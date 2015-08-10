@@ -5,7 +5,7 @@
   <subtitle><![CDATA[各種記錄用Blog]]></subtitle>
   <link href="/Blog/atom.xml" rel="self"/>
   <link href="http://NatLee.github.io/Blog/Blog//"/>
-  <updated>2015-08-10T09:42:11.911Z</updated>
+  <updated>2015-08-10T14:06:45.270Z</updated>
   <id>http://NatLee.github.io/Blog/Blog//</id>
   
   <author>
@@ -14,6 +14,105 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://NatLee.github.io/Blog/Blog/2015/08/10/Hexo%E5%9C%A8Windows%E4%B8%8A%E7%9A%84%E5%AE%89%E8%A3%9D%E5%BF%83%E5%BE%97/"/>
+    <id>http://NatLee.github.io/Blog/Blog/2015/08/10/Hexo在Windows上的安裝心得/</id>
+    <published>2015-08-10T14:06:45.270Z</published>
+    <updated>2015-08-10T14:06:45.270Z</updated>
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2><hr>
+<p>其實在幾年之前就有想過建立Blog記錄一些瑣事<br>但之前對於GitHub還不是很熟悉（現在也還在努力中），所以一直弄失敗。<br>現在好不容易弄成功了，我想把我的步驟記錄下來，或許能幫助到一些人XD</p>
+<h2 id="步驟說明">步驟說明</h2><hr>
+<ul>
+<li><font color="purple"><strong>第一步：確認電腦有是否有node.js與Git</strong></font>
+
+</li>
+</ul>
+<p>想安裝Hexo需要git與node.js，而Github的桌面版程式已有附Git shell<br>所以只需要到<a href="https://nodejs.org/" target="_blank" rel="external">Node.js官網</a>下載安裝環境即可</p>
+<blockquote>
+<p><strong>Note:</strong> 建議安裝完後重新啟動，確保環境變數已更新</p>
+</blockquote>
+<ul>
+<li><font color="purple"><strong>第二步：開始安裝Hexo</strong></font>
+
+</li>
+</ul>
+<p>打開Github的Git shell，然後輸入以下code</p>
+<pre><code>npm <span class="operator"><span class="keyword">install</span> hexo-cli -<span class="keyword">g</span>
+npm <span class="keyword">install</span> hexo <span class="comment">--save</span></span>
+</code></pre><p>然後直接輸入hexo，測試是否安裝成功，若成功再繼續往下</p>
+<ul>
+<li><font color="purple"><strong>第三步：以Hexo建置自己的Blog</strong></font>
+
+</li>
+</ul>
+<p>首先，你必須到GitHub上面建立一個新的Repository<br>名字必須參照規定 <strong>[yourName].github.io</strong>　ex: NatLee.github.io<br>　<em>而這個名字也是你之後Blog或個人頁面的主網址</em><br>建立完後，就可以用Github桌面版程式建立一個clone到自己電腦中<br>然後再回到Git shell切換到剛建立的那個clone資料夾中</p>
+<p>此時如果想讓<strong>[yourName].github.io</strong>當個人網頁而非直接呈現Blog的話<br>可先建立一個資料夾以hexo初始化後再切至該資料夾下安裝<br>如以下code為建立並初始化一個叫Blog的資料夾然後再將Blog建置在該資料夾內</p>
+<pre><code>hexo init B<span class="built_in">log</span>
+<span class="built_in">cd</span> B<span class="built_in">log</span>
+npm install
+</code></pre><p>若想直接在<strong>[yourName].github.io</strong>頁面呈現Blog，則直接輸入以下code即可</p>
+<pre><code><span class="title">hexo</span> init
+</code></pre><p>然後再來可依個人喜好安裝一些插件以幫助Blog營運</p>
+<pre><code>npm <span class="operator"><span class="keyword">install</span> hexo-generator-<span class="keyword">index</span> <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-generator-<span class="keyword">archive</span> <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-generator-<span class="keyword">category</span> <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-generator-tag <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-<span class="keyword">server</span> <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-deployer-heroku <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-deployer-rsync <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-deployer-openshift <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-renderer-marked@<span class="number">0.2</span> <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-renderer-stylus@<span class="number">0.2</span> <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-generator-feed@<span class="number">1</span> <span class="comment">--save</span>
+npm <span class="keyword">install</span> hexo-generator-sitemap@<span class="number">1</span> <span class="comment">--save</span></span>
+</code></pre><p>這樣Blog的建置大致上完成了，輸入以下code可產生Blog並檢視</p>
+<pre><code><span class="title">hexo</span> g  <span class="comment"># g 為 generator 的縮寫，建置 Blog</span>
+hexo s  <span class="comment"># s 為 server 的縮寫，可以開啟 localhost ，方便檢視 Blog</span>
+</code></pre><p>   此時，只要在<a href="http://127.0.0.1:4000，就可以看到自己的Blog了" target="_blank" rel="external">http://127.0.0.1:4000，就可以看到自己的Blog了</a></p>
+<ul>
+<li><font color="purple"><strong>第四步：試著建立文章吧！</strong></font>
+
+</li>
+</ul>
+<p>先來建立個文章看看吧！</p>
+<pre><code><span class="title">hexo</span> n <span class="string">"標題"</span> <span class="comment"># n 為 new 的縮寫，此指令可以建立一個標題為「標題」的文章</span>
+</code></pre><p>至於內容則要到<font color="red">/source/_posts/</font>中找到<strong>.md檔</strong>以<strong>markdown</strong>的格式編輯</p>
+<p>編輯方法可以參考 <a href="http://markdown.tw/" target="_blank" rel="external">http://markdown.tw/</a><br>而網路上也有一些線上編輯器，像是 <a href="https://stackedit.io/" target="_blank" rel="external">https://stackedit.io/</a></p>
+<ul>
+<li><font color="purple"><strong>第五步：上傳到GitHub</strong></font>
+
+</li>
+</ul>
+<p>到剛建立的Blog資料夾底下可以發現<strong>_config.yml</strong>檔案，我們要修改它裡面的<strong>deploy</strong></p>
+<pre><code><span class="attribute">deploy</span>:
+  <span class="attribute">type</span>: git
+  <span class="attribute">repository</span>: <span class="attribute">https</span>:<span class="comment">//github.com/[yourAccount]/[yourAccount].github.com.git</span>
+  <span class="attribute">branch</span>: master    
+</code></pre><p>接下來找到<strong>URL</strong>並更改url和root</p>
+<pre><code># URL
+## If your site is put in a subdirectory, set url as <span class="emphasis">'http://yoursite.com/child'</span> and root as <span class="emphasis">'/child/'</span>
+url: <span class="link_url">http://</span>[<span class="link_label">yourAccount</span>].github.io/Blog
+root: /Blog/
+</code></pre><p>最後都儲存完後，在Git shell上輸入以下command</p>
+<pre><code><span class="title">hexo</span> d <span class="comment"># d 為 deploy 的縮寫</span>
+</code></pre><p>這樣就完成大部份的建置了！</p>
+<hr>
+<p>參考資料</p>
+<p><a href="https://hexo.io/zh-tw/docs/deployment.html" target="_blank" rel="external">佈署 | Hexo</a></p>
+<p><a href="http://eva0919.github.io/2013/04/21/%E4%BD%BF%E7%94%A8hexo%E4%BB%A5%E5%8F%8Agithub-page%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%83%A8%E8%90%BD%E6%A0%BC/" target="_blank" rel="external">使用hexo以及github-page建立自己的部落格</a></p>
+<p><a href="https://wwssllabcd.github.io/blog/2014/12/22/how-to-install-hexo-on-window/" target="_blank" rel="external">Hexo安裝教學、心得筆記</a></p>
+<p><a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">使用GitHub和Hexo搭建免费静态Blog</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="前言">前言</h2><hr>
+<p>其實在幾年之前就有想過建立Blog記錄一些瑣事<br>但之前對於GitHub還不是很熟悉（現在也還在努力中），所以一直弄失敗。<br>現在好不容易弄成功了，我想把我的步驟記錄下來，或許能幫助到一些人XD</p>
+<h2 id=]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hello World]]></title>
