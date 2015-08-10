@@ -81,21 +81,20 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/Blog/2015/08/10/Hexoinstall in Windows/" title="" itemprop="url"></a>
+      <a href="/Blog/2015/08/10/Hexoinstall in Windows/" title="Hexo在Windows上的安裝心得" itemprop="url">Hexo在Windows上的安裝心得</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/Blog/about" title="Nat Lee" target="_blank" itemprop="author">Nat Lee</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-10T14:33:39.804Z" itemprop="datePublished"> 發表於 2015-08-10</time>
+    <time datetime="2015-08-10T14:38:16.246Z" itemprop="datePublished"> 發表於 2015-08-10</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p>title: Hexo在Windows上的安裝心得</p>
-<h2 id="前言">前言</h2><hr>
+        <h2 id="前言">前言</h2><hr>
 <p>其實在幾年之前就有想過建立Blog記錄一些瑣事<br>但之前對於GitHub還不是很熟悉（現在也還在努力中），所以一直弄失敗。<br>現在好不容易弄成功了，我想把我的步驟記錄下來，或許能幫助到一些人XD</p>
 <h2 id="步驟說明">步驟說明</h2><hr>
 <ul>
@@ -121,7 +120,7 @@ npm <span class="keyword">install</span> hexo <span class="comment">--save</span
 
 </li>
 </ul>
-<p>首先，你必須到GitHub上面建立一個新的Repository<br>名字必須參照規定 <strong>[yourName].github. io</strong> </p>
+<p>首先，你必須到GitHub上面建立一個新的Repository<br>名字必須參照規定 <strong>[yourName].github.io</strong> </p>
 <blockquote>
 <p><strong>ex:</strong> NatLee.github.io<br>　<em>而這個名字也是你之後Blog或個人頁面的主網址</em><br>建立完後，就可以用Github桌面版程式建立一個clone到自己電腦中<br>然後再回到Git shell切換到剛建立的那個clone資料夾中</p>
 </blockquote>
@@ -146,8 +145,8 @@ npm <span class="keyword">install</span> hexo-renderer-stylus@<span class="numbe
 npm <span class="keyword">install</span> hexo-generator-feed@<span class="number">1</span> <span class="comment">--save</span>
 npm <span class="keyword">install</span> hexo-generator-sitemap@<span class="number">1</span> <span class="comment">--save</span></span>
 </code></pre><p>這樣Blog的建置大致上完成了，輸入以下code可產生Blog並檢視</p>
-<pre><code>hexo g <span class="string">"#"</span> g 為 generator 的縮寫，建置 B<span class="built_in">log</span>
-hexo s <span class="string">"#"</span> s 為 server 的縮寫，可以開啟 localhost ，方便檢視 B<span class="built_in">log</span>
+<pre><code><span class="title">hexo</span> g \<span class="comment"># g 為 generator 的縮寫，建置 Blog</span>
+hexo s \<span class="comment"># s 為 server 的縮寫，可以開啟 localhost ，方便檢視 Blog</span>
 </code></pre><p>   此時，只要在<a href="http://127.0.0.1:4000，就可以看到自己的Blog了" target="_blank" rel="external">http://127.0.0.1:4000，就可以看到自己的Blog了</a></p>
 <ul>
 <li><font color="purple"><strong>第四步：試著建立文章吧！</strong></font>
@@ -155,7 +154,7 @@ hexo s <span class="string">"#"</span> s 為 server 的縮寫，可以開啟 loc
 </li>
 </ul>
 <p>先來建立個文章看看吧！</p>
-<pre><code>hexo <span class="keyword">n</span> <span class="string">"title"</span> <span class="string">"#"</span> <span class="keyword">n</span> 為 new 的縮寫，此指令可以建立一個標題為「title」的文章
+<pre><code>hexo n <span class="string">"title"</span> <span class="string">\#</span> n 為 <span class="keyword">new</span> 的縮寫，此指令可以建立一個標題為「title」的文章
 </code></pre><p>至於內容則要到<font color="red">/source/_posts/</font>中找到<strong>.md檔</strong>以<strong>markdown</strong>的格式編輯</p>
 <p>編輯方法可以參考 <a href="http://markdown.tw/" target="_blank" rel="external">http://markdown.tw/</a><br>而網路上也有一些線上編輯器，像是 <a href="https://stackedit.io/" target="_blank" rel="external">https://stackedit.io/</a></p>
 <ul>
@@ -164,17 +163,17 @@ hexo s <span class="string">"#"</span> s 為 server 的縮寫，可以開啟 loc
 </li>
 </ul>
 <p>到剛建立的Blog資料夾底下可以發現<strong>_config.yml</strong>檔案，我們要修改它裡面的<strong>deploy</strong></p>
-<pre><code>deploy<span class="string">":"</span> 
-  <span class="built_in">type</span><span class="string">":"</span> git
-  repository<span class="string">":"</span> http<span class="variable">s:</span>//github.<span class="keyword">com</span>/[yourAccount]/[yourAccount].github.<span class="keyword">com</span>.git
-  branch<span class="string">":"</span> master    
+<pre><code><span class="attribute">deploy\</span>: <span class="string"></span>
+  <span class="attribute">type\</span>: <span class="string">git</span>
+  <span class="attribute">repository\</span>: <span class="string">https://github.com/[yourAccount]/[yourAccount].github.com.git</span>
+  <span class="attribute">branch</span>: <span class="string">master    </span>
 </code></pre><p>接下來找到<strong>URL</strong>並更改url和root</p>
-<pre><code><span class="string">"#"</span> <span class="built_in">URL</span>
-<span class="string">"#"</span><span class="string">"#"</span> If your site is <span class="built_in">put</span> <span class="operator">in</span> <span class="operator">a</span> subdirectory, <span class="built_in">set</span> url <span class="keyword">as</span> <span class="string">'http://yoursite.com/child'</span> <span class="operator">and</span> root <span class="keyword">as</span> <span class="string">'/child/'</span>
-url<span class="string">":"</span> <span class="keyword">http</span>://[yourAccount].github.io/Blog
-root<span class="string">":"</span> /Blog/
+<pre><code>\# URL
+\#\# If your site is put in a subdirectory, set url as <span class="emphasis">'http://yoursite.com/child'</span> and root as <span class="emphasis">'/child/'</span>
+url\: <span class="link_url">http://</span>[<span class="link_label">yourAccount</span>].github.io/Blog
+root\: /Blog/
 </code></pre><p>最後都儲存完後，在Git shell上輸入以下command</p>
-<pre><code>hexo <span class="keyword">d</span> <span class="string">"#"</span> <span class="keyword">d</span> 為 deploy 的縮寫
+<pre><code><span class="title">hexo</span> d \<span class="comment"># d 為 deploy 的縮寫</span>
 </code></pre><p>這樣就完成大部份的建置了！</p>
 <hr>
 <p>參考資料</p>
