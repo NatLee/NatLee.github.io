@@ -1,7 +1,0 @@
-<%
-var arr = [];
-taxonomy.forEach(function(item){
-  arr.push('<a href="' + config.root + item.path + '">' + item.name + '</a>');
-});
-%>
-<%- arr.join(separator) %>
