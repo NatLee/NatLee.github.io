@@ -73,7 +73,7 @@ stylus:
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/NatLee/NatLee.github.io/Blog/
+  repository: https://github.com/NatLee/NatLee.github.io/Blog
   branch: master	
   
   

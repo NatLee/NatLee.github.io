@@ -35,7 +35,7 @@ title: Hexo在Windows上的安裝心得
 首先，你必須到GitHub上面建立一個新的Repository
 名字必須參照規定 **[yourName].github.io** 
 > **ex:** NatLee.github.io
-> 而這個名字也是你之後Blog或個人頁面的主網址
+>> 而這個名字也是你之後Blog或個人頁面的主網址
 
 建立完後，就可以用Github桌面版程式建立一個clone到自己電腦中
 然後再回到Git shell切換到剛建立的那個clone資料夾中
@@ -73,7 +73,7 @@ title: Hexo在Windows上的安裝心得
     hexo g # g 為 generator 的縮寫，建置 Blog
     hexo s # s 為 server 的縮寫，可以開啟 localhost ，方便檢視 Blog
     
-   此時，只要在http://127.0.0.1:4000，就可以看到自己的Blog了
+   此時，只要在[localhost:4000](http://127.0.0.1:4000)，就可以看到自己的Blog了
 
  - <font color="purple">**第四步：試著建立文章吧！**</font>
 
