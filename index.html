@@ -88,7 +88,7 @@
 		<a href="/Blog/about" title="Nat Lee" target="_blank" itemprop="author">Nat Lee</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-10T14:38:16.246Z" itemprop="datePublished"> 發表於 2015-08-10</time>
+    <time datetime="2015-08-10T14:42:21.089Z" itemprop="datePublished"> 發表於 2015-08-10</time>
     
   </p>
 </header>
@@ -145,8 +145,8 @@ npm <span class="keyword">install</span> hexo-renderer-stylus@<span class="numbe
 npm <span class="keyword">install</span> hexo-generator-feed@<span class="number">1</span> <span class="comment">--save</span>
 npm <span class="keyword">install</span> hexo-generator-sitemap@<span class="number">1</span> <span class="comment">--save</span></span>
 </code></pre><p>這樣Blog的建置大致上完成了，輸入以下code可產生Blog並檢視</p>
-<pre><code><span class="title">hexo</span> g \<span class="comment"># g 為 generator 的縮寫，建置 Blog</span>
-hexo s \<span class="comment"># s 為 server 的縮寫，可以開啟 localhost ，方便檢視 Blog</span>
+<pre><code><span class="title">hexo</span> g <span class="comment"># g 為 generator 的縮寫，建置 Blog</span>
+hexo s <span class="comment"># s 為 server 的縮寫，可以開啟 localhost ，方便檢視 Blog</span>
 </code></pre><p>   此時，只要在<a href="http://127.0.0.1:4000，就可以看到自己的Blog了" target="_blank" rel="external">http://127.0.0.1:4000，就可以看到自己的Blog了</a></p>
 <ul>
 <li><font color="purple"><strong>第四步：試著建立文章吧！</strong></font>
@@ -154,7 +154,7 @@ hexo s \<span class="comment"># s 為 server 的縮寫，可以開啟 localhost 
 </li>
 </ul>
 <p>先來建立個文章看看吧！</p>
-<pre><code>hexo n <span class="string">"title"</span> <span class="string">\#</span> n 為 <span class="keyword">new</span> 的縮寫，此指令可以建立一個標題為「title」的文章
+<pre><code><span class="title">hexo</span> n <span class="string">"title"</span> <span class="comment"># n 為 new 的縮寫，此指令可以建立一個標題為「title」的文章</span>
 </code></pre><p>至於內容則要到<font color="red">/source/_posts/</font>中找到<strong>.md檔</strong>以<strong>markdown</strong>的格式編輯</p>
 <p>編輯方法可以參考 <a href="http://markdown.tw/" target="_blank" rel="external">http://markdown.tw/</a><br>而網路上也有一些線上編輯器，像是 <a href="https://stackedit.io/" target="_blank" rel="external">https://stackedit.io/</a></p>
 <ul>
@@ -163,17 +163,17 @@ hexo s \<span class="comment"># s 為 server 的縮寫，可以開啟 localhost 
 </li>
 </ul>
 <p>到剛建立的Blog資料夾底下可以發現<strong>_config.yml</strong>檔案，我們要修改它裡面的<strong>deploy</strong></p>
-<pre><code><span class="attribute">deploy\</span>: <span class="string"></span>
-  <span class="attribute">type\</span>: <span class="string">git</span>
-  <span class="attribute">repository\</span>: <span class="string">https://github.com/[yourAccount]/[yourAccount].github.com.git</span>
+<pre><code><span class="attribute">deploy</span>: <span class="string"></span>
+  <span class="attribute">type</span>: <span class="string">git</span>
+  <span class="attribute">repository</span>: <span class="string">https://github.com/[yourAccount]/[yourAccount].github.com.git</span>
   <span class="attribute">branch</span>: <span class="string">master    </span>
 </code></pre><p>接下來找到<strong>URL</strong>並更改url和root</p>
-<pre><code>\# URL
-\#\# If your site is put in a subdirectory, set url as <span class="emphasis">'http://yoursite.com/child'</span> and root as <span class="emphasis">'/child/'</span>
-url\: <span class="link_url">http://</span>[<span class="link_label">yourAccount</span>].github.io/Blog
-root\: /Blog/
+<pre><code># URL
+## If your site is put in a subdirectory, set url as <span class="emphasis">'http://yoursite.com/child'</span> and root as <span class="emphasis">'/child/'</span>
+url: <span class="link_url">http://</span>[<span class="link_label">yourAccount</span>].github.io/Blog
+root: /Blog/
 </code></pre><p>最後都儲存完後，在Git shell上輸入以下command</p>
-<pre><code><span class="title">hexo</span> d \<span class="comment"># d 為 deploy 的縮寫</span>
+<pre><code><span class="title">hexo</span> d <span class="comment"># d 為 deploy 的縮寫</span>
 </code></pre><p>這樣就完成大部份的建置了！</p>
 <hr>
 <p>參考資料</p>
