@@ -5,7 +5,7 @@
   <subtitle><![CDATA[各種記錄用Blog]]></subtitle>
   <link href="/Blog/atom.xml" rel="self"/>
   <link href="http://NatLee.github.io/Blog/Blog//"/>
-  <updated>2015-08-10T14:42:21.089Z</updated>
+  <updated>2015-08-10T15:08:02.416Z</updated>
   <id>http://NatLee.github.io/Blog/Blog//</id>
   
   <author>
@@ -19,8 +19,8 @@
     <title><![CDATA[Hexo在Windows上的安裝心得]]></title>
     <link href="http://NatLee.github.io/Blog/Blog/2015/08/10/Hexoinstall%20in%20Windows/"/>
     <id>http://NatLee.github.io/Blog/Blog/2015/08/10/Hexoinstall in Windows/</id>
-    <published>2015-08-10T14:42:21.089Z</published>
-    <updated>2015-08-10T14:42:21.089Z</updated>
+    <published>2015-08-10T15:08:02.416Z</published>
+    <updated>2015-08-10T15:08:02.416Z</updated>
     <content type="html"><![CDATA[<h2 id="前言">前言</h2><hr>
 <p>其實在幾年之前就有想過建立Blog記錄一些瑣事<br>但之前對於GitHub還不是很熟悉（現在也還在努力中），所以一直弄失敗。<br>現在好不容易弄成功了，我想把我的步驟記錄下來，或許能幫助到一些人XD</p>
 <h2 id="步驟說明">步驟說明</h2><hr>
@@ -49,8 +49,12 @@ npm <span class="keyword">install</span> hexo <span class="comment">--save</span
 </ul>
 <p>首先，你必須到GitHub上面建立一個新的Repository<br>名字必須參照規定 <strong>[yourName].github.io</strong> </p>
 <blockquote>
-<p><strong>ex:</strong> NatLee.github.io<br>　<em>而這個名字也是你之後Blog或個人頁面的主網址</em><br>建立完後，就可以用Github桌面版程式建立一個clone到自己電腦中<br>然後再回到Git shell切換到剛建立的那個clone資料夾中</p>
+<p><strong>ex:</strong> NatLee.github.io</p>
+<blockquote>
+<p>而這個名字也是你之後Blog或個人頁面的主網址</p>
 </blockquote>
+</blockquote>
+<p>建立完後，就可以用Github桌面版程式建立一個clone到自己電腦中<br>然後再回到Git shell切換到剛建立的那個clone資料夾中</p>
 <p>此時如果想讓<strong>[yourName].github.io</strong>當個人網頁而非直接呈現Blog的話<br>可先建立一個資料夾以hexo初始化後再切至該資料夾下安裝<br>如以下code為建立並初始化一個叫Blog的資料夾然後再將Blog建置在該資料夾內</p>
 <pre><code>hexo init B<span class="built_in">log</span>
 <span class="built_in">cd</span> B<span class="built_in">log</span>
@@ -74,7 +78,7 @@ npm <span class="keyword">install</span> hexo-generator-sitemap@<span class="num
 </code></pre><p>這樣Blog的建置大致上完成了，輸入以下code可產生Blog並檢視</p>
 <pre><code><span class="title">hexo</span> g <span class="comment"># g 為 generator 的縮寫，建置 Blog</span>
 hexo s <span class="comment"># s 為 server 的縮寫，可以開啟 localhost ，方便檢視 Blog</span>
-</code></pre><p>   此時，只要在<a href="http://127.0.0.1:4000，就可以看到自己的Blog了" target="_blank" rel="external">http://127.0.0.1:4000，就可以看到自己的Blog了</a></p>
+</code></pre><p>   此時，只要在<a href="http://127.0.0.1:4000" target="_blank" rel="external">localhost:4000</a>，就可以看到自己的Blog了</p>
 <ul>
 <li><font color="purple"><strong>第四步：試著建立文章吧！</strong></font>
 
