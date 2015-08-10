@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Nat Lee's Blog
-subtitle:
+title: Nat Lee
+subtitle: 各種記錄用Blog
 description:
 author: Nat Lee
 language:
@@ -16,6 +16,8 @@ url: http://NatLee.github.io/Blog
 root: /Blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
+about_dir: about
+
 
 # Directory
 source_dir: source
@@ -63,13 +65,15 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: landscape
+theme: jacman
+stylus:
+  compress: true
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/Natlee/Natlee.github.com.git
+  repository: https://github.com/NatLee/NatLee.github.io
   branch: master	
   
   
@@ -82,3 +86,5 @@ deploy:
     smartLists: false
     smartypants: false
   
+  sitemap:
+    path: sitemap.xml
