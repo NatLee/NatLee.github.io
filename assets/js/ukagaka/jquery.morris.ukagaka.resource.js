@@ -462,8 +462,8 @@
     };
 
     $.ukagaka.defaults = {
-    	googleKey: '1ZWb12yMAXcKzWFFPOL0cbuwVwpqVWuhPBWBddgSbJgs',
-        googleFormkey: '1zql24G-x_qVLlK01n5B0sB-lSdUlPpcrc0rvaLX4R8s',
+    	googleKey: '1zql24G-x_qVLlK01n5B0sB-lSdUlPpcrc0rvaLX4R8s',
+        googleFormkey: '1ZWb12yMAXcKzWFFPOL0cbuwVwpqVWuhPBWBddgSbJgs',
         googleSheet: "og5fwrf",
         googleSheetField: "entry.888061137",
         //googleKey: '0ArRwmWo93u-mdG93a2dkSWxIbHEzZjRIeDdxZXdsU1E',
