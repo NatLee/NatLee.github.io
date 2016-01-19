@@ -339,7 +339,7 @@
                     $.ukagaka.talking[i] = JData.feed.entry[i].gsx$storedatabase.$t;
                 }
                 showText($.ukagaka.talking[Math.floor(Math.random() * $.ukagaka.talking.length)]);
-                $('input#ukagaka_addstring').attr('placeholder', $.ukagaka.ukagakaText + '學會了' + JData.feed.entry.length + '個字彙');
+                $('input#ukagaka_addstring').attr('placeholder', $.ukagaka.ukagakaText + '學了' + JData.feed.entry.length + '個詞');
             });
         }
 
@@ -374,7 +374,7 @@
                     }
                 });
             } else {
-                alert("OOPS！" + $.ukagaka.ukagakaText + "不接受這個字串喔！");
+                alert("OOPS！" + $.ukagaka.ukagakaText + "不接受這個詞喔！");
             }
         }
 
@@ -408,8 +408,8 @@
             var loadingText = opt.loadingText;
 
             if (navigator.userAgent.match(/Android|iPhone|iPad/i)) {
-                $(".ukagaka_img").hide();
-                $(".ukagaka_box").hide();
+                //$(".ukagaka_img").hide();
+                //$(".ukagaka_box").hide();
             } else {
                 $(window).load(function() {
                     var talk_timer = setInterval(talkingbox, opt.talkTime);
@@ -462,36 +462,40 @@
     };
 
     $.ukagaka.defaults = {
-        googleKey: '0ArRwmWo93u-mdG93a2dkSWxIbHEzZjRIeDdxZXdsU1E',
-        googleFormkey: '1xADUIiBq1ksH7lxwSch1Nz_p2gSxdJttmv5OJOxJye0',
-        googleSheet: "od6",
-        googleSheetField: "entry.2030600456",
-        talkTime: 60000,
+    	googleKey: '1ZWb12yMAXcKzWFFPOL0cbuwVwpqVWuhPBWBddgSbJgs',
+        googleFormkey: '1zql24G-x_qVLlK01n5B0sB-lSdUlPpcrc0rvaLX4R8s',
+        googleSheet: "og5fwrf",
+        googleSheetField: "entry.888061137",
+        //googleKey: '0ArRwmWo93u-mdG93a2dkSWxIbHEzZjRIeDdxZXdsU1E',
+        //googleFormkey: '1xADUIiBq1ksH7lxwSch1Nz_p2gSxdJttmv5OJOxJye0',
+        //googleSheet: "od6",
+        //googleSheetField: "entry.2030600456",
+        talkTime: 3000,
 
         ukagakaText: "千代",
         loadingText: ' .^100.^100.',
         learnPlaceholder: "default: input for learn.",
         menuMainText: "使用選單功能&#65292; 為什麼要聽你的！",
-        menuLearnText: "$ 學習",
-        menuLogText: "$ 日誌",
-        menuExitText: "$ 結束",
-        menuCancelText: "$ 取消",
-        menuSubmitText: "$ 確認",
+        menuLearnText: "○學習",
+        menuLogText: "○日誌",
+        menuExitText: "○結束",
+        menuCancelText: "○取消",
+        menuSubmitText: "○確認",
         menuQueryText: "請輸入想要讓千代學的話<br/><br/>",
         logText: "更新日誌<br/><br/>Morris 修正<br/><br/>找尋 AI 系統<br/>找尋 AI 對話<br/>",
         imgs: [	'assets/img/uk12.png',
-					'assets/img/uk13.png',
-					'assets/img/uk14.png',
-					'assets/img/uk15.png',
-					'assets/img/uk16.png',
-					'assets/img/uk17.png',
-					'assets/img/uk18.png',
-					'assets/img/uk20.png',
-					'assets/img/uk21.png',
-					'assets/img/uk23.png',
-					'assets/img/uk24.png',
-					'assets/img/uk25.png',
-					'assets/img/uk26.png']
+		'assets/img/uk13.png',
+		'assets/img/uk14.png',
+		'assets/img/uk15.png',
+		'assets/img/uk16.png',
+		'assets/img/uk17.png',
+		'assets/img/uk18.png',
+		'assets/img/uk20.png',
+		'assets/img/uk21.png',
+		'assets/img/uk23.png',
+		'assets/img/uk24.png',
+		'assets/img/uk25.png',
+		'assets/img/uk26.png']
     };
 
     $.ukagaka.talking = [];
