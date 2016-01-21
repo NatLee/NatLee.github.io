@@ -487,20 +487,21 @@
         menuCancelText: "○取消",
         menuSubmitText: "○確認",
         menuQueryText: "請輸入想要讓千代學的話<br/><br/>",
-        logText: "更新日誌<br/><br/>Morris 修正<br/><br/>找尋 AI 系統<br/>找尋 AI 對話<br/>",
-        imgs: [	'assets/img/uk12.png',
-		'assets/img/uk13.png',
-		'assets/img/uk14.png',
-		'assets/img/uk15.png',
-		'assets/img/uk16.png',
-		'assets/img/uk17.png',
-		'assets/img/uk18.png',
-		'assets/img/uk20.png',
-		'assets/img/uk21.png',
-		'assets/img/uk23.png',
-		'assets/img/uk24.png',
-		'assets/img/uk25.png',
-		'assets/img/uk26.png']
+        logText: "更新日誌<br/>Morris 修正<br/>找尋 AI 系統<br/>找尋 AI 對話<br/>Nat 修正<br/>修復學習功能<br/>",
+        imgs: [	
+			'assets/img/uk12.png',
+			'assets/img/uk13.png',
+			'assets/img/uk14.png',
+			'assets/img/uk15.png',
+			'assets/img/uk16.png',
+			'assets/img/uk17.png',
+			'assets/img/uk18.png',
+			'assets/img/uk20.png',
+			'assets/img/uk21.png',
+			'assets/img/uk23.png',
+			'assets/img/uk24.png',
+			'assets/img/uk25.png',
+			'assets/img/uk26.png']
     };
 
     $.ukagaka.talking = [];
