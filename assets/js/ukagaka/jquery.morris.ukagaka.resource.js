@@ -38,19 +38,19 @@
                     mp3: 'http://www.youtube-mp3.org/get?video_id=71mgH45y5fY&ts_create=1453816126&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=21d5163dba5c62d7923a053540a973de&s=22152',
                     ogg: 'http://www.youtube-mp3.org/get?video_id=71mgH45y5fY&ts_create=1453816126&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=21d5163dba5c62d7923a053540a973de&s=22152'
                 }, {
-                    title: 'さよならのこと',
-                    artist: 'WHITE ALBUM2 ED',
+                    title: '歌に形はないけれど',
+                    artist: '花たん',
                     album: '',
                     cover: '',
-                    mp3: 'http://morris821028.github.io/file/music/WHITE-ALBUM2-ED-Piano.mp3',
-                    ogg: 'http://morris821028.github.io/file/music/WHITE-ALBUM2-ED-Piano.mp3'
+                    mp3: 'http://www.youtube-mp3.org/get?video_id=Re6JJ_njYR4&ts_create=1453817855&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=db505de6d12ed5871b0594560cc3d8a9&s=179315',
+                    ogg: 'http://www.youtube-mp3.org/get?video_id=Re6JJ_njYR4&ts_create=1453817855&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=db505de6d12ed5871b0594560cc3d8a9&s=179315'
                 }, {
-                    title: '光るなら',
-                    artist: '四月は君の嘘 OP',
+                    title: '空想少女への恋手紙',
+                    artist: '花たん',
                     album: '',
                     cover: '',
-                    mp3: 'http://morris821028.github.io/file/music/Shigatsu-wa-Kimi-no-Uso-OP-Piano.mp3',
-                    ogg: 'http://morris821028.github.io/file/music/Shigatsu-wa-Kimi-no-Uso-OP-Piano.mp3'
+                    mp3: 'http://www.youtube-mp3.org/get?video_id=oHWgMFRMnYs&ts_create=1453817891&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=960ebf3810ac529a50ccd9ecba8dfcd8&s=148566',
+                    ogg: 'http://www.youtube-mp3.org/get?video_id=oHWgMFRMnYs&ts_create=1453817891&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=960ebf3810ac529a50ccd9ecba8dfcd8&s=148566'
                 }];
 
             var time = new Date(),
@@ -411,10 +411,10 @@
 
             var obj = $(elem);
             var loadingText = opt.loadingText;
-
+			/*
             if (navigator.userAgent.match(/Android|iPhone|iPad/i)) {
-                //$(".ukagaka_img").hide();
-                //$(".ukagaka_box").hide();
+                $(".ukagaka_img").hide();
+                $(".ukagaka_box").hide();
             } else {
                 $(window).load(function() {
                     var talk_timer = setInterval(talkingbox, opt.talkTime);
@@ -427,6 +427,20 @@
                 });
                 loadTalk(opt);
             }
+			*/
+			/*******************/
+			$(window).load(function() {
+            var talk_timer = setInterval(talkingbox, opt.talkTime);
+
+				function talkingbox() {
+					if ($("#ukagaka_msgbox").css("display") != 'none' && $.ukagaka.talkValid == true) {
+						showText($.ukagaka.talking[Math.floor(Math.random() * $.ukagaka.talking.length)]);
+					}
+				}
+            });
+            loadTalk(opt);
+			/*******************/
+			
             showText(loadingText);
 
             var scrollDelay = 1000,
