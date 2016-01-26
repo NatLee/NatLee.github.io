@@ -31,12 +31,12 @@
                 autoplay = false,
                 track = 0,
                 playlist = [{
-                    title: 'シュガーソングとビターステップ',
-                    artist: '血界戰線 ED',
+                    title: 'bouquet',
+                    artist: '花たん',
                     album: '',
                     cover: '',
-                    mp3: 'http://morris821028.github.io/file/music/Kekkai-Sensen-ED-Instrumental-ED.mp3',
-                    ogg: 'http://morris821028.github.io/file/music/Kekkai-Sensen-ED-Instrumental-ED.mp3'
+                    mp3: 'http://www.youtube-mp3.org/get?video_id=71mgH45y5fY&ts_create=1453816126&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=21d5163dba5c62d7923a053540a973de&s=22152',
+                    ogg: 'http://www.youtube-mp3.org/get?video_id=71mgH45y5fY&ts_create=1453816126&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=21d5163dba5c62d7923a053540a973de&s=22152'
                 }, {
                     title: 'さよならのこと',
                     artist: 'WHITE ALBUM2 ED',
@@ -395,7 +395,7 @@
                 $.ukagaka.nowText = $.ukagaka.nextText;
                 $("#ukagaka_msgbox").typed({
                     strings: [$.ukagaka.nowText],
-                    typeSpeed: 20,
+                    typeSpeed: 30,
                     contentType: 'html',
                     loop: false,
                     backDelay: 500,
@@ -475,7 +475,7 @@
         //googleFormkey: '1xADUIiBq1ksH7lxwSch1Nz_p2gSxdJttmv5OJOxJye0',
         //googleSheet: "od6",
         //googleSheetField: "entry.2030600456",
-        talkTime: 3000,
+        talkTime: 5000,
 
         ukagakaText: "千代",
         loadingText: ' .^100.^100.',
