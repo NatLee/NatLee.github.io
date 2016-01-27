@@ -35,22 +35,22 @@
                     artist: '花たん',
                     album: '',
                     cover: '',
-                    mp3: 'http://www.youtube-mp3.org/get?video_id=71mgH45y5fY&ts_create=1453816126&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=21d5163dba5c62d7923a053540a973de&s=22152',
-                    ogg: 'http://www.youtube-mp3.org/get?video_id=71mgH45y5fY&ts_create=1453816126&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=21d5163dba5c62d7923a053540a973de&s=22152'
+                    mp3: 'assets/file/bouquet - 花たん.mp3',
+                    ogg: 'assets/file/bouquet - 花たん.mp3'
                 }, {
                     title: '歌に形はないけれど',
                     artist: '花たん',
                     album: '',
                     cover: '',
-                    mp3: 'http://www.youtube-mp3.org/get?video_id=Re6JJ_njYR4&ts_create=1453817855&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=db505de6d12ed5871b0594560cc3d8a9&s=179315',
-                    ogg: 'http://www.youtube-mp3.org/get?video_id=Re6JJ_njYR4&ts_create=1453817855&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=db505de6d12ed5871b0594560cc3d8a9&s=179315'
+                    mp3: 'assets/file/歌に形はないけれど - 花たん.mp3',
+                    ogg: 'assets/file/歌に形はないけれど - 花たん.mp3'
                 }, {
                     title: '空想少女への恋手紙',
                     artist: '花たん',
                     album: '',
                     cover: '',
-                    mp3: 'http://www.youtube-mp3.org/get?video_id=oHWgMFRMnYs&ts_create=1453817891&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=960ebf3810ac529a50ccd9ecba8dfcd8&s=148566',
-                    ogg: 'http://www.youtube-mp3.org/get?video_id=oHWgMFRMnYs&ts_create=1453817891&r=MTE4LjE2Ni40Ni4yMzY%3D&h2=960ebf3810ac529a50ccd9ecba8dfcd8&s=148566'
+                    mp3: 'assets/file/空想少女への恋手紙 - 花たん.mp3',
+                    ogg: 'assets/file/空想少女への恋手紙 - 花たん.mp3'
                 }];
 
             var time = new Date(),
