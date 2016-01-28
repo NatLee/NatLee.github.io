@@ -1,50 +1,57 @@
-﻿<html>
+<!DOCTYPE HTML>
+<!--
+	Identity by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
 	<head>
-		<title>404 Page NOT Found</title>
+		<title>404</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><script src="assets/404/js/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/404/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/404/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/404/css/ie8.css" /><![endif]-->
+		<noscript><link rel="stylesheet" href="assets/404/css/noscript.css" /></noscript>
 	</head>
-	<body class="loading">
-		<div id="wrapper">
-			<div id="bg"></div>
-			<div id="overlay"></div>
-			<div id="main">
+	<body class="is-loading">
 
-				<!-- Header -->
-			  <header id="header">
-						<h1>Page Not Found</h1>
-						<p>404．404．404．404．404</p>
-						<input type ="button" onclick="history.back()" value="Back to the Last Page"></input>
-						<nav>
-							<ul>
-								<li><a href="https://www.facebook.com/VIP.NATLee" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="http://natlee.github.io/Blog/" class="icon fa-smile-o"><span class="label">Blog</span></a></li>
-								<li><a href="https://github.com/NatLee" class="icon fa-github"><span class="label">Github</span></a></li>
-								<!-- <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li> -->
-							</ul>
-						</nav>
+		<!-- Wrapper -->
+			<div id="wrapper">
 
-						
-                        <iframe src="https://embed.windyty.com/?surface,wind,now,25.721,120.938,4,,menu,message,ip" width="90% px" height="500 px" frameborder="0" scrolling="auto"></iframe>
-                        
-					</header>
+				<!-- Main -->
+					<section id="main">
+						<header>
+							<span class="avatar"><img src="https://avatars2.githubusercontent.com/u/10178964?v=3&s=400" alt="" /></span>
+							<h1>404</h1>
+							<p> Page Not Found</p>
+							<p><input type ="button" onclick="history.back()" value="Return"></input></p>
+						</header>
+						<footer>
+							<input type ="button" onclick="javascript:location.href='http://natlee.github.io/Blog/'" value="Blog"></input>
+							<input type ="button" onclick="javascript:location.href='https://github.com/NatLee'" value="Github"></input>
+						</footer>
+					</section>
+
 				<!-- Footer -->
 					<footer id="footer">
-                        <span class="copyright">&copy; NatLee. Design: <a href="http://html5up.net">HTML5 UP</a>.</span>
+						<ul class="copyright">
+							<li>&copy; Nat Lee</li>
+							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
 					</footer>
 
 			</div>
-		</div>
-		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-		<script>
-		
-			window.onload = function() { document.body.className = ''; }
-			window.ontouchmove = function() { return false; }
-			window.onorientationchange = function() { document.body.scrollTop = 0; }
-		</script>
+
+		<!-- Scripts -->
+			<!--[if lte IE 8]><script src="assets/404/js/respond.min.js"></script><![endif]-->
+			<script>
+				if ('addEventListener' in window) {
+					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
+					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+				}
+			</script>
+
 	</body>
 </html>
