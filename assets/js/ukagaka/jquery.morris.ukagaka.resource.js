@@ -343,39 +343,33 @@
             });
         }
 
+		function get_ip_country()  {  
+			if (!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+				$myip = $_SERVER['HTTP_CLIENT_IP'];  
+			} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+				$myip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+			} else {  
+			$myip = $_SERVER['REMOTE_ADDR'];  
+			}  
+			$contry = file_get_contents('http://api.hostip.info/country.php?ip=' . $myip);  
+			return $contry;  
+		}
+		
         function sendLearnText(options) {
             var o = options;
 
             var formkey = o.googleFormkey;
 
             var add = $("input#ukagaka_addstring").val(),
-                googleSheetField = $('input#ukagaka_sheetfield').val(),
-                sendData = {googleSheetField : add};
+                googleSheetField = $('input#ukagaka_sheetfield').val();
+				
+			var country=get_ip_country;
+			
             if (!((add.length <= 1) || add.indexOf('script') > -1 || add.indexOf('body') > -1 ||
                     add.indexOf('style') > -1 || add.indexOf('link') > -1 || add.indexOf('iframe') > -1 || add.indexOf('head') > -1 ||
                     add.indexOf('nav') > -1 || add.indexOf('object') > -1 || add.indexOf('embed') > -1) ||
                 add.indexOf('>') > -1 || add.indexOf('>') > -1) {
-				/*
-                $.ajax({
-                    type: 'POST',
-                    url: 'https://docs.google.com/forms/d/' + formkey + '/formResponse',
-                    data: sendData,
-                    dataType: "xml",
-                    statusCode: {
-                        0: function() {
-                            $("input#ukagaka_addstring").attr("value", "");
-                            $(".ukagaka_box div").fadeOut(500);
-                            showText($.ukagaka.ukagakaText + "學習了 !");
-                        },
-                        200: function() {
-                            $("input#ukagaka_addstring").attr("value", "");
-                            $(".ukagaka_box div").fadeOut(500);
-                            showText($.ukagaka.ukagakaText + "學習了 !");
-                        }
-                    }
-                });
-				*/
-				$.get('https://docs.google.com/forms/d/' + formkey + '/formResponse?'+googleSheetField+"="+add,"");
+				$.get('https://docs.google.com/forms/d/' + formkey + '/formResponse?'+googleSheetField+"="+add&googleSheetFieldCountry+"="+country,"");
             } else {
                 alert("OOPS！" + $.ukagaka.ukagakaText + "不接受這個字串喔！");
             }
@@ -485,6 +479,7 @@
         googleFormkey: '1ZWb12yMAXcKzWFFPOL0cbuwVwpqVWuhPBWBddgSbJgs',
         googleSheet: "og5fwrf",
         googleSheetField: "entry.888061137",
+		googleSheetFieldCountry: "entry.1776335338",
         //googleKey: '0ArRwmWo93u-mdG93a2dkSWxIbHEzZjRIeDdxZXdsU1E',
         //googleFormkey: '1xADUIiBq1ksH7lxwSch1Nz_p2gSxdJttmv5OJOxJye0',
         //googleSheet: "od6",
@@ -526,4 +521,7 @@
     $.ukagaka.ukagakaText = '';
     $.ukagaka.mp3player = '';
 
+	
+	
+	
 })(jQuery);
