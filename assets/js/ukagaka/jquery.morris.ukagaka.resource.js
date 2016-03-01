@@ -342,16 +342,6 @@
                 $('input#ukagaka_addstring').attr('placeholder', $.ukagaka.ukagakaText + '學了' + JData.feed.entry.length + '個詞');
             });
         }
-
-		function get_ip_country()  {  
-			if (!empty($_SERVER['HTTP_CLIENT_IP'])) {  
-				$myip = $_SERVER['HTTP_CLIENT_IP'];  
-			} else {  
-				$myip = $_SERVER['REMOTE_ADDR'];  
-			}  
-			$contry = file_get_contents('http://api.hostip.info/country.php?ip=' . $myip);  
-			return $contry;  
-		}
 		
         function sendLearnText(options) {
             var o = options;
@@ -360,8 +350,12 @@
 
             var add = $("input#ukagaka_addstring").val(),
                 googleSheetField = $('input#ukagaka_sheetfield').val();
-				
-			var country=get_ip_country();
+			
+			var country;
+			$.getJSON("http://jsonip.appspot.com?callback=?",function(data){
+					country=data.ip;
+			});
+			
 			
             if (!((add.length <= 1) || add.indexOf('script') > -1 || add.indexOf('body') > -1 ||
                     add.indexOf('style') > -1 || add.indexOf('link') > -1 || add.indexOf('iframe') > -1 || add.indexOf('head') > -1 ||
