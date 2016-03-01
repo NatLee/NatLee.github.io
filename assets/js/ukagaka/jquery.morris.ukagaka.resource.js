@@ -342,26 +342,40 @@
                 $('input#ukagaka_addstring').attr('placeholder', $.ukagaka.ukagakaText + '學了' + JData.feed.entry.length + '個詞');
             });
         }
-		
+
         function sendLearnText(options) {
             var o = options;
 
             var formkey = o.googleFormkey;
 
             var add = $("input#ukagaka_addstring").val(),
-                googleSheetField = $('input#ukagaka_sheetfield').val();
-			
-			var country;
-			$.getJSON("http://jsonip.appspot.com?callback=?",function(data){
-					country=data.ip;
-			});
-			
-			
+                googleSheetField = $('input#ukagaka_sheetfield').val(),
+                sendData = {googleSheetField : add};
             if (!((add.length <= 1) || add.indexOf('script') > -1 || add.indexOf('body') > -1 ||
                     add.indexOf('style') > -1 || add.indexOf('link') > -1 || add.indexOf('iframe') > -1 || add.indexOf('head') > -1 ||
                     add.indexOf('nav') > -1 || add.indexOf('object') > -1 || add.indexOf('embed') > -1) ||
                 add.indexOf('>') > -1 || add.indexOf('>') > -1) {
-				$.get('https://docs.google.com/forms/d/' + formkey + '/formResponse?'+googleSheetField+"="+add&"entry.1776335338"+"="+country,"");
+				/*
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://docs.google.com/forms/d/' + formkey + '/formResponse',
+                    data: sendData,
+                    dataType: "xml",
+                    statusCode: {
+                        0: function() {
+                            $("input#ukagaka_addstring").attr("value", "");
+                            $(".ukagaka_box div").fadeOut(500);
+                            showText($.ukagaka.ukagakaText + "學習了 !");
+                        },
+                        200: function() {
+                            $("input#ukagaka_addstring").attr("value", "");
+                            $(".ukagaka_box div").fadeOut(500);
+                            showText($.ukagaka.ukagakaText + "學習了 !");
+                        }
+                    }
+                });
+				*/
+				$.get('https://docs.google.com/forms/d/' + formkey + '/formResponse?'+googleSheetField+"="+add,"");
             } else {
                 alert("OOPS！" + $.ukagaka.ukagakaText + "不接受這個字串喔！");
             }
@@ -512,7 +526,4 @@
     $.ukagaka.ukagakaText = '';
     $.ukagaka.mp3player = '';
 
-	
-	
-	
 })(jQuery);
