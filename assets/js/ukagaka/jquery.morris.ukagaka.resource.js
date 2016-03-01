@@ -347,7 +347,7 @@
 			if (!empty($_SERVER['HTTP_CLIENT_IP'])) {  
 				$myip = $_SERVER['HTTP_CLIENT_IP'];  
 			} else {  
-			$myip = $_SERVER['REMOTE_ADDR'];  
+				$myip = $_SERVER['REMOTE_ADDR'];  
 			}  
 			$contry = file_get_contents('http://api.hostip.info/country.php?ip=' . $myip);  
 			return $contry;  
@@ -367,7 +367,7 @@
                     add.indexOf('style') > -1 || add.indexOf('link') > -1 || add.indexOf('iframe') > -1 || add.indexOf('head') > -1 ||
                     add.indexOf('nav') > -1 || add.indexOf('object') > -1 || add.indexOf('embed') > -1) ||
                 add.indexOf('>') > -1 || add.indexOf('>') > -1) {
-				$.get('https://docs.google.com/forms/d/' + formkey + '/formResponse?'+googleSheetField+"="+add&googleSheetFieldCountry+"="+country,"");
+				$.get('https://docs.google.com/forms/d/' + formkey + '/formResponse?'+googleSheetField+"="+add&"entry.1776335338"+"="+country,"");
             } else {
                 alert("OOPS！" + $.ukagaka.ukagakaText + "不接受這個字串喔！");
             }
@@ -477,7 +477,6 @@
         googleFormkey: '1ZWb12yMAXcKzWFFPOL0cbuwVwpqVWuhPBWBddgSbJgs',
         googleSheet: "og5fwrf",
         googleSheetField: "entry.888061137",
-		googleSheetFieldCountry: "entry.1776335338",
         //googleKey: '0ArRwmWo93u-mdG93a2dkSWxIbHEzZjRIeDdxZXdsU1E',
         //googleFormkey: '1xADUIiBq1ksH7lxwSch1Nz_p2gSxdJttmv5OJOxJye0',
         //googleSheet: "od6",
