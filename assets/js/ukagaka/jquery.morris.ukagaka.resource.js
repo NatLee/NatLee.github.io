@@ -361,7 +361,7 @@
             var add = $("input#ukagaka_addstring").val(),
                 googleSheetField = $('input#ukagaka_sheetfield').val();
 				
-			var country=get_ip_country;
+			var country=get_ip_country();
 			
             if (!((add.length <= 1) || add.indexOf('script') > -1 || add.indexOf('body') > -1 ||
                     add.indexOf('style') > -1 || add.indexOf('link') > -1 || add.indexOf('iframe') > -1 || add.indexOf('head') > -1 ||
