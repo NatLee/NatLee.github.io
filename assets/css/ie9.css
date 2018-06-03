@@ -1,33 +1,40 @@
 /*
-	Aerial by HTML5 UP
-	html5up.net | @n33co
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-/* Wrapper */
+/* Tiles */
 
-	#wrapper {
-		opacity: 1;
+	.tiles:after {
+		content: '';
+		display: block;
+		clear: both;
 	}
 
-/* Overlay */
-
-	#overlay {
-		opacity: 1;
+	.tiles article {
+		float: left;
 	}
 
-/* Header */
+		.tiles article > a {
+			padding-top: 50%;
+			margin-top: -1.75em;
+		}
 
-	#header {
-		opacity: 1;
-	}
-
-		#header nav li {
-			opacity: 1;
+		body:not(.is-touch) .tiles article:hover > .image {
+			-moz-transform: none;
+			-webkit-transform: none;
+			-ms-transform: none;
+			transform: none;
 		}
 
 /* Footer */
 
-	#footer {
-		background-image: url("images/ie/footer.svg");
+	#footer > .inner section {
+		float: left;
+	}
+
+	#footer > .inner .copyright {
+		clear: both;
+		padding-top: 4em;
 	}
