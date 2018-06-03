@@ -2773,6 +2773,10 @@
 				background-color: #b8b49d;
 			}
 
+			.tiles article.IPFind > .image:before {
+				background-color: #b2bfab;
+			}
+
 			body:not(.is-touch) .tiles article:hover > .image {
 				-moz-transform: scale(1.1);
 				-webkit-transform: scale(1.1);
