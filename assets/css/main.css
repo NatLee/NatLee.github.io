@@ -2761,6 +2761,10 @@
 				background-color: #5694bb;
 			}
 
+			.tiles article.QWOP > .image:before {
+				background-color: #666666;
+			}
+
 			.tiles article.hexo > .image:before {
 				background-color: #8d9dc7;
 			}
