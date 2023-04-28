@@ -1,0 +1,143 @@
+[{
+        "header": "Nat Lee | Link",
+        "articles": [{
+                "imgSrc": "https://i.imgur.com/zGZlRpT.png",
+                "link": "https://natlee.github.io/Blog/",
+                "title": "Blog",
+                "description": "Build with a fast, simple & powerful framework, powered by Node.js."
+            },
+            {
+                "imgSrc": "assets/img/medium.png",
+                "link": "https://medium.com/@natlee_",
+                "title": "Medium",
+                "description": "My medium site, part of articles are the same as my blog in Github page."
+            },
+            {
+                "imgSrc": "assets/img/linkedin.png",
+                "link": "https://www.linkedin.com/in/nat-lee-726525ba/",
+                "title": "Linkedin",
+                "description": "My linkedin profile."
+            }
+        ]
+    },
+    {
+        "header": "Tech Site",
+        "articles": [{
+                "imgSrc": "https://i.imgur.com/evPZQrv.png",
+                "link": "https://github.com/natlee",
+                "title": "Github",
+                "description": "My github page, part of my open source works."
+            },
+            {
+                "imgSrc": "assets/img/kaggle.png",
+                "link": "https://www.kaggle.com/natlee",
+                "title": "Kaggle",
+                "description": "Kaggle is the place to do data science projects."
+            },
+            {
+                "imgSrc": "assets/img/leetcode.png",
+                "link": "https://leetcode.com/NatLee/",
+                "title": "LeetCode",
+                "description": "LeetCode is a platform to help enhancing some skills of coding and algorithm."
+            },
+            {
+                "imgSrc": "assets/img/hugging-face.png",
+                "link": "https://huggingface.co/NatLee",
+                "title": "Hugging Face",
+                "description": "My Hugging Face page, it shows what model I use or I trained."
+            }
+        ]
+    },
+    {
+        "header": "Open Source | Side Project",
+        "articles": [{
+                "imgSrc": "assets/img/stream-player.png",
+                "link": "https://github.com/NatLee/streaming-player",
+                "title": "Stream Player",
+                "description": "A self-hosted Nightbot-like video player which can be used on streaming or others."
+            },
+            {
+                "imgSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Structural_MRI_animation.ogv/256px--Structural_MRI_animation.ogv.jpg",
+                "link": "https://github.com/NatLee/Preprocessing-Pipeline-on-Brain-MR-Images",
+                "title": "MRI Image Pipeline",
+                "description": "The project is used to do preprocessing on brain MR images."
+            },
+            {
+                "imgSrc": "https://i.imgur.com/uhPBck9.gif",
+                "link": "https://github.com/NatLee/QWOP-Reach-the-Goal-with-Reinforcement-Learning-Actor-Critic-Agents-Using-Tensorflow-2",
+                "title": "QWOP RL Play",
+                "description": "Use reinforcement learning to play QWOP with python3 by using tensorflow2 and reach the goal!"
+            },
+            {
+                "imgSrc": "https://i.imgur.com/WrmLPRk.gif",
+                "link": "https://natlee.github.io/AniNet/",
+                "title": "AniFace",
+                "description": "A website collecting data of Anime character faces."
+            },
+            {
+                "imgSrc": "https://i.imgur.com/5kNfOqw.png",
+                "link": "https://natlee.github.io/WordNet/",
+                "title": "WordNet",
+                "description": "A website collecting data of emotion with text."
+            }
+        ]
+    },
+    {
+        "header": "Open Source | Tool",
+        "articles": [{
+                "imgSrc": "assets/img/eagle.png",
+                "link": "https://github.com/NatLee/Eagle-Wrapper",
+                "title": "Eagle Wrapper",
+                "description": "A wrapper for an image management software, Eagle."
+            },
+            {
+                "imgSrc": "assets/img/pypi.png",
+                "link": "https://github.com/NatLee/Django-Simple-3rd-Party-JWT-Dev-Dashboard",
+                "title": "Django Simple 3rd JWT Dashboard",
+                "description": "A dashboard for learning and simply add 3rd party login mixed with JWT."
+            },
+            {
+                "imgSrc": "assets/img/pypi.png",
+                "link": "https://github.com/NatLee/Django-Simple-3rd-Party-JWT",
+                "title": "Django Simple 3rd JWT Login",
+                "description": "A tool for simply add 3rd party login mixed with JWT."
+            },
+            {
+                "imgSrc": "assets/img/pypi.png",
+                "link": "https://github.com/NatLee/Batch-crop-images",
+                "title": "Batch Image Cropping Tool",
+                "description": "A tool for cropping images in a batch with an interface."
+            },
+            {
+                "imgSrc": "assets/img/pypi.png",
+                "link": "https://github.com/NatLee/Django-Simple-API-Proxy",
+                "title": "Django Simple API Proxy",
+                "description": "This is a tool for proxying any APIs on Django server."
+            },
+            {
+                "imgSrc": "assets/img/pypi.png",
+                "link": "https://github.com/NatLee/PyppeSnap",
+                "title": "PyppeSnap",
+                "description": "This is a tool for getting snapshot with base64 encoding from a website by using pyppeteer."
+            },
+            {
+                "imgSrc": "assets/img/pypi.png",
+                "link": "https://github.com/NatLee/HEIC2PNG",
+                "title": "HEIC2PNG",
+                "description": "This is a tool for converting format of HEIC images to PNG by using Python."
+            },
+            {
+                "imgSrc": "assets/img/pypi.png",
+                "link": "https://github.com/NatLee/Blur-Generator",
+                "title": "Blur Generator",
+                "description": "This tool is for generating blur on images for model training or something else."
+            },
+            {
+                "imgSrc": "https://i.imgur.com/IuOYTGt.png",
+                "link": "https://github.com/NatLee/IP-FIND-ChromeExtension",
+                "title": "IP Find",
+                "description": "A chrome extension help you find your IP."
+            }
+        ]
+    }
+]
