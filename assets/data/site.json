@@ -79,6 +79,18 @@
                 "link": "https://natlee.github.io/WordNet/",
                 "title": "WordNet",
                 "description": "A website collecting data of emotion with text."
+            },
+            {
+                "imgSrc": "https://raw.githubusercontent.com/NatLee/simply-nlp-classification-labeling-platform/main/doc/demo.gif",
+                "link": "https://github.com/NatLee/simply-nlp-classification-labeling-platform",
+                "title": "Simply NLP Classification Labeling Platform",
+                "description": "This is a flask-based simply platform for labeling classification of a text."
+            },
+            {
+                "imgSrc": "https://raw.githubusercontent.com/NatLee/simply-labeling-platform-for-machine-reading/main/doc/demo.gif",
+                "link": "https://github.com/NatLee/simply-labeling-platform-for-machine-reading",
+                "title": "Simply Labeling Platform for Machine Reading",
+                "description": "This is a simple platform for labeling answers to questions in an article."
             }
         ]
     },
