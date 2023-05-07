@@ -2081,6 +2081,8 @@ hr.major {
 .tiles article>.image img {
     display: block;
     width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    filter: blur(1px);
 }
 
 .tiles article>.image:before {
@@ -2125,6 +2127,7 @@ hr.major {
     background-size: 100% 100%;
     opacity: 0.25;
     z-index: 2;
+    filter: blur(1px);
 }
 
 .tiles article>a {
