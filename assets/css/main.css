@@ -2074,8 +2074,8 @@ hr.major {
 
 .tiles article > .image img {
     display: block;
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
     object-fit: cover;
 }
 
