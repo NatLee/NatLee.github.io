@@ -2057,45 +2057,29 @@ hr.major {
 }
 
 .tiles article {
-    -moz-transition: -moz-transform 0.5s ease, opacity 0.5s ease;
-    -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
-    -ms-transition: -ms-transform 0.5s ease, opacity 0.5s ease;
     transition: transform 0.5s ease, opacity 0.5s ease;
     position: relative;
     width: calc(33.33333% - 2.5em);
     margin: 2.5em 0 0 2.5em;
 }
 
-.tiles article>.image {
-    -moz-transition: -moz-transform 0.5s ease;
-    -webkit-transition: -webkit-transform 0.5s ease;
-    -ms-transition: -ms-transform 0.5s ease;
-    transition: transform 0.5s ease;
+.tiles article > .image {
     position: relative;
     display: block;
     width: 100%;
     border-radius: 4px;
     overflow: hidden;
+    transition: transform 0.5s ease;
 }
 
-.tiles article>.image img {
+.tiles article > .image img {
     display: block;
     width: 100%;
     height: 250px;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.3);
-    filter: blur(1px);
+    object-fit: cover;
 }
 
-.tiles article>.image:before {
-    -moz-pointer-events: none;
-    -webkit-pointer-events: none;
-    -ms-pointer-events: none;
-    pointer-events: none;
-    -moz-transition: background-color 0.5s ease, opacity 0.5s ease;
-    -webkit-transition: background-color 0.5s ease, opacity 0.5s ease;
-    -ms-transition: background-color 0.5s ease, opacity 0.5s ease;
-    transition: background-color 0.5s ease, opacity 0.5s ease;
+.tiles article > .image:before {
     content: '';
     display: block;
     position: absolute;
@@ -2103,20 +2087,13 @@ hr.major {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 1.0;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the initial darkness */
+    pointer-events: none;
     z-index: 1;
-    opacity: 0.8;
+    transition: background-color 0.5s ease, opacity 0.5s ease;
 }
 
-.tiles article>.image:after {
-    -moz-pointer-events: none;
-    -webkit-pointer-events: none;
-    -ms-pointer-events: none;
-    pointer-events: none;
-    -moz-transition: opacity 0.5s ease;
-    -webkit-transition: opacity 0.5s ease;
-    -ms-transition: opacity 0.5s ease;
-    transition: opacity 0.5s ease;
+.tiles article > .image:after {
     content: '';
     display: block;
     position: absolute;
@@ -2129,8 +2106,11 @@ hr.major {
     background-size: 100% 100%;
     opacity: 0.25;
     z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
     filter: blur(1px);
 }
+
 
 .tiles article>a {
     display: -moz-flex;
