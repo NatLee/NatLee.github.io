@@ -1,4 +1,4 @@
-@import url(assets/css/font-awesome.css);
+@import url(font-awesome.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,900");
 
 
@@ -2074,8 +2074,8 @@ hr.major {
 
 .tiles article > .image img {
     display: block;
-    width: 100%;
-    height: 250px;
+    width: 400px;
+    height: 400px;
     object-fit: cover;
 }
 
