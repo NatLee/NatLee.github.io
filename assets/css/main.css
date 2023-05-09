@@ -2091,6 +2091,7 @@ hr.major {
     pointer-events: none;
     z-index: 1;
     transition: background-color 0.5s ease, opacity 0.5s ease;
+    filter: blur(8px);
 }
 
 .tiles article > .image:after {
@@ -2108,7 +2109,7 @@ hr.major {
     z-index: 2;
     pointer-events: none;
     transition: opacity 0.5s ease;
-    filter: blur(1px);
+    filter: blur(5px);
 }
 
 
