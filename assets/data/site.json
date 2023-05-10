@@ -57,6 +57,12 @@
                 "description": "A self-hosted Nightbot-like video player which can be used on streaming or others."
             },
             {
+                "imgSrc": "https://github.com/NatLee/openpose-detect-hands-with-heatmap/raw/main/doc/heatmap-motion.gif",
+                "link": "https://github.com/NatLee/openpose-detect-hands-with-heatmap",
+                "title": "OpenPose Detect Hands with Heatmap",
+                "description": "A simply application for using OpenPose model for detecting hands and showing the visualization with a heatmap."
+            },
+            {
                 "imgSrc": "https://github.com/NatLee/simply-blur-detector/raw/main/docs/results.png",
                 "link": "https://github.com/NatLee/simply-blur-detector",
                 "title": "Simply Blur Detector",
