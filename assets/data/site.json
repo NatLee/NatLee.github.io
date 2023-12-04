@@ -1,6 +1,7 @@
 [{
         "header": "Nat Lee | Link",
-        "articles": [{
+        "articles": [
+            {
                 "imgSrc": "https://i.imgur.com/zGZlRpT.png",
                 "link": "https://natlee.github.io/Blog/",
                 "title": "Blog",
@@ -22,7 +23,8 @@
     },
     {
         "header": "Tech Site",
-        "articles": [{
+        "articles": [
+            {
                 "imgSrc": "https://i.imgur.com/evPZQrv.png",
                 "link": "https://github.com/natlee",
                 "title": "Github",
@@ -50,7 +52,14 @@
     },
     {
         "header": "Open Source | Side Project",
-        "articles": [{
+        "articles": [
+            {
+                "imgSrc": "assets/img/dev-dock.png",
+                "link": "https://github.com/NatLee/dev-dock-manager",
+                "title": "Dev Dock Manager",
+                "description": "A Django-based tool for managing DEV environment created by docker."
+            },
+            {
                 "imgSrc": "assets/img/stream-player.png",
                 "link": "https://github.com/NatLee/streaming-player",
                 "title": "Stream Player",
@@ -108,11 +117,12 @@
     },
     {
         "header": "Open Source | Tool",
-        "articles": [{
-            "imgSrc": "assets/img/fisheye-warping.png",
-            "link": "https://github.com/NatLee/fisheye-warping",
-            "title": "Fisheye Warping",
-            "description": "A tool for dewarping and rewarping on a top-down fisheye image by using OpenCV on Python."
+        "articles": [
+            {
+                "imgSrc": "assets/img/fisheye-warping.png",
+                "link": "https://github.com/NatLee/fisheye-warping",
+                "title": "Fisheye Warping",
+                "description": "A tool for dewarping and rewarping on a top-down fisheye image by using OpenCV on Python."
             },
             {
                 "imgSrc": "assets/img/eagle.png",
