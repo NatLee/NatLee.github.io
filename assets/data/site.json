@@ -79,9 +79,9 @@
             },
             {
                 "imgSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Structural_MRI_animation.ogv/256px--Structural_MRI_animation.ogv.jpg",
-                "link": "https://github.com/NatLee/Preprocessing-Pipeline-on-Brain-MR-Images",
-                "title": "MRI Image Pipeline",
-                "description": "The project is used to do preprocessing on brain MR images."
+                "link": "https://github.com/NatLee/nipype-preprocess-on-brain-MR",
+                "title": "Brain MR Pipeline",
+                "description": "The project is used to do preprocessing on brain MR images by using Nipype."
             },
             {
                 "imgSrc": "https://i.imgur.com/uhPBck9.gif",
