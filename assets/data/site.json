@@ -119,6 +119,12 @@
         "header": "Open Source | Tool",
         "articles": [
             {
+                "imgSrc": "assets/img/pypi.png",
+                "link": "https://github.com/NatLee/show-system-info",
+                "title": "ShowSys",
+                "description": "A tool for showing system information by using Python."
+            },
+            {
                 "imgSrc": "assets/img/fisheye-warping.png",
                 "link": "https://github.com/NatLee/fisheye-warping",
                 "title": "Fisheye Warping",
