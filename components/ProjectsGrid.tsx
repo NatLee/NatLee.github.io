@@ -5,6 +5,112 @@ import Link from 'next/link'
 import { allProjectsData, getAllCategories } from '@/data/projects'
 import Icon from './Icon'
 
+// Language Color Mapping
+const getLanguageColor = (language?: string): string => {
+  if (!language) return '#6b7280'
+  
+  const languageColors: Record<string, string> = {
+    'python': '#3776ab',
+    'javascript': '#f1e05a',
+    'typescript': '#2b7489',
+    'shell': '#89e051',
+    'html': '#e34c26',
+    'css': '#563d7c',
+    'java': '#b07219',
+    'cpp': '#f34b7d',
+    'go': '#00add8',
+    'rust': '#dea584',
+    'php': '#4f5d95',
+    'c': '#a8b9cc',
+    'csharp': '#239120',
+    'ruby': '#701516',
+    'swift': '#fa7343',
+    'kotlin': '#7f52ff',
+    'scala': '#dc322f',
+    'r': '#276dc3',
+    'matlab': '#e16737',
+    'perl': '#39457e',
+    'lua': '#000080',
+    'dart': '#0175c2',
+    'elixir': '#4e2a8e',
+    'clojure': '#5881d8',
+    'haskell': '#5d4f85',
+    'erlang': '#a90533',
+    'ocaml': '#3be133',
+    'fsharp': '#378bda',
+    'julia': '#9558b2',
+    'nim': '#ffc200',
+    'crystal': '#000100',
+    'zig': '#f7a41d',
+    'v': '#4f87c4',
+    'd': '#ba595e',
+    'ada': '#02f88c',
+    'fortran': '#4d41b1',
+    'cobol': '#005ca9',
+    'pascal': '#e3f171',
+    'prolog': '#74283c',
+    'lisp': '#3fb68b',
+    'scheme': '#1e4a72',
+    'smalltalk': '#596706',
+    'forth': '#341708',
+    'assembly': '#6e4c13',
+    'vhdl': '#adb2cb',
+    'verilog': '#b2b7f8',
+    'tcl': '#e4cc98',
+    'awk': '#c30e24',
+    'sed': '#64b970',
+    'bash': '#4eaa25',
+    'powershell': '#012456',
+    'batch': '#c1c1c1',
+    'vim': '#019733',
+    'emacs': '#7f5ab6',
+    'tex': '#3d6117',
+    'markdown': '#083fa1',
+    'yaml': '#cb171e',
+    'json': '#000000',
+    'xml': '#005f9f',
+    'sql': '#336791',
+    'dockerfile': '#384d54',
+    'makefile': '#427819',
+    'cmake': '#064f8c',
+    'gradle': '#02303a',
+    'maven': '#c71a36',
+    'ant': '#a81c7d',
+    'sbt': '#db4d3f',
+    'leiningen': '#202020',
+    'cargo': '#000000',
+    'npm': '#cb3837',
+    'yarn': '#2c8ebb',
+    'pip': '#3776ab',
+    'gem': '#e9573f',
+    'composer': '#885630',
+    'nuget': '#004880',
+    'cpan': '#0298c3',
+    'cabal': '#4655c2',
+    'stack': '#f5f5f5',
+    'mix': '#4e2a8e',
+    'rebar': '#ff6b35',
+    'hex': '#6e4a7e',
+    'pub': '#0175c2',
+    'conan': '#222222',
+    'vcpkg': '#0052cc',
+    'hunter': '#ff6b35',
+    'buckaroo': '#ff6b35',
+    'buck': '#ff6b35',
+    'bazel': '#43a047',
+    'pants': '#ff6b35',
+    'scons': '#ff6b35',
+    'waf': '#ff6b35',
+    'ninja': '#ff6b35',
+    'meson': '#0077c7',
+    'premake': '#ff6b35',
+    'qmake': '#ff6b35',
+    'autotools': '#ff6b35'
+  }
+  
+  return languageColors[language.toLowerCase()] || '#6b7280'
+}
+
 export default function ProjectsGrid() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [searchTerm, setSearchTerm] = useState('')
@@ -216,14 +322,36 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
           )}
         </div>
 
-        {/* Category Icon */}
-        <div className="absolute bottom-3 left-3">
+        {/* Category Icon & Language Badge */}
+        <div className="absolute bottom-3 left-3 flex items-center gap-3">
+          {/* Category Icon */}
           <div className="group relative">
             <div className="w-12 h-12 bg-gradient-to-br from-dark-900/90 to-dark-800/90 rounded-full flex items-center justify-center border border-secondary/40 backdrop-blur-sm">
               <Icon name={project.category} className="text-secondary group-hover:text-accent transition-colors duration-300" size={24} />
             </div>
             <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-full blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
+          
+          {/* Language Badge */}
+          {project.language && (
+            <div className="relative group">
+              <span 
+                className="relative z-10 px-3 py-1.5 text-white text-xs font-bold rounded-full border backdrop-blur-sm"
+                style={{
+                  backgroundColor: getLanguageColor(project.language),
+                  borderColor: `${getLanguageColor(project.language)}40`
+                }}
+              >
+                {project.language.toUpperCase()}
+              </span>
+              <div 
+                className="absolute inset-0 rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+                style={{
+                  backgroundColor: `${getLanguageColor(project.language)}30`
+                }}
+              ></div>
+            </div>
+          )}
         </div>
       </div>
 
