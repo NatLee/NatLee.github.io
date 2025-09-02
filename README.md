@@ -159,8 +159,7 @@ Static files will be in the `out/` directory, ready for deployment.
 │       ├── experience.json     # Work experience
 │       ├── skills.json         # Technical skills
 │       ├── education.json      # Education history
-│       ├── projects.json       # Project data
-│       └── image-config.json   # Image URLs and config
+│       └── projects.json       # Project data
 ├── public/                      # Static assets
 │   └── CNAME                   # Custom domain config
 ├── .github/                     # GitHub configuration
