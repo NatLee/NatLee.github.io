@@ -69,8 +69,60 @@ export default function About() {
                 </div>
               </div>
               
+              {/* Language */}
+              <div className="bg-dark-800/80 backdrop-blur-sm border border-gray-700 rounded-lg p-6 mb-6 animate-fade-in-right delay-200">
+                <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                  <div className="w-8 h-8 bg-gradient-to-br from-accent to-secondary rounded-lg flex items-center justify-center">
+                    <Icon name="brain" className="w-4 h-4 text-dark-900" />
+                  </div>
+                  Language
+                </h4>
+                
+                <div className="space-y-4">
+                  {/* Mandarin */}
+                  <div className="group">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-white font-medium">Mandarin</span>
+                      <span className="text-secondary text-sm font-bold">Native Speaker</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-accent to-warm-500 transition-all duration-1000 ease-out rounded-full" style={{ width: '100%' }}>
+                        <div className="h-full bg-white/20 animate-pulse rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* English */}
+                  <div className="group">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-white font-medium">English</span>
+                      <span className="text-secondary text-sm font-bold">Professional</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-warm-400 to-warm-600 transition-all duration-1000 ease-out rounded-full" style={{ width: '85%' }}>
+                        <div className="h-full bg-white/20 animate-pulse rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Japanese */}
+                  <div className="group">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-white font-medium">Japanese</span>
+                      <span className="text-secondary text-sm font-bold">JLPT N1</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-secondary to-accent transition-all duration-1000 ease-out rounded-full" style={{ width: '95%' }}>
+                        <div className="h-full bg-white/20 animate-pulse rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
               {/* Contact & Social Links */}
-              <div className="bg-dark-800/80 backdrop-blur-sm border border-gray-700 rounded-lg p-6 animate-fade-in-right delay-200">
+              <div className="bg-dark-800/80 backdrop-blur-sm border border-gray-700 rounded-lg p-6 animate-fade-in-right delay-300">
                 <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
                   <div className="w-8 h-8 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center">
                     <Icon name="mail" className="w-4 h-4 text-dark-900" />
