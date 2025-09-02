@@ -92,6 +92,11 @@
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
   }
 
+  /* Project Card Image - 完全移除所有 hover 效果，避免變換衝突 */
+  .project-card-image {
+    @apply transition-all duration-500 ease-out;
+  }
+
   /* Animations */
   @keyframes fadeInUp {
     from {

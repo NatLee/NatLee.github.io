@@ -250,7 +250,7 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
           <img
             src={project.images[0]}
             alt={project.title}
-            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-cover object-center project-card-image"
             onError={(e) => {
               const target = e.target as HTMLImageElement
               const parent = target.parentElement
@@ -282,7 +282,7 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
 
         {/* Status Badge */}
         <div className="absolute top-3 right-3">
-          <div className="relative group">
+          <div className="relative group overflow-hidden rounded-full">
             <span className={`relative z-10 px-3 py-1.5 rounded-full text-xs font-bold border ${
               project.status === 'Completed' 
                 ? 'bg-gradient-to-r from-accent to-warm-500 text-white border-accent/30' 
@@ -292,32 +292,26 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
             }`}>
               {project.status}
             </span>
-            <div className={`absolute inset-0 rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-300 -z-10 ${
-              project.status === 'Completed' 
-                ? 'bg-gradient-to-r from-accent/30 to-warm-500/30' 
-                : project.status === 'In Progress' 
-                  ? 'bg-gradient-to-r from-secondary/30 to-neon-red/30'
-                  : 'bg-gradient-to-r from-gray-500/30 to-gray-600/30'
-            }`}></div>
+            {/* 移除模糊效果，避免與卡片變換衝突 */}
           </div>
         </div>
 
         {/* Featured & Open Source Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           {featured && (
-            <div className="relative group">
+            <div className="relative group overflow-hidden rounded-full">
               <span className="relative z-10 px-3 py-1.5 bg-gradient-to-r from-accent to-warm-500 text-white text-xs font-bold rounded-full border border-accent/30">
                 FEATURED
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-accent/30 to-warm-500/30 rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+              {/* 移除模糊效果，避免與卡片變換衝突 */}
             </div>
           )}
           {project.opensource && (
-            <div className="relative group">
+            <div className="relative group overflow-hidden rounded-full">
               <span className="relative z-10 px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold rounded-full border border-green-400/30">
                 OPEN SOURCE
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+              {/* 移除模糊效果，避免與卡片變換衝突 */}
             </div>
           )}
         </div>
@@ -325,16 +319,16 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
         {/* Category Icon & Language Badge */}
         <div className="absolute bottom-3 left-3 flex items-center gap-3">
           {/* Category Icon */}
-          <div className="group relative">
+          <div className="group relative overflow-hidden rounded-full">
             <div className="w-12 h-12 bg-gradient-to-br from-dark-900/90 to-dark-800/90 rounded-full flex items-center justify-center border border-secondary/40 backdrop-blur-sm">
               <Icon name={project.category} className="text-secondary group-hover:text-accent transition-colors duration-300" size={24} />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-full blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+            {/* 移除模糊效果，避免與卡片變換衝突 */}
           </div>
           
           {/* Language Badge */}
           {project.language && (
-            <div className="relative group">
+            <div className="relative group overflow-hidden rounded-full">
               <span 
                 className="relative z-10 px-3 py-1.5 text-white text-xs font-bold rounded-full border backdrop-blur-sm"
                 style={{
@@ -344,12 +338,7 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
               >
                 {project.language.toUpperCase()}
               </span>
-              <div 
-                className="absolute inset-0 rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-300 -z-10"
-                style={{
-                  backgroundColor: `${getLanguageColor(project.language)}30`
-                }}
-              ></div>
+              {/* 移除模糊效果，避免與卡片變換衝突 */}
             </div>
           )}
         </div>
