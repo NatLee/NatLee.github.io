@@ -151,25 +151,25 @@ export default function ProjectsGrid() {
 
           {/* Search and Filter */}
           <div className="mb-12 space-y-6">
-            {/* First Row: Search with Project Count */}
-            <div className="flex justify-center">
-              {/* Search with Project Count */}
+            {/* First Row: Search and Project Count */}
+            <div className="flex flex-col items-center gap-4">
+              {/* Search Box */}
               <div className="relative w-full max-w-2xl">
-                <Icon name="search" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Icon name="search" className="absolute left-3 top-1/2 transform -translate-y-1/2 translate-y-0.5 text-gray-400" size={20} />
                 <input
                   type="text"
                   placeholder="Search projects..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-32 py-3 bg-dark-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                  className="w-full pl-10 pr-4 py-3 bg-dark-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
                 />
-                
-                {/* Project Count inside search box */}
-                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                  <span className="text-sm text-gray-400">
-                    <span className="text-secondary font-bold">{filteredProjects.length}</span> projects
-                  </span>
-                </div>
+              </div>
+              
+              {/* Project Count */}
+              <div className="text-center">
+                <span className="text-sm text-gray-400">
+                  Showing <span className="text-secondary font-bold">{filteredProjects.length}</span> of <span className="text-secondary font-bold">{allProjectsData.length}</span> projects
+                </span>
               </div>
             </div>
 
