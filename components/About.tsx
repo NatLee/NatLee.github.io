@@ -60,7 +60,7 @@ export default function About() {
                   </div>
                   <div className="flex justify-between">
                     <span>Format:</span>
-                    <span className="text-accent">JPG</span>
+                    <span className="text-accent">PNG</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Status:</span>
