@@ -9,7 +9,8 @@ export interface Experience {
   companyLogo: string
   department: string
   location: string
-  duration: string
+  start: string
+  end: string
   summary: string
   responsibilities: string[]
   techStack: string[]

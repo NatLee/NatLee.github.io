@@ -7,7 +7,8 @@
     "companyLogo": "https://via.placeholder.com/100x100/4A90E2/FFFFFF?text=HD",
     "department": "International Power Trading Division",
     "location": "Taipei, Taiwan",
-    "duration": "Dec 2024 - Present",
+    "start": "Dec 2024",
+    "end": "Present",
     "summary": "Transferred to the International Power Trading Division, focusing on developing power trading strategies for Japan and Australia markets. Developing spread strategy models to predict spot market electricity prices and assist traders in decision-making.",
     "responsibilities": [
       "Develop international power trading strategies for Japan and Australia markets",
@@ -30,7 +31,8 @@
     "companyLogo": "https://via.placeholder.com/100x100/4A90E2/FFFFFF?text=HD",
     "department": "Smart Services Division",
     "location": "Taipei, Taiwan", 
-    "duration": "Apr 2023 - Dec 2024",
+    "start": "Apr 2023",
+    "end": "Dec 2024",
     "summary": "Developed solar power prediction and display systems, optimized power matching algorithms, and integrated various platforms with advanced authentication systems.",
     "responsibilities": [
       "Developed time series models using Python and PyTorch to predict solar power generation for Tainan FamilyMart Pingfeng store energy storage demonstration site",
@@ -57,7 +59,8 @@
     "companyLogo": "https://via.placeholder.com/100x100/50C878/FFFFFF?text=BD",
     "department": "Technology Center",
     "location": "Taipei, Taiwan",
-    "duration": "Dec 2021 - Apr 2023",
+    "start": "Dec 2021",
+    "end": "Apr 2023",
     "summary": "Developed NLP and data platforms using Python and deep learning frameworks. Built sentiment analysis platform processing over 3 billion data points with 30% accuracy improvement. Led backend development for dashboard projects and CDP platforms.",
     "responsibilities": [
       "Developed sentiment analysis platform using deep learning frameworks, improving accuracy by 30%",
@@ -84,7 +87,8 @@
     "companyLogo": "https://via.placeholder.com/100x100/FF6B6B/FFFFFF?text=TC",
     "department": "Security Product Development Division", 
     "location": "Taipei, Taiwan",
-    "duration": "Sep 2021 - Nov 2021",
+    "start": "Sep 2021",
+    "end": "Nov 2021",
     "summary": "Worked on cybersecurity products, focusing on CA certificate applications and writing comprehensive test cases for security systems.",
     "responsibilities": [
       "Developed test cases for cybersecurity-related products",
@@ -107,7 +111,8 @@
     "companyLogo": "https://via.placeholder.com/100x100/9B59B6/FFFFFF?text=IT",
     "department": "R&D Department",
     "location": "New Taipei, Taiwan",
-    "duration": "Oct 2019 - Mar 2021",
+    "start": "Oct 2019",
+    "end": "Mar 2021",
     "summary": "Specialized in computer vision and deep learning solutions. Developed AI applications for medical imaging, retail analytics, and embedded advertising systems using edge computing devices.",
     "responsibilities": [
       "Applied Docker virtualization technology to simplify development processes",
@@ -134,7 +139,8 @@
     "companyLogo": "https://via.placeholder.com/100x100/FF8C00/FFFFFF?text=LM",
     "department": "Tool Product Division",
     "location": "Taipei, Taiwan", 
-    "duration": "Jul 2018 - Oct 2019",
+    "start": "Jul 2018",
+    "end": "Oct 2019",
     "summary": "First professional role developing web scraping and data analysis platforms. Built NLP models, voice recognition systems, and blockchain-related applications using various technologies.",
     "responsibilities": [
       "Developed frontend and backend web applications and microservices for blockchain trend products",

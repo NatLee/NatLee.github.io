@@ -3,6 +3,60 @@
 import { experienceData } from '@/data/experience'
 import Icon from './Icon'
 
+// Utility function: Parse time string to a comparable format
+function parseTimeString(timeStr: string): Date | null {
+  if (timeStr === 'Present') return new Date() // 當前時間
+  
+  // Process "MMM YYYY" format
+  const months: { [key: string]: number } = {
+    'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+    'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+  }
+  
+  const parts = timeStr.split(' ')
+  if (parts.length === 2) {
+    const month = months[parts[0]]
+    const year = parseInt(parts[1])
+    if (month !== undefined && !isNaN(year)) {
+      return new Date(year, month, 1)
+    }
+  }
+  
+  return null
+}
+
+// Utility function: Format time range
+function formatDuration(start: string, end: string): string {
+  return `${start} - ${end}`
+}
+
+// Utility function: Calculate grouped experience time range
+function calculateGroupedDuration(experiences: any[]): string {
+  if (experiences.length === 0) return ''
+  
+  // Parse all times
+  const startTimes = experiences.map(exp => parseTimeString(exp.start)).filter(Boolean)
+  const endTimes = experiences.map(exp => parseTimeString(exp.end)).filter(Boolean)
+  
+  if (startTimes.length === 0 || endTimes.length === 0) return ''
+  
+  // Find earliest start time and latest end time
+  const earliestStart = new Date(Math.min(...startTimes.map(d => d!.getTime())))
+  const latestEnd = new Date(Math.max(...endTimes.map(d => d!.getTime())))
+  
+  // Format time
+  const formatDate = (date: Date): string => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return `${months[date.getMonth()]} ${date.getFullYear()}`
+  }
+  
+  const startStr = formatDate(earliestStart)
+  const endStr = latestEnd.getTime() === new Date().getTime() ? 'Present' : formatDate(latestEnd)
+  
+  return formatDuration(startStr, endStr)
+}
+
 export default function Experience() {
   return (
     <section id="experience" className="py-20 bg-dark-800 min-h-screen relative overflow-hidden">
@@ -110,7 +164,7 @@ export default function Experience() {
                               </div>
                               <div>
                                 <h3 className="text-2xl font-bold text-white">{item.company}</h3>
-                                <p className="text-orange-300 font-medium">Apr 2023 - Present • Internal Department Transfer</p>
+                                <p className="text-orange-300 font-medium">{calculateGroupedDuration(item.experiences)} • Internal Department Transfer</p>
                               </div>
                             </div>
                           </div>
@@ -151,11 +205,17 @@ export default function Experience() {
                                     <div className="mb-6">
                                       <div className="flex items-start justify-between mb-3">
                                         <h4 className="text-xl font-bold text-white">{exp.title}</h4>
-                                        <div className="flex items-center gap-2">
-                                          <div className={`w-2 h-2 ${expIndex === 0 ? 'bg-orange-400' : 'bg-secondary'} rounded-full animate-pulse`}></div>
-                                          <span className={`text-sm font-mono ${expIndex === 0 ? 'text-orange-300' : 'text-secondary'} bg-dark-700/80 px-3 py-1 rounded-full border ${expIndex === 0 ? 'border-orange-400/20' : 'border-secondary/20'}`}>
-                                            {exp.duration}
-                                          </span>
+                                        <div className="flex flex-col items-end gap-2">
+                                          <div className="flex items-center gap-2">
+                                            <div className={`w-2 h-2 ${expIndex === 0 ? 'bg-orange-400' : 'bg-secondary'} rounded-full animate-pulse`}></div>
+                                            <span className={`text-sm font-mono ${expIndex === 0 ? 'text-orange-300' : 'text-secondary'} bg-dark-700/80 px-3 py-1 rounded-full border ${expIndex === 0 ? 'border-orange-400/20' : 'border-secondary/20'}`}>
+                                              {formatDuration(exp.start, exp.end)}
+                                            </span>
+                                          </div>
+                                          <div className="flex items-center gap-2 text-sm text-gray-400">
+                                            <Icon name="location" className="w-4 h-4" />
+                                            <span>{exp.location}</span>
+                                          </div>
                                         </div>
                                       </div>
                                       
@@ -351,7 +411,7 @@ export default function Experience() {
                               </div>
                               <div className="flex items-center gap-2">
                                 <div className={`w-3 h-3 ${theme.dot} rounded-full animate-pulse`}></div>
-                                <span className="font-mono">{exp.duration}</span>
+                                <span className="font-mono">{formatDuration(exp.start, exp.end)}</span>
                               </div>
                             </div>
                           </div>
