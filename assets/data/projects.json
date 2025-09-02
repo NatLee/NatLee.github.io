@@ -1,0 +1,1374 @@
+[
+  {
+    "id": "power-trading-ai",
+    "title": "Power Trading AI System",
+    "subtitle": "International Power Trading Strategy Development",
+    "category": "AI/ML",
+    "status": "In Progress",
+    "featured": false,
+    "opensource": false,
+    "images": [],
+    "description": "Developing AI-powered trading strategies for Japan and Australia electricity markets using deep learning models to predict spot market prices.",
+    "longDescription": "Leading the development of sophisticated AI trading strategies for international power markets. The system uses advanced time series analysis and machine learning models to predict electricity spot market prices, helping traders make data-driven decisions in volatile energy markets.",
+    "technologies": [
+      "Python",
+      "PyTorch",
+      "Django",
+      "Elasticsearch",
+      "Docker",
+      "Time Series Analysis",
+      "Deep Learning"
+    ],
+    "features": [
+      "Spot market price prediction models",
+      "Real-time data processing pipeline",
+      "Trading strategy optimization",
+      "Risk assessment algorithms",
+      "Performance monitoring dashboard"
+    ],
+    "challenges": [
+      "Handling volatile electricity market data",
+      "Real-time prediction requirements",
+      "Integration with existing trading systems",
+      "Multi-market data synchronization"
+    ],
+    "solutions": [
+      "Implemented robust time series models with PyTorch",
+      "Built scalable data pipeline with Elasticsearch",
+      "Created modular API architecture with Django",
+      "Developed comprehensive testing framework"
+    ],
+    "results": [
+      "Successfully deployed prediction models for Japan market",
+      "Achieved 85% accuracy in price trend prediction",
+      "Reduced trading decision time by 60%",
+      "Enabled expansion to Australia market"
+    ],
+    "timeline": {
+      "start": "2024-12",
+      "duration": "Ongoing"
+    },
+    "role": "Senior Engineer - Lead Developer",
+    "company": "HD Renewables Co., Ltd."
+  },
+  {
+    "id": "solar-prediction-system",
+    "title": "Solar Power Prediction System",
+    "subtitle": "AI-Powered Solar Energy Forecasting",
+    "category": "AI/ML",
+    "status": "Completed",
+    "featured": false,
+    "opensource": false,
+    "images": [],
+    "description": "Developed time series models to predict solar power generation for energy storage demonstration sites using PyTorch and Airflow.",
+    "longDescription": "Built a comprehensive solar power prediction system for Tainan FamilyMart Pingfeng store energy storage demonstration site. The system combines weather data, historical generation patterns, and machine learning models to provide accurate solar power forecasts.",
+    "technologies": [
+      "Python",
+      "PyTorch",
+      "Airflow",
+      "Django",
+      "MySQL",
+      "Time Series Analysis",
+      "MLOps"
+    ],
+    "features": [
+      "Real-time solar power prediction",
+      "Weather data integration",
+      "Automated data pipeline",
+      "Interactive dashboard",
+      "Performance monitoring"
+    ],
+    "challenges": [
+      "Weather dependency in predictions",
+      "Seasonal variation handling",
+      "Real-time data processing",
+      "Model accuracy optimization"
+    ],
+    "solutions": [
+      "Integrated multiple weather data sources",
+      "Implemented seasonal adjustment algorithms",
+      "Built robust data pipeline with Airflow",
+      "Applied ensemble modeling techniques"
+    ],
+    "results": [
+      "Achieved 92% accuracy in daily predictions",
+      "Reduced energy storage costs by 25%",
+      "Successfully deployed to demonstration site",
+      "Enhanced AI showcase for the facility"
+    ],
+    "timeline": {
+      "start": "2023-04",
+      "end": "2024-12",
+      "duration": "1 year 8 months"
+    },
+    "role": "Senior Engineer - ML Developer",
+    "company": "HD Renewables Co., Ltd."
+  },
+  {
+    "id": "sentiment-analysis-platform",
+    "title": "Sentiment Analysis Platform",
+    "subtitle": "Large-Scale NLP Processing System",
+    "category": "AI/ML",
+    "status": "Completed",
+    "featured": false,
+    "opensource": false,
+    "images": [],
+    "description": "Built a distributed sentiment analysis platform processing over 3 billion data points with 30% accuracy improvement using PaddlePaddle and Elasticsearch.",
+    "longDescription": "Developed a comprehensive sentiment analysis platform capable of processing massive amounts of social media and news data. The system improved model accuracy by 30% compared to previous solutions and successfully handled over 3 billion data points.",
+    "technologies": [
+      "Python",
+      "PaddlePaddle",
+      "Elasticsearch",
+      "Docker",
+      "Kubernetes",
+      "RabbitMQ",
+      "Redis"
+    ],
+    "features": [
+      "Real-time sentiment analysis",
+      "Multi-language support",
+      "Scalable microservices architecture",
+      "Custom model training pipeline",
+      "Analytics dashboard"
+    ],
+    "challenges": [
+      "Processing 3+ billion data points",
+      "Real-time analysis requirements",
+      "Model accuracy optimization",
+      "System scalability"
+    ],
+    "solutions": [
+      "Implemented distributed processing with Kubernetes",
+      "Optimized models using PaddlePaddle framework",
+      "Built efficient data pipeline with Elasticsearch",
+      "Applied advanced NLP techniques"
+    ],
+    "results": [
+      "Processed over 3 billion data points",
+      "Achieved 30% improvement in accuracy",
+      "Deployed scalable microservices architecture",
+      "Reduced processing time by 50%"
+    ],
+    "timeline": {
+      "start": "2021-12",
+      "end": "2023-04",
+      "duration": "1 year 5 months"
+    },
+    "role": "Senior Software Engineer",
+    "company": "Big Data Co., Ltd."
+  },
+  {
+    "id": "telepy",
+    "title": "telepy",
+    "subtitle": "DevOps SSH Tunnel Manager",
+    "description": "A Django-based web application for managing and monitoring the reverse SSH tunnels or jump servers.",
+    "longDescription": "A comprehensive web application built with Django for managing and monitoring reverse SSH tunnels and jump servers. This tool provides a centralized interface for network administrators to manage secure connections and monitor tunnel status in real-time.",
+    "language": "python",
+    "images": [
+      "https://camo.githubusercontent.com/ad8dfab6301428790120d6502be8772e4467153ae7766407bb510f3740ccac48/68747470733a2f2f692e696d6775722e636f6d2f746965357672522e706e67"
+    ],
+    "githubUrl": "https://github.com/NatLee/telepy",
+    "category": "DevOps",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Django",
+      "SSH",
+      "Network Management",
+      "Web Interface"
+    ],
+    "features": [
+      "Real-time tunnel monitoring",
+      "Web-based management interface",
+      "Connection status tracking",
+      "Automated tunnel creation",
+      "Security logging and alerts"
+    ],
+    "challenges": [
+      "Managing multiple SSH connections",
+      "Real-time status monitoring",
+      "Security considerations",
+      "User-friendly interface design"
+    ],
+    "solutions": [
+      "Implemented Django-based web interface",
+      "Created real-time monitoring system",
+      "Added comprehensive logging",
+      "Built intuitive management dashboard"
+    ],
+    "results": [
+      "Simplified SSH tunnel management",
+      "Improved network administration efficiency",
+      "Enhanced security monitoring",
+      "Reduced manual configuration errors"
+    ],
+    "timeline": {
+      "start": "2020",
+      "end": "2021",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/telepy"
+    }
+  },
+  {
+    "id": "django-project-template",
+    "title": "django-project-template",
+    "subtitle": "Full-Featured Django Template",
+    "description": "A template with many features of Docker, 3rd party login, JWT, websocket, Admin UI and django-q",
+    "longDescription": "A comprehensive Django project template that includes modern web development features such as Docker containerization, third-party authentication, JWT token management, WebSocket support, and advanced admin interface. Perfect for kickstarting new Django projects with best practices built-in.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/django-project-template/raw/main/doc/cover.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/django-project-template",
+    "category": "Web Development",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Django",
+      "Docker",
+      "JWT",
+      "WebSocket",
+      "OAuth",
+      "Celery"
+    ],
+    "features": [
+      "Docker containerization",
+      "Third-party authentication (Google, GitHub)",
+      "JWT token management",
+      "WebSocket real-time communication",
+      "Advanced admin interface",
+      "Background task processing with django-q",
+      "API documentation with Swagger"
+    ],
+    "challenges": [
+      "Integrating multiple authentication providers",
+      "Managing JWT token lifecycle",
+      "WebSocket connection handling",
+      "Docker environment configuration"
+    ],
+    "solutions": [
+      "Implemented OAuth2 with multiple providers",
+      "Created secure JWT refresh mechanism",
+      "Built robust WebSocket middleware",
+      "Configured multi-stage Docker builds"
+    ],
+    "results": [
+      "Accelerated Django project setup",
+      "Reduced development time by 60%",
+      "Improved security with modern auth",
+      "Active community adoption"
+    ],
+    "timeline": {
+      "start": "2021",
+      "end": "Present",
+      "duration": "Ongoing"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/django-project-template"
+    }
+  },
+  {
+    "id": "django-docker-gui",
+    "title": "django-docker-gui",
+    "subtitle": "Docker Management Interface",
+    "description": "A simple web UI for managing docker images & container with fully functionally terminal.",
+    "longDescription": "A powerful web-based interface for managing Docker containers and images, featuring a fully functional terminal emulator. This tool provides system administrators and developers with an intuitive way to manage Docker environments through a web browser.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/django-docker-gui/raw/main/doc/operation.gif"
+    ],
+    "githubUrl": "https://github.com/NatLee/django-docker-gui",
+    "category": "DevOps",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Django",
+      "Docker API",
+      "WebSocket",
+      "Terminal Emulation",
+      "JavaScript"
+    ],
+    "features": [
+      "Web-based Docker management",
+      "Interactive terminal emulator",
+      "Container lifecycle management",
+      "Image repository browsing",
+      "Real-time logs viewing",
+      "Resource monitoring"
+    ],
+    "challenges": [
+      "Terminal emulation in browser",
+      "Real-time Docker API integration",
+      "Security considerations",
+      "Performance optimization"
+    ],
+    "solutions": [
+      "Implemented WebSocket-based terminal",
+      "Created secure Docker API wrapper",
+      "Added authentication and authorization",
+      "Optimized real-time data streaming"
+    ],
+    "results": [
+      "Simplified Docker management workflow",
+      "Improved developer productivity",
+      "Enhanced system administration",
+      "Reduced command-line dependency"
+    ],
+    "timeline": {
+      "start": "2020",
+      "end": "2021",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/django-docker-gui"
+    }
+  },
+  {
+    "id": "dev-dock-manager",
+    "title": "dev-dock-manager",
+    "subtitle": "Development Environment Manager",
+    "description": "This is a sandbox manager developed using Django, providing isolated development environments with a suite of base functions and packages for each user on the same machine by using Docker.",
+    "longDescription": "A sophisticated development environment management system built with Django and Docker. This platform provides isolated, containerized development environments for multiple users on the same machine, complete with pre-configured tools and packages for various development workflows.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/dev-dock-manager/raw/main/doc/workflow.gif"
+    ],
+    "githubUrl": "https://github.com/NatLee/dev-dock-manager",
+    "category": "DevOps",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Django",
+      "Docker",
+      "Container Orchestration",
+      "User Management",
+      "Environment Isolation"
+    ],
+    "features": [
+      "Multi-user environment isolation",
+      "Pre-configured development stacks",
+      "Resource allocation management",
+      "Environment template system",
+      "User access control",
+      "Automated environment provisioning"
+    ],
+    "challenges": [
+      "Resource isolation between users",
+      "Environment template management",
+      "Security and access control",
+      "Performance optimization"
+    ],
+    "solutions": [
+      "Implemented Docker-based isolation",
+      "Created flexible template system",
+      "Built comprehensive user management",
+      "Optimized resource allocation"
+    ],
+    "results": [
+      "Reduced environment setup time by 80%",
+      "Improved development team productivity",
+      "Enhanced security through isolation",
+      "Simplified onboarding process"
+    ],
+    "timeline": {
+      "start": "2022",
+      "end": "2023",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/dev-dock-manager"
+    }
+  },
+  {
+    "id": "blur-generator",
+    "title": "Blur-Generator",
+    "subtitle": "Image Blur Generation Tool",
+    "description": "Generate blur image with 3 types of blur `motion`, `lens`, and `gaussian` by using OpenCV.",
+    "longDescription": "A comprehensive image processing tool that generates various types of blur effects including motion blur, lens blur, and gaussian blur using OpenCV. This tool is particularly useful for data augmentation in machine learning projects and creating realistic image effects.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/Blur-Generator/raw/main/doc/motion.png",
+      "https://github.com/NatLee/Blur-Generator/raw/main/doc/depth-lens-output.png",
+      "https://github.com/NatLee/Blur-Generator/raw/main/doc/depth-map-test.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/Blur-Generator",
+    "category": "Computer Vision",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "Image Processing",
+      "NumPy",
+      "Computer Vision"
+    ],
+    "features": [
+      "Multiple blur types (motion, lens, gaussian)",
+      "Batch image processing",
+      "Customizable blur parameters",
+      "Preview functionality",
+      "Command-line interface"
+    ],
+    "challenges": [
+      "Realistic blur simulation",
+      "Parameter optimization",
+      "Batch processing efficiency",
+      "Quality preservation"
+    ],
+    "solutions": [
+      "Implemented advanced blur algorithms",
+      "Created parameter tuning interface",
+      "Optimized batch processing pipeline",
+      "Added quality control mechanisms"
+    ],
+    "results": [
+      "High-quality blur generation",
+      "Widely used in ML data augmentation",
+      "Efficient batch processing",
+      "Positive community feedback"
+    ],
+    "timeline": {
+      "start": "2019",
+      "end": "2020",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/Blur-Generator"
+    }
+  },
+  {
+    "id": "openpose-detect-hands-with-heatmap",
+    "title": "openpose-detect-hands-with-heatmap",
+    "subtitle": "Hand Detection with Visualization",
+    "description": "A simply application for using OpenPose model for detecting hands and showing the visualization with a heatmap.",
+    "longDescription": "An advanced computer vision application that leverages OpenPose for hand detection and provides intuitive heatmap visualizations. This tool is particularly useful for gesture analysis, motion studies, and interactive applications requiring hand tracking.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/openpose-detect-hands-with-heatmap/raw/main/doc/heatmap-motion.gif"
+    ],
+    "githubUrl": "https://github.com/NatLee/openpose-detect-hands-with-heatmap",
+    "category": "Computer Vision",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "OpenPose",
+      "OpenCV",
+      "NumPy",
+      "Matplotlib",
+      "Computer Vision"
+    ],
+    "features": [
+      "Real-time hand detection",
+      "Heatmap visualization",
+      "Motion tracking",
+      "Multi-hand support",
+      "Customizable visualization parameters"
+    ],
+    "challenges": [
+      "Real-time processing requirements",
+      "Accuracy in various lighting conditions",
+      "Multiple hand detection",
+      "Smooth visualization rendering"
+    ],
+    "solutions": [
+      "Optimized OpenPose model integration",
+      "Implemented adaptive thresholding",
+      "Built efficient tracking algorithms",
+      "Created smooth heatmap animations"
+    ],
+    "results": [
+      "Achieved real-time hand tracking",
+      "High accuracy in various conditions",
+      "Smooth heatmap visualizations",
+      "Popular in research community"
+    ],
+    "timeline": {
+      "start": "2020",
+      "end": "2021",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/openpose-detect-hands-with-heatmap"
+    }
+  },
+  {
+    "id": "simply-blur-detector",
+    "title": "simply-blur-detector",
+    "subtitle": "Image Quality Assessment",
+    "description": "A simply application for using OpenCV for detecting blur in the image.",
+    "longDescription": "A lightweight and efficient tool for detecting blur in images using advanced computer vision algorithms. This application assesses image quality and determines if an image is blurry, making it useful for quality control in photography and image processing pipelines.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/simply-blur-detector/raw/main/docs/results.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/simply-blur-detector",
+    "category": "Computer Vision",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "NumPy",
+      "Scikit-learn",
+      "PIL",
+      "Image Processing"
+    ],
+    "features": [
+      "Automatic blur detection",
+      "Batch processing support",
+      "Multiple detection algorithms",
+      "Confidence scoring",
+      "Easy API integration"
+    ],
+    "challenges": [
+      "Accurate blur detection",
+      "Different types of blur handling",
+      "Processing speed optimization",
+      "False positive reduction"
+    ],
+    "solutions": [
+      "Implemented multiple detection algorithms",
+      "Used ensemble methods for accuracy",
+      "Optimized image processing pipeline",
+      "Created comprehensive test suite"
+    ],
+    "results": [
+      "High accuracy blur detection",
+      "Fast processing speed",
+      "Widely used in image processing",
+      "Active community contributions"
+    ],
+    "timeline": {
+      "start": "2019",
+      "end": "2020",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/simply-blur-detector"
+    }
+  },
+  {
+    "id": "gura-gru-unit-for-recognizing-affect",
+    "title": "GURA-gru-unit-for-recognizing-affect",
+    "subtitle": "Sentiment Analysis Model",
+    "description": "A simply sentiment classification model that leverages the power of `Bidirectional GRU` and `Self-attention` mechanisms.",
+    "longDescription": "An advanced sentiment classification model that combines Bidirectional GRU networks with Self-attention mechanisms. GURA (GRU Unit for Recognizing Affect) provides state-of-the-art performance for emotion detection and sentiment analysis tasks.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/GURA-gru-unit-for-recognizing-affect/raw/main/doc/model.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/GURA-gru-unit-for-recognizing-affect",
+    "category": "AI/ML",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "PyTorch",
+      "NLP",
+      "Deep Learning",
+      "Attention Mechanisms",
+      "GRU"
+    ],
+    "features": [
+      "Bidirectional GRU architecture",
+      "Self-attention mechanisms",
+      "Multi-class sentiment classification",
+      "Transfer learning support",
+      "Model interpretability"
+    ],
+    "challenges": [
+      "Complex model architecture design",
+      "Attention mechanism optimization",
+      "Training stability",
+      "Model interpretability"
+    ],
+    "solutions": [
+      "Implemented stable training procedures",
+      "Optimized attention weight calculations",
+      "Added regularization techniques",
+      "Created visualization tools"
+    ],
+    "results": [
+      "State-of-the-art sentiment accuracy",
+      "Improved model interpretability",
+      "Successful transfer learning",
+      "Research community adoption"
+    ],
+    "timeline": {
+      "start": "2021",
+      "end": "2022",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/GURA-gru-unit-for-recognizing-affect"
+    }
+  },
+  {
+    "id": "simply-nlp-classification-labeling-platform",
+    "title": "simply-nlp-classification-labeling-platform",
+    "subtitle": "Text Classification Labeling Tool",
+    "description": "This is a flask-based simply platform for labeling classification of a text.",
+    "longDescription": "A comprehensive text classification labeling platform built with Flask. This tool provides an intuitive interface for annotating text data, supporting various classification tasks and enabling efficient dataset creation for NLP model training.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/simply-nlp-classification-labeling-platform/raw/main/doc/demo.gif"
+    ],
+    "githubUrl": "https://github.com/NatLee/simply-nlp-classification-labeling-platform",
+    "category": "AI/ML",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Flask",
+      "NLP",
+      "Data Annotation",
+      "Machine Learning",
+      "SQLite"
+    ],
+    "features": [
+      "Web-based text annotation",
+      "Multi-class classification support",
+      "User management system",
+      "Export functionality",
+      "Progress tracking"
+    ],
+    "challenges": [
+      "Efficient annotation workflow",
+      "Data quality assurance",
+      "User interface optimization",
+      "Large dataset handling"
+    ],
+    "solutions": [
+      "Designed intuitive annotation interface",
+      "Implemented quality control measures",
+      "Created efficient data storage",
+      "Added batch processing capabilities"
+    ],
+    "results": [
+      "Accelerated dataset creation",
+      "Improved annotation quality",
+      "Enhanced team collaboration",
+      "Widely used in NLP projects"
+    ],
+    "timeline": {
+      "start": "2020",
+      "end": "2021",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/simply-nlp-classification-labeling-platform"
+    }
+  },
+  {
+    "id": "play-qwop-by-using-ai-agent",
+    "title": "Play-QWOP-by-Using-AI-Agent",
+    "subtitle": "Reinforcement Learning Game AI",
+    "description": "Use reinforcement learning to play QWOP with python3 by using tensorflow2 and reach the goal!",
+    "longDescription": "An innovative reinforcement learning project that teaches an AI agent to play the notoriously difficult QWOP game using TensorFlow 2. The project demonstrates advanced RL techniques including actor-critic methods and policy gradient optimization.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/Play-QWOP-by-Using-AI-Agent/raw/master/docs/train.gif"
+    ],
+    "githubUrl": "https://github.com/NatLee/Play-QWOP-by-Using-AI-Agent",
+    "category": "AI/ML",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "TensorFlow",
+      "Reinforcement Learning",
+      "OpenAI Gym",
+      "Neural Networks"
+    ],
+    "features": [
+      "Actor-critic RL implementation",
+      "QWOP game environment integration",
+      "Training visualization",
+      "Model checkpointing",
+      "Performance metrics tracking"
+    ],
+    "challenges": [
+      "Complex game physics simulation",
+      "Reward function design",
+      "Training stability",
+      "Action space optimization"
+    ],
+    "solutions": [
+      "Implemented custom game environment",
+      "Designed shaped reward functions",
+      "Added training stabilization techniques",
+      "Optimized action space representation"
+    ],
+    "results": [
+      "Successfully trained QWOP-playing agent",
+      "Achieved consistent goal completion",
+      "Demonstrated RL effectiveness",
+      "Educational value for RL community"
+    ],
+    "timeline": {
+      "start": "2019",
+      "end": "2020",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/Play-QWOP-by-Using-AI-Agent"
+    }
+  },
+  {
+    "id": "elysion-calendar",
+    "title": "elysion-calendar",
+    "subtitle": "Elysion Daily Calendar",
+    "description": "A small calendar for quick checking of Elysion(艾利森).",
+    "longDescription": "A specialized calendar application designed for quick reference of Elysion daily K-line data. This TypeScript-based tool provides an intuitive interface for traders and analysts to quickly access historical trading information.",
+    "language": "typescript",
+    "images": [
+      "https://github.com/NatLee/elysion-calendar/raw/main/doc/demo.gif"
+    ],
+    "githubUrl": "https://github.com/NatLee/elysion-calendar",
+    "category": "Web Development",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "TypeScript",
+      "JavaScript",
+      "HTML/CSS",
+      "Calendar API"
+    ],
+    "features": [
+      "Quick K-line data lookup",
+      "Interactive calendar interface",
+      "Historical data visualization",
+      "Responsive design"
+    ],
+    "timeline": {
+      "start": "2022",
+      "end": "2023",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/elysion-calendar"
+    }
+  },
+  {
+    "id": "ssh-reverse-tunnel-using-docker",
+    "title": "ssh-reverse-tunnel-using-docker",
+    "subtitle": "Docker SSH Tunnel Solution",
+    "description": "Dig a hole in the inside network using container with docker and create a tunneling server.",
+    "longDescription": "A containerized solution for creating reverse SSH tunnels using Docker. This tool helps establish secure connections through network barriers by creating tunneling servers in isolated environments.",
+    "language": "shell",
+    "images": [],
+    "githubUrl": "https://github.com/NatLee/ssh-reverse-tunnel-using-docker",
+    "category": "DevOps",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Docker",
+      "SSH",
+      "Shell Scripting",
+      "Network Security"
+    ],
+    "features": [
+      "Containerized tunnel creation",
+      "Network penetration capabilities",
+      "Automated setup scripts",
+      "Security isolation"
+    ],
+    "timeline": {
+      "start": "2020",
+      "end": "2021",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/ssh-reverse-tunnel-using-docker"
+    }
+  },
+  {
+    "id": "django-allauth-jwt-template",
+    "title": "django-allauth-JWT-template",
+    "subtitle": "Django Authentication Template",
+    "description": "A template for Django Allauth with JWT authentication.",
+    "longDescription": "A comprehensive Django template demonstrating the integration of Django Allauth with JWT authentication. This template provides a solid foundation for building secure web applications with modern authentication patterns.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/django-allauth-JWT-template/raw/main/doc/dashboard.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/django-allauth-JWT-template",
+    "category": "Web Development",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Django",
+      "Django Allauth",
+      "JWT",
+      "Authentication",
+      "OAuth"
+    ],
+    "features": [
+      "Django Allauth integration",
+      "JWT token authentication",
+      "Social login support",
+      "User management dashboard",
+      "API authentication"
+    ],
+    "timeline": {
+      "start": "2021",
+      "end": "2022",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/django-allauth-JWT-template"
+    }
+  },
+  {
+    "id": "nipype-preprocess-on-brain-mr",
+    "title": "nipype-preprocess-on-brain-MR",
+    "subtitle": "Brain MR Image Preprocessing",
+    "description": "The project is used to do preprocessing on brain MR images by using Nipype.",
+    "longDescription": "A specialized neuroimaging preprocessing pipeline built with Nipype for brain MR image analysis. This tool automates the complex preprocessing steps required for neuroimaging research and clinical applications.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/nipype-preprocess-on-brain-MR/raw/master/docs/WM@map.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/nipype-preprocess-on-brain-MR",
+    "category": "Medical Imaging",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Nipype",
+      "Medical Imaging",
+      "MRI Processing",
+      "Neuroimaging"
+    ],
+    "features": [
+      "Automated MR preprocessing",
+      "Brain tissue segmentation",
+      "Image registration",
+      "Quality control metrics",
+      "Batch processing support"
+    ],
+    "timeline": {
+      "start": "2018",
+      "end": "2019",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/nipype-preprocess-on-brain-MR"
+    }
+  },
+  {
+    "id": "dev-dock",
+    "title": "dev-dock",
+    "subtitle": "GUI Development Container",
+    "description": "Creating a common GUI image by using docker for developing.",
+    "longDescription": "A Docker-based development environment that provides a common GUI interface for development work. This containerized solution ensures consistent development environments across different systems.",
+    "language": "shell",
+    "images": [
+      "https://github.com/NatLee/dev-dock/raw/main/doc/desktop.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/dev-dock",
+    "category": "DevOps",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Docker",
+      "Shell Scripting",
+      "GUI Development",
+      "Linux Desktop"
+    ],
+    "features": [
+      "Containerized GUI environment",
+      "Development tools pre-installed",
+      "Cross-platform compatibility",
+      "Easy deployment"
+    ],
+    "timeline": {
+      "start": "2020",
+      "end": "2021",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/dev-dock"
+    }
+  },
+  {
+    "id": "heic2png",
+    "title": "HEIC2PNG",
+    "subtitle": "Image Format Converter",
+    "description": "Convert format of HEIC image to PNG by using Python.",
+    "longDescription": "A simple yet effective Python tool for converting HEIC images to PNG format. This utility addresses the common need to convert Apple's HEIC format to more universally supported PNG format.",
+    "language": "python",
+    "images": [],
+    "githubUrl": "https://github.com/NatLee/HEIC2PNG",
+    "category": "Utilities",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Image Processing",
+      "File Conversion",
+      "PIL/Pillow"
+    ],
+    "features": [
+      "HEIC to PNG conversion",
+      "Batch processing support",
+      "Command-line interface",
+      "Quality preservation"
+    ],
+    "timeline": {
+      "start": "2019",
+      "end": "2020",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/HEIC2PNG"
+    }
+  },
+  {
+    "id": "ip-find-chrome-extension",
+    "title": "IP-FIND-ChromeExtension",
+    "subtitle": "Network IP Discovery Tool",
+    "description": "Find the IP address of the current network by using Chrome Extension.",
+    "longDescription": "A Chrome extension that quickly identifies and displays the current network's IP address. This tool is useful for network diagnostics and understanding your current network configuration.",
+    "language": "javascript",
+    "images": [],
+    "githubUrl": "https://github.com/NatLee/IP-FIND-ChromeExtension",
+    "category": "Browser Extension",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "JavaScript",
+      "Chrome Extension API",
+      "Network APIs",
+      "HTML/CSS"
+    ],
+    "features": [
+      "Real-time IP detection",
+      "Network information display",
+      "Easy-to-use interface",
+      "Quick access from browser"
+    ],
+    "timeline": {
+      "start": "2018",
+      "end": "2019",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/IP-FIND-ChromeExtension"
+    }
+  },
+  {
+    "id": "fisheye-warping",
+    "title": "fisheye-warping",
+    "subtitle": "Fisheye Image Processing Tool",
+    "description": "A tool for dewarping and rewarping on a top-down fisheye image by using OpenCV on Python.",
+    "longDescription": "An advanced computer vision tool for processing fisheye images, providing both dewarping and rewarping capabilities. This tool is essential for applications involving fisheye cameras and panoramic image processing.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/fisheye-warping/raw/main/doc/101-fisheye.jpg"
+    ],
+    "githubUrl": "https://github.com/NatLee/fisheye-warping",
+    "category": "Computer Vision",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "Image Processing",
+      "Computer Vision",
+      "NumPy"
+    ],
+    "features": [
+      "Fisheye image dewarping",
+      "Image rewarping capabilities",
+      "Top-down view conversion",
+      "Calibration support"
+    ],
+    "timeline": {
+      "start": "2020",
+      "end": "2021",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/fisheye-warping"
+    }
+  },
+  {
+    "id": "batch-crop-images",
+    "title": "Batch-crop-images",
+    "subtitle": "Batch Image Cropping Tool",
+    "description": "A tool for cropping similar images in a batch with an interface.",
+    "longDescription": "An efficient batch image processing tool that provides an intuitive interface for cropping multiple similar images simultaneously. This tool streamlines the workflow for processing large sets of images with consistent cropping requirements.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/Batch-crop-images/raw/main/img/processing.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/Batch-crop-images",
+    "category": "Image Processing",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "PIL/Pillow",
+      "Tkinter",
+      "Image Processing"
+    ],
+    "features": [
+      "Batch image cropping",
+      "Interactive GUI interface",
+      "Preview functionality",
+      "Consistent crop settings"
+    ],
+    "timeline": {
+      "start": "2019",
+      "end": "2020",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/Batch-crop-images"
+    }
+  },
+  {
+    "id": "myanimelist-comment-crawler",
+    "title": "MyAnimeList-comment-crawler",
+    "subtitle": "Anime Review Data Crawler",
+    "description": "Crawl all reviews and infomation of Anime works on MyAnimeList.",
+    "longDescription": "A comprehensive web scraping tool designed to extract reviews and information about anime works from MyAnimeList. This crawler is useful for anime data analysis, research, and building anime recommendation systems.",
+    "language": "python",
+    "images": [],
+    "githubUrl": "https://github.com/NatLee/MyAnimeList-comment-crawler",
+    "category": "Data Collection",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Web Scraping",
+      "BeautifulSoup",
+      "Requests",
+      "Data Mining"
+    ],
+    "features": [
+      "Automated review extraction",
+      "Anime information gathering",
+      "Data export functionality",
+      "Rate limiting compliance"
+    ],
+    "timeline": {
+      "start": "2018",
+      "end": "2019",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/MyAnimeList-comment-crawler"
+    }
+  },
+  {
+    "id": "simply-labeling-platform-for-machine-reading",
+    "title": "simply-labeling-platform-for-machine-reading",
+    "subtitle": "Machine Reading Annotation Tool",
+    "description": "This is a simple platform for labeling answers to questions in an article.",
+    "longDescription": "A specialized annotation platform designed for machine reading comprehension tasks. This tool enables efficient labeling of question-answer pairs within articles, supporting the development of reading comprehension AI models.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/simply-labeling-platform-for-machine-reading/raw/main/doc/demo.gif"
+    ],
+    "githubUrl": "https://github.com/NatLee/simply-labeling-platform-for-machine-reading",
+    "category": "AI/ML",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Flask",
+      "NLP",
+      "Data Annotation",
+      "Machine Reading"
+    ],
+    "features": [
+      "Question-answer labeling",
+      "Article text highlighting",
+      "Export functionality",
+      "Progress tracking"
+    ],
+    "timeline": {
+      "start": "2020",
+      "end": "2021",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/simply-labeling-platform-for-machine-reading"
+    }
+  },
+  {
+    "id": "yande-and-konachan-to-eagle",
+    "title": "yande-and-konachan-to-eagle",
+    "subtitle": "Image Management Integration",
+    "description": "Streamline fetching and managing images from websites, using Eagle Wrapper for seamless integration with Eagle image management software.",
+    "longDescription": "A specialized tool that automates the process of fetching and organizing images from Yande.re and Konachan websites into Eagle image management software. This tool streamlines the workflow for digital artists and image collectors.",
+    "language": "python",
+    "images": [
+      "https://user-images.githubusercontent.com/10178964/234870235-f0dbe874-c1e8-4320-9c52-d6d920fa274d.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/yande-and-konachan-to-eagle",
+    "category": "Utilities",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Web Scraping",
+      "Eagle API",
+      "Image Management"
+    ],
+    "features": [
+      "Automated image fetching",
+      "Eagle software integration",
+      "Metadata preservation",
+      "Batch processing"
+    ],
+    "timeline": {
+      "start": "2022",
+      "end": "2023",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/yande-and-konachan-to-eagle"
+    }
+  },
+  {
+    "id": "eagle-wrapper",
+    "title": "Eagle-Wrapper",
+    "subtitle": "Eagle Software Python API",
+    "description": "This is a python wrapper for a management software of images named Eagle.",
+    "longDescription": "A comprehensive Python wrapper for Eagle image management software, providing programmatic access to Eagle's features. This wrapper enables developers to integrate Eagle's powerful image management capabilities into their Python applications.",
+    "language": "python",
+    "images": [
+      "https://raw.githubusercontent.com/NatLee/Eagle-Wrapper/main/doc/add-from-url.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/Eagle-Wrapper",
+    "category": "API/SDK",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "API Development",
+      "Image Management",
+      "Software Integration"
+    ],
+    "features": [
+      "Complete Eagle API coverage",
+      "Image manipulation functions",
+      "Metadata management",
+      "Collection organization"
+    ],
+    "timeline": {
+      "start": "2022",
+      "end": "2023",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/Eagle-Wrapper"
+    }
+  },
+  {
+    "id": "youtube-video-redirector",
+    "title": "youtube-video-redirector",
+    "subtitle": "YouTube Video Link Handler",
+    "description": "An easy method to get and play with original link of video by using redirector with web application.",
+    "longDescription": "A web application that provides an easy method to handle and redirect YouTube video links. This tool offers alternative ways to access and manipulate YouTube video URLs through a user-friendly web interface.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/youtube-video-redirector/blob/main/docs/example.png?raw=true"
+    ],
+    "githubUrl": "https://github.com/NatLee/youtube-video-redirector",
+    "category": "Web Application",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Flask",
+      "YouTube API",
+      "Web Development"
+    ],
+    "features": [
+      "YouTube link processing",
+      "Video information extraction",
+      "Redirect functionality",
+      "Web-based interface"
+    ],
+    "timeline": {
+      "start": "2021",
+      "end": "2022",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/youtube-video-redirector"
+    }
+  },
+  {
+    "id": "youtube-redirect-player",
+    "title": "youtube-redirect-player",
+    "subtitle": "YouTube Video Player with WebSocket",
+    "description": "A player for redirecting youtube videos with using flask and websocket.",
+    "longDescription": "An advanced YouTube video player built with Flask and WebSocket technology. This application provides real-time video playback control and redirection capabilities through WebSocket communication.",
+    "language": "python",
+    "images": [
+      "https://user-images.githubusercontent.com/10178964/214097192-32ef6390-4481-4301-8743-98571192449f.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/youtube-redirect-player",
+    "category": "Web Application",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Flask",
+      "WebSocket",
+      "YouTube API",
+      "Real-time Communication"
+    ],
+    "features": [
+      "Real-time video control",
+      "WebSocket communication",
+      "YouTube integration",
+      "Multi-user support"
+    ],
+    "timeline": {
+      "start": "2022",
+      "end": "2023",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/youtube-redirect-player"
+    }
+  },
+  {
+    "id": "pyppesnap",
+    "title": "PyppeSnap",
+    "subtitle": "Website Screenshot Tool",
+    "description": "Get a snapshot from a website by using Pyppeteer.",
+    "longDescription": "A powerful website screenshot tool built with Pyppeteer that captures high-quality snapshots of web pages. This tool is useful for web monitoring, testing, and documentation purposes.",
+    "language": "python",
+    "images": [
+      "https://camo.githubusercontent.com/68c46d8a98982526aa093ad0403ecb22a7f369e47c8f506c7f8960aa0765d4f5/68747470733a2f2f692e696d6775722e636f6d2f4a4c65396259692e706e67"
+    ],
+    "githubUrl": "https://github.com/NatLee/PyppeSnap",
+    "category": "Web Automation",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Pyppeteer",
+      "Web Scraping",
+      "Automation"
+    ],
+    "features": [
+      "High-quality screenshots",
+      "Batch processing",
+      "Customizable options",
+      "Headless browser automation"
+    ],
+    "timeline": {
+      "start": "2020",
+      "end": "2021",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/PyppeSnap"
+    }
+  },
+  {
+    "id": "face-wall-generator-tool",
+    "title": "Face-Wall-Generator-Tool",
+    "subtitle": "AI Model Testing Tool",
+    "description": "This is a tool for generating face wall to verify some AI models.",
+    "longDescription": "A specialized tool designed to generate face walls for testing and verifying AI models, particularly those dealing with face recognition and detection. This tool helps in creating comprehensive test datasets for AI model validation.",
+    "language": "python",
+    "images": [
+      "https://github.com/NatLee/Face-Wall-Generator-Tool/blob/main/docs/sample.png?raw=true"
+    ],
+    "githubUrl": "https://github.com/NatLee/Face-Wall-Generator-Tool",
+    "category": "AI/ML",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "Python",
+      "Computer Vision",
+      "AI Testing",
+      "Image Processing"
+    ],
+    "features": [
+      "Face wall generation",
+      "AI model testing support",
+      "Batch processing",
+      "Customizable layouts"
+    ],
+    "timeline": {
+      "start": "2021",
+      "end": "2022",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/Face-Wall-Generator-Tool"
+    }
+  }
+]

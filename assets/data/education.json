@@ -1,0 +1,27 @@
+[
+  {
+    "id": "ntust-master",
+    "school": "國立臺灣科技大學",
+    "schoolEn": "National Taiwan University of Science and Technology",
+    "schoolAbbr": "NTUST",
+    "degree": "Master",
+    "major": "Computer Science and Engineering",
+    "location": "Taipei, Taiwan",
+    "startYear": "2017",
+    "endYear": "2019",
+    "logo": "https://www.ntust.edu.tw/var/file/0/1000/msys_1000_92476_24746.png"
+  },
+  {
+    "id": "ntou-bachelor",
+    "school": "國立臺灣海洋大學",
+    "schoolEn": "National Taiwan Ocean University",
+    "schoolAbbr": "NTOU",
+    "degree": "Bachelor",
+    "major": "Marine Environmental Informatics",
+    "minor": "Computer Science and Engineering",
+    "location": "Keelung, Taiwan",
+    "startYear": "2012",
+    "endYear": "2016",
+    "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/3/3e/National_Taiwan_Ocean_University_Logo.svg/1920px-National_Taiwan_Ocean_University_Logo.svg.png"
+  }
+]

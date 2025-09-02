@@ -1,0 +1,176 @@
+[
+  {
+    "id": "programming",
+    "name": "Programming Languages",
+    "skills": [
+      {
+        "name": "Python",
+        "level": "Expert",
+        "years": 6,
+        "description": "Primary language for backend development, data analysis, and machine learning"
+      },
+      {
+        "name": "JavaScript",
+        "level": "Intermediate",
+        "years": 4,
+        "description": "Frontend development and API integration"
+      },
+      {
+        "name": "Java",
+        "level": "Intermediate",
+        "years": 2,
+        "description": "Enterprise application development"
+      },
+      {
+        "name": "TypeScript",
+        "level": "Intermediate",
+        "years": 2,
+        "description": "Type-safe JavaScript development"
+      }
+    ]
+  },
+  {
+    "id": "backend",
+    "name": "Backend Frameworks",
+    "skills": [
+      {
+        "name": "Django",
+        "level": "Expert",
+        "years": 5,
+        "description": "Primary web framework for REST API development"
+      },
+      {
+        "name": "FastAPI",
+        "level": "Advanced",
+        "years": 3,
+        "description": "High-performance API development"
+      },
+      {
+        "name": "Flask",
+        "level": "Advanced",
+        "years": 4,
+        "description": "Lightweight web applications and microservices"
+      }
+    ]
+  },
+  {
+    "id": "ai-ml",
+    "name": "AI/ML Frameworks",
+    "skills": [
+      {
+        "name": "PyTorch",
+        "level": "Expert",
+        "years": 4,
+        "description": "Deep learning model development and deployment"
+      },
+      {
+        "name": "TensorFlow",
+        "level": "Advanced",
+        "years": 3,
+        "description": "Machine learning and neural network development"
+      },
+      {
+        "name": "PaddlePaddle",
+        "level": "Advanced",
+        "years": 2,
+        "description": "NLP and computer vision applications"
+      },
+      {
+        "name": "OpenCV",
+        "level": "Advanced",
+        "years": 4,
+        "description": "Computer vision and image processing"
+      }
+    ]
+  },
+  {
+    "id": "database",
+    "name": "Databases",
+    "skills": [
+      {
+        "name": "MySQL",
+        "level": "Expert",
+        "years": 6,
+        "description": "Primary relational database for web applications"
+      },
+      {
+        "name": "Elasticsearch",
+        "level": "Advanced",
+        "years": 4,
+        "description": "Search engine and analytics for large datasets"
+      },
+      {
+        "name": "MongoDB",
+        "level": "Intermediate",
+        "years": 2,
+        "description": "NoSQL database for flexible data storage"
+      },
+      {
+        "name": "Redis",
+        "level": "Intermediate",
+        "years": 3,
+        "description": "Caching and session management"
+      }
+    ]
+  },
+  {
+    "id": "devops",
+    "name": "DevOps & Tools",
+    "skills": [
+      {
+        "name": "Docker",
+        "level": "Expert",
+        "years": 5,
+        "description": "Containerization and deployment"
+      },
+      {
+        "name": "Kubernetes",
+        "level": "Intermediate",
+        "years": 2,
+        "description": "Container orchestration"
+      },
+      {
+        "name": "Airflow",
+        "level": "Advanced",
+        "years": 3,
+        "description": "Workflow orchestration and data pipeline"
+      },
+      {
+        "name": "Git",
+        "level": "Expert",
+        "years": 6,
+        "description": "Version control and collaboration"
+      }
+    ]
+  },
+  {
+    "id": "specialization",
+    "name": "Specializations",
+    "skills": [
+      {
+        "name": "Natural Language Processing",
+        "level": "Expert",
+        "years": 5,
+        "description": "Sentiment analysis, text classification, and language models"
+      },
+      {
+        "name": "Computer Vision",
+        "level": "Advanced",
+        "years": 4,
+        "description": "Image processing, object detection, and pose estimation"
+      },
+      {
+        "name": "Time Series Analysis",
+        "level": "Advanced",
+        "years": 3,
+        "description": "Forecasting and pattern recognition in temporal data"
+      },
+      {
+        "name": "MLOps",
+        "level": "Advanced",
+        "years": 3,
+        "description": "Model deployment, monitoring, and lifecycle management"
+      }
+    ]
+  }
+]

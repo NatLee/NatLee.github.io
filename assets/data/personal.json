@@ -1,0 +1,80 @@
+{
+  "name": "Ying Tse Lee",
+  "nameEn": "Nat Lee",
+  "title": "Senior Software Engineer & AI Specialist",
+  "email": "natlee.work@gmail.com",
+  "location": "Taipei, Taiwan",
+  "bio": "As a software engineer, my primary focus is on back-end development. Additionally, I am passionate about staying up-to-date with emerging technologies and collaborating with teams. I believe that it is important to not reinvent the wheel, but to have a thorough understanding of existing tools and utilize them effectively.",
+  "avatar": "https://avatars.githubusercontent.com/u/10178964?v=4",
+  "languages": [
+    {
+      "name": "Mandarin",
+      "level": "Native",
+      "description": "Native speaker"
+    },
+    {
+      "name": "Japanese",
+      "level": "JLPT N1",
+      "description": "Professional proficiency"
+    },
+    {
+      "name": "English",
+      "level": "Professional",
+      "description": "Professional working proficiency"
+    }
+  ],
+  "socialLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/natlee",
+      "icon": "github",
+      "description": "Open source projects and code repositories"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/nat-lee-726525ba/",
+      "icon": "linkedin",
+      "description": "Professional network and career information"
+    },
+    {
+      "name": "Medium",
+      "url": "https://medium.com/@natlee_",
+      "icon": "medium",
+      "description": "Technical articles and insights"
+    },
+    {
+      "name": "Blog",
+      "url": "https://natlee.github.io/Blog/",
+      "icon": "blog",
+      "description": "Personal blog with technical content"
+    },
+    {
+      "name": "Kaggle",
+      "url": "https://www.kaggle.com/natlee",
+      "icon": "kaggle",
+      "description": "Data science competitions and datasets"
+    },
+    {
+      "name": "LeetCode",
+      "url": "https://leetcode.com/NatLee/",
+      "icon": "leetcode",
+      "description": "Coding challenges and algorithm practice"
+    },
+    {
+      "name": "Hugging Face",
+      "url": "https://huggingface.co/NatLee",
+      "icon": "huggingface",
+      "description": "Machine learning models and datasets"
+    }
+  ],
+  "interests": [
+    "Artificial Intelligence & Machine Learning",
+    "Computer Vision",
+    "Backend Development",
+    "Cloud Computing",
+    "Data Science",
+    "Open Source",
+    "Software Architecture",
+    "DevOps"
+  ]
+}

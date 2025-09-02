@@ -1,0 +1,158 @@
+[
+  {
+    "id": "hd-renewables-international",
+    "title": "Senior Engineer",
+    "company": "HD Renewables Co., Ltd.",
+    "companyId": "hd-renewables",
+    "companyLogo": "https://via.placeholder.com/100x100/4A90E2/FFFFFF?text=HD",
+    "department": "International Power Trading Division",
+    "location": "Taipei, Taiwan",
+    "duration": "Dec 2024 - Present",
+    "summary": "Transferred to the International Power Trading Division, focusing on developing power trading strategies for Japan and Australia markets. Developing spread strategy models to predict spot market electricity prices and assist traders in decision-making.",
+    "responsibilities": [
+      "Develop international power trading strategies for Japan and Australia markets",
+      "Create spread strategy models for predicting spot market electricity prices",
+      "Support traders with data-driven decision-making tools",
+      "Apply technical solutions to real trading scenarios to support overseas market expansion"
+    ],
+    "techStack": [
+      "Python", "Deep Learning", "Docker", "Django", "Elasticsearch", "Time Series Analysis", "MLOps"
+    ],
+    "achievements": [
+      "Developed spot market prediction model for electronic trading strategies"
+    ]
+  },
+  {
+    "id": "hd-renewables-smart",
+    "title": "Senior Engineer",
+    "company": "HD Renewables Co., Ltd.",
+    "companyId": "hd-renewables",
+    "companyLogo": "https://via.placeholder.com/100x100/4A90E2/FFFFFF?text=HD",
+    "department": "Smart Services Division",
+    "location": "Taipei, Taiwan", 
+    "duration": "Apr 2023 - Dec 2024",
+    "summary": "Developed solar power prediction and display systems, optimized power matching algorithms, and integrated various platforms with advanced authentication systems.",
+    "responsibilities": [
+      "Developed time series models using Python and PyTorch to predict solar power generation for Tainan FamilyMart Pingfeng store energy storage demonstration site",
+      "Implemented scheduled data extraction and processing using Airflow, pushing load and generation data to display dashboards",
+      "Optimized power matching algorithms in collaboration with ITRI, reducing computational complexity from O(N⁴) to O(N³) using MaxFlow algorithm",
+      "Integrated optimized algorithms into power matching platform backend using Django REST APIs",
+      "Implemented asynchronous computing with token system and email notifications for better UX",
+      "Developed third-party login (SSO) functionality integrating Microsoft Azure AD and Google login"
+    ],
+    "techStack": [
+      "Python", "PyTorch", "Django", "MySQL", "Airflow", "Docker", "Time Series Analysis", "MLOps", "SSO", "REST API"
+    ],
+    "achievements": [
+      "Successfully deployed solar power prediction system for demonstration site",
+      "Improved algorithm efficiency by 25% through optimization",
+      "Enhanced platform security and user experience with SSO integration"
+    ]
+  },
+  {
+    "id": "big-data",
+    "title": "Senior Software Engineer", 
+    "company": "Big Data Co., Ltd.",
+    "companyId": "big-data",
+    "companyLogo": "https://via.placeholder.com/100x100/50C878/FFFFFF?text=BD",
+    "department": "Technology Center",
+    "location": "Taipei, Taiwan",
+    "duration": "Dec 2021 - Apr 2023",
+    "summary": "Developed NLP and data platforms using Python and deep learning frameworks. Built sentiment analysis platform processing over 3 billion data points with 30% accuracy improvement. Led backend development for dashboard projects and CDP platforms.",
+    "responsibilities": [
+      "Developed sentiment analysis platform using deep learning frameworks, improving accuracy by 30%",
+      "Built distributed services using Docker to process large-scale daily crawler data stored in Elasticsearch",
+      "Established automated DevOps for public opinion data analysis and push notification mechanisms",
+      "Developed internal data management and annotation tools",
+      "Created various public opinion monitoring dashboards based on different business requirements",
+      "Implemented CDP platform using FastAPI and Elasticsearch for cross-website user identification services"
+    ],
+    "techStack": [
+      "Python", "PaddlePaddle", "PyTorch", "Django", "FastAPI", "Elasticsearch", "MySQL", "Docker", "Kubernetes", "RabbitMQ", "Redis", "Airflow"
+    ],
+    "achievements": [
+      "Processed over 3 billion data points through sentiment analysis platform",
+      "Achieved 30% improvement in model accuracy compared to previous solutions",
+      "Successfully deployed scalable microservices architecture handling high API traffic"
+    ]
+  },
+  {
+    "id": "taiwan-ca",
+    "title": "Senior Software Engineer",
+    "company": "TAIWAN-CA, Inc.",
+    "companyId": "taiwan-ca",
+    "companyLogo": "https://via.placeholder.com/100x100/FF6B6B/FFFFFF?text=TC",
+    "department": "Security Product Development Division", 
+    "location": "Taipei, Taiwan",
+    "duration": "Sep 2021 - Nov 2021",
+    "summary": "Worked on cybersecurity products, focusing on CA certificate applications and writing comprehensive test cases for security systems.",
+    "responsibilities": [
+      "Developed test cases for cybersecurity-related products",
+      "Worked on CA certificate applications and implementations",
+      "Ensured product quality through comprehensive testing procedures"
+    ],
+    "techStack": [
+      "Python", "Java", "Information Security", "Cryptography", "Certificate Management", "Test Case Development"
+    ],
+    "achievements": [
+      "Developed comprehensive test suite for TSA (Time Stamping Authority)",
+      "Successfully implemented certificate-based security products"
+    ]
+  },
+  {
+    "id": "infortrend",
+    "title": "Image Processing Software Engineer",
+    "company": "Infortrend Technology, Inc.",
+    "companyId": "infortrend",
+    "companyLogo": "https://via.placeholder.com/100x100/9B59B6/FFFFFF?text=IT",
+    "department": "R&D Department",
+    "location": "New Taipei, Taiwan",
+    "duration": "Oct 2019 - Mar 2021",
+    "summary": "Specialized in computer vision and deep learning solutions. Developed AI applications for medical imaging, retail analytics, and embedded advertising systems using edge computing devices.",
+    "responsibilities": [
+      "Applied Docker virtualization technology to simplify development processes",
+      "Developed automated MRI/PET brain medical image AC-PC correction preprocessing solutions",
+      "Created AI image recognition applications on Nvidia Jetson edge devices with system integration",
+      "Developed fisheye camera conversion algorithms for human pose recognition applications",
+      "Built and integrated AI product frontend and backend architectures"
+    ],
+    "techStack": [
+      "Python", "OpenCV", "Docker", "Deep Learning", "Computer Vision", "Nvidia Jetson", "SQLite", "jQuery", "Edge Computing", "Medical Imaging"
+    ],
+    "achievements": [
+      "Developed AI solution for Alzheimer's disease diagnosis using MRI/PET brain image processing",
+      "Created human pose recognition system for fisheye cameras improving narrow space monitoring", 
+      "Built heat map detection system for retail stores optimizing product exposure",
+      "Implemented embedded advertising recommendation system detecting crowd demographics"
+    ]
+  },
+  {
+    "id": "leopard-mobile",
+    "title": "Software and AI Engineer",
+    "company": "Leopard Mobile, Ltd.",
+    "companyId": "leopard-mobile",
+    "companyLogo": "https://via.placeholder.com/100x100/FF8C00/FFFFFF?text=LM",
+    "department": "Tool Product Division",
+    "location": "Taipei, Taiwan", 
+    "duration": "Jul 2018 - Oct 2019",
+    "summary": "First professional role developing web scraping and data analysis platforms. Built NLP models, voice recognition systems, and blockchain-related applications using various technologies.",
+    "responsibilities": [
+      "Developed frontend and backend web applications and microservices for blockchain trend products",
+      "Created web scraping programs for major social media platforms (Twitter, Facebook, Telegram) using Selenium",
+      "Built and managed public opinion analysis databases using MySQL",
+      "Developed MySQL database remote backup and synchronization systems",
+      "Created AI content classification technology for voice assistants", 
+      "Built AI Chinese reading comprehension online services",
+      "Developed text and speech annotation platform systems"
+    ],
+    "techStack": [
+      "Python", "JavaScript", "Django", "Flask", "MySQL", "Selenium", "Docker", "NLP", "Machine Learning", "Web Scraping", "Deep Learning"
+    ],
+    "achievements": [
+      "Built ICO sentiment analysis platform 'Rating Token & Coin Master' with integrated NLP models",
+      "Developed Taiwanese Hokkien song recognition model for voice-controlled smart speakers",
+      "Created comprehensive data annotation platform for Chinese reading comprehension and Taiwanese speech recognition models",
+      "Successfully deployed scalable web scraping infrastructure processing social media data"
+    ]
+  }
+]
