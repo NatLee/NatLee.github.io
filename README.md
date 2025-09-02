@@ -172,11 +172,7 @@ Static files will be in the `out/` directory, ready for deployment.
 
 ## Deployment
 
-This project is configured to automatically deploy to GitHub Pages using GitHub Actions. The workflow:
-
-1. Triggers on pushes to the `main` branch
-2. Builds the Next.js application
-3. Deploys the static files to GitHub Pages
+This project is configured to automatically deploy to GitHub Pages using GitHub Actions. The workflow builds the static site and pushes it to the `gh-pages` branch.
 
 ### GitHub Pages Setup
 
@@ -184,17 +180,38 @@ To enable automatic deployment to GitHub Pages:
 
 1. **Enable GitHub Pages**:
    - Go to your repository Settings → Pages
-   - Set Source to "GitHub Actions"
-   - This will create the `gh-pages` branch automatically
+   - Under "Build and deployment", set Source to "Deploy from a branch"
+   - Select `gh-pages` branch as the source
+   - Select `/ (root)` as the folder
 
-2. **Configure Repository Settings**:
-   - Ensure your repository is public (or you have GitHub Pro for private repos)
-   - The workflow will automatically build and deploy on each push to `main`
+2. **Configure Deploy Key**:
+   - Generate a new SSH key pair for deployment
+   - Add the public key to your repository's Deploy Keys
+   - Add the private key to your repository's Secrets as `DEPLOY_KEY`
 
 3. **First Deployment**:
    - Push your code to the `main` branch
-   - GitHub Actions will automatically build and deploy
+   - GitHub Actions will automatically build and deploy to `gh-pages`
    - Check the Actions tab to monitor the deployment process
+
+### Deploy Key Setup
+
+1. **Generate SSH Key**:
+   ```bash
+   ssh-keygen -t rsa -b 4096 -C "your-email@example.com" -f deploy_key
+   ```
+
+2. **Add Public Key to Repository**:
+   - Go to Settings → Deploy keys
+   - Click "Add deploy key"
+   - Paste the content of `deploy_key.pub`
+   - Check "Allow write access"
+
+3. **Add Private Key to Secrets**:
+   - Go to Settings → Secrets and variables → Actions
+   - Click "New repository secret"
+   - Name: `DEPLOY_KEY`
+   - Value: Content of `deploy_key` (private key)
 
 ### Manual Deployment
 
@@ -203,9 +220,24 @@ If you need to deploy manually:
 1. Build the project: `npm run build`
 2. Upload the contents of the `out/` directory to your hosting service
 
-### Deployment Branch
+### GitHub Actions Workflow
 
-The project is configured to deploy to the `gh-pages` branch, which is automatically managed by GitHub Actions. This branch contains the built static files and is used by GitHub Pages to serve your website.
+The deployment workflow (`.github/workflows/deploy.yml`) uses the `peaceiris/actions-gh-pages` action:
+
+1. **Trigger**: On push to `main` branch or manual workflow dispatch
+2. **Build Process**:
+   - Checks out repository contents using SSH key
+   - Sets up Node.js 18 with npm cache
+   - Installs dependencies with `npm ci`
+   - Builds the Next.js application
+   - Deploys static files to `gh-pages` branch
+
+### Workflow Features
+
+- **SSH Authentication**: Uses deploy key for secure repository access
+- **Automatic Branch Creation**: Creates `gh-pages` branch if it doesn't exist
+- **Clean Deployment**: Overwrites the entire `gh-pages` branch with new build
+- **Manual Trigger**: Can be triggered manually from the Actions tab
 
 ### Custom Domain (Optional)
 
@@ -214,17 +246,6 @@ To use a custom domain:
 1. Add your domain to the `CNAME` file in the `public/` directory
 2. Configure your DNS settings to point to GitHub Pages
 3. Enable custom domain in repository Settings → Pages
-
-### GitHub Actions Workflow
-
-The deployment workflow (`.github/workflows/deploy.yml`) automatically:
-
-- Builds the Next.js application
-- Exports static files to the `out/` directory
-- Deploys to GitHub Pages using the `gh-pages` branch
-- Runs on every push to the `main` branch
-
-You can also manually trigger the workflow from the Actions tab in your repository.
 
 ## 🎨 Customization
 
