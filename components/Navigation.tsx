@@ -1,12 +1,13 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Icon from './Icon'
 
 export default function Navigation() {
   const pathname = usePathname()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const navItems = [
     { id: 'home', label: 'Home', href: '/' },
@@ -70,38 +71,51 @@ export default function Navigation() {
           <button
             className="md:hidden text-gray-300 hover:text-secondary transition-colors p-2"
             aria-label="Toggle mobile menu"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <div className="w-6 h-6 flex flex-col justify-center items-center space-y-1">
-              <span className="bg-current block h-0.5 w-6 rounded-sm transition-all"></span>
-              <span className="bg-current block h-0.5 w-6 rounded-sm transition-all"></span>
-              <span className="bg-current block h-0.5 w-6 rounded-sm transition-all"></span>
+              <span className={`bg-current block h-0.5 w-6 rounded-sm transition-all ${
+                isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''
+              }`}></span>
+              <span className={`bg-current block h-0.5 w-6 rounded-sm transition-all ${
+                isMobileMenuOpen ? 'opacity-0' : ''
+              }`}></span>
+              <span className={`bg-current block h-0.5 w-6 rounded-sm transition-all ${
+                isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
+              }`}></span>
             </div>
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden py-4 border-t border-dark-700">
-          <div className="flex flex-col space-y-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  isActive(item.href)
-                    ? 'text-secondary bg-secondary/10 border border-secondary/20'
-                    : 'text-gray-300 hover:text-white hover:bg-dark-700'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="pt-4 border-t border-dark-700">
-              <a
-                href="mailto:natlee.work@gmail.com"
-                className="block w-full bg-gradient-to-r from-secondary to-accent text-dark-900 px-6 py-3 rounded-lg text-center font-medium transition-all duration-300"
-              >
-                Contact Me
-              </a>
+        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
+          isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+        }`}>
+          <div className="py-4 border-t border-dark-700">
+            <div className="flex flex-col space-y-2">
+              {navItems.map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
+                    isActive(item.href)
+                      ? 'text-secondary bg-secondary/10 border border-secondary/20'
+                      : 'text-gray-300 hover:text-white hover:bg-dark-700'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <div className="pt-4 border-t border-dark-700">
+                <a
+                  href="mailto:natlee.work@gmail.com"
+                  className="block w-full bg-gradient-to-r from-secondary to-accent text-dark-900 px-6 py-3 rounded-lg text-center font-medium transition-all duration-300"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Contact Me
+                </a>
+              </div>
             </div>
           </div>
         </div>
