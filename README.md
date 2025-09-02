@@ -172,7 +172,7 @@ Static files will be in the `out/` directory, ready for deployment.
 
 ## Deployment
 
-This project is configured to automatically deploy to GitHub Pages using GitHub Actions. The workflow builds the static site and pushes it to the `gh-pages` branch.
+This project is configured to automatically deploy to GitHub Pages using GitHub's official Next.js deployment workflow. The workflow follows GitHub's recommended practices for Next.js static site deployment.
 
 ### GitHub Pages Setup
 
@@ -180,38 +180,18 @@ To enable automatic deployment to GitHub Pages:
 
 1. **Enable GitHub Pages**:
    - Go to your repository Settings → Pages
-   - Under "Build and deployment", set Source to "Deploy from a branch"
-   - Select `gh-pages` branch as the source
-   - Select `/ (root)` as the folder
+   - Under "Build and deployment", set Source to "GitHub Actions"
+   - This will create the `github-pages` environment automatically
 
-2. **Configure Deploy Key**:
-   - Generate a new SSH key pair for deployment
-   - Add the public key to your repository's Deploy Keys
-   - Add the private key to your repository's Secrets as `DEPLOY_KEY`
+2. **Configure Repository Settings**:
+   - Ensure your repository is public (or you have GitHub Pro for private repos)
+   - The workflow will automatically build and deploy on each push to `main`
+   - Only pushes to the default branch (`main`) will trigger deployment
 
 3. **First Deployment**:
    - Push your code to the `main` branch
-   - GitHub Actions will automatically build and deploy to `gh-pages`
+   - GitHub Actions will automatically build and deploy
    - Check the Actions tab to monitor the deployment process
-
-### Deploy Key Setup
-
-1. **Generate SSH Key**:
-   ```bash
-   ssh-keygen -t rsa -b 4096 -C "your-email@example.com" -f deploy_key
-   ```
-
-2. **Add Public Key to Repository**:
-   - Go to Settings → Deploy keys
-   - Click "Add deploy key"
-   - Paste the content of `deploy_key.pub`
-   - Check "Allow write access"
-
-3. **Add Private Key to Secrets**:
-   - Go to Settings → Secrets and variables → Actions
-   - Click "New repository secret"
-   - Name: `DEPLOY_KEY`
-   - Value: Content of `deploy_key` (private key)
 
 ### Manual Deployment
 
@@ -222,22 +202,35 @@ If you need to deploy manually:
 
 ### GitHub Actions Workflow
 
-The deployment workflow (`.github/workflows/deploy.yml`) uses the `peaceiris/actions-gh-pages` action:
+The deployment workflow (`.github/workflows/deploy.yml`) follows GitHub's official Next.js template:
 
 1. **Trigger**: On push to `main` branch or manual workflow dispatch
-2. **Build Process**:
-   - Checks out repository contents using SSH key
-   - Sets up Node.js 18 with npm cache
-   - Installs dependencies with `npm ci`
+2. **Build Job**:
+   - Detects package manager (npm/yarn) automatically
+   - Sets up Node.js 20 with package manager cache
+   - Configures Pages with Next.js static site generator
+   - Restores Next.js build cache for faster builds
+   - Installs dependencies using detected package manager
    - Builds the Next.js application
-   - Deploys static files to `gh-pages` branch
+   - Uploads static files as artifact
+3. **Deploy Job**:
+   - Uses the `github-pages` environment
+   - Deploys the artifact to GitHub Pages
 
 ### Workflow Features
 
-- **SSH Authentication**: Uses deploy key for secure repository access
-- **Automatic Branch Creation**: Creates `gh-pages` branch if it doesn't exist
-- **Clean Deployment**: Overwrites the entire `gh-pages` branch with new build
+- **Package Manager Detection**: Automatically detects npm or yarn
+- **Advanced Caching**: Caches Next.js build files for faster subsequent builds
+- **Static Site Generator**: Automatically configures Next.js for static export
+- **Environment Protection**: Uses GitHub's environment protection rules
+- **Concurrency Control**: Prevents multiple deployments from running simultaneously
 - **Manual Trigger**: Can be triggered manually from the Actions tab
+
+### Environment Protection
+
+The workflow uses the `github-pages` environment with deployment protection rules:
+- Only the default branch (`main`) can deploy to this environment
+- This ensures only production-ready code is deployed
 
 ### Custom Domain (Optional)
 
