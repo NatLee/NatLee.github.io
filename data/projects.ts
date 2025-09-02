@@ -1,6 +1,5 @@
 // 從 JSON 檔案載入專案數據
 import projectsJsonData from '@/assets/data/projects.json'
-import imageConfigData from '@/assets/data/image-config.json'
 
 export interface ProjectDetail {
   id: string
@@ -40,7 +39,7 @@ export interface ProjectDetail {
 // 載入所有專案數據
 export const allProjectsData: ProjectDetail[] = projectsJsonData.map(project => ({
   ...project,
-  thumbnail: project.images[0] || imageConfigData.placeholders.project,
+  thumbnail: project.images[0] || '', // 空字串，由組件處理 fallback
   links: {
     github: project.githubUrl || project.links?.github
   }
@@ -71,13 +70,6 @@ export function getProfessionalProjects(): ProjectDetail[] {
 
 export function getOpenSourceProjects(): ProjectDetail[] {
   return allProjectsData.filter(project => project.opensource)
-}
-
-// 語言顏色輔助函數
-export function getLanguageColor(language?: string): string {
-  if (!language) return '#6b7280'
-  const languageColors = imageConfigData.languageColors as Record<string, string>
-  return languageColors[language.toLowerCase()] || '#6b7280'
 }
 
 // 向後兼容性

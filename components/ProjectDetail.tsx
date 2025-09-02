@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ProjectDetail as ProjectDetailType } from '@/data/projects'
-import imageConfigData from '@/assets/data/image-config.json'
+
 import Icon from './Icon'
 
 interface Props {
@@ -378,7 +378,19 @@ function ImageSlider({ images, title }: { images: string[], title: string }) {
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement
-                  target.src = imageConfigData.placeholders.project
+                  const parent = target.parentElement
+                  if (parent) {
+                    parent.innerHTML = `
+                      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/10 to-accent/10">
+                        <div class="text-center">
+                          <svg class="w-8 h-8 text-secondary/40 mx-auto mb-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd" />
+                          </svg>
+                          <p class="text-xs text-gray-400 font-mono">${title}</p>
+                        </div>
+                      </div>
+                    `
+                  }
                 }}
               />
               {/* 選中指示器 */}

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { allProjectsData, getLanguageColor, getAllCategories } from '@/data/projects'
+import { allProjectsData, getAllCategories } from '@/data/projects'
 import Icon from './Icon'
 
 export default function ProjectsGrid() {
@@ -129,9 +129,6 @@ export default function ProjectsGrid() {
 
 function ProjectCard({ project, featured, index }: { project: any, featured: boolean, index: number }) {
   const [imageError, setImageError] = useState(false)
-  const languageColor = getLanguageColor(project.language)
-
-
 
   return (
     <div
