@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { personalInfo } from '@/data/personal'
 import Icon from './Icon'
-import TechIcon from './TechIcon'
 
 export default function TechHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -227,7 +226,7 @@ export default function TechHero() {
                 {/* Icon with gradient background */}
                 <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${tech.color} p-0.5`}>
                   <div className="w-full h-full bg-dark-800 rounded-xl flex items-center justify-center group-hover:bg-dark-700 transition-colors">
-                    <TechIcon name={tech.name} className="text-white" size={32} />
+                    <Icon name={tech.name} className="text-white" size={32} />
                   </div>
                 </div>
                 

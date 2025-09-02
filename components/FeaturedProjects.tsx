@@ -4,7 +4,6 @@ import React from 'react'
 import Link from 'next/link'
 import { getFeaturedProjects } from '@/data/projects'
 import Icon from './Icon'
-import TechIcon from './TechIcon'
 
 export default function FeaturedProjects() {
   const featuredProjects = getFeaturedProjects()
@@ -43,7 +42,7 @@ export default function FeaturedProjects() {
               className="group inline-flex items-center gap-3 bg-gradient-to-r from-secondary to-accent hover:from-accent hover:to-secondary text-dark-900 px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-secondary/25"
             >
               View All Projects
-              <TechIcon name="arrow-right" className="group-hover:translate-x-1 transition-transform" size={24} />
+              <Icon name="arrow-right" className="group-hover:translate-x-1 transition-transform" size={24} />
             </Link>
           </div>
         </div>
@@ -88,7 +87,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/10 to-accent/10">
             <div className="text-center">
-              <TechIcon name="code" className="text-secondary/40 mx-auto mb-2" size={64} />
+              <Icon name="code" className="text-secondary/40 mx-auto mb-2" size={64} />
               <p className="text-sm text-gray-400 font-mono">{project.title}</p>
             </div>
           </div>
@@ -113,7 +112,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
         {/* Category Icon */}
         <div className="absolute top-6 left-6">
           <div className="w-12 h-12 bg-dark-900/80 rounded-full flex items-center justify-center border border-secondary/30">
-            <TechIcon name={project.category} className="text-secondary" size={24} />
+            <Icon name={project.category} className="text-secondary" size={24} />
           </div>
         </div>
       </div>
@@ -147,7 +146,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
             className="inline-flex items-center gap-2 text-secondary hover:text-accent font-bold transition-colors group"
           >
             Learn More
-            <TechIcon name="arrow-right" className="group-hover:translate-x-1 transition-transform" size={20} />
+            <Icon name="arrow-right" className="group-hover:translate-x-1 transition-transform" size={20} />
           </Link>
 
           <div className="flex items-center gap-3">
@@ -159,7 +158,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
                 className="p-2 text-gray-400 hover:text-white transition-colors hover:scale-110"
                 title="View Code"
               >
-                <TechIcon name="github" className="" size={16} />
+                <Icon name="github" className="" size={16} />
               </a>
             )}
             {project.links?.demo && (
@@ -170,12 +169,12 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
                 className="p-2 text-gray-400 hover:text-secondary transition-colors hover:scale-110"
                 title="Live Demo"
               >
-                <TechIcon name="external-link" className="" size={16} />
+                <Icon name="external-link" className="" size={16} />
               </a>
             )}
             {project.images && project.images.length > 1 && (
               <span className="text-xs text-gray-400 flex items-center gap-1">
-                <TechIcon name="image" className="" size={12} />
+                <Icon name="image" className="" size={12} />
                 +{project.images.length - 1}
               </span>
             )}

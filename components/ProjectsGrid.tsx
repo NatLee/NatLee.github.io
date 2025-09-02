@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { allProjectsData, getLanguageColor, getAllCategories } from '@/data/projects'
 import Icon from './Icon'
-import TechIcon from './TechIcon'
 
 export default function ProjectsGrid() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
@@ -50,7 +49,7 @@ export default function ProjectsGrid() {
             <div className="flex justify-center">
               {/* Search with Project Count */}
               <div className="relative w-full max-w-2xl">
-                <TechIcon name="search" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Icon name="search" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                 <input
                   type="text"
                   placeholder="Search projects..."
@@ -90,7 +89,7 @@ export default function ProjectsGrid() {
           {featuredProjects.length > 0 && (
             <div className="mb-16">
               <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-                <TechIcon name="star" className="text-accent" size={32} />
+                <Icon name="star" className="text-accent" size={32} />
                 Featured Projects
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -104,7 +103,7 @@ export default function ProjectsGrid() {
           {/* All Projects Grid */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-              <TechIcon name="code" className="text-secondary" size={32} />
+              <Icon name="code" className="text-secondary" size={32} />
               All Projects
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -117,7 +116,7 @@ export default function ProjectsGrid() {
           {/* No Results */}
           {filteredProjects.length === 0 && (
             <div className="text-center py-16">
-              <TechIcon name="search" className="text-gray-600 mx-auto mb-4" size={64} />
+              <Icon name="search" className="text-gray-600 mx-auto mb-4" size={64} />
               <h3 className="text-2xl font-bold text-gray-400 mb-2">No projects found</h3>
               <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
             </div>
@@ -169,7 +168,7 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/10 to-accent/10">
             <div className="text-center">
-              <TechIcon name="code" className="text-secondary/40 mx-auto mb-2" size={64} />
+              <Icon name="code" className="text-secondary/40 mx-auto mb-2" size={64} />
               <p className="text-sm text-gray-400 font-mono">{project.title}</p>
             </div>
           </div>
@@ -224,7 +223,7 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
         <div className="absolute bottom-3 left-3">
           <div className="group relative">
             <div className="w-12 h-12 bg-gradient-to-br from-dark-900/90 to-dark-800/90 rounded-full flex items-center justify-center border border-secondary/40 backdrop-blur-sm">
-              <TechIcon name={project.category} className="text-secondary group-hover:text-accent transition-colors duration-300" size={24} />
+              <Icon name={project.category} className="text-secondary group-hover:text-accent transition-colors duration-300" size={24} />
             </div>
             <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-full blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
@@ -257,7 +256,7 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
             className="inline-flex items-center gap-2 text-secondary hover:text-accent font-bold transition-colors group text-sm"
           >
             Learn More
-            <TechIcon name="arrow-right" className="group-hover:translate-x-1 transition-transform" size={16} />
+            <Icon name="arrow-right" className="group-hover:translate-x-1 transition-transform" size={16} />
           </Link>
 
           <div className="flex items-center gap-2">
@@ -269,7 +268,7 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
                 className="p-1.5 text-gray-400 hover:text-white transition-colors hover:scale-110"
                 title="View Code"
               >
-                <TechIcon name="github" className="" size={14} />
+                <Icon name="github" className="" size={14} />
               </a>
             )}
             {project.links?.demo && (
@@ -280,12 +279,12 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
                 className="p-1.5 text-gray-400 hover:text-secondary transition-colors hover:scale-110"
                 title="Live Demo"
               >
-                <TechIcon name="external-link" className="" size={14} />
+                <Icon name="external-link" className="" size={14} />
               </a>
             )}
             {project.images && project.images.length > 1 && (
               <span className="text-xs text-gray-400 flex items-center gap-1">
-                <TechIcon name="image" className="" size={12} />
+                <Icon name="image" className="" size={12} />
                 +{project.images.length - 1}
               </span>
             )}
