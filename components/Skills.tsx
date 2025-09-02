@@ -4,6 +4,18 @@ import { skillsData } from '@/data/skills'
 import Icon from './Icon'
 
 export default function Skills() {
+  const getCategoryIcon = (categoryId: string): string => {
+    switch (categoryId) {
+      case 'programming': return 'code'
+      case 'backend': return 'server'
+      case 'ai-ml': return 'AI/ML'
+      case 'database': return 'Database'
+      case 'devops': return 'DevOps'
+      case 'specialization': return 'brain'
+      default: return 'code'
+    }
+  }
+
   const getSkillLevel = (level: string): number => {
     switch (level) {
       case 'Expert': return 95
@@ -56,7 +68,7 @@ export default function Skills() {
               >
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
                   <div className="w-8 h-8 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center">
-                    <Icon name="code" className="w-4 h-4 text-white" />
+                    <Icon name={getCategoryIcon(category.id)} className="w-4 h-4 text-white" />
                   </div>
                   {category.name}
                 </h3>
