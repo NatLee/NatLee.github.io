@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { personalInfo } from '@/data/personal'
 import Icon from './Icon'
+import ScrollingTechStack from './ScrollingTechStack'
+
 
 export default function TechHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -94,7 +96,7 @@ export default function TechHero() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-dark-900 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-dark-900 overflow-x-hidden">
       {/* Animated Background Canvas */}
       <canvas
         ref={canvasRef}
@@ -119,7 +121,7 @@ export default function TechHero() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-900/50 to-dark-900"></div>
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-6xl mx-auto px-4 pt-20 pb-8">
+      <div className="relative z-10 text-center w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-20 pb-8">
         {/* Avatar with Tech Effects */}
         <div className="mb-12 relative inline-block mt-8">
           <div className="relative">
@@ -177,74 +179,14 @@ export default function TechHero() {
         </div>
 
         {/* Bio */}
-        <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto mb-10 leading-relaxed animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          {personalInfo.bio}
-        </p>
-
-        {/* Action Buttons */}
-        <div className="flex flex-wrap justify-center gap-6 mb-12 animate-slide-up" style={{ animationDelay: '0.6s' }}>
-          <Link
-            href="/projects"
-            className="group bg-gradient-to-r from-secondary to-accent hover:from-accent hover:to-secondary text-dark-900 px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-secondary/25"
-          >
-            <span className="flex items-center gap-3">
-              View My Work
-              <Icon name="arrow-right" className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </Link>
-          
-          <Link
-            href="/about"
-            className="group bg-dark-700 hover:bg-dark-600 text-white px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 border-2 border-dark-500 hover:border-secondary/50 hover:shadow-lg hover:shadow-secondary/10"
-          >
-            <span className="flex items-center gap-3">
-              Learn More
-              <Icon name="chevron-down" className="w-6 h-6 rotate-90 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </Link>
-        </div>
-
-                {/* Tech Stack Showcase - Icon Grid */}
-        <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">Core Technologies</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {[
-              { name: 'Python', color: 'from-yellow-400 to-blue-500' },
-              { name: 'AI/ML', color: 'from-purple-400 to-pink-500' },
-              { name: 'Django', color: 'from-green-400 to-emerald-500' },
-              { name: 'React', color: 'from-blue-400 to-cyan-500' },
-              { name: 'Docker', color: 'from-blue-500 to-indigo-500' },
-              { name: 'AWS', color: 'from-orange-400 to-red-500' },
-              { name: 'PostgreSQL', color: 'from-blue-600 to-purple-600' },
-              { name: 'PyTorch', color: 'from-red-400 to-orange-500' }
-            ].map((tech, index) => (
-              <div
-                key={tech.name}
-                className="group relative bg-dark-800/80 backdrop-blur-sm border border-gray-700 rounded-xl p-6 text-center hover:border-secondary/50 transition-all duration-300 hover:scale-105 animate-scale-in hover:shadow-xl hover:shadow-secondary/20"
-                style={{ animationDelay: `${0.9 + index * 0.1}s` }}
-              >
-                {/* Icon with gradient background */}
-                <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${tech.color} p-0.5`}>
-                  <div className="w-full h-full bg-dark-800 rounded-xl flex items-center justify-center group-hover:bg-dark-700 transition-colors">
-                    <Icon name={tech.name} className="text-white" size={32} />
-                  </div>
-                </div>
-                
-                {/* Tech name */}
-                <h4 className="text-white font-semibold text-sm mb-2">{tech.name}</h4>
-                
-                {/* Decorative elements */}
-                <div className="absolute inset-0 bg-gradient-to-r from-secondary/0 via-secondary/5 to-accent/0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                {/* Corner accent */}
-                <div className="absolute top-2 right-2 w-2 h-2 bg-gradient-to-br from-secondary to-accent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-            ))}
-          </div>
+        <div className="w-full max-w-4xl mx-auto mb-8 sm:mb-10 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed break-words hyphens-auto">
+            {personalInfo.bio}
+          </p>
         </div>
 
         {/* Social Links */}
-        <div className="flex justify-center gap-6 mb-16 animate-fade-in" style={{ animationDelay: '1.2s' }}>
+        <div className="flex justify-center gap-6 mb-12 animate-fade-in" style={{ animationDelay: '1.2s' }}>
           {personalInfo.socialLinks.slice(0, 4).map((link) => (
             <a
               key={link.name}
@@ -259,53 +201,37 @@ export default function TechHero() {
           ))}
         </div>
 
-        {/* Code-Style Scroll Indicator */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="group cursor-pointer" onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}>
-            {/* Terminal-style container */}
-            <div className="bg-dark-800/90 backdrop-blur-sm border border-gray-700 rounded-lg p-4 min-w-[280px] shadow-xl">
-              {/* Terminal header */}
-              <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-700">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                </div>
-                <span className="text-gray-400 text-xs font-mono ml-2">terminal</span>
-              </div>
-              
-              {/* Code-style content */}
-              <div className="font-mono text-sm">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-gray-500">$</span>
-                  <span className="text-gray-300">./explore</span>
-                  <span className="text-secondary">--interactive</span>
-                </div>
-                <div className="flex items-center gap-2 group-hover:text-secondary transition-colors">
-                  <span className="text-gray-500">→</span>
-                  <span className="text-gray-300 group-hover:text-secondary">scroll_to_explore()</span>
-                  <div className="w-2 h-4 bg-secondary animate-pulse ml-1"></div>
-                </div>
-              </div>
-              
-              {/* Animated scroll arrows */}
-              <div className="flex justify-center mt-3 pt-2 border-t border-gray-700">
-                <div className="flex flex-col items-center">
-                  <div className="text-secondary/60 group-hover:text-secondary transition-colors animate-bounce">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div className="text-secondary/40 group-hover:text-secondary/60 transition-colors animate-bounce" style={{ animationDelay: '0.2s' }}>
-                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6 mb-12 animate-slide-up" style={{ animationDelay: '0.6s' }}>
+          <Link
+            href="/projects"
+            className="group bg-gradient-to-r from-secondary to-accent hover:from-accent hover:to-secondary text-dark-900 px-6 sm:px-10 py-4 sm:py-5 rounded-2xl text-base sm:text-lg font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-secondary/25 w-fit mx-auto sm:w-auto text-center relative overflow-hidden min-w-[200px]"
+          >
+            {/* Button glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+            <span className="flex items-center justify-center gap-2 sm:gap-3 relative z-10">
+              View My Work
+              <Icon name="arrow-right" className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </Link>
+          
+          <Link
+            href="/about"
+            className="group bg-dark-700 hover:bg-dark-600 text-white px-6 sm:px-10 py-4 sm:py-5 rounded-2xl text-base sm:text-lg font-bold transition-all duration-300 border-2 border-dark-500 hover:border-secondary/50 hover:shadow-lg hover:shadow-secondary/10 w-fit mx-auto sm:w-auto text-center relative overflow-hidden min-w-[200px]"
+          >
+            {/* Button glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+            <span className="flex items-center justify-center gap-2 sm:gap-3 relative z-10">
+              Learn More
+              <Icon name="chevron-down" className="w-5 h-5 sm:w-6 sm:h-6 rotate-90 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </Link>
         </div>
+
+        {/* Scrolling Tech Stack */}
+        <ScrollingTechStack />
+
+
       </div>
     </section>
   )
