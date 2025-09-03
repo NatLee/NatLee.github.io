@@ -154,13 +154,13 @@
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-100%);
     }
   }
 
   @keyframes scrollRight {
     0% {
-      transform: translateX(-50%);
+      transform: translateX(-100%);
     }
     100% {
       transform: translateX(0);
@@ -252,11 +252,11 @@
   }
 
   .animate-scroll-left {
-    animation: scrollLeft 30s linear infinite;
+    animation: scrollLeft 40s linear infinite;
   }
 
   .animate-scroll-right {
-    animation: scrollRight 30s linear infinite;
+    animation: scrollRight 50s linear infinite;
   }
 
   .animate-slide-up {

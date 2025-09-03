@@ -63,38 +63,30 @@ export default function ScrollingTechStack() {
     <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.8s' }}>
       <h3 className="text-2xl font-bold text-white mb-8 text-center">Core Technologies</h3>
       
-      {/* Scrolling Tech Stack */}
-      <div className="relative overflow-visible py-8">
+      {/* Scrolling Tech Stack - Break Out of All Containers */}
+      <div className="relative overflow-hidden py-8 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-16 xl:-mx-24 2xl:-mx-32 3xl:-mx-48 4xl:-mx-64 5xl:-mx-80 6xl:-mx-96" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
         {/* Top Row - Scroll Left */}
         <div className="flex animate-scroll-left">
-          {/* First set */}
-          <div className="flex gap-6 mr-6">
-            {topRow.map((tech, index) => (
-              <TechCard key={`top-${index}`} tech={tech} />
-            ))}
-          </div>
-          {/* Duplicate for seamless loop */}
-          <div className="flex gap-6 mr-6">
-            {topRow.map((tech, index) => (
-              <TechCard key={`top-dup-${index}`} tech={tech} />
-            ))}
-          </div>
+          {/* Multiple sets for seamless infinite scroll */}
+          {[...Array(8)].map((_, setIndex) => (
+            <div key={`top-set-${setIndex}`} className="flex gap-6 mr-6">
+              {topRow.map((tech, index) => (
+                <TechCard key={`top-${setIndex}-${index}`} tech={tech} />
+              ))}
+            </div>
+          ))}
         </div>
 
         {/* Bottom Row - Scroll Right */}
         <div className="flex animate-scroll-right mt-6">
-          {/* First set */}
-          <div className="flex gap-6 mr-6">
-            {bottomRow.map((tech, index) => (
-              <TechCard key={`bottom-${index}`} tech={tech} />
-            ))}
-          </div>
-          {/* Duplicate for seamless loop */}
-          <div className="flex gap-6 mr-6">
-            {bottomRow.map((tech, index) => (
-              <TechCard key={`bottom-dup-${index}`} tech={tech} />
-            ))}
-          </div>
+          {/* Multiple sets for seamless infinite scroll */}
+          {[...Array(8)].map((_, setIndex) => (
+            <div key={`bottom-set-${setIndex}`} className="flex gap-6 mr-6">
+              {bottomRow.map((tech, index) => (
+                <TechCard key={`bottom-${setIndex}-${index}`} tech={tech} />
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </div>
