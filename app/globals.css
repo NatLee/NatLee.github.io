@@ -259,6 +259,12 @@
     animation: scrollRight 50s linear infinite;
   }
 
+  /* Marquee rows: ensure children can overflow on hover */
+  .rfm-marquee,
+  .rfm-marquee * {
+    overflow: visible !important;
+  }
+
   .animate-slide-up {
     animation: slideUp 0.8s ease-out forwards;
   }

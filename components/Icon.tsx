@@ -65,6 +65,7 @@ import {
   FaMusic,
   FaVideo,
   FaImage,
+  FaJava,
   FaFileCode,
   FaTerminal,
   FaCogs,
@@ -93,6 +94,8 @@ export default function Icon({ name, className = '', size = 24 }: IconProps) {
     'typescript': <SiTypescript className={className} size={size} />,
     'tailwind': <SiTailwindcss className={className} size={size} />,
     'vue': <SiVuedotjs className={className} size={size} />,
+    'figma': <SiFigma className={className} size={size} />,
+    'javascript': <SiJavascript className={className} size={size} />,
     
     // Backend
     'python': <SiPython className={className} size={size} />,
@@ -100,7 +103,8 @@ export default function Icon({ name, className = '', size = 24 }: IconProps) {
     'fastapi': <SiFastapi className={className} size={size} />,
     'nodejs': <SiNodedotjs className={className} size={size} />,
     'express': <SiExpress className={className} size={size} />,
-    
+    'java': <FaJava className={className} size={size} />,
+  
     // AI/ML
     'pytorch': <SiPytorch className={className} size={size} />,
     'tensorflow': <SiTensorflow className={className} size={size} />,
