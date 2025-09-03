@@ -36,7 +36,18 @@ import {
   SiSelenium,
   SiFigma,
   SiAdobexd,
-  SiSketch
+  SiSketch,
+  SiFastapi,
+  SiExpress,
+  SiScikitlearn,
+  SiOpencv,
+  SiHuggingface,
+  SiElasticsearch,
+  SiMysql,
+  SiGooglecloud,
+
+  SiVercel,
+  SiNetlify
 } from 'react-icons/si'
 import { 
   FaBrain, 
@@ -76,6 +87,49 @@ interface IconProps {
 export default function Icon({ name, className = '', size = 24 }: IconProps) {
   // Core Technologies
   const coreTechIcons: Record<string, JSX.Element> = {
+    // Frontend
+    'react': <SiReact className={className} size={size} />,
+    'nextjs': <SiNextdotjs className={className} size={size} />,
+    'typescript': <SiTypescript className={className} size={size} />,
+    'tailwind': <SiTailwindcss className={className} size={size} />,
+    'vue': <SiVuedotjs className={className} size={size} />,
+    
+    // Backend
+    'python': <SiPython className={className} size={size} />,
+    'django': <SiDjango className={className} size={size} />,
+    'fastapi': <SiFastapi className={className} size={size} />,
+    'nodejs': <SiNodedotjs className={className} size={size} />,
+    'express': <SiExpress className={className} size={size} />,
+    
+    // AI/ML
+    'pytorch': <SiPytorch className={className} size={size} />,
+    'tensorflow': <SiTensorflow className={className} size={size} />,
+    'scikit': <SiScikitlearn className={className} size={size} />,
+    'opencv': <SiOpencv className={className} size={size} />,
+    'huggingface': <SiHuggingface className={className} size={size} />,
+    
+    // DevOps
+    'docker': <SiDocker className={className} size={size} />,
+    'kubernetes': <SiKubernetes className={className} size={size} />,
+    'jenkins': <SiJenkins className={className} size={size} />,
+    'git': <SiGit className={className} size={size} />,
+    'github': <SiGithub className={className} size={size} />,
+    
+    // Database
+    'postgresql': <SiPostgresql className={className} size={size} />,
+    'mongodb': <SiMongodb className={className} size={size} />,
+    'redis': <SiRedis className={className} size={size} />,
+    'elasticsearch': <SiElasticsearch className={className} size={size} />,
+    'mysql': <SiMysql className={className} size={size} />,
+    
+    // Cloud
+    'aws': <SiAmazon className={className} size={size} />,
+    'gcp': <SiGooglecloud className={className} size={size} />,
+    'azure': <FaCloud className={className} size={size} />,
+    'vercel': <SiVercel className={className} size={size} />,
+    'netlify': <SiNetlify className={className} size={size} />,
+    
+    // Legacy support
     'Python': <SiPython className={className} size={size} />,
     'AI/ML': <FaBrain className={className} size={size} />,
     'Django': <SiDjango className={className} size={size} />,
