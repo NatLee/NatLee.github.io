@@ -36,6 +36,26 @@ export default function QuickStats() {
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-secondary/5 via-transparent to-accent/5"></div>
       <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-10"></div>
+      {/* Subtle Line Chart Concept */}
+      <svg className="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style={{ filter: 'drop-shadow(0 2px 8px rgba(239,68,68,0.08))' }}>
+        <defs>
+          <linearGradient id="statLine" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#f97316" stopOpacity="0.15" />
+            <stop offset="100%" stopColor="#ef4444" stopOpacity="0.35" />
+          </linearGradient>
+          <linearGradient id="statArea" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#f97316" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="#ef4444" stopOpacity="0.10" />
+          </linearGradient>
+        </defs>
+
+        {/* Primary line + soft area fill */}
+        <path d="M0,65 L10,60 L20,62 L30,55 L40,58 L50,50 L60,54 L70,45 L80,48 L90,40 L100,44 L100,100 L0,100 Z" fill="url(#statArea)" />
+        <path d="M0,65 L10,60 L20,62 L30,55 L40,58 L50,50 L60,54 L70,45 L80,48 L90,40 L100,44" fill="none" stroke="url(#statLine)" strokeWidth="1.5" />
+
+        {/* Secondary faint guide line */}
+        <path d="M0,78 L10,73 L20,75 L30,68 L40,71 L50,63 L60,67 L70,58 L80,61 L90,53 L100,56" fill="none" stroke="url(#statLine)" strokeWidth="1" opacity="0.35" />
+      </svg>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
