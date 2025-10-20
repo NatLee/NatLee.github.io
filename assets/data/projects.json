@@ -169,7 +169,7 @@
     ],
     "githubUrl": "https://github.com/NatLee/telepy",
     "category": "DevOps",
-    "status": "Completed",
+    "status": "In Progress",
     "featured": true,
     "opensource": true,
     "technologies": [
@@ -205,9 +205,9 @@
       "Reduced manual configuration errors"
     ],
     "timeline": {
-      "start": "2020",
-      "end": "2021",
-      "duration": "1 year"
+      "start": "2024-02",
+      "end": "Present",
+      "duration": "WIP"
     },
     "role": "Creator & Maintainer",
     "links": {
@@ -1370,5 +1370,69 @@
     "links": {
       "github": "https://github.com/NatLee/Face-Wall-Generator-Tool"
     }
-  }
+  },
+  {
+    "id": "image-annotation",
+    "title": "Image Annotation",
+    "subtitle": "React + Next.js Bounding Box Annotation Tool",
+    "category": "Web Development",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "images": [
+      "https://raw.githubusercontent.com/NatLee/image-annotation/master/docs/index.png"
+    ],
+    "description": "A React + Next.js web refactored application for creating bounding box annotations on images with auto-loading, drag-and-drop functionality, and comprehensive data export capabilities.",
+    "longDescription": "A comprehensive web-based image annotation tool built with React and Next.js that streamlines the process of creating bounding box annotations. The application features automatic image loading, intuitive drag-and-drop interface, real-time annotation editing, and robust data management with localStorage integration and JSON export functionality.",
+    "language": "javascript",
+    "githubUrl": "https://github.com/NatLee/image-annotation",
+    "technologies": [
+      "React",
+      "Next.js",
+      "JavaScript",
+      "HTML/CSS",
+      "localStorage API",
+      "JSON"
+    ],
+    "features": [
+      "Auto-load random images on startup",
+      "Immediate bounding box creation and editing",
+      "Drag to move and resize with corner handles",
+      "Original coordinate storage with scale factor handling",
+      "Window resize handling and responsive design",
+      "Submit annotation with validation",
+      "Export all data to JSON format",
+      "Annotation leaderboard and progress tracking",
+      "Grid overlay for validation (keyboard shortcut)",
+      "Dark theme with green bounding boxes"
+    ],
+    "challenges": [
+      "Real-time coordinate scaling across different display sizes",
+      "Maintaining annotation accuracy during window resize",
+      "Efficient data storage and retrieval in browser",
+      "User-friendly annotation workflow design"
+    ],
+    "solutions": [
+      "Implemented scale factor calculation for coordinate accuracy",
+      "Built responsive design with automatic resize handling",
+      "Created comprehensive localStorage data structure",
+      "Designed intuitive keyboard shortcuts and UI controls"
+    ],
+    "results": [
+      "Streamlined annotation workflow with immediate box creation",
+      "Accurate coordinate preservation across display changes",
+      "Comprehensive data export with metadata",
+      "Enhanced user experience with keyboard shortcuts"
+    ],
+    "timeline": {
+      "start": "2017",
+      "end": "2025",
+      "duration": "8 years"
+    },
+    "role": "Creator",
+    "links": {
+      "github": "https://github.com/NatLee/image-annotation",
+      "demo": "https://natlee.github.io/image-annotation/"
+    }
+  }  
 ]
