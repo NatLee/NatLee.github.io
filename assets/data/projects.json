@@ -161,11 +161,12 @@
     "id": "telepy",
     "title": "telepy",
     "subtitle": "DevOps SSH Tunnel Manager",
-    "description": "A Django-based web application for managing and monitoring the reverse SSH tunnels or jump servers.",
-    "longDescription": "A comprehensive web application built with Django for managing and monitoring reverse SSH tunnels and jump servers. This tool provides a centralized interface for network administrators to manage secure connections and monitor tunnel status in real-time.",
+    "description": "A Django-based web application for managing and monitoring reverse SSH tunnels or jump servers.",
+    "longDescription": "Telepy is a comprehensive platform designed to simplify the management of reverse SSH tunnels. It features a web interface for creating and monitoring connections, an integrated browser-based console powered by Django Channels and WebSockets, and multi-user support with Google OAuth integration. The project is containerized with Docker for easy deployment and includes a robust management CLI script.",
     "language": "python",
     "images": [
-      "https://camo.githubusercontent.com/ad8dfab6301428790120d6502be8772e4467153ae7766407bb510f3740ccac48/68747470733a2f2f692e696d6775722e636f6d2f746965357672522e706e67"
+      "https://github.com/NatLee/telepy/raw/main/docs/telepy-create-tunnel.gif",
+      "https://github.com/NatLee/telepy/raw/main/docs/telepy-enter-console.gif"
     ],
     "githubUrl": "https://github.com/NatLee/telepy",
     "category": "DevOps",
@@ -175,39 +176,42 @@
     "technologies": [
       "Python",
       "Django",
-      "SSH",
-      "Network Management",
-      "Web Interface"
+      "Django REST Framework",
+      "Django Channels",
+      "Redis",
+      "Docker",
+      "Google OAuth",
+      "Swagger",
+      "Shell Scripting"
     ],
     "features": [
-      "Real-time tunnel monitoring",
-      "Web-based management interface",
-      "Connection status tracking",
-      "Automated tunnel creation",
-      "Security logging and alerts"
+      "Reverse SSH tunnel management",
+      "Integrated web-based terminal console",
+      "Multi-user support with Google Auth",
+      "RESTful API with Swagger documentation",
+      "Automated management CLI",
+      "Dockerized deployment",
+      "Real-time updates via WebSockets"
     ],
     "challenges": [
-      "Managing multiple SSH connections",
-      "Real-time status monitoring",
-      "Security considerations",
-      "User-friendly interface design"
+      "Maintaining secure, persistent web-based terminal sessions for multiple concurrent users.",
+      "Orchestrating complex networking requirements for reverse SSH tunnels within a containerized environment.",
+      "Simplifying the management of jump servers and SSH keys for end-users."
     ],
     "solutions": [
-      "Implemented Django-based web interface",
-      "Created real-time monitoring system",
-      "Added comprehensive logging",
-      "Built intuitive management dashboard"
+      "Implemented Django Channels and Redis to handle real-time terminal communication via WebSockets.",
+      "Developed a unified 'telepy.sh' management script to wrap complex Docker and Django operations.",
+      "Leveraged Docker Compose to isolate and manage individual components like the web server, SSH server, and Redis."
     ],
     "results": [
-      "Simplified SSH tunnel management",
-      "Improved network administration efficiency",
-      "Enhanced security monitoring",
-      "Reduced manual configuration errors"
+      "Provides a user-friendly web portal for centralized jump server management.",
+      "Eliminates the need for manual command-line configuration of reverse tunnels for most basic use cases.",
+      "Improved visibility into active tunnel status and sharing capabilities across teams."
     ],
     "timeline": {
       "start": "2024-02",
       "end": "Present",
-      "duration": "WIP"
+      "duration": "Ongoing"
     },
     "role": "Creator & Maintainer",
     "links": {
@@ -768,6 +772,21 @@
       "Historical data visualization",
       "Responsive design"
     ],
+    "challenges": [
+      "Efficiently managing and displaying complex daily K-line data in a responsive calendar interface.",
+      "Handling asynchronous cache updates for real-time room data without impacting frontend performance.",
+      "Orchestrating multiple services (Frontend, Backend, Redis, Nginx) for a consistent development and production environment."
+    ],
+    "solutions": [
+      "Implemented a Redis-based caching system to handle asynchronous updates and speed up data retrieval.",
+      "Utilized Docker Compose to containerize the environment, ensuring seamless deployment and cross-platform compatibility.",
+      "Developed a specialized frontend using TypeScript to manage complex calendar logic and navigation views."
+    ],
+    "results": [
+      "Created a streamlined tool for quickly querying Elysion daily K data in a user-friendly calendar format.",
+      "Optimized application performance by offloading heavy data processing to a background cache layer.",
+      "Simplified local development and production deployment through automated shell scripts and containerization."
+    ],
     "timeline": {
       "start": "2022",
       "end": "2023",
@@ -843,6 +862,21 @@
       "User management dashboard",
       "API authentication"
     ],
+    "challenges": [
+      "Bridging the gap between Django Allauth's session-based authentication and a stateless JWT-based architecture.",
+      "Integrating multiple 3rd-party authentication providers (Google, Microsoft, Line) into a unified JWT flow.",
+      "Customizing authentication adapters to handle specific business logic, such as conditional password management for social logins."
+    ],
+    "solutions": [
+      "Developed a custom authentication bridge that issues JWT tokens upon successful Django Allauth social authentication.",
+      "Created a comprehensive template demonstrating frontend-to-backend integration for 3rd-party login callbacks.",
+      "Implemented modular views and adapters in Python to manage user registration and token lifecycle efficiently."
+    ],
+    "results": [
+      "Provided a robust, reusable template that significantly reduces setup time for modern Django projects requiring JWT and social login.",
+      "Successfully unified diverse authentication streams into a single, secure token-based system.",
+      "Enabled developers to build decoupled, scalable backends that support modern frontend frameworks."
+    ],
     "timeline": {
       "start": "2021",
       "end": "2022",
@@ -882,6 +916,21 @@
       "Quality control metrics",
       "Batch processing support"
     ],
+    "challenges": [
+      "Automating a multi-stage neuroimaging pipeline involving complex tasks like AC-PC alignment and skull stripping.",
+      "Managing large-scale dependencies and environment consistency for niche medical imaging tools like FSL and ANTs.",
+      "Ensuring efficient data flow and intermediate file management across various analysis nodes."
+    ],
+    "solutions": [
+      "Leveraged Nipype to build a modular and reproducible workflow connecting multiple specialized neuroimaging toolsets.",
+      "Utilized Docker and Neurodocker to containerize the entire software stack, eliminating 'it works on my machine' issues.",
+      "Integrated K-means clustering for automated tissue segmentation and Nilearn for high-quality result visualization."
+    ],
+    "results": [
+      "Developed a robust, automated pipeline that processes .nii brain MR images with high precision and minimal manual intervention.",
+      "Achieved a highly portable research environment that facilitates reproducible science in medical imaging.",
+      "Provided clear visual outputs for tissue segmentation (GM, WM, CSF), enabling easier data verification and subsequent analysis."
+    ],
     "timeline": {
       "start": "2018",
       "end": "2019",
@@ -918,6 +967,23 @@
       "Development tools pre-installed",
       "Cross-platform compatibility",
       "Easy deployment"
+    ],
+    "challenges": [
+      "Creating a common GUI environment for development using Docker",
+      "Providing VNC and noVNC access to a containerized desktop",
+      "Supporting NVIDIA GPUs in a containerized environment",
+      "Handling Chinese input method initialization"
+    ],
+    "solutions": [
+      "Integrated Xfce Desktop with VNC and noVNC support",
+      "Included pre-installed development tools like Mini Conda, VS Code, and Git",
+      "Provided Docker Compose configurations for both standard and NVIDIA GPU setups",
+      "Implemented customizable container settings for resolution, passwords, and users"
+    ],
+    "results": [
+      "A fully functional GUI development container accessible via browser or VNC client",
+      "Support for multiple protocols including VNC (5901), noVNC (6901), and SSH (22)",
+      "A highly portable and consistent development environment"
     ],
     "timeline": {
       "start": "2020",
@@ -1249,6 +1315,19 @@
       "Redirect functionality",
       "Web-based interface"
     ],
+    "challenges": [
+      "Obtaining and playing original video links from YouTube via a web application redirector",
+      "Simplifying the process of accessing raw video streams"
+    ],
+    "solutions": [
+      "Developed a Flask-based web application to handle redirects",
+      "Utilized youtube-dl to extract original video links",
+      "Created a simple URL-based interface for video redirection"
+    ],
+    "results": [
+      "A lightweight microservice that redirects users to original YouTube video links",
+      "Easy integration by passing a video ID as a URL parameter (e.g., http://localhost:5000/?v=VIDEO_ID)"
+    ],
     "timeline": {
       "start": "2021",
       "end": "2022",
@@ -1287,6 +1366,21 @@
       "YouTube integration",
       "Multi-user support"
     ],
+    "challenges": [
+      "Redirecting YouTube videos to a local server for playback",
+      "Synchronizing playlists and history across different locations in real-time",
+      "Managing multiple playlist types including Default, Request, and History"
+    ],
+    "solutions": [
+      "Built a backend using Flask and WebSockets for real-time synchronization",
+      "Implemented a structured system to handle three distinct playlist tables",
+      "Extended the functionality of the youtube-video-redirector project"
+    ],
+    "results": [
+      "A synchronized YouTube video player with persistent history (up to 200 records) and queueing system",
+      "A robust API system for managing video requests and playlists",
+      "Ability to play videos anywhere while maintaining state through WebSockets"
+    ],
     "timeline": {
       "start": "2022",
       "end": "2023",
@@ -1324,6 +1418,21 @@
       "Customizable options",
       "Headless browser automation"
     ],
+    "challenges": [
+      "Navigation failure if URLs do not explicitly start with 'http'",
+      "Need for snapshots to be base64-encoded for seamless web framework integration",
+      "Requirement to support multiple export formats like image and PDF"
+    ],
+    "solutions": [
+      "Built a tool leveraging Pyppeteer for automated website snapshot capture",
+      "Implemented dedicated functions for converting both website images and PDFs into base64 strings",
+      "Created a CLI mode to facilitate rapid testing and parameter verification"
+    ],
+    "results": [
+      "A functional Python package published on PyPI",
+      "Successful delivery of website snapshots in base64 format for easy use in web APIs",
+      "Provision of a working example demonstrating integration with web frameworks"
+    ],
     "timeline": {
       "start": "2020",
       "end": "2021",
@@ -1360,6 +1469,21 @@
       "AI model testing support",
       "Batch processing",
       "Customizable layouts"
+    ],
+    "challenges": [
+      "Tedious manual process of creating image grids (face walls) for AI model verification",
+      "Need for structured and randomized face datasets to test face recognition performance",
+      "Requirement for a tool that can handle variable grid sizes based on user input"
+    ],
+    "solutions": [
+      "Developed a Python script using OpenCV and NumPy to automate the concatenation of images into grids",
+      "Integrated Python Fire to provide a simple command-line interface for adjusting row and column counts",
+      "Automated image selection and resizing from a source folder to maintain consistent output quality"
+    ],
+    "results": [
+      "A utility capable of generating custom 'face wall' images for AI testing",
+      "Significantly reduced time required for dataset preparation in computer vision projects",
+      "A flexible CLI tool that allows users to specify output paths and grid dimensions easily"
     ],
     "timeline": {
       "start": "2021",
@@ -1484,9 +1608,9 @@
       "Consistent vault structure"
     ],
     "timeline": {
-      "start": "2023",
+      "start": "2026",
       "end": "Present",
-      "duration": "1 year"
+      "duration": "1 week"
     },
     "role": "Creator & Maintainer",
     "links": {
