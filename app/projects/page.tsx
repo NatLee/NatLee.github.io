@@ -2,8 +2,8 @@ import Navigation from '@/components/Navigation'
 import ProjectsGrid from '@/components/ProjectsGrid'
 
 export const metadata = {
-  title: 'Open Source Projects | Nat Lee',
-  description: 'Collection of open source projects, tools, and experiments by Nat Lee',
+  title: 'Projects | Nat Lee',
+  description: 'Collection of projects, tools, and experiments by Nat Lee',
 }
 
 export default function ProjectsPage() {

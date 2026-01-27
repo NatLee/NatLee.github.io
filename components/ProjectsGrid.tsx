@@ -8,7 +8,7 @@ import Icon from './Icon'
 // Language Color Mapping
 const getLanguageColor = (language?: string): string => {
   if (!language) return '#6b7280'
-  
+
   const languageColors: Record<string, string> = {
     'python': '#3776ab',
     'javascript': '#f1e05a',
@@ -107,7 +107,7 @@ const getLanguageColor = (language?: string): string => {
     'qmake': '#ff6b35',
     'autotools': '#ff6b35'
   }
-  
+
   return languageColors[language.toLowerCase()] || '#6b7280'
 }
 
@@ -116,11 +116,11 @@ export default function ProjectsGrid() {
   const [searchTerm, setSearchTerm] = useState('')
 
   const categories = ['All', ...getAllCategories()]
-  
+
   const filteredProjects = allProjectsData.filter(project => {
     const matchesCategory = selectedCategory === 'All' || project.category === selectedCategory
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchTerm.toLowerCase())
+      project.description.toLowerCase().includes(searchTerm.toLowerCase())
     return matchesCategory && matchesSearch
   })
 
@@ -132,19 +132,19 @@ export default function ProjectsGrid() {
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-5"></div>
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-accent/5"></div>
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
               <span className="bg-gradient-to-r from-secondary via-accent to-neon-red bg-clip-text text-transparent">
-                Open Source Projects
+                Projects
               </span>
             </h1>
             <div className="w-32 h-1 bg-gradient-to-r from-secondary to-accent mx-auto mb-8 rounded-full"></div>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              A collection of my open source projects, tools, and experiments. 
+              A collection of my projects, tools, and experiments.
               From AI/ML applications to web development tools.
             </p>
           </div>
@@ -164,7 +164,7 @@ export default function ProjectsGrid() {
                   className="w-full pl-10 pr-4 py-3 bg-dark-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20"
                 />
               </div>
-              
+
               {/* Project Count */}
               <div className="text-center">
                 <span className="text-sm text-gray-400">
@@ -179,11 +179,10 @@ export default function ProjectsGrid() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    selectedCategory === category
-                      ? 'bg-secondary text-white shadow-lg shadow-secondary/20'
-                      : 'bg-dark-800 text-gray-300 hover:bg-dark-700 border border-gray-700'
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === category
+                    ? 'bg-secondary text-white shadow-lg shadow-secondary/20'
+                    : 'bg-dark-800 text-gray-300 hover:bg-dark-700 border border-gray-700'
+                    }`}
                 >
                   {category}
                 </button>
@@ -238,9 +237,8 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
 
   return (
     <div
-      className={`group bg-dark-800 rounded-xl border border-gray-700 overflow-hidden hover:border-secondary/50 transition-all duration-500 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary/10 ${
-        featured ? 'ring-2 ring-secondary/20' : ''
-      }`}
+      className={`group bg-dark-800 rounded-xl border border-gray-700 overflow-hidden hover:border-secondary/50 transition-all duration-500 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary/10 ${featured ? 'ring-2 ring-secondary/20' : ''
+        }`}
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       {/* Project Image */}
@@ -276,20 +274,19 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
             </div>
           </div>
         )}
-        
+
         {/* Overlay - 大幅減少遮罩透明度 */}
         <div className="absolute inset-0 bg-gradient-to-t from-dark-900/50 via-dark-900/10 to-transparent"></div>
 
         {/* Status Badge */}
         <div className="absolute top-3 right-3">
           <div className="relative group overflow-hidden rounded-full">
-            <span className={`relative z-10 px-3 py-1.5 rounded-full text-xs font-bold border ${
-              project.status === 'Completed' 
-                ? 'bg-gradient-to-r from-accent to-warm-500 text-white border-accent/30' 
-                : project.status === 'In Progress' 
-                  ? 'bg-gradient-to-r from-secondary to-neon-red text-white border-secondary/30'
-                  : 'bg-gradient-to-r from-gray-500 to-gray-600 text-white border-gray-400/30'
-            }`}>
+            <span className={`relative z-10 px-3 py-1.5 rounded-full text-xs font-bold border ${project.status === 'Completed'
+              ? 'bg-gradient-to-r from-accent to-warm-500 text-white border-accent/30'
+              : project.status === 'In Progress'
+                ? 'bg-gradient-to-r from-secondary to-neon-red text-white border-secondary/30'
+                : 'bg-gradient-to-r from-gray-500 to-gray-600 text-white border-gray-400/30'
+              }`}>
               {project.status}
             </span>
             {/* 移除模糊效果，避免與卡片變換衝突 */}
@@ -325,11 +322,11 @@ function ProjectCard({ project, featured, index }: { project: any, featured: boo
             </div>
             {/* 移除模糊效果，避免與卡片變換衝突 */}
           </div>
-          
+
           {/* Language Badge */}
           {project.language && (
             <div className="relative group overflow-hidden rounded-full">
-              <span 
+              <span
                 className="relative z-10 px-3 py-1.5 text-white text-xs font-bold rounded-full border backdrop-blur-sm"
                 style={{
                   backgroundColor: getLanguageColor(project.language),
