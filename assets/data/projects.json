@@ -1434,5 +1434,63 @@
       "github": "https://github.com/NatLee/image-annotation",
       "demo": "https://natlee.github.io/image-annotation/"
     }
-  }  
+  },
+  {
+    "id": "obsidian-attachmenter",
+    "title": "Obsidian Attachmenter",
+    "subtitle": "Obsidian Attachment Management Plugin",
+    "description": "A plugin for Obsidian to manage attachments with per-note folder rules, remote image downloading, and path checking tools.",
+    "longDescription": "A comprehensive Obsidian plugin designed to streamline attachment management. It enforces a per-note attachment folder structure, keeping your vault organized. Key capabilities include automatically moving pasted images to the correct folder, downloading remote images (including from Canvas) to local storage, and providing tools to check and repair broken attachment paths or clean up empty folders. It supports multiple languages and integrates seamlessly with Obsidian's file explorer.",
+    "language": "typescript",
+    "images": [
+      "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/master/docs/attachment-tree.gif",
+      "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/master/docs/attachment-manager.gif"
+    ],
+    "githubUrl": "https://github.com/NatLee/obsidian-attachmenter",
+    "category": "Productivity Tools",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "technologies": [
+      "TypeScript",
+      "Obsidian API",
+      "JavaScript",
+      "CSS"
+    ],
+    "features": [
+      "Per-note attachment folder management",
+      "Auto-move pasted images",
+      "Download remote images (Markdown & Canvas)",
+      "File Explorer attachment tree",
+      "Attachment Manager view",
+      "Path check and repair tool",
+      "Empty folder cleanup"
+    ],
+    "challenges": [
+      "Handling cross-platform file path sanitization",
+      "Integrating with Obsidian's internal link management",
+      "Supporting both Markdown and Canvas files",
+      "Real-time file system synchronization"
+    ],
+    "solutions": [
+      "Implemented robust path sanitization logic",
+      "Used Obsidian's vault events to track changes",
+      "Developed custom handlers for Canvas nodes",
+      "Created a centralized attachment manager"
+    ],
+    "results": [
+      "Simplified attachment workflow for users",
+      "Automated remote image archiving",
+      "Consistent vault structure"
+    ],
+    "timeline": {
+      "start": "2023",
+      "end": "Present",
+      "duration": "1 year"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/obsidian-attachmenter"
+    }
+  }
 ]
