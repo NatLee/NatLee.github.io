@@ -288,20 +288,42 @@ export default function ProjectDetail({ project }: Props) {
                   {/* Right Column: Preview / Images */}
                   <div className="bg-black/40 flex flex-col h-[600px] lg:h-[850px]">
 
-                    {/* Fake Browser Toolbar */}
-                    <div className="bg-black/60 border-b border-gray-800 p-2.5 flex items-center gap-4 flex-shrink-0">
-                      <div className="flex gap-1.5 ml-2">
-                        <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                        <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-                      </div>
-                      <div className="flex-1 bg-black rounded p-1.5 px-3 text-[10px] text-gray-500 font-mono flex justify-between items-center border border-gray-800">
-                        <span className="truncate opacity-60">
-                          {project.links?.demo || project.links?.github || `localhost:3000/projects/${project.id}`}
-                        </span>
-                        <div className="flex gap-2">
-                          <span className="text-gray-600 hover:text-white cursor-pointer transition-colors">↻</span>
+                    {/* Preview Tab Bar - Aligned with left column */}
+                    <div className="flex items-center justify-between bg-black/40 border-b border-gray-800 px-2 md:px-4 pt-2 gap-1 select-none flex-shrink-0">
+                      {/* Preview Tab */}
+                      <div className="flex items-center gap-1">
+                        <div className="px-2 md:px-4 py-2 text-[10px] md:text-xs font-mono rounded-t bg-black/20 text-secondary border-t border-x border-gray-800 font-bold flex items-center gap-1 md:gap-2">
+                          <span>🖼️</span>
+                          <span className="hidden sm:inline">Preview</span>
+                          <span className="sm:hidden">View</span>
                         </div>
+                      </div>
+                      
+                      {/* URL / Links - Compact */}
+                      <div className="flex items-center gap-2 text-[10px] text-gray-600 font-mono">
+                        {project.links?.demo && (
+                          <a 
+                            href={project.links.demo} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="hover:text-secondary transition-colors hidden sm:inline"
+                            title={project.links.demo}
+                          >
+                            🔗 Demo
+                          </a>
+                        )}
+                        {project.links?.github && (
+                          <a 
+                            href={project.links.github} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="hover:text-secondary transition-colors"
+                            title={project.links.github}
+                          >
+                            <span className="hidden sm:inline">⌥ Source</span>
+                            <span className="sm:hidden">📂</span>
+                          </a>
+                        )}
                       </div>
                     </div>
 
@@ -341,27 +363,98 @@ export default function ProjectDetail({ project }: Props) {
                             </div>
                           </div>
 
-                          {/* Caption / Image Counter */}
-                          <div className="bg-[#111] border-t border-gray-800 p-3 flex justify-between items-center text-xs font-mono text-gray-500 flex-shrink-0">
-                            <span>RENDER_OUTPUT_{currentImageIndex + 1}.PNG</span>
-                            <div className="flex items-center gap-2">
-                              <span>{currentImageIndex + 1} / {project.images.length}</span>
-                              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                          {/* Action Bar with Links */}
+                          <div className="bg-[#111] border-t border-gray-800 p-2 md:p-3 flex-shrink-0">
+                            {/* Links Row */}
+                            {(project.links?.demo || project.links?.github || project.links?.documentation) && (
+                              <div className="flex flex-wrap gap-2 mb-2">
+                                {project.links?.demo && (
+                                  <a
+                                    href={project.links.demo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary hover:bg-orange-500 text-black text-xs font-bold rounded transition-colors"
+                                  >
+                                    <span>🌐</span>
+                                    <span>Live Demo</span>
+                                  </a>
+                                )}
+                                {project.links?.github && (
+                                  <a
+                                    href={project.links.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold rounded border border-gray-700 transition-colors"
+                                  >
+                                    <span>📂</span>
+                                    <span>Source Code</span>
+                                  </a>
+                                )}
+                                {project.links?.documentation && (
+                                  <a
+                                    href={project.links.documentation}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold rounded border border-gray-700 transition-colors"
+                                  >
+                                    <span>📖</span>
+                                    <span>Docs</span>
+                                  </a>
+                                )}
+                              </div>
+                            )}
+                            
+                            {/* Image Counter */}
+                            <div className="flex justify-between items-center text-[10px] font-mono text-gray-600">
+                              <span>RENDER_OUTPUT_{currentImageIndex + 1}.PNG</span>
+                              <div className="flex items-center gap-2">
+                                <span>{currentImageIndex + 1} / {project.images.length}</span>
+                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                              </div>
                             </div>
                           </div>
 
                         </div>
                       ) : (
-                        <div className="h-full flex flex-col items-center justify-center text-gray-500 font-mono space-y-6">
-                          <div className="text-8xl opacity-30 select-none">404</div>
-                          <div className="text-center space-y-2">
-                            <div className="text-xs font-bold text-red-400 flex items-center gap-2 justify-center">
-                              <span className="animate-ping w-2 h-2 bg-red-500 rounded-full"></span>
-                              NO_ASSETS_FOUND
+                        <div className="h-full flex flex-col items-center justify-center text-gray-500 font-mono p-4">
+                          <div className="text-center space-y-4">
+                            <div className="text-6xl opacity-30 select-none">📷</div>
+                            <div className="space-y-2">
+                              <div className="text-xs font-bold text-gray-400">
+                                NO_PREVIEW_AVAILABLE
+                              </div>
+                              <p className="text-[10px] text-gray-500 max-w-[200px] mx-auto">
+                                No screenshots for this project yet
+                              </p>
                             </div>
-                            <p className="text-[10px] text-gray-400 max-w-[200px] mx-auto text-center leading-relaxed">
-                              Module visual buffers are currently null or disconnected for ID: {project.id}
-                            </p>
+                            
+                            {/* Links when no images */}
+                            {(project.links?.demo || project.links?.github) && (
+                              <div className="flex flex-wrap justify-center gap-2 pt-4">
+                                {project.links?.demo && (
+                                  <a
+                                    href={project.links.demo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1.5 px-4 py-2 bg-secondary hover:bg-orange-500 text-black text-xs font-bold rounded transition-colors"
+                                  >
+                                    <span>🌐</span>
+                                    <span>View Live Demo</span>
+                                  </a>
+                                )}
+                                {project.links?.github && (
+                                  <a
+                                    href={project.links.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1.5 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold rounded border border-gray-700 transition-colors"
+                                  >
+                                    <span>📂</span>
+                                    <span>View Source</span>
+                                  </a>
+                                )}
+                              </div>
+                            )}
                           </div>
                         </div>
                       )}
