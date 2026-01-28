@@ -203,7 +203,7 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
   }
 
   return (
-    <div className={`bg-[#0d0d0d] border-t border-gray-800 flex flex-col transition-all duration-300 ${isCollapsed ? 'h-10' : 'h-72'}`}>
+    <div className={`bg-[#0d0d0d] border-t border-gray-800 flex flex-col transition-all duration-300 ${isCollapsed ? 'h-10' : 'h-[420px]'}`}>
       {/* Terminal Header */}
       <div 
         className="flex items-center justify-between px-4 py-2 bg-[#0a0a0a] border-b border-gray-800 cursor-pointer select-none"

@@ -40,7 +40,7 @@ export default function ProjectDetailPage({ params }: Props) {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-16 pointer-events-none">
+      <main className="min-h-screen pointer-events-none">
         <ProjectDetail project={project} />
       </main>
     </>

@@ -10,7 +10,7 @@ export default function ProjectsPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-16 pointer-events-none">
+      <main className="min-h-screen pointer-events-none">
         <ProjectsGrid />
       </main>
     </>

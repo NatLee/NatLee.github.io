@@ -1,9 +1,15 @@
+'use client'
+
+import { useState } from 'react'
 import Navigation from '@/components/Navigation'
 import TechHero from '@/components/TechHero'
 import FeaturedProjects from '@/components/FeaturedProjects'
-import QuickStats from '@/components/QuickStats'
+import TerminalCommand from '@/components/TerminalCommand'
 
 export default function Home() {
+  const [firstCommandComplete, setFirstCommandComplete] = useState(false)
+  const [secondCommandComplete, setSecondCommandComplete] = useState(false)
+
   return (
     <>
       <Navigation />
@@ -11,12 +17,11 @@ export default function Home() {
 
         {/* Global Background handled in layout */}
 
-        {/* Layer 1: Main Terminal Window */}
-        <div className="relative z-10 container mx-auto px-2 md:px-4 max-w-6xl">
+        <div className="relative z-10 container mx-auto px-2 md:px-4 max-w-6xl pointer-events-auto">
 
-          <div className="border border-gray-700 rounded-lg overflow-hidden shadow-2xl bg-black/60 backdrop-blur-sm pointer-events-auto">
+          <div className="border border-gray-700 rounded-lg overflow-hidden shadow-2xl bg-black/60 backdrop-blur-sm">
             {/* Terminal Top Bar */}
-            <div className="w-full bg-[#1a1a1a] p-3 flex items-center gap-2 sticky top-0 z-20 border-b border-gray-800 pointer-events-auto">
+            <div className="w-full bg-[#1a1a1a] p-3 flex items-center gap-2 sticky top-0 z-20 border-b border-gray-800">
               <div className="flex gap-2 mr-4">
                 <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400"></div>
@@ -27,25 +32,44 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Terminal Content Area */}
-            <div className="min-h-[80vh] p-2 md:p-8 text-gray-300 pointer-events-auto">
+            {/* Terminal Content Area - continuous session */}
+            <div className="min-h-[80vh] p-4 md:p-8 text-gray-300">
 
-              {/* 1. Intro Section */}
-              <div className="mb-6">
-                <div className="text-secondary mb-2">natlee@mainframe:~$ ./intro.sh</div>
+              {/* Command 1: Intro */}
+              <TerminalCommand
+                command="./intro.sh"
+                startDelay={300}
+                typingSpeed={40}
+                onComplete={() => setFirstCommandComplete(true)}
+              >
                 <TechHero />
-              </div>
+              </TerminalCommand>
 
-              {/* 3. Projects Section */}
-              <div className="mb-6">
-                <div className="text-secondary mb-2">natlee@mainframe:~$ ls -l ./projects/ --ranger-mode</div>
-                <FeaturedProjects />
-              </div>
+              {/* Command 2: Projects - appears after first completes */}
+              {firstCommandComplete && (
+                <div className="mt-8 animate-content-reveal">
+                  <TerminalCommand
+                    path="~/projects"
+                    command="ls -l --ranger-mode"
+                    startDelay={200}
+                    typingSpeed={30}
+                    onComplete={() => setSecondCommandComplete(true)}
+                  >
+                    <FeaturedProjects />
+                  </TerminalCommand>
+                </div>
+              )}
 
-              {/* 4. Active Cursor */}
-              <div className="mt-4">
-                <span className="text-secondary">natlee@mainframe:~$</span> <span className="animate-pulse bg-secondary text-black px-1">_</span>
-              </div>
+              {/* Final active cursor */}
+              {secondCommandComplete && (
+                <div className="mt-8 animate-content-reveal">
+                  <span className="text-secondary font-bold">natlee@mainframe</span>
+                  <span className="text-white">:</span>
+                  <span className="text-blue-500">~</span>
+                  <span className="text-white">$ </span>
+                  <span className="animate-pulse bg-secondary text-black px-1">_</span>
+                </div>
+              )}
 
             </div>
           </div>
