@@ -13,20 +13,25 @@ export default function TechHero() {
 
   useEffect(() => {
     let index = 0
+    let isMounted = true
+    
     const timer = setInterval(() => {
+      if (!isMounted) return
       if (index < fullText.length) {
-        setText(prev => prev + fullText.charAt(index))
         index++
+        setText(fullText.slice(0, index))
       } else {
         clearInterval(timer)
       }
     }, 30)
 
     const cursorTimer = setInterval(() => {
+      if (!isMounted) return
       setShowCursor(prev => !prev)
     }, 530)
 
     return () => {
+      isMounted = false
       clearInterval(timer)
       clearInterval(cursorTimer)
     }
