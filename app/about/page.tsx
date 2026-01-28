@@ -10,7 +10,7 @@ export default function AboutPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-16">
+      <main className="min-h-screen pt-16 pointer-events-none">
         <About />
       </main>
     </>

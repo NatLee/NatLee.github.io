@@ -1,513 +1,209 @@
 'use client'
 
+import React, { useState } from 'react'
 import { experienceData } from '@/data/experience'
+import { educationData } from '@/data/education'
 import Icon from './Icon'
 
-// Utility function: Parse time string to a comparable format
-function parseTimeString(timeStr: string): Date | null {
-  if (timeStr === 'Present') return new Date() // 當前時間
-  
-  // Process "MMM YYYY" format
-  const months: { [key: string]: number } = {
-    'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
-    'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
-  }
-  
-  const parts = timeStr.split(' ')
-  if (parts.length === 2) {
-    const month = months[parts[0]]
-    const year = parseInt(parts[1])
-    if (month !== undefined && !isNaN(year)) {
-      return new Date(year, month, 1)
+// Group experiences by company
+const getGroupedExperience = () => {
+  const grouped: { company: string; items: typeof experienceData }[] = []
+
+  experienceData.forEach(exp => {
+    const existingGroup = grouped.find(g => g.company === exp.company)
+    if (existingGroup) {
+      existingGroup.items.push(exp)
+    } else {
+      grouped.push({ company: exp.company, items: [exp] })
     }
-  }
-  
-  return null
-}
+  })
 
-// Utility function: Format time range
-function formatDuration(start: string, end: string): string {
-  return `${start} - ${end}`
-}
-
-// Utility function: Calculate grouped experience time range
-function calculateGroupedDuration(experiences: any[]): string {
-  if (experiences.length === 0) return ''
-  
-  // Parse all times
-  const startTimes = experiences.map(exp => parseTimeString(exp.start)).filter(Boolean)
-  const endTimes = experiences.map(exp => parseTimeString(exp.end)).filter(Boolean)
-  
-  if (startTimes.length === 0 || endTimes.length === 0) return ''
-  
-  // Find earliest start time and latest end time
-  const earliestStart = new Date(Math.min(...startTimes.map(d => d!.getTime())))
-  const latestEnd = new Date(Math.max(...endTimes.map(d => d!.getTime())))
-  
-  // Format time
-  const formatDate = (date: Date): string => {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    return `${months[date.getMonth()]} ${date.getFullYear()}`
-  }
-  
-  const startStr = formatDate(earliestStart)
-  const endStr = latestEnd.getTime() === new Date().getTime() ? 'Present' : formatDate(latestEnd)
-  
-  return formatDuration(startStr, endStr)
+  return grouped
 }
 
 export default function Experience() {
+  const groupedData = getGroupedExperience()
+  // By default expand the most recent job
+  const [expandedGroups, setExpandedGroups] = useState<string[]>([groupedData[0]?.company])
+
+  const toggleGroup = (company: string) => {
+    setExpandedGroups(prev =>
+      prev.includes(company)
+        ? prev.filter(c => c !== company)
+        : [...prev, company]
+    )
+  }
+
   return (
-    <section id="experience" className="py-20 bg-dark-800 min-h-screen relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-10"></div>
-      <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-secondary/5"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-accent via-secondary to-neon-red bg-clip-text text-transparent">
-                Experience
-              </span>
-            </h1>
-            <div className="w-32 h-1 bg-gradient-to-r from-accent to-secondary mx-auto mb-8 rounded-full"></div>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              My professional journey spanning 6+ years across innovative companies, 
-              building AI systems, backend architectures, and scalable solutions.
-            </p>
-          </div>
+    <div className="font-mono text-sm md:text-base text-gray-300 w-full max-w-[90rem] mx-auto">
 
-          {/* Timeline */}
-          <div className="relative">
-            {/* Main Timeline Line - Hidden on mobile */}
-            <div className="hidden md:block absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-secondary/60 via-accent/40 to-secondary/20"></div>
-            
-            {/* Timeline decorative elements - Hidden on mobile */}
-            <div className="hidden md:block absolute left-7 top-0 bottom-0 w-3 bg-gradient-to-b from-secondary/5 via-accent/3 to-transparent blur-sm"></div>
-            
-            {/* Time markers - Hidden on mobile */}
-            <div className="hidden md:block absolute left-6 top-20 w-5 h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent"></div>
-            <div className="hidden md:block absolute left-6 top-40 w-5 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
-            <div className="hidden md:block absolute left-6 top-60 w-5 h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent"></div>
-            
-            <div className="space-y-8 md:space-y-12">
-              {(() => {
-                // Group experiences by companyId
-                const groupedExperiences = []
-                let i = 0
-                
-                while (i < experienceData.length) {
-                  const currentExp = experienceData[i]
-                  
-                  // Check if this company has multiple experiences
-                  const sameCompanyExps = experienceData.filter(exp => exp.companyId === currentExp.companyId)
-                  
-                  if (sameCompanyExps.length > 1) {
-                    // Group all experiences from the same company
-                    groupedExperiences.push({
-                      type: 'grouped',
-                      company: currentExp.company,
-                      companyId: currentExp.companyId,
-                      companyLogo: currentExp.companyLogo,
-                      experiences: sameCompanyExps
-                    })
-                    i += sameCompanyExps.length // Skip all grouped experiences
-                  } else {
-                    // Single experience
-                    groupedExperiences.push({
-                      type: 'single',
-                      experience: currentExp
-                    })
-                    i++
-                  }
-                }
-                
-                return groupedExperiences.map((item, index) => {
-                  if (item.type === 'grouped' && item.experiences) {
-                    // Render grouped HD Renewables experience
-                    return (
-                      <div key={`${item.company}-grouped`} className="relative flex flex-col md:flex-row items-start gap-4 md:gap-8">
-                        {/* Timeline Dot for grouped experience - Centered on mobile */}
-                        <div className="relative z-10 mx-auto md:mx-0">
-                          <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-orange-400 to-red-500 ring-4 ring-orange-400/30 rounded-full flex items-center justify-center shadow-lg">
-                            <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center">
-                              <div className="w-3 h-3 md:w-4 md:h-4 bg-orange-500 rounded-full"></div>
-                            </div>
-                          </div>
+      {/* Header Log */}
+      <div className="mb-8 p-4 bg-gray-900/50 border-l-4 border-secondary text-gray-400 text-xs md:text-sm">
+        <span className="text-secondary font-bold">natlee@mainframe</span>: <span className="text-blue-400">~/var/log/career.log</span>
+        <br />
+        <span>Total process groups: {groupedData.length}</span>
+        <span className="animate-pulse">_</span>
+      </div>
+
+      <div className="space-y-6">
+        {groupedData.map((group) => {
+          const isExpanded = expandedGroups.includes(group.company)
+
+          return (
+            <div key={group.company} className="border border-gray-800 bg-[#0a0a0a] rounded overflow-hidden">
+
+              {/* Group Header (Clickable) */}
+              <div
+                onClick={() => toggleGroup(group.company)}
+                className={`
+                                cursor-pointer p-4 flex items-center justify-between transition-colors
+                                ${isExpanded ? 'bg-gray-900 border-b border-gray-800' : 'hover:bg-gray-900'}
+                            `}
+              >
+                <div className="flex items-center gap-4 text-sm md:text-base">
+                  <span className={`text-xl transition-transform ${isExpanded ? 'rotate-90' : ''}`}>▶</span>
+                  <span className={`font-bold ${isExpanded ? 'text-secondary' : 'text-gray-400'}`}>
+                    {group.company}
+                  </span>
+                  <span className="text-gray-600 text-xs ml-2 border border-gray-800 px-2 py-0.5 rounded">
+                    {group.items.length} role{group.items.length > 1 ? 's' : ''}
+                  </span>
+                </div>
+                <div className="hidden md:block text-xs text-gray-500">
+                  Latest update: {group.items[0].end}
+                </div>
+              </div>
+
+              {/* Expandable Content */}
+              {isExpanded && (
+                <div className="p-0">
+                  {group.items.map((exp, index) => (
+                    <div key={exp.id} className="relative pl-8 md:pl-12 py-8 pr-4 group transition-colors hover:bg-white/5">
+
+                      {/* Thread Line - Connects multiple roles if exists */}
+                      {group.items.length > 1 && (
+                        <div className="absolute left-4 md:left-6 top-0 bottom-0 w-px bg-gray-800"></div>
+                      )}
+                      {/* Dot Indicator */}
+                      <div className={`
+                                            absolute left-[13px] md:left-[21px] top-10 w-2 h-2 rounded-full z-10
+                                            ${index === 0 ? 'bg-green-500 ring-4 ring-green-900/30' : 'bg-gray-600'}
+                                        `}></div>
+
+                      <div className="flex flex-col md:flex-row md:items-start gap-4 mb-4">
+                        {/* Time Column */}
+                        <div className="w-48 flex-shrink-0 text-xs text-gray-500 font-mono pt-1">
+                          [{exp.start} -- {exp.end}]
                         </div>
 
-                        {/* Grouped Experience Card */}
-                        <div className="flex-1 bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:transform hover:-translate-y-2 overflow-hidden">
-                          {/* Company Header */}
-                          <div className="bg-gradient-to-r from-orange-500/20 to-red-500/20 border-b border-orange-400/30 p-4 md:p-6">
-                            <div className="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4">
-                              <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-orange-400/30 to-red-500/30 rounded-lg border-2 border-orange-400/50 flex items-center justify-center overflow-hidden">
-                                <img 
-                                  src={item.companyLogo} 
-                                  alt={item.company} 
-                                  className="w-6 h-6 md:w-8 md:h-8 object-cover rounded"
-                                  onError={(e) => {
-                                    const target = e.target as HTMLImageElement
-                                    const companyName = item.company
-                                    const firstLetter = companyName.charAt(0).toUpperCase()
-                                    target.style.display = 'none'
-                                    target.parentElement!.innerHTML = `
-                                      <div class="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded flex items-center justify-center text-white font-bold text-sm">
-                                        ${firstLetter}
-                                      </div>
-                                    `
-                                  }}
-                                />
-                              </div>
-                              <div className="text-center md:text-left">
-                                <h3 className="text-xl md:text-2xl font-bold text-white">{item.company}</h3>
-                                <p className="text-orange-300 font-medium text-sm md:text-base">{calculateGroupedDuration(item.experiences)} • Internal Department Transfer</p>
-                              </div>
-                            </div>
+                        {/* Main Content */}
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-white mb-1 flex items-center gap-2">
+                            {exp.title}
+                          </h3>
+                          <div className="text-orange-300 text-sm mb-4 flex items-center gap-2">
+                            <span>@ {exp.location}</span>
                           </div>
 
-                          {/* Stages */}
-                          <div className="p-4 md:p-6 space-y-6 md:space-y-8">
-                            {item.experiences.map((exp, expIndex) => (
-                              <div key={exp.id} className="relative">
-                                {/* Stage indicator */}
-                                <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
-                                  <div className="flex flex-col items-center relative">
-                                    {/* Stage timeline */}
-                                    <div className="relative flex flex-col items-center">
-                                      {/* Stage number circle */}
-                                      <div className={`w-12 h-12 md:w-14 md:h-14 ${expIndex === 0 ? 'bg-gradient-to-br from-orange-400/15 to-red-400/15 border-2 border-orange-400/40' : 'bg-gradient-to-br from-secondary/15 to-accent/15 border-2 border-secondary/40'} rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg`}>
-                                        <div className={`w-6 h-6 md:w-8 md:h-8 ${expIndex === 0 ? 'bg-gradient-to-br from-orange-400 to-red-400' : 'bg-gradient-to-br from-secondary to-accent'} rounded-full flex items-center justify-center text-white font-bold text-xs md:text-sm shadow-md`}>
-                                          {expIndex === 0 ? '2' : '1'}
-                                        </div>
-                                      </div>
-                                      
-                                      {/* Stage status indicator */}
-                                      <div className="mt-2 flex flex-col items-center">
-                                        <div className={`w-2 h-2 ${expIndex === 0 ? 'bg-orange-400' : 'bg-secondary'} rounded-full mb-1 animate-pulse`}></div>
-                                        <span className={`text-xs font-medium ${expIndex === 0 ? 'text-orange-300' : 'text-secondary'} tracking-wide`}>
-                                          {expIndex === 0 ? 'CURRENT' : 'PREVIOUS'}
-                                        </span>
-                                      </div>
-                                    </div>
-                                    
-                                    {/* Connecting line - only show for the second (previous) stage */}
-                                    {expIndex === 1 && (
-                                      <div className="hidden md:block absolute top-16 w-px h-8 bg-gradient-to-b from-secondary/40 to-transparent"></div>
-                                    )}
-                                  </div>
-                                  
-                                  <div className="flex-1">
-                                    {/* Stage header */}
-                                    <div className="mb-4 md:mb-6">
-                                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
-                                        <h4 className="text-lg md:text-xl font-bold text-white text-center md:text-left">{exp.title}</h4>
-                                        <div className="flex flex-col items-center md:items-end gap-2">
-                                          <div className="flex items-center gap-2">
-                                            <div className={`w-2 h-2 ${expIndex === 0 ? 'bg-orange-400' : 'bg-secondary'} rounded-full animate-pulse`}></div>
-                                            <span className={`text-xs md:text-sm font-mono ${expIndex === 0 ? 'text-orange-300' : 'text-secondary'} bg-dark-700/80 px-2 md:px-3 py-1 rounded-full border ${expIndex === 0 ? 'border-orange-400/20' : 'border-secondary/20'}`}>
-                                              {formatDuration(exp.start, exp.end)}
-                                            </span>
-                                          </div>
-                                          <div className="flex items-center gap-2 text-xs md:text-sm text-gray-400">
-                                            <Icon name="location" className="w-3 h-3 md:w-4 md:h-4" />
-                                            <span>{exp.location}</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      
-                                      <div className="flex justify-center md:justify-start gap-3 mb-3">
-                                        <span className={`inline-block ${expIndex === 0 ? 'bg-gradient-to-r from-orange-400/15 to-red-400/15 border border-orange-400/30 text-orange-300' : 'bg-gradient-to-r from-secondary/15 to-accent/15 border border-secondary/30 text-secondary'} rounded-lg px-3 py-1.5 text-xs md:text-sm font-medium`}>
-                                          {exp.department}
-                                        </span>
-                                      </div>
-                                      
-                                      {/* Stage description with better styling */}
-                                      <div className={`p-3 md:p-4 rounded-lg ${expIndex === 0 ? 'bg-orange-500/5 border-l-4 border-orange-400/50' : 'bg-secondary/5 border-l-4 border-secondary/50'}`}>
-                                        <p className="text-gray-300 leading-relaxed text-xs md:text-sm">{exp.summary}</p>
-                                      </div>
-                                    </div>
-
-                                    {/* Stage content */}
-                                    <div className="grid grid-cols-1 gap-3 md:gap-4">
-                                      
-                                      {/* Key Responsibilities */}
-                                      <div className="bg-dark-700/50 rounded-lg p-3 md:p-4 border border-gray-700/50">
-                                        <h5 className={`font-semibold mb-2 md:mb-3 flex items-center gap-2 text-sm md:text-base ${expIndex === 0 ? 'text-orange-300' : 'text-secondary'}`}>
-                                          <Icon name="check" className="w-3 h-3 md:w-4 md:h-4" />
-                                          Key Responsibilities
-                                        </h5>
-                                        <ul className="space-y-1 md:space-y-2 text-gray-300 text-xs md:text-sm">
-                                          {exp.responsibilities.slice(0, 3).map((resp, respIndex) => (
-                                            <li key={respIndex} className="flex items-start gap-2 md:gap-3">
-                                              <span className={`${expIndex === 0 ? 'text-orange-400' : 'text-secondary'} mt-1 text-xs`}>▸</span>
-                                              <span className="leading-relaxed">{resp}</span>
-                                            </li>
-                                          ))}
-                                        </ul>
-                                      </div>
-
-                                      {/* Technologies */}
-                                      <div className="bg-dark-700/50 rounded-lg p-3 md:p-4 border border-gray-700/50">
-                                        <h5 className={`font-semibold mb-2 md:mb-3 flex items-center gap-2 text-sm md:text-base ${expIndex === 0 ? 'text-orange-300' : 'text-secondary'}`}>
-                                          <Icon name="code" className="w-3 h-3 md:w-4 md:h-4" />
-                                          Technologies
-                                        </h5>
-                                        <div className="flex flex-wrap gap-1 md:gap-2">
-                                          {exp.techStack.map((tech) => (
-                                            <span key={tech} className={`px-2 md:px-3 py-1 rounded-full text-xs font-medium border transition-colors ${expIndex === 0 ? 'bg-orange-400/10 text-orange-300 border-orange-400/30 hover:border-orange-400/50' : 'bg-secondary/10 text-secondary border-secondary/30 hover:border-secondary/50'}`}>
-                                              {tech}
-                                            </span>
-                                          ))}
-                                        </div>
-                                      </div>
-
-                                      {/* Achievements */}
-                                      {exp.achievements && exp.achievements.length > 0 && (
-                                        <div className="bg-dark-700/50 rounded-lg p-3 md:p-4 border border-gray-700/50">
-                                          <h5 className={`font-semibold mb-2 md:mb-3 flex items-center gap-2 text-sm md:text-base ${expIndex === 0 ? 'text-orange-300' : 'text-secondary'}`}>
-                                            <Icon name="star" className="w-3 h-3 md:w-4 md:h-4" />
-                                            Key Achievements
-                                          </h5>
-                                          <ul className="space-y-1 md:space-y-2 text-gray-300 text-xs md:text-sm">
-                                            {exp.achievements.map((achievement, achIndex) => (
-                                              <li key={achIndex} className="flex items-start gap-2 md:gap-3">
-                                                <span className={`${expIndex === 0 ? 'text-orange-400' : 'text-accent'} mt-1 text-xs`}>★</span>
-                                                <span className="leading-relaxed">{achievement}</span>
-                                              </li>
-                                            ))}
-                                          </ul>
-                                        </div>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  } else if (item.experience) {
-                    // Render single experience
-                    const exp = item.experience
-                    
-                    // Define company color themes
-                    const getCompanyTheme = (companyName: string) => {
-                      switch (companyName) {
-                        case 'Big Data Co., Ltd.':
-                          return {
-                            circle: 'from-purple-400/15 to-indigo-400/15 border-purple-400/40',
-                            inner: 'from-purple-400 to-indigo-400',
-                            dot: 'bg-purple-400',
-                            text: 'text-purple-300',
-                            header: 'from-purple-500/20 to-indigo-500/20 border-purple-400/30',
-                            icon: 'from-purple-400/30 to-indigo-400/30 border-purple-400/50 text-purple-400'
-                          }
-                        case 'TAIWAN-CA, Inc.':
-                          return {
-                            circle: 'from-green-400/15 to-emerald-400/15 border-green-400/40',
-                            inner: 'from-green-400 to-emerald-400',
-                            dot: 'bg-green-400',
-                            text: 'text-green-300',
-                            header: 'from-green-500/20 to-emerald-500/20 border-green-400/30',
-                            icon: 'from-green-400/30 to-emerald-400/30 border-green-400/50 text-green-400'
-                          }
-                        case 'Infortrend Technology, Inc.':
-                          return {
-                            circle: 'from-blue-400/15 to-cyan-400/15 border-blue-400/40',
-                            inner: 'from-blue-400 to-cyan-400',
-                            dot: 'bg-blue-400',
-                            text: 'text-blue-300',
-                            header: 'from-blue-500/20 to-cyan-500/20 border-blue-400/30',
-                            icon: 'from-blue-400/30 to-cyan-400/30 border-blue-400/50 text-blue-400'
-                          }
-                        case 'Leopard Mobile, Ltd.':
-                          return {
-                            circle: 'from-yellow-400/15 to-amber-400/15 border-yellow-400/40',
-                            inner: 'from-yellow-400 to-amber-400',
-                            dot: 'bg-yellow-400',
-                            text: 'text-yellow-300',
-                            header: 'from-yellow-500/20 to-amber-500/20 border-yellow-400/30',
-                            icon: 'from-yellow-400/30 to-amber-400/30 border-yellow-400/50 text-yellow-400'
-                          }
-                        default:
-                          return {
-                            circle: 'from-secondary/15 to-accent/15 border-secondary/40',
-                            inner: 'from-secondary to-accent',
-                            dot: 'bg-secondary',
-                            text: 'text-secondary',
-                            header: 'from-orange-500/20 to-red-500/20 border-orange-400/30',
-                            icon: 'from-secondary/30 to-accent/30 border-secondary/50 text-secondary'
-                          }
-                      }
-                    }
-                    
-                    const theme = getCompanyTheme(exp.company)
-                    
-                    return (
-                      <div key={exp.id} className="relative flex flex-col md:flex-row items-start gap-4 md:gap-8">
-                        {/* Timeline Dot - Centered on mobile */}
-                        <div className="relative z-10 mx-auto md:mx-0">
-                          <div className="relative">
-                            {/* Main timeline circle */}
-                            <div className={`w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br ${theme.circle} rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm border-2 border-gray-600/20`}>
-                              <div className={`w-6 h-6 md:w-10 md:h-10 bg-gradient-to-br ${theme.inner} rounded-full flex items-center justify-center shadow-md`}>
-                                <svg className="w-3 h-3 md:w-5 md:h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm2 6a2 2 0 114 0 2 2 0 01-4 0zm6 0a2 2 0 104 0 2 2 0 00-4 0z" clipRule="evenodd" />
-                                </svg>
-                              </div>
+                          <div className="border-l-2 border-gray-800 pl-4 space-y-4">
+                            <div>
+                              <span className="text-gray-500 text-xs block mb-1">LOG_SUMMARY</span>
+                              <p className="text-gray-300 leading-relaxed max-w-3xl">
+                                {exp.summary}
+                              </p>
                             </div>
-                            
-                            {/* Timeline connecting rings - for visual depth */}
-                            <div className="absolute -inset-2 rounded-full border border-gray-600/10"></div>
-                            <div className="absolute -inset-4 rounded-full border border-gray-600/5"></div>
-                          </div>
-                        </div>
 
-                        {/* Experience Card */}
-                        <div className="flex-1 bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:transform hover:-translate-y-2 overflow-hidden">
-                          {/* Company Header */}
-                          <div className={`bg-gradient-to-r ${theme.header} p-4 md:p-6`}>
-                            <div className="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4">
-                              <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${theme.icon} rounded-lg border-2 flex items-center justify-center overflow-hidden`}>
-                                <img 
-                                  src={exp.companyLogo} 
-                                  alt={exp.company} 
-                                  className="w-6 h-6 md:w-8 md:h-8 object-cover rounded"
-                                  onError={(e) => {
-                                    const target = e.target as HTMLImageElement
-                                    const companyName = exp.company
-                                    const firstLetter = companyName.charAt(0).toUpperCase()
-                                    target.style.display = 'none'
-                                    target.parentElement!.innerHTML = `
-                                      <div class="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br ${theme.inner} rounded flex items-center justify-center text-white font-bold text-sm">
-                                        ${firstLetter}
-                                      </div>
-                                    `
-                                  }}
-                                />
-                              </div>
-                              <div className="text-center md:text-left">
-                                <h3 className="text-xl md:text-2xl font-bold text-white">{exp.title}</h3>
-                                <p className={`font-semibold text-sm md:text-base ${theme.text}`}>{exp.company}</p>
-                                {exp.department && (
-                                  <div className="mt-1">
-                                    <span className={`inline-block bg-gradient-to-r ${theme.header} border rounded-full px-2 md:px-3 py-1 text-xs font-medium ${theme.text}`}>
-                                      {exp.department}
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
+                            <div>
+                              <span className="text-gray-500 text-xs block mb-1">PROCESS_OUTPUT (Responsibilities)</span>
+                              <ul className="space-y-1">
+                                {exp.responsibilities.map((resp, i) => (
+                                  <li key={i} className="flex gap-2 items-start text-sm text-gray-400">
+                                    <span className="text-secondary mt-1">➜</span>
+                                    <span>{resp}</span>
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
-                            
-                            <div className="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-6 mt-4 text-xs md:text-sm text-gray-300">
-                              <div className="flex items-center gap-2">
-                                <Icon name="location" className="w-3 h-3 md:w-4 md:h-4" />
-                                <span>{exp.location}</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <div className={`w-2 h-2 md:w-3 md:h-3 ${theme.dot} rounded-full animate-pulse`}></div>
-                                <span className="font-mono">{formatDuration(exp.start, exp.end)}</span>
-                              </div>
-                            </div>
-                          </div>
 
-                          {/* Experience Content */}
-                          <div className="p-4 md:p-6">
-                            <p className="text-gray-300 mb-4 md:mb-6 leading-relaxed text-sm md:text-base">
-                              {exp.summary}
-                            </p>
-
-                            <div className="grid grid-cols-1 gap-4 md:gap-6">
-                              {/* Responsibilities */}
-                              <div className="bg-dark-700/50 rounded-lg p-3 md:p-4 border border-gray-700/50">
-                                <h4 className={`font-semibold mb-2 md:mb-3 flex items-center gap-2 text-sm md:text-base ${theme.text}`}>
-                                  <Icon name="check" className="w-3 h-3 md:w-4 md:h-4" />
-                                  Key Responsibilities
-                                </h4>
-                                <ul className="space-y-1 md:space-y-2">
-                                  {exp.responsibilities.slice(0, 3).map((resp, idx) => (
-                                    <li key={idx} className="flex items-start gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
-                                      <span className={`${theme.text} mt-1 text-xs`}>▸</span>
-                                      <span className="leading-relaxed">{resp}</span>
+                            {exp.achievements && exp.achievements.length > 0 && (
+                              <div>
+                                <span className="text-gray-500 text-xs block mb-1">CRITICAL_EVENTS (Achievements)</span>
+                                <ul className="space-y-1">
+                                  {exp.achievements.map((ach, i) => (
+                                    <li key={i} className="flex gap-2 items-start text-sm text-green-400/90">
+                                      <span className="text-green-500 font-bold mt-1">+</span>
+                                      <span>{ach}</span>
                                     </li>
                                   ))}
                                 </ul>
                               </div>
+                            )}
 
-                              {/* Achievements */}
-                              {exp.achievements && exp.achievements.length > 0 && (
-                                <div className="bg-dark-700/50 rounded-lg p-3 md:p-4 border border-gray-700/50">
-                                  <h4 className={`font-semibold mb-2 md:mb-3 flex items-center gap-2 text-sm md:text-base ${theme.text}`}>
-                                    <Icon name="star" className="w-3 h-3 md:w-4 md:h-4" />
-                                    Key Achievements
-                                  </h4>
-                                  <div className="space-y-1 md:space-y-2">
-                                    {exp.achievements.slice(0, 2).map((achievement, idx) => (
-                                      <div key={idx} className="flex items-start gap-2 md:gap-3 text-gray-300 text-xs md:text-sm">
-                                        <span className={`${theme.text} mt-1 text-xs`}>★</span>
-                                        <span className="leading-relaxed">{achievement}</span>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-                              )}
-
-                              {/* Technologies */}
-                              <div className="bg-dark-700/50 rounded-lg p-3 md:p-4 border border-gray-700/50">
-                                <h4 className={`font-semibold mb-2 md:mb-3 flex items-center gap-2 text-sm md:text-base ${theme.text}`}>
-                                  <Icon name="code" className="w-3 h-3 md:w-4 md:h-4" />
-                                  Technologies Used
-                                </h4>
-                                <div className="flex flex-wrap gap-1 md:gap-2">
-                                  {exp.techStack.map((tech) => (
-                                    <span
-                                      key={tech}
-                                      className={`px-2 md:px-3 py-1 rounded-full text-xs font-medium border transition-colors bg-gradient-to-r ${theme.circle} ${theme.text} border-opacity-30 hover:border-opacity-50`}
-                                    >
-                                      {tech}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
+                            <div className="pt-2 flex flex-wrap gap-2">
+                              {exp.techStack.map(tech => (
+                                <span key={tech} className="bg-gray-900 border border-gray-700 text-gray-400 text-xs px-2 py-1 rounded hover:border-secondary hover:text-secondary transition-colors">
+                                  #{tech}
+                                </span>
+                              ))}
                             </div>
                           </div>
+
                         </div>
                       </div>
-                    )
-                  } else {
-                    return null
-                  }
-                })
-              })()}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
+          )
+        })}
+      </div>
 
-          {/* Summary Stats */}
-          <div className="mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            <div className="bg-gray-800 rounded-lg p-4 md:p-6 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-secondary mb-1 md:mb-2">6+</div>
-              <div className="text-gray-400 text-sm md:text-base">Years Experience</div>
+      {/* Education Section Merged */}
+      <div className="mt-20">
+        <div className="mb-8 p-4 bg-gray-900/50 border-l-4 border-blue-500 text-gray-400 text-xs md:text-sm">
+          <span className="text-blue-500 font-bold">natlee@mainframe</span>: <span className="text-green-400">~/var/lib/education</span>
+          <br />
+          <span>Loaded modules: {educationData.length}</span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {educationData.map((edu, index) => (
+            <div key={edu.id} className="border border-gray-800 bg-[#0a0a0a] p-6 rounded relative overflow-hidden group hover:border-blue-500/50 transition-colors">
+              {/* Year Label */}
+              <div className="absolute top-0 right-0 bg-gray-900 border-b border-l border-gray-800 px-3 py-1 text-xs text-blue-400 font-bold">
+                {edu.startYear} - {edu.endYear}
+              </div>
+
+              <div className="mb-4">
+                <div className="text-xs text-gray-500 uppercase tracking-widest mb-1">Module</div>
+                <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">{edu.schoolEn}</h3>
+                <div className="text-sm text-gray-400 mt-1">{edu.degree} in {edu.major}</div>
+                {edu.minor && <div className="text-xs text-gray-500 mt-1">Minor: {edu.minor}</div>}
+              </div>
+
+              <div className="border-t border-gray-800 pt-4 mt-4">
+                <div className="text-xs text-gray-500 uppercase tracking-widest mb-2">Dependencies</div>
+                <div className="flex flex-wrap gap-2">
+                  {(edu.degree.includes('Master')
+                    ? ['Computer Vision', 'Deep Learning', 'Cloud Computing']
+                    : ['Algorithms', 'Data Structures', 'OS', 'Networks']
+                  ).map(course => (
+                    <span key={course} className="text-xs bg-gray-900 px-2 py-1 rounded text-gray-400 border border-gray-800">
+                      {course}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="bg-gray-800 rounded-lg p-4 md:p-6 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-secondary mb-1 md:mb-2">5</div>
-              <div className="text-gray-400 text-sm md:text-base">Companies</div>
-            </div>
-            <div className="bg-gray-800 rounded-lg p-4 md:p-6 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-secondary mb-1 md:mb-2">15+</div>
-              <div className="text-gray-400 text-sm md:text-base">Major Projects</div>
-            </div>
-            <div className="bg-gray-800 rounded-lg p-4 md:p-6 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-secondary mb-1 md:mb-2">10+</div>
-              <div className="text-gray-400 text-sm md:text-base">Technologies</div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-    </section>
+
+      <div className="text-gray-600 text-center text-xs mt-12 mb-8">
+        -- End of Log Stream --
+      </div>
+
+    </div>
   )
 }

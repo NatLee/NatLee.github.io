@@ -1,237 +1,143 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
-import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { personalInfo } from '@/data/personal'
 import Icon from './Icon'
-import ScrollingTechStack from './ScrollingTechStack'
-
 
 export default function TechHero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [text, setText] = useState('')
+  const fullText = `> Initializing system...\n> Loading user profile: ${personalInfo.name}\n> Role: ${personalInfo.title}\n> Status: Online`
+  const [showCursor, setShowCursor] = useState(true)
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    let index = 0
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        setText(prev => prev + fullText.charAt(index))
+        index++
+      } else {
+        clearInterval(timer)
+      }
+    }, 30)
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
-
-    // Particle system for tech background
-    const particles: Array<{
-      x: number
-      y: number
-      vx: number
-      vy: number
-      size: number
-      opacity: number
-    }> = []
-
-    for (let i = 0; i < 50; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.2,
-      })
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      // Update and draw particles
-      particles.forEach((particle, index) => {
-        particle.x += particle.vx
-        particle.y += particle.vy
-
-        // Wrap around edges
-        if (particle.x < 0) particle.x = canvas.width
-        if (particle.x > canvas.width) particle.x = 0
-        if (particle.y < 0) particle.y = canvas.height
-        if (particle.y > canvas.height) particle.y = 0
-
-        // Draw particle
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(212, 116, 30, ${particle.opacity})`
-        ctx.fill()
-
-        // Draw connections
-        particles.forEach((otherParticle, otherIndex) => {
-          if (index !== otherIndex) {
-            const dx = particle.x - otherParticle.x
-            const dy = particle.y - otherParticle.y
-            const distance = Math.sqrt(dx * dx + dy * dy)
-
-            if (distance < 100) {
-              ctx.beginPath()
-              ctx.moveTo(particle.x, particle.y)
-              ctx.lineTo(otherParticle.x, otherParticle.y)
-              ctx.strokeStyle = `rgba(212, 116, 30, ${0.1 * (1 - distance / 100)})`
-              ctx.stroke()
-            }
-          }
-        })
-      })
-
-      requestAnimationFrame(animate)
-    }
-
-    animate()
+    const cursorTimer = setInterval(() => {
+      setShowCursor(prev => !prev)
+    }, 530)
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas)
+      clearInterval(timer)
+      clearInterval(cursorTimer)
     }
-  }, [])
+  }, [fullText])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-dark-900 overflow-x-hidden">
-      {/* Animated Background Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 opacity-30"
-        style={{ pointerEvents: 'none' }}
-      />
+    <section className="relative overflow-hidden font-mono text-secondary py-12 md:py-20">
 
-      {/* Artistic Background Elements */}
-      <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20"></div>
-      
-      {/* Floating Geometric Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-20 h-20 border-2 border-secondary/20 rotate-45 animate-float"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-accent/10 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-40 left-20 w-12 h-12 border border-accent/30 rotate-12 animate-float" style={{ animationDelay: '4s' }}></div>
-        <div className="absolute top-60 right-40 w-8 h-8 bg-secondary/20 rotate-45 animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-60 right-10 w-14 h-14 border-2 border-accent/15 rounded-full animate-float" style={{ animationDelay: '3s' }}></div>
-      </div>
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
 
-      {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-dark-900/80 via-transparent to-dark-900/80"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-900/50 to-dark-900"></div>
+        <div className="grid md:grid-cols-3 gap-12 items-center">
 
-      {/* Content */}
-      <div className="relative z-10 text-center w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-20 pb-8">
-        {/* Avatar with Tech Effects */}
-        <div className="mb-12 relative inline-block mt-8">
-          <div className="relative">
-            {/* Glowing rings */}
-            <div className="absolute inset-0 rounded-full border-2 border-secondary animate-spin" style={{ animationDuration: '20s' }}></div>
-            <div className="absolute inset-2 rounded-full border border-accent animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}></div>
-            
-            {/* Avatar */}
-            <div className="relative w-48 h-48 mx-auto">
-              <Image
-                src={personalInfo.avatar}
-                alt={personalInfo.nameEn}
-                width={192}
-                height={192}
-                className="rounded-full border-4 border-secondary/50 shadow-2xl shadow-secondary/20 hover:shadow-secondary/40 transition-all duration-500"
-              />
-              
-              {/* Status indicator */}
-              <div className="absolute -bottom-2 -right-2 bg-accent w-12 h-12 rounded-full border-4 border-dark-900 flex items-center justify-center">
-                <div className="w-6 h-6 bg-white rounded-full animate-pulse"></div>
+          {/* Left Col: Text */}
+          <div className="md:col-span-2 order-2 md:order-1">
+            <div className="whitespace-pre-wrap text-lg md:text-xl lg:text-2xl leading-relaxed mb-6 min-h-[160px] text-green-400 drop-shadow-[0_0_5px_rgba(74,222,128,0.5)]">
+              {text}
+              <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} inline-block w-3 h-6 bg-green-400 align-middle ml-1 shadow-[0_0_10px_#4ade80]`}></span>
+            </div>
+
+            <div className="animate-fade-in space-y-6" style={{ animationDelay: '1.5s' }}>
+              <div className="space-y-4">
+                <p className="text-base md:text-lg border-l-2 border-secondary/50 pl-4 py-1 text-gray-300 leading-relaxed max-w-2xl">
+                  {personalInfo.bio}
+                </p>
+
+                {/* Hashtag Social Links */}
+                <div className="flex flex-wrap gap-4 pl-4 pt-2">
+                  {personalInfo.socialLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-sm font-bold"
+                    >
+                      <span className="text-blue-600 group-hover:text-blue-400">#</span>
+                      <span className="underline decoration-blue-500/30 group-hover:decoration-blue-400">{link.name}</span>
+                    </a>
+                  ))}
+                  <a
+                    href={`mailto:${personalInfo.email}`}
+                    className="group flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-sm font-bold"
+                  >
+                    <span className="text-blue-600 group-hover:text-blue-400">#</span>
+                    <span className="underline decoration-blue-500/30 group-hover:decoration-blue-400">Email</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Link
+                  href="/projects"
+                  className="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden font-bold text-black transition-all duration-300 bg-secondary rounded hover:bg-orange-600 focus:outline-none ring-offset-2 focus:ring-2 ring-orange-400"
+                >
+                  <span className="mr-2 text-lg">&gt;</span>
+                  ./view_projects.sh
+                </Link>
+
+                <Link
+                  href="/about"
+                  className="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden font-bold text-secondary transition-all duration-300 bg-transparent border-2 border-secondary rounded hover:bg-secondary/10 focus:outline-none ring-offset-2 focus:ring-2 ring-orange-400"
+                >
+                  <span className="mr-2 text-lg">?</span>
+                  man about_me
+                </Link>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Main Title - Simplified */}
-        <div className="mb-8">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-slide-up">
-            <span className="bg-gradient-to-r from-white via-secondary to-accent bg-clip-text text-transparent">
-              {personalInfo.name}
-            </span>
-            <br />
-            <div className="flex items-center justify-center gap-4 mt-4">
-              <div className="w-16 h-0.5 bg-gradient-to-r from-transparent to-accent"></div>
-              <span className="text-2xl md:text-3xl bg-gradient-to-r from-accent via-neon-red to-secondary bg-clip-text text-transparent font-light">
-                {personalInfo.nameEn}
-              </span>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-accent to-transparent"></div>
+          {/* Right Col: Glitch Image */}
+          <div className="md:col-span-1 order-1 md:order-2 flex justify-center md:justify-end">
+            <div className="relative w-48 h-48 md:w-72 md:h-72 group cursor-crosshair">
+
+              {/* Spinning/Pulse Aura */}
+              <div className="absolute inset-0 bg-secondary/10 rounded-full blur-2xl animate-pulse"></div>
+
+              {/* Main Container */}
+              <div className="relative w-full h-full overflow-hidden rounded-full border-2 border-dashed border-secondary/30 shadow-[0_0_20px_rgba(255,165,0,0.2)]">
+
+                {/* TV Static Noise Overlay - Always On (Subtle) */}
+                <div className="absolute inset-0 z-10 opacity-20 pointer-events-none mix-blend-overlay animate-noise"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    filter: 'contrast(120%) brightness(120%)'
+                  }}
+                ></div>
+
+                {/* Profile Image */}
+                <Image
+                  src={personalInfo.avatar}
+                  alt="Nat Lee"
+                  fill
+                  className="object-cover relative z-0 transition-all duration-100 group-hover:scale-105 group-hover:grayscale group-hover:contrast-150"
+                  priority
+                />
+
+                {/* Glitch Layers (Active on Hover) */}
+                <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-75 mix-blend-hard-light pointer-events-none">
+                  <div className="absolute inset-0 bg-red-500/20 translate-x-1 animate-glitch-1"></div>
+                  <div className="absolute inset-0 bg-blue-500/20 -translate-x-1 animate-glitch-2"></div>
+                </div>
+
+                {/* Scanlines */}
+                <div className="absolute inset-0 z-30 pointer-events-none bg-[linear-gradient(rgba(18,18,18,0)_50%,rgba(0,0,0,0.4)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[size:100%_4px,6px_100%] opacity-50"></div>
+
+              </div>
+
             </div>
-          </h1>
-          
-          <div className="mb-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            <p className="text-2xl md:text-3xl text-secondary font-light mb-2">
-              {personalInfo.title.split(' & ')[0]}
-            </p>
-            <p className="text-xl md:text-2xl text-accent font-light">
-              {personalInfo.title.split(' & ')[1]}
-            </p>
           </div>
-          
-          {/* Artistic separator */}
-          <div className="flex justify-center mb-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <div className="w-32 h-1 bg-gradient-to-r from-secondary via-accent to-secondary rounded-full"></div>
-          </div>
+
         </div>
-
-        {/* Bio */}
-        <div className="w-full max-w-4xl mx-auto mb-8 sm:mb-10 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed break-words hyphens-auto">
-            {personalInfo.bio}
-          </p>
-        </div>
-
-        {/* Social Links */}
-        <div className="flex justify-center gap-6 mb-12 animate-fade-in" style={{ animationDelay: '1.2s' }}>
-          {personalInfo.socialLinks.slice(0, 4).map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group p-4 bg-dark-800 rounded-full border border-dark-600 hover:border-secondary/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-secondary/20"
-              title={link.description}
-            >
-              <Icon name={link.icon} className="w-6 h-6 text-gray-400 group-hover:text-secondary transition-colors" />
-            </a>
-          ))}
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6 mb-12 animate-slide-up" style={{ animationDelay: '0.6s' }}>
-          <Link
-            href="/projects"
-            className="group bg-gradient-to-r from-secondary to-accent hover:from-accent hover:to-secondary text-dark-900 px-6 sm:px-10 py-4 sm:py-5 rounded-2xl text-base sm:text-lg font-bold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-secondary/25 w-fit mx-auto sm:w-auto text-center relative overflow-hidden min-w-[200px]"
-          >
-            {/* Button glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-            <span className="flex items-center justify-center gap-2 sm:gap-3 relative z-10">
-              View My Work
-              <Icon name="arrow-right" className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </Link>
-          
-          <Link
-            href="/about"
-            className="group bg-dark-700 hover:bg-dark-600 text-white px-6 sm:px-10 py-4 sm:py-5 rounded-2xl text-base sm:text-lg font-bold transition-all duration-300 border-2 border-dark-500 hover:border-secondary/50 hover:shadow-lg hover:shadow-secondary/10 w-fit mx-auto sm:w-auto text-center relative overflow-hidden min-w-[200px]"
-          >
-            {/* Button glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-            <span className="flex items-center justify-center gap-2 sm:gap-3 relative z-10">
-              Learn More
-              <Icon name="chevron-down" className="w-5 h-5 sm:w-6 sm:h-6 rotate-90 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </Link>
-        </div>
-
-        {/* Scrolling Tech Stack */}
-        <ScrollingTechStack />
-
-
       </div>
     </section>
   )
