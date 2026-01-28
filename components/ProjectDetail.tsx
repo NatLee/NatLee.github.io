@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { ProjectDetail as ProjectDetailType } from '@/data/projects'
 import Image from 'next/image'
+import AIChatTerminal from './AIChatTerminal'
 
 interface Props {
   project: ProjectDetailType
@@ -11,50 +12,11 @@ interface Props {
 
 type Tab = 'README.md' | 'config.ts' | 'spec.json'
 
-// Simulated terminal logs
-const LOG_DELAY = 150
-const BOOT_SEQUENCE = [
-  { text: '>Initializing development environment...', type: 'info' },
-  { text: '>Loading project configuration...', type: 'info' },
-  { text: '>Resolving dependencies...', type: 'info' },
-  { text: '>Linking workspace...', type: 'info' },
-  { text: '✓ Environment ready', type: 'success' },
-  { text: '>Starting development server...', type: 'warning' },
-  { text: '>Compiled successfully', type: 'success' },
-  { text: '>Waiting for client connection...', type: 'info' },
-]
-
 export default function ProjectDetail({ project }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>('README.md')
-  const [logs, setLogs] = useState<{ text: string; type: string }[]>([])
-  const terminalRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    // Reset logs when project changes
-    setLogs([])
-    let currentIndex = 0
-
-    const interval = setInterval(() => {
-      if (currentIndex >= BOOT_SEQUENCE.length) {
-        clearInterval(interval)
-        return
-      }
-
-      const log = BOOT_SEQUENCE[currentIndex]
-      // Add dynamic project-specific logs
-      if (currentIndex === 1) log.text = `>Loading ${project.id} configuration...`
-
-      setLogs(prev => [...prev, log])
-      currentIndex++
-
-      // Auto-scroll to bottom
-      if (terminalRef.current) {
-        terminalRef.current.scrollTop = terminalRef.current.scrollHeight
-      }
-    }, LOG_DELAY)
-
-    return () => clearInterval(interval)
-  }, [project.id])
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isTerminalCollapsed, setIsTerminalCollapsed] = useState(false)
+  const projectId = project.id
 
   // Vim-like line generation helper
   const renderLine = (num: number, content: React.ReactNode) => (
@@ -138,8 +100,6 @@ export default function ProjectDetail({ project }: Props) {
     )
   }
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-
   const nextImage = () => {
     if (!project.images) return
     setCurrentImageIndex((prev) => (prev + 1) % project.images!.length)
@@ -151,193 +111,194 @@ export default function ProjectDetail({ project }: Props) {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row h-full min-h-[calc(100vh-8rem)] max-w-[100rem] mx-auto border-x border-gray-800 bg-black/60 backdrop-blur-md rounded-lg overflow-hidden shadow-2xl pointer-events-none">
+    <section id="project-detail" className="min-h-screen pt-12 md:pt-16 pb-20 font-mono relative overflow-hidden pointer-events-none">
 
-      {/* Left Column: Code Editor & Terminal */}
-      <div className="flex-1 flex flex-col md:w-1/2 lg:border-r border-gray-800">
+      <div className="relative z-10 container mx-auto px-2 md:px-4 max-w-[100rem] pointer-events-auto">
 
-        {/* Top: Vim Editor */}
-        <div className="flex flex-col h-[60%] lg:h-[65%] border-b border-gray-800 bg-black/20 pointer-events-auto">
-
-          {/* Tab Bar */}
-          <div className="flex bg-black/40 border-b border-gray-800 px-4 pt-2 gap-1 overflow-x-auto select-none no-scrollbar">
-            {(['README.md', 'config.ts', 'spec.json'] as Tab[]).map(tab => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`
-                  px-4 py-2 text-xs font-mono rounded-t transition-colors whitespace-nowrap
-                  ${activeTab === tab
-                    ? 'bg-black/20 text-secondary border-t border-x border-gray-800 font-bold'
-                    : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'
-                  }
-                `}
-              >
-                <span className="mr-2">{tab === 'README.md' ? '📘' : tab === 'config.ts' ? '⚙️' : '📋'}</span>
-                {tab}
-              </button>
-            ))}
+        <div className="border border-gray-700 rounded-lg overflow-hidden shadow-2xl bg-black/95 backdrop-blur-sm">
+          {/* Terminal Header */}
+          <div className="w-full bg-[#1a1a1a] p-3 flex items-center gap-2 sticky top-0 z-20 border-b border-gray-800">
+            <div className="flex gap-2 mr-4">
+              <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400"></div>
+            </div>
+            <div className="flex-1 text-center text-xs md:text-sm text-gray-500 font-bold select-none">
+              natlee@mainframe: ~/projects/{projectId} (zsh)
+            </div>
           </div>
 
-          <div className="flex-1 p-4 lg:p-8 overflow-y-auto custom-scrollbar relative">
-            {/* Breadcrumbs / Vim Header */}
-            <div className="mb-6 text-gray-500 font-mono text-xs flex justify-between items-center opacity-70">
-              <div className="flex items-center gap-2">
-                <Link href="/projects" className="hover:text-secondary hover:underline text-blue-400">
-                  ~/projects
-                </Link>
-                <span>/</span>
-                <span className="text-gray-300">{project.id}</span>
-                <span>/</span>
-                <span className="text-secondary">{activeTab}</span>
+          <div className="p-4 md:p-6 text-gray-300">
+
+            {/* Command Prompt */}
+            <div className="mb-8 border-b border-gray-900 pb-6 pt-2">
+              <span className="text-secondary font-bold">natlee@mainframe</span>:<span className="text-blue-500">~/projects/{projectId}</span>$ vim README.md
+            </div>
+
+            <div className="flex flex-col max-w-[100rem] mx-auto bg-black/40 backdrop-blur-md rounded-lg overflow-hidden shadow-2xl">
+
+              {/* Main Content Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 min-h-0">
+
+                {/* Left Column: Vim Editor */}
+                <div className="flex flex-col h-[700px] lg:h-[850px] border-b lg:border-b-0 lg:border-r border-gray-800 bg-black/20">
+
+                  {/* Tab Bar */}
+                  <div className="flex bg-black/40 border-b border-gray-800 px-4 pt-2 gap-1 overflow-x-auto select-none flex-shrink-0">
+                    {(['README.md', 'config.ts', 'spec.json'] as Tab[]).map(tab => (
+                      <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        className={`
+                          px-4 py-2 text-xs font-mono rounded-t transition-colors whitespace-nowrap
+                          ${activeTab === tab
+                            ? 'bg-black/20 text-secondary border-t border-x border-gray-800 font-bold'
+                            : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'
+                          }
+                        `}
+                      >
+                        <span className="mr-2">{tab === 'README.md' ? '📘' : tab === 'config.ts' ? '⚙️' : '📋'}</span>
+                        {tab}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="flex-1 p-4 lg:p-6 overflow-y-auto custom-scrollbar relative">
+                    {/* Breadcrumbs / Vim Header */}
+                    <div className="mb-6 text-gray-500 font-mono text-xs flex justify-between items-center opacity-70">
+                      <div className="flex items-center gap-2">
+                        <Link href="/projects" className="hover:text-secondary hover:underline text-blue-400">
+                          ~/projects
+                        </Link>
+                        <span>/</span>
+                        <span className="text-gray-300">{project.id}</span>
+                        <span>/</span>
+                        <span className="text-secondary">{activeTab}</span>
+                      </div>
+                      <span>vim 8.2</span>
+                    </div>
+
+                    <div className="font-mono">
+                      {activeTab === 'README.md' && renderREADME()}
+                      {activeTab === 'config.ts' && renderConfigTab()}
+                      {activeTab === 'spec.json' && renderSpec()}
+                    </div>
+                  </div>
+
+                  {/* Status Bar */}
+                  <div className="bg-black/40 border-t border-gray-800 p-1 px-4 flex justify-between items-center text-[10px] font-mono select-none flex-shrink-0">
+                    <div className="flex items-center gap-4">
+                      <span className="bg-secondary text-black px-2 py-0.5 font-bold">NORMAL</span>
+                      <span className="text-gray-500 uppercase tracking-widest">{activeTab}</span>
+                    </div>
+                    <div className="flex gap-4 text-gray-600">
+                      <span>utf-8</span>
+                      <span>Ln 1, Col 1</span>
+                      <span>100%</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column: Preview / Images */}
+                <div className="bg-black/40 flex flex-col h-[600px] lg:h-[850px]">
+
+                  {/* Fake Browser Toolbar */}
+                  <div className="bg-black/60 border-b border-gray-800 p-2.5 flex items-center gap-4 flex-shrink-0">
+                    <div className="flex gap-1.5 ml-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                    </div>
+                    <div className="flex-1 bg-black rounded p-1.5 px-3 text-[10px] text-gray-500 font-mono flex justify-between items-center border border-gray-800">
+                      <span className="truncate opacity-60">
+                        {project.links?.demo || project.links?.github || `localhost:3000/projects/${project.id}`}
+                      </span>
+                      <div className="flex gap-2">
+                        <span className="text-gray-600 hover:text-white cursor-pointer transition-colors">↻</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content Area */}
+                  <div className="flex-1 flex flex-col bg-black/20 relative overflow-hidden min-h-0">
+                    {project.images && project.images.length > 0 ? (
+                      <div className="relative w-full h-full flex flex-col">
+
+                        {/* Image Container */}
+                        <div className="flex-1 relative flex items-center justify-center p-4 lg:p-8 min-h-0">
+                          {/* Navigation Buttons */}
+                          {project.images.length > 1 && (
+                            <>
+                              <button
+                                onClick={prevImage}
+                                className="absolute left-4 z-20 p-2 bg-black/50 hover:bg-secondary text-white rounded-full border border-gray-700 hover:border-secondary transition-all"
+                              >
+                                <span className="text-xl">←</span>
+                              </button>
+                              <button
+                                onClick={nextImage}
+                                className="absolute right-4 z-20 p-2 bg-black/50 hover:bg-secondary text-white rounded-full border border-gray-700 hover:border-secondary transition-all"
+                              >
+                                <span className="text-xl">→</span>
+                              </button>
+                            </>
+                          )}
+
+                          <div className="relative w-full h-full">
+                            <Image
+                              src={project.images[currentImageIndex]}
+                              alt={`Preview ${currentImageIndex}`}
+                              fill
+                              className="object-contain"
+                              priority
+                            />
+                          </div>
+                        </div>
+
+                        {/* Caption / Image Counter */}
+                        <div className="bg-[#111] border-t border-gray-800 p-3 flex justify-between items-center text-xs font-mono text-gray-500 flex-shrink-0">
+                          <span>RENDER_OUTPUT_{currentImageIndex + 1}.PNG</span>
+                          <div className="flex items-center gap-2">
+                            <span>{currentImageIndex + 1} / {project.images.length}</span>
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                          </div>
+                        </div>
+
+                      </div>
+                    ) : (
+                      <div className="h-full flex flex-col items-center justify-center text-gray-500 font-mono space-y-6">
+                        <div className="text-8xl opacity-30 select-none">404</div>
+                        <div className="text-center space-y-2">
+                          <div className="text-xs font-bold text-red-400 flex items-center gap-2 justify-center">
+                            <span className="animate-ping w-2 h-2 bg-red-500 rounded-full"></span>
+                            NO_ASSETS_FOUND
+                          </div>
+                          <p className="text-[10px] text-gray-400 max-w-[200px] mx-auto text-center leading-relaxed">
+                            Module visual buffers are currently null or disconnected for ID: {project.id}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Scanline Overlay */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,18,18,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[size:100%_2px,3px_100%] pointer-events-none z-10"></div>
+                  </div>
+                </div>
               </div>
-              <span>vim 8.2</span>
-            </div>
 
-            <div className="font-mono">
-              {activeTab === 'README.md' && renderREADME()}
-              {activeTab === 'config.ts' && renderConfigTab()}
-              {activeTab === 'spec.json' && renderSpec()}
-            </div>
-          </div>
+              {/* AI Terminal Footer - Full Width */}
+              <AIChatTerminal
+                projectId={project.id}
+                projectTitle={project.title}
+                technologies={project.technologies}
+                isCollapsed={isTerminalCollapsed}
+                onToggleCollapse={() => setIsTerminalCollapsed(!isTerminalCollapsed)}
+              />
 
-          {/* Status Bar */}
-          <div className="bg-black/40 border-t border-gray-800 p-1 px-4 flex justify-between items-center text-[10px] font-mono select-none">
-            <div className="flex items-center gap-4">
-              <span className="bg-secondary text-black px-2 py-0.5 font-bold">NORMAL</span>
-              <span className="text-gray-500 uppercase tracking-widest">{activeTab}</span>
-            </div>
-            <div className="flex gap-4 text-gray-600">
-              <span>utf-8</span>
-              <span>Ln 1, Col 1</span>
-              <span>100%</span>
             </div>
           </div>
         </div>
-
-        {/* Bottom: Terminal Panel */}
-        <div className="flex-1 bg-[#111] flex flex-col min-h-0 pointer-events-auto">
-          {/* Terminal Tabs */}
-          <div className="flex border-b border-gray-800 text-[10px] font-mono select-none bg-[#0a0a0a]">
-            <div className="px-4 py-1.5 text-gray-300 border-r border-gray-800 border-t-2 border-t-secondary bg-[#1a1a1a]">TERMINAL</div>
-            <div className="px-4 py-1.5 text-gray-600 border-r border-gray-800 hover:text-gray-400 cursor-not-allowed">OUTPUT</div>
-            <div className="px-4 py-1.5 text-gray-600 border-r border-gray-800 hover:text-gray-400 cursor-not-allowed">DEBUG CONSOLE</div>
-            <div className="px-4 py-1.5 text-gray-600 border-r border-gray-800 hover:text-gray-400 cursor-not-allowed">PROBLEMS</div>
-            <div className="flex-1 text-right px-4 py-1.5 text-gray-700">zsh</div>
-          </div>
-
-          {/* Terminal Content */}
-          <div
-            ref={terminalRef}
-            className="flex-1 p-3 overflow-y-auto font-mono text-xs custom-scrollbar space-y-1"
-          >
-            {logs.map((log, i) => (
-              <div key={i} className={`
-                ${log.type === 'error' ? 'text-red-400' :
-                  log.type === 'success' ? 'text-green-400' :
-                    log.type === 'warning' ? 'text-yellow-400' : 'text-gray-400'}
-              `}>
-                <span className="opacity-50 mr-2">{new Date().toLocaleTimeString()}</span>
-                {log.text}
-              </div>
-            ))}
-            <div className="flex items-center text-gray-400">
-              <span className="text-green-500 font-bold mr-2">➜</span>
-              <span className="text-blue-400 mr-2">~/projects/{project.id}</span>
-              <span className="text-gray-500 bg-gray-500/50 w-2 h-4 animate-pulse"></span>
-            </div>
-          </div>
-        </div>
-
       </div>
-
-      {/* Right Column: Preview / Images ("Browser" or "Second Monitor") */}
-      <div className="lg:w-1/2 bg-black/40 flex flex-col shadow-inner border-l border-gray-800 pointer-events-auto">
-
-        {/* Fake Browser Toolbar */}
-        <div className="bg-black/60 border-b border-gray-800 p-2.5 flex items-center gap-4">
-          <div className="flex gap-1.5 ml-2">
-            <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-          </div>
-          <div className="flex-1 bg-black rounded p-1.5 px-3 text-[10px] text-gray-500 font-mono flex justify-between items-center border border-gray-800">
-            <span className="truncate opacity-60">
-              {project.links?.demo || project.links?.github || `localhost:3000/projects/${project.id}`}
-            </span>
-            <div className="flex gap-2">
-              <span className="text-gray-600 hover:text-white cursor-pointer transition-colors">↻</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Content Area */}
-        <div className="flex-1 flex flex-col bg-black/20 relative overflow-hidden">
-          {project.images && project.images.length > 0 ? (
-            <div className="relative w-full h-full flex flex-col">
-
-              {/* Image Container */}
-              <div className="flex-1 relative flex items-center justify-center p-8">
-                {/* Navigation Buttons */}
-                {project.images.length > 1 && (
-                  <>
-                    <button
-                      onClick={prevImage}
-                      className="absolute left-4 z-20 p-2 bg-black/50 hover:bg-secondary text-white rounded-full border border-gray-700 hover:border-secondary transition-all"
-                    >
-                      <span className="text-xl">←</span>
-                    </button>
-                    <button
-                      onClick={nextImage}
-                      className="absolute right-4 z-20 p-2 bg-black/50 hover:bg-secondary text-white rounded-full border border-gray-700 hover:border-secondary transition-all"
-                    >
-                      <span className="text-xl">→</span>
-                    </button>
-                  </>
-                )}
-
-                <div className="relative w-full h-full">
-                  <Image
-                    src={project.images[currentImageIndex]}
-                    alt={`Preview ${currentImageIndex}`}
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-              </div>
-
-              {/* Caption / Image Counter */}
-              <div className="bg-[#111] border-t border-gray-800 p-3 flex justify-between items-center text-xs font-mono text-gray-500">
-                <span>RENDER_OUTPUT_{currentImageIndex + 1}.PNG</span>
-                <div className="flex items-center gap-2">
-                  <span>{currentImageIndex + 1} / {project.images.length}</span>
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                </div>
-              </div>
-
-            </div>
-          ) : (
-            <div className="h-full flex flex-col items-center justify-center text-gray-700 font-mono space-y-6">
-              <div className="text-8xl opacity-10 select-none">404</div>
-              <div className="text-center space-y-2">
-                <div className="text-xs font-bold text-red-900/50 flex items-center gap-2 justify-center">
-                  <span className="animate-ping w-2 h-2 bg-red-900 rounded-full"></span>
-                  NO_ASSETS_FOUND
-                </div>
-                <p className="text-[10px] opacity-40 max-w-[200px] mx-auto text-center leading-relaxed">
-                  Module visual buffers are currently null or disconnected for ID: {project.id}
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Scanline Overlay */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(18,18,18,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[size:100%_2px,3px_100%] pointer-events-none z-10"></div>
-        </div>
-
-      </div>
-
-    </div>
+    </section>
   )
 }
