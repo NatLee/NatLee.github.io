@@ -18,11 +18,14 @@ interface Props {
   onToggleCollapse: () => void
 }
 
-// AI-style boot sequence messages
+// Help content
+const HELP_CONTENT = `**Available commands:**\n\n- \`info\` - Show project information\n- \`stack\` - List technology stack\n- \`links\` - Show project links\n- \`clear\` - Clear terminal\n- \`help\` - Show this help message`
+
+// AI-style boot sequence messages with help
 const getBootSequence = (projectId: string, projectTitle: string, technologies: string[] = []) => [
-  { type: 'system' as const, content: `Initializing project environment...`, delay: 0 },
-  { type: 'assistant' as const, content: `Analyzing ${projectTitle}...`, delay: 400 },
-  { type: 'assistant' as const, content: `\n**Project:** ${projectTitle}\n\n**Dependencies resolved:**\n${technologies.slice(0, 5).map(t => `- ${t}`).join('\n')}\n\n✓ Environment ready. Type \`help\` for available commands.`, delay: 800 },
+  { type: 'system' as const, content: `Initializing ${projectTitle}...`, delay: 0 },
+  { type: 'user' as const, content: `help`, delay: 300 },
+  { type: 'assistant' as const, content: HELP_CONTENT, delay: 600 },
 ]
 
 export default function AIChatTerminal({ projectId, projectTitle, technologies = [], isCollapsed, onToggleCollapse }: Props) {
@@ -33,16 +36,11 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const hasBootedRef = useRef<string | null>(null)
   const timeoutsRef = useRef<NodeJS.Timeout[]>([])
   const intervalsRef = useRef<NodeJS.Timeout[]>([])
 
-  // Boot sequence effect - only runs once per projectId
+  // Boot sequence effect
   useEffect(() => {
-    // Skip if already booted for this project
-    if (hasBootedRef.current === projectId) return
-    hasBootedRef.current = projectId
-
     // Clear any existing timeouts/intervals
     timeoutsRef.current.forEach(clearTimeout)
     intervalsRef.current.forEach(clearInterval)
@@ -56,20 +54,26 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
 
     bootSequence.forEach((msg, index) => {
       const timeout = setTimeout(() => {
+        const isLastAssistant = msg.type === 'assistant' && index === bootSequence.length - 1
         const newMsg: Message = {
           id: `boot-${index}`,
           type: msg.type,
-          content: msg.content,
+          content: isLastAssistant ? '' : msg.content,
           timestamp: new Date(),
-          isStreaming: msg.type === 'assistant' && index === bootSequence.length - 1
+          isStreaming: isLastAssistant
         }
         
-        if (newMsg.isStreaming) {
+        // Add message first
+        setMessages(prev => [...prev, newMsg])
+        
+        // Then start streaming if needed (with a small delay to ensure state is updated)
+        if (isLastAssistant) {
           setCurrentStreamingId(newMsg.id)
-          streamTextWithRef(newMsg.content, newMsg.id)
+          const streamTimeout = setTimeout(() => {
+            streamTextWithRef(msg.content, newMsg.id)
+          }, 50)
+          timeoutsRef.current.push(streamTimeout)
         }
-        
-        setMessages(prev => [...prev, { ...newMsg, content: newMsg.isStreaming ? '' : newMsg.content }])
       }, msg.delay)
       
       timeoutsRef.current.push(timeout)
@@ -78,8 +82,11 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
     return () => {
       timeoutsRef.current.forEach(clearTimeout)
       intervalsRef.current.forEach(clearInterval)
+      timeoutsRef.current = []
+      intervalsRef.current = []
     }
-  }, [projectId, projectTitle, technologies])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectId])
 
   // Stream text effect with ref tracking
   const streamTextWithRef = (text: string, msgId: string) => {
@@ -136,7 +143,7 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
       const cmd = command.toLowerCase().trim()
       
       if (cmd === 'help') {
-        response = `**Available commands:**\n\n- \`info\` - Show project information\n- \`stack\` - List technology stack\n- \`links\` - Show project links\n- \`clear\` - Clear terminal\n- \`help\` - Show this help message`
+        response = HELP_CONTENT
       } else if (cmd === 'info') {
         response = `**${projectTitle}**\n\nID: \`${projectId}\`\nStack: ${technologies.slice(0, 3).join(', ')}${technologies.length > 3 ? '...' : ''}`
       } else if (cmd === 'stack') {
@@ -158,9 +165,12 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
         isStreaming: true
       }
       
+      // Add message first, then start streaming with small delay
       setMessages(prev => [...prev, assistantMsg])
       setCurrentStreamingId(responseId)
-      streamTextWithRef(response, responseId)
+      setTimeout(() => {
+        streamTextWithRef(response, responseId)
+      }, 50)
     }, 600 + Math.random() * 400)
   }
 
@@ -193,7 +203,7 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
   }
 
   return (
-    <div className={`bg-[#0d0d0d] border-t border-gray-800 flex flex-col transition-all duration-300 ${isCollapsed ? 'h-10' : 'h-56'}`}>
+    <div className={`bg-[#0d0d0d] border-t border-gray-800 flex flex-col transition-all duration-300 ${isCollapsed ? 'h-10' : 'h-72'}`}>
       {/* Terminal Header */}
       <div 
         className="flex items-center justify-between px-4 py-2 bg-[#0a0a0a] border-b border-gray-800 cursor-pointer select-none"
