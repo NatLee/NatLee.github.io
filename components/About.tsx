@@ -1,240 +1,164 @@
 'use client'
 
 import { personalInfo } from '@/data/personal'
+import { skillsData } from '@/data/skills'
 import Image from 'next/image'
 import Icon from './Icon'
 
 export default function About() {
+  const getAsciiBar = (level: string): string => {
+    const totalChars = 20
+    let fill = 0
+    switch (level) {
+      case 'Expert': fill = 19; break;
+      case 'Advanced': fill = 16; break;
+      case 'Intermediate': fill = 12; break;
+      default: fill = 6;
+    }
+    const filledChars = '#'.repeat(fill)
+    const emptyChars = '.'.repeat(totalChars - fill)
+    return `[${filledChars}${emptyChars}]`
+  }
+
   return (
-    <section id="about" className="py-20 bg-dark-900 min-h-screen relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-10"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-accent/5"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-secondary via-neon-red to-accent bg-clip-text text-transparent">
-                About Me
-              </span>
-            </h1>
-            <div className="w-32 h-1 bg-gradient-to-r from-secondary to-accent mx-auto mb-8 rounded-full"></div>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Discover my journey as a software engineer, my passion for technology, 
-              and the experiences that shape my approach to solving complex problems.
-            </p>
+    <section id="about" className="min-h-screen pt-12 md:pt-16 pb-20 font-mono relative overflow-hidden pointer-events-none">
+
+      {/* Global Background handled in layout */}
+
+      <div className="relative z-10 container mx-auto px-2 md:px-4 max-w-6xl pointer-events-auto">
+
+        <div className="border border-gray-700 rounded-lg overflow-hidden shadow-2xl bg-black/95 backdrop-blur-sm">
+          {/* Terminal Header */}
+          <div className="w-full bg-[#1a1a1a] p-3 flex items-center gap-2 sticky top-0 z-20 border-b border-gray-800">
+            <div className="flex gap-2 mr-4">
+              <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400"></div>
+            </div>
+            <div className="flex-1 text-center text-xs md:text-sm text-gray-500 font-bold select-none">
+              natlee@mainframe: ~/profile (zsh)
+            </div>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-12 items-start">
-            {/* Left Column - Profile Image */}
-            <div className="lg:col-span-1">
-              {/* Profile Image with Code Frame */}
-              <div className="bg-dark-800/80 backdrop-blur-sm border border-gray-700 rounded-lg p-6 mb-6 animate-fade-in-right delay-100">
-                <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-700">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                  </div>
-                    <span className="text-gray-400 text-sm font-mono ml-2">profile.png</span>
-                </div>
-                
-                {/* Profile Image */}
-                <div className="relative group">
-                  <Image
-                    src={personalInfo.avatar}
-                    alt={personalInfo.nameEn}
-                    width={400}
-                    height={400}
-                    className="mx-auto rounded-full border-4 border-secondary shadow-2xl hover:border-white transition-colors duration-300"
-                  />
-                </div>
-                
-                {/* Image metadata */}
-                <div className="mt-4 pt-3 border-t border-gray-700 font-mono text-xs text-gray-500">
-                  <div className="flex justify-between">
-                    <span>Size:</span>
-                    <span className="text-secondary">400x400</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Format:</span>
-                    <span className="text-accent">PNG</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Status:</span>
-                    <span className="text-green-400">Ready</span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Language */}
-              <div className="bg-dark-800/80 backdrop-blur-sm border border-gray-700 rounded-lg p-6 mb-6 animate-fade-in-right delay-200">
-                <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-accent to-secondary rounded-lg flex items-center justify-center">
-                    <Icon name="brain" className="w-4 h-4 text-dark-900" />
-                  </div>
-                  Language
-                </h4>
-                
-                <div className="space-y-4">
-                  {/* Mandarin */}
-                  <div className="group">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-white font-medium">Mandarin</span>
-                      <span className="text-secondary text-sm font-bold">Native Speaker</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-accent to-warm-500 transition-all duration-1000 ease-out rounded-full" style={{ width: '100%' }}>
-                        <div className="h-full bg-white/20 animate-pulse rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
+          <div className="min-h-[80vh] p-6 md:p-12 text-gray-300">
 
-                  {/* English */}
-                  <div className="group">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-white font-medium">English</span>
-                      <span className="text-secondary text-sm font-bold">Professional</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-warm-400 to-warm-600 transition-all duration-1000 ease-out rounded-full" style={{ width: '85%' }}>
-                        <div className="h-full bg-white/20 animate-pulse rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
+            {/* Command Prompt */}
+            <div className="mb-12 border-b border-gray-900 pb-8 pt-2">
+              <span className="text-secondary font-bold">natlee@mainframe</span>:<span className="text-blue-500">~/profile</span>$ neofetch --ascii_distro linux
+            </div>
 
-                  {/* Japanese */}
-                  <div className="group">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-white font-medium">Japanese</span>
-                      <span className="text-secondary text-sm font-bold">JLPT N1</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-secondary to-accent transition-all duration-1000 ease-out rounded-full" style={{ width: '95%' }}>
-                        <div className="h-full bg-white/20 animate-pulse rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
+            <div className="grid lg:grid-cols-12 gap-12 items-start mb-16">
 
+              {/* Left Column - Image & System Info */}
+              <div className="lg:col-span-4 text-center lg:text-left flex flex-col items-center lg:items-start">
+
+                {/* Glitch Profile Image Container */}
+                <div className="relative w-48 h-48 md:w-64 md:h-64 group mb-8">
+                  {/* Scanlines */}
+                  <div className="absolute inset-0 z-30 pointer-events-none bg-[linear-gradient(rgba(18,18,18,0)_50%,rgba(0,0,0,0.2)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[size:100%_4px,6px_100%] opacity-50 rounded-full"></div>
+
+                  <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-gray-800 group-hover:border-secondary transition-colors">
+                    <Image
+                      src={personalInfo.avatar}
+                      alt={personalInfo.nameEn}
+                      fill
+                      className="object-cover relative z-10 transition-transform duration-200 group-hover:scale-105"
+                    />
+                    {/* Glitch Layers */}
+                    <Image
+                      src={personalInfo.avatar}
+                      alt=""
+                      fill
+                      className="object-cover absolute inset-0 z-20 opacity-0 group-hover:opacity-60 mix-blend-screen translate-x-1 translate-y-0 transition-opacity duration-100 pointer-events-none"
+                    />
+                    <Image
+                      src={personalInfo.avatar}
+                      alt=""
+                      fill
+                      className="object-cover absolute inset-0 z-20 opacity-0 group-hover:opacity-60 mix-blend-multiply -translate-x-1 translate-y-0 transition-opacity duration-100 pointer-events-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="w-full space-y-2 font-mono text-sm text-left bg-[#111] p-4 border border-gray-800 rounded">
+                  <div className="flex gap-2"><span className="text-secondary font-bold">OS:</span> Linux x86_64</div>
+                  <div className="flex gap-2"><span className="text-secondary font-bold">Host:</span> {personalInfo.nameEn}</div>
+                  <div className="flex gap-2"><span className="text-secondary font-bold">Kernel:</span> Software Engineer v6.0</div>
+                  <div className="flex gap-2"><span className="text-secondary font-bold">Uptime:</span> 6 years</div>
+                  <div className="flex gap-2"><span className="text-secondary font-bold">Shell:</span> zsh 5.9</div>
+                  <div className="flex gap-2"><span className="text-secondary font-bold">Resolution:</span> 3840x2160</div>
+                  <div className="flex gap-2"><span className="text-secondary font-bold">CPU:</span> Neural Engine</div>
+                  <div className="flex gap-2"><span className="text-secondary font-bold">Memory:</span> Full Stack</div>
                 </div>
               </div>
 
-              {/* Contact & Social Links */}
-              <div className="bg-dark-800/80 backdrop-blur-sm border border-gray-700 rounded-lg p-6 animate-fade-in-right delay-300">
-                <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center">
-                    <Icon name="mail" className="w-4 h-4 text-dark-900" />
-                  </div>
-                  Connect With Me
-                </h4>
-                
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 p-3 bg-dark-700 rounded-lg hover:bg-dark-600 transition-colors group">
-                    <Icon name="mail" className="w-5 h-5 text-secondary" />
-                    <a href={`mailto:${personalInfo.email}`} className="text-gray-300 group-hover:text-secondary transition-colors">
-                      {personalInfo.email}
+              {/* Right Content - Bio */}
+              <div className="lg:col-span-8">
+                <div className="border-l-2 border-gray-800 pl-6 ml-2 space-y-6 text-gray-400 leading-relaxed font-sans text-lg">
+                  <p>{personalInfo.bio}</p>
+                  <p>
+                    With over 6 years of experience in software development, I've worked across various domains
+                    including energy trading, big data analytics, cybersecurity, and computer vision. My expertise
+                    spans from backend development to AI/ML implementation.
+                  </p>
+                  <p>
+                    I'm particularly passionate about leveraging technology to solve real-world problems,
+                    whether it's optimizing energy trading strategies, building sentiment analysis platforms,
+                    or developing computer vision solutions for healthcare.
+                  </p>
+                </div>
+
+                <div className="grid sm:grid-cols-3 gap-4 mt-8">
+                  <div className="border border-gray-800 bg-[#0a0a0a] p-4 hover:border-secondary transition-colors group cursor-pointer text-center">
+                    <a href={`mailto:${personalInfo.email}`} className="flex flex-col items-center gap-2">
+                      <Icon name="mail" className="w-6 h-6 text-gray-500 group-hover:text-secondary" />
+                      <span className="text-xs group-hover:text-white transition-colors">EMAIL</span>
                     </a>
                   </div>
-                  
-                  <div className="flex items-center gap-3 p-3 bg-dark-700 rounded-lg hover:bg-dark-600 transition-colors group">
-                    <Icon name="github" className="w-5 h-5 text-gray-400" />
-                    <a href={personalInfo.socialLinks.find(link => link.name === 'GitHub')?.url} target="_blank" rel="noopener noreferrer" className="text-gray-300 group-hover:text-white transition-colors">
-                      GitHub Profile
+                  <div className="border border-gray-800 bg-[#0a0a0a] p-4 hover:border-secondary transition-colors group cursor-pointer text-center">
+                    <a href={personalInfo.socialLinks.find(link => link.name === 'GitHub')?.url} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-2">
+                      <Icon name="github" className="w-6 h-6 text-gray-500 group-hover:text-secondary" />
+                      <span className="text-xs group-hover:text-white transition-colors">GITHUB</span>
                     </a>
                   </div>
-                  
-                  <div className="flex items-center gap-3 p-3 bg-dark-700 rounded-lg hover:bg-dark-600 transition-colors group">
-                    <Icon name="linkedin" className="w-5 h-5 text-blue-400" />
-                    <a href={personalInfo.socialLinks.find(link => link.name === 'LinkedIn')?.url} target="_blank" rel="noopener noreferrer" className="text-gray-300 group-hover:text-blue-400 transition-colors">
-                      LinkedIn Profile
+                  <div className="border border-gray-800 bg-[#0a0a0a] p-4 hover:border-secondary transition-colors group cursor-pointer text-center">
+                    <a href={personalInfo.socialLinks.find(link => link.name === 'LinkedIn')?.url} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-2">
+                      <Icon name="linkedin" className="w-6 h-6 text-gray-500 group-hover:text-secondary" />
+                      <span className="text-xs group-hover:text-white transition-colors">LINKEDIN</span>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Middle & Right Columns - Bio and Stats */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Bio Section */}
-              <div className="bg-dark-800/80 backdrop-blur-sm border border-gray-700 rounded-lg p-8 animate-fade-in-left delay-100">
-                <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-accent to-secondary rounded-lg flex items-center justify-center">
-                    <Icon name="code" className="w-4 h-4 text-dark-900" />
-                  </div>
-                  My Journey
-                </h3>
-                
-                <div className="space-y-6 text-gray-300 leading-relaxed">
-                  <p className="text-lg">
-                    {personalInfo.bio}
-                  </p>
-                  <p>
-                    With over 6 years of experience in software development, I've worked across various domains 
-                    including energy trading, big data analytics, cybersecurity, and computer vision. My expertise 
-                    spans from backend development to AI/ML implementation.
-                  </p>
-                  <p>
-                    I'm particularly passionate about leveraging technology to solve real-world problems, 
-                    whether it's optimizing energy trading strategies, building sentiment analysis platforms, 
-                    or developing computer vision solutions for healthcare.
-                  </p>
-                </div>
+            {/* Merged Skills Section */}
+            <div className="border-t border-gray-800 pt-12">
+              <div className="mb-8 font-bold">
+                <span className="text-green-500">➜</span> <span className="text-blue-400">~/skills</span> <span className="text-gray-500">ls -la</span>
               </div>
 
-              {/* Stats & Interests Grid */}
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Career Statistics */}
-                <div className="bg-dark-800/80 backdrop-blur-sm border border-gray-700 rounded-lg p-6 animate-fade-in-left delay-200">
-                  <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center">
-                      <Icon name="chart" className="w-4 h-4 text-dark-900" />
-                    </div>
-                    Career Highlights
-                  </h4>
-                  
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-4 bg-dark-700 rounded-lg">
-                      <div className="text-2xl font-bold text-secondary mb-1">6+</div>
-                      <div className="text-gray-400 text-sm">Years Experience</div>
-                    </div>
-                    <div className="text-center p-4 bg-dark-700 rounded-lg">
-                      <div className="text-2xl font-bold text-secondary mb-1">50+</div>
-                      <div className="text-gray-400 text-sm">Projects</div>
-                    </div>
-                    <div className="text-center p-4 bg-dark-700 rounded-lg">
-                      <div className="text-2xl font-bold text-secondary mb-1">5</div>
-                      <div className="text-gray-400 text-sm">Companies</div>
-                    </div>
-                    <div className="text-center p-4 bg-dark-700 rounded-lg">
-                      <div className="text-2xl font-bold text-secondary mb-1">15+</div>
-                      <div className="text-gray-400 text-sm">Technologies</div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {skillsData.map((category) => (
+                  <div key={category.id} className="mb-6">
+                    <h4 className="text-secondary font-bold mb-4 flex items-center gap-2 border-b border-gray-800 pb-2">
+                      ./{category.id}
+                    </h4>
+                    <div className="space-y-3 pl-2">
+                      {category.skills.map((skill) => (
+                        <div key={skill.name} className="group flex justify-between items-center text-sm">
+                          <span className="text-gray-400 group-hover:text-white transition-colors">{skill.name}</span>
+                          <span className="text-gray-600 text-xs font-mono">{getAsciiBar(skill.level)}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </div>
-
-                {/* Areas of Interest */}
-                <div className="bg-dark-800/80 backdrop-blur-sm border border-gray-700 rounded-lg p-6 animate-fade-in-left delay-300">
-                  <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-accent to-secondary rounded-lg flex items-center justify-center">
-                      <Icon name="brain" className="w-4 h-4 text-dark-900" />
-                    </div>
-                    Areas of Interest
-                  </h4>
-                  
-                  <div className="flex flex-wrap gap-3">
-                    {personalInfo.interests.map((interest, index) => (
-                      <span
-                        key={index}
-                        className="px-4 py-2 bg-dark-700 rounded-full text-sm text-gray-300 border border-dark-500 hover:border-secondary/50 hover:text-secondary transition-all duration-300 hover:scale-105"
-                      >
-                        {interest}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
+            </div>
+
+            <div className="mt-12 pt-6 border-t border-gray-800 text-gray-600 text-xs text-center flex justify-between items-center px-4">
+              <span>PKGS: {skillsData.flatMap(c => c.skills).length}</span>
+              <span className="animate-pulse">_</span>
             </div>
           </div>
         </div>

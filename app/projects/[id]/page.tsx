@@ -17,7 +17,7 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: Props) {
   const project = getProjectById(params.id)
-  
+
   if (!project) {
     return {
       title: 'Project Not Found | Nat Lee',
@@ -40,7 +40,7 @@ export default function ProjectDetailPage({ params }: Props) {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-16">
+      <main className="min-h-screen pt-16 pointer-events-none">
         <ProjectDetail project={project} />
       </main>
     </>

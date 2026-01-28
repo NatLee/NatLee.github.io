@@ -1,408 +1,304 @@
 'use client'
 
 import React, { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { ProjectDetail as ProjectDetailType } from '@/data/projects'
-
-import Icon from './Icon'
+import Image from 'next/image'
+import AIChatTerminal from './AIChatTerminal'
 
 interface Props {
   project: ProjectDetailType
 }
 
+type Tab = 'README.md' | 'config.ts' | 'spec.json'
+
 export default function ProjectDetail({ project }: Props) {
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Completed': return 'text-electric-500 bg-electric-500/10 border-electric-500/20'
-      case 'In Progress': return 'text-secondary bg-secondary/10 border-secondary/20'
-      case 'Archived': return 'text-gray-400 bg-gray-400/10 border-gray-400/20'
-      default: return 'text-gray-400 bg-gray-400/10 border-gray-400/20'
-    }
-  }
+  const [activeTab, setActiveTab] = useState<Tab>('README.md')
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isTerminalCollapsed, setIsTerminalCollapsed] = useState(false)
+  const projectId = project.id
 
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case 'AI/ML': return 'brain'
-      case 'Computer Vision': return 'eye'
-      case 'Web Development': return 'code'
-      case 'Data Science': return 'chart'
-      case 'Backend': return 'server'
-      case 'Open Source': return 'github'
-      default: return 'default'
-    }
-  }
-
-  return (
-    <div className="bg-dark-900 min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-dark-900 via-dark-800 to-dark-900">
-        <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Back Button */}
-            <div className="mb-8">
-              <Link
-                href="/projects"
-                className="inline-flex items-center gap-2 text-secondary hover:text-neon-blue transition-colors"
-              >
-                <Icon name="arrow-left" className="w-5 h-5" />
-                Back to Projects
-              </Link>
-            </div>
-
-            {/* Project Header */}
-            <div className="mb-8">
-              <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="flex items-center gap-2">
-                  <Icon name={getCategoryIcon(project.category)} className="w-6 h-6 text-secondary" />
-                  <span className="text-secondary font-medium">{project.category}</span>
-                </div>
-                <div className={`px-4 py-2 rounded-full border text-sm font-medium ${getStatusColor(project.status)}`}>
-                  {project.status}
-                </div>
-                {project.featured && (
-                  <div className="px-4 py-2 rounded-full bg-neon-pink/10 border border-neon-pink/20 text-neon-pink text-sm font-medium">
-                    Featured
-                  </div>
-                )}
-              </div>
-
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-white via-secondary to-accent bg-clip-text text-transparent">
-                  {project.title}
-                </span>
-              </h1>
-              <p className="text-xl text-gray-300 mb-6">{project.subtitle}</p>
-              <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                {project.description}
-              </p>
-            </div>
-
-            {/* Project Links */}
-            <div className="flex flex-wrap justify-center gap-4">
-              {project.links.demo && (
-                <a
-                  href={project.links.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/80 text-dark-900 px-6 py-3 rounded-full font-medium transition-all hover:scale-105"
-                >
-                  <Icon name="external-link" className="w-5 h-5" />
-                  Live Demo
-                </a>
-              )}
-              {project.links.github && (
-                <a
-                  href={project.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-dark-700 hover:bg-dark-600 text-white px-6 py-3 rounded-full font-medium transition-all border border-dark-500 hover:border-secondary/50"
-                >
-                  <Icon name="github" className="w-5 h-5" />
-                  View Code
-                </a>
-              )}
-              {project.links.article && (
-                <a
-                  href={project.links.article}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-dark-700 hover:bg-dark-600 text-white px-6 py-3 rounded-full font-medium transition-all border border-dark-500 hover:border-secondary/50"
-                >
-                  <Icon name="blog" className="w-5 h-5" />
-                  Read Article
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Project Images Slider */}
-      {project.images && project.images.length > 0 && (
-        <section className="py-16 bg-dark-800">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-white mb-8 text-center">Project Gallery</h2>
-              
-              <div className="flex justify-center">
-                <ImageSlider images={project.images} title={project.title} />
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Project Details */}
-      <section className="py-16 bg-dark-900">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-3 gap-12">
-              {/* Main Content */}
-              <div className="lg:col-span-2 space-y-12">
-                {/* Overview */}
-                <div>
-                  <h2 className="text-3xl font-bold text-white mb-6">Overview</h2>
-                  <div className="prose prose-invert max-w-none">
-                    <p className="text-gray-300 leading-relaxed whitespace-pre-line">
-                      {project.longDescription}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Features */}
-                {project.features && project.features.length > 0 && (
-                  <div>
-                    <h2 className="text-3xl font-bold text-white mb-6">Key Features</h2>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {project.features.map((feature, index) => (
-                        <div key={index} className="flex items-start gap-3 p-4 bg-dark-800 rounded-lg border border-dark-600">
-                          <Icon name="check" className="w-5 h-5 text-electric-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-300">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Challenges & Solutions */}
-                {project.challenges && project.solutions && (
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <h3 className="text-2xl font-bold text-white mb-6">Challenges</h3>
-                      <div className="space-y-4">
-                        {project.challenges.map((challenge, index) => (
-                          <div key={index} className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                            <p className="text-gray-300">{challenge}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-white mb-6">Solutions</h3>
-                      <div className="space-y-4">
-                        {project.solutions.map((solution, index) => (
-                          <div key={index} className="p-4 bg-electric-500/10 border border-electric-500/20 rounded-lg">
-                            <p className="text-gray-300">{solution}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Results */}
-                {project.results && project.results.length > 0 && (
-                  <div>
-                    <h2 className="text-3xl font-bold text-white mb-6">Results & Impact</h2>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {project.results.map((result, index) => (
-                        <div key={index} className="p-4 bg-secondary/10 border border-secondary/20 rounded-lg">
-                          <div className="flex items-start gap-3">
-                            <Icon name="chart" className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-300">{result}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Sidebar */}
-              <div className="space-y-8">
-                {/* Project Info */}
-                <div className="bg-dark-800 rounded-lg p-6 border border-dark-600">
-                  <h3 className="text-xl font-bold text-white mb-4">Project Info</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <span className="text-gray-400 text-sm">Role</span>
-                      <p className="text-white font-medium">{project.role}</p>
-                    </div>
-                    {project.company && (
-                      <div>
-                        <span className="text-gray-400 text-sm">Company</span>
-                        <p className="text-white font-medium">{project.company}</p>
-                      </div>
-                    )}
-                    <div>
-                      <span className="text-gray-400 text-sm">Timeline</span>
-                      <p className="text-white font-medium">
-                        {project.timeline.start} {project.timeline.end ? `- ${project.timeline.end}` : '- Present'}
-                      </p>
-                      <p className="text-gray-400 text-sm">{project.timeline.duration}</p>
-                    </div>
-                    {project.team && project.team.length > 0 && (
-                      <div>
-                        <span className="text-gray-400 text-sm">Team</span>
-                        <p className="text-white font-medium">{project.team.join(', ')}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Technologies */}
-                <div className="bg-dark-800 rounded-lg p-6 border border-dark-600">
-                  <h3 className="text-xl font-bold text-white mb-4">Technologies</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-dark-700 text-gray-300 text-sm rounded-full border border-dark-500 hover:border-secondary/50 transition-colors"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Links */}
-                <div className="bg-dark-800 rounded-lg p-6 border border-dark-600">
-                  <h3 className="text-xl font-bold text-white mb-4">Links</h3>
-                  <div className="space-y-3">
-                    {Object.entries(project.links).map(([key, url]) => (
-                      <a
-                        key={key}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 text-gray-300 hover:text-secondary transition-colors"
-                      >
-                        <Icon name={key === 'github' ? 'github' : key === 'demo' ? 'external-link' : 'blog'} className="w-5 h-5" />
-                        <span className="capitalize">{key}</span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  // Vim-like line generation helper
+  const renderLine = (num: number, content: React.ReactNode) => (
+    <div className="flex group" key={num}>
+      <span className="text-gray-600 select-none mr-4 w-8 text-right font-mono text-sm opacity-50 group-hover:opacity-100">{num}</span>
+      <div className="text-gray-300 font-mono text-sm whitespace-pre-wrap break-words flex-1">{content}</div>
     </div>
   )
-}
 
-function ImageSlider({ images, title }: { images: string[], title: string }) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const renderConfigTab = () => {
+    let lineIdx = 0
+    const next = () => ++lineIdx
+    return (
+      <div className="space-y-1">
+        {renderLine(next(), <span className="text-gray-500">/**</span>)}
+        {renderLine(next(), <span className="text-gray-500"> * <span className="text-secondary font-bold">Project Configuration</span></span>)}
+        {renderLine(next(), <span className="text-gray-500"> * @module {project.id}</span>)}
+        {renderLine(next(), <span className="text-gray-500"> */</span>)}
+        {renderLine(next(), '')}
+        {renderLine(next(), <span><span className="text-purple-400">export const</span> <span className="text-blue-400">project_config</span> = <span className="text-yellow-300">{'{'}</span></span>)}
+        {renderLine(next(), <span>  <span className="text-red-300">id</span>: <span className="text-green-300">"{project.id}"</span>,</span>)}
+        {renderLine(next(), <span>  <span className="text-red-300">name</span>: <span className="text-green-300">"{project.title}"</span>,</span>)}
+        {renderLine(next(), <span>  <span className="text-red-300">category</span>: <span className="text-green-300">"{project.category}"</span>,</span>)}
+        {renderLine(next(), <span>  <span className="text-red-300">role</span>: <span className="text-green-300">"{project.role}"</span>,</span>)}
+        {renderLine(next(), <span>  <span className="text-red-300">stack</span>: [</span>)}
+        {project.technologies?.map((tech, i) =>
+          renderLine(next(), <span className="pl-4"><span className="text-green-300">"{tech}"</span>{i < (project.technologies?.length || 0) - 1 ? ',' : ''}</span>)
+        )}
+        {renderLine(next(), <span>  ],</span>)}
+        {renderLine(next(), <span>  <span className="text-red-300">deployment</span>: <span className="text-yellow-300">{'{'}</span></span>)}
+        {project.links && Object.entries(project.links).map(([key, url]) => (
+          url && renderLine(next(), (
+            <span className="pl-4">
+              <span className="text-red-300">{key}</span>: <a href={url} target="_blank" className="text-blue-400 underline decoration-blue-900/50 hover:text-blue-300">"{url}"</a>,
+            </span>
+          ))
+        ))}
+        {renderLine(next(), <span>  <span className="text-yellow-300">{'}'}</span></span>)}
+        {renderLine(next(), <span className="text-yellow-300">{'}'}</span>)}
+        {renderLine(next(), '')}
+        {renderLine(next(), <span><span className="text-purple-400">export default</span> <span className="text-blue-400">project_config</span>;</span>)}
+      </div>
+    )
+  }
+
+  const renderREADME = () => {
+    let lineIdx = 0
+    const next = () => ++lineIdx
+    return (
+      <div className="space-y-1">
+        {renderLine(next(), <h1 className="text-secondary font-bold text-2xl mb-4"># {project.title}</h1>)}
+        {renderLine(next(), <p className="text-gray-400 italic mb-6">{project.subtitle}</p>)}
+        {renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">## Project Overview</h2>)}
+        {project.longDescription.split('\n').map((para, i) => para && renderLine(next(), <p className="mb-4">{para}</p>))}
+        {renderLine(next(), '')}
+        {renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">## Core Features</h2>)}
+        {project.features?.map(feat => renderLine(next(), <li className="list-none flex gap-2"><span className="text-secondary">-</span> {feat}</li>))}
+        {renderLine(next(), '')}
+        {renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">## Key Technologies</h2>)}
+        {renderLine(next(), <span>{project.technologies?.join(' • ')}</span>)}
+      </div>
+    )
+  }
+
+  const renderSpec = () => {
+    let lineIdx = 0
+    const next = () => ++lineIdx
+    return (
+      <div className="space-y-1">
+        {renderLine(next(), <span className="text-yellow-400">{'{'}</span>)}
+        {renderLine(next(), <span>  <span className="text-blue-300">"specification"</span>: <span className="text-yellow-400">{'{'}</span></span>)}
+        {project.timeline && renderLine(next(), <span>    <span className="text-blue-300">"timeline"</span>: <span className="text-green-300">"{project.timeline.start} to {project.timeline.end || 'Present'}"</span>,</span>)}
+        {renderLine(next(), <span>    <span className="text-blue-300">"role"</span>: <span className="text-green-300">"{project.role}"</span>,</span>)}
+        {renderLine(next(), <span>    <span className="text-blue-300">"organization"</span>: <span className="text-green-300">"{project.company || 'Personal'}"</span>,</span>)}
+        {renderLine(next(), <span>    <span className="text-blue-300">"impact_metrics"</span>: [</span>)}
+        {project.results?.map((res, i) => renderLine(next(), <span className="pl-6"><span className="text-green-300">"{res}"</span>{i < (project.results?.length || 0) - 1 ? ',' : ''}</span>))}
+        {renderLine(next(), <span>    ]</span>)}
+        {renderLine(next(), <span>  <span className="text-yellow-400">{'}'}</span></span>)}
+        {renderLine(next(), <span className="text-yellow-400">{'}'}</span>)}
+      </div>
+    )
+  }
 
   const nextImage = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length)
+    if (!project.images) return
+    setCurrentImageIndex((prev) => (prev + 1) % project.images!.length)
   }
 
   const prevImage = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+    if (!project.images) return
+    setCurrentImageIndex((prev) => (prev - 1 + project.images!.length) % project.images!.length)
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto">
-      {/* Main Image - 更大尺寸 */}
-      <div className="relative rounded-xl overflow-hidden bg-dark-700 shadow-2xl" style={{ aspectRatio: '16/10' }}>
-        {images.length > 0 ? (
-          <img
-            src={images[currentIndex]}
-            alt={`${title} image ${currentIndex + 1}`}
-            className="w-full h-full object-contain bg-dark-700 transition-opacity duration-300"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement
-              const parent = target.parentElement
-              if (parent) {
-                parent.innerHTML = `
-                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/10 to-accent/10">
-                    <div class="text-center">
-                      <svg class="w-16 h-16 text-secondary/40 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd" />
-                      </svg>
-                      <p class="text-sm text-gray-400 font-mono">${title}</p>
-                    </div>
-                  </div>
-                `
-              }
-            }}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/10 to-accent/10">
-            <div className="text-center">
-              <Icon name="code" className="w-16 h-16 text-secondary/40 mx-auto mb-2" />
-              <p className="text-sm text-gray-400 font-mono">{title}</p>
+    <section id="project-detail" className="min-h-screen pt-12 md:pt-16 pb-20 font-mono relative overflow-hidden pointer-events-none">
+
+      <div className="relative z-10 container mx-auto px-2 md:px-4 max-w-[100rem] pointer-events-auto">
+
+        <div className="border border-gray-700 rounded-lg overflow-hidden shadow-2xl bg-black/95 backdrop-blur-sm">
+          {/* Terminal Header */}
+          <div className="w-full bg-[#1a1a1a] p-3 flex items-center gap-2 sticky top-0 z-20 border-b border-gray-800">
+            <div className="flex gap-2 mr-4">
+              <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400"></div>
+            </div>
+            <div className="flex-1 text-center text-xs md:text-sm text-gray-500 font-bold select-none">
+              natlee@mainframe: ~/projects/{projectId} (zsh)
             </div>
           </div>
-        )}
-        
-        {/* 漸變邊框效果 */}
-        <div className="absolute inset-0 rounded-xl border-2 border-gradient-to-r from-secondary/30 via-accent/30 to-secondary/30"></div>
-        
-        {/* Navigation Arrows */}
-        {images.length > 1 && (
-          <>
-            <button
-              onClick={prevImage}
-              className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-dark-900/90 hover:bg-dark-900 text-white p-4 rounded-full transition-all duration-300 hover:scale-110 shadow-xl"
-            >
-              <Icon name="arrow-left" className="w-6 h-6" />
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-dark-900/90 hover:bg-dark-900 text-white p-4 rounded-full transition-all duration-300 hover:scale-110 shadow-xl"
-            >
-              <Icon name="arrow-right" className="w-6 h-6" />
-            </button>
-          </>
-        )}
 
-        {/* Image Counter */}
-        {images.length > 1 && (
-          <div className="absolute bottom-6 right-6 bg-dark-900/90 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
-            {currentIndex + 1} / {images.length}
-          </div>
-        )}
-      </div>
+          <div className="p-4 md:p-6 text-gray-300">
 
-      {/* Thumbnail Navigation */}
-      {images.length > 1 && (
-        <div className="flex justify-center gap-4 mt-8 overflow-x-auto pb-2">
-          {images.map((image, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`relative rounded-lg overflow-hidden border-2 transition-all duration-300 flex-shrink-0 ${
-                index === currentIndex 
-                  ? 'border-secondary shadow-lg shadow-secondary/20 w-24 h-16' 
-                  : 'border-gray-600 hover:border-gray-400 w-20 h-14'
-              }`}
-            >
-              <img
-                src={image}
-                alt={`${title} thumbnail ${index + 1}`}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement
-                  const parent = target.parentElement
-                  if (parent) {
-                    parent.innerHTML = `
-                      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/10 to-accent/10">
-                        <div class="text-center">
-                          <svg class="w-8 h-8 text-secondary/40 mx-auto mb-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd" />
-                          </svg>
-                          <p class="text-xs text-gray-400 font-mono">${title}</p>
+            {/* Command Prompt */}
+            <div className="mb-8 border-b border-gray-900 pb-6 pt-2">
+              <span className="text-secondary font-bold">natlee@mainframe</span>:<span className="text-blue-500">~/projects/{projectId}</span>$ vim README.md
+            </div>
+
+            <div className="flex flex-col max-w-[100rem] mx-auto bg-black/40 backdrop-blur-md rounded-lg overflow-hidden shadow-2xl">
+
+              {/* Main Content Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 min-h-0">
+
+                {/* Left Column: Vim Editor */}
+                <div className="flex flex-col h-[700px] lg:h-[850px] border-b lg:border-b-0 lg:border-r border-gray-800 bg-black/20">
+
+                  {/* Tab Bar */}
+                  <div className="flex bg-black/40 border-b border-gray-800 px-4 pt-2 gap-1 overflow-x-auto select-none flex-shrink-0">
+                    {(['README.md', 'config.ts', 'spec.json'] as Tab[]).map(tab => (
+                      <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        className={`
+                          px-4 py-2 text-xs font-mono rounded-t transition-colors whitespace-nowrap
+                          ${activeTab === tab
+                            ? 'bg-black/20 text-secondary border-t border-x border-gray-800 font-bold'
+                            : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'
+                          }
+                        `}
+                      >
+                        <span className="mr-2">{tab === 'README.md' ? '📘' : tab === 'config.ts' ? '⚙️' : '📋'}</span>
+                        {tab}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="flex-1 p-4 lg:p-6 overflow-y-auto custom-scrollbar relative">
+                    {/* Breadcrumbs / Vim Header */}
+                    <div className="mb-6 text-gray-500 font-mono text-xs flex justify-between items-center opacity-70">
+                      <div className="flex items-center gap-2">
+                        <Link href="/projects" className="hover:text-secondary hover:underline text-blue-400">
+                          ~/projects
+                        </Link>
+                        <span>/</span>
+                        <span className="text-gray-300">{project.id}</span>
+                        <span>/</span>
+                        <span className="text-secondary">{activeTab}</span>
+                      </div>
+                      <span>vim 8.2</span>
+                    </div>
+
+                    <div className="font-mono">
+                      {activeTab === 'README.md' && renderREADME()}
+                      {activeTab === 'config.ts' && renderConfigTab()}
+                      {activeTab === 'spec.json' && renderSpec()}
+                    </div>
+                  </div>
+
+                  {/* Status Bar */}
+                  <div className="bg-black/40 border-t border-gray-800 p-1 px-4 flex justify-between items-center text-[10px] font-mono select-none flex-shrink-0">
+                    <div className="flex items-center gap-4">
+                      <span className="bg-secondary text-black px-2 py-0.5 font-bold">NORMAL</span>
+                      <span className="text-gray-500 uppercase tracking-widest">{activeTab}</span>
+                    </div>
+                    <div className="flex gap-4 text-gray-600">
+                      <span>utf-8</span>
+                      <span>Ln 1, Col 1</span>
+                      <span>100%</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column: Preview / Images */}
+                <div className="bg-black/40 flex flex-col h-[600px] lg:h-[850px]">
+
+                  {/* Fake Browser Toolbar */}
+                  <div className="bg-black/60 border-b border-gray-800 p-2.5 flex items-center gap-4 flex-shrink-0">
+                    <div className="flex gap-1.5 ml-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                    </div>
+                    <div className="flex-1 bg-black rounded p-1.5 px-3 text-[10px] text-gray-500 font-mono flex justify-between items-center border border-gray-800">
+                      <span className="truncate opacity-60">
+                        {project.links?.demo || project.links?.github || `localhost:3000/projects/${project.id}`}
+                      </span>
+                      <div className="flex gap-2">
+                        <span className="text-gray-600 hover:text-white cursor-pointer transition-colors">↻</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content Area */}
+                  <div className="flex-1 flex flex-col bg-black/20 relative overflow-hidden min-h-0">
+                    {project.images && project.images.length > 0 ? (
+                      <div className="relative w-full h-full flex flex-col">
+
+                        {/* Image Container */}
+                        <div className="flex-1 relative flex items-center justify-center p-4 lg:p-8 min-h-0">
+                          {/* Navigation Buttons */}
+                          {project.images.length > 1 && (
+                            <>
+                              <button
+                                onClick={prevImage}
+                                className="absolute left-4 z-20 p-2 bg-black/50 hover:bg-secondary text-white rounded-full border border-gray-700 hover:border-secondary transition-all"
+                              >
+                                <span className="text-xl">←</span>
+                              </button>
+                              <button
+                                onClick={nextImage}
+                                className="absolute right-4 z-20 p-2 bg-black/50 hover:bg-secondary text-white rounded-full border border-gray-700 hover:border-secondary transition-all"
+                              >
+                                <span className="text-xl">→</span>
+                              </button>
+                            </>
+                          )}
+
+                          <div className="relative w-full h-full">
+                            <Image
+                              src={project.images[currentImageIndex]}
+                              alt={`Preview ${currentImageIndex}`}
+                              fill
+                              className="object-contain"
+                              priority
+                            />
+                          </div>
+                        </div>
+
+                        {/* Caption / Image Counter */}
+                        <div className="bg-[#111] border-t border-gray-800 p-3 flex justify-between items-center text-xs font-mono text-gray-500 flex-shrink-0">
+                          <span>RENDER_OUTPUT_{currentImageIndex + 1}.PNG</span>
+                          <div className="flex items-center gap-2">
+                            <span>{currentImageIndex + 1} / {project.images.length}</span>
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                          </div>
+                        </div>
+
+                      </div>
+                    ) : (
+                      <div className="h-full flex flex-col items-center justify-center text-gray-500 font-mono space-y-6">
+                        <div className="text-8xl opacity-30 select-none">404</div>
+                        <div className="text-center space-y-2">
+                          <div className="text-xs font-bold text-red-400 flex items-center gap-2 justify-center">
+                            <span className="animate-ping w-2 h-2 bg-red-500 rounded-full"></span>
+                            NO_ASSETS_FOUND
+                          </div>
+                          <p className="text-[10px] text-gray-400 max-w-[200px] mx-auto text-center leading-relaxed">
+                            Module visual buffers are currently null or disconnected for ID: {project.id}
+                          </p>
                         </div>
                       </div>
-                    `
-                  }
-                }}
-              />
-              {/* 選中指示器 */}
-              {index === currentIndex && (
-                <div className="absolute inset-0 bg-secondary/20 flex items-center justify-center">
-                  <div className="w-3 h-3 bg-secondary rounded-full"></div>
+                    )}
+
+                    {/* Scanline Overlay */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,18,18,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[size:100%_2px,3px_100%] pointer-events-none z-10"></div>
+                  </div>
                 </div>
-              )}
-            </button>
-          ))}
+              </div>
+
+              {/* AI Terminal Footer - Full Width */}
+              <AIChatTerminal
+                projectId={project.id}
+                projectTitle={project.title}
+                technologies={project.technologies}
+                isCollapsed={isTerminalCollapsed}
+                onToggleCollapse={() => setIsTerminalCollapsed(!isTerminalCollapsed)}
+              />
+
+            </div>
+          </div>
         </div>
-      )}
-    </div>
+      </div>
+    </section>
   )
 }

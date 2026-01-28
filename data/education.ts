@@ -13,6 +13,7 @@ export interface Education {
   startYear: string
   endYear: string
   logo: string
+  achievements?: string[]
 }
 
 export const educationData: Education[] = educationJson as Education[]
