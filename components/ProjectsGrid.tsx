@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { allProjectsData, getAllCategories } from '@/data/projects'
-import Icon from './Icon'
 
 export default function ProjectsGrid() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
@@ -22,7 +21,13 @@ export default function ProjectsGrid() {
   // Simple project stats
   const totalProjects = allProjectsData.length
   const yearValues = allProjectsData
-    .map((project) => (project.year as number | undefined))
+    .map((project) => {
+      const startYear = project.timeline?.start
+      if (!startYear || startYear === 'Present') return undefined
+      // Extract year from formats like "2024-12", "2021", etc.
+      const match = startYear.match(/^\d{4}/)
+      return match ? parseInt(match[0]) : undefined
+    })
     .filter((year): year is number => typeof year === 'number')
     .sort((a, b) => a - b)
   const yearRange =
