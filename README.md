@@ -1,369 +1,100 @@
-# Nat Lee Portfolio
+# Nat Lee Portfolio | `sudo ./view_portfolio.sh`
 
-A modern, tech-savvy portfolio website built with React and Next.js, showcasing professional experience, projects, and technical expertise in AI/ML, backend development, and software engineering.
+A highly interactive, **Linux/Unix terminal-themed** personal portfolio website. Built with **Next.js 14**, **React 18**, and **TypeScript**, this project simulates a Zsh shell environment complete with command-line navigation, glitch effects, and a hacker-aesthetic UI.
 
-## ✨ Features
+> "There is no place like ~"
 
-- 🚀 **Modern Tech Stack**: Built with Next.js 14, React 18, and TypeScript
-- 🎨 **Tech-Savvy Design**: Dark theme with warm color palette and animated effects
-- 📱 **Responsive Design**: Fully responsive across all devices
-- ⚡ **Performance Optimized**: Static site generation with Next.js
-- 🌐 **Multi-Page Structure**: Separate pages for About, Experience, Skills, Education, and Projects
-- 🎯 **Interactive Elements**: Animated progress bars, hover effects, and smooth transitions
-- 🔧 **Unified Icon System**: Centralized icon management with react-icons
-- 📊 **Dynamic Data**: JSON-based data management for easy content updates
-- 🏢 **Company Logos**: Dynamic company logo display with fallback handling
-- 🌍 **Multi-Language Support**: Language skills showcase with proficiency levels
+## 🖥️ System Features
 
-## 🛠 Tech Stack
+- **💻 Interactive Terminal**: Fully functional terminal interface with support for custom commands (e.g., `./intro.sh`, `ls -l`).
+- **⌨️ Command-Line Navigation**: Navigate the site using simulated shell commands or traditional UI clicks.
+- **👾 Glitch & Cyberpunk Aesthetics**: Custom CRT animations, text glitch effects, and "matrix-style" visuals.
+- **📁 File System Metaphor**: Projects and pages are presented as files and directories in a file explorer (Ranger-style).
+- **🚀 Modern Spec**: Built on the latest Next.js App Router for blazing fast static generation.
+- **🎨 Dynamic Theming**: "Dark Mode" by default with semantic highlighting for code and terminal output.
+- **📊 Real-time Stats**: "System" statistics (career stats) displayed like server metrics.
 
-- **Framework**: Next.js 14 with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS with custom theme
-- **Icons**: react-icons (Simple Icons & Font Awesome)
-- **Images**: Next.js Image optimization
-- **Deployment**: GitHub Pages (via GitHub Actions)
-- **Data Management**: JSON files for content
+## 🛠️ Kernel Specs (Tech Stack)
 
-## 🚀 Quick Start
+| Component | Specification |
+|-----------|---------------|
+| **Core** | Next.js 14 (App Router), React 18, TypeScript |
+| **Shell UI** | Tailwind CSS, Framer Motion (animations) |
+| **Icons** | react-icons (FontAwesome, Simple Icons) |
+| **Deployment** | GitHub Pages (Static Export) |
+| **Package Manager** | npm / yarn |
+
+## 🚀 Boot Sequence (Quick Start)
 
 ### Prerequisites
+- Node.js 18+
+- npm or yarn
 
-- **Node.js** 18+ 
-- **npm** or **yarn**
-- **Git**
+### Installation
 
-### Installation & Setup
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/natlee/NatLee.github.io.git
+    cd NatLee.github.io
+    ```
 
-1. **Clone the repository:**
+2.  **Install modules:**
+    ```bash
+    npm install
+    ```
+
+3.  **Initialize local server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Access Localhost:**
+    Open `http://localhost:3000` to establish a session.
+
+## 📂 File System Structure
+
+```
+/home/natlee/portfolio
+├── app/                  # Kernel (Next.js App Router)
+├── components/           # UI Modules (Terminal, Shell, Glitch Components)
+│   ├── TerminalCommand.tsx   # Command execution logic
+│   ├── TechHero.tsx          # Main boot screen / Hero
+│   └── ...
+├── data/                 # System Data (JSON files for content)
+├── public/               # Static Assets
+└── tailwind.config.js    # UI Configuration
+```
+
+## 📜 Available Commands (Scripts)
+
 ```bash
-git clone https://github.com/natlee/NatLee.github.io.git
-cd NatLee.github.io
+# Development Mode
+npm run dev          # Start local development server
+
+# Production Build
+npm run build        # Compile system binaries
+
+# Static Export
+npm run build:pages  # Export static site for GitHub Pages
+
+# Deployment
+npm run deploy       # Deploy to remote (GitHub Pages)
+
+# System Check
+npm run lint         # Run code analysis
 ```
 
-2. **Install dependencies:**
-```bash
-npm install
-```
+## 🔧 Deployment
 
-3. **Start development server:**
-```bash
-npm run dev
-```
+This system is configured for automatic deployment via **GitHub Actions**.
+Pushes to the `main` branch trigger a workflow that builds and deploys the static site to the `gh-pages` branch.
 
-4. **Open your browser:**
-Navigate to [http://localhost:3000](http://localhost:3000) to view the portfolio.
+## 👤 User Profile
 
-### Available Scripts
+**Nat Lee**
+b. Software Engineer // Full Stack Developer
 
-```bash
-# Development
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
+Edit `assets/data/personal.json` to update user variables such as bio, contact info, and social links.
 
-# Static Export (for GitHub Pages)
-npm run build:pages  # Build static files
-npm run deploy       # Build and prepare for deployment
-
-# Code Quality
-npm run lint         # Run ESLint
-npm run type-check   # Run TypeScript checks
-```
-
-### Building for Production
-
-**Standard Build:**
-```bash
-npm run build
-```
-Built files will be in the `.next/` directory.
-
-**Static Export (GitHub Pages):**
-```bash
-npm run build:pages
-```
-Static files will be in the `out/` directory, ready for deployment.
-
-## 🌟 Page Features
-
-### Homepage (`/`)
-- **TechHero**: Animated hero section with particle effects
-- **QuickStats**: Career statistics and highlights
-- **FeaturedProjects**: Showcase of top projects with interactive cards
-
-### About Page (`/about`)
-- **Personal Information**: Bio, contact details, and social links
-- **Language Skills**: Multi-language proficiency with progress bars
-- **Career Highlights**: Statistics and achievements
-- **Areas of Interest**: Interactive interest tags
-
-### Experience Page (`/experience`)
-- **Timeline View**: Chronological work experience
-- **Company Grouping**: Smart grouping of positions within same company
-- **Company Logos**: Dynamic logo display with fallback handling
-- **Detailed Descriptions**: Responsibilities, achievements, and tech stack
-
-### Skills Page (`/skills`)
-- **Categorized Skills**: Organized by technology type
-- **Progress Visualization**: Animated progress bars
-- **Proficiency Levels**: Expert, Advanced, Intermediate, Beginner
-- **Experience Years**: Years of experience for each skill
-
-### Education Page (`/education`)
-- **Academic Timeline**: Educational background
-- **School Information**: Institution details and logos
-- **Degree Information**: Major, minor, and graduation details
-
-### Projects Page (`/projects`)
-- **Project Grid**: Filterable and searchable project showcase
-- **Category Filtering**: Filter by technology or project type
-- **Search Functionality**: Real-time project search
-- **Project Details**: Individual project pages with full descriptions
-
-## 📁 Project Structure
-
-```
-├── app/                          # Next.js 14 App Router
-│   ├── about/                   # About page
-│   ├── experience/              # Experience page
-│   ├── skills/                  # Skills page
-│   ├── education/               # Education page
-│   ├── projects/                # Projects pages
-│   │   └── [id]/               # Dynamic project detail pages
-│   ├── layout.tsx              # Root layout
-│   ├── page.tsx                # Home page
-│   └── globals.css             # Global styles
-├── components/                   # React components
-│   ├── Navigation.tsx          # Site navigation
-│   ├── TechHero.tsx            # Homepage hero section
-│   ├── QuickStats.tsx          # Homepage statistics
-│   ├── FeaturedProjects.tsx    # Featured projects showcase
-│   ├── About.tsx               # About page component
-│   ├── Experience.tsx          # Experience timeline
-│   ├── Skills.tsx              # Skills visualization
-│   ├── Education.tsx           # Education timeline
-│   ├── ProjectsGrid.tsx        # Projects grid with filtering
-│   ├── ProjectDetail.tsx       # Individual project details
-│   ├── Icon.tsx                # Unified icon component
-│   └── ImageSlider.tsx         # Project image carousel
-├── data/                        # TypeScript data interfaces
-│   ├── personal.ts             # Personal information
-│   ├── experience.ts           # Work experience
-│   ├── skills.ts               # Technical skills
-│   ├── education.ts            # Education history
-│   └── projects.ts             # Project data
-├── assets/                      # JSON data files
-│   └── data/                   # Content data
-│       ├── personal.json       # Personal information
-│       ├── experience.json     # Work experience
-│       ├── skills.json         # Technical skills
-│       ├── education.json      # Education history
-│       └── projects.json       # Project data
-├── public/                      # Static assets
-│   └── CNAME                   # Custom domain config
-├── .github/                     # GitHub configuration
-│   └── workflows/              # GitHub Actions
-│       └── deploy.yml          # Deployment workflow
-├── tailwind.config.js          # Tailwind CSS configuration
-├── next.config.js              # Next.js configuration
-└── package.json                # Dependencies and scripts
-```
-
-## Deployment
-
-This project is configured to automatically deploy to GitHub Pages using GitHub's official Next.js deployment workflow. The workflow follows GitHub's recommended practices for Next.js static site deployment.
-
-### GitHub Pages Setup
-
-To enable automatic deployment to GitHub Pages:
-
-1. **Enable GitHub Pages**:
-   - Go to your repository Settings → Pages
-   - Under "Build and deployment", set Source to "GitHub Actions"
-   - This will create the `github-pages` environment automatically
-
-2. **Configure Repository Settings**:
-   - Ensure your repository is public (or you have GitHub Pro for private repos)
-   - The workflow will automatically build and deploy on each push to `main`
-   - Only pushes to the default branch (`main`) will trigger deployment
-
-3. **First Deployment**:
-   - Push your code to the `main` branch
-   - GitHub Actions will automatically build and deploy
-   - Check the Actions tab to monitor the deployment process
-
-### Manual Deployment
-
-If you need to deploy manually:
-
-1. Build the project: `npm run build`
-2. Upload the contents of the `out/` directory to your hosting service
-
-### GitHub Actions Workflow
-
-The deployment workflow (`.github/workflows/deploy.yml`) follows GitHub's official Next.js template:
-
-1. **Trigger**: On push to `main` branch or manual workflow dispatch
-2. **Build Job**:
-   - Detects package manager (npm/yarn) automatically
-   - Sets up Node.js 20 with package manager cache
-   - Configures Pages with Next.js static site generator
-   - Restores Next.js build cache for faster builds
-   - Installs dependencies using detected package manager
-   - Builds the Next.js application
-   - Uploads static files as artifact
-3. **Deploy Job**:
-   - Uses the `github-pages` environment
-   - Deploys the artifact to GitHub Pages
-
-### Workflow Features
-
-- **Package Manager Detection**: Automatically detects npm or yarn
-- **Advanced Caching**: Caches Next.js build files for faster subsequent builds
-- **Static Site Generator**: Automatically configures Next.js for static export
-- **Environment Protection**: Uses GitHub's environment protection rules
-- **Concurrency Control**: Prevents multiple deployments from running simultaneously
-- **Manual Trigger**: Can be triggered manually from the Actions tab
-
-### Environment Protection
-
-The workflow uses the `github-pages` environment with deployment protection rules:
-- Only the default branch (`main`) can deploy to this environment
-- This ensures only production-ready code is deployed
-
-### Custom Domain (Optional)
-
-To use a custom domain:
-
-1. Add your domain to the `CNAME` file in the `public/` directory
-2. Configure your DNS settings to point to GitHub Pages
-3. Enable custom domain in repository Settings → Pages
-
-## 🎨 Customization
-
-### Adding New Projects
-
-Edit `assets/data/projects.json` to add new portfolio items:
-
-```json
-{
-  "id": "project-id",
-  "title": "Project Name",
-  "description": "Project description",
-  "category": "Web Development",
-  "techStack": ["React", "TypeScript", "Tailwind CSS"],
-  "images": ["image1.jpg", "image2.jpg"],
-  "githubUrl": "https://github.com/username/project",
-  "liveUrl": "https://project-url.com",
-  "featured": true,
-  "opensource": false,
-  "features": ["Feature 1", "Feature 2"],
-  "challenges": ["Challenge 1", "Challenge 2"],
-  "solutions": ["Solution 1", "Solution 2"],
-  "results": ["Result 1", "Result 2"]
-}
-```
-
-### Updating Personal Information
-
-Edit `assets/data/personal.json` to update personal details:
-
-```json
-{
-  "name": "Your Name",
-  "nameEn": "Your English Name",
-  "title": "Software Engineer",
-  "bio": "Your bio description",
-  "email": "your.email@example.com",
-  "avatar": "path/to/avatar.jpg",
-  "socialLinks": [
-    {
-      "name": "GitHub",
-      "url": "https://github.com/username"
-    }
-  ],
-  "interests": ["AI/ML", "Web Development", "Backend"]
-}
-```
-
-### Adding Work Experience
-
-Edit `assets/data/experience.json` to add new work experience:
-
-```json
-{
-  "id": "company-id",
-  "title": "Job Title",
-  "company": "Company Name",
-  "companyId": "company-id",
-  "companyLogo": "https://company-logo-url.com",
-  "department": "Department Name",
-  "location": "City, Country",
-  "duration": "Jan 2023 - Present",
-  "summary": "Job summary",
-  "responsibilities": ["Responsibility 1", "Responsibility 2"],
-  "techStack": ["Python", "React", "Docker"],
-  "achievements": ["Achievement 1", "Achievement 2"]
-}
-```
-
-### Customizing Skills
-
-Edit `assets/data/skills.json` to update technical skills:
-
-```json
-[
-  {
-    "id": "category-id",
-    "name": "Category Name",
-    "skills": [
-      {
-        "name": "Skill Name",
-        "level": "Expert",
-        "years": 5,
-        "description": "Skill description"
-      }
-    ]
-  }
-]
-```
-
-### Styling & Theming
-
-The project uses Tailwind CSS with a custom warm color theme. Customize colors in `tailwind.config.js`:
-
-```javascript
-theme: {
-  extend: {
-    colors: {
-      'dark': {
-        800: '#1a1a1a',
-        900: '#0f0f0f',
-      },
-      'accent': '#ff6b35',
-      'secondary': '#f7931e',
-      'warm': {
-        400: '#ff8c42',
-        500: '#ff6b35',
-        600: '#e55a2b',
-      }
-    }
-  }
-}
-```
-
-### Icon Management
-
-The project uses a unified icon system. Add new icons in `components/Icon.tsx`:
-
-```typescript
-// Add to the appropriate icon category
-const coreTechIcons: Record<string, JSX.Element> = {
-  'NewTech': <SiNewTech className={className} size={size} />,
-  // ... other icons
-}
-```
-
-## Contributor
-**Built with ❤️ by Nat Lee**
+---
+*Built with <3 and caffeine by Nat Lee*
