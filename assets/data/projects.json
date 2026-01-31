@@ -1616,5 +1616,116 @@
     "links": {
       "github": "https://github.com/NatLee/obsidian-attachmenter"
     }
+  },
+  {
+    "id": "natlee.github.io.v0",
+    "title": "Nat Lee | Personal Link Page",
+    "subtitle": "Personal Link Page (v0)",
+    "description": "The first iteration of my personal website, acting as a central hub for my online presence.",
+    "longDescription": "This static website serves as a central hub for all of Nat Lee's online presence, including blogs, social profiles, tech platforms, and open-source projects. The site features a dynamic tile-based layout that loads content from a JSON configuration file.",
+    "category": "Web Development",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "images": [
+      "https://github.com/NatLee/natlee.github.io.v0/blob/main/docs/cover.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/natlee.github.io.v0",
+    "technologies": [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "jQuery",
+      "Font Awesome"
+    ],
+    "features": [
+      "Dynamic Content Loading",
+      "Responsive Design",
+      "Interactive Tile Cards",
+      "Section-Based Organization"
+    ],
+    "timeline": {
+      "start": "2018",
+      "end": "2018",
+      "duration": "1 week"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/natlee.github.io.v0"
+    }
+  },
+  {
+    "id": "natlee.github.io.v1",
+    "title": "Nat Lee | Portfolio (v1)",
+    "subtitle": "Flatten Style Portfolio",
+    "description": "A modern personal portfolio website built with Next.js and TypeScript, featuring a strict 'Flatten' design style.",
+    "longDescription": "A modern personal portfolio website built with Next.js, React, and TypeScript. Features a dark theme, responsive design, and dynamic content loading. This version introduced a more structured approach to showcasing projects and skills.",
+    "category": "Web Development",
+    "status": "Completed",
+    "featured": false,
+    "opensource": true,
+    "images": [
+      "https://github.com/NatLee/natlee.github.io.v1/blob/main/docs/cover.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/natlee.github.io.v1",
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "GitHub Pages"
+    ],
+    "features": [
+      "Modern Tech Stack",
+      "Tech-Savvy Design",
+      "Responsive Design",
+      "Multi-Page Structure"
+    ],
+    "timeline": {
+      "start": "2025",
+      "end": "2025",
+      "duration": "1 week"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/natlee.github.io.v1"
+    }
+  },
+  {
+    "id": "natlee.github.io.v3",
+    "title": "Nat Lee Portfolio | Financial Terminal",
+    "subtitle": "Stonk Style Financial Terminal (v3)",
+    "description": "A fully interactive trading interface featuring dynamic candlestick charts and live price simulation.",
+    "longDescription": "The current version of the portfolio, designed as a high-frequency trading terminal. It features a fully interactive trading interface with dynamic candlestick charts, live price simulation (NAT/USD), and real-time analytics representing career growth and skills.",
+    "category": "Web Development",
+    "status": "In Progress",
+    "featured": true,
+    "opensource": true,
+    "images": [
+      "https://github.com/NatLee/natlee.github.io.v3/blob/main/docs/cover.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/natlee.github.io.v3",
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "App Router"
+    ],
+    "features": [
+      "Simulated Trading Platform",
+      "Real-time Analytics",
+      "Portfolio Dashboard",
+      "High-Frequency UI"
+    ],
+    "timeline": {
+      "start": "2026",
+      "end": "2026",
+      "duration": "1 week"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/natlee.github.io.v3"
+    }
   }
 ]
