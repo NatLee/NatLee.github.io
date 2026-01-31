@@ -1619,8 +1619,8 @@
   },
   {
     "id": "natlee.github.io.v0",
-    "title": "Nat Lee | Personal Link Page",
-    "subtitle": "Personal Link Page (v0)",
+    "title": "Self Portfolio V0",
+    "subtitle": "Personal Link Page",
     "description": "The first iteration of my personal website, acting as a central hub for my online presence.",
     "longDescription": "This static website serves as a central hub for all of Nat Lee's online presence, including blogs, social profiles, tech platforms, and open-source projects. The site features a dynamic tile-based layout that loads content from a JSON configuration file.",
     "category": "Web Development",
@@ -1656,7 +1656,7 @@
   },
   {
     "id": "natlee.github.io.v1",
-    "title": "Nat Lee | Portfolio (v1)",
+    "title": "Self Portfolio V1",
     "subtitle": "Flatten Style Portfolio",
     "description": "A modern personal portfolio website built with Next.js and TypeScript, featuring a strict 'Flatten' design style.",
     "longDescription": "A modern personal portfolio website built with Next.js, React, and TypeScript. Features a dark theme, responsive design, and dynamic content loading. This version introduced a more structured approach to showcasing projects and skills.",
@@ -1693,8 +1693,8 @@
   },
   {
     "id": "natlee.github.io.v3",
-    "title": "Nat Lee Portfolio | Financial Terminal",
-    "subtitle": "Stonk Style Financial Terminal (v3)",
+    "title": "Self Portfolio V3",
+    "subtitle": "Stonk Style Financial Terminal",
     "description": "A fully interactive trading interface featuring dynamic candlestick charts and live price simulation.",
     "longDescription": "The current version of the portfolio, designed as a high-frequency trading terminal. It features a fully interactive trading interface with dynamic candlestick charts, live price simulation (NAT/USD), and real-time analytics representing career growth and skills.",
     "category": "Web Development",
