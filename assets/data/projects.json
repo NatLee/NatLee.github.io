@@ -1628,7 +1628,7 @@
     "featured": false,
     "opensource": true,
     "images": [
-      "https://github.com/NatLee/natlee.github.io.v0/blob/main/docs/cover.png"
+      "https://raw.githubusercontent.com/NatLee/natlee.github.io.v0/refs/heads/main/docs/cover.png"
     ],
     "githubUrl": "https://github.com/NatLee/natlee.github.io.v0",
     "technologies": [
@@ -1665,7 +1665,7 @@
     "featured": false,
     "opensource": true,
     "images": [
-      "https://github.com/NatLee/natlee.github.io.v1/blob/main/docs/cover.png"
+      "https://raw.githubusercontent.com/NatLee/natlee.github.io.v1/refs/heads/main/docs/cover.png"
     ],
     "githubUrl": "https://github.com/NatLee/natlee.github.io.v1",
     "technologies": [
@@ -1702,7 +1702,7 @@
     "featured": true,
     "opensource": true,
     "images": [
-      "https://github.com/NatLee/natlee.github.io.v3/blob/main/docs/cover.png"
+      "https://raw.githubusercontent.com/NatLee/natlee.github.io.v3/refs/heads/main/docs/cover.png"
     ],
     "githubUrl": "https://github.com/NatLee/natlee.github.io.v3",
     "technologies": [
