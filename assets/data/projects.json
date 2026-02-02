@@ -112,9 +112,9 @@
     "status": "Completed",
     "featured": false,
     "opensource": false,
-    "images": [],
-    "description": "Built a distributed sentiment analysis platform processing over 3 billion data points with 30% accuracy improvement using PaddlePaddle and Elasticsearch.",
-    "longDescription": "Developed a comprehensive sentiment analysis platform capable of processing massive amounts of social media and news data. The system improved model accuracy by 30% compared to previous solutions and successfully handled over 3 billion data points.",
+    "images": ["https://suite-info.keypo.ai/_next/static/media/1.6edb6f01.png", "https://image-cdn.learnin.tw/bnextmedia/image/album/2025-04/picture-54c6f4c8c0a2b9bf4df8a349d8faa927.png"],
+    "description": "Led the development of the core sentiment analysis AI engine for company products, processing web-crawled data to generate sentiment insights integrated with Keypo and DailyView platforms.",
+    "longDescription": "As the lead engineer for the sentiment analysis AI engine, I developed and maintained the core emotion detection model that processes data from web crawlers. The system analyzes sentiment from crawled content and outputs emotion classification results, which are then integrated with the company's flagship products—Keypo (大數據引擎) and DailyView (網路溫度計)—to provide users with comprehensive online sentiment and buzz analysis. The platform successfully processed over 3 billion data points with a 30% accuracy improvement, enabling real-time sentiment monitoring and trend analysis for business intelligence.",
     "technologies": [
       "Python",
       "PaddlePaddle",
@@ -125,11 +125,13 @@
       "Redis"
     ],
     "features": [
-      "Real-time sentiment analysis",
-      "Multi-language support",
-      "Scalable microservices architecture",
-      "Custom model training pipeline",
-      "Analytics dashboard"
+      "Core sentiment analysis AI engine development",
+      "Web crawler data processing pipeline",
+      "Emotion classification and sentiment output",
+      "Integration with Keypo and DailyView platforms",
+      "Online sentiment and buzz analysis for users",
+      "Real-time sentiment monitoring",
+      "Scalable microservices architecture"
     ],
     "challenges": [
       "Processing 3+ billion data points",
@@ -138,16 +140,20 @@
       "System scalability"
     ],
     "solutions": [
-      "Implemented distributed processing with Kubernetes",
-      "Optimized models using PaddlePaddle framework",
-      "Built efficient data pipeline with Elasticsearch",
-      "Applied advanced NLP techniques"
+      "Developed and maintained the core sentiment analysis AI engine",
+      "Built data processing pipeline from web crawlers to emotion classification",
+      "Integrated sentiment analysis results with Keypo and DailyView products",
+      "Implemented distributed processing with Kubernetes for scalability",
+      "Optimized models using PaddlePaddle framework for 30% accuracy improvement",
+      "Built efficient data pipeline with Elasticsearch for real-time analysis"
     ],
     "results": [
-      "Processed over 3 billion data points",
-      "Achieved 30% improvement in accuracy",
-      "Deployed scalable microservices architecture",
-      "Reduced processing time by 50%"
+      "Successfully deployed core sentiment analysis AI engine for company products",
+      "Processed over 3 billion data points from web crawlers",
+      "Achieved 30% improvement in emotion classification accuracy",
+      "Integrated sentiment analysis with Keypo and DailyView platforms",
+      "Enabled real-time online sentiment and buzz analysis for end users",
+      "Deployed scalable microservices architecture supporting high-volume processing"
     ],
     "timeline": {
       "start": "2021-12",
