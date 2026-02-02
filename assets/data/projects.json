@@ -1704,7 +1704,7 @@
     "description": "A fully interactive trading interface featuring dynamic candlestick charts and live price simulation.",
     "longDescription": "The current version of the portfolio, designed as a high-frequency trading terminal. It features a fully interactive trading interface with dynamic candlestick charts, live price simulation (NAT/USD), and real-time analytics representing career growth and skills.",
     "category": "Web Development",
-    "status": "In Progress",
+    "status": "Completed",
     "featured": true,
     "opensource": true,
     "images": [
