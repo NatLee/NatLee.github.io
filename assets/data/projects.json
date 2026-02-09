@@ -237,7 +237,7 @@
     "githubUrl": "https://github.com/NatLee/django-project-template",
     "category": "Web Development",
     "status": "Completed",
-    "featured": true,
+    "featured": false,
     "opensource": true,
     "technologies": [
       "Python",
@@ -670,7 +670,7 @@
     "githubUrl": "https://github.com/NatLee/GURA-gru-unit-for-recognizing-affect",
     "category": "AI/ML",
     "status": "Completed",
-    "featured": true,
+    "featured": false,
     "opensource": true,
     "technologies": [
       "Python",
@@ -728,7 +728,7 @@
     "githubUrl": "https://github.com/NatLee/simply-nlp-classification-labeling-platform",
     "category": "AI/ML",
     "status": "Completed",
-    "featured": true,
+    "featured": false,
     "opensource": true,
     "technologies": [
       "Python",
