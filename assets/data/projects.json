@@ -112,9 +112,9 @@
     "status": "Completed",
     "featured": false,
     "opensource": false,
-    "images": [],
-    "description": "Built a distributed sentiment analysis platform processing over 3 billion data points with 30% accuracy improvement using PaddlePaddle and Elasticsearch.",
-    "longDescription": "Developed a comprehensive sentiment analysis platform capable of processing massive amounts of social media and news data. The system improved model accuracy by 30% compared to previous solutions and successfully handled over 3 billion data points.",
+    "images": ["https://suite-info.keypo.ai/_next/static/media/1.6edb6f01.png", "https://image-cdn.learnin.tw/bnextmedia/image/album/2025-04/picture-54c6f4c8c0a2b9bf4df8a349d8faa927.png"],
+    "description": "Led the development of the core sentiment analysis AI engine for company products, processing web-crawled data to generate sentiment insights integrated with Keypo and DailyView platforms.",
+    "longDescription": "As the lead engineer for the sentiment analysis AI engine, I developed and maintained the core emotion detection model that processes data from web crawlers. The system analyzes sentiment from crawled content and outputs emotion classification results, which are then integrated with the company's flagship products—Keypo (大數據引擎) and DailyView (網路溫度計)—to provide users with comprehensive online sentiment and buzz analysis. The platform successfully processed over 3 billion data points with a 30% accuracy improvement, enabling real-time sentiment monitoring and trend analysis for business intelligence.",
     "technologies": [
       "Python",
       "PaddlePaddle",
@@ -125,11 +125,13 @@
       "Redis"
     ],
     "features": [
-      "Real-time sentiment analysis",
-      "Multi-language support",
-      "Scalable microservices architecture",
-      "Custom model training pipeline",
-      "Analytics dashboard"
+      "Core sentiment analysis AI engine development",
+      "Web crawler data processing pipeline",
+      "Emotion classification and sentiment output",
+      "Integration with Keypo and DailyView platforms",
+      "Online sentiment and buzz analysis for users",
+      "Real-time sentiment monitoring",
+      "Scalable microservices architecture"
     ],
     "challenges": [
       "Processing 3+ billion data points",
@@ -138,16 +140,20 @@
       "System scalability"
     ],
     "solutions": [
-      "Implemented distributed processing with Kubernetes",
-      "Optimized models using PaddlePaddle framework",
-      "Built efficient data pipeline with Elasticsearch",
-      "Applied advanced NLP techniques"
+      "Developed and maintained the core sentiment analysis AI engine",
+      "Built data processing pipeline from web crawlers to emotion classification",
+      "Integrated sentiment analysis results with Keypo and DailyView products",
+      "Implemented distributed processing with Kubernetes for scalability",
+      "Optimized models using PaddlePaddle framework for 30% accuracy improvement",
+      "Built efficient data pipeline with Elasticsearch for real-time analysis"
     ],
     "results": [
-      "Processed over 3 billion data points",
-      "Achieved 30% improvement in accuracy",
-      "Deployed scalable microservices architecture",
-      "Reduced processing time by 50%"
+      "Successfully deployed core sentiment analysis AI engine for company products",
+      "Processed over 3 billion data points from web crawlers",
+      "Achieved 30% improvement in emotion classification accuracy",
+      "Integrated sentiment analysis with Keypo and DailyView platforms",
+      "Enabled real-time online sentiment and buzz analysis for end users",
+      "Deployed scalable microservices architecture supporting high-volume processing"
     ],
     "timeline": {
       "start": "2021-12",
@@ -1777,7 +1783,7 @@
     "description": "A fully interactive trading interface featuring dynamic candlestick charts and live price simulation.",
     "longDescription": "The current version of the portfolio, designed as a high-frequency trading terminal. It features a fully interactive trading interface with dynamic candlestick charts, live price simulation (NAT/USD), and real-time analytics representing career growth and skills.",
     "category": "Web Development",
-    "status": "In Progress",
+    "status": "Completed",
     "featured": true,
     "opensource": true,
     "images": [
@@ -1805,6 +1811,82 @@
     "role": "Creator & Maintainer",
     "links": {
       "github": "https://github.com/NatLee/natlee.github.io.v3"
+    }
+  },
+  {
+    "id": "stock-trading-simulation",
+    "title": "Stock Trading Simulator",
+    "subtitle": "Real-time Trading Simulation with Learning Center",
+    "description": "A comprehensive stock trading simulator built with Next.js, featuring a real-time matching engine, bot-driven market simulation, and an integrated learning center for trading education.",
+    "longDescription": "A full-featured stock trading simulator that provides a realistic trading experience with real-time order matching, candlestick charts, and market analysis tools. The platform includes a sophisticated matching engine implementing price-time priority order matching with support for market orders, limit orders, and various order conditions (GTC, IOC, FOK). Three types of trading bots (MarketMakerBot, TrendBot, NoiseBot) simulate realistic market activity across different scenarios (Bull Market, Bear Market, Sideways, Volatile, Calm). The integrated Learning Center offers 19 courses across 4 categories (Beginner, Intermediate, Advanced, Investment) with interactive quizzes and progress tracking. The Practice Center enables risk-free pattern recognition training and trading simulation with rewind/replay functionality. Real-time market analysis includes trend detection, order book scanning, momentum indicators, and automatic pattern detection with confidence scores.",
+    "category": "Web Development",
+    "status": "In Progress",
+    "featured": true,
+    "opensource": true,
+    "images": [
+      "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/simulation.png",
+      "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/simulation-settings.png",
+      "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/learn-center.png",
+      "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/learn-sub-page.png",
+      "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/k-chart-practice.png",
+      "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/guess-practice.png"
+    ],
+    "githubUrl": "https://github.com/NatLee/stock-trading-simulation",
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Lucide React",
+      "WebSocket",
+      "Real-time Matching Engine"
+    ],
+    "features": [
+      "Real-time order matching engine with price-time priority",
+      "Multiple order types: Market, Limit with GTC/IOC/FOK conditions",
+      "Interactive candlestick charts with multiple timeframes (15s, 1m, 5m, 30m)",
+      "Bot-driven market simulation (MarketMakerBot, TrendBot, NoiseBot)",
+      "Five market scenarios: Bull, Bear, Sideways, Volatile, Calm",
+      "Learning Center with 19 courses across 4 categories",
+      "Practice Center for pattern recognition and trading simulation",
+      "Real-time market analysis: trend detection, order book scanning, momentum indicators",
+      "Automatic chart pattern detection with confidence scores",
+      "Taiwan Stock Exchange tick rules for realistic price steps",
+      "Color theme toggle: Asian (red=up) vs Western (green=up)",
+      "Standard/Odd lot trading modes with configurable commission rates"
+    ],
+    "challenges": [
+      "Implementing accurate price-time priority matching engine",
+      "Real-time order book updates and candlestick chart rendering",
+      "Coordinating multiple trading bots with realistic market behavior",
+      "Building comprehensive learning content with interactive elements",
+      "Pattern recognition algorithm development for chart analysis",
+      "Maintaining performance with high-frequency trading simulation"
+    ],
+    "solutions": [
+      "Developed custom MatchingEngine with OrderBook implementing price-time priority",
+      "Built efficient CandleAggregator for real-time K-line generation",
+      "Created BotManager to coordinate bot activities on configurable tick intervals",
+      "Implemented modular architecture separating matching, trading, and UI logic",
+      "Designed comprehensive course structure with JSON-based content management",
+      "Built interactive Practice Center with rewind/replay functionality for learning"
+    ],
+    "results": [
+      "Successfully implemented real-time matching engine supporting multiple order types",
+      "Created realistic market simulation with three distinct bot behaviors",
+      "Built comprehensive learning platform with 19 structured courses",
+      "Developed interactive practice environment for trading skill development",
+      "Implemented real-time market analysis tools for trend and pattern detection",
+      "Achieved smooth performance with high-frequency order processing"
+    ],
+    "timeline": {
+      "start": "2026",
+      "end": "Present",
+      "duration": "Ongoing"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/stock-trading-simulation"
     }
   }
 ]
