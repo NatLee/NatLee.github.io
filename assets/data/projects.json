@@ -414,6 +414,7 @@
     "longDescription": "A high-performance development environment management system built with Rust and Docker. This platform provides isolated, containerized development environments for multiple users on the same machine, featuring a Rust-based backend API with JWT authentication, WebSocket support for real-time console access, and a React/Next.js frontend. All services run behind Traefik reverse proxy with optional Nvidia Docker support.",
     "language": "rust",
     "images": [
+      "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/refs/heads/main/doc/workflow.gif",
       "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/refs/heads/main/doc/login.gif",
       "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/refs/heads/main/doc/create.gif",
       "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/refs/heads/main/doc/console.gif",
@@ -421,7 +422,7 @@
     ],
     "githubUrl": "https://github.com/NatLee/dev-dock-manager-rust",
     "category": "DevOps",
-    "status": "Completed",
+    "status": "In Progress",
     "featured": true,
     "opensource": true,
     "technologies": [
