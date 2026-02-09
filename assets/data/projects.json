@@ -346,12 +346,15 @@
     "longDescription": "A sophisticated development environment management system built with Django and Docker. This platform provides isolated, containerized development environments for multiple users on the same machine, complete with pre-configured tools and packages for various development workflows.",
     "language": "python",
     "images": [
-      "https://github.com/NatLee/dev-dock-manager/raw/main/doc/workflow.gif"
+      "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/login.gif",
+      "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/create.gif",
+      "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/console.gif",
+      "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/novnc.gif"
     ],
     "githubUrl": "https://github.com/NatLee/dev-dock-manager",
     "category": "DevOps",
     "status": "Completed",
-    "featured": true,
+    "featured": false,
     "opensource": true,
     "technologies": [
       "Python",
@@ -395,6 +398,82 @@
     "role": "Creator & Maintainer",
     "links": {
       "github": "https://github.com/NatLee/dev-dock-manager"
+    }
+  },
+  {
+    "id": "dev-dock-manager-rust",
+    "title": "dev-dock-manager-rust",
+    "subtitle": "Development Environment Manager (Rust)",
+    "description": "This is a sandbox manager developed using Rust, providing isolated development environments with a suite of base functions and packages for each user on the same machine by using Docker.",
+    "longDescription": "A high-performance development environment management system built with Rust and Docker. This platform provides isolated, containerized development environments for multiple users on the same machine, featuring a Rust-based backend API with JWT authentication, WebSocket support for real-time console access, and a React/Next.js frontend. All services run behind Traefik reverse proxy with optional Nvidia Docker support.",
+    "language": "rust",
+    "images": [
+      "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/refs/heads/main/doc/login.gif",
+      "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/refs/heads/main/doc/create.gif",
+      "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/refs/heads/main/doc/console.gif",
+      "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/refs/heads/main/doc/novnc.gif"
+    ],
+    "githubUrl": "https://github.com/NatLee/dev-dock-manager-rust",
+    "category": "DevOps",
+    "status": "Completed",
+    "featured": true,
+    "opensource": true,
+    "technologies": [
+      "Rust",
+      "React",
+      "Next.js",
+      "Docker",
+      "Traefik",
+      "Redis",
+      "JWT",
+      "WebSocket",
+      "SQLite",
+      "Argon2",
+      "Bollard",
+      "Container Orchestration",
+      "User Management",
+      "Environment Isolation"
+    ],
+    "features": [
+      "High-performance Rust backend API",
+      "JWT-based authentication system",
+      "WebSocket console access",
+      "Multi-user environment isolation",
+      "Traefik reverse proxy integration",
+      "React/Next.js dashboard",
+      "Optional Nvidia Docker support",
+      "Redis task queue",
+      "Automated environment provisioning"
+    ],
+    "challenges": [
+      "Building high-performance Rust API",
+      "WebSocket implementation for console access",
+      "Docker API integration with Bollard",
+      "JWT authentication and authorization",
+      "Traefik configuration for multi-instance NoVNC"
+    ],
+    "solutions": [
+      "Implemented Rust backend with async/await",
+      "Built WebSocket handlers for real-time console",
+      "Used Bollard for Docker API integration",
+      "Created JWT-based auth system with SQLite + Argon2",
+      "Configured Traefik for service routing"
+    ],
+    "results": [
+      "Improved performance over Python version",
+      "Lower memory footprint with Rust",
+      "Enhanced security with type-safe code",
+      "Better concurrency handling",
+      "Simplified deployment with Docker Compose"
+    ],
+    "timeline": {
+      "start": "2026",
+      "end": "Present",
+      "duration": "Ongoing"
+    },
+    "role": "Creator & Maintainer",
+    "links": {
+      "github": "https://github.com/NatLee/dev-dock-manager-rust"
     }
   },
   {
