@@ -111,7 +111,7 @@ export default function FeaturedProjects() {
             </div>
             
             {activeProject && (
-              <div className="flex-1 p-4 flex flex-col animate-fade-in">
+              <div key={activeProject.id} className="flex-1 p-4 flex flex-col animate-preview-fade">
                 {/* Image Preview */}
                 <div className="border border-gray-700 bg-black overflow-hidden rounded">
                   <div className="relative aspect-video w-full bg-gray-900 overflow-hidden">
@@ -149,13 +149,13 @@ export default function FeaturedProjects() {
                     </div>
                   </div>
                   
-                  <p className="text-xs text-gray-400 leading-relaxed line-clamp-3">
+                  <p className="text-xs text-gray-400 leading-relaxed line-clamp-3 min-h-[3.75rem]">
                     {activeProject.description}
                   </p>
                   
                   {/* Tech stack preview */}
                   {activeProject.technologies && (
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-1 min-h-[1.5rem]">
                       {activeProject.technologies.slice(0, 4).map((tech: string) => (
                         <span key={tech} className="text-[10px] px-1.5 py-0.5 bg-gray-800/50 text-gray-500 rounded">
                           {tech}

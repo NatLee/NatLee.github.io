@@ -370,6 +370,22 @@
     animation: contentReveal 0.4s ease-out forwards;
   }
 
+  /* Preview pane crossfade animation for project switching */
+  @keyframes previewFade {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-preview-fade {
+    animation: previewFade 0.25s ease-out forwards;
+  }
+
   /* Mobile menu slide down animation */
   @keyframes slideDown {
     from {
