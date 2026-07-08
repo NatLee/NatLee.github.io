@@ -76,6 +76,7 @@ import {
   FaArrowRight,
   FaExternalLinkAlt,
   FaGithub,
+  FaLinux,
   FaImage as FaImageIcon
 } from 'react-icons/fa'
 
@@ -118,6 +119,7 @@ export default function Icon({ name, className = '', size = 24 }: IconProps) {
     'jenkins': <SiJenkins className={className} size={size} />,
     'git': <SiGit className={className} size={size} />,
     'github': <SiGithub className={className} size={size} />,
+    'linux': <FaLinux className={className} size={size} />,
     
     // Database
     'postgresql': <SiPostgresql className={className} size={size} />,

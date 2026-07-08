@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ProjectDetail as ProjectDetailType } from '@/data/projects'
+import { ProjectDetail as ProjectDetailType, getProjectById } from '@/data/projects'
 import Image from 'next/image'
 import AIChatTerminal from './AIChatTerminal'
 import TerminalCommand from './TerminalCommand'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Props {
   project: ProjectDetailType
@@ -14,12 +15,16 @@ interface Props {
 
 type Tab = 'README.md' | 'config.ts' | 'spec.json'
 
-export default function ProjectDetail({ project }: Props) {
+export default function ProjectDetail({ project: initialProject }: Props) {
   const router = useRouter()
+  const { locale, t } = useLanguage()
+  const project = useMemo(
+    () => getProjectById(initialProject.id, locale) ?? initialProject,
+    [initialProject, locale]
+  )
   const [activeTab, setActiveTab] = useState<Tab>('README.md')
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isTerminalCollapsed, setIsTerminalCollapsed] = useState(false)
-  const [commandComplete, setCommandComplete] = useState(false)
   const [isClosingTab, setIsClosingTab] = useState(false)
   const [isTabOpen, setIsTabOpen] = useState(false)
   const projectId = project.id
@@ -95,13 +100,17 @@ export default function ProjectDetail({ project }: Props) {
       <div className="space-y-1">
         {renderLine(next(), <h1 className="text-secondary font-bold text-2xl mb-4"># {project.title}</h1>)}
         {renderLine(next(), <p className="text-gray-400 italic mb-6">{project.subtitle}</p>)}
-        {renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">## Project Overview</h2>)}
+        {renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">{t('projectDetail.overview')}</h2>)}
         {project.longDescription.split('\n').map((para, i) => para && renderLine(next(), <p className="mb-4">{para}</p>))}
         {renderLine(next(), '')}
-        {renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">## Core Features</h2>)}
+        {project.challenges?.length > 0 && renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">{t('projectDetail.challenges')}</h2>)}
+        {project.challenges?.map((item) => renderLine(next(), <li className="list-none flex gap-2"><span className="text-secondary">-</span> {item}</li>))}
+        {project.solutions?.length > 0 && renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">{t('projectDetail.solutions')}</h2>)}
+        {project.solutions?.map((item) => renderLine(next(), <li className="list-none flex gap-2"><span className="text-secondary">-</span> {item}</li>))}
+        {renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">{t('projectDetail.features')}</h2>)}
         {project.features?.map(feat => renderLine(next(), <li className="list-none flex gap-2"><span className="text-secondary">-</span> {feat}</li>))}
         {renderLine(next(), '')}
-        {renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">## Key Technologies</h2>)}
+        {renderLine(next(), <h2 className="text-blue-400 font-bold text-lg mt-6 mb-2">{t('projectDetail.technologies')}</h2>)}
         {renderLine(next(), <span>{project.technologies?.join(' • ')}</span>)}
       </div>
     )
@@ -114,7 +123,7 @@ export default function ProjectDetail({ project }: Props) {
       <div className="space-y-1">
         {renderLine(next(), <span className="text-yellow-400">{'{'}</span>)}
         {renderLine(next(), <span>  <span className="text-blue-300">"specification"</span>: <span className="text-yellow-400">{'{'}</span></span>)}
-        {project.timeline && renderLine(next(), <span>    <span className="text-blue-300">"timeline"</span>: <span className="text-green-300">"{project.timeline.start} to {project.timeline.end || 'Present'}"</span>,</span>)}
+        {project.timeline && renderLine(next(), <span>    <span className="text-blue-300">"timeline"</span>: <span className="text-green-300">"{project.timeline.start} to {project.timeline.end || t('common.present')}"</span>,</span>)}
         {renderLine(next(), <span>    <span className="text-blue-300">"role"</span>: <span className="text-green-300">"{project.role}"</span>,</span>)}
         {renderLine(next(), <span>    <span className="text-blue-300">"organization"</span>: <span className="text-green-300">"{project.company || 'Personal'}"</span>,</span>)}
         {renderLine(next(), <span>    <span className="text-blue-300">"impact_metrics"</span>: [</span>)}
@@ -216,7 +225,6 @@ export default function ProjectDetail({ project }: Props) {
               command="vim README.md"
               startDelay={300}
               typingSpeed={45}
-              onComplete={() => setCommandComplete(true)}
               className="mb-6"
             >
               <div className="flex flex-col max-w-[100rem] mx-auto bg-black/40 backdrop-blur-md rounded-lg overflow-hidden shadow-2xl mt-4">
@@ -294,8 +302,8 @@ export default function ProjectDetail({ project }: Props) {
                       <div className="flex items-center gap-1">
                         <div className="px-2 md:px-4 py-2 text-[10px] md:text-xs font-mono rounded-t bg-black/20 text-secondary border-t border-x border-gray-800 font-bold flex items-center gap-1 md:gap-2">
                           <span>🖼️</span>
-                          <span className="hidden sm:inline">Preview</span>
-                          <span className="sm:hidden">View</span>
+                          <span className="hidden sm:inline">{t('projectDetail.preview')}</span>
+                          <span className="sm:hidden">{t('projectDetail.previewShort')}</span>
                         </div>
                       </div>
                       
@@ -309,7 +317,7 @@ export default function ProjectDetail({ project }: Props) {
                             className="hover:text-secondary transition-colors hidden sm:inline"
                             title={project.links.demo}
                           >
-                            🔗 Demo
+                            🔗 {t('projectDetail.demo')}
                           </a>
                         )}
                         {project.links?.github && (
@@ -320,7 +328,7 @@ export default function ProjectDetail({ project }: Props) {
                             className="hover:text-secondary transition-colors"
                             title={project.links.github}
                           >
-                            <span className="hidden sm:inline">⌥ Source</span>
+                            <span className="hidden sm:inline">⌥ {t('projectDetail.source')}</span>
                             <span className="sm:hidden">📂</span>
                           </a>
                         )}
@@ -339,15 +347,17 @@ export default function ProjectDetail({ project }: Props) {
                               <>
                                 <button
                                   onClick={prevImage}
+                                  aria-label={t('projectDetail.prevImage')}
                                   className="absolute left-4 z-20 p-2 bg-black/50 hover:bg-secondary text-white rounded-full border border-gray-700 hover:border-secondary transition-all"
                                 >
-                                  <span className="text-xl">←</span>
+                                  <span className="text-xl" aria-hidden="true">←</span>
                                 </button>
                                 <button
                                   onClick={nextImage}
+                                  aria-label={t('projectDetail.nextImage')}
                                   className="absolute right-4 z-20 p-2 bg-black/50 hover:bg-secondary text-white rounded-full border border-gray-700 hover:border-secondary transition-all"
                                 >
-                                  <span className="text-xl">→</span>
+                                  <span className="text-xl" aria-hidden="true">→</span>
                                 </button>
                               </>
                             )}
@@ -376,7 +386,7 @@ export default function ProjectDetail({ project }: Props) {
                                     className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary hover:bg-orange-500 text-black text-xs font-bold rounded transition-colors"
                                   >
                                     <span>🌐</span>
-                                    <span>Live Demo</span>
+                                    <span>{t('projectDetail.liveDemo')}</span>
                                   </a>
                                 )}
                                 {project.links?.github && (
@@ -387,7 +397,7 @@ export default function ProjectDetail({ project }: Props) {
                                     className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold rounded border border-gray-700 transition-colors"
                                   >
                                     <span>📂</span>
-                                    <span>Source Code</span>
+                                    <span>{t('projectDetail.sourceCode')}</span>
                                   </a>
                                 )}
                                 {project.links?.documentation && (
@@ -398,7 +408,7 @@ export default function ProjectDetail({ project }: Props) {
                                     className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold rounded border border-gray-700 transition-colors"
                                   >
                                     <span>📖</span>
-                                    <span>Docs</span>
+                                    <span>{t('projectDetail.docs')}</span>
                                   </a>
                                 )}
                               </div>
@@ -421,10 +431,10 @@ export default function ProjectDetail({ project }: Props) {
                             <div className="text-6xl opacity-30 select-none">📷</div>
                             <div className="space-y-2">
                               <div className="text-xs font-bold text-gray-400">
-                                NO_PREVIEW_AVAILABLE
+                                {t('projectDetail.noPreviewTitle')}
                               </div>
                               <p className="text-[10px] text-gray-500 max-w-[200px] mx-auto">
-                                No screenshots for this project yet
+                                {t('projectDetail.noScreenshots')}
                               </p>
                             </div>
                             
@@ -439,7 +449,7 @@ export default function ProjectDetail({ project }: Props) {
                                     className="flex items-center gap-1.5 px-4 py-2 bg-secondary hover:bg-orange-500 text-black text-xs font-bold rounded transition-colors"
                                   >
                                     <span>🌐</span>
-                                    <span>View Live Demo</span>
+                                    <span>{t('projectDetail.viewLiveDemo')}</span>
                                   </a>
                                 )}
                                 {project.links?.github && (
@@ -450,7 +460,7 @@ export default function ProjectDetail({ project }: Props) {
                                     className="flex items-center gap-1.5 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold rounded border border-gray-700 transition-colors"
                                   >
                                     <span>📂</span>
-                                    <span>View Source</span>
+                                    <span>{t('projectDetail.viewSource')}</span>
                                   </a>
                                 )}
                               </div>

@@ -9,7 +9,7 @@
   
   body {
     @apply bg-dark-900 text-gray-100 font-sans;
-    -webkit-text-size-adjust: none;
+    -webkit-text-size-adjust: 100%;
     background-image: 
       radial-gradient(circle at 25% 25%, rgba(212, 116, 30, 0.06) 0%, transparent 50%),
       radial-gradient(circle at 75% 75%, rgba(230, 184, 0, 0.06) 0%, transparent 50%);
@@ -400,6 +400,47 @@
 
   .animate-slideDown {
     animation: slideDown 0.2s ease-out forwards;
+  }
+
+  @keyframes noise {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-2%, -2%); }
+    20% { transform: translate(2%, 2%); }
+    30% { transform: translate(-1%, 1%); }
+    40% { transform: translate(1%, -1%); }
+    50% { transform: translate(-2%, 2%); }
+    60% { transform: translate(2%, -2%); }
+    70% { transform: translate(-1%, -1%); }
+    80% { transform: translate(1%, 1%); }
+    90% { transform: translate(-2%, 0); }
+  }
+
+  .animate-noise {
+    animation: noise 0.5s steps(2) infinite;
+  }
+
+  @keyframes glitch1 {
+    0%, 100% { transform: translate(0); opacity: 0.2; }
+    20% { transform: translate(-3px, 2px); opacity: 0.4; }
+    40% { transform: translate(3px, -2px); opacity: 0.3; }
+    60% { transform: translate(-2px, -1px); opacity: 0.5; }
+    80% { transform: translate(2px, 1px); opacity: 0.2; }
+  }
+
+  @keyframes glitch2 {
+    0%, 100% { transform: translate(0); opacity: 0.2; }
+    20% { transform: translate(3px, -2px); opacity: 0.4; }
+    40% { transform: translate(-3px, 2px); opacity: 0.3; }
+    60% { transform: translate(2px, 1px); opacity: 0.5; }
+    80% { transform: translate(-2px, -1px); opacity: 0.2; }
+  }
+
+  .animate-glitch-1 {
+    animation: glitch1 0.3s steps(2) infinite;
+  }
+
+  .animate-glitch-2 {
+    animation: glitch2 0.3s steps(2) infinite reverse;
   }
 
   /* Custom scrollbar for terminal */
