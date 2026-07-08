@@ -2,25 +2,37 @@
   "name": "Ying Tse Lee",
   "nameEn": "Nat Lee",
   "title": "Senior Software Engineer & AI Specialist",
+  "titleZh": "資深軟體工程師與 AI 專家",
   "email": "natlee.work@gmail.com",
   "location": "Taipei, Taiwan",
-  "bio": "As a software engineer, my primary focus is on back-end development. Additionally, I am passionate about staying up-to-date with emerging technologies and collaborating with teams. I believe that it is important to not reinvent the wheel, but to have a thorough understanding of existing tools and utilize them effectively.",
+  "locationZh": "台灣台北",
+  "bio": "As a software engineer, my primary focus is on backend development. Additionally, I am passionate about staying up-to-date with emerging technologies and collaborating with teams. I believe that it is important to not reinvent the wheel, but to have a thorough understanding of existing tools and utilize them effectively.",
+  "bioZh": "身為軟體工程師，我主要專注於後端開發。同時我也熱衷於跟上新興技術，並與團隊協作。我認為不應該重複造輪子，而是要深入理解現有工具並有效運用它們。",
   "avatar": "https://avatars.githubusercontent.com/u/10178964?v=4",
   "languages": [
     {
       "name": "Mandarin",
+      "nameZh": "中文",
       "level": "Native",
-      "description": "Native speaker"
+      "levelZh": "母語",
+      "description": "Native speaker",
+      "descriptionZh": "母語使用者"
     },
     {
       "name": "Japanese",
+      "nameZh": "日文",
       "level": "JLPT N1",
-      "description": "Professional proficiency"
+      "levelZh": "JLPT N1",
+      "description": "Professional proficiency",
+      "descriptionZh": "專業程度"
     },
     {
       "name": "English",
+      "nameZh": "英文",
       "level": "Professional",
-      "description": "Professional working proficiency"
+      "levelZh": "專業程度",
+      "description": "Professional working proficiency",
+      "descriptionZh": "專業工作程度"
     }
   ],
   "socialLinks": [
@@ -75,6 +87,16 @@
     "Data Science",
     "Open Source",
     "Software Architecture",
+    "DevOps"
+  ],
+  "interestsZh": [
+    "人工智慧與機器學習",
+    "電腦視覺",
+    "後端開發",
+    "雲端運算",
+    "資料科學",
+    "開源軟體",
+    "軟體架構",
     "DevOps"
   ]
 }

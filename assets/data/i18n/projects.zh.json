@@ -1,0 +1,53 @@
+{
+  "telepy": {
+    "subtitle": "DevOps SSH 通道管理工具",
+    "description": "基於 Django 的 Web 應用，用於管理與監控反向 SSH 通道或跳板伺服器。",
+    "longDescription": "Telepy 是一個全面性的平台，旨在簡化反向 SSH 通道的管理。它提供 Web 介面以建立與監控連線、整合 Django Channels 與 WebSocket 的瀏覽器終端機，以及支援 Google OAuth 的多使用者功能。專案以 Docker 容器化部署，並包含強大的管理 CLI 腳本。",
+    "role": "創建者與維護者"
+  },
+  "django-docker-gui": {
+    "subtitle": "Docker 容器管理 Web UI",
+    "description": "用於管理 Docker 映像檔與容器的簡易 Web UI，內建完整功能的終端機。",
+    "role": "創建者"
+  },
+  "dev-dock-manager-rust": {
+    "subtitle": "Rust 開發環境管理器",
+    "description": "以 Rust 建置的開發環境管理工具，提供高效能的容器與開發環境管理。",
+    "role": "創建者"
+  },
+  "blur-generator": {
+    "subtitle": "影像模糊生成工具",
+    "description": "用於生成模糊影像的工具，適用於電腦視覺測試與資料增強。",
+    "role": "創建者"
+  },
+  "openpose-detect-hands-with-heatmap": {
+    "subtitle": "OpenPose 手部偵測與熱力圖",
+    "description": "使用 OpenPose 模型偵測手部並以熱力圖顯示視覺化結果的應用程式。",
+    "role": "創建者"
+  },
+  "simply-blur-detector": {
+    "subtitle": "簡易模糊偵測工具",
+    "description": "使用 OpenCV 偵測影像模糊程度的應用程式。",
+    "role": "創建者"
+  },
+  "play-qwop-by-using-ai-agent": {
+    "subtitle": "AI Agent 玩 QWOP",
+    "description": "使用 AI Agent 自動遊玩 QWOP 遊戲的實驗專案。",
+    "role": "創建者"
+  },
+  "image-annotation": {
+    "subtitle": "影像標註平台",
+    "description": "Web 端的影像標註工具，支援資料標註工作流程。",
+    "role": "創建者"
+  },
+  "natlee.github.io.v3": {
+    "subtitle": "終端機主題作品集網站",
+    "description": "以 Linux/Unix 終端機為主題的互動式個人作品集網站。",
+    "role": "創建者"
+  },
+  "stock-trading-simulation": {
+    "subtitle": "股票交易模擬器",
+    "description": "股票交易模擬平台，用於策略測試與學習。",
+    "role": "創建者"
+  }
+}
