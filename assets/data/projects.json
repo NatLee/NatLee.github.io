@@ -171,9 +171,9 @@
     "longDescription": "Telepy is a comprehensive platform designed to simplify the management of reverse SSH tunnels. It features a web interface for creating and monitoring connections, an integrated browser-based console powered by Django Channels and WebSockets, and multi-user support with Google OAuth integration. The project is containerized with Docker for easy deployment and includes a robust management CLI script.",
     "language": "python",
     "images": [
-      "https://github.com/NatLee/telepy/blob/main/docs/gifs/create-tunnel.gif",
-      "https://github.com/NatLee/telepy/blob/main/docs/gifs/web-terminal.gif",
-      "https://github.com/NatLee/telepy/blob/main/docs/gifs/remote-browser.gif"
+      "https://raw.githubusercontent.com/NatLee/telepy/main/docs/gifs/create-tunnel.gif",
+      "https://raw.githubusercontent.com/NatLee/telepy/main/docs/gifs/web-terminal.gif",
+      "https://raw.githubusercontent.com/NatLee/telepy/main/docs/gifs/remote-browser.gif"
     ],
     "githubUrl": "https://github.com/NatLee/telepy",
     "category": "DevOps",
@@ -229,7 +229,7 @@
     "id": "django-project-template",
     "title": "django-project-template",
     "subtitle": "Full-Featured Django Template",
-    "description": "A template with many features of Docker, 3rd party login, JWT, websocket, Admin UI and django-q",
+    "description": "A template with many features of Docker, 3rd-party login, JWT, websocket, Admin UI and django-q",
     "longDescription": "A comprehensive Django project template that includes modern web development features such as Docker containerization, third-party authentication, JWT token management, WebSocket support, and advanced admin interface. Perfect for kickstarting new Django projects with best practices built-in.",
     "language": "python",
     "images": [
@@ -290,7 +290,7 @@
     "id": "django-docker-gui",
     "title": "django-docker-gui",
     "subtitle": "Docker Management Interface",
-    "description": "A simple web UI for managing docker images & container with fully functionally terminal.",
+    "description": "A simple web UI for managing docker images & containers with a fully functional terminal.",
     "longDescription": "A powerful web-based interface for managing Docker containers and images, featuring a fully functional terminal emulator. This tool provides system administrators and developers with an intuitive way to manage Docker environments through a web browser.",
     "language": "python",
     "images": [
@@ -547,7 +547,7 @@
     "id": "openpose-detect-hands-with-heatmap",
     "title": "openpose-detect-hands-with-heatmap",
     "subtitle": "Hand Detection with Visualization",
-    "description": "A simply application for using OpenPose model for detecting hands and showing the visualization with a heatmap.",
+    "description": "A simple application for using OpenPose model for detecting hands and showing the visualization with a heatmap.",
     "longDescription": "An advanced computer vision application that leverages OpenPose for hand detection and provides intuitive heatmap visualizations. This tool is particularly useful for gesture analysis, motion studies, and interactive applications requiring hand tracking.",
     "language": "python",
     "images": [
@@ -605,7 +605,7 @@
     "id": "simply-blur-detector",
     "title": "simply-blur-detector",
     "subtitle": "Image Quality Assessment",
-    "description": "A simply application for using OpenCV for detecting blur in the image.",
+    "description": "A simple application for using OpenCV for detecting blur in the image.",
     "longDescription": "A lightweight and efficient tool for detecting blur in images using advanced computer vision algorithms. This application assesses image quality and determines if an image is blurry, making it useful for quality control in photography and image processing pipelines.",
     "language": "python",
     "images": [
@@ -663,7 +663,7 @@
     "id": "gura-gru-unit-for-recognizing-affect",
     "title": "GURA-gru-unit-for-recognizing-affect",
     "subtitle": "Sentiment Analysis Model",
-    "description": "A simply sentiment classification model that leverages the power of `Bidirectional GRU` and `Self-attention` mechanisms.",
+    "description": "A simple sentiment classification model that leverages the power of `Bidirectional GRU` and `Self-attention` mechanisms.",
     "longDescription": "An advanced sentiment classification model that combines Bidirectional GRU networks with Self-attention mechanisms. GURA (GRU Unit for Recognizing Affect) provides state-of-the-art performance for emotion detection and sentiment analysis tasks.",
     "language": "python",
     "images": [
@@ -1231,7 +1231,7 @@
     "id": "myanimelist-comment-crawler",
     "title": "MyAnimeList-comment-crawler",
     "subtitle": "Anime Review Data Crawler",
-    "description": "Crawl all reviews and infomation of Anime works on MyAnimeList.",
+    "description": "Crawl all reviews and information of Anime works on MyAnimeList.",
     "longDescription": "A comprehensive web scraping tool designed to extract reviews and information about anime works from MyAnimeList. This crawler is useful for anime data analysis, research, and building anime recommendation systems.",
     "language": "python",
     "images": [],
