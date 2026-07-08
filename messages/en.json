@@ -69,7 +69,13 @@
     "department": "Department",
     "endOfLog": "-- End of Log Stream --",
     "totalEntries": "TOTAL ENTRIES: {count}",
-    "degreeInMajor": "{degree} in {major}"
+    "degreeInMajor": "{degree} in {major}",
+    "subsidiaryOf": "Subsidiary of {parent}",
+    "transition": {
+      "promotion": "Promotion",
+      "transfer": "Transfer",
+      "join": "Joined"
+    }
   },
   "projects": {
     "terminalTitle": "natlee@mainframe: ~/projects",

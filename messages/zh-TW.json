@@ -69,7 +69,13 @@
     "department": "部門",
     "endOfLog": "-- 日誌結束 --",
     "totalEntries": "總計條目：{count}",
-    "degreeInMajor": "{major}{degree}"
+    "degreeInMajor": "{major}{degree}",
+    "subsidiaryOf": "{parent} 子公司",
+    "transition": {
+      "promotion": "晉升",
+      "transfer": "轉調",
+      "join": "到職"
+    }
   },
   "projects": {
     "terminalTitle": "natlee@mainframe: ~/projects",

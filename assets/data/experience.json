@@ -1,14 +1,93 @@
 [
   {
+    "id": "star-power-manager",
+    "title": "Deputy Manager",
+    "company": "Star Power Co., Ltd.",
+    "companyId": "star-power",
+    "companyLogo": "",
+    "parentCompany": "HD Renewables Co., Ltd.",
+    "roleType": "transfer",
+    "department": "Overseas Power Trading",
+    "location": "Taipei, Taiwan",
+    "start": "May 2026",
+    "end": "Present",
+    "summary": "Transferred within the HD Renewables group to its subsidiary Star Power while retaining the Deputy Manager role. Leads engineering for overseas power trading — market data, bidding systems, and the planning of automated trading modules.",
+    "responsibilities": [
+      "Lead development of overseas power-trading and market-data systems together with the team",
+      "Build bidding and tender systems for overseas electricity markets",
+      "Plan and architect automated trading modules",
+      "Drive the trading data platform's evolution across the corporate group"
+    ],
+    "techStack": [
+      "Python", "Docker", "PostgreSQL", "Airflow", "Time Series Analysis", "Automated Trading", "System Design"
+    ],
+    "achievements": [
+      "Transferred within the HD Renewables group to Star Power while retaining the Deputy Manager role"
+    ]
+  },
+  {
+    "id": "hd-renewables-manager",
+    "title": "Deputy Manager",
+    "company": "HD Renewables Co., Ltd.",
+    "companyId": "hd-renewables",
+    "companyLogo": "",
+    "roleType": "promotion",
+    "department": "International Power Trading Division",
+    "location": "Taipei, Taiwan",
+    "start": "Mar 2026",
+    "end": "May 2026",
+    "summary": "Moved onto the management track as Deputy Manager and kicked off the power-trading data platform — a centralized system that ingests Japan's electricity market and weather data to underpin trading and forecasting.",
+    "responsibilities": [
+      "Designed and led development of a power-trading data platform from the ground up",
+      "Built ingestion for Japanese electricity-market data (JEPX) and meteorological data feeds",
+      "Defined the data model and architecture powering price forecasting and trading analytics",
+      "Coordinated the engineering team while shaping the platform roadmap"
+    ],
+    "techStack": [
+      "Python", "Docker", "PostgreSQL", "Airflow", "Elasticsearch", "Time Series Analysis", "System Design"
+    ],
+    "achievements": [
+      "Transitioned from an individual contributor to a management role",
+      "Launched the foundation of the trading data platform consolidating market and weather data"
+    ]
+  },
+  {
+    "id": "hd-renewables-principal",
+    "title": "Principal Engineer",
+    "company": "HD Renewables Co., Ltd.",
+    "companyId": "hd-renewables",
+    "companyLogo": "",
+    "roleType": "promotion",
+    "department": "International Power Trading Division",
+    "location": "Taipei, Taiwan",
+    "start": "Sep 2025",
+    "end": "Mar 2026",
+    "summary": "Promoted to Principal Engineer, taking technical ownership of the international power-trading strategy stack — the spot-price prediction models and the data pipelines feeding the Japan and Australia trading desks.",
+    "responsibilities": [
+      "Led development of spread and spot-price prediction models for the Japan and Australia power markets",
+      "Set the technical direction for the trading data pipeline and model-serving infrastructure",
+      "Mentored engineers and reviewed designs across the trading platform",
+      "Partnered with traders to turn market requirements into production tooling"
+    ],
+    "techStack": [
+      "Python", "Deep Learning", "Time Series Analysis", "Docker", "Django", "Elasticsearch", "MLOps"
+    ],
+    "achievements": [
+      "Promoted from Senior Engineer to Principal Engineer within the International Power Trading Division",
+      "Hardened the spot-market prediction pipeline into a reliable daily production service"
+    ]
+  },
+  {
     "id": "hd-renewables-international",
     "title": "Senior Engineer",
     "company": "HD Renewables Co., Ltd.",
     "companyId": "hd-renewables",
     "companyLogo": "",
+    "roleType": "transfer",
     "department": "International Power Trading Division",
     "location": "Taipei, Taiwan",
     "start": "Dec 2024",
-    "end": "Present",
+    "end": "Sep 2025",
     "summary": "Transferred to the International Power Trading Division, focusing on developing power trading strategies for Japan and Australia markets. Developing spread strategy models to predict spot market electricity prices and assist traders in decision-making.",
     "responsibilities": [
       "Develop international power trading strategies for Japan and Australia markets",

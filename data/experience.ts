@@ -9,6 +9,10 @@ export interface Experience {
   company: string
   companyId: string
   companyLogo?: string
+  /** Parent company shown when this role sits inside a subsidiary. */
+  parentCompany?: string
+  /** Career transition into this role — drives the timeline badge. */
+  roleType?: 'join' | 'promotion' | 'transfer'
   department: string
   location: string
   start: string

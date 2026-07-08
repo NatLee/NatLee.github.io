@@ -16,12 +16,22 @@ function getGroupedExperience(experienceData: ReturnType<typeof getExperienceDat
   return grouped
 }
 
+const ROLE_TRANSITION: Record<'join' | 'promotion' | 'transfer', { icon: string; className: string }> = {
+  promotion: { icon: '▲', className: 'text-green-400 border-green-500/40 bg-green-500/10' },
+  transfer: { icon: '⇄', className: 'text-blue-400 border-blue-500/40 bg-blue-500/10' },
+  join: { icon: '●', className: 'text-gray-400 border-gray-600/40 bg-gray-500/10' },
+}
+
 export default function Experience() {
   const { locale, t } = useLanguage()
   const experienceData = useMemo(() => getExperienceData(locale), [locale])
   const educationData = useMemo(() => getEducationData(locale), [locale])
   const groupedData = useMemo(() => getGroupedExperience(experienceData), [experienceData])
-  const [expandedGroups, setExpandedGroups] = useState<string[]>([groupedData[0]?.company])
+  // Expand the current employer and the previous one so the recent career
+  // progression (incl. the HD Renewables promotions) is visible without a click.
+  const [expandedGroups, setExpandedGroups] = useState<string[]>(
+    [groupedData[0]?.company, groupedData[1]?.company].filter((c): c is string => Boolean(c))
+  )
   const [commandComplete, setCommandComplete] = useState(false)
 
   const toggleGroup = (company: string) => {
@@ -77,10 +87,17 @@ export default function Experience() {
                           isExpanded ? 'bg-gray-900 border-b border-gray-800' : 'hover:bg-gray-900'
                         }`}
                       >
-                        <div className="flex items-center gap-4 text-sm md:text-base">
-                          <span className={`text-xl transition-transform ${isExpanded ? 'rotate-90' : ''}`}>▶</span>
-                          <span className={`font-bold ${isExpanded ? 'text-secondary' : 'text-gray-400'}`}>{group.company}</span>
-                          <span className="text-gray-600 text-xs ml-2 border border-gray-800 px-2 py-0.5 rounded">
+                        <div className="flex items-center gap-3 md:gap-4 text-sm md:text-base min-w-0">
+                          <span className={`text-xl transition-transform flex-shrink-0 ${isExpanded ? 'rotate-90' : ''}`}>▶</span>
+                          <span className="flex flex-col items-start text-left min-w-0">
+                            <span className={`font-bold truncate max-w-full ${isExpanded ? 'text-secondary' : 'text-gray-400'}`}>{group.company}</span>
+                            {group.items[0]?.parentCompany && (
+                              <span className="text-[10px] text-gray-500 font-normal normal-case tracking-normal truncate max-w-full">
+                                {t('experience.subsidiaryOf', { parent: group.items[0].parentCompany })}
+                              </span>
+                            )}
+                          </span>
+                          <span className="text-gray-600 text-xs ml-1 md:ml-2 border border-gray-800 px-2 py-0.5 rounded whitespace-nowrap flex-shrink-0">
                             {group.items.length} {group.items.length > 1 ? t('experience.rolesPlural') : t('experience.roles')}
                           </span>
                         </div>
@@ -91,14 +108,22 @@ export default function Experience() {
 
                       {isExpanded && (
                         <div className="p-0">
-                          {group.items.map((exp, index) => (
+                          {group.items.map((exp) => (
                             <div key={exp.id} className="relative pl-8 md:pl-12 py-8 pr-4 group transition-colors hover:bg-white/5">
                               {group.items.length > 1 && <div className="absolute left-4 md:left-6 top-0 bottom-0 w-px bg-gray-800" />}
-                              <div className={`absolute left-[13px] md:left-[21px] top-10 w-2 h-2 rounded-full z-10 ${index === 0 ? 'bg-green-500 ring-4 ring-green-900/30' : 'bg-gray-600'}`} />
+                              <div className={`absolute left-[13px] md:left-[21px] top-10 w-2 h-2 rounded-full z-10 ${exp.end === 'Present' ? 'bg-green-500 ring-4 ring-green-900/30' : 'bg-gray-600'}`} />
                               <div className="flex flex-col md:flex-row md:items-start gap-4 mb-4">
                                 <div className="w-48 flex-shrink-0 text-xs text-gray-500 font-mono pt-1">[{exp.start} -- {displayEnd(exp.end)}]</div>
                                 <div className="flex-1">
-                                  <h3 className="text-xl font-bold text-white mb-1">{exp.title}</h3>
+                                  <div className="flex items-center gap-2 md:gap-3 flex-wrap mb-1">
+                                    <h3 className="text-xl font-bold text-white">{exp.title}</h3>
+                                    {exp.roleType && (
+                                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${ROLE_TRANSITION[exp.roleType].className}`}>
+                                        <span aria-hidden="true" className="mr-1">{ROLE_TRANSITION[exp.roleType].icon}</span>
+                                        {t(`experience.transition.${exp.roleType}` as 'experience.transition.promotion')}
+                                      </span>
+                                    )}
+                                  </div>
                                   <div className="text-orange-300 text-sm mb-2">@ {exp.location}</div>
                                   {exp.department && (
                                     <div className="text-gray-500 text-xs mb-4">
