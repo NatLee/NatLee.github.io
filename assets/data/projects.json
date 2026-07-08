@@ -171,8 +171,9 @@
     "longDescription": "Telepy is a comprehensive platform designed to simplify the management of reverse SSH tunnels. It features a web interface for creating and monitoring connections, an integrated browser-based console powered by Django Channels and WebSockets, and multi-user support with Google OAuth integration. The project is containerized with Docker for easy deployment and includes a robust management CLI script.",
     "language": "python",
     "images": [
-      "https://github.com/NatLee/telepy/raw/main/docs/telepy-create-tunnel.gif",
-      "https://github.com/NatLee/telepy/raw/main/docs/telepy-enter-console.gif"
+      "https://github.com/NatLee/telepy/blob/main/docs/gifs/create-tunnel.gif",
+      "https://github.com/NatLee/telepy/blob/main/docs/gifs/web-terminal.gif",
+      "https://github.com/NatLee/telepy/blob/main/docs/gifs/remote-browser.gif"
     ],
     "githubUrl": "https://github.com/NatLee/telepy",
     "category": "DevOps",
