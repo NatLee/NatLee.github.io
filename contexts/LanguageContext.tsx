@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { defaultLocale, detectBrowserLocale, isLocale, type Locale } from '@/lib/i18n/config'
+import { defaultLocale, isLocale, type Locale } from '@/lib/i18n/config'
 import enMessages from '@/messages/en.json'
 import zhMessages from '@/messages/zh-TW.json'
 
@@ -50,12 +50,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       stored = null
     }
 
+    // Default to English; only an explicit, stored user choice overrides it.
     if (stored && isLocale(stored)) {
       setLocaleState(stored)
-    } else {
-      // No explicit choice yet — follow the browser's language preference.
-      const detected = detectBrowserLocale()
-      if (detected) setLocaleState(detected)
     }
     setMounted(true)
   }, [])
