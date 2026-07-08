@@ -3,6 +3,8 @@ import { getProjectById, allProjectsData } from '@/data/projects'
 import ProjectDetail from '@/components/ProjectDetail'
 import Navigation from '@/components/Navigation'
 
+const siteUrl = 'https://natlee.github.io'
+
 interface Props {
   params: {
     id: string
@@ -19,14 +21,36 @@ export function generateMetadata({ params }: Props) {
   const project = getProjectById(params.id)
 
   if (!project) {
+    // The root layout template appends " | Nat Lee".
     return {
-      title: 'Project Not Found | Nat Lee',
+      title: 'Project Not Found',
     }
   }
 
+  const canonicalPath = `/projects/${project.id}/`
+  const image = project.thumbnail || project.images?.[0]
+
   return {
-    title: `${project.title} | Nat Lee`,
+    // Bare title — the root layout's title.template adds the " | Nat Lee" suffix
+    // exactly once (returning the full string here double-suffixed every page).
+    title: project.title,
     description: project.description,
+    alternates: {
+      canonical: canonicalPath,
+    },
+    openGraph: {
+      type: 'article',
+      url: `${siteUrl}${canonicalPath}`,
+      title: `${project.title} | Nat Lee`,
+      description: project.description,
+      ...(image ? { images: [{ url: image, alt: project.title }] } : {}),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.title} | Nat Lee`,
+      description: project.description,
+      ...(image ? { images: [image] } : {}),
+    },
   }
 }
 

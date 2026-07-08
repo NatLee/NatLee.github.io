@@ -2,18 +2,52 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import ScrollingTechStack from '@/components/ScrollingTechStack'
+import Providers from '@/components/Providers'
+import { PersonJsonLd } from '@/components/PersonJsonLd'
 
 const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '700', '900'],
-  variable: '--font-inter'
+  variable: '--font-inter',
 })
 
+const siteUrl = 'https://natlee.github.io'
+
 export const metadata: Metadata = {
-  title: 'Nat Lee | Portfolio',
-  description: 'Personal portfolio and project showcase',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Nat Lee | Portfolio',
+    template: '%s | Nat Lee',
+  },
+  description: 'Senior Software Engineer & AI Specialist — portfolio, projects, and experience.',
+  alternates: {
+    canonical: '/',
+  },
   icons: {
     icon: '/favicon.svg',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    alternateLocale: ['zh_TW'],
+    url: siteUrl,
+    siteName: 'Nat Lee Portfolio',
+    title: 'Nat Lee | Portfolio',
+    description: 'Senior Software Engineer & AI Specialist — portfolio, projects, and experience.',
+    images: [
+      {
+        url: 'https://avatars.githubusercontent.com/u/10178964?v=4',
+        width: 460,
+        height: 460,
+        alt: 'Nat Lee',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Nat Lee | Portfolio',
+    description: 'Senior Software Engineer & AI Specialist — portfolio, projects, and experience.',
+    images: ['https://avatars.githubusercontent.com/u/10178964?v=4'],
   },
 }
 
@@ -23,17 +57,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans bg-[#050505] text-gray-300`}>
-        {/* Global Background Layer */}
-        <div className="fixed inset-0 z-0">
-          <ScrollingTechStack />
-        </div>
+        <PersonJsonLd />
+        <Providers>
+          <div className="fixed inset-0 z-0">
+            <ScrollingTechStack />
+          </div>
 
-        {/* Main Content - pointer-events-none to let background receive hover */}
-        <div className="relative z-10 pointer-events-none">
-          {children}
-        </div>
+          <div className="relative z-10 pointer-events-none">
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   )
