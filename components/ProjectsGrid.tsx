@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getAllCategories, getLocalizedProjects } from '@/data/projects'
+import { getAllCategories, getLocalizedProjects, localizeCategory } from '@/data/projects'
 import TerminalCommand from './TerminalCommand'
 import { useLanguage } from '@/contexts/LanguageContext'
 
@@ -20,10 +20,30 @@ function getStableSize(id: string): string {
   return `${(hashString(id) % 900) + 100}KB`
 }
 
+function getCategoryEmoji(category: string): string {
+  const c = category.toLowerCase()
+  if (c.includes('web')) return '🌐'
+  if (c.includes('vision') || c.includes('ai') || c.includes('ml') || c.includes('learning')) return '🧠'
+  if (c.includes('medical')) return '🩺'
+  if (c.includes('image')) return '🖼️'
+  if (c.includes('data collection')) return '🕸️'
+  if (c.includes('data')) return '📊'
+  if (c.includes('devops')) return '⚙️'
+  if (c.includes('api') || c.includes('sdk')) return '🔌'
+  if (c.includes('extension')) return '🧩'
+  if (c.includes('automation')) return '🤖'
+  if (c.includes('backend')) return '🖥️'
+  if (c.includes('tool') || c.includes('utilit') || c.includes('productivity')) return '🛠️'
+  return '📁'
+}
+
 function getStableDate(id: string): string {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   const hash = hashString(id)
-  return `${months[hash % months.length]} ${(hash % 28) + 1} ${(hash % 23)}:${hash % 59}`
+  const day = String((hash % 28) + 1).padStart(2, '0')
+  const hour = String(hash % 24).padStart(2, '0')
+  const minute = String(hash % 60).padStart(2, '0')
+  return `${months[hash % 12]} ${day} ${hour}:${minute}`
 }
 
 export default function ProjectsGrid() {
@@ -49,9 +69,13 @@ export default function ProjectsGrid() {
 
   const filteredProjects = allProjects.filter((project) => {
     const matchesCategory = selectedCategory === 'All' || project.category === selectedCategory
+    const term = searchTerm.toLowerCase().trim()
     const matchesSearch =
-      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase())
+      term === '' ||
+      project.title.toLowerCase().includes(term) ||
+      project.description.toLowerCase().includes(term) ||
+      project.category.toLowerCase().includes(term) ||
+      (project.technologies?.some((tech) => tech.toLowerCase().includes(term)) ?? false)
     return matchesCategory && matchesSearch
   })
 
@@ -84,7 +108,7 @@ export default function ProjectsGrid() {
         <div className="border border-gray-700 rounded-lg overflow-hidden shadow-2xl bg-black/95 backdrop-blur-sm">
           <div className="w-full bg-[#1a1a1a] sticky top-0 z-20 border-b border-gray-800">
             <div className="p-3 flex items-center gap-2">
-              <div className="flex gap-2 mr-4">
+              <div className="flex gap-2 mr-4" aria-hidden="true">
                 <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400" />
                 <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400" />
@@ -120,7 +144,7 @@ export default function ProjectsGrid() {
                     <div className="flex items-center gap-2">
                       <span className="lg:hidden">{isExplorerOpen ? '▼' : '▶'}</span>
                       <span>{t('projects.explorer')}</span>
-                      {selectedCategory !== 'All' && <span className="text-secondary normal-case font-normal">({selectedCategory})</span>}
+                      {selectedCategory !== 'All' && <span className="text-secondary normal-case font-normal">({localizeCategory(selectedCategory, locale)})</span>}
                     </div>
                     <span className="text-gray-600 lg:hidden">{categories.length - 1} {t('projects.categories')}</span>
                   </button>
@@ -145,7 +169,7 @@ export default function ProjectsGrid() {
                           >
                             <span className="opacity-70 text-xs hidden lg:inline">drwxr-xr-x</span>
                             <span className="opacity-70 lg:hidden">📁</span>
-                            <span className="truncate text-xs lg:text-sm">{category}</span>
+                            <span className="truncate text-xs lg:text-sm">{localizeCategory(category, locale)}</span>
                           </button>
                         ))}
                       </div>
@@ -170,7 +194,7 @@ export default function ProjectsGrid() {
                     </div>
                     <div className="flex items-center bg-black border border-gray-700 px-3 py-1.5 w-full focus-within:border-secondary transition-colors rounded">
                       <span className="text-gray-500 text-xs mr-2">{t('projects.findPattern')}</span>
-                      <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='"pattern"' className="bg-transparent border-none outline-none flex-1 text-white placeholder-gray-800 font-mono text-sm" autoComplete="off" aria-label="Search projects" />
+                      <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='"pattern"' className="bg-transparent border-none outline-none flex-1 text-white placeholder-gray-600 font-mono text-sm" autoComplete="off" aria-label={t('projects.searchAria')} />
                     </div>
                   </div>
 
@@ -181,7 +205,7 @@ export default function ProjectsGrid() {
                     <span>|</span>
                     <span>{t('projects.years')}: <span className="text-gray-400">{yearRange}</span></span>
                     <span>|</span>
-                    <span>{t('projects.top')}: <span className="text-secondary">{topCategory}</span></span>
+                    <span>{t('projects.top')}: <span className="text-secondary">{localizeCategory(topCategory, locale)}</span></span>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -199,10 +223,10 @@ export default function ProjectsGrid() {
                               <span className="group-hover:text-secondary">{getStableSize(project.id)}</span>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
-                              <span className="text-2xl opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all drop-shadow-md">
-                                {project.category.includes('Web') ? '🌐' : project.category.includes('AI') || project.category.includes('Vision') ? '🧠' : project.category.includes('Tool') ? '🛠️' : '📁'}
+                              <span className="text-2xl opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all drop-shadow-md" aria-hidden="true">
+                                {getCategoryEmoji(project.category)}
                               </span>
-                              <h3 className="text-base font-bold text-gray-300 group-hover:text-white break-all drop-shadow-md group-hover:text-secondary transition-colors">
+                              <h3 className="text-base font-bold text-gray-300 group-hover:text-secondary [overflow-wrap:anywhere] line-clamp-2 drop-shadow-md transition-colors">
                                 {project.title.toLowerCase().replace(/\s+/g, '_')}
                                 {project.language ? `.${project.language.toLowerCase()}` : '.sh'}
                               </h3>

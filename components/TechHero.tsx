@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getPersonalInfo, getYearsOfExperience } from '@/data/personal'
 import { useLanguage } from '@/contexts/LanguageContext'
+import CopyButton from './CopyButton'
 
 export default function TechHero() {
   const { locale, t } = useLanguage()
@@ -24,8 +25,16 @@ export default function TechHero() {
   const [showCursor, setShowCursor] = useState(true)
 
   useEffect(() => {
-    let index = 0
     let isMounted = true
+
+    // Users who prefer reduced motion get the full text immediately.
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setText(fullText)
+      setShowCursor(false)
+      return
+    }
+
+    let index = 0
     setText('')
 
     const timer = setInterval(() => {
@@ -79,13 +88,16 @@ export default function TechHero() {
                       <span className="underline decoration-blue-500/30 group-hover:decoration-blue-400">{link.name}</span>
                     </a>
                   ))}
-                  <a
-                    href={`mailto:${personalInfo.email}`}
-                    className="group flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-sm font-bold"
-                  >
-                    <span className="text-blue-600 group-hover:text-blue-400">#</span>
-                    <span className="underline decoration-blue-500/30 group-hover:decoration-blue-400">{t('common.email')}</span>
-                  </a>
+                  <span className="flex items-center gap-1.5">
+                    <a
+                      href={`mailto:${personalInfo.email}`}
+                      className="group flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-sm font-bold"
+                    >
+                      <span className="text-blue-600 group-hover:text-blue-400">#</span>
+                      <span className="underline decoration-blue-500/30 group-hover:decoration-blue-400">{t('common.email')}</span>
+                    </a>
+                    <CopyButton value={personalInfo.email} label={t('common.copyEmail')} className="text-sm" />
+                  </span>
                 </div>
 
                 <div className="pl-4 pt-2 text-sm text-gray-500">
@@ -119,7 +131,7 @@ export default function TechHero() {
               <div className="absolute inset-0 bg-secondary/10 rounded-full blur-2xl animate-pulse" />
               <div className="relative w-full h-full overflow-hidden rounded-full border-2 border-dashed border-secondary/30 shadow-[0_0_20px_rgba(255,165,0,0.2)]">
                 <div
-                  className="absolute inset-0 z-10 opacity-20 pointer-events-none mix-blend-overlay animate-noise"
+                  className="absolute inset-0 z-10 opacity-20 pointer-events-none mix-blend-overlay avatar-noise"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
                     filter: 'contrast(120%) brightness(120%)',

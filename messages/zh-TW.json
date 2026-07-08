@@ -4,6 +4,13 @@
     "about": "/about",
     "experience": "/experience",
     "projects": "/projects",
+    "ariaLabel": "主要導覽",
+    "languageSelector": "語言選擇",
+    "shortcutsTitle": "鍵盤快捷鍵",
+    "shortcutsButton": "鍵盤快捷鍵",
+    "shortcutHelpRow": "開關此說明",
+    "shortcutEscRow": "關閉此對話框",
+    "shortcutNavigate": "前往",
     "menu": "選單",
     "close": "關閉",
     "sessionUptime": "連線時間",
@@ -27,7 +34,28 @@
     "initializing": "> 正在初始化系統...",
     "loadingProfile": "> 載入使用者資料：{name}",
     "role": "> 職稱：{title}",
-    "statusOnline": "> 狀態：線上"
+    "statusOnline": "> 狀態：線上",
+    "shell": {
+      "welcome": "互動式 shell 已就緒。輸入 'help' 後按 Enter。",
+      "helpHeader": "可用指令：",
+      "notFound": "找不到指令：{cmd}。輸入 'help' 查看清單。",
+      "sudo": "拒絕存取：想得美。😏",
+      "opening": "正在開啟 {target}/ ...",
+      "ariaLabel": "互動式終端機",
+      "hint": "試試看：help",
+      "cmd": {
+        "help": "列出可用指令",
+        "whoami": "顯示身分",
+        "ls": "列出區塊",
+        "about": "開啟關於頁面",
+        "projects": "開啟專案頁面",
+        "experience": "開啟經歷頁面",
+        "social": "列出社群連結",
+        "email": "顯示聯絡信箱",
+        "date": "顯示目前日期／時間",
+        "clear": "清除畫面"
+      }
+    }
   },
   "about": {
     "terminalTitle": "natlee@mainframe: ~/profile (zsh)",
@@ -93,8 +121,10 @@
     "top": "最多",
     "noMatches": "錯誤：zsh: 找不到符合項目：{term}",
     "totalProjects": "專案總數：{count}",
+    "searchAria": "以名稱、描述或技術搜尋專案",
     "featured": {
       "items": "項目",
+      "listAria": "精選專案",
       "viewAll": "... 查看所有專案",
       "navigate": "↑↓ 導覽",
       "open": "⏎ 開啟",
@@ -122,6 +152,10 @@
     "noScreenshots": "尚無此專案的截圖",
     "prevImage": "上一張",
     "nextImage": "下一張",
+    "imageAlt": "{title} — 截圖 {index} / {total}",
+    "goHome": "回到首頁",
+    "goProjects": "返回專案列表",
+    "closeTab": "關閉專案分頁",
     "preview": "預覽",
     "previewShort": "檢視",
     "demo": "Demo",
@@ -130,7 +164,26 @@
     "sourceCode": "原始碼",
     "docs": "文件",
     "viewLiveDemo": "查看線上展示",
-    "viewSource": "查看原始碼"
+    "viewSource": "查看原始碼",
+    "terminal": {
+      "title": "AI 終端機",
+      "thinking": "思考中",
+      "initializing": "正在初始化 {title}...",
+      "placeholder": "輸入指令...",
+      "thinkingPlaceholder": "思考中...",
+      "availableCommands": "可用指令：",
+      "cmdInfo": "顯示專案資訊",
+      "cmdStack": "列出技術堆疊",
+      "cmdLinks": "顯示專案連結",
+      "cmdClear": "清除終端機",
+      "cmdHelp": "顯示此說明訊息",
+      "stackHeading": "技術堆疊：",
+      "noTech": "沒有列出任何技術。",
+      "linksResponse": "請查看上方的 **config.ts** 分頁以取得專案連結與部署資訊。",
+      "notRecognized": "無法辨識的指令：`{command}`",
+      "typeHelp": "輸入 `help` 查看可用指令。",
+      "ariaLabel": "專案指令終端機"
+    }
   },
   "status": {
     "Completed": "已完成",
@@ -139,7 +192,16 @@
   },
   "common": {
     "present": "至今",
-    "email": "Email"
+    "email": "Email",
+    "copy": "複製",
+    "copyEmail": "複製電子郵件地址",
+    "copied": "已複製！"
+  },
+  "notFound": {
+    "error": "查無此檔案或目錄",
+    "message": "您要求的頁面不存在於此主機。它可能已被移動、重新命名，或從未存在。",
+    "home": "cd ~  ·  回首頁",
+    "projects": "ls ~/projects"
   },
   "meta": {
     "siteTitle": "Nat Lee | 作品集",

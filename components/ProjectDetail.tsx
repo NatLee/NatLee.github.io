@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ProjectDetail as ProjectDetailType, getProjectById } from '@/data/projects'
@@ -27,19 +27,25 @@ export default function ProjectDetail({ project: initialProject }: Props) {
   const [isTerminalCollapsed, setIsTerminalCollapsed] = useState(false)
   const [isClosingTab, setIsClosingTab] = useState(false)
   const [isTabOpen, setIsTabOpen] = useState(false)
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const projectId = project.id
 
-  // Trigger tab open animation on mount
+  // Trigger tab open animation on mount; clear any pending close nav on unmount.
   useEffect(() => {
     const timer = setTimeout(() => setIsTabOpen(true), 50)
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
+    }
   }, [])
 
   // Handle tab close with animation
   const handleCloseProjectTab = (destination: string = '/projects') => {
     setIsClosingTab(true)
-    // Wait for animation to complete before navigating
-    setTimeout(() => {
+    // Wait for animation to complete before navigating. Track the timer so a
+    // navigation elsewhere before it fires can't yank the user back.
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
+    closeTimerRef.current = setTimeout(() => {
       router.push(destination)
     }, 300)
   }
@@ -155,7 +161,7 @@ export default function ProjectDetail({ project: initialProject }: Props) {
           <div className="w-full bg-[#1a1a1a] sticky top-0 z-20 border-b border-gray-800">
             {/* Traffic Lights & Title */}
             <div className="p-3 flex items-center gap-2">
-              <div className="flex gap-2 mr-4">
+              <div className="flex gap-2 mr-4" aria-hidden="true">
                 <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400"></div>
                 <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400"></div>
@@ -170,19 +176,21 @@ export default function ProjectDetail({ project: initialProject }: Props) {
             {/* Terminal Tabs */}
             <div className="flex items-end px-2 gap-1 bg-[#111] overflow-x-auto no-scrollbar">
               {/* Home Tab (Inactive - links to home) */}
-              <button 
+              <button
                 onClick={() => handleCloseProjectTab('/')}
                 className="group flex items-center gap-1.5 px-3 py-2 text-xs font-mono bg-[#1a1a1a] text-gray-600 hover:text-gray-300 border-t border-x border-gray-800 rounded-t transition-colors flex-shrink-0"
-                title="Go to Home"
+                title={t('projectDetail.goHome')}
+                aria-label={t('projectDetail.goHome')}
               >
-                <span className="group-hover:text-secondary">~</span>
+                <span className="group-hover:text-secondary" aria-hidden="true">~</span>
               </button>
-              
+
               {/* Projects Tab (Inactive - links back to projects list) */}
-              <button 
+              <button
                 onClick={() => handleCloseProjectTab('/projects')}
                 className="group flex items-center gap-1.5 px-3 py-2 text-xs font-mono bg-[#1a1a1a] text-gray-500 hover:text-gray-300 border-t border-x border-gray-800 rounded-t transition-colors flex-shrink-0"
-                title="Go to Projects"
+                title={t('projectDetail.goProjects')}
+                aria-label={t('projectDetail.goProjects')}
               >
                 <span className="text-gray-600 group-hover:text-yellow-500">📁</span>
                 <span className="hidden sm:inline">projects/</span>
@@ -200,12 +208,13 @@ export default function ProjectDetail({ project: initialProject }: Props) {
               >
                 <span className="flex-shrink-0">📄</span>
                 <span className="truncate" title={projectId}>{truncatedId}/</span>
-                <button 
+                <button
                   onClick={() => handleCloseProjectTab('/projects')}
                   className="flex-shrink-0 text-gray-500 hover:text-red-400 hover:bg-red-400/10 rounded px-0.5 transition-colors"
-                  title="Close tab"
+                  title={t('projectDetail.closeTab')}
+                  aria-label={t('projectDetail.closeTab')}
                 >
-                  ×
+                  <span aria-hidden="true">×</span>
                 </button>
               </div>
             </div>
@@ -233,7 +242,7 @@ export default function ProjectDetail({ project: initialProject }: Props) {
                 <div className="grid grid-cols-1 lg:grid-cols-2 min-h-0">
 
                   {/* Left Column: Vim Editor */}
-                  <div className="flex flex-col h-[700px] lg:h-[850px] border-b lg:border-b-0 lg:border-r border-gray-800 bg-black/20">
+                  <div className="flex flex-col h-[560px] lg:h-[850px] border-b lg:border-b-0 lg:border-r border-gray-800 bg-black/20">
 
                     {/* Tab Bar */}
                     <div className="flex bg-black/40 border-b border-gray-800 px-2 md:px-4 pt-2 gap-0.5 md:gap-1 overflow-x-auto no-scrollbar select-none flex-shrink-0">
@@ -294,7 +303,7 @@ export default function ProjectDetail({ project: initialProject }: Props) {
                   </div>
 
                   {/* Right Column: Preview / Images */}
-                  <div className="bg-black/40 flex flex-col h-[600px] lg:h-[850px]">
+                  <div className="bg-black/40 flex flex-col h-[420px] lg:h-[850px]">
 
                     {/* Preview Tab Bar - Aligned with left column */}
                     <div className="flex items-center justify-between bg-black/40 border-b border-gray-800 px-2 md:px-4 pt-2 gap-1 select-none flex-shrink-0">
@@ -365,7 +374,7 @@ export default function ProjectDetail({ project: initialProject }: Props) {
                             <div className="relative w-full h-full">
                               <Image
                                 src={project.images[currentImageIndex]}
-                                alt={`Preview ${currentImageIndex}`}
+                                alt={t('projectDetail.imageAlt', { title: project.title, index: currentImageIndex + 1, total: project.images.length })}
                                 fill
                                 className="object-contain"
                                 priority

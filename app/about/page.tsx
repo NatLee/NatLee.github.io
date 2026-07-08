@@ -1,18 +1,19 @@
-import Navigation from '@/components/Navigation'
 import About from '@/components/About'
 
 export const metadata = {
-  title: 'About | Nat Lee',
+  // Bare title — the root layout's title.template appends " | Nat Lee" once.
+  title: 'About',
   description: 'Learn more about Nat Lee - Software Engineer and AI Specialist',
+  alternates: {
+    canonical: '/about/',
+  },
 }
 
 export default function AboutPage() {
   return (
-    <>
-      <Navigation />
-      <main className="min-h-screen pointer-events-none">
-        <About />
-      </main>
-    </>
+    <main id="main" tabIndex={-1} className="min-h-screen pointer-events-none focus:outline-none">
+      <h1 className="sr-only">About Nat Lee</h1>
+      <About />
+    </main>
   )
 }

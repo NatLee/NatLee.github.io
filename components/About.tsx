@@ -6,6 +6,7 @@ import { skillsData } from '@/data/skills'
 import Image from 'next/image'
 import Icon from './Icon'
 import TerminalCommand from './TerminalCommand'
+import CopyButton from './CopyButton'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function About() {
@@ -32,7 +33,7 @@ export default function About() {
       <div className="relative z-10 container mx-auto px-2 md:px-4 max-w-6xl pointer-events-auto">
         <div className="border border-gray-700 rounded-lg overflow-hidden shadow-2xl bg-black/95 backdrop-blur-sm">
           <div className="w-full bg-[#1a1a1a] p-3 flex items-center gap-2 sticky top-0 z-20 border-b border-gray-800">
-            <div className="flex gap-2 mr-4">
+            <div className="flex gap-2 mr-4" aria-hidden="true">
               <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400" />
               <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400" />
               <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400" />
@@ -110,11 +111,14 @@ export default function About() {
                       { label: t('about.github'), icon: 'github', href: personalInfo.socialLinks.find((link) => link.name === 'GitHub')?.url || '#' },
                       { label: t('about.linkedin'), icon: 'linkedin', href: personalInfo.socialLinks.find((link) => link.name === 'LinkedIn')?.url || '#' },
                     ].map((item) => (
-                      <div key={item.label} className="border border-gray-800 bg-[#0a0a0a] p-4 hover:border-secondary transition-colors group cursor-pointer text-center">
+                      <div key={item.label} className="relative border border-gray-800 bg-[#0a0a0a] p-4 hover:border-secondary transition-colors group cursor-pointer text-center">
                         <a href={item.href} target={item.href.startsWith('mailto:') ? undefined : '_blank'} rel="noopener noreferrer" className="flex flex-col items-center gap-2">
                           <Icon name={item.icon} className="w-6 h-6 text-gray-500 group-hover:text-secondary" />
                           <span className="text-xs group-hover:text-white transition-colors">{item.label}</span>
                         </a>
+                        {item.href.startsWith('mailto:') && (
+                          <CopyButton value={personalInfo.email} label={t('common.copyEmail')} className="absolute top-1.5 right-1.5 text-xs" />
+                        )}
                       </div>
                     ))}
                   </div>

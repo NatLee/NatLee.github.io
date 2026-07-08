@@ -6,7 +6,31 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
+  /* Visible, on-brand focus ring for keyboard users across the near-black UI. */
+  :focus-visible {
+    outline: 2px solid #d4741e;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Respect users who ask for less motion: neutralize animations/transitions
+     and stop smooth-scroll. Individual JS typing effects also gate on this. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
   body {
     @apply bg-dark-900 text-gray-100 font-sans;
     -webkit-text-size-adjust: 100%;
@@ -416,6 +440,16 @@
   }
 
   .animate-noise {
+    animation: noise 0.5s steps(2) infinite;
+  }
+
+  /* Avatar film-grain: a static grain overlay when idle (no continuous repaints)
+     that only animates while the avatar is hovered. */
+  .avatar-noise {
+    animation: none;
+  }
+
+  .group:hover .avatar-noise {
     animation: noise 0.5s steps(2) infinite;
   }
 

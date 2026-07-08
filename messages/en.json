@@ -4,6 +4,13 @@
     "about": "/about",
     "experience": "/experience",
     "projects": "/projects",
+    "ariaLabel": "Main navigation",
+    "languageSelector": "Language selector",
+    "shortcutsTitle": "Keyboard Shortcuts",
+    "shortcutsButton": "Keyboard shortcuts",
+    "shortcutHelpRow": "Toggle this help",
+    "shortcutEscRow": "Close this dialog",
+    "shortcutNavigate": "Navigate",
     "menu": "MENU",
     "close": "CLOSE",
     "sessionUptime": "SESSION UPTIME",
@@ -27,7 +34,28 @@
     "initializing": "> Initializing system...",
     "loadingProfile": "> Loading user profile: {name}",
     "role": "> Role: {title}",
-    "statusOnline": "> Status: Online"
+    "statusOnline": "> Status: Online",
+    "shell": {
+      "welcome": "Interactive shell ready. Type 'help' and press Enter.",
+      "helpHeader": "Available commands:",
+      "notFound": "command not found: {cmd}. Type 'help' for a list.",
+      "sudo": "Permission denied: nice try. 😏",
+      "opening": "opening {target}/ ...",
+      "ariaLabel": "Interactive terminal",
+      "hint": "Try: help",
+      "cmd": {
+        "help": "list available commands",
+        "whoami": "print identity",
+        "ls": "list sections",
+        "about": "open the About page",
+        "projects": "open the Projects page",
+        "experience": "open the Experience page",
+        "social": "list social links",
+        "email": "print contact email",
+        "date": "print current date/time",
+        "clear": "clear the screen"
+      }
+    }
   },
   "about": {
     "terminalTitle": "natlee@mainframe: ~/profile (zsh)",
@@ -93,8 +121,10 @@
     "top": "top",
     "noMatches": "Error: zsh: no matches found: {term}",
     "totalProjects": "TOTAL PROJECTS: {count}",
+    "searchAria": "Search projects by name, description, or technology",
     "featured": {
       "items": "items",
+      "listAria": "Featured projects",
       "viewAll": "... view all projects",
       "navigate": "↑↓ Navigate",
       "open": "⏎ Open",
@@ -122,6 +152,10 @@
     "noScreenshots": "No screenshots for this project yet",
     "prevImage": "Previous image",
     "nextImage": "Next image",
+    "imageAlt": "{title} — screenshot {index} of {total}",
+    "goHome": "Go to home",
+    "goProjects": "Back to projects",
+    "closeTab": "Close project tab",
     "preview": "Preview",
     "previewShort": "View",
     "demo": "Demo",
@@ -130,7 +164,26 @@
     "sourceCode": "Source Code",
     "docs": "Docs",
     "viewLiveDemo": "View Live Demo",
-    "viewSource": "View Source"
+    "viewSource": "View Source",
+    "terminal": {
+      "title": "AI Terminal",
+      "thinking": "thinking",
+      "initializing": "Initializing {title}...",
+      "placeholder": "Type a command...",
+      "thinkingPlaceholder": "Thinking...",
+      "availableCommands": "Available commands:",
+      "cmdInfo": "Show project information",
+      "cmdStack": "List technology stack",
+      "cmdLinks": "Show project links",
+      "cmdClear": "Clear terminal",
+      "cmdHelp": "Show this help message",
+      "stackHeading": "Technology Stack:",
+      "noTech": "No technologies listed.",
+      "linksResponse": "Check the **config.ts** tab above for project links and deployment information.",
+      "notRecognized": "Command not recognized: `{command}`",
+      "typeHelp": "Type `help` for available commands.",
+      "ariaLabel": "Project command terminal"
+    }
   },
   "status": {
     "Completed": "Completed",
@@ -139,7 +192,16 @@
   },
   "common": {
     "present": "Present",
-    "email": "Email"
+    "email": "Email",
+    "copy": "Copy",
+    "copyEmail": "Copy email address",
+    "copied": "Copied!"
+  },
+  "notFound": {
+    "error": "No such file or directory",
+    "message": "The page you requested doesn't exist on this mainframe. It may have been moved, renamed, or never existed.",
+    "home": "cd ~  ·  Home",
+    "projects": "ls ~/projects"
   },
   "meta": {
     "siteTitle": "Nat Lee | Portfolio",

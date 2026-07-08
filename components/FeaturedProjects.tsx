@@ -4,7 +4,7 @@ import React, { useCallback, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { getFeaturedProjects } from '@/data/projects'
+import { getFeaturedProjects, localizeCategory } from '@/data/projects'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function FeaturedProjects() {
@@ -55,13 +55,13 @@ export default function FeaturedProjects() {
     <section className="py-8 font-mono text-gray-400">
       <div className="w-full">
         <div className="flex flex-col md:flex-row overflow-hidden border border-gray-800 rounded-lg bg-[#0a0a0a]">
-          <div className="w-full md:w-1/2 border-r border-gray-800 flex flex-col">
+          <div className="w-full md:w-1/2 md:border-r border-gray-800 flex flex-col">
             <div className="flex items-center justify-between px-4 py-2 text-xs border-b border-gray-800 bg-black/50">
               <span className="text-secondary">~/projects/</span>
               <span className="text-gray-600">{featuredProjects.length} {t('projects.featured.items')}</span>
             </div>
 
-            <div className="flex-1 p-2" role="listbox" aria-label="Featured projects" onKeyDown={handleListKeyDown}>
+            <div className="flex-1 p-2" role="listbox" aria-label={t('projects.featured.listAria')} onKeyDown={handleListKeyDown}>
               <div className="space-y-0.5">
                 {featuredProjects.map((project, index) => (
                   <button
@@ -106,17 +106,17 @@ export default function FeaturedProjects() {
               </div>
             </div>
 
-            <div className="px-4 py-2 text-[10px] text-gray-600 border-t border-gray-800 bg-black/30 flex justify-between">
+            <div className="px-4 py-2 text-[10px] text-gray-600 border-t border-gray-800 bg-black/30 hidden md:flex justify-between">
               <span>{t('projects.featured.navigate')}</span>
               <span>{t('projects.featured.open')}</span>
               <span>{t('projects.featured.preview')}</span>
             </div>
           </div>
 
-          <div className="w-full md:w-1/2 flex flex-col relative bg-[#111] min-h-[400px]">
+          <div className="hidden md:flex w-full md:w-1/2 flex-col relative bg-[#111] min-h-[400px]">
             <div className="flex items-center justify-between px-4 py-2 text-xs border-b border-gray-800 bg-black/50">
               <span className="text-gray-500">{t('projects.featured.previewLabel')}</span>
-              <span className="text-gray-600">{activeProject?.category}</span>
+              <span className="text-gray-600">{activeProject ? localizeCategory(activeProject.category, locale) : ''}</span>
             </div>
 
             {activeProject && (
@@ -138,7 +138,7 @@ export default function FeaturedProjects() {
                   <div>
                     <h3 className="text-lg text-secondary font-bold">{activeProject.title}</h3>
                     <div className="flex items-center gap-2 text-[10px] text-gray-500 mt-1">
-                      <span className="px-1.5 py-0.5 bg-gray-800 rounded">{activeProject.category}</span>
+                      <span className="px-1.5 py-0.5 bg-gray-800 rounded">{localizeCategory(activeProject.category, locale)}</span>
                       <span>•</span>
                       <span>{activeProject.role}</span>
                     </div>

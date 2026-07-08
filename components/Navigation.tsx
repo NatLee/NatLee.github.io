@@ -31,6 +31,7 @@ export default function Navigation() {
   const router = useRouter()
   const { t } = useLanguage()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [showShortcuts, setShowShortcuts] = useState(false)
   const [time, setTime] = useState('')
   const [mounted, setMounted] = useState(false)
   const [reduceMotion, setReduceMotion] = useState(false)
@@ -101,7 +102,27 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return
+      // Escape always closes the shortcuts dialog.
+      if (event.key === 'Escape') {
+        setShowShortcuts(false)
+        return
+      }
+      // Don't hijack browser shortcuts (Cmd/Ctrl/Alt+number switch tabs, etc.).
+      if (event.metaKey || event.ctrlKey || event.altKey) return
+      const target = event.target as HTMLElement | null
+      if (
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target?.isContentEditable
+      ) {
+        return
+      }
+      // "?" toggles the keyboard-shortcut help overlay.
+      if (event.key === '?') {
+        event.preventDefault()
+        setShowShortcuts((prev) => !prev)
+        return
+      }
       const index = Number(event.key) - 1
       if (index >= 0 && index < navItems.length) {
         router.push(navItems[index].href)
@@ -157,10 +178,10 @@ export default function Navigation() {
     }
   }
 
-  if (!mounted) return <nav className="fixed top-0 w-full h-12 bg-black border-b border-gray-800 z-50" aria-label="Main navigation" />
+  if (!mounted) return <nav className="fixed top-0 w-full h-12 bg-black border-b border-gray-800 z-50" aria-label={t('nav.ariaLabel')} />
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-gray-800 font-mono text-xs uppercase select-none pointer-events-auto" aria-label="Main navigation">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-gray-800 font-mono text-xs uppercase select-none pointer-events-auto" aria-label={t('nav.ariaLabel')}>
       <div className="w-full flex items-center justify-between h-12 px-2 md:px-0">
         <div className="flex items-center h-full">
           <div className={`hidden md:flex items-center h-full px-4 bg-gray-900 border-r border-gray-800 font-bold gap-2 transition-colors duration-300 ${getStatusColor()}`}>
@@ -242,6 +263,16 @@ export default function Navigation() {
             </div>
           )}
 
+          <button
+            type="button"
+            onClick={() => setShowShortcuts(true)}
+            aria-label={t('nav.shortcutsButton')}
+            title={t('nav.shortcutsButton')}
+            className="hidden md:flex items-center justify-center h-full px-2 text-gray-600 hover:text-secondary transition-colors font-bold text-sm"
+          >
+            ?
+          </button>
+
           <LanguageSwitcher />
 
           <div className="flex items-center border-l border-gray-800 pl-2 lg:pl-4 h-full gap-2">
@@ -278,6 +309,46 @@ export default function Navigation() {
           <div className="px-4 py-2 text-[10px] text-gray-700 flex justify-between">
             <span>{t('nav.sessionUptime')}</span>
             <span className="tabular-nums text-gray-500">{formatUptime(uptime)}</span>
+          </div>
+        </div>
+      )}
+
+      {showShortcuts && (
+        <div
+          className="fixed inset-0 z-[90] flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t('nav.shortcutsTitle')}
+        >
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowShortcuts(false)} />
+          <div className="relative z-10 w-full max-w-sm border border-gray-700 rounded-lg bg-[#0a0a0a] shadow-2xl overflow-hidden animate-scale-in normal-case">
+            <div className="flex items-center justify-between px-4 py-3 bg-[#1a1a1a] border-b border-gray-800">
+              <span className="text-secondary font-bold text-xs uppercase tracking-wider">{t('nav.shortcutsTitle')}</span>
+              <button
+                type="button"
+                onClick={() => setShowShortcuts(false)}
+                aria-label={t('nav.close')}
+                className="text-gray-500 hover:text-red-400 text-lg leading-none"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div className="p-4 space-y-2.5 text-xs">
+              {navItems.map((item, index) => (
+                <div key={item.id} className="flex items-center justify-between gap-4">
+                  <span className="text-gray-400">{t('nav.shortcutNavigate')} {t(item.labelKey)}</span>
+                  <kbd className="px-2 py-0.5 rounded border border-gray-700 bg-gray-900 text-secondary font-mono text-[11px] min-w-[2rem] text-center">{index + 1}</kbd>
+                </div>
+              ))}
+              <div className="flex items-center justify-between gap-4 pt-2 border-t border-gray-800">
+                <span className="text-gray-400">{t('nav.shortcutHelpRow')}</span>
+                <kbd className="px-2 py-0.5 rounded border border-gray-700 bg-gray-900 text-secondary font-mono text-[11px] min-w-[2rem] text-center">?</kbd>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-gray-400">{t('nav.shortcutEscRow')}</span>
+                <kbd className="px-2 py-0.5 rounded border border-gray-700 bg-gray-900 text-secondary font-mono text-[11px] min-w-[2rem] text-center">Esc</kbd>
+              </div>
+            </div>
           </div>
         </div>
       )}

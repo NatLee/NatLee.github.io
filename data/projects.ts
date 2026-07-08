@@ -117,6 +117,34 @@ export function getAllCategories(): string[] {
   return Array.from(categories)
 }
 
+// Display-only category labels. Filtering always uses the canonical (English)
+// category value; this maps that value to a localized label for rendering.
+const categoryLabelsZh: Record<string, string> = {
+  'AI/ML': '人工智慧／機器學習',
+  'Web Development': '網頁開發',
+  'Web Application': '網頁應用',
+  'Web Automation': '網頁自動化',
+  'DevOps': 'DevOps',
+  'Computer Vision': '電腦視覺',
+  'Data Science': '資料科學',
+  'Data Collection': '資料蒐集',
+  'Image Processing': '影像處理',
+  'Medical Imaging': '醫療影像',
+  'Backend': '後端',
+  'API/SDK': 'API/SDK',
+  'Browser Extension': '瀏覽器擴充功能',
+  'Open Source': '開源',
+  'Utilities': '公用程式',
+  'Tool': '工具',
+  'Tools': '工具',
+  'Productivity Tools': '生產力工具',
+}
+
+export function localizeCategory(category: string, locale: Locale = 'en'): string {
+  if (locale !== 'zh-TW') return category
+  return categoryLabelsZh[category] ?? category
+}
+
 export function getLocalizedProjects(locale: Locale = 'en'): ProjectDetail[] {
   return allProjectsData.map((project) => localizeProject(project, locale))
 }

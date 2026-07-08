@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getProjectById, allProjectsData } from '@/data/projects'
 import ProjectDetail from '@/components/ProjectDetail'
-import Navigation from '@/components/Navigation'
 
 const siteUrl = 'https://natlee.github.io'
 
@@ -62,11 +61,8 @@ export default function ProjectDetailPage({ params }: Props) {
   }
 
   return (
-    <>
-      <Navigation />
-      <main className="min-h-screen pointer-events-none">
-        <ProjectDetail project={project} />
-      </main>
-    </>
+    <main id="main" tabIndex={-1} className="min-h-screen pointer-events-none focus:outline-none">
+      <ProjectDetail project={project} />
+    </main>
   )
 }

@@ -51,7 +51,7 @@ export default function Experience() {
       <div className="relative z-10 container mx-auto px-2 md:px-4 max-w-7xl pointer-events-auto">
         <div className="border border-gray-700 rounded-lg overflow-hidden shadow-2xl bg-black/95 backdrop-blur-sm">
           <div className="w-full bg-[#1a1a1a] p-3 flex items-center gap-2 sticky top-0 z-20 border-b border-gray-800">
-            <div className="flex gap-2 mr-4">
+            <div className="flex gap-2 mr-4" aria-hidden="true">
               <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400" />
               <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400" />
               <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400" />
