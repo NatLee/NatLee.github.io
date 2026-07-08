@@ -4,97 +4,75 @@ A highly interactive, **Linux/Unix terminal-themed** personal portfolio website.
 
 > "There is no place like ~"
 
-## 🖥️ System Features
+## System Features
 
-- **💻 Interactive Terminal**: Fully functional terminal interface with support for custom commands (e.g., `./intro.sh`, `ls -l`).
-- **⌨️ Command-Line Navigation**: Navigate the site using simulated shell commands or traditional UI clicks.
-- **👾 Glitch & Cyberpunk Aesthetics**: Custom CRT animations, text glitch effects, and "matrix-style" visuals.
-- **📁 File System Metaphor**: Projects and pages are presented as files and directories in a file explorer (Ranger-style).
-- **🚀 Modern Spec**: Built on the latest Next.js App Router for blazing fast static generation.
-- **🎨 Dynamic Theming**: "Dark Mode" by default with semantic highlighting for code and terminal output.
-- **📊 Real-time Stats**: "System" statistics (career stats) displayed like server metrics.
+- **Interactive Terminal**: Terminal interface with custom commands (e.g., `./intro.sh`, `ls -l --ranger-mode`).
+- **Command-Line Navigation**: Navigate using shell-style UI, keyboard shortcuts `[1]`–`[4]`, or traditional clicks.
+- **i18n (EN / 中文)**: Language switcher in the navigation bar with localized UI and content overlays.
+- **Glitch & Cyberpunk Aesthetics**: CRT animations, text glitch effects, and scanline visuals.
+- **File System Metaphor**: Projects presented as files and directories in a Ranger-style explorer.
+- **Static Generation**: Next.js App Router with static export for GitHub Pages.
+- **SEO**: Open Graph metadata, sitemap, robots.txt, and JSON-LD Person schema.
 
-## 🛠️ Kernel Specs (Tech Stack)
+## Tech Stack
 
 | Component | Specification |
 |-----------|---------------|
 | **Core** | Next.js 14 (App Router), React 18, TypeScript |
-| **Shell UI** | Tailwind CSS, Framer Motion (animations) |
+| **Shell UI** | Tailwind CSS, CSS keyframes, react-fast-marquee |
 | **Icons** | react-icons (FontAwesome, Simple Icons) |
 | **Deployment** | GitHub Pages (Static Export) |
-| **Package Manager** | npm / yarn |
+| **Package Manager** | npm |
 
-## 🚀 Boot Sequence (Quick Start)
+## Quick Start
 
 ### Prerequisites
 - Node.js 18+
-- npm or yarn
+- npm
 
 ### Installation
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/natlee/NatLee.github.io.git
-    cd NatLee.github.io
-    ```
-
-2.  **Install modules:**
-    ```bash
-    npm install
-    ```
-
-3.  **Initialize local server:**
-    ```bash
-    npm run dev
-    ```
-
-4.  **Access Localhost:**
-    Open `http://localhost:3000` to establish a session.
-
-## 📂 File System Structure
-
-```
-/home/natlee/portfolio
-├── app/                  # Kernel (Next.js App Router)
-├── components/           # UI Modules (Terminal, Shell, Glitch Components)
-│   ├── TerminalCommand.tsx   # Command execution logic
-│   ├── TechHero.tsx          # Main boot screen / Hero
-│   └── ...
-├── data/                 # System Data (JSON files for content)
-├── public/               # Static Assets
-└── tailwind.config.js    # UI Configuration
+```bash
+git clone https://github.com/natlee/NatLee.github.io.git
+cd NatLee.github.io
+npm install
+npm run dev
 ```
 
-## 📜 Available Commands (Scripts)
+Open `http://localhost:3000`.
+
+## File Structure
+
+```
+├── app/                     # Next.js App Router pages & layout
+├── assets/data/             # Source-of-truth JSON content
+│   └── i18n/                # Chinese content overlays
+├── components/              # UI modules (Terminal, Navigation, etc.)
+├── contexts/                # LanguageProvider (i18n)
+├── data/                    # Typed data wrappers
+├── lib/i18n/                # i18n helpers
+├── messages/                # UI string dictionaries (en, zh-TW)
+└── public/                  # Static assets (favicon, CNAME)
+```
+
+## Scripts
 
 ```bash
-# Development Mode
-npm run dev          # Start local development server
-
-# Production Build
-npm run build        # Compile system binaries
-
-# Static Export
-npm run build:pages  # Export static site for GitHub Pages
-
-# Deployment
-npm run deploy       # Deploy to remote (GitHub Pages)
-
-# System Check
-npm run lint         # Run code analysis
+npm run dev          # Development server
+npm run build        # Production build (static export)
+npm run build:pages  # Same as build — GitHub Pages export
+npm run lint         # ESLint
 ```
 
-## 🔧 Deployment
+## Content & i18n
 
-This system is configured for automatic deployment via **GitHub Actions**.
-Pushes to the `main` branch trigger a workflow that builds and deploys the static site to the `gh-pages` branch.
+- Edit `assets/data/personal.json` for bio, contact, and social links.
+- UI strings live in `messages/en.json` and `messages/zh-TW.json`.
+- Chinese content overlays: `assets/data/i18n/*.zh.json`.
 
-## 👤 User Profile
+## Deployment
 
-**Nat Lee**
-b. Software Engineer // Full Stack Developer
-
-Edit `assets/data/personal.json` to update user variables such as bio, contact info, and social links.
+Pushes to `main` trigger GitHub Actions to build and deploy to GitHub Pages.
 
 ---
-*Built with <3 and caffeine by Nat Lee*
+*Built with care by Nat Lee*
