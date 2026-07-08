@@ -9,6 +9,8 @@ export interface Experience {
   company: string
   companyId: string
   companyLogo?: string
+  /** Corporate group used to merge roles across legal entities into one timeline. */
+  group?: string
   /** Parent company shown when this role sits inside a subsidiary. */
   parentCompany?: string
   /** Career transition into this role — drives the timeline badge. */

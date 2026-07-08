@@ -70,7 +70,7 @@
     "endOfLog": "-- End of Log Stream --",
     "totalEntries": "TOTAL ENTRIES: {count}",
     "degreeInMajor": "{degree} in {major}",
-    "subsidiaryOf": "Subsidiary of {parent}",
+    "subsidiary": "Subsidiary",
     "transition": {
       "promotion": "Promotion",
       "transfer": "Transfer",

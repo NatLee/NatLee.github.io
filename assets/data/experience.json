@@ -1,17 +1,18 @@
 [
   {
-    "id": "star-power-manager",
+    "id": "star-trade-manager",
     "title": "Deputy Manager",
-    "company": "Star Power Co., Ltd.",
-    "companyId": "star-power",
+    "company": "Star Trade Co., Ltd.",
+    "companyId": "star-trade",
     "companyLogo": "",
+    "group": "HD Renewables Co., Ltd.",
     "parentCompany": "HD Renewables Co., Ltd.",
     "roleType": "transfer",
-    "department": "Overseas Power Trading",
+    "department": "Overseas Operations & Strategy Div. Systems & Data Analytics Dept.",
     "location": "Taipei, Taiwan",
-    "start": "May 2026",
+    "start": "2026.05",
     "end": "Present",
-    "summary": "Transferred within the HD Renewables group to its subsidiary Star Power while retaining the Deputy Manager role. Leads engineering for overseas power trading — market data, bidding systems, and the planning of automated trading modules.",
+    "summary": "Transferred within the HD Renewables group to its subsidiary Star Trade while retaining the Deputy Manager role. Leads engineering for overseas power trading — market data, bidding systems, and the planning of automated trading modules.",
     "responsibilities": [
       "Lead development of overseas power-trading and market-data systems together with the team",
       "Build bidding and tender systems for overseas electricity markets",
@@ -22,7 +23,7 @@
       "Python", "Docker", "PostgreSQL", "Airflow", "Time Series Analysis", "Automated Trading", "System Design"
     ],
     "achievements": [
-      "Transferred within the HD Renewables group to Star Power while retaining the Deputy Manager role"
+      "Transferred within the HD Renewables group to Star Trade while retaining the Deputy Manager role"
     ]
   },
   {
@@ -34,8 +35,8 @@
     "roleType": "promotion",
     "department": "International Power Trading Division",
     "location": "Taipei, Taiwan",
-    "start": "Mar 2026",
-    "end": "May 2026",
+    "start": "2026.03",
+    "end": "2026.05",
     "summary": "Moved onto the management track as Deputy Manager and kicked off the power-trading data platform — a centralized system that ingests Japan's electricity market and weather data to underpin trading and forecasting.",
     "responsibilities": [
       "Designed and led development of a power-trading data platform from the ground up",
@@ -60,8 +61,8 @@
     "roleType": "promotion",
     "department": "International Power Trading Division",
     "location": "Taipei, Taiwan",
-    "start": "Sep 2025",
-    "end": "Mar 2026",
+    "start": "2025.09",
+    "end": "2026.03",
     "summary": "Promoted to Principal Engineer, taking technical ownership of the international power-trading strategy stack — the spot-price prediction models and the data pipelines feeding the Japan and Australia trading desks.",
     "responsibilities": [
       "Led development of spread and spot-price prediction models for the Japan and Australia power markets",
@@ -86,8 +87,8 @@
     "roleType": "transfer",
     "department": "International Power Trading Division",
     "location": "Taipei, Taiwan",
-    "start": "Dec 2024",
-    "end": "Sep 2025",
+    "start": "2024.12",
+    "end": "2025.09",
     "summary": "Transferred to the International Power Trading Division, focusing on developing power trading strategies for Japan and Australia markets. Developing spread strategy models to predict spot market electricity prices and assist traders in decision-making.",
     "responsibilities": [
       "Develop international power trading strategies for Japan and Australia markets",
@@ -110,8 +111,8 @@
     "companyLogo": "",
     "department": "Smart Services Division",
     "location": "Taipei, Taiwan", 
-    "start": "Apr 2023",
-    "end": "Dec 2024",
+    "start": "2023.04",
+    "end": "2024.12",
     "summary": "Developed solar power prediction and display systems, optimized power matching algorithms, and integrated various platforms with advanced authentication systems.",
     "responsibilities": [
       "Developed time series models using Python and PyTorch to predict solar power generation for Tainan FamilyMart Pingfeng store energy storage demonstration site",
@@ -138,8 +139,8 @@
     "companyLogo": "",
     "department": "Technology Center",
     "location": "Taipei, Taiwan",
-    "start": "Dec 2021",
-    "end": "Apr 2023",
+    "start": "2021.12",
+    "end": "2023.04",
     "summary": "Developed NLP and data platforms using Python and deep learning frameworks. Built sentiment analysis platform processing over 3 billion data points with 30% accuracy improvement. Led backend development for dashboard projects and CDP platforms.",
     "responsibilities": [
       "Developed sentiment analysis platform using deep learning frameworks, improving accuracy by 30%",
@@ -166,8 +167,8 @@
     "companyLogo": "",
     "department": "Security Product Development Division", 
     "location": "Taipei, Taiwan",
-    "start": "Sep 2021",
-    "end": "Nov 2021",
+    "start": "2021.09",
+    "end": "2021.11",
     "summary": "Worked on cybersecurity products, focusing on CA certificate applications and writing comprehensive test cases for security systems.",
     "responsibilities": [
       "Developed test cases for cybersecurity-related products",
@@ -190,8 +191,8 @@
     "companyLogo": "",
     "department": "R&D Department",
     "location": "New Taipei, Taiwan",
-    "start": "Oct 2019",
-    "end": "Mar 2021",
+    "start": "2019.10",
+    "end": "2021.03",
     "summary": "Specialized in computer vision and deep learning solutions. Developed AI applications for medical imaging, retail analytics, and embedded advertising systems using edge computing devices.",
     "responsibilities": [
       "Applied Docker virtualization technology to simplify development processes",
@@ -218,8 +219,8 @@
     "companyLogo": "",
     "department": "Tool Product Division",
     "location": "Taipei, Taiwan", 
-    "start": "Jul 2018",
-    "end": "Oct 2019",
+    "start": "2018.07",
+    "end": "2019.10",
     "summary": "First professional role developing web scraping and data analysis platforms. Built NLP models, voice recognition systems, and blockchain-related applications using various technologies.",
     "responsibilities": [
       "Developed frontend and backend web applications and microservices for blockchain trend products",

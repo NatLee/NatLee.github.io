@@ -9,9 +9,12 @@ import { useLanguage } from '@/contexts/LanguageContext'
 function getGroupedExperience(experienceData: ReturnType<typeof getExperienceData>) {
   const grouped: { company: string; items: ReturnType<typeof getExperienceData> }[] = []
   experienceData.forEach((exp) => {
-    const existingGroup = grouped.find((g) => g.company === exp.company)
+    // Roles can share a corporate group (e.g. a parent and its subsidiary) so
+    // they render as one continuous timeline; fall back to the legal entity.
+    const key = exp.group ?? exp.company
+    const existingGroup = grouped.find((g) => g.company === key)
     if (existingGroup) existingGroup.items.push(exp)
-    else grouped.push({ company: exp.company, items: [exp] })
+    else grouped.push({ company: key, items: [exp] })
   })
   return grouped
 }
@@ -89,14 +92,7 @@ export default function Experience() {
                       >
                         <div className="flex items-center gap-3 md:gap-4 text-sm md:text-base min-w-0">
                           <span className={`text-xl transition-transform flex-shrink-0 ${isExpanded ? 'rotate-90' : ''}`}>▶</span>
-                          <span className="flex flex-col items-start text-left min-w-0">
-                            <span className={`font-bold truncate max-w-full ${isExpanded ? 'text-secondary' : 'text-gray-400'}`}>{group.company}</span>
-                            {group.items[0]?.parentCompany && (
-                              <span className="text-[10px] text-gray-500 font-normal normal-case tracking-normal truncate max-w-full">
-                                {t('experience.subsidiaryOf', { parent: group.items[0].parentCompany })}
-                              </span>
-                            )}
-                          </span>
+                          <span className={`font-bold truncate min-w-0 ${isExpanded ? 'text-secondary' : 'text-gray-400'}`}>{group.company}</span>
                           <span className="text-gray-600 text-xs ml-1 md:ml-2 border border-gray-800 px-2 py-0.5 rounded whitespace-nowrap flex-shrink-0">
                             {group.items.length} {group.items.length > 1 ? t('experience.rolesPlural') : t('experience.roles')}
                           </span>
@@ -124,6 +120,16 @@ export default function Experience() {
                                       </span>
                                     )}
                                   </div>
+                                  {exp.company !== group.company && (
+                                    <div className="flex items-center gap-2 flex-wrap mb-2 text-sm">
+                                      <span className="text-secondary font-bold">{exp.company}</span>
+                                      {exp.parentCompany && (
+                                        <span className="text-[10px] font-normal normal-case text-gray-400 border border-gray-700 rounded px-1.5 py-0.5">
+                                          {t('experience.subsidiary')}
+                                        </span>
+                                      )}
+                                    </div>
+                                  )}
                                   <div className="text-orange-300 text-sm mb-2">@ {exp.location}</div>
                                   {exp.department && (
                                     <div className="text-gray-500 text-xs mb-4">

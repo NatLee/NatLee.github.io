@@ -70,7 +70,7 @@
     "endOfLog": "-- 日誌結束 --",
     "totalEntries": "總計條目：{count}",
     "degreeInMajor": "{major}{degree}",
-    "subsidiaryOf": "{parent} 子公司",
+    "subsidiary": "子公司",
     "transition": {
       "promotion": "晉升",
       "transfer": "轉調",
