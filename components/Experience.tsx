@@ -131,6 +131,23 @@ export default function Experience() {
                                     </div>
                                   )}
                                   <div className="text-orange-300 text-sm mb-2">@ {exp.location}</div>
+                                  {exp.assignment && (
+                                    <div className="mb-2 text-xs border-l-2 border-purple-500/50 bg-purple-500/5 pl-3 py-1.5">
+                                      <div className="flex items-center gap-2 flex-wrap text-purple-300">
+                                        <span className="font-bold uppercase tracking-wider text-[10px] border border-purple-500/40 rounded px-1.5 py-0.5">
+                                          <span aria-hidden="true" className="mr-1">✈</span>
+                                          {t('experience.assignment')}
+                                        </span>
+                                        <span>@ {exp.assignment.location}</span>
+                                        <span className="text-gray-500 font-mono">
+                                          [{exp.assignment.start} -- {displayEnd(exp.assignment.end)}]
+                                        </span>
+                                      </div>
+                                      {exp.assignment.note && (
+                                        <p className="text-gray-400 mt-1.5 leading-relaxed max-w-3xl">{exp.assignment.note}</p>
+                                      )}
+                                    </div>
+                                  )}
                                   {exp.department && (
                                     <div className="text-gray-500 text-xs mb-4">
                                       {t('experience.department')}: {exp.department}

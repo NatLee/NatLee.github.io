@@ -99,6 +99,7 @@
     "totalEntries": "總計條目：{count}",
     "degreeInMajor": "{major}{degree}",
     "subsidiary": "子公司",
+    "assignment": "出差駐點",
     "transition": {
       "promotion": "晉升",
       "transfer": "轉調",

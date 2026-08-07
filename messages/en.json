@@ -99,6 +99,7 @@
     "totalEntries": "TOTAL ENTRIES: {count}",
     "degreeInMajor": "{degree} in {major}",
     "subsidiary": "Subsidiary",
+    "assignment": "On-site Assignment",
     "transition": {
       "promotion": "Promotion",
       "transfer": "Transfer",

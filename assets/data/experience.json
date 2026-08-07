@@ -10,20 +10,31 @@
     "roleType": "transfer",
     "department": "Overseas Operations & Strategy Div. Systems & Data Analytics Dept.",
     "location": "Taipei, Taiwan",
+    "assignment": {
+      "location": "Tokyo, Japan",
+      "start": "2026.05",
+      "end": "2026.08",
+      "note": "On-site in Tokyo working directly with the contracted vendors — running requirement design and planning sessions, and supporting live power-trading bids in the Japanese market."
+    },
     "start": "2026.05",
     "end": "Present",
-    "summary": "Transferred within the HD Renewables group to its subsidiary Star Trade while retaining the Deputy Manager role. Leads engineering for overseas power trading — market data, bidding systems, and the planning of automated trading modules.",
+    "summary": "Transferred within the HD Renewables group to its subsidiary Star Trade while retaining the Deputy Manager role. Leads engineering for overseas power trading — market data, bidding systems, and the planning of automated trading modules — including a Tokyo posting to drive vendor requirement design and support live bidding.",
     "responsibilities": [
       "Lead development of overseas power-trading and market-data systems together with the team",
       "Build bidding and tender systems for overseas electricity markets",
       "Plan and architect automated trading modules",
+      "Stationed in Tokyo to work face-to-face with contracted vendors, gathering requirements and defining system scope and specifications",
+      "Turn vendor discussions into design and delivery plans, then track them through to implementation",
+      "Support power-trading bidding in the Japanese market on site, coordinating between traders and engineering",
       "Drive the trading data platform's evolution across the corporate group"
     ],
     "techStack": [
-      "Python", "Docker", "PostgreSQL", "Airflow", "Time Series Analysis", "Automated Trading", "System Design"
+      "Python", "Docker", "PostgreSQL", "Airflow", "Time Series Analysis", "Automated Trading", "System Design", "Vendor Management", "Requirements Engineering"
     ],
     "achievements": [
-      "Transferred within the HD Renewables group to Star Trade while retaining the Deputy Manager role"
+      "Transferred within the HD Renewables group to Star Trade while retaining the Deputy Manager role",
+      "Completed a three-month Tokyo assignment (2026.05–2026.08) as the on-site technical counterpart to the vendors, aligning requirements and system design directly with them",
+      "Supported Japanese power-trading bids on site, shortening the feedback loop between the trading desk and the engineering team"
     ]
   },
   {
