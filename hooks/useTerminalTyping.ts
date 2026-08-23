@@ -7,7 +7,7 @@ export interface UseTerminalTypingOptions {
   typingSpeed?: number      // mean ms per character; omit to auto-fit a ~1.8s scene
   startDelay?: number       // delay before typing starts (default: 0)
   cursorBlinkSpeed?: number // cursor blink interval (default: 500)
-  completeHoldMs?: number   // pause on the finished command before onComplete (default: 600)
+  completeHoldMs?: number   // pause on the finished command before onComplete (default: 450)
   onComplete?: () => void
   enabled?: boolean         // whether to start the animation (default: true)
 }
@@ -19,14 +19,15 @@ export interface UseTerminalTypingReturn {
   showCursor: boolean
 }
 
-// Mean per-character delay when the caller doesn't pin one. Real command-line
-// typing sits around 60-90 WPM (150-250ms a character); the previous "snappy"
-// 55-60ms cadence measured out to ~160 WPM, which the eye reads as the command
-// simply appearing. Short commands take the slow end and long ones compress,
-// so every command scene lands in roughly the same 1.5-2.5s window regardless
-// of string length — a 10-char command can finally read as typing at all.
+// Mean per-character delay when the caller doesn't pin one. The eye needs
+// roughly human cadence to read "typing" at all — the old 55-60ms fixed rate
+// (~160 WPM) registered as the command simply appearing — but a full 60-90 WPM
+// re-enactment read as sluggish once the owner saw it for real. This sits in
+// between (~85-110 WPM): short commands take the slow end and long ones
+// compress, so every command scene lands in roughly 1.0-2.2s regardless of
+// string length.
 function meanCharDelay(length: number): number {
-  return Math.round(Math.min(150, Math.max(70, 1800 / Math.max(length, 1))))
+  return Math.round(Math.min(115, Math.max(60, 1400 / Math.max(length, 1))))
 }
 
 // A fixed interval reads as a progress bar filling, not as someone at a
@@ -44,7 +45,7 @@ export function useTerminalTyping({
   typingSpeed,
   startDelay = 0,
   cursorBlinkSpeed = 500,
-  completeHoldMs = 600,
+  completeHoldMs = 450,
   onComplete,
   enabled = true,
 }: UseTerminalTypingOptions): UseTerminalTypingReturn {

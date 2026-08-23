@@ -57,7 +57,7 @@ export default function TechHero({ onBootComplete }: TechHeroProps) {
         clearInterval(timer)
         onBootCompleteRef.current?.()
       }
-    }, 38)
+    }, 30)
 
     const cursorTimer = setInterval(() => {
       if (!isMounted) return
