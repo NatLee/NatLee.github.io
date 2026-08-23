@@ -3,6 +3,28 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Motion system ─────────────────────────────────────────────────────
+     Single source of truth for how fast things move. Anything under ~150ms
+     reads as an instant state change rather than as motion, so entrances
+     live in the 400-900ms band and only pointer feedback stays in the fast
+     lane. Retune a token here instead of hand-editing durations per file. */
+  :root {
+    --motion-instant: 150ms; /* colour / opacity nudges */
+    --motion-fast: 250ms;    /* hover + press feedback */
+    --motion-base: 420ms;    /* small element entrance */
+    --motion-slow: 650ms;    /* content block reveal */
+    --motion-slower: 900ms;  /* page + hero level reveal */
+
+    /* Decelerating curves: big first frames, a long readable tail. */
+    --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-back: cubic-bezier(0.34, 1.28, 0.64, 1);
+    --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+    /* Per-item offset for staggered lists and grids. */
+    --stagger-step: 65ms;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -15,7 +37,9 @@
   }
 
   /* Respect users who ask for less motion: neutralize animations/transitions
-     and stop smooth-scroll. Individual JS typing effects also gate on this. */
+     and stop smooth-scroll. Individual JS typing effects also gate on this.
+     Delays are zeroed too — entrance animations fill `both`, so a surviving
+     delay would hold content invisible and then snap it in. */
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -25,8 +49,10 @@
     *::before,
     *::after {
       animation-duration: 0.001ms !important;
+      animation-delay: 0ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
+      transition-delay: 0ms !important;
       scroll-behavior: auto !important;
     }
   }
@@ -34,7 +60,7 @@
   body {
     @apply bg-dark-900 text-gray-100 font-sans;
     -webkit-text-size-adjust: 100%;
-    background-image: 
+    background-image:
       radial-gradient(circle at 25% 25%, rgba(212, 116, 30, 0.06) 0%, transparent 50%),
       radial-gradient(circle at 75% 75%, rgba(230, 184, 0, 0.06) 0%, transparent 50%);
     background-attachment: fixed;
@@ -64,7 +90,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
@@ -73,55 +99,67 @@
 @layer components {
   /* Portfolio Tiles */
   .tile {
-    @apply relative overflow-hidden rounded-lg transition-all duration-500 ease-in-out hover:transform hover:-translate-y-2;
+    @apply relative overflow-hidden rounded-lg hover:transform hover:-translate-y-2;
+    transition: transform var(--motion-slow) var(--ease-out-soft),
+                box-shadow var(--motion-slow) var(--ease-out-soft);
   }
-  
+
   .tile-image {
-    @apply relative w-full h-80 object-cover transition-transform duration-500 ease-in-out;
+    @apply relative w-full h-80 object-cover;
+    transition: transform var(--motion-slow) var(--ease-out-soft);
   }
-  
+
   .tile-overlay {
-    @apply absolute inset-0 bg-black bg-opacity-50 transition-all duration-500 ease-in-out;
+    @apply absolute inset-0 bg-black bg-opacity-50;
+    transition: background-color var(--motion-slow) var(--ease-out-soft);
   }
-  
+
   .tile-content {
     @apply absolute inset-0 flex flex-col items-center justify-center p-6 text-white text-center z-10;
   }
-  
+
   .tile-title {
-    @apply text-2xl font-bold mb-2 transition-all duration-500 ease-in-out;
+    @apply text-2xl font-bold mb-2;
+    transition: color var(--motion-slow) var(--ease-out-soft),
+                transform var(--motion-slow) var(--ease-out-soft);
   }
-  
+
   .tile-description {
-    @apply max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out;
+    @apply max-h-0 opacity-0 overflow-hidden;
+    transition: max-height var(--motion-slow) var(--ease-out-soft),
+                opacity var(--motion-slow) var(--ease-out-soft);
   }
-  
+
   .tile:hover .tile-image {
     @apply scale-110;
   }
-  
+
   .tile:hover .tile-overlay {
     @apply bg-opacity-80;
   }
-  
+
   .tile:hover .tile-description {
     @apply max-h-32 opacity-100;
   }
-  
+
   .section-header {
     @apply text-center text-3xl font-bold mb-8 text-white;
   }
-  
+
   .tiles-grid {
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
   }
 
   /* Project Card Image - 完全移除所有 hover 效果，避免變換衝突 */
   .project-card-image {
-    @apply transition-all duration-500 ease-out;
+    transition: transform var(--motion-slow) var(--ease-out-soft),
+                opacity var(--motion-slow) var(--ease-out-soft),
+                filter var(--motion-slow) var(--ease-out-soft);
   }
 
-  /* Animations */
+  /* ── Keyframes ─────────────────────────────────────────────────────────
+     Entrance travel distances are deliberately generous. A 6px slide reads
+     as a pop at any duration; the eye needs both distance and time. */
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -205,7 +243,7 @@
   @keyframes scaleIn {
     from {
       opacity: 0;
-      transform: scale(0.8);
+      transform: scale(0.92);
     }
     to {
       opacity: 1;
@@ -255,20 +293,24 @@
     }
   }
 
+  /* Every one-shot entrance fills `both`, never `forwards`. Under `forwards`
+     an animation with a delay renders its element in the natural (visible)
+     state until the delay elapses, then snaps back to the 0% keyframe — that
+     is a flash, not a reveal. `both` applies 0% during the delay as well. */
   .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
+    animation: fadeInUp var(--motion-slow) var(--ease-out-soft) both;
   }
 
   .animate-fade-in-left {
-    animation: fadeInLeft 0.6s ease-out forwards;
+    animation: fadeInLeft var(--motion-slow) var(--ease-out-soft) both;
   }
 
   .animate-fade-in-right {
-    animation: fadeInRight 0.6s ease-out forwards;
+    animation: fadeInRight var(--motion-slow) var(--ease-out-soft) both;
   }
 
   .animate-typewriter {
-    animation: typewriter 2s steps(40) forwards;
+    animation: typewriter 2s steps(40) both;
   }
 
   .animate-cursor {
@@ -290,15 +332,15 @@
   }
 
   .animate-slide-up {
-    animation: slideUp 0.8s ease-out forwards;
+    animation: slideUp var(--motion-slower) var(--ease-out-expo) both;
   }
 
   .animate-scale-in {
-    animation: scaleIn 0.6s ease-out forwards;
+    animation: scaleIn var(--motion-base) var(--ease-out-back) both;
   }
 
   .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+    animation: fadeIn var(--motion-slower) var(--ease-out-soft) both;
   }
 
   .animate-float {
@@ -310,7 +352,7 @@
   }
 
   .animate-terminal-expand {
-    animation: terminalExpand 0.3s ease-out forwards;
+    animation: terminalExpand var(--motion-base) var(--ease-out-soft) both;
   }
 
   /* Gradient Text */
@@ -325,18 +367,21 @@
 
   /* Hover Effects */
   .hover-lift {
-    @apply transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl;
+    @apply hover:transform hover:-translate-y-2 hover:shadow-xl;
+    transition: transform var(--motion-fast) var(--ease-out-soft),
+                box-shadow var(--motion-fast) var(--ease-out-soft);
   }
 
   .hover-glow {
-    @apply transition-all duration-300 hover:shadow-lg hover:shadow-secondary/25;
+    @apply hover:shadow-lg hover:shadow-secondary/25;
+    transition: box-shadow var(--motion-fast) var(--ease-out-soft);
   }
 
   /* AI Terminal Animations */
   @keyframes terminalFadeIn {
     from {
       opacity: 0;
-      transform: translateY(8px);
+      transform: translateY(14px);
     }
     to {
       opacity: 1;
@@ -358,16 +403,16 @@
   @keyframes messageSlide {
     from {
       opacity: 0;
-      transform: translateX(-10px);
+      transform: translate3d(-18px, 4px, 0);
     }
     to {
       opacity: 1;
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
   .animate-terminal-fade-in {
-    animation: terminalFadeIn 0.3s ease-out forwards;
+    animation: terminalFadeIn var(--motion-slow) var(--ease-out-soft) both;
   }
 
   .animate-sparkle {
@@ -375,55 +420,89 @@
   }
 
   .animate-message-slide {
-    animation: messageSlide 0.2s ease-out forwards;
+    animation: messageSlide var(--motion-base) var(--ease-out-soft) both;
   }
 
   /* Content reveal animation for terminal command output */
   @keyframes contentReveal {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translate3d(0, 18px, 0);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
   .animate-content-reveal {
-    animation: contentReveal 0.4s ease-out forwards;
+    animation: contentReveal var(--motion-slow) var(--ease-out-expo) both;
   }
 
   /* Preview pane crossfade animation for project switching */
   @keyframes previewFade {
     from {
       opacity: 0;
-      transform: translateY(6px);
+      transform: translate3d(0, 12px, 0);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
   .animate-preview-fade {
-    animation: previewFade 0.25s ease-out forwards;
+    animation: previewFade var(--motion-base) var(--ease-out-soft) both;
   }
 
   /* Mobile menu slide down animation */
   @keyframes slideDown {
     from {
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translate3d(0, -16px, 0);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
   .animate-slideDown {
-    animation: slideDown 0.2s ease-out forwards;
+    animation: slideDown var(--motion-base) var(--ease-out-soft) both;
+  }
+
+  /* Card reveal for grid tiles — more travel and a longer tail than a plain
+     content reveal, since a card carries more visual weight than a line. */
+  @keyframes cardReveal {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 26px, 0) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  .animate-card-reveal {
+    animation: cardReveal var(--motion-slow) var(--ease-out-expo) both;
+  }
+
+  /* Row reveal for list rows: enters from the left like text landing in a
+     terminal, which matches the file-listing metaphor of these pages. */
+  @keyframes rowReveal {
+    from {
+      opacity: 0;
+      transform: translate3d(-14px, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .animate-row-reveal {
+    animation: rowReveal var(--motion-base) var(--ease-out-soft) both;
   }
 
   @keyframes noise {
@@ -469,12 +548,14 @@
     80% { transform: translate(-2px, -1px); opacity: 0.2; }
   }
 
+  /* Slowed from 0.3s: at that rate the two channels strobed into a blur
+     instead of reading as discrete RGB-split frames. */
   .animate-glitch-1 {
-    animation: glitch1 0.3s steps(2) infinite;
+    animation: glitch1 0.55s steps(2) infinite;
   }
 
   .animate-glitch-2 {
-    animation: glitch2 0.3s steps(2) infinite reverse;
+    animation: glitch2 0.55s steps(2) infinite reverse;
   }
 
   /* Custom scrollbar for terminal */
@@ -515,24 +596,32 @@
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
 
-  /* Animation Delays */
-  .delay-100 {
+  /* Staggered reveal: set `--i` (the item index) inline on each child and it
+     waits its turn, so a list reads as a sequence instead of one pop. Callers
+     cap `--i` so a long grid never leaves the last card waiting seconds. */
+  .stagger {
+    animation-delay: calc(var(--i, 0) * var(--stagger-step));
+  }
+
+  /* Animation delays for one-off sequencing. Named `anim-delay-*` rather than
+     `delay-*` so they don't collide with Tailwind's transition-delay scale. */
+  .anim-delay-100 {
     animation-delay: 100ms;
   }
 
-  .delay-200 {
+  .anim-delay-200 {
     animation-delay: 200ms;
   }
 
-  .delay-300 {
+  .anim-delay-300 {
     animation-delay: 300ms;
   }
 
-  .delay-500 {
+  .anim-delay-500 {
     animation-delay: 500ms;
   }
 
-  .delay-700 {
+  .anim-delay-700 {
     animation-delay: 700ms;
   }
 }

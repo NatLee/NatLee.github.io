@@ -59,39 +59,18 @@ module.exports = {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
+      // Motion lives in app/globals.css, where durations and easings come from
+      // the --motion-* / --ease-* tokens. Only animations with no counterpart
+      // there belong here: Tailwind emits these into the utilities layer, so a
+      // duplicated name silently shadows the globals.css definition.
       animation: {
         'glow': 'glow 2s ease-in-out infinite alternate',
-        'float': 'float 6s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'slide-up': 'slideUp 0.5s ease-out',
-        'slide-down': 'slideDown 0.5s ease-out',
-        'fade-in': 'fadeIn 0.6s ease-out',
-        'scale-in': 'scaleIn 0.3s ease-out',
       },
       keyframes: {
         glow: {
           '0%': { boxShadow: '0 0 5px #d4741e, 0 0 10px #d4741e, 0 0 15px #d4741e' },
           '100%': { boxShadow: '0 0 10px #d4741e, 0 0 20px #d4741e, 0 0 30px #d4741e' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(100px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        slideDown: {
-          '0%': { transform: 'translateY(-100px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        scaleIn: {
-          '0%': { transform: 'scale(0.9)', opacity: '0' },
-          '100%': { transform: 'scale(1)', opacity: '1' },
         },
       },
       backgroundImage: {
