@@ -1,0 +1,37 @@
+{
+  "id": "natlee.github.io.v3",
+  "title": "Self Portfolio V3",
+  "subtitle": "Stonk Style Financial Terminal",
+  "description": "A fully interactive trading interface featuring dynamic candlestick charts and live price simulation.",
+  "longDescription": "The current version of the portfolio, designed as a high-frequency trading terminal. It features a fully interactive trading interface with dynamic candlestick charts, live price simulation (NAT/USD), and real-time analytics representing career growth and skills.",
+  "category": "Web Development",
+  "status": "Completed",
+  "featured": true,
+  "opensource": true,
+  "images": [
+    "https://raw.githubusercontent.com/NatLee/natlee.github.io.v3/refs/heads/main/docs/cover.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/natlee.github.io.v3",
+  "technologies": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "App Router"
+  ],
+  "features": [
+    "Simulated Trading Platform",
+    "Real-time Analytics",
+    "Portfolio Dashboard",
+    "High-Frequency UI"
+  ],
+  "timeline": {
+    "start": "2026",
+    "end": "2026",
+    "duration": "1 week"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/natlee.github.io.v3"
+  }
+}

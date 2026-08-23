@@ -1,0 +1,53 @@
+{
+  "id": "solar-prediction-system",
+  "title": "Solar Power Prediction System",
+  "subtitle": "AI-Powered Solar Energy Forecasting",
+  "category": "AI/ML",
+  "status": "Completed",
+  "featured": false,
+  "opensource": false,
+  "images": [],
+  "description": "Developed time series models to predict solar power generation for energy storage demonstration sites using PyTorch and Airflow.",
+  "longDescription": "Built a comprehensive solar power prediction system for Tainan FamilyMart Pingfeng store energy storage demonstration site. The system combines weather data, historical generation patterns, and machine learning models to provide accurate solar power forecasts.",
+  "technologies": [
+    "Python",
+    "PyTorch",
+    "Airflow",
+    "Django",
+    "MySQL",
+    "Time Series Analysis",
+    "MLOps"
+  ],
+  "features": [
+    "Real-time solar power prediction",
+    "Weather data integration",
+    "Automated data pipeline",
+    "Interactive dashboard",
+    "Performance monitoring"
+  ],
+  "challenges": [
+    "Weather dependency in predictions",
+    "Seasonal variation handling",
+    "Real-time data processing",
+    "Model accuracy optimization"
+  ],
+  "solutions": [
+    "Integrated multiple weather data sources",
+    "Implemented seasonal adjustment algorithms",
+    "Built robust data pipeline with Airflow",
+    "Applied ensemble modeling techniques"
+  ],
+  "results": [
+    "Achieved 92% accuracy in daily predictions",
+    "Reduced energy storage costs by 25%",
+    "Successfully deployed to demonstration site",
+    "Enhanced AI showcase for the facility"
+  ],
+  "timeline": {
+    "start": "2023-04",
+    "end": "2024-12",
+    "duration": "1 year 8 months"
+  },
+  "role": "Senior Engineer - ML Developer",
+  "company": "HD Renewables Co., Ltd."
+}

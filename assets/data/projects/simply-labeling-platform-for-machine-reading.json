@@ -1,0 +1,38 @@
+{
+  "id": "simply-labeling-platform-for-machine-reading",
+  "title": "simply-labeling-platform-for-machine-reading",
+  "subtitle": "Machine Reading Annotation Tool",
+  "description": "This is a simple platform for labeling answers to questions in an article.",
+  "longDescription": "A specialized annotation platform designed for machine reading comprehension tasks. This tool enables efficient labeling of question-answer pairs within articles, supporting the development of reading comprehension AI models.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/simply-labeling-platform-for-machine-reading/raw/main/doc/demo.gif"
+  ],
+  "githubUrl": "https://github.com/NatLee/simply-labeling-platform-for-machine-reading",
+  "category": "AI/ML",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Flask",
+    "NLP",
+    "Data Annotation",
+    "Machine Reading"
+  ],
+  "features": [
+    "Question-answer labeling",
+    "Article text highlighting",
+    "Export functionality",
+    "Progress tracking"
+  ],
+  "timeline": {
+    "start": "2020",
+    "end": "2021",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/simply-labeling-platform-for-machine-reading"
+  }
+}

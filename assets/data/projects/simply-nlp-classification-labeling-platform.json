@@ -1,0 +1,58 @@
+{
+  "id": "simply-nlp-classification-labeling-platform",
+  "title": "simply-nlp-classification-labeling-platform",
+  "subtitle": "Text Classification Labeling Tool",
+  "description": "This is a flask-based simply platform for labeling classification of a text.",
+  "longDescription": "A comprehensive text classification labeling platform built with Flask. This tool provides an intuitive interface for annotating text data, supporting various classification tasks and enabling efficient dataset creation for NLP model training.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/simply-nlp-classification-labeling-platform/raw/main/doc/demo.gif"
+  ],
+  "githubUrl": "https://github.com/NatLee/simply-nlp-classification-labeling-platform",
+  "category": "AI/ML",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Flask",
+    "NLP",
+    "Data Annotation",
+    "Machine Learning",
+    "SQLite"
+  ],
+  "features": [
+    "Web-based text annotation",
+    "Multi-class classification support",
+    "User management system",
+    "Export functionality",
+    "Progress tracking"
+  ],
+  "challenges": [
+    "Efficient annotation workflow",
+    "Data quality assurance",
+    "User interface optimization",
+    "Large dataset handling"
+  ],
+  "solutions": [
+    "Designed intuitive annotation interface",
+    "Implemented quality control measures",
+    "Created efficient data storage",
+    "Added batch processing capabilities"
+  ],
+  "results": [
+    "Accelerated dataset creation",
+    "Improved annotation quality",
+    "Enhanced team collaboration",
+    "Widely used in NLP projects"
+  ],
+  "timeline": {
+    "start": "2020",
+    "end": "2021",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/simply-nlp-classification-labeling-platform"
+  }
+}

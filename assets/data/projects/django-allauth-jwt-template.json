@@ -1,0 +1,55 @@
+{
+  "id": "django-allauth-jwt-template",
+  "title": "django-allauth-JWT-template",
+  "subtitle": "Django Authentication Template",
+  "description": "A template for Django Allauth with JWT authentication.",
+  "longDescription": "A comprehensive Django template demonstrating the integration of Django Allauth with JWT authentication. This template provides a solid foundation for building secure web applications with modern authentication patterns.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/django-allauth-JWT-template/raw/main/doc/dashboard.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/django-allauth-JWT-template",
+  "category": "Web Development",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Django",
+    "Django Allauth",
+    "JWT",
+    "Authentication",
+    "OAuth"
+  ],
+  "features": [
+    "Django Allauth integration",
+    "JWT token authentication",
+    "Social login support",
+    "User management dashboard",
+    "API authentication"
+  ],
+  "challenges": [
+    "Bridging the gap between Django Allauth's session-based authentication and a stateless JWT-based architecture.",
+    "Integrating multiple 3rd-party authentication providers (Google, Microsoft, Line) into a unified JWT flow.",
+    "Customizing authentication adapters to handle specific business logic, such as conditional password management for social logins."
+  ],
+  "solutions": [
+    "Developed a custom authentication bridge that issues JWT tokens upon successful Django Allauth social authentication.",
+    "Created a comprehensive template demonstrating frontend-to-backend integration for 3rd-party login callbacks.",
+    "Implemented modular views and adapters in Python to manage user registration and token lifecycle efficiently."
+  ],
+  "results": [
+    "Provided a robust, reusable template that significantly reduces setup time for modern Django projects requiring JWT and social login.",
+    "Successfully unified diverse authentication streams into a single, secure token-based system.",
+    "Enabled developers to build decoupled, scalable backends that support modern frontend frameworks."
+  ],
+  "timeline": {
+    "start": "2021",
+    "end": "2022",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/django-allauth-JWT-template"
+  }
+}

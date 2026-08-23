@@ -1,0 +1,53 @@
+{
+  "id": "youtube-redirect-player",
+  "title": "youtube-redirect-player",
+  "subtitle": "YouTube Video Player with WebSocket",
+  "description": "A player for redirecting youtube videos with using flask and websocket.",
+  "longDescription": "An advanced YouTube video player built with Flask and WebSocket technology. This application provides real-time video playback control and redirection capabilities through WebSocket communication.",
+  "language": "python",
+  "images": [
+    "https://user-images.githubusercontent.com/10178964/214097192-32ef6390-4481-4301-8743-98571192449f.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/youtube-redirect-player",
+  "category": "Web Application",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Flask",
+    "WebSocket",
+    "YouTube API",
+    "Real-time Communication"
+  ],
+  "features": [
+    "Real-time video control",
+    "WebSocket communication",
+    "YouTube integration",
+    "Multi-user support"
+  ],
+  "challenges": [
+    "Redirecting YouTube videos to a local server for playback",
+    "Synchronizing playlists and history across different locations in real-time",
+    "Managing multiple playlist types including Default, Request, and History"
+  ],
+  "solutions": [
+    "Built a backend using Flask and WebSockets for real-time synchronization",
+    "Implemented a structured system to handle three distinct playlist tables",
+    "Extended the functionality of the youtube-video-redirector project"
+  ],
+  "results": [
+    "A synchronized YouTube video player with persistent history (up to 200 records) and queueing system",
+    "A robust API system for managing video requests and playlists",
+    "Ability to play videos anywhere while maintaining state through WebSockets"
+  ],
+  "timeline": {
+    "start": "2022",
+    "end": "2023",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/youtube-redirect-player"
+  }
+}

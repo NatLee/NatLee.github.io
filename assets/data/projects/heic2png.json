@@ -1,0 +1,35 @@
+{
+  "id": "heic2png",
+  "title": "HEIC2PNG",
+  "subtitle": "Image Format Converter",
+  "description": "Convert format of HEIC image to PNG by using Python.",
+  "longDescription": "A simple yet effective Python tool for converting HEIC images to PNG format. This utility addresses the common need to convert Apple's HEIC format to more universally supported PNG format.",
+  "language": "python",
+  "images": [],
+  "githubUrl": "https://github.com/NatLee/HEIC2PNG",
+  "category": "Utilities",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Image Processing",
+    "File Conversion",
+    "PIL/Pillow"
+  ],
+  "features": [
+    "HEIC to PNG conversion",
+    "Batch processing support",
+    "Command-line interface",
+    "Quality preservation"
+  ],
+  "timeline": {
+    "start": "2019",
+    "end": "2020",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/HEIC2PNG"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "face-wall-generator-tool",
+  "title": "Face-Wall-Generator-Tool",
+  "subtitle": "AI Model Testing Tool",
+  "description": "This is a tool for generating face wall to verify some AI models.",
+  "longDescription": "A specialized tool designed to generate face walls for testing and verifying AI models, particularly those dealing with face recognition and detection. This tool helps in creating comprehensive test datasets for AI model validation.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/Face-Wall-Generator-Tool/blob/main/docs/sample.png?raw=true"
+  ],
+  "githubUrl": "https://github.com/NatLee/Face-Wall-Generator-Tool",
+  "category": "AI/ML",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Computer Vision",
+    "AI Testing",
+    "Image Processing"
+  ],
+  "features": [
+    "Face wall generation",
+    "AI model testing support",
+    "Batch processing",
+    "Customizable layouts"
+  ],
+  "challenges": [
+    "Tedious manual process of creating image grids (face walls) for AI model verification",
+    "Need for structured and randomized face datasets to test face recognition performance",
+    "Requirement for a tool that can handle variable grid sizes based on user input"
+  ],
+  "solutions": [
+    "Developed a Python script using OpenCV and NumPy to automate the concatenation of images into grids",
+    "Integrated Python Fire to provide a simple command-line interface for adjusting row and column counts",
+    "Automated image selection and resizing from a source folder to maintain consistent output quality"
+  ],
+  "results": [
+    "A utility capable of generating custom 'face wall' images for AI testing",
+    "Significantly reduced time required for dataset preparation in computer vision projects",
+    "A flexible CLI tool that allows users to specify output paths and grid dimensions easily"
+  ],
+  "timeline": {
+    "start": "2021",
+    "end": "2022",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/Face-Wall-Generator-Tool"
+  }
+}

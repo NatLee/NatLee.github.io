@@ -1,0 +1,36 @@
+{
+  "id": "myanimelist-comment-crawler",
+  "title": "MyAnimeList-comment-crawler",
+  "subtitle": "Anime Review Data Crawler",
+  "description": "Crawl all reviews and information of Anime works on MyAnimeList.",
+  "longDescription": "A comprehensive web scraping tool designed to extract reviews and information about anime works from MyAnimeList. This crawler is useful for anime data analysis, research, and building anime recommendation systems.",
+  "language": "python",
+  "images": [],
+  "githubUrl": "https://github.com/NatLee/MyAnimeList-comment-crawler",
+  "category": "Data Collection",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Web Scraping",
+    "BeautifulSoup",
+    "Requests",
+    "Data Mining"
+  ],
+  "features": [
+    "Automated review extraction",
+    "Anime information gathering",
+    "Data export functionality",
+    "Rate limiting compliance"
+  ],
+  "timeline": {
+    "start": "2018",
+    "end": "2019",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/MyAnimeList-comment-crawler"
+  }
+}

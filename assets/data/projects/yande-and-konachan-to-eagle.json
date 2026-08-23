@@ -1,0 +1,37 @@
+{
+  "id": "yande-and-konachan-to-eagle",
+  "title": "yande-and-konachan-to-eagle",
+  "subtitle": "Image Management Integration",
+  "description": "Streamline fetching and managing images from websites, using Eagle Wrapper for seamless integration with Eagle image management software.",
+  "longDescription": "A specialized tool that automates the process of fetching and organizing images from Yande.re and Konachan websites into Eagle image management software. This tool streamlines the workflow for digital artists and image collectors.",
+  "language": "python",
+  "images": [
+    "https://user-images.githubusercontent.com/10178964/234870235-f0dbe874-c1e8-4320-9c52-d6d920fa274d.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/yande-and-konachan-to-eagle",
+  "category": "Utilities",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Web Scraping",
+    "Eagle API",
+    "Image Management"
+  ],
+  "features": [
+    "Automated image fetching",
+    "Eagle software integration",
+    "Metadata preservation",
+    "Batch processing"
+  ],
+  "timeline": {
+    "start": "2022",
+    "end": "2023",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/yande-and-konachan-to-eagle"
+  }
+}

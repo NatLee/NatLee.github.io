@@ -1,0 +1,58 @@
+{
+  "id": "simply-blur-detector",
+  "title": "simply-blur-detector",
+  "subtitle": "Image Quality Assessment",
+  "description": "A simple application for using OpenCV for detecting blur in the image.",
+  "longDescription": "A lightweight and efficient tool for detecting blur in images using advanced computer vision algorithms. This application assesses image quality and determines if an image is blurry, making it useful for quality control in photography and image processing pipelines.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/simply-blur-detector/raw/main/docs/results.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/simply-blur-detector",
+  "category": "Computer Vision",
+  "status": "Completed",
+  "featured": true,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "OpenCV",
+    "NumPy",
+    "Scikit-learn",
+    "PIL",
+    "Image Processing"
+  ],
+  "features": [
+    "Automatic blur detection",
+    "Batch processing support",
+    "Multiple detection algorithms",
+    "Confidence scoring",
+    "Easy API integration"
+  ],
+  "challenges": [
+    "Accurate blur detection",
+    "Different types of blur handling",
+    "Processing speed optimization",
+    "False positive reduction"
+  ],
+  "solutions": [
+    "Implemented multiple detection algorithms",
+    "Used ensemble methods for accuracy",
+    "Optimized image processing pipeline",
+    "Created comprehensive test suite"
+  ],
+  "results": [
+    "High accuracy blur detection",
+    "Fast processing speed",
+    "Widely used in image processing",
+    "Active community contributions"
+  ],
+  "timeline": {
+    "start": "2019",
+    "end": "2020",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/simply-blur-detector"
+  }
+}

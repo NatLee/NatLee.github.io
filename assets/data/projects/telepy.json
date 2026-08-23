@@ -1,0 +1,62 @@
+{
+  "id": "telepy",
+  "title": "telepy",
+  "subtitle": "DevOps SSH Tunnel Manager",
+  "description": "A Django-based web application for managing and monitoring reverse SSH tunnels or jump servers.",
+  "longDescription": "Telepy is a comprehensive platform designed to simplify the management of reverse SSH tunnels. It features a web interface for creating and monitoring connections, an integrated browser-based console powered by Django Channels and WebSockets, and multi-user support with Google OAuth integration. The project is containerized with Docker for easy deployment and includes a robust management CLI script.",
+  "language": "python",
+  "images": [
+    "https://raw.githubusercontent.com/NatLee/telepy/main/docs/gifs/create-tunnel.gif",
+    "https://raw.githubusercontent.com/NatLee/telepy/main/docs/gifs/web-terminal.gif",
+    "https://raw.githubusercontent.com/NatLee/telepy/main/docs/gifs/remote-browser.gif"
+  ],
+  "githubUrl": "https://github.com/NatLee/telepy",
+  "category": "DevOps",
+  "status": "In Progress",
+  "featured": true,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Django",
+    "Django REST Framework",
+    "Django Channels",
+    "Redis",
+    "Docker",
+    "Google OAuth",
+    "Swagger",
+    "Shell Scripting"
+  ],
+  "features": [
+    "Reverse SSH tunnel management",
+    "Integrated web-based terminal console",
+    "Multi-user support with Google Auth",
+    "RESTful API with Swagger documentation",
+    "Automated management CLI",
+    "Dockerized deployment",
+    "Real-time updates via WebSockets"
+  ],
+  "challenges": [
+    "Maintaining secure, persistent web-based terminal sessions for multiple concurrent users.",
+    "Orchestrating complex networking requirements for reverse SSH tunnels within a containerized environment.",
+    "Simplifying the management of jump servers and SSH keys for end-users."
+  ],
+  "solutions": [
+    "Implemented Django Channels and Redis to handle real-time terminal communication via WebSockets.",
+    "Developed a unified 'telepy.sh' management script to wrap complex Docker and Django operations.",
+    "Leveraged Docker Compose to isolate and manage individual components like the web server, SSH server, and Redis."
+  ],
+  "results": [
+    "Provides a user-friendly web portal for centralized jump server management.",
+    "Eliminates the need for manual command-line configuration of reverse tunnels for most basic use cases.",
+    "Improved visibility into active tunnel status and sharing capabilities across teams."
+  ],
+  "timeline": {
+    "start": "2024-02",
+    "end": "Present",
+    "duration": "Ongoing"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/telepy"
+  }
+}

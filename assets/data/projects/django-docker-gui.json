@@ -1,0 +1,59 @@
+{
+  "id": "django-docker-gui",
+  "title": "django-docker-gui",
+  "subtitle": "Docker Management Interface",
+  "description": "A simple web UI for managing docker images & containers with a fully functional terminal.",
+  "longDescription": "A powerful web-based interface for managing Docker containers and images, featuring a fully functional terminal emulator. This tool provides system administrators and developers with an intuitive way to manage Docker environments through a web browser.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/django-docker-gui/raw/main/doc/operation.gif"
+  ],
+  "githubUrl": "https://github.com/NatLee/django-docker-gui",
+  "category": "DevOps",
+  "status": "Completed",
+  "featured": true,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Django",
+    "Docker API",
+    "WebSocket",
+    "Terminal Emulation",
+    "JavaScript"
+  ],
+  "features": [
+    "Web-based Docker management",
+    "Interactive terminal emulator",
+    "Container lifecycle management",
+    "Image repository browsing",
+    "Real-time logs viewing",
+    "Resource monitoring"
+  ],
+  "challenges": [
+    "Terminal emulation in browser",
+    "Real-time Docker API integration",
+    "Security considerations",
+    "Performance optimization"
+  ],
+  "solutions": [
+    "Implemented WebSocket-based terminal",
+    "Created secure Docker API wrapper",
+    "Added authentication and authorization",
+    "Optimized real-time data streaming"
+  ],
+  "results": [
+    "Simplified Docker management workflow",
+    "Improved developer productivity",
+    "Enhanced system administration",
+    "Reduced command-line dependency"
+  ],
+  "timeline": {
+    "start": "2020",
+    "end": "2021",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/django-docker-gui"
+  }
+}

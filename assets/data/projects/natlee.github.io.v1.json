@@ -1,0 +1,37 @@
+{
+  "id": "natlee.github.io.v1",
+  "title": "Self Portfolio V1",
+  "subtitle": "Flatten Style Portfolio",
+  "description": "A modern personal portfolio website built with Next.js and TypeScript, featuring a strict 'Flatten' design style.",
+  "longDescription": "A modern personal portfolio website built with Next.js, React, and TypeScript. Features a dark theme, responsive design, and dynamic content loading. This version introduced a more structured approach to showcasing projects and skills.",
+  "category": "Web Development",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "images": [
+    "https://raw.githubusercontent.com/NatLee/natlee.github.io.v1/refs/heads/main/docs/cover.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/natlee.github.io.v1",
+  "technologies": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "GitHub Pages"
+  ],
+  "features": [
+    "Modern Tech Stack",
+    "Tech-Savvy Design",
+    "Responsive Design",
+    "Multi-Page Structure"
+  ],
+  "timeline": {
+    "start": "2025",
+    "end": "2025",
+    "duration": "1 week"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/natlee.github.io.v1"
+  }
+}

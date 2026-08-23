@@ -1,0 +1,59 @@
+{
+  "id": "blur-generator",
+  "title": "Blur-Generator",
+  "subtitle": "Image Blur Generation Tool",
+  "description": "Generate blur image with 3 types of blur `motion`, `lens`, and `gaussian` by using OpenCV.",
+  "longDescription": "A comprehensive image processing tool that generates various types of blur effects including motion blur, lens blur, and gaussian blur using OpenCV. This tool is particularly useful for data augmentation in machine learning projects and creating realistic image effects.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/Blur-Generator/raw/main/doc/motion.png",
+    "https://github.com/NatLee/Blur-Generator/raw/main/doc/depth-lens-output.png",
+    "https://github.com/NatLee/Blur-Generator/raw/main/doc/depth-map-test.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/Blur-Generator",
+  "category": "Computer Vision",
+  "status": "Completed",
+  "featured": true,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "OpenCV",
+    "Image Processing",
+    "NumPy",
+    "Computer Vision"
+  ],
+  "features": [
+    "Multiple blur types (motion, lens, gaussian)",
+    "Batch image processing",
+    "Customizable blur parameters",
+    "Preview functionality",
+    "Command-line interface"
+  ],
+  "challenges": [
+    "Realistic blur simulation",
+    "Parameter optimization",
+    "Batch processing efficiency",
+    "Quality preservation"
+  ],
+  "solutions": [
+    "Implemented advanced blur algorithms",
+    "Created parameter tuning interface",
+    "Optimized batch processing pipeline",
+    "Added quality control mechanisms"
+  ],
+  "results": [
+    "High-quality blur generation",
+    "Widely used in ML data augmentation",
+    "Efficient batch processing",
+    "Positive community feedback"
+  ],
+  "timeline": {
+    "start": "2019",
+    "end": "2020",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/Blur-Generator"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "openpose-detect-hands-with-heatmap",
+  "title": "openpose-detect-hands-with-heatmap",
+  "subtitle": "Hand Detection with Visualization",
+  "description": "A simple application for using OpenPose model for detecting hands and showing the visualization with a heatmap.",
+  "longDescription": "An advanced computer vision application that leverages OpenPose for hand detection and provides intuitive heatmap visualizations. This tool is particularly useful for gesture analysis, motion studies, and interactive applications requiring hand tracking.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/openpose-detect-hands-with-heatmap/raw/main/doc/heatmap-motion.gif"
+  ],
+  "githubUrl": "https://github.com/NatLee/openpose-detect-hands-with-heatmap",
+  "category": "Computer Vision",
+  "status": "Completed",
+  "featured": true,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "OpenPose",
+    "OpenCV",
+    "NumPy",
+    "Matplotlib",
+    "Computer Vision"
+  ],
+  "features": [
+    "Real-time hand detection",
+    "Heatmap visualization",
+    "Motion tracking",
+    "Multi-hand support",
+    "Customizable visualization parameters"
+  ],
+  "challenges": [
+    "Real-time processing requirements",
+    "Accuracy in various lighting conditions",
+    "Multiple hand detection",
+    "Smooth visualization rendering"
+  ],
+  "solutions": [
+    "Optimized OpenPose model integration",
+    "Implemented adaptive thresholding",
+    "Built efficient tracking algorithms",
+    "Created smooth heatmap animations"
+  ],
+  "results": [
+    "Achieved real-time hand tracking",
+    "High accuracy in various conditions",
+    "Smooth heatmap visualizations",
+    "Popular in research community"
+  ],
+  "timeline": {
+    "start": "2020",
+    "end": "2021",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/openpose-detect-hands-with-heatmap"
+  }
+}

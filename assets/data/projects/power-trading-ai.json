@@ -1,0 +1,52 @@
+{
+  "id": "power-trading-ai",
+  "title": "Power Trading AI System",
+  "subtitle": "International Power Trading Strategy Development",
+  "category": "AI/ML",
+  "status": "In Progress",
+  "featured": false,
+  "opensource": false,
+  "images": [],
+  "description": "Developing AI-powered trading strategies for Japan and Australia electricity markets using deep learning models to predict spot market prices.",
+  "longDescription": "Leading the development of sophisticated AI trading strategies for international power markets. The system uses advanced time series analysis and machine learning models to predict electricity spot market prices, helping traders make data-driven decisions in volatile energy markets.",
+  "technologies": [
+    "Python",
+    "PyTorch",
+    "Django",
+    "Elasticsearch",
+    "Docker",
+    "Time Series Analysis",
+    "Deep Learning"
+  ],
+  "features": [
+    "Spot market price prediction models",
+    "Real-time data processing pipeline",
+    "Trading strategy optimization",
+    "Risk assessment algorithms",
+    "Performance monitoring dashboard"
+  ],
+  "challenges": [
+    "Handling volatile electricity market data",
+    "Real-time prediction requirements",
+    "Integration with existing trading systems",
+    "Multi-market data synchronization"
+  ],
+  "solutions": [
+    "Implemented robust time series models with PyTorch",
+    "Built scalable data pipeline with Elasticsearch",
+    "Created modular API architecture with Django",
+    "Developed comprehensive testing framework"
+  ],
+  "results": [
+    "Successfully deployed prediction models for Japan market",
+    "Achieved 85% accuracy in price trend prediction",
+    "Reduced trading decision time by 60%",
+    "Enabled expansion to Australia market"
+  ],
+  "timeline": {
+    "start": "2024-12",
+    "duration": "Ongoing"
+  },
+  "role": "Senior Engineer - Lead Developer",
+  "company": "HD Renewables Co., Ltd."
+}

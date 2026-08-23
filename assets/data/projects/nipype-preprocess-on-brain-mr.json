@@ -1,0 +1,54 @@
+{
+  "id": "nipype-preprocess-on-brain-mr",
+  "title": "nipype-preprocess-on-brain-MR",
+  "subtitle": "Brain MR Image Preprocessing",
+  "description": "The project is used to do preprocessing on brain MR images by using Nipype.",
+  "longDescription": "A specialized neuroimaging preprocessing pipeline built with Nipype for brain MR image analysis. This tool automates the complex preprocessing steps required for neuroimaging research and clinical applications.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/nipype-preprocess-on-brain-MR/raw/master/docs/WM@map.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/nipype-preprocess-on-brain-MR",
+  "category": "Medical Imaging",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Nipype",
+    "Medical Imaging",
+    "MRI Processing",
+    "Neuroimaging"
+  ],
+  "features": [
+    "Automated MR preprocessing",
+    "Brain tissue segmentation",
+    "Image registration",
+    "Quality control metrics",
+    "Batch processing support"
+  ],
+  "challenges": [
+    "Automating a multi-stage neuroimaging pipeline involving complex tasks like AC-PC alignment and skull stripping.",
+    "Managing large-scale dependencies and environment consistency for niche medical imaging tools like FSL and ANTs.",
+    "Ensuring efficient data flow and intermediate file management across various analysis nodes."
+  ],
+  "solutions": [
+    "Leveraged Nipype to build a modular and reproducible workflow connecting multiple specialized neuroimaging toolsets.",
+    "Utilized Docker and Neurodocker to containerize the entire software stack, eliminating 'it works on my machine' issues.",
+    "Integrated K-means clustering for automated tissue segmentation and Nilearn for high-quality result visualization."
+  ],
+  "results": [
+    "Developed a robust, automated pipeline that processes .nii brain MR images with high precision and minimal manual intervention.",
+    "Achieved a highly portable research environment that facilitates reproducible science in medical imaging.",
+    "Provided clear visual outputs for tissue segmentation (GM, WM, CSF), enabling easier data verification and subsequent analysis."
+  ],
+  "timeline": {
+    "start": "2018",
+    "end": "2019",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/nipype-preprocess-on-brain-MR"
+  }
+}

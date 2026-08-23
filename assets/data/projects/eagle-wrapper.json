@@ -1,0 +1,37 @@
+{
+  "id": "eagle-wrapper",
+  "title": "Eagle-Wrapper",
+  "subtitle": "Eagle Software Python API",
+  "description": "This is a python wrapper for a management software of images named Eagle.",
+  "longDescription": "A comprehensive Python wrapper for Eagle image management software, providing programmatic access to Eagle's features. This wrapper enables developers to integrate Eagle's powerful image management capabilities into their Python applications.",
+  "language": "python",
+  "images": [
+    "https://raw.githubusercontent.com/NatLee/Eagle-Wrapper/main/doc/add-from-url.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/Eagle-Wrapper",
+  "category": "API/SDK",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "API Development",
+    "Image Management",
+    "Software Integration"
+  ],
+  "features": [
+    "Complete Eagle API coverage",
+    "Image manipulation functions",
+    "Metadata management",
+    "Collection organization"
+  ],
+  "timeline": {
+    "start": "2022",
+    "end": "2023",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/Eagle-Wrapper"
+  }
+}

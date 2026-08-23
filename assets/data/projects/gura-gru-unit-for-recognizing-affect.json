@@ -1,0 +1,58 @@
+{
+  "id": "gura-gru-unit-for-recognizing-affect",
+  "title": "GURA-gru-unit-for-recognizing-affect",
+  "subtitle": "Sentiment Analysis Model",
+  "description": "A simple sentiment classification model that leverages the power of `Bidirectional GRU` and `Self-attention` mechanisms.",
+  "longDescription": "An advanced sentiment classification model that combines Bidirectional GRU networks with Self-attention mechanisms. GURA (GRU Unit for Recognizing Affect) provides state-of-the-art performance for emotion detection and sentiment analysis tasks.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/GURA-gru-unit-for-recognizing-affect/raw/main/doc/model.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/GURA-gru-unit-for-recognizing-affect",
+  "category": "AI/ML",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "PyTorch",
+    "NLP",
+    "Deep Learning",
+    "Attention Mechanisms",
+    "GRU"
+  ],
+  "features": [
+    "Bidirectional GRU architecture",
+    "Self-attention mechanisms",
+    "Multi-class sentiment classification",
+    "Transfer learning support",
+    "Model interpretability"
+  ],
+  "challenges": [
+    "Complex model architecture design",
+    "Attention mechanism optimization",
+    "Training stability",
+    "Model interpretability"
+  ],
+  "solutions": [
+    "Implemented stable training procedures",
+    "Optimized attention weight calculations",
+    "Added regularization techniques",
+    "Created visualization tools"
+  ],
+  "results": [
+    "State-of-the-art sentiment accuracy",
+    "Improved model interpretability",
+    "Successful transfer learning",
+    "Research community adoption"
+  ],
+  "timeline": {
+    "start": "2021",
+    "end": "2022",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/GURA-gru-unit-for-recognizing-affect"
+  }
+}

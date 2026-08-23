@@ -46,6 +46,7 @@ Open `http://localhost:3000`.
 ```
 ├── app/                     # Next.js App Router pages & layout
 ├── assets/data/             # Source-of-truth JSON content
+│   ├── projects/            # One JSON file per project
 │   └── i18n/                # Chinese content overlays
 ├── components/              # UI modules (Terminal, Navigation, etc.)
 ├── contexts/                # LanguageProvider (i18n)
@@ -67,6 +68,7 @@ npm run lint         # ESLint
 ## Content & i18n
 
 - Edit `assets/data/personal.json` for bio, contact, and social links.
+- Projects: one file per project in `assets/data/projects/<id>.json`; register new ones in `data/projects-list.ts` (array order = display order).
 - UI strings live in `messages/en.json` and `messages/zh-TW.json`.
 - Chinese content overlays: `assets/data/i18n/*.zh.json`.
 

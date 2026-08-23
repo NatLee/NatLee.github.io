@@ -1,0 +1,50 @@
+{
+  "id": "youtube-video-redirector",
+  "title": "youtube-video-redirector",
+  "subtitle": "YouTube Video Link Handler",
+  "description": "An easy method to get and play with original link of video by using redirector with web application.",
+  "longDescription": "A web application that provides an easy method to handle and redirect YouTube video links. This tool offers alternative ways to access and manipulate YouTube video URLs through a user-friendly web interface.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/youtube-video-redirector/blob/main/docs/example.png?raw=true"
+  ],
+  "githubUrl": "https://github.com/NatLee/youtube-video-redirector",
+  "category": "Web Application",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Flask",
+    "YouTube API",
+    "Web Development"
+  ],
+  "features": [
+    "YouTube link processing",
+    "Video information extraction",
+    "Redirect functionality",
+    "Web-based interface"
+  ],
+  "challenges": [
+    "Obtaining and playing original video links from YouTube via a web application redirector",
+    "Simplifying the process of accessing raw video streams"
+  ],
+  "solutions": [
+    "Developed a Flask-based web application to handle redirects",
+    "Utilized youtube-dl to extract original video links",
+    "Created a simple URL-based interface for video redirection"
+  ],
+  "results": [
+    "A lightweight microservice that redirects users to original YouTube video links",
+    "Easy integration by passing a video ID as a URL parameter (e.g., http://localhost:5000/?v=VIDEO_ID)"
+  ],
+  "timeline": {
+    "start": "2021",
+    "end": "2022",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/youtube-video-redirector"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "elysion-calendar",
+  "title": "elysion-calendar",
+  "subtitle": "Elysion Daily Calendar",
+  "description": "A small calendar for quick checking of Elysion(艾利森).",
+  "longDescription": "A specialized calendar application designed for quick reference of Elysion daily K-line data. This TypeScript-based tool provides an intuitive interface for traders and analysts to quickly access historical trading information.",
+  "language": "typescript",
+  "images": [
+    "https://github.com/NatLee/elysion-calendar/raw/main/doc/demo.gif"
+  ],
+  "githubUrl": "https://github.com/NatLee/elysion-calendar",
+  "category": "Web Development",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "TypeScript",
+    "JavaScript",
+    "HTML/CSS",
+    "Calendar API"
+  ],
+  "features": [
+    "Quick K-line data lookup",
+    "Interactive calendar interface",
+    "Historical data visualization",
+    "Responsive design"
+  ],
+  "challenges": [
+    "Efficiently managing and displaying complex daily K-line data in a responsive calendar interface.",
+    "Handling asynchronous cache updates for real-time room data without impacting frontend performance.",
+    "Orchestrating multiple services (Frontend, Backend, Redis, Nginx) for a consistent development and production environment."
+  ],
+  "solutions": [
+    "Implemented a Redis-based caching system to handle asynchronous updates and speed up data retrieval.",
+    "Utilized Docker Compose to containerize the environment, ensuring seamless deployment and cross-platform compatibility.",
+    "Developed a specialized frontend using TypeScript to manage complex calendar logic and navigation views."
+  ],
+  "results": [
+    "Created a streamlined tool for quickly querying Elysion daily K data in a user-friendly calendar format.",
+    "Optimized application performance by offloading heavy data processing to a background cache layer.",
+    "Simplified local development and production deployment through automated shell scripts and containerization."
+  ],
+  "timeline": {
+    "start": "2022",
+    "end": "2023",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/elysion-calendar"
+  }
+}

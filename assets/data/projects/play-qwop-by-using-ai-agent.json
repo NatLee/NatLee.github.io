@@ -1,0 +1,57 @@
+{
+  "id": "play-qwop-by-using-ai-agent",
+  "title": "Play-QWOP-by-Using-AI-Agent",
+  "subtitle": "Reinforcement Learning Game AI",
+  "description": "Use reinforcement learning to play QWOP with python3 by using tensorflow2 and reach the goal!",
+  "longDescription": "An innovative reinforcement learning project that teaches an AI agent to play the notoriously difficult QWOP game using TensorFlow 2. The project demonstrates advanced RL techniques including actor-critic methods and policy gradient optimization.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/Play-QWOP-by-Using-AI-Agent/raw/master/docs/train.gif"
+  ],
+  "githubUrl": "https://github.com/NatLee/Play-QWOP-by-Using-AI-Agent",
+  "category": "AI/ML",
+  "status": "Completed",
+  "featured": true,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "TensorFlow",
+    "Reinforcement Learning",
+    "OpenAI Gym",
+    "Neural Networks"
+  ],
+  "features": [
+    "Actor-critic RL implementation",
+    "QWOP game environment integration",
+    "Training visualization",
+    "Model checkpointing",
+    "Performance metrics tracking"
+  ],
+  "challenges": [
+    "Complex game physics simulation",
+    "Reward function design",
+    "Training stability",
+    "Action space optimization"
+  ],
+  "solutions": [
+    "Implemented custom game environment",
+    "Designed shaped reward functions",
+    "Added training stabilization techniques",
+    "Optimized action space representation"
+  ],
+  "results": [
+    "Successfully trained QWOP-playing agent",
+    "Achieved consistent goal completion",
+    "Demonstrated RL effectiveness",
+    "Educational value for RL community"
+  ],
+  "timeline": {
+    "start": "2019",
+    "end": "2020",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/Play-QWOP-by-Using-AI-Agent"
+  }
+}

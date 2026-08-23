@@ -1,0 +1,54 @@
+{
+  "id": "dev-dock",
+  "title": "dev-dock",
+  "subtitle": "GUI Development Container",
+  "description": "Creating a common GUI image by using docker for developing.",
+  "longDescription": "A Docker-based development environment that provides a common GUI interface for development work. This containerized solution ensures consistent development environments across different systems.",
+  "language": "shell",
+  "images": [
+    "https://github.com/NatLee/dev-dock/raw/main/doc/desktop.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/dev-dock",
+  "category": "DevOps",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Docker",
+    "Shell Scripting",
+    "GUI Development",
+    "Linux Desktop"
+  ],
+  "features": [
+    "Containerized GUI environment",
+    "Development tools pre-installed",
+    "Cross-platform compatibility",
+    "Easy deployment"
+  ],
+  "challenges": [
+    "Creating a common GUI environment for development using Docker",
+    "Providing VNC and noVNC access to a containerized desktop",
+    "Supporting NVIDIA GPUs in a containerized environment",
+    "Handling Chinese input method initialization"
+  ],
+  "solutions": [
+    "Integrated Xfce Desktop with VNC and noVNC support",
+    "Included pre-installed development tools like Mini Conda, VS Code, and Git",
+    "Provided Docker Compose configurations for both standard and NVIDIA GPU setups",
+    "Implemented customizable container settings for resolution, passwords, and users"
+  ],
+  "results": [
+    "A fully functional GUI development container accessible via browser or VNC client",
+    "Support for multiple protocols including VNC (5901), noVNC (6901), and SSH (22)",
+    "A highly portable and consistent development environment"
+  ],
+  "timeline": {
+    "start": "2020",
+    "end": "2021",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/dev-dock"
+  }
+}

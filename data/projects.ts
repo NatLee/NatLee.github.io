@@ -1,5 +1,5 @@
-// 從 JSON 檔案載入專案數據
-import projectsJsonData from '@/assets/data/projects.json'
+// 從 JSON 檔案載入專案數據（每個專案一個檔案，順序由 projects-list.ts 決定）
+import { projectsJsonData } from './projects-list'
 import projectsZh from '@/assets/data/i18n/projects.zh.json'
 import type { Locale } from '@/lib/i18n/config'
 import { localizedArray, localizedField } from '@/lib/i18n/localize'

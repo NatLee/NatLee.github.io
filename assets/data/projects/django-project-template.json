@@ -1,0 +1,61 @@
+{
+  "id": "django-project-template",
+  "title": "django-project-template",
+  "subtitle": "Full-Featured Django Template",
+  "description": "A template with many features of Docker, 3rd-party login, JWT, websocket, Admin UI and django-q",
+  "longDescription": "A comprehensive Django project template that includes modern web development features such as Docker containerization, third-party authentication, JWT token management, WebSocket support, and advanced admin interface. Perfect for kickstarting new Django projects with best practices built-in.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/django-project-template/raw/main/doc/cover.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/django-project-template",
+  "category": "Web Development",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Django",
+    "Docker",
+    "JWT",
+    "WebSocket",
+    "OAuth",
+    "Celery"
+  ],
+  "features": [
+    "Docker containerization",
+    "Third-party authentication (Google, GitHub)",
+    "JWT token management",
+    "WebSocket real-time communication",
+    "Advanced admin interface",
+    "Background task processing with django-q",
+    "API documentation with Swagger"
+  ],
+  "challenges": [
+    "Integrating multiple authentication providers",
+    "Managing JWT token lifecycle",
+    "WebSocket connection handling",
+    "Docker environment configuration"
+  ],
+  "solutions": [
+    "Implemented OAuth2 with multiple providers",
+    "Created secure JWT refresh mechanism",
+    "Built robust WebSocket middleware",
+    "Configured multi-stage Docker builds"
+  ],
+  "results": [
+    "Accelerated Django project setup",
+    "Reduced development time by 60%",
+    "Improved security with modern auth",
+    "Active community adoption"
+  ],
+  "timeline": {
+    "start": "2021",
+    "end": "Present",
+    "duration": "Ongoing"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/django-project-template"
+  }
+}

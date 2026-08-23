@@ -1,0 +1,37 @@
+{
+  "id": "batch-crop-images",
+  "title": "Batch-crop-images",
+  "subtitle": "Batch Image Cropping Tool",
+  "description": "A tool for cropping similar images in a batch with an interface.",
+  "longDescription": "An efficient batch image processing tool that provides an intuitive interface for cropping multiple similar images simultaneously. This tool streamlines the workflow for processing large sets of images with consistent cropping requirements.",
+  "language": "python",
+  "images": [
+    "https://github.com/NatLee/Batch-crop-images/raw/main/img/processing.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/Batch-crop-images",
+  "category": "Image Processing",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "PIL/Pillow",
+    "Tkinter",
+    "Image Processing"
+  ],
+  "features": [
+    "Batch image cropping",
+    "Interactive GUI interface",
+    "Preview functionality",
+    "Consistent crop settings"
+  ],
+  "timeline": {
+    "start": "2019",
+    "end": "2020",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/Batch-crop-images"
+  }
+}

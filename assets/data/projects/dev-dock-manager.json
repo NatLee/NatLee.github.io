@@ -1,0 +1,62 @@
+{
+  "id": "dev-dock-manager",
+  "title": "dev-dock-manager",
+  "subtitle": "Development Environment Manager",
+  "description": "This is a sandbox manager developed using Django, providing isolated development environments with a suite of base functions and packages for each user on the same machine by using Docker.",
+  "longDescription": "A sophisticated development environment management system built with Django and Docker. This platform provides isolated, containerized development environments for multiple users on the same machine, complete with pre-configured tools and packages for various development workflows.",
+  "language": "python",
+  "images": [
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/login.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/create.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/console.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/novnc.gif"
+  ],
+  "githubUrl": "https://github.com/NatLee/dev-dock-manager",
+  "category": "DevOps",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Django",
+    "Docker",
+    "Container Orchestration",
+    "User Management",
+    "Environment Isolation"
+  ],
+  "features": [
+    "Multi-user environment isolation",
+    "Pre-configured development stacks",
+    "Resource allocation management",
+    "Environment template system",
+    "User access control",
+    "Automated environment provisioning"
+  ],
+  "challenges": [
+    "Resource isolation between users",
+    "Environment template management",
+    "Security and access control",
+    "Performance optimization"
+  ],
+  "solutions": [
+    "Implemented Docker-based isolation",
+    "Created flexible template system",
+    "Built comprehensive user management",
+    "Optimized resource allocation"
+  ],
+  "results": [
+    "Reduced environment setup time by 80%",
+    "Improved development team productivity",
+    "Enhanced security through isolation",
+    "Simplified onboarding process"
+  ],
+  "timeline": {
+    "start": "2022",
+    "end": "2023",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/dev-dock-manager"
+  }
+}

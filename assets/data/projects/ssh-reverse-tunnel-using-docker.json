@@ -1,0 +1,35 @@
+{
+  "id": "ssh-reverse-tunnel-using-docker",
+  "title": "ssh-reverse-tunnel-using-docker",
+  "subtitle": "Docker SSH Tunnel Solution",
+  "description": "Dig a hole in the inside network using container with docker and create a tunneling server.",
+  "longDescription": "A containerized solution for creating reverse SSH tunnels using Docker. This tool helps establish secure connections through network barriers by creating tunneling servers in isolated environments.",
+  "language": "shell",
+  "images": [],
+  "githubUrl": "https://github.com/NatLee/ssh-reverse-tunnel-using-docker",
+  "category": "DevOps",
+  "status": "Completed",
+  "featured": false,
+  "opensource": true,
+  "technologies": [
+    "Docker",
+    "SSH",
+    "Shell Scripting",
+    "Network Security"
+  ],
+  "features": [
+    "Containerized tunnel creation",
+    "Network penetration capabilities",
+    "Automated setup scripts",
+    "Security isolation"
+  ],
+  "timeline": {
+    "start": "2020",
+    "end": "2021",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/ssh-reverse-tunnel-using-docker"
+  }
+}
