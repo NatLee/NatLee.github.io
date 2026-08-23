@@ -73,7 +73,8 @@ export default function FeaturedProjects() {
                     onClick={() => handleProjectClick(project.id)}
                     onMouseEnter={() => setActiveIndex(index)}
                     onFocus={() => setActiveIndex(index)}
-                    className={`w-full text-left cursor-pointer px-3 py-2 flex items-center gap-3 transition-all duration-150 rounded ${
+                    style={{ '--i': index } as React.CSSProperties}
+                    className={`w-full text-left cursor-pointer px-3 py-2 flex items-center gap-3 transition-colors duration-200 rounded animate-row-reveal stagger ${
                       activeIndex === index ? 'bg-secondary text-black font-bold' : 'hover:bg-gray-800/50'
                     }`}
                   >
@@ -97,7 +98,11 @@ export default function FeaturedProjects() {
                   </button>
                 ))}
 
-                <Link href="/projects" className="group px-3 py-2 flex items-center gap-3 text-gray-600 hover:text-secondary transition-colors rounded hover:bg-gray-800/30">
+                <Link
+                  href="/projects"
+                  style={{ '--i': featuredProjects.length } as React.CSSProperties}
+                  className="group px-3 py-2 flex items-center gap-3 text-gray-600 hover:text-secondary transition-colors duration-200 rounded hover:bg-gray-800/30 animate-row-reveal stagger"
+                >
                   <span className="text-xs w-4 group-hover:text-secondary">→</span>
                   <span className="text-xs hidden sm:inline">----------</span>
                   <span>📂</span>
@@ -124,11 +129,11 @@ export default function FeaturedProjects() {
                 <div className="border border-gray-700 bg-black overflow-hidden rounded">
                   <div className="relative aspect-video w-full bg-gray-900 overflow-hidden">
                     {activeProject.images?.length ? (
-                      <Image src={activeProject.images[0]} alt={activeProject.title} fill className="object-cover transition-transform duration-300 hover:scale-105" unoptimized />
+                      <Image src={activeProject.images[0]} alt={activeProject.title} fill className="object-cover transition-transform duration-500 ease-out hover:scale-105" unoptimized />
                     ) : (
                       <div className="flex items-center justify-center h-full text-secondary text-sm">{t('projects.featured.noPreview')}</div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-4">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                       <div className="text-white text-xs">{t('projects.featured.clickToOpen')}</div>
                     </div>
                   </div>

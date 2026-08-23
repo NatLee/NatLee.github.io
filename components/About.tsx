@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type CSSProperties } from 'react'
 import { getPersonalInfo, getYearsOfExperience } from '@/data/personal'
 import { skillsData } from '@/data/skills'
 import Image from 'next/image'
@@ -48,7 +48,7 @@ export default function About() {
               path="~/profile"
               command={t('about.neofetchCommand')}
               startDelay={300}
-              typingSpeed={35}
+              typingSpeed={55}
               onComplete={() => setFirstCommandComplete(true)}
             >
               <div className="grid lg:grid-cols-12 gap-12 items-start mt-6">
@@ -56,9 +56,9 @@ export default function About() {
                   <div className="relative w-48 h-48 md:w-64 md:h-64 group mb-8">
                     <div className="absolute inset-0 z-30 pointer-events-none bg-[linear-gradient(rgba(18,18,18,0)_50%,rgba(0,0,0,0.2)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[size:100%_4px,6px_100%] opacity-50 rounded-full" />
                     <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-gray-800 group-hover:border-secondary transition-colors">
-                      <Image src={personalInfo.avatar} alt={personalInfo.displayName} fill className="object-cover relative z-10 transition-transform duration-200 group-hover:scale-105" />
-                      <Image src={personalInfo.avatar} alt="" fill className="object-cover absolute inset-0 z-20 opacity-0 group-hover:opacity-60 mix-blend-screen translate-x-1 transition-opacity duration-100 pointer-events-none" />
-                      <Image src={personalInfo.avatar} alt="" fill className="object-cover absolute inset-0 z-20 opacity-0 group-hover:opacity-60 mix-blend-multiply -translate-x-1 transition-opacity duration-100 pointer-events-none" />
+                      <Image src={personalInfo.avatar} alt={personalInfo.displayName} fill className="object-cover relative z-10 transition-transform duration-500 ease-out group-hover:scale-105" />
+                      <Image src={personalInfo.avatar} alt="" fill className="object-cover absolute inset-0 z-20 opacity-0 group-hover:opacity-60 mix-blend-screen translate-x-1 transition-opacity duration-300 pointer-events-none" />
+                      <Image src={personalInfo.avatar} alt="" fill className="object-cover absolute inset-0 z-20 opacity-0 group-hover:opacity-60 mix-blend-multiply -translate-x-1 transition-opacity duration-300 pointer-events-none" />
                     </div>
                   </div>
 
@@ -85,8 +85,12 @@ export default function About() {
                     <div>
                       <h4 className="text-secondary font-bold mb-3 text-sm">{t('about.languages')}</h4>
                       <div className="flex flex-wrap gap-2">
-                        {personalInfo.languages.map((language) => (
-                          <span key={language.name} className="text-xs bg-gray-900 border border-gray-800 px-3 py-1 rounded text-gray-400">
+                        {personalInfo.languages.map((language, index) => (
+                          <span
+                            key={language.name}
+                            style={{ '--i': index } as CSSProperties}
+                            className="text-xs bg-gray-900 border border-gray-800 px-3 py-1 rounded text-gray-400 animate-row-reveal stagger"
+                          >
                             {language.name} ({language.level})
                           </span>
                         ))}
@@ -96,8 +100,12 @@ export default function About() {
                     <div>
                       <h4 className="text-secondary font-bold mb-3 text-sm">{t('about.interests')}</h4>
                       <div className="flex flex-wrap gap-2">
-                        {personalInfo.interests.map((interest) => (
-                          <span key={interest} className="text-xs bg-gray-900 border border-gray-800 px-3 py-1 rounded text-gray-400">
+                        {personalInfo.interests.map((interest, index) => (
+                          <span
+                            key={interest}
+                            style={{ '--i': index } as CSSProperties}
+                            className="text-xs bg-gray-900 border border-gray-800 px-3 py-1 rounded text-gray-400 animate-row-reveal stagger"
+                          >
                             #{interest}
                           </span>
                         ))}
@@ -110,8 +118,12 @@ export default function About() {
                       { label: t('about.email'), icon: 'mail', href: `mailto:${personalInfo.email}` },
                       { label: t('about.github'), icon: 'github', href: personalInfo.socialLinks.find((link) => link.name === 'GitHub')?.url || '#' },
                       { label: t('about.linkedin'), icon: 'linkedin', href: personalInfo.socialLinks.find((link) => link.name === 'LinkedIn')?.url || '#' },
-                    ].map((item) => (
-                      <div key={item.label} className="relative border border-gray-800 bg-[#0a0a0a] p-4 hover:border-secondary transition-colors group cursor-pointer text-center">
+                    ].map((item, index) => (
+                      <div
+                        key={item.label}
+                        style={{ '--i': index } as CSSProperties}
+                        className="relative border border-gray-800 bg-[#0a0a0a] p-4 hover:border-secondary transition-colors duration-200 group cursor-pointer text-center animate-card-reveal stagger"
+                      >
                         <a href={item.href} target={item.href.startsWith('mailto:') ? undefined : '_blank'} rel="noopener noreferrer" className="flex flex-col items-center gap-2">
                           <Icon name={item.icon} className="w-6 h-6 text-gray-500 group-hover:text-secondary" />
                           <span className="text-xs group-hover:text-white transition-colors">{item.label}</span>
@@ -132,12 +144,16 @@ export default function About() {
                   path="~/skills"
                   command={t('about.skillsCommand')}
                   startDelay={200}
-                  typingSpeed={40}
+                  typingSpeed={55}
                   onComplete={() => setSecondCommandComplete(true)}
                 >
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
-                    {skillsData.map((category) => (
-                      <div key={category.id} className="mb-6">
+                    {skillsData.map((category, index) => (
+                      <div
+                        key={category.id}
+                        style={{ '--i': index } as CSSProperties}
+                        className="mb-6 animate-content-reveal stagger"
+                      >
                         <h4 className="text-secondary font-bold mb-4 flex items-center gap-2 border-b border-gray-800 pb-2">
                           ./{category.id}
                         </h4>

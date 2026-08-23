@@ -66,7 +66,7 @@ export default function Experience() {
               path="~/experience"
               command={t('experience.command')}
               startDelay={300}
-              typingSpeed={40}
+              typingSpeed={55}
               onComplete={() => setCommandComplete(true)}
               className="mb-12 border-b border-gray-900 pb-8 pt-2"
             >
@@ -78,10 +78,14 @@ export default function Experience() {
               </div>
 
               <div className="space-y-6">
-                {groupedData.map((group) => {
+                {groupedData.map((group, index) => {
                   const isExpanded = expandedGroups.includes(group.company)
                   return (
-                    <div key={group.company} className="border border-gray-800 bg-[#0a0a0a] rounded overflow-hidden">
+                    <div
+                      key={group.company}
+                      style={{ '--i': index } as React.CSSProperties}
+                      className="border border-gray-800 bg-[#0a0a0a] rounded overflow-hidden animate-card-reveal stagger"
+                    >
                       <button
                         type="button"
                         onClick={() => toggleGroup(group.company)}
@@ -91,7 +95,7 @@ export default function Experience() {
                         }`}
                       >
                         <div className="flex items-center gap-3 md:gap-4 text-sm md:text-base min-w-0">
-                          <span className={`text-xl transition-transform flex-shrink-0 ${isExpanded ? 'rotate-90' : ''}`}>▶</span>
+                          <span className={`text-xl transition-transform duration-300 ease-out flex-shrink-0 ${isExpanded ? 'rotate-90' : ''}`}>▶</span>
                           <span className={`font-bold truncate min-w-0 ${isExpanded ? 'text-secondary' : 'text-gray-400'}`}>{group.company}</span>
                           <span className="text-gray-600 text-xs ml-1 md:ml-2 border border-gray-800 px-2 py-0.5 rounded whitespace-nowrap flex-shrink-0">
                             {group.items.length} {group.items.length > 1 ? t('experience.rolesPlural') : t('experience.roles')}
@@ -104,8 +108,12 @@ export default function Experience() {
 
                       {isExpanded && (
                         <div className="p-0">
-                          {group.items.map((exp) => (
-                            <div key={exp.id} className="relative pl-8 md:pl-12 py-8 pr-4 group transition-colors hover:bg-white/5">
+                          {group.items.map((exp, roleIndex) => (
+                            <div
+                              key={exp.id}
+                              style={{ '--i': roleIndex } as React.CSSProperties}
+                              className="relative pl-8 md:pl-12 py-8 pr-4 group transition-colors duration-200 hover:bg-white/5 animate-content-reveal stagger"
+                            >
                               {group.items.length > 1 && <div className="absolute left-4 md:left-6 top-0 bottom-0 w-px bg-gray-800" />}
                               <div className={`absolute left-[13px] md:left-[21px] top-10 w-2 h-2 rounded-full z-10 ${exp.end === 'Present' ? 'bg-green-500 ring-4 ring-green-900/30' : 'bg-gray-600'}`} />
                               <div className="flex flex-col md:flex-row md:items-start gap-4 mb-4">

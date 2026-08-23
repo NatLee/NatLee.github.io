@@ -32,7 +32,7 @@ export default function ProjectDetail({ project: initialProject }: Props) {
 
   // Trigger tab open animation on mount; clear any pending close nav on unmount.
   useEffect(() => {
-    const timer = setTimeout(() => setIsTabOpen(true), 50)
+    const timer = setTimeout(() => setIsTabOpen(true), 120)
     return () => {
       clearTimeout(timer)
       if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
@@ -47,7 +47,7 @@ export default function ProjectDetail({ project: initialProject }: Props) {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
     closeTimerRef.current = setTimeout(() => {
       router.push(destination)
-    }, 300)
+    }, 450)
   }
 
   // Truncate project ID for display
@@ -198,7 +198,7 @@ export default function ProjectDetail({ project: initialProject }: Props) {
               
               {/* Current Project Tab (Active) - with open/close animation */}
               <div 
-                className={`flex items-center gap-1.5 py-2 text-xs font-mono bg-black/60 text-secondary border-t border-x border-secondary/30 rounded-t font-bold transition-all duration-300 ease-out origin-left flex-shrink-0 ${
+                className={`flex items-center gap-1.5 py-2 text-xs font-mono bg-black/60 text-secondary border-t border-x border-secondary/30 rounded-t font-bold transition-[opacity,max-width,padding] duration-500 ease-out origin-left flex-shrink-0 ${
                   isClosingTab 
                     ? 'opacity-0 max-w-0 px-0 overflow-hidden' 
                     : isTabOpen 
@@ -220,7 +220,7 @@ export default function ProjectDetail({ project: initialProject }: Props) {
             </div>
           </div>
 
-          <div className={`p-4 md:p-6 text-gray-300 transition-all duration-300 ${
+          <div className={`p-4 md:p-6 text-gray-300 transition-[opacity,transform] duration-500 ease-out ${
             isClosingTab 
               ? 'opacity-0 translate-y-4' 
               : isTabOpen 
@@ -233,7 +233,7 @@ export default function ProjectDetail({ project: initialProject }: Props) {
               path={`~/${truncatedId}`}
               command="vim README.md"
               startDelay={300}
-              typingSpeed={45}
+              typingSpeed={55}
               className="mb-6"
             >
               <div className="flex flex-col max-w-[100rem] mx-auto bg-black/40 backdrop-blur-md rounded-lg overflow-hidden shadow-2xl mt-4">

@@ -77,7 +77,7 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
         ))
         setCurrentStreamingId(null)
       }
-    }, 15)
+    }, 24)
 
     intervalsRef.current.push(interval)
   }
@@ -95,8 +95,8 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
 
     const bootSequence = [
       { type: 'system' as const, content: t('projectDetail.terminal.initializing', { title: projectTitle }), delay: 0 },
-      { type: 'user' as const, content: 'help', delay: 300 },
-      { type: 'assistant' as const, content: helpContent, delay: 600 },
+      { type: 'user' as const, content: 'help', delay: 550 },
+      { type: 'assistant' as const, content: helpContent, delay: 1100 },
     ]
 
     bootSequence.forEach((msg, index) => {
@@ -118,7 +118,7 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
           setCurrentStreamingId(newMsg.id)
           const streamTimeout = setTimeout(() => {
             streamTextWithRef(msg.content, newMsg.id)
-          }, 50)
+          }, 120)
           timeoutsRef.current.push(streamTimeout)
         }
       }, msg.delay)
@@ -192,7 +192,7 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
       setCurrentStreamingId(responseId)
       const streamTimeout = setTimeout(() => {
         streamTextWithRef(response, responseId)
-      }, 50)
+      }, 120)
       timeoutsRef.current.push(streamTimeout)
     }, 600 + Math.random() * 400)
 
@@ -229,7 +229,7 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
   }
 
   return (
-    <div className={`bg-[#0d0d0d] border-t border-gray-800 flex flex-col transition-all duration-300 ${isCollapsed ? 'h-10' : 'h-[420px]'}`}>
+    <div className={`bg-[#0d0d0d] border-t border-gray-800 flex flex-col transition-[height] duration-500 ease-out ${isCollapsed ? 'h-10' : 'h-[420px]'}`}>
       {/* Terminal Header */}
       <button
         type="button"
@@ -272,10 +272,10 @@ export default function AIChatTerminal({ projectId, projectTitle, technologies =
               <div
                 key={msg.id}
                 className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'} animate-message-slide`}
-                style={{ animationDelay: `${index * 50}ms` }}
+                style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
               >
                 <div
-                  className={`max-w-[85%] rounded-lg px-4 py-2.5 transition-all duration-200 ${
+                  className={`max-w-[85%] rounded-lg px-4 py-2.5 transition-colors duration-200 ${
                     msg.type === 'user'
                       ? 'bg-secondary/20 text-secondary border-l-2 border-secondary'
                       : msg.type === 'system'

@@ -131,7 +131,7 @@ export default function ProjectsGrid() {
           </div>
 
           <div className="min-h-[80vh] p-4 md:p-8 lg:p-12 text-gray-300">
-            <TerminalCommand path="~/projects" command={t('projects.command')} startDelay={300} typingSpeed={35} onComplete={() => setCommandComplete(true)} className="mb-12 border-b border-gray-900 pb-8 pt-2">
+            <TerminalCommand path="~/projects" command={t('projects.command')} startDelay={300} typingSpeed={55} onComplete={() => setCommandComplete(true)} className="mb-12 border-b border-gray-900 pb-8 pt-2">
               <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mt-6">
                 <aside className="w-full lg:w-64 flex-shrink-0 bg-[#0a0a0a] border border-gray-800 rounded-lg flex flex-col lg:h-fit lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)]">
                   <button
@@ -149,7 +149,7 @@ export default function ProjectsGrid() {
                     <span className="text-gray-600 lg:hidden">{categories.length - 1} {t('projects.categories')}</span>
                   </button>
 
-                  <div id="projects-explorer-panel" className={`overflow-hidden transition-all duration-300 lg:!max-h-none ${isExplorerOpen ? 'max-h-[500px]' : 'max-h-0 lg:max-h-none'}`}>
+                  <div id="projects-explorer-panel" className={`overflow-hidden transition-[max-height] duration-500 ease-out lg:!max-h-none ${isExplorerOpen ? 'max-h-[500px]' : 'max-h-0 lg:max-h-none'}`}>
                     <div className="p-3 lg:p-4 pt-2">
                       <div className="overflow-y-auto custom-scrollbar pr-2 space-y-1 max-h-[300px] lg:max-h-none">
                         <button
@@ -209,9 +209,16 @@ export default function ProjectsGrid() {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    {filteredProjects.map((project) => (
-                      <Link href={`/projects/${project.id}`} key={project.id} className="block group relative">
-                        <div className="bg-[#0a0a0a] border border-gray-800 h-64 flex flex-col relative overflow-hidden transition-all duration-300 hover:border-secondary shadow-lg hover:shadow-secondary/20 rounded-lg">
+                    {filteredProjects.map((project, index) => (
+                      <Link
+                        href={`/projects/${project.id}`}
+                        key={project.id}
+                        // Stagger caps at the 12th card: uncapped, the tail of a
+                        // 37-project grid would still be arriving 2.4s in.
+                        style={{ '--i': Math.min(index, 11) } as React.CSSProperties}
+                        className="block group relative animate-card-reveal stagger"
+                      >
+                        <div className="bg-[#0a0a0a] border border-gray-800 h-64 flex flex-col relative overflow-hidden transition-[border-color,box-shadow] duration-300 hover:border-secondary shadow-lg hover:shadow-secondary/20 rounded-lg">
                           {(project.images?.[0] || project.thumbnail) && (
                             <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500 grayscale group-hover:grayscale-0">
                               <Image src={project.thumbnail || project.images[0]} alt="" fill className="object-cover" />
@@ -223,7 +230,7 @@ export default function ProjectsGrid() {
                               <span className="group-hover:text-secondary">{getStableSize(project.id)}</span>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
-                              <span className="text-2xl opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all drop-shadow-md" aria-hidden="true">
+                              <span className="text-2xl opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-[transform,opacity] duration-300 ease-out drop-shadow-md" aria-hidden="true">
                                 {getCategoryEmoji(project.category)}
                               </span>
                               <h3 className="text-base font-bold text-gray-300 group-hover:text-secondary [overflow-wrap:anywhere] line-clamp-2 drop-shadow-md transition-colors">

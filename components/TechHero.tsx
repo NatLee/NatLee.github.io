@@ -45,12 +45,12 @@ export default function TechHero() {
       } else {
         clearInterval(timer)
       }
-    }, 30)
+    }, 38)
 
     const cursorTimer = setInterval(() => {
       if (!isMounted) return
       setShowCursor((prev) => !prev)
-    }, 530)
+    }, 500)
 
     return () => {
       isMounted = false
@@ -69,7 +69,7 @@ export default function TechHero() {
               <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} inline-block w-3 h-6 bg-green-400 align-middle ml-1 shadow-[0_0_10px_#4ade80]`} />
             </div>
 
-            <div className="animate-fade-in space-y-6" style={{ animationDelay: '1.5s' }}>
+            <div className="animate-fade-in space-y-6" style={{ animationDelay: '1.1s' }}>
               <div className="space-y-4">
                 <p className="text-base md:text-lg border-l-2 border-secondary/50 pl-4 py-1 text-gray-300 leading-relaxed max-w-2xl">
                   {personalInfo.bio}
@@ -141,10 +141,10 @@ export default function TechHero() {
                   src={personalInfo.avatar}
                   alt={personalInfo.displayName}
                   fill
-                  className="object-cover relative z-0 transition-all duration-100 group-hover:scale-105 group-hover:grayscale group-hover:contrast-150"
+                  className="object-cover relative z-0 transition-[transform,filter] duration-500 ease-out group-hover:scale-105 group-hover:grayscale group-hover:contrast-150"
                   priority
                 />
-                <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-75 mix-blend-hard-light pointer-events-none">
+                <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-hard-light pointer-events-none">
                   <div className="absolute inset-0 bg-red-500/20 translate-x-1 animate-glitch-1" />
                   <div className="absolute inset-0 bg-blue-500/20 -translate-x-1 animate-glitch-2" />
                 </div>

@@ -4,9 +4,9 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 
 export interface UseTerminalTypingOptions {
   command: string
-  typingSpeed?: number      // ms per character (default: 50)
+  typingSpeed?: number      // ms per character (default: 55)
   startDelay?: number       // delay before typing starts (default: 0)
-  cursorBlinkSpeed?: number // cursor blink interval (default: 530)
+  cursorBlinkSpeed?: number // cursor blink interval (default: 500)
   onComplete?: () => void
   enabled?: boolean         // whether to start the animation (default: true)
 }
@@ -20,9 +20,9 @@ export interface UseTerminalTypingReturn {
 
 export function useTerminalTyping({
   command,
-  typingSpeed = 50,
+  typingSpeed = 55,
   startDelay = 0,
-  cursorBlinkSpeed = 530,
+  cursorBlinkSpeed = 500,
   onComplete,
   enabled = true,
 }: UseTerminalTypingOptions): UseTerminalTypingReturn {
