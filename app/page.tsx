@@ -35,9 +35,11 @@ export default function Home() {
             </div>
 
             <div className="min-h-[80vh] p-4 md:p-8 text-gray-300">
+              {/* 800ms: let first paint and fonts settle so the visitor's eye
+                  is already on the prompt when the first keystroke lands. */}
               <TerminalCommand
                 command={t('home.introCommand')}
-                startDelay={300}
+                startDelay={800}
               >
                 <TechHero onBootComplete={() => setHeroBootComplete(true)} />
               </TerminalCommand>

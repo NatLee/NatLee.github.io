@@ -4,10 +4,10 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 
 export interface UseTerminalTypingOptions {
   command: string
-  typingSpeed?: number      // mean ms per character (default: 60)
+  typingSpeed?: number      // mean ms per character; omit to auto-fit a ~1.8s scene
   startDelay?: number       // delay before typing starts (default: 0)
   cursorBlinkSpeed?: number // cursor blink interval (default: 500)
-  completeHoldMs?: number   // pause on the finished command before onComplete (default: 420)
+  completeHoldMs?: number   // pause on the finished command before onComplete (default: 600)
   onComplete?: () => void
   enabled?: boolean         // whether to start the animation (default: true)
 }
@@ -17,6 +17,16 @@ export interface UseTerminalTypingReturn {
   isTyping: boolean
   isComplete: boolean
   showCursor: boolean
+}
+
+// Mean per-character delay when the caller doesn't pin one. Real command-line
+// typing sits around 60-90 WPM (150-250ms a character); the previous "snappy"
+// 55-60ms cadence measured out to ~160 WPM, which the eye reads as the command
+// simply appearing. Short commands take the slow end and long ones compress,
+// so every command scene lands in roughly the same 1.5-2.5s window regardless
+// of string length — a 10-char command can finally read as typing at all.
+function meanCharDelay(length: number): number {
+  return Math.round(Math.min(150, Math.max(70, 1800 / Math.max(length, 1))))
 }
 
 // A fixed interval reads as a progress bar filling, not as someone at a
@@ -31,10 +41,10 @@ function keystrokeDelay(base: number, char: string): number {
 
 export function useTerminalTyping({
   command,
-  typingSpeed = 60,
+  typingSpeed,
   startDelay = 0,
   cursorBlinkSpeed = 500,
-  completeHoldMs = 420,
+  completeHoldMs = 600,
   onComplete,
   enabled = true,
 }: UseTerminalTypingOptions): UseTerminalTypingReturn {
@@ -98,6 +108,8 @@ export function useTerminalTyping({
     setIsComplete(false)
     setIsTyping(false)
 
+    const base = typingSpeed ?? meanCharDelay(command.length)
+
     // Start typing after delay
     startDelayTimeoutRef.current = setTimeout(() => {
       setIsTyping(true)
@@ -110,7 +122,7 @@ export function useTerminalTyping({
           const char = command[index]
           index++
           setDisplayedCommand(command.slice(0, index))
-          typingTimeoutRef.current = setTimeout(typeNext, keystrokeDelay(typingSpeed, char))
+          typingTimeoutRef.current = setTimeout(typeNext, keystrokeDelay(base, char))
           return
         }
 
