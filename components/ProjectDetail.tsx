@@ -233,7 +233,6 @@ export default function ProjectDetail({ project: initialProject }: Props) {
               path={`~/${truncatedId}`}
               command="vim README.md"
               startDelay={300}
-              typingSpeed={55}
               className="mb-6"
             >
               <div className="flex flex-col max-w-[100rem] mx-auto bg-black/40 backdrop-blur-md rounded-lg overflow-hidden shadow-2xl mt-4">

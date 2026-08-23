@@ -10,7 +10,7 @@ export interface TerminalCommandProps {
   path?: string
   /** The command to type (e.g., "./intro.sh") */
   command: string
-  /** Typing speed in ms per character (default: 55) */
+  /** Mean typing speed in ms per character; each keystroke jitters around it (default: 60) */
   typingSpeed?: number
   /** Delay before typing starts in ms (default: 0) */
   startDelay?: number
@@ -30,7 +30,7 @@ export function TerminalCommand({
   prompt = 'natlee@mainframe',
   path = '~',
   command,
-  typingSpeed = 55,
+  typingSpeed = 60,
   startDelay = 0,
   onComplete,
   enabled = true,

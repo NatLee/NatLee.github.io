@@ -32,7 +32,6 @@ export default function Home() {
               <TerminalCommand
                 command={t('home.introCommand')}
                 startDelay={300}
-                typingSpeed={55}
                 onComplete={() => setFirstCommandComplete(true)}
               >
                 <TechHero />
@@ -44,7 +43,6 @@ export default function Home() {
                     path="~/projects"
                     command={t('home.projectsCommand')}
                     startDelay={200}
-                    typingSpeed={55}
                     onComplete={() => setSecondCommandComplete(true)}
                   >
                     <FeaturedProjects />

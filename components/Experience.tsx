@@ -66,7 +66,6 @@ export default function Experience() {
               path="~/experience"
               command={t('experience.command')}
               startDelay={300}
-              typingSpeed={55}
               onComplete={() => setCommandComplete(true)}
               className="mb-12 border-b border-gray-900 pb-8 pt-2"
             >

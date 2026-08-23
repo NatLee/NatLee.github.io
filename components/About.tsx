@@ -48,7 +48,6 @@ export default function About() {
               path="~/profile"
               command={t('about.neofetchCommand')}
               startDelay={300}
-              typingSpeed={55}
               onComplete={() => setFirstCommandComplete(true)}
             >
               <div className="grid lg:grid-cols-12 gap-12 items-start mt-6">
@@ -144,7 +143,6 @@ export default function About() {
                   path="~/skills"
                   command={t('about.skillsCommand')}
                   startDelay={200}
-                  typingSpeed={55}
                   onComplete={() => setSecondCommandComplete(true)}
                 >
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">

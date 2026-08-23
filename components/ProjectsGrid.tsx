@@ -131,7 +131,7 @@ export default function ProjectsGrid() {
           </div>
 
           <div className="min-h-[80vh] p-4 md:p-8 lg:p-12 text-gray-300">
-            <TerminalCommand path="~/projects" command={t('projects.command')} startDelay={300} typingSpeed={55} onComplete={() => setCommandComplete(true)} className="mb-12 border-b border-gray-900 pb-8 pt-2">
+            <TerminalCommand path="~/projects" command={t('projects.command')} startDelay={300} onComplete={() => setCommandComplete(true)} className="mb-12 border-b border-gray-900 pb-8 pt-2">
               <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mt-6">
                 <aside className="w-full lg:w-64 flex-shrink-0 bg-[#0a0a0a] border border-gray-800 rounded-lg flex flex-col lg:h-fit lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)]">
                   <button

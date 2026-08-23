@@ -31,7 +31,7 @@ export default function NotFound() {
           </div>
 
           <div className="p-6 md:p-10 text-gray-300 min-h-[50vh]">
-            <TerminalCommand path="~" command={`cat ${path}`} startDelay={300} typingSpeed={55}>
+            <TerminalCommand path="~" command={`cat ${path}`} startDelay={300}>
               <div className="mt-6 space-y-6">
                 <p className="text-red-400 text-sm md:text-base">
                   bash: cat: {path}: {t('notFound.error')}
