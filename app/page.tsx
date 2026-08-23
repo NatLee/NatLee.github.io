@@ -5,12 +5,18 @@ import TechHero from '@/components/TechHero'
 import FeaturedProjects from '@/components/FeaturedProjects'
 import TerminalCommand from '@/components/TerminalCommand'
 import InteractiveTerminal from '@/components/InteractiveTerminal'
+import RevealOnView from '@/components/RevealOnView'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Home() {
   const { t } = useLanguage()
-  const [firstCommandComplete, setFirstCommandComplete] = useState(false)
-  const [secondCommandComplete, setSecondCommandComplete] = useState(false)
+  // Serial choreography: one typewriter at a time. Measured with the old
+  // gating, the hero boot log (1.8s-6.4s) and the projects command (2.0s-3.6s)
+  // typed simultaneously — and everything below the fold had finished its
+  // entrance before the visitor ever scrolled to it. The projects prompt now
+  // waits for the boot log to finish AND for its own slot to scroll into view.
+  const [heroBootComplete, setHeroBootComplete] = useState(false)
+  const [projectsCommandComplete, setProjectsCommandComplete] = useState(false)
 
   return (
     <main id="main" tabIndex={-1} className="min-h-screen pt-16 md:pt-20 pb-20 font-mono relative overflow-hidden pointer-events-none focus:outline-none">
@@ -32,25 +38,26 @@ export default function Home() {
               <TerminalCommand
                 command={t('home.introCommand')}
                 startDelay={300}
-                onComplete={() => setFirstCommandComplete(true)}
               >
-                <TechHero />
+                <TechHero onBootComplete={() => setHeroBootComplete(true)} />
               </TerminalCommand>
 
-              {firstCommandComplete && (
-                <div className="mt-8 animate-content-reveal">
-                  <TerminalCommand
-                    path="~/projects"
-                    command={t('home.projectsCommand')}
-                    startDelay={200}
-                    onComplete={() => setSecondCommandComplete(true)}
-                  >
-                    <FeaturedProjects />
-                  </TerminalCommand>
-                </div>
+              {heroBootComplete && (
+                <RevealOnView className="mt-8">
+                  <div className="animate-content-reveal">
+                    <TerminalCommand
+                      path="~/projects"
+                      command={t('home.projectsCommand')}
+                      startDelay={400}
+                      onComplete={() => setProjectsCommandComplete(true)}
+                    >
+                      <FeaturedProjects />
+                    </TerminalCommand>
+                  </div>
+                </RevealOnView>
               )}
 
-              {secondCommandComplete && (
+              {projectsCommandComplete && (
                 <div className="animate-content-reveal">
                   <InteractiveTerminal />
                 </div>

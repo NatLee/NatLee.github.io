@@ -603,6 +603,14 @@
     animation-delay: calc(var(--i, 0) * var(--stagger-step));
   }
 
+  /* Entrance animations guarded by RevealOnView (hold mode) sit paused on
+     their 0% keyframe — invisible, but holding their layout box — until the
+     wrapper scrolls into view and the class is dropped. */
+  .anim-hold,
+  .anim-hold * {
+    animation-play-state: paused !important;
+  }
+
   /* Animation delays for one-off sequencing. Named `anim-delay-*` rather than
      `delay-*` so they don't collide with Tailwind's transition-delay scale. */
   .anim-delay-100 {

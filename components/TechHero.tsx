@@ -1,13 +1,18 @@
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getPersonalInfo, getYearsOfExperience } from '@/data/personal'
 import { useLanguage } from '@/contexts/LanguageContext'
 import CopyButton from './CopyButton'
 
-export default function TechHero() {
+interface TechHeroProps {
+  /** Fired once the boot log finishes typing (immediately under reduced motion). */
+  onBootComplete?: () => void
+}
+
+export default function TechHero({ onBootComplete }: TechHeroProps) {
   const { locale, t } = useLanguage()
   const personalInfo = useMemo(() => getPersonalInfo(locale), [locale])
   const years = getYearsOfExperience()
@@ -23,6 +28,11 @@ export default function TechHero() {
   )
   const [text, setText] = useState('')
   const [showCursor, setShowCursor] = useState(true)
+  // Ref so a parent re-render (new inline callback) can't restart the typing effect.
+  const onBootCompleteRef = useRef(onBootComplete)
+  useEffect(() => {
+    onBootCompleteRef.current = onBootComplete
+  }, [onBootComplete])
 
   useEffect(() => {
     let isMounted = true
@@ -31,6 +41,7 @@ export default function TechHero() {
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setText(fullText)
       setShowCursor(false)
+      onBootCompleteRef.current?.()
       return
     }
 
@@ -44,6 +55,7 @@ export default function TechHero() {
         setText(fullText.slice(0, index))
       } else {
         clearInterval(timer)
+        onBootCompleteRef.current?.()
       }
     }, 38)
 

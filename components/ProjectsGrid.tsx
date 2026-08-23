@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAllCategories, getLocalizedProjects, localizeCategory } from '@/data/projects'
 import TerminalCommand from './TerminalCommand'
+import RevealOnView from './RevealOnView'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 function hashString(value: string): number {
@@ -210,14 +211,15 @@ export default function ProjectsGrid() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                     {filteredProjects.map((project, index) => (
-                      <Link
-                        href={`/projects/${project.id}`}
+                      <RevealOnView
                         key={project.id}
+                        hold
                         // Stagger caps at the 12th card: uncapped, the tail of a
                         // 37-project grid would still be arriving 2.4s in.
                         style={{ '--i': Math.min(index, 11) } as React.CSSProperties}
-                        className="block group relative animate-card-reveal stagger"
+                        className="animate-card-reveal stagger"
                       >
+                        <Link href={`/projects/${project.id}`} className="block group relative">
                         <div className="bg-[#0a0a0a] border border-gray-800 h-64 flex flex-col relative overflow-hidden transition-[border-color,box-shadow] duration-300 hover:border-secondary shadow-lg hover:shadow-secondary/20 rounded-lg">
                           {(project.images?.[0] || project.thumbnail) && (
                             <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500 grayscale group-hover:grayscale-0">
@@ -245,7 +247,8 @@ export default function ProjectsGrid() {
                             </div>
                           </div>
                         </div>
-                      </Link>
+                        </Link>
+                      </RevealOnView>
                     ))}
                   </div>
 
