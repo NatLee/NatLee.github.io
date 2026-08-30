@@ -7,7 +7,7 @@ export interface UseTerminalTypingOptions {
   typingSpeed?: number      // mean ms per character; omit to auto-fit a ~1.8s scene
   startDelay?: number       // delay before typing starts (default: 0)
   cursorBlinkSpeed?: number // cursor blink interval (default: 500)
-  completeHoldMs?: number   // pause on the finished command before onComplete (default: 450)
+  completeHoldMs?: number   // pause on the finished command before onComplete (default: 350)
   onComplete?: () => void
   enabled?: boolean         // whether to start the animation (default: true)
 }
@@ -23,11 +23,11 @@ export interface UseTerminalTypingReturn {
 // roughly human cadence to read "typing" at all — the old 55-60ms fixed rate
 // (~160 WPM) registered as the command simply appearing — but a full 60-90 WPM
 // re-enactment read as sluggish once the owner saw it for real. This sits in
-// between (~85-110 WPM): short commands take the slow end and long ones
-// compress, so every command scene lands in roughly 1.0-2.2s regardless of
+// between (~100-130 WPM): short commands take the slow end and long ones
+// compress, so every command scene lands in roughly 0.8-1.8s regardless of
 // string length.
 function meanCharDelay(length: number): number {
-  return Math.round(Math.min(115, Math.max(60, 1400 / Math.max(length, 1))))
+  return Math.round(Math.min(100, Math.max(50, 1150 / Math.max(length, 1))))
 }
 
 // A fixed interval reads as a progress bar filling, not as someone at a
@@ -45,7 +45,7 @@ export function useTerminalTyping({
   typingSpeed,
   startDelay = 0,
   cursorBlinkSpeed = 500,
-  completeHoldMs = 450,
+  completeHoldMs = 350,
   onComplete,
   enabled = true,
 }: UseTerminalTypingOptions): UseTerminalTypingReturn {
