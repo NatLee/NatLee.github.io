@@ -1,0 +1,64 @@
+{
+  "id": "morphkit",
+  "title": "morphkit",
+  "subtitle": "In-Browser Media Converter & Editor",
+  "description": "A 100% static web app that converts and edits images, audio, video, GIF, and APNG entirely in the browser — no uploads, no backend.",
+  "longDescription": "MorphKit is a browser-based file converter and editor with no backend at all: every file is processed client-side, so nothing ever leaves the user's machine. It converts between common image formats (PNG, JPG, WEBP, BMP, GIF, APNG, AVIF), audio formats (MP3, WAV, OGG, FLAC, M4A, AAC, OPUS), and video formats (MP4, WEBM, MOV, AVI, MKV), and goes beyond conversion with a full editing toolkit — a layered image editor with brushes, shapes, text, crop, and background removal; audio/video trimming with volume and speed controls; and GIF/APNG frame-by-frame editing with captions and speed, reverse, and boomerang effects. Batch processing with ZIP download, file metadata inspection (EXIF, bitrate, duration), and clipboard integration round out the workflow. The site is built with Vite, React, and TypeScript, and deploys to GitHub Pages via GitHub Actions.",
+  "language": "typescript",
+  "images": [
+    "https://raw.githubusercontent.com/NatLee/morphkit/refs/heads/main/docs/imgs/index.png",
+    "https://raw.githubusercontent.com/NatLee/morphkit/refs/heads/main/docs/imgs/image-editor.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/morphkit",
+  "category": "Web Application",
+  "status": "In Progress",
+  "featured": true,
+  "opensource": true,
+  "technologies": [
+    "TypeScript",
+    "React",
+    "Vite",
+    "ffmpeg.wasm",
+    "Canvas API",
+    "gifuct-js",
+    "gifenc",
+    "upng-js",
+    "GitHub Actions",
+    "GitHub Pages"
+  ],
+  "features": [
+    "Client-side conversion for images (PNG, JPG, WEBP, BMP, GIF, APNG, AVIF), audio (MP3, WAV, OGG, FLAC, M4A, AAC, OPUS), and video (MP4, WEBM, MOV, AVI, MKV)",
+    "Layered image editor with brushes, shapes, text, crop, rotate/flip, and background removal",
+    "Audio/video trimming, volume adjustment, speed control, and rotation",
+    "GIF/APNG editing with frame manipulation, captions, and speed/reverse/boomerang effects",
+    "Batch processing with ZIP download",
+    "File metadata display (EXIF, bitrate, duration)",
+    "Clipboard integration for paste-and-convert workflows",
+    "100% static site — no server, no file uploads, privacy by design"
+  ],
+  "challenges": [
+    "Processing large media files entirely in the browser under its ~2 GB memory ceiling.",
+    "Supporting a wide matrix of image, audio, and video formats without any server-side help.",
+    "Editing animated formats (GIF/APNG) frame by frame while keeping the UI responsive."
+  ],
+  "solutions": [
+    "Used ffmpeg.wasm for audio/video transcoding and the Canvas API for static images, keeping every byte on the user's machine.",
+    "Combined specialized codecs (gifuct-js, gifenc, upng-js) for animation decoding and encoding, with a frame cap to stay within memory limits.",
+    "Built as a fully static Vite + React site deployed to GitHub Pages via GitHub Actions, so the whole tool ships without any infrastructure."
+  ],
+  "results": [
+    "A free, privacy-friendly converter and editor — files never leave the browser.",
+    "Covers conversion and editing for images, audio, video, GIF, and APNG in a single tool.",
+    "Runs entirely on GitHub Pages with zero hosting cost or server maintenance."
+  ],
+  "timeline": {
+    "start": "2026-08",
+    "end": "Present",
+    "duration": "Ongoing"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/morphkit",
+    "demo": "https://natlee.github.io/morphkit/"
+  }
+}

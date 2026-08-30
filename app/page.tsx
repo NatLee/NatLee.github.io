@@ -35,11 +35,11 @@ export default function Home() {
             </div>
 
             <div className="min-h-[80vh] p-4 md:p-8 text-gray-300">
-              {/* 500ms: enough for first paint and fonts to settle so the
+              {/* 400ms: enough for first paint and fonts to settle so the
                   visitor's eye is on the prompt when the first keystroke lands. */}
               <TerminalCommand
                 command={t('home.introCommand')}
-                startDelay={500}
+                startDelay={400}
               >
                 <TechHero onBootComplete={() => setHeroBootComplete(true)} />
               </TerminalCommand>
@@ -50,7 +50,7 @@ export default function Home() {
                     <TerminalCommand
                       path="~/projects"
                       command={t('home.projectsCommand')}
-                      startDelay={250}
+                      startDelay={200}
                       onComplete={() => setProjectsCommandComplete(true)}
                     >
                       <FeaturedProjects />

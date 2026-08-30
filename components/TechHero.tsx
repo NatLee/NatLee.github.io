@@ -57,7 +57,7 @@ export default function TechHero({ onBootComplete }: TechHeroProps) {
         clearInterval(timer)
         onBootCompleteRef.current?.()
       }
-    }, 22)
+    }, 12)
 
     const cursorTimer = setInterval(() => {
       if (!isMounted) return
@@ -81,7 +81,7 @@ export default function TechHero({ onBootComplete }: TechHeroProps) {
               <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} inline-block w-3 h-6 bg-green-400 align-middle ml-1 shadow-[0_0_10px_#4ade80]`} />
             </div>
 
-            <div className="animate-fade-in space-y-6" style={{ animationDelay: '1.1s' }}>
+            <div className="animate-fade-in space-y-6" style={{ animationDelay: '0.7s' }}>
               <div className="space-y-4">
                 <p className="text-base md:text-lg border-l-2 border-secondary/50 pl-4 py-1 text-gray-300 leading-relaxed max-w-2xl">
                   {personalInfo.bio}

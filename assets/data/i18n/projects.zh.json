@@ -1,4 +1,10 @@
 {
+  "morphkit": {
+    "subtitle": "瀏覽器內媒體轉檔與編輯工具",
+    "description": "100% 靜態網頁應用，直接在瀏覽器中轉換與編輯圖片、音訊、影片、GIF 與 APNG——無需上傳檔案、沒有後端。",
+    "longDescription": "MorphKit 是一個純前端的檔案轉換與編輯工具，完全沒有後端：所有處理皆在瀏覽器內完成，檔案不會離開使用者的裝置。支援常見圖片（PNG、JPG、WEBP、BMP、GIF、APNG、AVIF）、音訊（MP3、WAV、OGG、FLAC、M4A、AAC、OPUS）與影片（MP4、WEBM、MOV、AVI、MKV）格式互轉，並提供完整編輯功能：具圖層的圖片編輯器（筆刷、形狀、文字、裁切與去背）、音訊／影片剪輯與音量、速度調整，以及 GIF／APNG 的逐幀編輯、字幕與倒轉、回力鏢等特效。另支援批次處理打包 ZIP 下載、檔案中繼資料檢視（EXIF、位元率、時長）與剪貼簿整合。以 Vite、React 與 TypeScript 建置，透過 GitHub Actions 自動部署至 GitHub Pages。",
+    "role": "創建者與維護者"
+  },
   "telepy": {
     "subtitle": "DevOps SSH 通道管理工具",
     "description": "基於 Django 的 Web 應用，用於管理與監控反向 SSH 通道或跳板伺服器。",
