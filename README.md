@@ -1,80 +1,66 @@
-# Nat Lee Portfolio | `sudo ./view_portfolio.sh`
+# natlee.github.io
 
-A highly interactive, **Linux/Unix terminal-themed** personal portfolio website. Built with **Next.js 14**, **React 18**, and **TypeScript**, this project simulates a Zsh shell environment complete with command-line navigation, glitch effects, and a hacker-aesthetic UI.
+Nat Lee's personal site: one body of content, several looks.
 
-> "There is no place like ~"
+- **Live:** https://natlee.github.io (theme: Persimmon)
+- **Other looks:** https://natlee.github.io/valhalla/
 
-## System Features
+![Open Graph card](./public/og.png)
 
-- **Interactive Terminal**: Terminal interface with custom commands (e.g., `./intro.sh`, `ls -l --ranger-mode`).
-- **Command-Line Navigation**: Navigate using shell-style UI, keyboard shortcuts `[1]`–`[4]`, or traditional clicks.
-- **i18n (EN / 中文)**: Language switcher in the navigation bar with localized UI and content overlays.
-- **Glitch & Cyberpunk Aesthetics**: CRT animations, text glitch effects, and scanline visuals.
-- **File System Metaphor**: Projects presented as files and directories in a Ranger-style explorer.
-- **Static Generation**: Next.js App Router with static export for GitHub Pages.
-- **SEO**: Open Graph metadata, sitemap, robots.txt, and JSON-LD Person schema.
+## How it fits together
 
-## Tech Stack
+```
+content/                      ← the only place content is edited
+  personal.json  projects/*.json  experience.json  mascots.json  …
+      │
+      ├─ npx next build ──► Persimmon (static HTML, the main site)
+      │                 └─► /content/site.json
+      │                          ▲
+      └──────────── read at runtime by every Valhalla theme
+                     Aerial · Bonfire · Flat · Terminal · Stonk
+```
 
-| Component | Specification |
-|-----------|---------------|
-| **Core** | Next.js 14 (App Router), React 18, TypeScript |
-| **Shell UI** | Tailwind CSS, CSS keyframes, react-fast-marquee |
-| **Icons** | react-icons (FontAwesome, Simple Icons) |
-| **Deployment** | GitHub Pages (Static Export) |
-| **Package Manager** | npm |
+Adding a project means editing one JSON file and pushing once. The main site is rebuilt, and every other theme picks the change up the next time it loads. Themes are only rebuilt when their own code changes.
 
-## Quick Start
+## Pages (Persimmon)
 
-### Prerequisites
-- Node.js 18+
-- npm
+| Page | What it shows |
+|---|---|
+| `/` | Who I am, Telepy, selected work, open source, career eras, how I work, writing |
+| `/projects` | All projects with search and theme filters |
+| `/projects/telepy` | Case study: architecture, features, the Django → Rust benchmarks |
+| `/about` | The longer story, languages, contact |
+| `/experience` | Work, education, skills and upstream contributions; prints as a CV |
+| `/valhalla` | The other themes |
 
-### Installation
+English and Traditional Chinese, light and dark. The mascots are Tapi (from [Telepy](https://github.com/NatLee/telepy)) and Chiyo (from the 2015 Aerial page).
+
+## Valhalla
+
+| Theme | Since | Look |
+|---|---|---|
+| Aerial | 2015 | HTML5 UP "Aerial", a live wind map, Chiyo talking in the corner |
+| Bonfire | 2018 | Link tiles under a pixel bonfire |
+| Flat | 2025 | First Next.js look |
+| Terminal | 2026 | The whole site as a zsh session |
+| Stonk | 2026 | Trading-terminal experiment |
+
+How themes work and how to change one: [`themes/README.md`](./themes/README.md).
+
+## Develop
 
 ```bash
-git clone https://github.com/natlee/NatLee.github.io.git
-cd NatLee.github.io
-npm install
-npm run dev
+npm ci
+npx next dev        # http://localhost:3000
+npx next build      # lint + type-check + static export to out/
 ```
 
-Open `http://localhost:3000`.
-
-## File Structure
-
-```
-├── app/                     # Next.js App Router pages & layout
-├── assets/data/             # Source-of-truth JSON content
-│   ├── projects/            # One JSON file per project
-│   └── i18n/                # Chinese content overlays
-├── components/              # UI modules (Terminal, Navigation, etc.)
-├── contexts/                # LanguageProvider (i18n)
-├── data/                    # Typed data wrappers
-├── lib/i18n/                # i18n helpers
-├── messages/                # UI string dictionaries (en, zh-TW)
-└── public/                  # Static assets (favicon, CNAME)
-```
-
-## Scripts
+On Windows, call `npx next …` directly (`npm run build` uses Unix env syntax).
 
 ```bash
-npm run dev          # Development server
-npm run build        # Production build (static export)
-npm run build:pages  # Same as build — GitHub Pages export
-npm run lint         # ESLint
+node scripts/sync-github.mjs                 # refresh star counts (CI does this on deploy)
+node scripts/make-thumbs.mjs                 # card thumbnails after adding a project
+node scripts/valhalla/build-theme.mjs <name> # rebuild a theme after changing its code
 ```
 
-## Content & i18n
-
-- Edit `assets/data/personal.json` for bio, contact, and social links.
-- Projects: one file per project in `assets/data/projects/<id>.json`; register new ones in `data/projects-list.ts` (array order = display order).
-- UI strings live in `messages/en.json` and `messages/zh-TW.json`.
-- Chinese content overlays: `assets/data/i18n/*.zh.json`.
-
-## Deployment
-
-Pushes to `main` trigger GitHub Actions to build and deploy to GitHub Pages.
-
----
-*Built with care by Nat Lee*
+Content lives in `content/` (with JSON Schemas for editor autocomplete); UI strings in `messages/`. See [`CLAUDE.md`](./CLAUDE.md) for conventions.
