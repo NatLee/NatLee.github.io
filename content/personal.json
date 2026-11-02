@@ -1,0 +1,138 @@
+{
+  "$schema": "./schema/personal.schema.json",
+  "name": "Ying Tse Lee",
+  "nameEn": "Nat Lee",
+  "title": "Software Engineer",
+  "titleZh": "軟體工程師",
+  "email": "natlee.work@gmail.com",
+  "location": "Taipei, Taiwan",
+  "locationZh": "台灣台北",
+  "careerStartYear": 2018,
+  "avatar": "https://avatars.githubusercontent.com/u/10178964?v=4",
+  "description": "Software engineer in Taipei. Backend, data platforms and forecasting, plus a few open-source tools.",
+  "descriptionZh": "台北的軟體工程師，做後端、資料平台與預測，也維護幾個開源工具。",
+  "tagline": {
+    "lead": "An engineer who got promoted into meetings and keeps **sneaking back into the codebase**.",
+    "sub": "These days I forecast Japan's electricity prices, and build tools so I never have to open a VPN again."
+  },
+  "taglineZh": {
+    "lead": "被升進會議室、卻還是常**偷溜回 codebase** 的工程師。",
+    "sub": "最近在預測日本電價，順便寫工具，讓自己再也不用開 VPN。"
+  },
+  "now": "building power-trading systems for Japan's electricity market: market and weather data pipelines, bidding tools, spot-price forecasts.",
+  "nowZh": "替日本電力市場打造交易系統：市場與氣象資料管線、競價工具、現貨價格預測。",
+  "bio": "I started in 2018 writing crawlers and NLP models, which is a polite way of saying I downloaded a lot of the internet and asked it how it felt. Then came a few years of computer vision and medical imaging: blur detection, face and pose models, brain MRI preprocessing. After that, a sentiment-analysis platform that read more than three billion posts so nobody else had to.",
+  "bioZh": "2018 年從爬蟲和 NLP 模型開始，說好聽是做資料，說白了就是把網路下載回家，再問它心情好不好。接著做了幾年電腦視覺與醫學影像：模糊偵測、人臉與姿態模型、腦部 MRI 前處理。之後做了一套情緒分析平台，替大家讀了超過三十億則貼文。",
+  "story": [
+    "I started in 2018 writing crawlers and NLP models, which is a polite way of saying I downloaded a lot of the internet and asked it how it felt. Then came a few years of computer vision and medical imaging: blur detection, face and pose models, brain MRI preprocessing. After that, a sentiment-analysis platform that read more than three billion posts so nobody else had to.",
+    "Since 2023 I have worked on electricity: solar forecasting first, then trading strategy for the Japanese market. In practice that means data pipelines, bidding tools, price models, and a calendar that somehow filled up with meetings. JLPT N1 helps when the market publishes its rules in Japanese, and in 2026 I spent a few months in Tokyo finding out how much I still didn't know.",
+    "Python is home. Rust is where I go when something has to be fast and stay up, which is how Telepy's backend became a single Rust process. Most of my open-source tools exist because I needed them first and was too lazy to do the same job by hand twice."
+  ],
+  "storyZh": [
+    "2018 年從爬蟲和 NLP 模型開始，說好聽是做資料，說白了就是把網路下載回家，再問它心情好不好。接著做了幾年電腦視覺與醫學影像：模糊偵測、人臉與姿態模型、腦部 MRI 前處理。之後做了一套情緒分析平台，替大家讀了超過三十億則貼文。",
+    "2023 年開始做電力：先是太陽能發電預測，再來是日本市場的交易策略。實際上是資料管線、競價工具、價格模型，以及一個不知道為什麼被會議塞滿的行事曆。日文有 JLPT N1，在一個用日文公布規則的市場很好用；2026 年也在東京待了幾個月，認真體會自己還有多少不懂。",
+    "Python 是主場。需要又快又穩的時候就換 Rust，Telepy 的後端就是這樣變成一個 Rust 程序的。我的開源工具，大多是因為自己先需要，又懶得同一件事手動做兩次。"
+  ],
+  "howIWork": "Most of what I build now, I build together with AI coding agents. I decide what to make, how the pieces fit and whether it actually works. The agent writes a lot of the code, and I read every change before it ships.",
+  "howIWorkZh": "我現在做的東西，大多是和 AI coding agent 一起完成的。做什麼、怎麼拼、到底能不能用，由我決定；程式有很多是 agent 寫的，但每個改動上線前我都親自讀過。",
+  "tools": [
+    "Claude Code",
+    "Codex",
+    "Python",
+    "Rust",
+    "TypeScript"
+  ],
+  "eras": [
+    {
+      "period": "2018 – 2019",
+      "title": "Crawlers & NLP",
+      "titleZh": "爬蟲與 NLP",
+      "note": "First job. Scraped the web, trained language models, learned that regex is a lifestyle.",
+      "noteZh": "第一份工作。爬網頁、訓練語言模型，學到正規表示式是一種生活方式。"
+    },
+    {
+      "period": "2019 – 2021",
+      "title": "Computer vision",
+      "titleZh": "電腦視覺",
+      "note": "Medical imaging, retail analytics and ads on embedded boards. Stared at a lot of pixels.",
+      "noteZh": "醫學影像、零售分析、嵌入式廣告。盯著很多像素看。"
+    },
+    {
+      "period": "2021 – 2023",
+      "title": "NLP & data platforms",
+      "titleZh": "NLP 與資料平台",
+      "note": "A sentiment platform over three billion data points. Most of them were complaints.",
+      "noteZh": "處理超過三十億筆資料的情緒分析平台，大部分是抱怨。"
+    },
+    {
+      "period": "2023 – now",
+      "title": "Energy trading",
+      "titleZh": "能源交易",
+      "note": "Solar forecasts first, then power trading for Japan. The weather is now my problem.",
+      "noteZh": "先做太陽能預測，再做日本電力交易。從此天氣變成我的問題。"
+    }
+  ],
+  "languages": [
+    {
+      "name": "Mandarin",
+      "nameZh": "中文",
+      "level": "Native",
+      "levelZh": "母語",
+      "description": "Native speaker",
+      "descriptionZh": "母語使用者"
+    },
+    {
+      "name": "Japanese",
+      "nameZh": "日文",
+      "level": "JLPT N1",
+      "levelZh": "JLPT N1",
+      "description": "Professional proficiency; on assignment in Tokyo in 2026",
+      "descriptionZh": "專業程度，2026 年外派東京"
+    },
+    {
+      "name": "English",
+      "nameZh": "英文",
+      "level": "Professional",
+      "levelZh": "專業程度",
+      "description": "Professional working proficiency",
+      "descriptionZh": "專業工作程度"
+    }
+  ],
+  "socialLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/natlee",
+      "icon": "github"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/nat-lee-726525ba/",
+      "icon": "linkedin"
+    },
+    {
+      "name": "Blog",
+      "url": "https://natlee.github.io/Blog/",
+      "icon": "blog"
+    },
+    {
+      "name": "Medium",
+      "url": "https://medium.com/@natlee_",
+      "icon": "medium"
+    },
+    {
+      "name": "Kaggle",
+      "url": "https://www.kaggle.com/natlee",
+      "icon": "kaggle"
+    },
+    {
+      "name": "Hugging Face",
+      "url": "https://huggingface.co/NatLee",
+      "icon": "huggingface"
+    },
+    {
+      "name": "LeetCode",
+      "url": "https://leetcode.com/NatLee/",
+      "icon": "leetcode"
+    }
+  ]
+}

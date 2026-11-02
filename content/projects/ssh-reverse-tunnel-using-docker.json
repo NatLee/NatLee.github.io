@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "ssh-reverse-tunnel-using-docker",
+  "title": "ssh-reverse-tunnel-using-docker",
+  "subtitle": "Docker SSH Tunnel Solution",
+  "description": "Digs a hole out of an internal network with a container and a reverse SSH tunnel. Telepy's rough first draft, before it had a dashboard or manners.",
+  "longDescription": "A containerized solution for creating reverse SSH tunnels using Docker. This tool helps establish secure connections through network barriers by creating tunneling servers in isolated environments.",
+  "language": "shell",
+  "images": [],
+  "githubUrl": "https://github.com/NatLee/ssh-reverse-tunnel-using-docker",
+  "category": "DevOps",
+  "theme": "infra",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "technologies": [
+    "Docker",
+    "SSH",
+    "Shell Scripting",
+    "Network Security"
+  ],
+  "features": [
+    "Containerized tunnel creation",
+    "Network penetration capabilities",
+    "Automated setup scripts",
+    "Security isolation"
+  ],
+  "timeline": {
+    "start": "2020",
+    "end": "2021",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/ssh-reverse-tunnel-using-docker"
+  }
+}

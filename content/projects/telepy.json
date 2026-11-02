@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "telepy",
+  "title": "Telepy",
+  "subtitle": "Self-hosted web console for machines behind NAT",
+  "description": "One outbound reverse SSH tunnel per device gives you a browser terminal, files, remote desktop, a remote browser and the LAN behind it. No port forwarding, no VPN, no public IP.",
+  "longDescription": "Telepy is a self-hosted web console for the machines you can't reach directly: a server behind NAT, a Raspberry Pi at home, an office PC behind a firewall, an OpenWrt router. Each device dials out one reverse SSH tunnel to the Telepy server. From then on you work on it in the browser: terminal, files, RDP, VNC and RustDesk desktops, a Chromium that goes online from the device, and the other hosts on its network. Teams get fine-grained sharing, feature permissions, command rules, live session control and tamper-evident audit logs, and everything is scriptable through a CLI, a REST API and MCP for AI agents. It started in 2024 as a Django app and was rewritten in 2026 as a single Rust process.",
+  "language": "rust",
+  "images": [
+    "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/tunnels.png",
+    "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/terminal.png",
+    "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/desktop.png",
+    "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/browser.png",
+    "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/network.png",
+    "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/commands.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/telepy",
+  "category": "DevOps",
+  "theme": "infra",
+  "tier": "flagship",
+  "status": "In Progress",
+  "opensource": true,
+  "technologies": [
+    "Rust",
+    "axum",
+    "russh",
+    "Tokio",
+    "SQLite",
+    "Next.js",
+    "TypeScript",
+    "Docker Compose",
+    "Traefik",
+    "Apache Guacamole",
+    "KasmVNC",
+    "RustDesk",
+    "MCP"
+  ],
+  "features": [
+    "One command adds a Linux, macOS or OpenWrt device; a wizard covers Windows, Docker and appliances",
+    "Falls back to SSH inside a WebSocket on the web port when only HTTPS gets out",
+    "Web terminal with tabs, saved commands and optional recordings",
+    "File manager, RDP / VNC / RustDesk desktops and a remote Chromium that browses from the device",
+    "Scan the LAN behind a device and open a terminal or desktop on any host there",
+    "Sharing, per-feature permissions, command rules, live session takeover and tamper-evident audit logs",
+    "Passkeys, authenticator apps and alerts for new sign-ins",
+    "telepy CLI, scoped REST API tokens and an MCP endpoint for AI agents"
+  ],
+  "challenges": [
+    "Reaching devices that have no public IP, sit behind NAT or a firewall, and sometimes can only make outbound HTTPS connections.",
+    "Giving a team shared access to production machines without handing out SSH keys or losing track of who ran what.",
+    "The original Django + Redis stack ran two sshd processes per device and took 14 seconds to cold-start, which would not hold up at hundreds of devices."
+  ],
+  "solutions": [
+    "Each device runs an ordinary `ssh -R` to an SSH gateway built into Telepy. Nothing is bound on the server: the tunnel key identifies the tunnel, and both ends verify each other's host key.",
+    "Access is shared per device with view, edit and admin levels. Command rules (block, hold for approval, remind) apply to the web terminal and MCP agents alike, and removing someone ends their open sessions immediately.",
+    "The backend was rewritten as one Rust process (axum, russh, Tokio, SQLite) behind the same REST and WebSocket contracts, then switched over in a single release with a rollback path."
+  ],
+  "results": [
+    "Device connect to online on the dashboard: 2.90 s → 0.16 s, 18× faster.",
+    "Idle memory 329 MiB → 20 MiB; backend cold start 14.2 s → 0.7 s.",
+    "Dashboard API throughput 8.4× higher at 50 concurrent requests (561 → 4,726 req/s).",
+    "Released up to v2.13.0 with over 1,340 commits, documented in English, Traditional Chinese and Japanese."
+  ],
+  "timeline": {
+    "start": "2024-02",
+    "end": "Present",
+    "duration": "Ongoing"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/telepy",
+    "documentation": "https://github.com/NatLee/telepy/tree/main/docs",
+    "article": "https://github.com/NatLee/telepy/blob/main/docs/engineering/articles/2026-07-03-kasmvnc-migration-warstory.md"
+  }
+}

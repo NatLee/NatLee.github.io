@@ -1,0 +1,79 @@
+{
+  "upstream": [
+    {
+      "repo": "jeanp413/open-remote-ssh",
+      "url": "https://github.com/jeanp413/open-remote-ssh/pulls?q=is%3Apr+author%3ANatLee+is%3Amerged",
+      "count": 8,
+      "summary": {
+        "en": "8 merged PRs, including the host list in Connect to Host, known_hosts verification and ProxyJump fixes.",
+        "zh": "合併 8 個 PR，包含 Connect to Host 的主機清單、known_hosts 驗證與 ProxyJump 修正。"
+      }
+    },
+    {
+      "repo": "serengil/deepface",
+      "url": "https://github.com/serengil/deepface/pull/1396",
+      "count": 1,
+      "summary": { "en": "Batch age and gender prediction.", "zh": "批次年齡與性別預測。" }
+    },
+    {
+      "repo": "tensorflow/models",
+      "url": "https://github.com/tensorflow/models/pull/6587",
+      "count": 1,
+      "summary": { "en": "Compatibility fixes for newer TensorFlow and Python 3.", "zh": "相容新版 TensorFlow 與 Python 3 的修正。" }
+    },
+    {
+      "repo": "nipy/nipype",
+      "url": "https://github.com/nipy/nipype/pull/3107",
+      "count": 1,
+      "summary": { "en": "A docs fix in the example code.", "zh": "範例程式碼的文件修正。" }
+    }
+  ],
+  "packages": [
+    {
+      "name": "BlurGenerator",
+      "repo": "NatLee/Blur-Generator",
+      "project": "blur-generator",
+      "url": "https://pypi.org/project/BlurGenerator/",
+      "summary": { "en": "Motion, lens, Gaussian and depth-aware blur for making blurry training data.", "zh": "動態、鏡頭、高斯與景深模糊，用來產生模糊的訓練資料。" }
+    },
+    {
+      "name": "HEIC2PNG",
+      "repo": "NatLee/HEIC2PNG",
+      "project": "heic2png",
+      "url": "https://pypi.org/project/HEIC2PNG/",
+      "summary": { "en": "Turn iPhone HEIC photos into PNG from the CLI, a shell pipe or Python.", "zh": "把 iPhone 的 HEIC 照片轉成 PNG，CLI、管線或 Python 都能用。" }
+    },
+    {
+      "name": "FisheyeWarping",
+      "repo": "NatLee/fisheye-warping",
+      "project": "fisheye-warping",
+      "url": "https://pypi.org/project/FisheyeWarping/",
+      "summary": { "en": "Dewarp top-down fisheye images to panoramas and back.", "zh": "把俯視魚眼影像展開成全景，也能轉回去。" }
+    },
+    {
+      "name": "EagleWrapper",
+      "repo": "NatLee/Eagle-Wrapper",
+      "project": "eagle-wrapper",
+      "url": "https://pypi.org/project/EagleWrapper/",
+      "summary": { "en": "A Python wrapper for the Eagle image manager's API.", "zh": "圖片管理軟體 Eagle 的 Python API 封裝。" }
+    },
+    {
+      "name": "ShowSys",
+      "repo": "NatLee/show-system-info",
+      "url": "https://pypi.org/project/ShowSys/",
+      "summary": { "en": "Print system information from Python or the shell.", "zh": "從 Python 或 shell 印出系統資訊。" }
+    },
+    {
+      "name": "django-simple-third-party-jwt",
+      "repo": "NatLee/Django-Simple-3rd-Party-JWT",
+      "url": "https://pypi.org/project/django-simple-third-party-jwt/",
+      "summary": { "en": "Third-party login and JWT in one Django app.", "zh": "在同一個 Django 應用裡結合第三方登入與 JWT。" }
+    },
+    {
+      "name": "django-simple-api-proxy",
+      "repo": "NatLee/Django-Simple-API-Proxy",
+      "url": "https://pypi.org/project/django-simple-api-proxy/",
+      "summary": { "en": "Proxy any API through a Django server.", "zh": "透過 Django 伺服器代理任何 API。" }
+    }
+  ]
+}

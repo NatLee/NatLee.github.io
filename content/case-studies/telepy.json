@@ -1,0 +1,101 @@
+{
+  "tagline": {
+    "en": "Reach every device from your browser.",
+    "zh": "從瀏覽器連到每一台裝置。"
+  },
+  "banner": "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/tunnels.png",
+  "stats": [
+    { "value": "0.16 s", "label": { "en": "Device connect to online (Django: 2.90 s)", "zh": "裝置連線到顯示上線（Django 版 2.90 s）" } },
+    { "value": "20 MiB", "label": { "en": "Idle memory (Django: 329 MiB)", "zh": "閒置記憶體（Django 版 329 MiB）" } },
+    { "value": "0.7 s", "label": { "en": "Backend cold start (Django: 14.2 s)", "zh": "後端冷啟動（Django 版 14.2 s）" } },
+    { "value": "v2.13", "label": { "en": "1,340+ commits since 2024", "zh": "2024 至今 1,340+ 個 commit" } }
+  ],
+  "problem": {
+    "en": [
+      "The machines I needed to reach kept ending up somewhere unreachable: a server behind NAT, a Raspberry Pi at home, an office PC behind a firewall, a router that only lets HTTPS out.",
+      "Port forwarding needs a router you control, a VPN needs software on every laptop, and both need someone to maintain them. Every one of those devices could already reach the internet, judging by how often they download updates. So Telepy turns the connection around: the device dials out, and you work on it from the browser."
+    ],
+    "zh": [
+      "我需要連的機器，總是待在連不到的地方：NAT 後面的伺服器、家裡的樹莓派、防火牆後的辦公室電腦、只放 HTTPS 出去的路由器。",
+      "開 port forwarding 要能管路由器，VPN 要每台筆電都裝軟體，兩者都得有人維護。但這些裝置自己上網都沒問題，看它們多常下載更新就知道。所以 Telepy 把連線方向倒過來：裝置往外撥，你在瀏覽器裡操作它。"
+    ]
+  },
+  "architecture": {
+    "browser": { "en": "Your browser", "zh": "你的瀏覽器" },
+    "server": { "en": "Telepy server", "zh": "Telepy 伺服器" },
+    "parts": [
+      { "name": "Traefik", "note": { "en": "front door, HTTPS", "zh": "入口與 HTTPS" } },
+      { "name": "Next.js", "note": { "en": "web interface", "zh": "網頁介面" } },
+      { "name": "Rust backend", "note": { "en": "REST · WebSockets · SSH gateway · monitor · SQLite", "zh": "REST · WebSocket · SSH gateway · 監控 · SQLite" } },
+      { "name": "guacd", "note": { "en": "RDP / VNC engine", "zh": "RDP / VNC 引擎" } },
+      { "name": "kasm-browser", "note": { "en": "Chromium for remote browsing", "zh": "遠端瀏覽用的 Chromium" } }
+    ],
+    "tunnel": { "en": "reverse SSH, dialed out by the device", "zh": "反向 SSH，由裝置往外撥" },
+    "device": { "en": "Device", "zh": "裝置" },
+    "lan": { "en": "LAN hosts behind it", "zh": "它後面的區網主機" }
+  },
+  "featureGroups": [
+    {
+      "title": { "en": "Connect devices", "zh": "連上裝置" },
+      "image": "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/create.png",
+      "items": [
+        { "en": "One command on Linux, macOS and OpenWrt, followed live until Telepy can log in", "zh": "Linux、macOS、OpenWrt 貼一行指令，頁面即時跟到 Telepy 能登入為止" },
+        { "en": "A step-by-step wizard with ready-made scripts for Windows, Docker and appliances", "zh": "Windows、Docker 與各種設備有逐步精靈和現成腳本" },
+        { "en": "SSH inside a WebSocket on the web port when only HTTPS gets out", "zh": "只有 HTTPS 出得去時，把 SSH 包進 WebSocket 走網頁埠" },
+        { "en": "Health, per-hop latency and search that understands status:down or label:env=prod", "zh": "健康狀態、每一跳延遲，搜尋看得懂 status:down 或 label:env=prod" }
+      ]
+    },
+    {
+      "title": { "en": "Work on a device", "zh": "操作裝置" },
+      "image": "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/terminal.png",
+      "items": [
+        { "en": "Web terminal with tabs, Nerd Fonts, a toolbox of saved commands and recordings", "zh": "網頁終端機：分頁、Nerd Fonts、常用指令工具箱、操作錄影" },
+        { "en": "File manager with an editor that never saves half a file", "zh": "檔案管理，內建的編輯器不會只存一半" },
+        { "en": "RDP and VNC through the tunnel, or RustDesk in the tab", "zh": "透過隧道開 RDP、VNC，或直接在分頁裡用 RustDesk" },
+        { "en": "A real Chromium that goes online from the device, for admin pages that only open on that network", "zh": "從裝置那端上網的 Chromium，專門開那些只有內網看得到的管理頁" }
+      ]
+    },
+    {
+      "title": { "en": "Teams and control", "zh": "團隊與管控" },
+      "image": "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/commands.png",
+      "items": [
+        { "en": "View, edit or admin sharing with expiry; removing someone ends their sessions at once", "zh": "檢視、編輯、管理三種分享層級，可設到期；移除權限的當下就切斷連線" },
+        { "en": "Command rules that block, hold for approval or remind, for people and MCP agents alike", "zh": "指令規則可以封鎖、等待核准或提醒，對人和 MCP agent 一視同仁" },
+        { "en": "Watch a live terminal, hand over the keyboard, or end a session", "zh": "即時看別人的終端機、交出鍵盤、或結束連線" },
+        { "en": "Tamper-evident audit logs, recordings and sign-in history", "zh": "防竄改的稽核紀錄、錄影與登入歷史" }
+      ]
+    },
+    {
+      "title": { "en": "Automate", "zh": "自動化" },
+      "image": "https://raw.githubusercontent.com/NatLee/telepy/main/docs/screenshots/en/activity.png",
+      "items": [
+        { "en": "telepy CLI: ls, ssh, exec on twenty devices at once, cp", "zh": "telepy CLI：ls、ssh、一次對二十台 exec、cp" },
+        { "en": "REST API with scoped personal tokens, device limits, expiry and a call log", "zh": "REST API：可限定範圍、裝置與期限的個人 token，每次呼叫都有紀錄" },
+        { "en": "MCP endpoint so Claude Code or Cursor can work on devices, every call logged", "zh": "MCP 端點，讓 Claude Code 或 Cursor 操作裝置，每次呼叫都記錄" }
+      ]
+    }
+  ],
+  "benchmark": {
+    "intro": {
+      "en": "In October 2026 the Django backend was rewritten as one Rust process behind the same API. Measured side by side on the same machine and the same device, right after the switch:",
+      "zh": "2026 年 10 月，Django 後端在同一套 API 契約下改寫成單一 Rust 程序。切換後在同一台機器、同一個裝置上並排量測："
+    },
+    "rows": [
+      { "metric": { "en": "Device connect → online on the dashboard", "zh": "裝置連線 → 儀表板顯示上線" }, "before": "2.90 s", "after": "0.16 s", "change": "18.1×" },
+      { "metric": { "en": "Device SSH authentication", "zh": "裝置 SSH 驗證" }, "before": "54 ms", "after": "12 ms", "change": "4.5×" },
+      { "metric": { "en": "Dashboard API, 50 concurrent", "zh": "儀表板 API，50 並行" }, "before": "561 req/s", "after": "4,726 req/s", "change": "8.4×" },
+      { "metric": { "en": "Web terminal throughput", "zh": "網頁終端機吞吐量" }, "before": "35.1 MB/s", "after": "96.9 MB/s", "change": "2.8×" },
+      { "metric": { "en": "Backend cold start", "zh": "後端冷啟動" }, "before": "14.2 s", "after": "0.7 s", "change": "20.1×" },
+      { "metric": { "en": "Memory at idle", "zh": "閒置記憶體" }, "before": "329 MiB", "after": "20 MiB", "change": "16.5×" },
+      { "metric": { "en": "Processes per connected device", "zh": "每個已連線裝置的程序數" }, "before": "2 sshd + sampler", "after": "0 (one Tokio task)", "change": "—" }
+    ],
+    "source": "https://github.com/NatLee/telepy/blob/main/docs/benchmarks.md"
+  },
+  "reading": [
+    { "title": { "en": "Benchmarks: Django vs Rust", "zh": "效能測試：Django 對 Rust" }, "url": "https://github.com/NatLee/telepy/blob/main/docs/benchmarks.md" },
+    { "title": { "en": "The Rust migration plan", "zh": "改寫成 Rust 的規劃" }, "url": "https://github.com/NatLee/telepy/blob/main/docs/engineering/rust-migration-plan.md" },
+    { "title": { "en": "I just wanted a remote browser: a KasmVNC migration war story (zh)", "zh": "我只是想遠端開個瀏覽器：KasmVNC 遷移踩雷實錄" }, "url": "https://github.com/NatLee/telepy/blob/main/docs/engineering/articles/2026-07-03-kasmvnc-migration-warstory.md" },
+    { "title": { "en": "Telepy in pictures", "zh": "圖解 Telepy" }, "url": "https://github.com/NatLee/telepy/blob/main/docs/visual-guide.md" },
+    { "title": { "en": "CLI guide", "zh": "CLI 使用說明" }, "url": "https://github.com/NatLee/telepy/blob/main/docs/cli.md" }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "title": { "en": "I just wanted a remote browser", "zh": "我只是想遠端開個瀏覽器" },
+    "description": {
+      "en": "A KasmVNC migration war story: seven commits, forty-five tests and several rounds of “this time it really works”. In Chinese.",
+      "zh": "KasmVNC 遷移踩雷實錄：七個 commit、四十五個測試，與若干次「這次真的好了」。"
+    },
+    "source": "Telepy · 2026",
+    "url": "https://github.com/NatLee/telepy/blob/main/docs/engineering/articles/2026-07-03-kasmvnc-migration-warstory.md"
+  },
+  {
+    "title": { "en": "Benchmarks: Django vs Rust", "zh": "效能測試：Django 對 Rust" },
+    "description": {
+      "en": "Two backends side by side on the same machine, before and after Telepy's rewrite.",
+      "zh": "同一台機器上並排跑兩套後端，Telepy 改寫前後的對照。"
+    },
+    "source": "Telepy · 2026",
+    "url": "https://github.com/NatLee/telepy/blob/main/docs/benchmarks.md"
+  },
+  {
+    "title": { "en": "Blog", "zh": "部落格" },
+    "description": { "en": "My long-running personal blog.", "zh": "寫了很多年的個人部落格。" },
+    "source": "natlee.github.io/Blog",
+    "url": "https://natlee.github.io/Blog/"
+  },
+  {
+    "title": { "en": "Medium", "zh": "Medium" },
+    "description": { "en": "Technical write-ups.", "zh": "技術文章。" },
+    "source": "@natlee_",
+    "url": "https://medium.com/@natlee_"
+  }
+]

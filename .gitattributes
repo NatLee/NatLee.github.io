@@ -1,0 +1,27 @@
+# Linux is the reference platform for this project (it is what the GitHub Pages
+# workflow builds on), so text files are LF in the repository *and* in the
+# working tree on every OS.
+#
+# `eol=lf` overrides each developer's core.autocrlf, which is what previously
+# let a Windows checkout rewrite every file to CRLF behind git's back: the
+# blobs stayed LF, the working tree went CRLF, and with core.safecrlf=true any
+# file written with LF then failed `git add` outright.
+* text=auto eol=lf
+
+# Binary assets: never convert, never diff as text. `text=auto` already detects
+# these by content, but being explicit means a corrupt-looking heuristic call
+# can never mangle them.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.avif binary
+*.ico  binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.pdf binary
+*.mp4 binary
+*.zip binary

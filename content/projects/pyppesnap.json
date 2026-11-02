@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "pyppesnap",
+  "title": "PyppeSnap",
+  "subtitle": "Website Screenshot Tool",
+  "description": "Takes a screenshot of a website with Pyppeteer. Like pressing Print Screen, with more dependencies.",
+  "longDescription": "A powerful website screenshot tool built with Pyppeteer that captures high-quality snapshots of web pages. This tool is useful for web monitoring, testing, and documentation purposes.",
+  "language": "python",
+  "images": [
+    "https://i.imgur.com/JLe9bYi.png"
+  ],
+  "githubUrl": "https://github.com/NatLee/PyppeSnap",
+  "category": "Web Automation",
+  "theme": "libraries",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "technologies": [
+    "Python",
+    "Pyppeteer",
+    "Web Scraping",
+    "Automation"
+  ],
+  "features": [
+    "High-quality screenshots",
+    "Batch processing",
+    "Customizable options",
+    "Headless browser automation"
+  ],
+  "challenges": [
+    "Navigation failure if URLs do not explicitly start with 'http'",
+    "Need for snapshots to be base64-encoded for seamless web framework integration",
+    "Requirement to support multiple export formats like image and PDF"
+  ],
+  "solutions": [
+    "Built a tool leveraging Pyppeteer for automated website snapshot capture",
+    "Implemented dedicated functions for converting both website images and PDFs into base64 strings",
+    "Created a CLI mode to facilitate rapid testing and parameter verification"
+  ],
+  "results": [
+    "A functional Python package published on PyPI",
+    "Successful delivery of website snapshots in base64 format for easy use in web APIs",
+    "Provision of a working example demonstrating integration with web frameworks"
+  ],
+  "timeline": {
+    "start": "2020",
+    "end": "2021",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/PyppeSnap"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "ip-find-chrome-extension",
+  "title": "IP-FIND-ChromeExtension",
+  "subtitle": "Network IP Discovery Tool",
+  "description": "One click and Chrome tells you your IP. A whole extension for something you could search for; in my defence, it is faster.",
+  "longDescription": "A Chrome extension that quickly identifies and displays the current network's IP address. This tool is useful for network diagnostics and understanding your current network configuration.",
+  "language": "javascript",
+  "images": [],
+  "githubUrl": "https://github.com/NatLee/IP-FIND-ChromeExtension",
+  "category": "Browser Extension",
+  "theme": "web",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "technologies": [
+    "JavaScript",
+    "Chrome Extension API",
+    "Network APIs",
+    "HTML/CSS"
+  ],
+  "features": [
+    "Real-time IP detection",
+    "Network information display",
+    "Easy-to-use interface",
+    "Quick access from browser"
+  ],
+  "timeline": {
+    "start": "2018",
+    "end": "2019",
+    "duration": "1 year"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/IP-FIND-ChromeExtension"
+  }
+}

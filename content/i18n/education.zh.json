@@ -1,0 +1,11 @@
+{
+  "ntust-master": {
+    "degree": "碩士",
+    "major": "資訊工程"
+  },
+  "ntou-bachelor": {
+    "degree": "學士",
+    "major": "海洋環境資訊",
+    "minor": "資訊工程"
+  }
+}

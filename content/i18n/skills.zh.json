@@ -1,0 +1,55 @@
+{
+  "programming": {
+    "name": "程式語言",
+    "skills": {
+      "Python": "後端開發、資料分析與機器學習的主要語言",
+      "JavaScript": "前端開發與 API 串接",
+      "Java": "企業應用程式開發",
+      "TypeScript": "具型別安全的 JavaScript 開發"
+    }
+  },
+  "backend": {
+    "name": "後端框架",
+    "skills": {
+      "Django": "開發 REST API 的主要 Web 框架",
+      "FastAPI": "高效能 API 開發",
+      "Flask": "輕量 Web 應用與微服務"
+    }
+  },
+  "ai-ml": {
+    "name": "AI／ML 框架",
+    "skills": {
+      "PyTorch": "深度學習模型開發與部署",
+      "TensorFlow": "機器學習與類神經網路開發",
+      "PaddlePaddle": "NLP 與電腦視覺應用",
+      "OpenCV": "電腦視覺與影像處理"
+    }
+  },
+  "database": {
+    "name": "資料庫",
+    "skills": {
+      "MySQL": "Web 應用的主要關聯式資料庫",
+      "Elasticsearch": "大型資料集的搜尋引擎與分析",
+      "MongoDB": "用於彈性資料儲存的 NoSQL 資料庫",
+      "Redis": "快取與 session 管理"
+    }
+  },
+  "devops": {
+    "name": "DevOps 與工具",
+    "skills": {
+      "Docker": "容器化與部署",
+      "Kubernetes": "容器編排",
+      "Airflow": "工作流程編排與資料管線",
+      "Git": "版本控制與協作"
+    }
+  },
+  "specialization": {
+    "name": "專業領域",
+    "skills": {
+      "Natural Language Processing": "情緒分析、文本分類與語言模型",
+      "Computer Vision": "影像處理、物件偵測與姿態估計",
+      "Time Series Analysis": "時序資料的預測與模式辨識",
+      "MLOps": "模型部署、監控與生命週期管理"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+[
+  {
+    "id": "aerial",
+    "name": "Aerial",
+    "since": "2015",
+    "stack": "HTML5 UP · jQuery",
+    "cover": "/images/valhalla/aerial.jpg",
+    "thesis": {
+      "en": "A mountain view, a live wind map and Chiyo in the corner, talking to nobody in particular. The orange started here.",
+      "zh": "山景、即時風場圖，還有角落那個對著空氣講話的千代。橘色從這裡開始。"
+    },
+    "note": {
+      "en": "Back then, a homepage was a background image and three icons. It still is, honestly.",
+      "zh": "當年的首頁就是一張背景加三顆圖示。說實話，現在也差不多。"
+    }
+  },
+  {
+    "id": "bonfire",
+    "name": "Bonfire",
+    "since": "2018",
+    "stack": "HTML · jQuery",
+    "cover": "/images/valhalla/bonfire.jpg",
+    "thesis": {
+      "en": "Link tiles under a pixel bonfire. Rest here, then go read the projects.",
+      "zh": "像素篝火下的一格格連結。在這裡休息一下，再去看作品。"
+    },
+    "note": {
+      "en": "Lasted seven years, which makes it the most stable thing I have ever shipped.",
+      "zh": "撐了七年，是我做過最穩定的東西。"
+    }
+  },
+  {
+    "id": "flat",
+    "name": "Flat",
+    "since": "2025",
+    "stack": "Next.js · Tailwind",
+    "cover": "/images/valhalla/flat.jpg",
+    "thesis": {
+      "en": "The first Next.js look: a warm gradient, a big name and the JSON data layer every later look kept.",
+      "zh": "第一個 Next.js 外觀：暖色漸層、很大的名字，還有之後每個外觀都沿用的 JSON 資料層。"
+    },
+    "note": { "en": "", "zh": "" }
+  },
+  {
+    "id": "terminal",
+    "name": "Terminal",
+    "since": "2026",
+    "stack": "Next.js · Tailwind",
+    "cover": "/images/valhalla/terminal.jpg",
+    "thesis": {
+      "en": "The whole site as a zsh session: typed commands, a ranger file browser and project pages opened in vim.",
+      "zh": "整個網站是一個 zsh 工作階段：打字的指令、ranger 檔案瀏覽，作品頁用 vim 打開。"
+    },
+    "note": {
+      "en": "Type help in the terminal. It still answers, and it still refuses sudo.",
+      "zh": "在終端機打 help，它還會回；打 sudo，它還是不給。"
+    }
+  },
+  {
+    "id": "stonk",
+    "name": "Stonk",
+    "since": "2026",
+    "stack": "Next.js · Recharts",
+    "cover": "/images/valhalla/stonk.jpg",
+    "side": true,
+    "thesis": {
+      "en": "The portfolio as a trading terminal, with candlesticks, an order book and a buy button that buys nothing.",
+      "zh": "把作品集做成交易終端機：有 K 線、委託簿，還有一顆什麼都買不到的下單鍵。"
+    },
+    "note": {
+      "en": "Built two days after Terminal, as an experiment. It never went live, which in hindsight was sound risk management.",
+      "zh": "Terminal 上線兩天後做的實驗，最後沒有上線。事後看來，這是很好的風險控管。"
+    }
+  }
+]

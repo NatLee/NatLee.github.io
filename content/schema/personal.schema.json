@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Personal",
+  "description": "個人資料（content/personal.json）。中文欄位放在同一個檔案、以 Zh 結尾，沒寫就用英文。",
+  "type": "object",
+  "required": ["name", "nameEn", "title", "email", "location", "careerStartYear", "avatar", "description", "tagline", "now", "story", "howIWork", "eras", "languages", "socialLinks"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string", "description": "全名（Ying Tse Lee）" },
+    "nameEn": { "type": "string", "description": "顯示用的名字（Nat Lee）" },
+    "title": { "type": "string", "description": "職稱，LinkedIn 式的謙虛寫法" },
+    "titleZh": { "type": "string" },
+    "email": { "type": "string", "format": "email" },
+    "location": { "type": "string" },
+    "locationZh": { "type": "string" },
+    "careerStartYear": { "type": "integer" },
+    "avatar": { "type": "string", "format": "uri" },
+    "description": { "type": "string", "description": "搜尋結果與分享預覽用的一句話，保持謙虛。" },
+    "descriptionZh": { "type": "string" },
+    "tagline": { "$ref": "#/definitions/tagline", "description": "首屏的自我介紹。lead 裡用 **雙星號** 標出強調的片語。" },
+    "taglineZh": { "$ref": "#/definitions/tagline" },
+    "now": { "type": "string", "description": "首屏 now.txt 的內容" },
+    "nowZh": { "type": "string" },
+    "bio": { "type": "string" },
+    "bioZh": { "type": "string" },
+    "story": { "type": "array", "items": { "type": "string" }, "description": "About 頁的故事段落，可以自嘲。" },
+    "storyZh": { "type": "array", "items": { "type": "string" } },
+    "howIWork": { "type": "string" },
+    "howIWorkZh": { "type": "string" },
+    "tools": { "type": "array", "items": { "type": "string" } },
+    "eras": {
+      "type": "array",
+      "description": "首頁的經歷時間軸（不寫公司名稱）",
+      "items": {
+        "type": "object",
+        "required": ["period", "title", "note"],
+        "properties": {
+          "period": { "type": "string" },
+          "title": { "type": "string" },
+          "titleZh": { "type": "string" },
+          "note": { "type": "string" },
+          "noteZh": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "level"],
+        "properties": {
+          "name": { "type": "string" },
+          "nameZh": { "type": "string" },
+          "level": { "type": "string" },
+          "levelZh": { "type": "string" },
+          "description": { "type": "string" },
+          "descriptionZh": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "socialLinks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "url", "icon"],
+        "properties": {
+          "name": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "icon": { "enum": ["github", "linkedin", "medium", "blog", "kaggle", "leetcode", "huggingface"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "tagline": {
+      "type": "object",
+      "required": ["lead", "sub"],
+      "properties": { "lead": { "type": "string" }, "sub": { "type": "string" } },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,255 @@
+[
+  {
+    "id": "star-trade-manager",
+    "title": "Deputy Manager",
+    "company": "Star Trade Co., Ltd.",
+    "companyId": "star-trade",
+    "companyLogo": "",
+    "group": "HD Renewables Co., Ltd.",
+    "parentCompany": "HD Renewables Co., Ltd.",
+    "roleType": "transfer",
+    "department": "Overseas Operations & Strategy Div. Systems & Data Analytics Dept.",
+    "location": "Taipei, Taiwan",
+    "assignment": {
+      "location": "Tokyo, Japan",
+      "start": "2026.05",
+      "end": "2026.08",
+      "note": "On-site in Tokyo working directly with the contracted vendors — running requirement design and planning sessions, and supporting live power-trading bids in the Japanese market."
+    },
+    "start": "2026.05",
+    "end": "Present",
+    "summary": "Transferred within the HD Renewables group to its subsidiary Star Trade while retaining the Deputy Manager role. Leads engineering for overseas power trading — market data, bidding systems, and the planning of automated trading modules — including a Tokyo posting to drive vendor requirement design and support live bidding.",
+    "responsibilities": [
+      "Lead development of overseas power-trading and market-data systems together with the team",
+      "Build bidding and tender systems for overseas electricity markets",
+      "Plan and architect automated trading modules",
+      "Stationed in Tokyo to work face-to-face with contracted vendors, gathering requirements and defining system scope and specifications",
+      "Turn vendor discussions into design and delivery plans, then track them through to implementation",
+      "Support power-trading bidding in the Japanese market on site, coordinating between traders and engineering",
+      "Drive the trading data platform's evolution across the corporate group"
+    ],
+    "techStack": [
+      "Python", "Docker", "PostgreSQL", "Airflow", "Time Series Analysis", "Automated Trading", "System Design", "Vendor Management", "Requirements Engineering"
+    ],
+    "achievements": [
+      "Transferred within the HD Renewables group to Star Trade while retaining the Deputy Manager role",
+      "Completed a three-month Tokyo assignment (2026.05–2026.08) as the on-site technical counterpart to the vendors, aligning requirements and system design directly with them",
+      "Supported Japanese power-trading bids on site, shortening the feedback loop between the trading desk and the engineering team"
+    ]
+  },
+  {
+    "id": "hd-renewables-manager",
+    "title": "Deputy Manager",
+    "company": "HD Renewables Co., Ltd.",
+    "companyId": "hd-renewables",
+    "companyLogo": "",
+    "roleType": "promotion",
+    "department": "Data Analytics Dept., International Power Trading Division",
+    "location": "Taipei, Taiwan",
+    "start": "2026.03",
+    "end": "2026.05",
+    "summary": "Moved onto the management track as Deputy Manager and kicked off the power-trading data platform — a centralized system that ingests Japan's electricity market and weather data to underpin trading and forecasting.",
+    "responsibilities": [
+      "Designed and led development of a power-trading data platform from the ground up",
+      "Built ingestion for Japanese electricity-market data (JEPX) and meteorological data feeds",
+      "Defined the data model and architecture powering price forecasting and trading analytics",
+      "Coordinated the engineering team while shaping the platform roadmap"
+    ],
+    "techStack": [
+      "Python", "Docker", "PostgreSQL", "Airflow", "Elasticsearch", "Time Series Analysis", "System Design"
+    ],
+    "achievements": [
+      "Transitioned from an individual contributor to a management role",
+      "Launched the foundation of the trading data platform consolidating market and weather data"
+    ]
+  },
+  {
+    "id": "hd-renewables-principal",
+    "title": "Principal Engineer",
+    "company": "HD Renewables Co., Ltd.",
+    "companyId": "hd-renewables",
+    "companyLogo": "",
+    "roleType": "promotion",
+    "department": "Data Analytics Dept., International Power Trading Division",
+    "location": "Taipei, Taiwan",
+    "start": "2025.09",
+    "end": "2026.03",
+    "summary": "Promoted to Principal Engineer, taking technical ownership of the international power-trading strategy stack — the spot-price prediction models and the data pipelines feeding the Japan and Australia trading desks.",
+    "responsibilities": [
+      "Led development of spread and spot-price prediction models for the Japan and Australia power markets",
+      "Set the technical direction for the trading data pipeline and model-serving infrastructure",
+      "Mentored engineers and reviewed designs across the trading platform",
+      "Partnered with traders to turn market requirements into production tooling"
+    ],
+    "techStack": [
+      "Python", "Deep Learning", "Time Series Analysis", "Docker", "Django", "Elasticsearch", "MLOps"
+    ],
+    "achievements": [
+      "Promoted from Senior Engineer to Principal Engineer within the International Power Trading Division",
+      "Hardened the spot-market prediction pipeline into a reliable daily production service"
+    ]
+  },
+  {
+    "id": "hd-renewables-international",
+    "title": "Senior Engineer",
+    "company": "HD Renewables Co., Ltd.",
+    "companyId": "hd-renewables",
+    "companyLogo": "",
+    "roleType": "transfer",
+    "department": "Data Analytics Dept., International Power Trading Division",
+    "location": "Taipei, Taiwan",
+    "start": "2024.12",
+    "end": "2025.09",
+    "summary": "Transferred to the International Power Trading Division, focusing on developing power trading strategies for Japan and Australia markets. Developing spread strategy models to predict spot market electricity prices and assist traders in decision-making.",
+    "responsibilities": [
+      "Develop international power trading strategies for Japan and Australia markets",
+      "Create spread strategy models for predicting spot market electricity prices",
+      "Support traders with data-driven decision-making tools",
+      "Apply technical solutions to real trading scenarios to support overseas market expansion"
+    ],
+    "techStack": [
+      "Python", "Deep Learning", "Docker", "Django", "Elasticsearch", "Time Series Analysis", "MLOps"
+    ],
+    "achievements": [
+      "Developed spot market prediction model for electronic trading strategies"
+    ]
+  },
+  {
+    "id": "hd-renewables-smart",
+    "title": "Senior Engineer",
+    "company": "HD Renewables Co., Ltd.",
+    "companyId": "hd-renewables",
+    "companyLogo": "",
+    "department": "Smart Services Division",
+    "location": "Taipei, Taiwan", 
+    "start": "2023.04",
+    "end": "2024.12",
+    "summary": "Developed solar power prediction and display systems, optimized power matching algorithms, and integrated various platforms with advanced authentication systems.",
+    "responsibilities": [
+      "Developed time series models using Python and PyTorch to predict solar power generation for Tainan FamilyMart Pingfeng store energy storage demonstration site",
+      "Implemented scheduled data extraction and processing using Airflow, pushing load and generation data to display dashboards",
+      "Optimized power matching algorithms in collaboration with ITRI, reducing computational complexity from O(N⁴) to O(N³) using MaxFlow algorithm",
+      "Integrated optimized algorithms into power matching platform backend using Django REST APIs",
+      "Implemented asynchronous computing with token system and email notifications for better UX",
+      "Developed third-party login (SSO) functionality integrating Microsoft Azure AD and Google login"
+    ],
+    "techStack": [
+      "Python", "PyTorch", "Django", "MySQL", "Airflow", "Docker", "Time Series Analysis", "MLOps", "SSO", "REST API"
+    ],
+    "achievements": [
+      "Successfully deployed solar power prediction system for demonstration site",
+      "Improved algorithm efficiency by 25% through optimization",
+      "Enhanced platform security and user experience with SSO integration"
+    ]
+  },
+  {
+    "id": "big-data",
+    "title": "Senior Software Engineer", 
+    "company": "Big Data Co., Ltd.",
+    "companyId": "big-data",
+    "companyLogo": "",
+    "department": "Technology Center",
+    "location": "Taipei, Taiwan",
+    "start": "2021.12",
+    "end": "2023.04",
+    "summary": "Developed NLP and data platforms using Python and deep learning frameworks. Built sentiment analysis platform processing over 3 billion data points with 30% accuracy improvement. Led backend development for dashboard projects and CDP platforms.",
+    "responsibilities": [
+      "Developed sentiment analysis platform using deep learning frameworks, improving accuracy by 30%",
+      "Built distributed services using Docker to process large-scale daily crawler data stored in Elasticsearch",
+      "Established automated DevOps for public opinion data analysis and push notification mechanisms",
+      "Developed internal data management and annotation tools",
+      "Created various public opinion monitoring dashboards based on different business requirements",
+      "Implemented CDP platform using FastAPI and Elasticsearch for cross-website user identification services"
+    ],
+    "techStack": [
+      "Python", "PaddlePaddle", "PyTorch", "Django", "FastAPI", "Elasticsearch", "MySQL", "Docker", "Kubernetes", "RabbitMQ", "Redis", "Airflow"
+    ],
+    "achievements": [
+      "Processed over 3 billion data points through sentiment analysis platform",
+      "Achieved 30% improvement in model accuracy compared to previous solutions",
+      "Successfully deployed scalable microservices architecture handling high API traffic"
+    ]
+  },
+  {
+    "id": "taiwan-ca",
+    "title": "Senior Software Engineer",
+    "company": "TAIWAN-CA, Inc.",
+    "companyId": "taiwan-ca",
+    "companyLogo": "",
+    "department": "Security Product Development Division", 
+    "location": "Taipei, Taiwan",
+    "start": "2021.09",
+    "end": "2021.11",
+    "summary": "Worked on cybersecurity products, focusing on CA certificate applications and writing comprehensive test cases for security systems.",
+    "responsibilities": [
+      "Developed test cases for cybersecurity-related products",
+      "Worked on CA certificate applications and implementations",
+      "Ensured product quality through comprehensive testing procedures"
+    ],
+    "techStack": [
+      "Python", "Java", "Information Security", "Cryptography", "Certificate Management", "Test Case Development"
+    ],
+    "achievements": [
+      "Developed comprehensive test suite for TSA (Time Stamping Authority)",
+      "Successfully implemented certificate-based security products"
+    ]
+  },
+  {
+    "id": "infortrend",
+    "title": "Image Processing Software Engineer",
+    "company": "Infortrend Technology, Inc.",
+    "companyId": "infortrend",
+    "companyLogo": "",
+    "department": "R&D Department",
+    "location": "New Taipei, Taiwan",
+    "start": "2019.10",
+    "end": "2021.03",
+    "summary": "Specialized in computer vision and deep learning solutions. Developed AI applications for medical imaging, retail analytics, and embedded advertising systems using edge computing devices.",
+    "responsibilities": [
+      "Applied Docker virtualization technology to simplify development processes",
+      "Developed automated MRI/PET brain medical image AC-PC correction preprocessing solutions",
+      "Created AI image recognition applications on Nvidia Jetson edge devices with system integration",
+      "Developed fisheye camera conversion algorithms for human pose recognition applications",
+      "Built and integrated AI product frontend and backend architectures"
+    ],
+    "techStack": [
+      "Python", "OpenCV", "Docker", "Deep Learning", "Computer Vision", "Nvidia Jetson", "SQLite", "jQuery", "Edge Computing", "Medical Imaging"
+    ],
+    "achievements": [
+      "Developed AI solution for Alzheimer's disease diagnosis using MRI/PET brain image processing",
+      "Created human pose recognition system for fisheye cameras improving narrow space monitoring", 
+      "Built heat map detection system for retail stores optimizing product exposure",
+      "Implemented embedded advertising recommendation system detecting crowd demographics"
+    ]
+  },
+  {
+    "id": "leopard-mobile",
+    "title": "Software and AI Engineer",
+    "company": "Leopard Mobile, Ltd.",
+    "companyId": "leopard-mobile",
+    "companyLogo": "",
+    "department": "Tool Product Division",
+    "location": "Taipei, Taiwan", 
+    "start": "2018.07",
+    "end": "2019.10",
+    "summary": "First professional role developing web scraping and data analysis platforms. Built NLP models, voice recognition systems, and blockchain-related applications using various technologies.",
+    "responsibilities": [
+      "Developed frontend and backend web applications and microservices for blockchain trend products",
+      "Created web scraping programs for major social media platforms (Twitter, Facebook, Telegram) using Selenium",
+      "Built and managed public opinion analysis databases using MySQL",
+      "Developed MySQL database remote backup and synchronization systems",
+      "Created AI content classification technology for voice assistants", 
+      "Built AI Chinese reading comprehension online services",
+      "Developed text and speech annotation platform systems"
+    ],
+    "techStack": [
+      "Python", "JavaScript", "Django", "Flask", "MySQL", "Selenium", "Docker", "NLP", "Machine Learning", "Web Scraping", "Deep Learning"
+    ],
+    "achievements": [
+      "Built ICO sentiment analysis platform 'Rating Token & Coin Master' with integrated NLP models",
+      "Developed Taiwanese Hokkien song recognition model for voice-controlled smart speakers",
+      "Created comprehensive data annotation platform for Chinese reading comprehension and Taiwanese speech recognition models",
+      "Successfully deployed scalable web scraping infrastructure processing social media data"
+    ]
+  }
+]

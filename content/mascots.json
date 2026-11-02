@@ -1,0 +1,90 @@
+{
+  "$schema": "./schema/mascots.schema.json",
+  "tapi": {
+    "name": { "en": "Tapi", "zh": "Tapi" },
+    "kind": "sprite",
+    "about": {
+      "en": "Telepy's mascot: a persimmon-coloured ghost with teal cross clips, no feet and an ω mouth.",
+      "zh": "Telepy 的吉祥物：柿子色的小幽靈，夾著青綠十字髮夾，沒有腳，嘴巴是 ω。"
+    },
+    "lines": {
+      "en": [
+        "No feet, still gets everywhere. Mostly over reverse SSH.",
+        "Telepy dials out, so you never have to dig in.",
+        "I live in the footer. The rent is very reasonable.",
+        "Click me five times. I dare you.",
+        "My clips change colour on holidays. It's in the config.",
+        "Yes, I am a ghost. No, I don't haunt production. Usually."
+      ],
+      "zh": [
+        "沒有腳，但哪裡都去得了，主要靠反向 SSH。",
+        "Telepy 往外撥，你就不用往裡面鑽。",
+        "我住在頁尾，房租很佛心。",
+        "連點我五下試試看。",
+        "過節的時候髮夾會換顏色，寫在設定檔裡。",
+        "對，我是幽靈。不，我不會在正式環境作祟。通常不會。"
+      ]
+    }
+  },
+  "chiyo": {
+    "name": { "en": "Chiyo", "zh": "千代" },
+    "kind": "images",
+    "about": {
+      "en": "The talking mascot from the 2015 Aerial theme. Lines from 2016 onward, some taught by visitors.",
+      "zh": "2015 年 Aerial 主題角落那個會說話的吉祥物。台詞從 2016 年開始累積，有些是訪客教的。"
+    },
+    "images": [
+      "/mascots/chiyo/01.webp",
+      "/mascots/chiyo/02.webp",
+      "/mascots/chiyo/03.webp",
+      "/mascots/chiyo/04.webp",
+      "/mascots/chiyo/05.webp",
+      "/mascots/chiyo/06.webp",
+      "/mascots/chiyo/07.webp",
+      "/mascots/chiyo/08.webp",
+      "/mascots/chiyo/09.webp",
+      "/mascots/chiyo/10.webp",
+      "/mascots/chiyo/11.webp",
+      "/mascots/chiyo/12.webp",
+      "/mascots/chiyo/13.webp",
+      "/mascots/chiyo/14.webp"
+    ],
+    "lines": {
+      "zh": [
+        "啊哈哈 我不知道",
+        "比起沒有作用、徒有虛名的英雄，還是能繼續編織夢想的人偶比較好啊。",
+        "改變不了的過去不如就這樣帶去墳墓算了。",
+        "他們理解就算搬的動岩石，也移動不了高山的事實。正因為老是在把玩小石頭，才會夢想自己能夠移動高山。",
+        "我也很想過很普普通通的人生就好了啊。",
+        "為什麼會有這麼荒唐的想法",
+        "即使不帥氣、即使不強大、即使不正確、即使不美麗、即使不可愛、即使不乾淨，我也想贏過那些帥氣、強大、正確、美麗、可愛、乾淨的傢伙。",
+        "常會把自己投影到故事中的主人翁，殊不知自己最常扮演的卻是不起眼的配角。",
+        "鏡子不是讓你覺悟而是讓你迷惘，當你再也看不到原來的自己。",
+        "理解一樣東西，不等於要擁有那樣東西。你有家人，你覺得幸福嗎？人一說到自己，總是不知是幸福還是不幸。",
+        "這世界怎麼了",
+        "這問題真困難。",
+        "poi poi poi !",
+        "三次元是萌不起來的！！！",
+        "我現在的心情你怎麼可能了解",
+        "(ˋ ﾟ∀ ﾟ)",
+        "你沒有妹妹",
+        "先別管那個了，你聽過ㄈ貓嗎",
+        "上班好累RRR",
+        "YEE",
+        "TF大法好",
+        "母湯",
+        "站長好帥",
+        "哈哈這個有趣",
+        "救救我的畢專",
+        "雷侯!",
+        "新年快樂",
+        "山林涼~草枝擺",
+        "加油",
+        "天啊！原來還可以用這個留言噢！",
+        "龍蝦1斤1000",
+        "你好鳩咪!",
+        "閃電鳥: 閃電!!!!閃電!!!!!!!!!!!"
+      ]
+    }
+  }
+}

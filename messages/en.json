@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "siteTitle": "Nat Lee",
+    "projectsTitle": "Projects | Nat Lee",
+    "aboutTitle": "About | Nat Lee",
+    "experienceTitle": "Experience | Nat Lee",
+    "valhallaTitle": "Valhalla | Nat Lee"
+  },
+  "common": {
+    "copy": "Copy email address",
+    "copied": "Copied",
+    "present": "Present",
+    "stars": "{count} stars on GitHub",
+    "newTab": "opens in a new tab"
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "experience": "Experience",
+    "valhalla": "Valhalla",
+    "skip": "Skip to content",
+    "primary": "Main",
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme",
+    "language": "Language",
+    "shortcuts": "Keyboard shortcuts"
+  },
+  "shortcuts": {
+    "title": "Keyboard shortcuts",
+    "toggle": "Single-key shortcuts",
+    "on": "On",
+    "off": "Off",
+    "hint": "Turn these off if they get in the way of a screen reader or voice control. The setting is saved in this browser.",
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "experience": "Experience",
+    "search": "Search projects",
+    "help": "Show this panel",
+    "close": "Close"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "{location} · shipping since {year}",
+      "nowCmd": "$ cat now.txt",
+      "cta": "See projects",
+      "about": "About me",
+      "avatarAlt": "Nat Lee's avatar, a chibi drawing by seseren"
+    },
+    "flagship": {
+      "eyebrow": "Flagship project",
+      "caseStudy": "Read the case study",
+      "shotAlt": "Telepy's tunnels page: health, latency, how each device connects, and who is using it",
+      "tapi": "Tapi, Telepy's mascot, waving"
+    },
+    "selected": {
+      "title": "Selected work",
+      "intro": "A few projects that show the range: trading data, developer infrastructure, computer vision and small tools people actually install.",
+      "all": "All {count} projects"
+    },
+    "opensource": {
+      "title": "Open source",
+      "intro": "Fixes I sent upstream, and packages other people install.",
+      "upstream": "Upstream contributions",
+      "packages": "Packages on PyPI",
+      "prs": "{count} merged PRs",
+      "pr": "Merged PR"
+    },
+    "career": {
+      "title": "Where I've been",
+      "intro": "Four rooms so far. Each one taught me something the next one needed, usually the hard way.",
+      "full": "Full experience"
+    },
+    "how": {
+      "title": "How I work",
+      "tools": "Daily tools"
+    },
+    "writing": {
+      "title": "Writing"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "intro": "Things I built at work and on my own time, {count} in all. Telepy first, then the ones I'd show in an interview, then everything else.",
+    "searchLabel": "Search projects",
+    "searchPlaceholder": "Search by name, technology or topic",
+    "all": "All",
+    "themes": {
+      "energy": "Energy & forecasting",
+      "infra": "Infrastructure & backend",
+      "ai": "AI, vision & medical imaging",
+      "libraries": "Libraries & tools",
+      "web": "Web apps & extensions"
+    },
+    "selected": "Selected",
+    "more": "Everything else",
+    "shown": "{shown} of {total} shown",
+    "empty": "Nothing matches “{query}”. Try a technology such as Django, OpenCV or Rust.",
+    "clear": "Clear search and filters",
+    "status": {
+      "Completed": "Completed",
+      "In Progress": "Active",
+      "Archived": "Archived"
+    }
+  },
+  "project": {
+    "back": "All projects",
+    "overview": "Overview",
+    "problem": "The problem",
+    "approach": "What I did",
+    "results": "Results",
+    "features": "Features",
+    "stack": "Stack",
+    "role": "Role",
+    "period": "Period",
+    "status": "Status",
+    "theme": "Theme",
+    "gallery": "Screenshots",
+    "related": "Related projects",
+    "links": {
+      "github": "Source",
+      "demo": "Live demo",
+      "pypi": "PyPI",
+      "documentation": "Docs",
+      "article": "Write-up"
+    },
+    "imageAlt": "{title}, screenshot {n}",
+    "noImage": "No screenshots for this one. It is private or command-line only."
+  },
+  "telepy": {
+    "eyebrow": "Flagship · case study",
+    "problem": "Why it exists",
+    "architecture": "How it works",
+    "architectureNote": "The device runs an ordinary ssh -R to the gateway built into Telepy. Nothing is opened on the server, and both ends check each other's host key.",
+    "features": "What it does",
+    "rewrite": "From Django to Rust",
+    "metric": "Measure",
+    "before": "Django",
+    "after": "Rust",
+    "change": "Change",
+    "source": "Full benchmark notes",
+    "reading": "Further reading",
+    "stack": "Stack",
+    "cta": "Telepy on GitHub",
+    "ctaNote": "Self-hosted with Docker Compose. AGPL-3.0."
+  },
+  "about": {
+    "title": "About",
+    "lead": "The longer version, for people who scrolled past the jokes.",
+    "story": "The short story",
+    "how": "How I work",
+    "languages": "Languages",
+    "contact": "Get in touch",
+    "contactIntro": "Email is the fastest way to reach me. I read everything, and I answer most of it.",
+    "valhalla": "This site has worn a few looks.",
+    "valhallaBody": "Every look since 2015 still works in Valhalla, from the page with a wind map to the terminal that came right before this one. They all show the current content.",
+    "valhallaCta": "Visit Valhalla"
+  },
+  "experience": {
+    "title": "Experience",
+    "intro": "Work, education, skills and open-source contributions on one page. It also prints cleanly as a one-page CV.",
+    "print": "Print or save as PDF",
+    "work": "Work",
+    "education": "Education",
+    "skills": "Skills",
+    "skillsIntro": "Years of hands-on use, and where you can see it in my projects.",
+    "upstream": "Open-source contributions",
+    "roleType": {
+      "join": "Joined",
+      "promotion": "Promotion",
+      "transfer": "Transfer"
+    },
+    "assignment": "On assignment in {location}",
+    "achievements": "Results",
+    "subsidiary": "Part of {parent}",
+    "minor": "Minor in {minor}",
+    "years": "{count} yrs",
+    "skill": "Skill",
+    "experienceCol": "Experience",
+    "notes": "Notes",
+    "usedIn": "Used in"
+  },
+  "valhalla": {
+    "title": "Valhalla",
+    "intro": "The same content, in every look this site has worn since 2015. Each theme reads the current content, so nothing here is out of date. Only the haircuts are.",
+    "enter": "Open {name}",
+    "side": "Experiment",
+    "timeline": "When each look first appeared",
+    "now": "Now",
+    "howTitle": "How it works",
+    "how": "Every theme reads one file, /content/site.json, published with this site. Add a project once and it shows up in all of them without rebuilding any. Each theme’s own code is built once and then left alone.",
+    "keepers": "Tapi and Chiyo keep the place. Click them; they talk."
+  },
+  "footer": {
+    "contact": "Contact",
+    "elsewhere": "Elsewhere",
+    "valhalla": "Valhalla",
+    "valhallaNote": "Every look this site has worn, still working.",
+    "version": "Persimmon · since 2015",
+    "tapi": "Tapi, Telepy's mascot. Click it.",
+    "built": "Built with Next.js and deployed to GitHub Pages."
+  },
+  "notFound": {
+    "title": "This tunnel isn't connected",
+    "body": "The page you asked for doesn't exist, or it moved when the site was rebuilt.",
+    "home": "Back home",
+    "projects": "Browse projects",
+    "valhalla": "Looking for an older look? They live in Valhalla."
+  }
+}

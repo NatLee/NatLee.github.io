@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Mascots",
+  "description": "吉祥物：角色、表情與台詞。主站（components/mascot/）與純 HTML 主題（public/shared/mascot.js）都讀這份。",
+  "type": "object",
+  "properties": { "$schema": { "type": "string" } },
+  "additionalProperties": {
+    "type": "object",
+    "required": ["name", "kind", "about", "lines"],
+    "properties": {
+      "name": { "$ref": "#/definitions/localized" },
+      "kind": { "enum": ["sprite", "images"], "description": "sprite = 像素格畫出來的（Tapi）；images = 一組表情圖（千代）。" },
+      "about": { "$ref": "#/definitions/localized" },
+      "images": { "type": "array", "items": { "type": "string" }, "description": "kind = images 時的表情圖，網站根目錄的絕對路徑，例如 /mascots/chiyo/01.webp。" },
+      "lines": {
+        "type": "object",
+        "description": "台詞，依序輪播。某個語言沒有就用另一個。",
+        "properties": {
+          "en": { "type": "array", "items": { "type": "string" } },
+          "zh": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "additionalProperties": false
+  },
+  "definitions": {
+    "localized": {
+      "type": "object",
+      "required": ["en"],
+      "properties": { "en": { "type": "string" }, "zh": { "type": "string" } },
+      "additionalProperties": false
+    }
+  }
+}

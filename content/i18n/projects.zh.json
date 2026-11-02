@@ -1,0 +1,928 @@
+{
+  "telepy": {
+    "subtitle": "管理 NAT 後方機器的自架 Web 主控台",
+    "description": "每台裝置只要往外建立一條反向 SSH 通道，就能在瀏覽器裡使用終端機、檔案、遠端桌面、遠端瀏覽器，還能連到它背後的區域網路。不用設定 port forwarding、不用 VPN，也不需要公開 IP。",
+    "longDescription": "Telepy 是一套自架的 Web 主控台，專門用來管理那些無法直接連線的機器：NAT 後方的伺服器、家裡的 Raspberry Pi、防火牆後的辦公室電腦，或是一台 OpenWrt 路由器。每台裝置主動往外連一條反向 SSH 通道到 Telepy 伺服器，之後就能直接在瀏覽器裡操作它：終端機、檔案、RDP／VNC／RustDesk 遠端桌面、一個從該裝置上網的 Chromium，以及同一個網路裡的其他主機。團隊可以使用細緻的分享設定、功能權限、指令規則、即時 session 控管，以及可偵測竄改的稽核日誌；所有操作也都能透過 CLI、REST API，以及提供給 AI agent 的 MCP 自動化。這個專案在 2024 年以 Django 應用起步，2026 年改寫為單一 Rust 行程。",
+    "role": "創建者與維護者",
+    "features": [
+      "一行指令即可加入 Linux、macOS 或 OpenWrt 裝置；Windows、Docker 與各類設備則有設定精靈引導",
+      "對外只能走 HTTPS 時，自動改用 Web 連接埠上、包在 WebSocket 裡的 SSH",
+      "Web 終端機，支援分頁、常用指令儲存，並可選擇錄製操作過程",
+      "檔案管理員、RDP／VNC／RustDesk 遠端桌面，以及從裝置端上網的遠端 Chromium",
+      "掃描裝置背後的區域網路，並對其中任一台主機開啟終端機或桌面",
+      "分享、逐項功能權限、指令規則、即時接管 session，以及可偵測竄改的稽核日誌",
+      "支援 Passkey、驗證器 App，並在有新登入時發出通知",
+      "telepy CLI、可限定權限範圍的 REST API token，以及提供給 AI agent 的 MCP endpoint"
+    ],
+    "challenges": [
+      "要連到沒有公開 IP、位於 NAT 或防火牆後方，有時甚至只能對外建立 HTTPS 連線的裝置。",
+      "讓團隊共同存取正式環境的機器，但不必發放 SSH 金鑰，也不會搞不清楚誰執行了什麼。",
+      "最初的 Django + Redis 架構每台裝置要跑兩個 sshd 行程，冷啟動要 14 秒，裝置數量到數百台時撐不住。"
+    ],
+    "solutions": [
+      "每台裝置只是對 Telepy 內建的 SSH gateway 執行一般的 `ssh -R`。伺服器上不綁定任何連接埠：通道由 tunnel key 識別，兩端也會互相驗證對方的 host key。",
+      "存取權以裝置為單位分享，分為檢視、編輯與管理三個等級。指令規則（封鎖、暫停待核准、提醒）同時套用在 Web 終端機與 MCP agent 上；移除某位成員時，對方開著的 session 也會立即結束。",
+      "後端改寫為單一 Rust 行程（axum、russh、Tokio、SQLite），維持相同的 REST 與 WebSocket 介面規格，並在單一版本中完成切換，同時保留可退回舊版的路徑。"
+    ],
+    "results": [
+      "裝置從連線到在儀表板上顯示上線：2.90 s → 0.16 s，快了 18 倍。",
+      "閒置記憶體 329 MiB → 20 MiB；後端冷啟動 14.2 s → 0.7 s。",
+      "在 50 個並行請求下，儀表板 API 吞吐量提升 8.4 倍（561 → 4,726 req/s）。",
+      "目前已發布至 v2.13.0，累計超過 1,340 個 commit，並提供英文、繁體中文與日文文件。"
+    ]
+  },
+  "dev-dock-manager-rust": {
+    "subtitle": "Rust 開發環境管理器",
+    "description": "每個使用者一台 Docker 開發機，附網頁終端機、noVNC 桌面，GPU 可選。是 Django 版的 Rust 重寫，一部分原因是想知道自己做不做得到。",
+    "longDescription": "以 Rust 與 Docker 打造的高效能開發環境管理系統。平台為同一台機器上的多位使用者提供彼此隔離的容器化開發環境，包含以 Rust 撰寫、採用 JWT 驗證的後端 API，支援即時主控台存取的 WebSocket，以及 React／Next.js 前端。所有服務都透過 Traefik 反向代理對外提供，並可選擇啟用 Nvidia Docker。",
+    "role": "創建者與維護者",
+    "features": [
+      "高效能 Rust 後端 API",
+      "以 JWT 為基礎的驗證系統",
+      "透過 WebSocket 存取主控台",
+      "多使用者環境隔離",
+      "整合 Traefik 反向代理",
+      "React／Next.js 儀表板",
+      "可選擇支援 Nvidia Docker",
+      "Redis 任務佇列",
+      "自動化建置環境"
+    ],
+    "challenges": [
+      "打造高效能的 Rust API",
+      "實作 WebSocket 以存取主控台",
+      "透過 Bollard 整合 Docker API",
+      "JWT 身分驗證與授權",
+      "為多個 NoVNC 實例設定 Traefik"
+    ],
+    "solutions": [
+      "以 async/await 實作 Rust 後端",
+      "撰寫 WebSocket handler 提供即時主控台",
+      "使用 Bollard 整合 Docker API",
+      "以 SQLite + Argon2 建立基於 JWT 的驗證系統",
+      "設定 Traefik 處理服務路由"
+    ],
+    "results": [
+      "效能優於 Python 版本",
+      "改用 Rust 後記憶體用量更低",
+      "型別安全的程式碼提升了安全性",
+      "更好的並行處理能力",
+      "以 Docker Compose 簡化部署"
+    ]
+  },
+  "morphkit": {
+    "subtitle": "瀏覽器內媒體轉檔與編輯工具",
+    "description": "在瀏覽器裡轉檔、編輯圖片、音訊、影片和 GIF。不會上傳任何東西，主要是因為根本沒有地方可以上傳。",
+    "longDescription": "MorphKit 是一個純前端的檔案轉換與編輯工具，完全沒有後端：所有處理皆在瀏覽器內完成，檔案不會離開使用者的裝置。支援常見圖片（PNG、JPG、WEBP、BMP、GIF、APNG、AVIF）、音訊（MP3、WAV、OGG、FLAC、M4A、AAC、OPUS）與影片（MP4、WEBM、MOV、AVI、MKV）格式互轉，並提供完整編輯功能：具圖層的圖片編輯器（筆刷、形狀、文字、裁切與去背）、音訊／影片剪輯與音量、速度調整，以及 GIF／APNG 的逐幀編輯、字幕與倒轉、回力鏢等特效。另支援批次處理打包 ZIP 下載、檔案中繼資料檢視（EXIF、位元率、時長）與剪貼簿整合。以 Vite、React 與 TypeScript 建置，透過 GitHub Actions 自動部署至 GitHub Pages。",
+    "role": "創建者與維護者",
+    "features": [
+      "在瀏覽器端轉換圖片（PNG、JPG、WEBP、BMP、GIF、APNG、AVIF）、音訊（MP3、WAV、OGG、FLAC、M4A、AAC、OPUS）與影片（MP4、WEBM、MOV、AVI、MKV）",
+      "具圖層的圖片編輯器：筆刷、形狀、文字、裁切、旋轉／翻轉與去背",
+      "音訊／影片剪輯、音量調整、速度控制與旋轉",
+      "GIF／APNG 編輯：逐幀處理、字幕，以及變速／倒轉／回力鏢特效",
+      "批次處理並打包成 ZIP 下載",
+      "顯示檔案中繼資料（EXIF、位元率、時長）",
+      "整合剪貼簿，貼上即可轉檔",
+      "100% 靜態網站——沒有伺服器、不上傳檔案，從設計上保護隱私"
+    ],
+    "challenges": [
+      "在瀏覽器約 2 GB 的記憶體上限內，完全於瀏覽器中處理大型媒體檔案。",
+      "在沒有任何伺服器協助的情況下，支援眾多圖片、音訊與影片格式之間的轉換。",
+      "逐幀編輯動畫格式（GIF／APNG），同時讓 UI 保持流暢。"
+    ],
+    "solutions": [
+      "音訊與影片轉檔使用 ffmpeg.wasm，靜態圖片使用 Canvas API，每一個位元組都留在使用者的裝置上。",
+      "結合專用的編解碼器（gifuct-js、gifenc、upng-js）處理動畫的解碼與編碼，並設定幀數上限，避免超出記憶體限制。",
+      "整個網站以 Vite + React 建置為純靜態網站，透過 GitHub Actions 部署至 GitHub Pages，整套工具不需要任何基礎設施就能上線。"
+    ],
+    "results": [
+      "免費且注重隱私的轉檔與編輯工具——檔案從不離開瀏覽器。",
+      "單一工具即涵蓋圖片、音訊、影片、GIF 與 APNG 的轉檔與編輯。",
+      "完全運行於 GitHub Pages，沒有主機費用，也不需維護伺服器。"
+    ]
+  },
+  "stock-trading-simulation": {
+    "title": "股票交易模擬器",
+    "subtitle": "結合學習中心的即時交易模擬",
+    "description": "有價格時間優先撮合引擎、機器人交易者和即時委託簿的交易模擬器。在這裡賠錢，不會真的賠錢。",
+    "longDescription": "功能完整的股票交易模擬器，透過即時撮合、K 線圖與市場分析工具，提供貼近真實的交易體驗。平台內建一套撮合引擎，依價格優先、時間優先原則撮合委託，支援市價單、限價單與多種委託條件（GTC、IOC、FOK）。三種交易機器人（MarketMakerBot、TrendBot、NoiseBot）會在不同情境（多頭市場、空頭市場、盤整、高波動、平穩）下模擬真實的市場活動。內建的學習中心提供 4 大類別（入門、中級、進階、投資）共 19 堂課程，附互動測驗與進度追蹤。練習中心則能在零風險下進行型態辨識訓練與交易模擬，並支援倒帶／重播。即時市場分析包含趨勢偵測、委託簿掃描、動能指標，以及附信心分數的自動型態偵測。",
+    "role": "創建者與維護者",
+    "features": [
+      "依價格優先、時間優先原則的即時撮合引擎",
+      "多種委託類型：市價單、限價單，支援 GTC／IOC／FOK 條件",
+      "互動式 K 線圖，支援多種時間週期（15s、1m、5m、30m）",
+      "由機器人驅動的市場模擬（MarketMakerBot、TrendBot、NoiseBot）",
+      "五種市場情境：多頭、空頭、盤整、高波動、平穩",
+      "學習中心，涵蓋 4 大類別共 19 堂課程",
+      "練習中心，可進行型態辨識與交易模擬",
+      "即時市場分析：趨勢偵測、委託簿掃描、動能指標",
+      "自動偵測線圖型態並給出信心分數",
+      "採用臺灣證券交易所的升降單位規則，價格跳動更貼近真實",
+      "配色切換：亞洲式（紅漲）與西方式（綠漲）",
+      "整股／零股交易模式，手續費率可自訂"
+    ],
+    "challenges": [
+      "實作準確的價格優先、時間優先撮合引擎",
+      "即時更新委託簿並繪製 K 線圖",
+      "協調多個交易機器人，模擬貼近真實的市場行為",
+      "打造完整且具互動元素的學習內容",
+      "開發用於線圖分析的型態辨識演算法",
+      "在高頻交易模擬下維持效能"
+    ],
+    "solutions": [
+      "自行開發 MatchingEngine 與 OrderBook，實作價格優先、時間優先撮合",
+      "撰寫高效率的 CandleAggregator，即時產生 K 線",
+      "建立 BotManager，依可設定的 tick 間隔協調各機器人的行為",
+      "採用模組化架構，將撮合、交易與 UI 邏輯分離",
+      "設計完整的課程架構，以 JSON 管理課程內容",
+      "打造可倒帶／重播的互動式練習中心，方便學習"
+    ],
+    "results": [
+      "成功實作支援多種委託類型的即時撮合引擎",
+      "以三種不同行為的機器人打造逼真的市場模擬",
+      "建立包含 19 堂系統化課程的完整學習平台",
+      "開發互動式練習環境，培養交易技巧",
+      "實作即時市場分析工具，偵測趨勢與型態",
+      "在高頻委託處理下仍維持流暢效能"
+    ]
+  },
+  "power-trading-ai": {
+    "title": "電力交易 AI 系統",
+    "subtitle": "國際電力交易策略開發",
+    "description": "日本與澳洲電力市場的現貨價格預測與交易策略。程式碼不公開，所以只能請你相信我。",
+    "longDescription": "主導國際電力市場 AI 交易策略的開發。系統運用進階的時間序列分析與機器學習模型預測電力現貨市場價格，協助交易員在波動劇烈的能源市場中依據資料做出決策。",
+    "role": "資深工程師（主導開發）",
+    "features": [
+      "現貨市場電價預測模型",
+      "即時資料處理管線",
+      "交易策略優化",
+      "風險評估演算法",
+      "績效監控儀表板"
+    ],
+    "challenges": [
+      "處理波動劇烈的電力市場資料",
+      "即時預測的需求",
+      "與既有交易系統整合",
+      "多市場資料同步"
+    ],
+    "solutions": [
+      "以 PyTorch 實作穩健的時間序列模型",
+      "以 Elasticsearch 建置可擴展的資料管線",
+      "以 Django 建立模組化的 API 架構",
+      "開發完整的測試框架"
+    ],
+    "results": [
+      "成功為日本市場部署預測模型",
+      "價格趨勢預測準確率達 85%",
+      "交易決策時間縮短 60%",
+      "支援拓展至澳洲市場"
+    ]
+  },
+  "blur-generator": {
+    "subtitle": "影像模糊生成工具",
+    "description": "刻意把好好的照片弄糊：動態、鏡頭、高斯與景深模糊，拿來訓練得面對爛照片的模型。",
+    "longDescription": "使用 OpenCV 產生多種模糊效果的影像處理工具，包含動態模糊、鏡頭模糊與高斯模糊。特別適合用在機器學習專案的資料增強，或製作擬真的影像效果。",
+    "role": "創建者與維護者",
+    "features": [
+      "多種模糊類型（動態、鏡頭、高斯）",
+      "批次影像處理",
+      "可自訂模糊參數",
+      "預覽功能",
+      "命令列介面"
+    ],
+    "challenges": [
+      "模擬逼真的模糊效果",
+      "參數最佳化",
+      "批次處理效率",
+      "維持影像品質"
+    ],
+    "solutions": [
+      "實作進階模糊演算法",
+      "建立參數調整介面",
+      "優化批次處理流程",
+      "加入品質控管機制"
+    ],
+    "results": [
+      "產生高品質的模糊影像",
+      "廣泛用於機器學習的資料增強",
+      "高效率的批次處理",
+      "獲得社群正面回饋"
+    ]
+  },
+  "heic2png": {
+    "subtitle": "影像格式轉換工具",
+    "description": "把 iPhone 的 HEIC 照片轉成 PNG，CLI、管線或 Python 都行。專治那種小小但一直出現的煩。",
+    "longDescription": "簡單實用的 Python 工具，可將 HEIC 圖片轉為 PNG 格式。解決一個常見的需求：把 Apple 的 HEIC 格式轉成支援度更廣的 PNG。",
+    "role": "創建者與維護者",
+    "features": [
+      "HEIC 轉 PNG",
+      "支援批次處理",
+      "命令列介面",
+      "保留影像品質"
+    ]
+  },
+  "batch-crop-images": {
+    "subtitle": "批次影像裁切工具",
+    "description": "框一次，整個資料夾的相似圖片一起裁。因為我拒絕一張一張裁，看來也有不少人跟我一樣拒絕。",
+    "longDescription": "高效率的批次影像處理工具，提供直覺的介面，可同時裁切多張相似的影像。對於需要以相同方式裁切大量影像的情境，能簡化整個處理流程。",
+    "role": "創建者與維護者",
+    "features": [
+      "批次影像裁切",
+      "互動式 GUI 介面",
+      "預覽功能",
+      "一致的裁切設定"
+    ]
+  },
+  "nipype-preprocess-on-brain-mr": {
+    "subtitle": "腦部 MR 影像前處理",
+    "description": "用 Nipype、FSL 與 ANTs 做腦部 MRI 前處理：AC-PC 校正、去頭骨、分割。證明我曾經懂過神經影像流程。",
+    "longDescription": "以 Nipype 打造、專為腦部 MR 影像分析設計的神經影像前處理流程，將神經影像研究與臨床應用所需的繁複前處理步驟自動化。",
+    "role": "創建者與維護者",
+    "features": [
+      "MR 影像自動化前處理",
+      "腦組織分割",
+      "影像對位",
+      "品質控管指標",
+      "支援批次處理"
+    ],
+    "challenges": [
+      "將包含 AC-PC 校正、頭骨去除（skull stripping）等複雜步驟的多階段神經影像流程自動化。",
+      "管理 FSL、ANTs 等小眾醫學影像工具的大量相依套件，並維持環境一致性。",
+      "確保各分析節點之間的資料流有效率，並妥善管理中間檔案。"
+    ],
+    "solutions": [
+      "運用 Nipype 建立模組化且可重現的工作流程，串接多套專業神經影像工具。",
+      "使用 Docker 與 Neurodocker 將整套軟體環境容器化，解決「在我電腦上可以跑」的問題。",
+      "整合 K-means 分群進行自動化組織分割，並以 Nilearn 產生高品質的結果視覺化。"
+    ],
+    "results": [
+      "開發出穩健的自動化流程，能以高精確度處理 .nii 腦部 MR 影像，幾乎不需人工介入。",
+      "建立高度可攜的研究環境，有助於醫學影像研究的可重現性。",
+      "為組織分割結果（GM、WM、CSF）提供清楚的視覺化輸出，方便資料驗證與後續分析。"
+    ]
+  },
+  "solar-prediction-system": {
+    "title": "太陽能發電預測系統",
+    "subtitle": "AI 驅動的太陽能發電預測",
+    "description": "替儲能示範場預測太陽能發電量的時間序列模型，用 Airflow 排程。太陽很準時，問題都出在雲。",
+    "longDescription": "為台南全家平豐店儲能示範案場建置完整的太陽能發電預測系統。系統結合氣象資料、歷史發電模式與機器學習模型，提供準確的太陽能發電預測。",
+    "role": "資深工程師（機器學習開發）",
+    "features": [
+      "即時太陽能發電預測",
+      "整合氣象資料",
+      "自動化資料管線",
+      "互動式儀表板",
+      "成效監控"
+    ],
+    "challenges": [
+      "預測結果高度受天氣影響",
+      "處理季節性變化",
+      "即時資料處理",
+      "提升模型準確率"
+    ],
+    "solutions": [
+      "整合多個氣象資料來源",
+      "實作季節調整演算法",
+      "以 Airflow 建置穩定的資料管線",
+      "採用集成（ensemble）建模技術"
+    ],
+    "results": [
+      "每日預測準確率達 92%",
+      "儲能成本降低 25%",
+      "成功部署至示範案場",
+      "強化案場的 AI 展示效果"
+    ]
+  },
+  "sentiment-analysis-platform": {
+    "title": "輿情分析平台",
+    "subtitle": "大規模 NLP 處理系統",
+    "description": "帶領開發公司輿情產品背後的情緒分析引擎，讀過超過三十億筆爬下來的資料。學到一件事：網路上大部分是抱怨。",
+    "longDescription": "身為情緒分析 AI 引擎的主要負責工程師，我開發並維護核心的情緒偵測模型，處理來自網路爬蟲的資料。系統分析爬取內容的情緒並輸出情緒分類結果，再整合至公司的旗艦產品——Keypo（大數據引擎）與 DailyView（網路溫度計），為使用者提供完整的網路輿情與聲量分析。平台已處理超過 30 億筆資料，準確率提升 30%，實現即時的輿情監測與趨勢分析，支援商業智慧應用。",
+    "role": "資深軟體工程師",
+    "features": [
+      "開發核心情緒分析 AI 引擎",
+      "網路爬蟲資料處理管線",
+      "情緒分類與情緒結果輸出",
+      "整合 Keypo 與 DailyView 平台",
+      "為使用者提供網路輿情與聲量分析",
+      "即時輿情監測",
+      "可擴展的微服務架構"
+    ],
+    "challenges": [
+      "處理超過 30 億筆資料",
+      "即時分析的需求",
+      "提升模型準確率",
+      "系統擴展性"
+    ],
+    "solutions": [
+      "開發並維護核心情緒分析 AI 引擎",
+      "建置從網路爬蟲到情緒分類的資料處理管線",
+      "將情緒分析結果整合至 Keypo 與 DailyView 產品",
+      "以 Kubernetes 實作分散式處理，提升擴展性",
+      "使用 PaddlePaddle 框架優化模型，準確率提升 30%",
+      "以 Elasticsearch 建置高效率資料管線，支援即時分析"
+    ],
+    "results": [
+      "成功為公司產品部署核心情緒分析 AI 引擎",
+      "處理超過 30 億筆網路爬蟲資料",
+      "情緒分類準確率提升 30%",
+      "將情緒分析整合至 Keypo 與 DailyView 平台",
+      "讓終端使用者能即時進行網路輿情與聲量分析",
+      "部署可擴展的微服務架構，支援大量資料處理"
+    ]
+  },
+  "django-project-template": {
+    "subtitle": "功能齊全的 Django 專案模板",
+    "description": "Django 起手式：Docker、第三方登入、JWT、WebSocket、管理介面與 django-q。把每次都要手動設的東西，一次設好。",
+    "longDescription": "完整的 Django 專案模板，內含現代 Web 開發常用的功能，例如 Docker 容器化、第三方登入驗證、JWT token 管理、WebSocket 支援與進階的管理介面。內建最佳實務，非常適合用來快速啟動新的 Django 專案。",
+    "role": "創建者與維護者",
+    "features": [
+      "Docker 容器化",
+      "第三方登入驗證（Google、GitHub）",
+      "JWT token 管理",
+      "WebSocket 即時通訊",
+      "進階管理介面",
+      "以 django-q 處理背景任務",
+      "以 Swagger 產生 API 文件"
+    ],
+    "challenges": [
+      "整合多個身分驗證提供者",
+      "管理 JWT token 的生命週期",
+      "處理 WebSocket 連線",
+      "設定 Docker 環境"
+    ],
+    "solutions": [
+      "實作支援多個提供者的 OAuth2",
+      "建立安全的 JWT refresh 機制",
+      "打造穩定的 WebSocket middleware",
+      "設定 multi-stage Docker build"
+    ],
+    "results": [
+      "加快 Django 專案的建置速度",
+      "開發時間縮短 60%",
+      "透過現代化的驗證機制提升安全性",
+      "社群積極採用"
+    ]
+  },
+  "django-docker-gui": {
+    "subtitle": "Docker 容器管理 Web UI",
+    "description": "管理 Docker 映像檔與容器的網頁介面，瀏覽器裡有真的終端機。精神上算是 Telepy 的曾祖父。",
+    "longDescription": "功能強大的 Web 介面，用於管理 Docker 容器與映像檔，並內建完整功能的終端模擬器。讓系統管理員與開發者能透過瀏覽器，以直覺的方式管理 Docker 環境。",
+    "role": "創建者與維護者",
+    "features": [
+      "透過 Web 管理 Docker",
+      "互動式終端模擬器",
+      "容器生命週期管理",
+      "瀏覽映像檔儲存庫",
+      "即時檢視 log",
+      "資源監控"
+    ],
+    "challenges": [
+      "在瀏覽器中模擬終端機",
+      "即時整合 Docker API",
+      "安全性考量",
+      "效能優化"
+    ],
+    "solutions": [
+      "實作基於 WebSocket 的終端機",
+      "建立安全的 Docker API 封裝",
+      "加入身分驗證與授權",
+      "優化即時資料串流"
+    ],
+    "results": [
+      "簡化 Docker 管理流程",
+      "提升開發者生產力",
+      "強化系統管理",
+      "減少對命令列的依賴"
+    ]
+  },
+  "dev-dock-manager": {
+    "subtitle": "開發環境管理工具",
+    "description": "開發機管理器的 Django 初代：一台機器上讓多個使用者各有隔離的 Docker 環境。後來被 Rust 版取代，但最早是它在扛。",
+    "longDescription": "以 Django 與 Docker 打造的完整開發環境管理系統。平台為同一台機器上的多位使用者提供彼此隔離的容器化開發環境，並預先配置好各種開發流程所需的工具與套件。",
+    "role": "創建者與維護者",
+    "features": [
+      "多使用者環境隔離",
+      "預先配置好的開發技術堆疊",
+      "資源分配管理",
+      "環境模板系統",
+      "使用者存取控制",
+      "自動化建置環境"
+    ],
+    "challenges": [
+      "使用者之間的資源隔離",
+      "環境模板管理",
+      "安全性與存取控制",
+      "效能優化"
+    ],
+    "solutions": [
+      "以 Docker 實作隔離",
+      "建立彈性的模板系統",
+      "建置完整的使用者管理",
+      "優化資源分配"
+    ],
+    "results": [
+      "環境建置時間縮短 80%",
+      "提升開發團隊生產力",
+      "透過隔離強化安全性",
+      "簡化新人上手流程"
+    ]
+  },
+  "openpose-detect-hands-with-heatmap": {
+    "subtitle": "OpenPose 手部偵測與熱力圖",
+    "description": "用 OpenPose 找手，再疊一層熱力圖，讓你清楚看到模型認為你的手在哪裡。",
+    "longDescription": "運用 OpenPose 進行手部偵測，並以直覺的熱力圖呈現結果的電腦視覺應用。特別適合用於手勢分析、動作研究，以及需要手部追蹤的互動式應用。",
+    "role": "創建者與維護者",
+    "features": [
+      "即時手部偵測",
+      "熱力圖視覺化",
+      "動作追蹤",
+      "支援多隻手",
+      "可自訂視覺化參數"
+    ],
+    "challenges": [
+      "即時處理的需求",
+      "在不同光線條件下維持準確度",
+      "偵測多隻手",
+      "流暢的視覺化繪製"
+    ],
+    "solutions": [
+      "優化 OpenPose 模型的整合",
+      "實作自適應門檻（adaptive thresholding）",
+      "打造高效率的追蹤演算法",
+      "製作流暢的熱力圖動畫"
+    ],
+    "results": [
+      "實現即時手部追蹤",
+      "在各種條件下都有高準確度",
+      "流暢的熱力圖視覺化",
+      "在研究社群中廣受歡迎"
+    ]
+  },
+  "simply-blur-detector": {
+    "subtitle": "簡易模糊偵測工具",
+    "description": "判斷照片是不是糊掉的 OpenCV 小工具。用眼睛也看得出來，只是看不了一萬張。",
+    "longDescription": "輕量且高效率的影像模糊偵測工具，採用進階的電腦視覺演算法。能評估影像品質並判斷影像是否模糊，適合用於攝影與影像處理流程中的品質控管。",
+    "role": "創建者與維護者",
+    "features": [
+      "自動偵測模糊",
+      "支援批次處理",
+      "多種偵測演算法",
+      "信心分數",
+      "容易整合的 API"
+    ],
+    "challenges": [
+      "準確偵測模糊",
+      "處理不同類型的模糊",
+      "優化處理速度",
+      "減少誤判（false positive）"
+    ],
+    "solutions": [
+      "實作多種偵測演算法",
+      "使用 ensemble 方法提升準確度",
+      "優化影像處理流程",
+      "建立完整的測試套件"
+    ],
+    "results": [
+      "高準確度的模糊偵測",
+      "處理速度快",
+      "廣泛用於影像處理",
+      "社群積極貢獻"
+    ]
+  },
+  "gura-gru-unit-for-recognizing-affect": {
+    "subtitle": "情緒分析模型",
+    "description": "用雙向 GRU 加 self-attention 做的情緒分類模型。取名叫 GURA，因為命名才是最難的部分。",
+    "longDescription": "結合雙向 GRU 網路與 Self-attention 機制的進階情緒分類模型。GURA（GRU Unit for Recognizing Affect）在情緒偵測與情感分析任務上達到 state-of-the-art 的表現。",
+    "role": "創建者與維護者",
+    "features": [
+      "雙向 GRU 架構",
+      "Self-attention 機制",
+      "多類別情緒分類",
+      "支援遷移學習",
+      "模型可解釋性"
+    ],
+    "challenges": [
+      "設計複雜的模型架構",
+      "優化 attention 機制",
+      "訓練穩定性",
+      "模型可解釋性"
+    ],
+    "solutions": [
+      "實作穩定的訓練流程",
+      "優化 attention 權重的計算",
+      "加入正規化技術",
+      "製作視覺化工具"
+    ],
+    "results": [
+      "達到 state-of-the-art 的情緒分類準確率",
+      "提升模型可解釋性",
+      "成功應用遷移學習",
+      "獲研究社群採用"
+    ]
+  },
+  "simply-nlp-classification-labeling-platform": {
+    "subtitle": "文本分類標註工具",
+    "description": "把文字標成各個類別的 Flask 小工具。標資料不是誰的最愛，這個讓它稍微沒那麼痛苦。",
+    "longDescription": "以 Flask 打造的完整文本分類標註平台。提供直覺的介面來標註文字資料，支援多種分類任務，能有效率地建立訓練 NLP 模型所需的資料集。",
+    "role": "創建者與維護者",
+    "features": [
+      "Web 介面的文字標註",
+      "支援多類別分類",
+      "使用者管理系統",
+      "匯出功能",
+      "進度追蹤"
+    ],
+    "challenges": [
+      "有效率的標註流程",
+      "確保資料品質",
+      "優化使用者介面",
+      "處理大型資料集"
+    ],
+    "solutions": [
+      "設計直覺的標註介面",
+      "實作品質控管機制",
+      "建立高效率的資料儲存方式",
+      "加入批次處理功能"
+    ],
+    "results": [
+      "加快資料集的建立",
+      "提升標註品質",
+      "強化團隊協作",
+      "廣泛用於 NLP 專案"
+    ]
+  },
+  "play-qwop-by-using-ai-agent": {
+    "subtitle": "AI Agent 玩 QWOP",
+    "description": "用 TensorFlow 2 訓練強化學習代理人玩 QWOP。它走得比我好，雖然這個標準很低。",
+    "longDescription": "一個創新的強化學習專案，使用 TensorFlow 2 訓練 AI agent 玩以難度著稱的 QWOP 遊戲。專案展示了 actor-critic 方法與策略梯度（policy gradient）優化等進階強化學習技術。",
+    "role": "創建者與維護者",
+    "features": [
+      "實作 actor-critic 強化學習",
+      "整合 QWOP 遊戲環境",
+      "訓練過程視覺化",
+      "儲存模型 checkpoint",
+      "追蹤表現指標"
+    ],
+    "challenges": [
+      "複雜的遊戲物理模擬",
+      "設計獎勵函數",
+      "訓練穩定性",
+      "動作空間最佳化"
+    ],
+    "solutions": [
+      "實作自訂的遊戲環境",
+      "設計經過塑形（reward shaping）的獎勵函數",
+      "加入穩定訓練的技巧",
+      "優化動作空間的表示方式"
+    ],
+    "results": [
+      "成功訓練出會玩 QWOP 的 agent",
+      "能穩定抵達終點",
+      "證明強化學習的有效性",
+      "對強化學習社群具教學價值"
+    ]
+  },
+  "elysion-calendar": {
+    "subtitle": "Elysion 每日日曆",
+    "description": "快速查艾利森日 K 的小日曆。非常小眾，對那群小眾非常好用。",
+    "longDescription": "專為快速查閱 Elysion 日 K 線資料而設計的日曆應用。以 TypeScript 開發，提供直覺的介面，讓交易者與分析師能快速取得歷史交易資訊。",
+    "role": "創建者與維護者",
+    "features": [
+      "快速查詢 K 線資料",
+      "互動式日曆介面",
+      "歷史資料視覺化",
+      "響應式設計"
+    ],
+    "challenges": [
+      "在響應式日曆介面中，有效率地管理並呈現複雜的日 K 線資料。",
+      "非同步更新即時房間資料的快取，同時不影響前端效能。",
+      "協調多個服務（前端、後端、Redis、Nginx），讓開發與正式環境保持一致。"
+    ],
+    "solutions": [
+      "實作以 Redis 為基礎的快取系統，處理非同步更新並加快資料讀取。",
+      "使用 Docker Compose 將環境容器化，確保部署順暢並具跨平台相容性。",
+      "以 TypeScript 開發專屬前端，處理複雜的日曆邏輯與導覽檢視。"
+    ],
+    "results": [
+      "打造一個精簡的工具，以易用的日曆形式快速查詢 Elysion 的日 K 資料。",
+      "將繁重的資料處理移到背景快取層，提升應用程式效能。",
+      "透過自動化 shell script 與容器化，簡化本機開發與正式環境部署。"
+    ]
+  },
+  "ssh-reverse-tunnel-using-docker": {
+    "subtitle": "Docker SSH 通道方案",
+    "description": "用容器和反向 SSH 隧道從內網挖一個洞出去。是 Telepy 很粗糙的初稿，那時它還沒有儀表板，也還沒有禮貌。",
+    "longDescription": "以 Docker 建立反向 SSH 通道的容器化方案。透過在隔離環境中建立通道伺服器，協助穿越網路限制、建立安全連線。",
+    "role": "創建者與維護者",
+    "features": [
+      "以容器建立通道",
+      "網路穿透能力",
+      "自動化設定腳本",
+      "安全隔離"
+    ]
+  },
+  "django-allauth-jwt-template": {
+    "subtitle": "Django 身分驗證模板",
+    "description": "把 Django Allauth 和 JWT 接好的範本，這樣我就不用再查怎麼接。結果我還是會去查。",
+    "longDescription": "完整的 Django 模板，示範如何整合 Django Allauth 與 JWT 驗證，為採用現代驗證模式、注重安全的 Web 應用提供穩固的基礎。",
+    "role": "創建者與維護者",
+    "features": [
+      "整合 Django Allauth",
+      "JWT token 驗證",
+      "支援社群帳號登入",
+      "使用者管理儀表板",
+      "API 驗證"
+    ],
+    "challenges": [
+      "銜接 Django Allauth 基於 session 的驗證機制與無狀態的 JWT 架構。",
+      "將多個第三方驗證提供者（Google、Microsoft、Line）整合進統一的 JWT 流程。",
+      "客製化驗證 adapter 以處理特定商業邏輯，例如針對社群登入有條件地管理密碼。"
+    ],
+    "solutions": [
+      "開發自訂的驗證橋接層，在 Django Allauth 社群登入成功後簽發 JWT token。",
+      "建立完整模板，示範第三方登入 callback 從前端到後端的整合方式。",
+      "以 Python 實作模組化的 view 與 adapter，有效率地管理使用者註冊與 token 生命週期。"
+    ],
+    "results": [
+      "提供穩健、可重複使用的模板，大幅縮短需要 JWT 與社群登入的現代 Django 專案的建置時間。",
+      "成功將各種驗證來源整合為單一、安全的 token 驗證系統。",
+      "讓開發者能打造前後端分離、可擴展，且支援現代前端框架的後端。"
+    ]
+  },
+  "dev-dock": {
+    "subtitle": "GUI 開發容器",
+    "description": "附完整 GUI 桌面的 Docker 開發映像檔，因為有些工具就是不肯住在終端機裡。",
+    "longDescription": "以 Docker 為基礎的開發環境，提供開發工作用的通用 GUI 介面。這套容器化方案能確保在不同系統上都有一致的開發環境。",
+    "role": "創建者與維護者",
+    "features": [
+      "容器化的 GUI 環境",
+      "預裝開發工具",
+      "跨平台相容",
+      "部署簡單"
+    ],
+    "challenges": [
+      "使用 Docker 建立通用的 GUI 開發環境",
+      "讓容器化桌面可透過 VNC 與 noVNC 存取",
+      "在容器化環境中支援 NVIDIA GPU",
+      "處理中文輸入法的初始化"
+    ],
+    "solutions": [
+      "整合 Xfce 桌面，並支援 VNC 與 noVNC",
+      "預裝 Mini Conda、VS Code、Git 等開發工具",
+      "提供一般與 NVIDIA GPU 兩種環境的 Docker Compose 設定",
+      "可自訂容器的解析度、密碼與使用者設定"
+    ],
+    "results": [
+      "功能完整的 GUI 開發容器，可透過瀏覽器或 VNC 用戶端存取",
+      "支援多種協定，包括 VNC（5901）、noVNC（6901）與 SSH（22）",
+      "高度可攜且一致的開發環境"
+    ]
+  },
+  "ip-find-chrome-extension": {
+    "subtitle": "網路 IP 查詢工具",
+    "description": "點一下，Chrome 就告訴你目前的 IP。為了一個搜尋就查得到的東西寫了整個擴充功能；替自己辯護一下，它比較快。",
+    "longDescription": "快速辨識並顯示目前網路 IP 位址的 Chrome 擴充功能。適合用於網路診斷，以及了解目前的網路設定。",
+    "role": "創建者與維護者",
+    "features": [
+      "即時偵測 IP",
+      "顯示網路資訊",
+      "簡單易用的介面",
+      "從瀏覽器快速開啟"
+    ]
+  },
+  "fisheye-warping": {
+    "subtitle": "魚眼影像處理工具",
+    "description": "把俯視魚眼影像展開成全景，也能捲回去，從此不用再瞇著眼看圓形的照片。",
+    "longDescription": "處理魚眼影像的進階電腦視覺工具，同時提供 dewarping 與 rewarping 功能。對於使用魚眼相機及環景影像處理的應用來說，是不可或缺的工具。",
+    "role": "創建者與維護者",
+    "features": [
+      "魚眼影像 dewarping（展開校正）",
+      "影像 rewarping 功能",
+      "俯視視角轉換",
+      "支援校正"
+    ]
+  },
+  "myanimelist-comment-crawler": {
+    "subtitle": "動畫評論資料爬蟲",
+    "description": "把 MyAnimeList 上動畫的評論與資訊全部爬下來。說是研究資料，大致上是。",
+    "longDescription": "完整的網路爬蟲工具，用於從 MyAnimeList 擷取動畫作品的評論與資訊。可用於動畫資料分析、研究，以及建立動畫推薦系統。",
+    "role": "創建者與維護者",
+    "features": [
+      "自動擷取評論",
+      "蒐集動畫資訊",
+      "資料匯出功能",
+      "遵守請求頻率限制"
+    ]
+  },
+  "simply-labeling-platform-for-machine-reading": {
+    "subtitle": "機器閱讀標註工具",
+    "description": "在文章裡標出問題答案的小平台，一句一句用螢光筆畫出機器閱讀的資料集。",
+    "longDescription": "專為機器閱讀理解任務設計的標註平台，能有效率地標註文章中的問答配對，支援閱讀理解 AI 模型的開發。",
+    "role": "創建者與維護者",
+    "features": [
+      "問答標註",
+      "文章文字標示",
+      "匯出功能",
+      "進度追蹤"
+    ]
+  },
+  "yande-and-konachan-to-eagle": {
+    "subtitle": "圖片管理整合",
+    "description": "把兩個圖站的圖片直接抓進 Eagle，用的是自己寫的 Eagle 封裝。吃自己的狗糧，多了幾個步驟。",
+    "longDescription": "自動從 Yande.re 與 Konachan 網站抓取圖片，並整理到 Eagle 圖片管理軟體中的專用工具，為數位繪師與圖片收藏者簡化工作流程。",
+    "role": "創建者與維護者",
+    "features": [
+      "自動抓取圖片",
+      "整合 Eagle 軟體",
+      "保留中繼資料",
+      "批次處理"
+    ]
+  },
+  "eagle-wrapper": {
+    "subtitle": "Eagle 軟體的 Python API",
+    "description": "圖片管理軟體 Eagle 的 Python API 封裝，讓我的腳本整理圖片比我自己快。",
+    "longDescription": "Eagle 圖片管理軟體的完整 Python wrapper，讓程式能直接存取 Eagle 的各項功能。開發者可藉此將 Eagle 強大的圖片管理能力整合進自己的 Python 應用程式。",
+    "role": "創建者與維護者",
+    "features": [
+      "完整涵蓋 Eagle API",
+      "圖片操作功能",
+      "中繼資料管理",
+      "收藏整理"
+    ]
+  },
+  "youtube-video-redirector": {
+    "subtitle": "YouTube 影片連結處理工具",
+    "description": "用一個小網頁拿到 YouTube 影片的原始連結，拿去別的地方播。是 redirect player 的前傳。",
+    "longDescription": "提供簡單方式處理並重新導向 YouTube 影片連結的 Web 應用程式。透過易用的 Web 介面，提供存取與操作 YouTube 影片網址的另一種方式。",
+    "role": "創建者與維護者",
+    "features": [
+      "處理 YouTube 連結",
+      "擷取影片資訊",
+      "重新導向功能",
+      "Web 介面"
+    ],
+    "challenges": [
+      "透過 Web 應用程式的重新導向器，取得並播放 YouTube 影片的原始連結",
+      "簡化存取原始影片串流的流程"
+    ],
+    "solutions": [
+      "開發以 Flask 為基礎的 Web 應用程式處理重新導向",
+      "使用 youtube-dl 擷取影片原始連結",
+      "建立以 URL 操作的簡單影片重新導向介面"
+    ],
+    "results": [
+      "將使用者重新導向至 YouTube 影片原始連結的輕量微服務",
+      "只要以 URL 參數傳入影片 ID 即可輕鬆整合（例如 http://localhost:5000/?v=VIDEO_ID）"
+    ]
+  },
+  "youtube-redirect-player": {
+    "subtitle": "使用 WebSocket 的 YouTube 影片播放器",
+    "description": "用 Flask 和 WebSocket 做的播放器，透過原始連結播 YouTube 影片。一次小小的過度設計練習。",
+    "longDescription": "以 Flask 與 WebSocket 技術打造的進階 YouTube 影片播放器，透過 WebSocket 通訊提供即時的播放控制與重新導向功能。",
+    "role": "創建者與維護者",
+    "features": [
+      "即時影片控制",
+      "WebSocket 通訊",
+      "整合 YouTube",
+      "支援多使用者"
+    ],
+    "challenges": [
+      "將 YouTube 影片重新導向到本機伺服器播放",
+      "在不同地點之間即時同步播放清單與播放紀錄",
+      "管理多種播放清單類型，包括預設（Default）、點播（Request）與歷史（History）"
+    ],
+    "solutions": [
+      "以 Flask 與 WebSocket 建置後端，實現即時同步",
+      "實作結構化的機制，處理三張不同的播放清單資料表",
+      "延伸 youtube-video-redirector 專案的功能"
+    ],
+    "results": [
+      "具同步功能的 YouTube 影片播放器，可保存播放紀錄（最多 200 筆）並具備點播排隊機制",
+      "穩健的 API 系統，用於管理點播請求與播放清單",
+      "可在任何地方播放影片，並透過 WebSocket 維持播放狀態"
+    ]
+  },
+  "pyppesnap": {
+    "subtitle": "網站截圖工具",
+    "description": "用 Pyppeteer 幫網頁截圖。跟按 Print Screen 差不多，只是相依套件多了一些。",
+    "longDescription": "以 Pyppeteer 打造、功能強大的網站截圖工具，可擷取高品質的網頁快照。適用於網站監控、測試與文件製作等用途。",
+    "role": "創建者與維護者",
+    "features": [
+      "高品質截圖",
+      "批次處理",
+      "可自訂選項",
+      "Headless 瀏覽器自動化"
+    ],
+    "challenges": [
+      "網址若未明確以「http」開頭，頁面導覽就會失敗",
+      "快照需要以 base64 編碼，才能無縫整合到 Web 框架",
+      "需要支援圖片、PDF 等多種匯出格式"
+    ],
+    "solutions": [
+      "運用 Pyppeteer 打造自動擷取網站快照的工具",
+      "實作專用函式，將網站圖片與 PDF 都轉為 base64 字串",
+      "提供 CLI 模式，方便快速測試與驗證參數"
+    ],
+    "results": [
+      "已發布至 PyPI、可實際使用的 Python 套件",
+      "成功以 base64 格式輸出網站快照，方便在 Web API 中使用",
+      "提供可執行的範例，示範如何與 Web 框架整合"
+    ]
+  },
+  "face-wall-generator-tool": {
+    "subtitle": "AI 模型測試工具",
+    "description": "產生一整面人臉牆，用來檢查人臉模型的表現。聽起來有點毛，實際上只毛一點點。",
+    "longDescription": "專門產生人臉牆的工具，用於測試與驗證 AI 模型，特別是人臉辨識與偵測相關的模型。可協助建立完整的測試資料集來驗證 AI 模型。",
+    "role": "創建者與維護者",
+    "features": [
+      "產生人臉牆",
+      "支援 AI 模型測試",
+      "批次處理",
+      "可自訂版面配置"
+    ],
+    "challenges": [
+      "為驗證 AI 模型而手動製作影像網格（人臉牆）的流程十分繁瑣",
+      "需要結構化且隨機化的人臉資料集來測試人臉辨識效能",
+      "需要一個能依使用者輸入調整網格大小的工具"
+    ],
+    "solutions": [
+      "以 OpenCV 與 NumPy 撰寫 Python 腳本，自動將影像拼接成網格",
+      "整合 Python Fire，提供簡單的命令列介面來調整列數與欄數",
+      "自動從來源資料夾挑選影像並調整尺寸，維持一致的輸出品質"
+    ],
+    "results": [
+      "可產生自訂「人臉牆」影像、供 AI 測試使用的工具",
+      "大幅縮短電腦視覺專案中準備資料集所需的時間",
+      "彈性的 CLI 工具，使用者可輕鬆指定輸出路徑與網格尺寸"
+    ]
+  },
+  "image-annotation": {
+    "title": "影像標註",
+    "subtitle": "React + Next.js bounding box 標註工具",
+    "description": "在圖片上畫框、匯出標註。2017 年寫的，後來用 React 和 Next.js 重寫，比大多數標註工具得到的照顧還多。",
+    "longDescription": "以 React 與 Next.js 打造的完整 Web 影像標註工具，簡化建立 bounding box 標註的流程。具備自動載入影像、直覺的拖放介面與即時編輯標註，並透過 localStorage 與 JSON 匯出功能提供可靠的資料管理。",
+    "role": "創建者",
+    "features": [
+      "啟動時自動載入隨機影像",
+      "即時建立與編輯 bounding box",
+      "拖曳移動，並可用角落控點調整大小",
+      "以縮放比例換算，儲存原始座標",
+      "處理視窗縮放並支援響應式設計",
+      "送出標註前進行驗證",
+      "將所有資料匯出為 JSON 格式",
+      "標註排行榜與進度追蹤",
+      "可疊加格線協助檢查（鍵盤快捷鍵）",
+      "深色主題搭配綠色 bounding box"
+    ],
+    "challenges": [
+      "在不同顯示尺寸間即時換算座標",
+      "視窗縮放時維持標註的準確度",
+      "在瀏覽器中有效率地儲存與讀取資料",
+      "設計易用的標註流程"
+    ],
+    "solutions": [
+      "實作縮放比例計算，確保座標準確",
+      "打造響應式設計，自動處理視窗縮放",
+      "設計完整的 localStorage 資料結構",
+      "設計直覺的鍵盤快捷鍵與 UI 控制項"
+    ],
+    "results": [
+      "可立即建立標註框，簡化標註流程",
+      "顯示尺寸改變時仍能準確保留座標",
+      "完整匯出資料與中繼資料",
+      "透過鍵盤快捷鍵提升使用體驗"
+    ]
+  },
+  "obsidian-attachmenter": {
+    "subtitle": "Obsidian 附件管理外掛",
+    "description": "Obsidian 外掛：附件依筆記分資料夾、下載遠端圖片、檢查路徑。給圖片比筆記多的人。",
+    "longDescription": "功能完整的 Obsidian 外掛，用來簡化附件管理。它會為每篇筆記套用獨立的附件資料夾結構，讓 vault 保持井然有序。主要功能包括：自動將貼上的圖片移到正確的資料夾、將遠端圖片（包含 Canvas 中的圖片）下載到本機，以及提供檢查與修復失效附件路徑、清理空資料夾的工具。支援多國語言，並與 Obsidian 的檔案總管無縫整合。",
+    "role": "創建者與維護者",
+    "features": [
+      "每篇筆記獨立的附件資料夾管理",
+      "自動搬移貼上的圖片",
+      "下載遠端圖片（Markdown 與 Canvas）",
+      "檔案總管中的附件樹狀檢視",
+      "附件管理員檢視",
+      "路徑檢查與修復工具",
+      "清理空資料夾"
+    ],
+    "challenges": [
+      "處理跨平台的檔案路徑清理（sanitization）",
+      "整合 Obsidian 內部的連結管理",
+      "同時支援 Markdown 與 Canvas 檔案",
+      "即時同步檔案系統"
+    ],
+    "solutions": [
+      "實作穩健的路徑清理邏輯",
+      "利用 Obsidian 的 vault 事件追蹤變更",
+      "為 Canvas 節點開發自訂 handler",
+      "建立集中式附件管理器"
+    ],
+    "results": [
+      "簡化使用者的附件處理流程",
+      "自動保存遠端圖片",
+      "一致的 vault 結構"
+    ]
+  }
+}

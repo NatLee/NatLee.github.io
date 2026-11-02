@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "siteTitle": "Nat Lee",
+    "projectsTitle": "作品 | Nat Lee",
+    "aboutTitle": "關於 | Nat Lee",
+    "experienceTitle": "經歷 | Nat Lee",
+    "valhallaTitle": "英靈殿 | Nat Lee"
+  },
+  "common": {
+    "copy": "複製 Email",
+    "copied": "已複製",
+    "present": "至今",
+    "stars": "GitHub 上 {count} 顆星",
+    "newTab": "在新分頁開啟"
+  },
+  "nav": {
+    "home": "首頁",
+    "projects": "作品",
+    "about": "關於",
+    "experience": "經歷",
+    "valhalla": "英靈殿",
+    "skip": "跳到主要內容",
+    "primary": "主要導覽",
+    "toLight": "切換成淺色主題",
+    "toDark": "切換成深色主題",
+    "language": "語言",
+    "shortcuts": "鍵盤快捷鍵"
+  },
+  "shortcuts": {
+    "title": "鍵盤快捷鍵",
+    "toggle": "單鍵快捷鍵",
+    "on": "開啟",
+    "off": "關閉",
+    "hint": "如果它們干擾到螢幕閱讀器或語音控制，可以在這裡關掉。設定會存在這個瀏覽器。",
+    "home": "首頁",
+    "projects": "作品",
+    "about": "關於",
+    "experience": "經歷",
+    "search": "搜尋作品",
+    "help": "顯示這個面板",
+    "close": "關閉"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "{location} · {year} 年開始出貨",
+      "nowCmd": "$ cat now.txt",
+      "cta": "看作品",
+      "about": "關於我",
+      "avatarAlt": "Nat Lee 的大頭貼，seseren 繪的 Q 版人物"
+    },
+    "flagship": {
+      "eyebrow": "旗艦作品",
+      "caseStudy": "讀案例",
+      "shotAlt": "Telepy 的隧道頁：健康狀態、延遲、每台裝置怎麼連線，以及誰正在使用",
+      "tapi": "Telepy 的吉祥物 Tapi 在揮手"
+    },
+    "selected": {
+      "title": "精選作品",
+      "intro": "幾個能看出範圍的作品：交易資料、開發者基礎設施、電腦視覺，還有一些真的有人在裝的小工具。",
+      "all": "全部 {count} 個作品"
+    },
+    "opensource": {
+      "title": "開源",
+      "intro": "送回上游的修正，以及別人會安裝的套件。",
+      "upstream": "上游貢獻",
+      "packages": "PyPI 套件",
+      "prs": "{count} 個合併的 PR",
+      "pr": "合併的 PR"
+    },
+    "career": {
+      "title": "一路走來",
+      "intro": "目前走過四個房間，每一間都教了我下一間會用到的東西，通常是用比較痛的方式。",
+      "full": "完整經歷"
+    },
+    "how": {
+      "title": "工作方式",
+      "tools": "每天在用"
+    },
+    "writing": {
+      "title": "文章"
+    }
+  },
+  "projects": {
+    "title": "作品",
+    "intro": "工作上和自己做的東西，一共 {count} 個。Telepy 排第一，接著是面試時會拿出來講的，最後是其他全部。",
+    "searchLabel": "搜尋作品",
+    "searchPlaceholder": "用名稱、技術或主題搜尋",
+    "all": "全部",
+    "themes": {
+      "energy": "能源與預測",
+      "infra": "基礎設施與後端",
+      "ai": "AI、視覺與醫學影像",
+      "libraries": "函式庫與工具",
+      "web": "網頁應用與擴充功能"
+    },
+    "selected": "精選",
+    "more": "其他作品",
+    "shown": "顯示 {shown} / {total}",
+    "empty": "找不到「{query}」。試試看技術名稱，例如 Django、OpenCV 或 Rust。",
+    "clear": "清除搜尋與篩選",
+    "status": {
+      "Completed": "已完成",
+      "In Progress": "進行中",
+      "Archived": "已封存"
+    }
+  },
+  "project": {
+    "back": "所有作品",
+    "overview": "概要",
+    "problem": "問題",
+    "approach": "我做了什麼",
+    "results": "成果",
+    "features": "功能",
+    "stack": "技術",
+    "role": "角色",
+    "period": "期間",
+    "status": "狀態",
+    "theme": "主題",
+    "gallery": "截圖",
+    "related": "相關作品",
+    "links": {
+      "github": "原始碼",
+      "demo": "線上試用",
+      "pypi": "PyPI",
+      "documentation": "文件",
+      "article": "文章"
+    },
+    "imageAlt": "{title} 截圖 {n}",
+    "noImage": "這個作品沒有截圖，它是未公開或純命令列的。"
+  },
+  "telepy": {
+    "eyebrow": "旗艦作品 · 案例",
+    "problem": "為什麼要做",
+    "architecture": "怎麼運作",
+    "architectureNote": "裝置跑的就是一般的 ssh -R，連到 Telepy 內建的 gateway。伺服器上不會開任何埠，兩端也會互相檢查 host key。",
+    "features": "能做什麼",
+    "rewrite": "從 Django 到 Rust",
+    "metric": "項目",
+    "before": "Django",
+    "after": "Rust",
+    "change": "變化",
+    "source": "完整的效能測試紀錄",
+    "reading": "延伸閱讀",
+    "stack": "技術",
+    "cta": "到 GitHub 看 Telepy",
+    "ctaNote": "用 Docker Compose 自架，AGPL-3.0 授權。"
+  },
+  "about": {
+    "title": "關於",
+    "lead": "比較長的版本，給滑過那些笑話還想多了解一點的人。",
+    "story": "簡單的故事",
+    "how": "工作方式",
+    "languages": "語言",
+    "contact": "聯絡我",
+    "contactIntro": "寫 Email 最快。每封我都會看，大部分也會回。",
+    "valhalla": "這個網站換過幾套外觀。",
+    "valhallaBody": "2015 年以來的每一套外觀都還在英靈殿裡，從有風場圖的那一頁，到前一套終端機。它們顯示的都是最新內容。",
+    "valhallaCta": "參觀英靈殿"
+  },
+  "experience": {
+    "title": "經歷",
+    "intro": "工作、學歷、技能與開源貢獻都在這一頁，也可以直接印成一份履歷。",
+    "print": "列印或存成 PDF",
+    "work": "工作",
+    "education": "學歷",
+    "skills": "技能",
+    "skillsIntro": "實際使用的年數，以及在哪些作品裡看得到。",
+    "upstream": "開源貢獻",
+    "roleType": {
+      "join": "加入",
+      "promotion": "晉升",
+      "transfer": "調動"
+    },
+    "assignment": "外派{location}",
+    "achievements": "成果",
+    "subsidiary": "隸屬 {parent}",
+    "minor": "輔系：{minor}",
+    "years": "{count} 年",
+    "skill": "技能",
+    "experienceCol": "年資",
+    "notes": "說明",
+    "usedIn": "用在"
+  },
+  "valhalla": {
+    "title": "英靈殿",
+    "intro": "這個網站從 2015 年起穿過的每一套外觀都在這裡。每個主題讀的都是最新內容，所以這裡沒有過時的資訊，過時的只有髮型。",
+    "enter": "打開 {name}",
+    "side": "實驗",
+    "timeline": "各外觀第一次出現的時間",
+    "now": "現在",
+    "howTitle": "運作方式",
+    "how": "所有主題都讀同一個檔案 /content/site.json，跟著主站一起發布。作品只要加一次，每個主題都會出現，不必重 build 任何一個。主題自己的程式只 build 一次，之後就放著。",
+    "keepers": "Tapi 和千代在這裡看門。點它們，會講話。"
+  },
+  "footer": {
+    "contact": "聯絡",
+    "elsewhere": "其他地方",
+    "valhalla": "英靈殿",
+    "valhallaNote": "這個網站穿過的每一套外觀，都還能逛。",
+    "version": "Persimmon · since 2015",
+    "tapi": "Telepy 的吉祥物 Tapi，點點看。",
+    "built": "用 Next.js 打造，部署在 GitHub Pages。"
+  },
+  "notFound": {
+    "title": "這條隧道沒有接通",
+    "body": "你要找的頁面不存在，或是在網站改版時搬家了。",
+    "home": "回首頁",
+    "projects": "看作品",
+    "valhalla": "在找舊的外觀嗎？它們都在英靈殿。"
+  }
+}

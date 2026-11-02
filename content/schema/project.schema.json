@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Project",
+  "description": "一個作品（content/projects/<id>.json）。新增後記得在 data/projects-list.ts 登記。中文寫在 content/i18n/projects.zh.json。",
+  "type": "object",
+  "required": ["id", "title", "subtitle", "description", "category", "theme", "tier", "status", "timeline", "role"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "pattern": "^[a-z0-9.-]+$", "description": "網址用的代號：/projects/<id>/，要跟檔名一樣。" },
+    "title": { "type": "string" },
+    "subtitle": { "type": "string", "description": "一句話說它是什麼，例如 Image Format Converter。" },
+    "description": { "type": "string", "description": "卡片上的一兩句介紹。可以自嘲，但事實要對。" },
+    "longDescription": { "type": "string", "description": "作品頁的概要段落。" },
+    "language": { "type": "string" },
+    "images": { "type": "array", "items": { "type": "string", "format": "uri" }, "description": "截圖網址；第一張是作品頁主圖，也是卡片縮圖的來源（node scripts/make-thumbs.mjs）。" },
+    "githubUrl": { "type": "string", "format": "uri" },
+    "category": {
+      "enum": ["AI/ML", "Web Development", "Data Science", "Computer Vision", "Backend", "DevOps", "Medical Imaging", "Utilities", "Browser Extension", "Image Processing", "Data Collection", "API/SDK", "Web Application", "Web Automation", "Productivity Tools"]
+    },
+    "theme": { "enum": ["energy", "infra", "ai", "libraries", "web"], "description": "作品頁的篩選主題。" },
+    "tier": { "enum": ["flagship", "selected", "archive"], "description": "flagship 只給 Telepy；selected 會出現在卡片區（首頁取前 6 個）；archive 在列表。" },
+    "status": { "enum": ["Completed", "In Progress", "Archived"] },
+    "opensource": { "type": "boolean" },
+    "technologies": { "type": "array", "items": { "type": "string" } },
+    "features": { "type": "array", "items": { "type": "string" } },
+    "challenges": { "type": "array", "items": { "type": "string" } },
+    "solutions": { "type": "array", "items": { "type": "string" } },
+    "results": { "type": "array", "items": { "type": "string" } },
+    "links": {
+      "type": "object",
+      "properties": {
+        "github": { "type": "string", "format": "uri" },
+        "demo": { "type": "string", "format": "uri" },
+        "pypi": { "type": "string", "format": "uri" },
+        "documentation": { "type": "string", "format": "uri" },
+        "article": { "type": "string", "format": "uri" }
+      },
+      "additionalProperties": false
+    },
+    "timeline": {
+      "type": "object",
+      "required": ["start"],
+      "properties": {
+        "start": { "type": "string", "description": "YYYY 或 YYYY-MM" },
+        "end": { "type": "string", "description": "YYYY-MM 或 Present" },
+        "duration": { "type": "string" }
+      }
+    },
+    "role": { "type": "string" },
+    "company": { "type": "string" },
+    "team": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

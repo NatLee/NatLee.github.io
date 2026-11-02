@@ -1,0 +1,323 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── v4 design tokens ────────────────────────────────────────────────────
+   配色取自 Tapi：柿橘身體（accent）、青綠十字髮夾（clip）、梅褐輪廓線（ink / plum）。
+   值是 RGB 三元組，Tailwind 才能加透明度（bg-accent/10）。淺色寫在 :root，
+   深色只在兩個區塊重新定義同一組變數：跟隨系統（沒有 data-theme）與手動選深色。 */
+@layer base {
+  :root {
+    --paper: 247 243 242;
+    --surface: 255 253 252;
+    --ink: 42 29 31;
+    --muted: 108 91 93;
+    --line: 230 219 217;
+    --accent: 176 84 15; /* 文字用，在 paper 上對比 ≥ 4.5 */
+    --accent-fill: 212 116 30; /* #d4741e，品牌色，用在色塊 */
+    --accent-soft: 247 228 212;
+    --clip: 17 115 93;
+    --clip-soft: 220 243 236;
+    --plum: 74 32 38;
+    color-scheme: light;
+
+    /* Motion system：所有時間與曲線都從這裡取，不在元件裡寫死。 */
+    --motion-instant: 150ms;
+    --motion-fast: 250ms;
+    --motion-base: 420ms;
+    --motion-slow: 650ms;
+    --motion-slower: 900ms;
+    --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+    --stagger-step: 65ms;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      --paper: 20 16 18;
+      --surface: 28 22 24;
+      --ink: 240 232 229;
+      --muted: 168 152 155;
+      --line: 50 40 43;
+      --accent: 242 138 56;
+      --accent-fill: 227 119 14;
+      --accent-soft: 58 35 23;
+      --clip: 141 230 207;
+      --clip-soft: 21 48 42;
+      --plum: 239 200 205;
+      color-scheme: dark;
+    }
+  }
+
+  :root[data-theme='dark'] {
+    --paper: 20 16 18;
+    --surface: 28 22 24;
+    --ink: 240 232 229;
+    --muted: 168 152 155;
+    --line: 50 40 43;
+    --accent: 242 138 56;
+    --accent-fill: 227 119 14;
+    --accent-soft: 58 35 23;
+    --clip: 141 230 207;
+    --clip-soft: 21 48 42;
+    --plum: 239 200 205;
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    text-wrap: balance;
+    letter-spacing: -0.012em;
+  }
+
+  ::selection {
+    background: rgb(var(--accent-fill) / 0.28);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent-fill));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* 唯一的版面寬度與左右留白，各頁都用它。 */
+  .shell {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase text-muted;
+    letter-spacing: 0.08em;
+  }
+
+  .link {
+    @apply text-accent underline decoration-accent/40 decoration-1 underline-offset-[3px] transition-colors hover:decoration-accent;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-md border border-line bg-paper px-2 py-0.5 font-mono text-xs leading-5 text-muted;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-colors;
+    transition-duration: var(--motion-fast);
+  }
+
+  .btn-primary {
+    @apply btn border-ink bg-ink text-paper hover:bg-ink/85;
+  }
+
+  .btn-ghost {
+    @apply btn border-line bg-surface text-ink hover:border-ink/40;
+  }
+
+  .section-title {
+    @apply font-display text-3xl font-bold md:text-[2.5rem] md:leading-tight;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ── Motion ──────────────────────────────────────────────────────────── */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise var(--motion-slow) var(--ease-out-soft) both;
+  animation-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+/* 首屏唯一編排過的時刻：`$ cat now.txt` 打字，接著輸出浮現。內容一直在 DOM 裡。 */
+@keyframes type-in {
+  from {
+    width: 0;
+  }
+}
+
+.type-cmd {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  animation: type-in 0.8s steps(13, end) 0.35s both;
+}
+
+.after-type {
+  animation: rise var(--motion-base) var(--ease-out-soft) 1.25s both;
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.caret::after {
+  content: '';
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 0.25em;
+  vertical-align: -0.15em;
+  background: rgb(var(--clip));
+  animation: caret 1.1s steps(1) infinite;
+}
+
+/* Tapi 走路：sideA / sideB 兩格交替；在英靈殿地板上來回巡邏，折返時轉身。 */
+@keyframes walk-frame-a {
+  0%,
+  49.99% {
+    visibility: visible;
+  }
+  50%,
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes walk-frame-b {
+  0%,
+  49.99% {
+    visibility: hidden;
+  }
+  50%,
+  100% {
+    visibility: visible;
+  }
+}
+
+@keyframes patrol {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: calc(100% - var(--walker-w, 52px));
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes face {
+  0%,
+  49.99% {
+    transform: scaleX(-1);
+  }
+  50%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.walker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  animation:
+    patrol 36s linear infinite,
+    face 36s steps(1) infinite;
+}
+
+.walker .frame-a {
+  animation: walk-frame-a 0.5s steps(1) infinite;
+}
+
+.walker .frame-b {
+  visibility: hidden;
+  animation: walk-frame-b 0.5s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .walker,
+  .walker .frame-a,
+  .walker .frame-b {
+    animation: none !important;
+  }
+  .walker {
+    left: 1rem;
+  }
+}
+
+/* ── Print（/experience 的「列印或存成 PDF」） ──────────────────────── */
+@media print {
+  :root,
+  :root[data-theme],
+  :root:not([data-theme='light']) {
+    --paper: 255 255 255;
+    --surface: 255 255 255;
+    --ink: 0 0 0;
+    --muted: 70 70 70;
+    --line: 205 205 205;
+    --accent: 120 55 10;
+    --accent-soft: 255 255 255;
+    --clip: 0 90 70;
+    --clip-soft: 255 255 255;
+    color-scheme: light;
+  }
+
+  body {
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-avoid-break {
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
