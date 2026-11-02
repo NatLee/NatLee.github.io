@@ -1,0 +1,74 @@
+'use client'
+
+import { useState } from 'react'
+import TechHero from '@/components/TechHero'
+import FeaturedProjects from '@/components/FeaturedProjects'
+import TerminalCommand from '@/components/TerminalCommand'
+import InteractiveTerminal from '@/components/InteractiveTerminal'
+import RevealOnView from '@/components/RevealOnView'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { getPersonalInfo, getUserHandle } from '@/data/personal'
+
+export default function Home() {
+  const { locale, t } = useLanguage()
+  const personalInfo = getPersonalInfo(locale)
+  // Serial choreography: one typewriter at a time. Measured with the old
+  // gating, the hero boot log (1.8s-6.4s) and the projects command (2.0s-3.6s)
+  // typed simultaneously — and everything below the fold had finished its
+  // entrance before the visitor ever scrolled to it. The projects prompt now
+  // waits for the boot log to finish AND for its own slot to scroll into view.
+  const [heroBootComplete, setHeroBootComplete] = useState(false)
+  const [projectsCommandComplete, setProjectsCommandComplete] = useState(false)
+
+  return (
+    <main id="main" tabIndex={-1} className="min-h-screen pt-16 md:pt-20 pb-20 font-mono relative overflow-hidden pointer-events-none focus:outline-none">
+      <h1 className="sr-only">{personalInfo.displayName} — {personalInfo.title}</h1>
+      <div className="relative z-10 container mx-auto px-2 md:px-4 max-w-6xl pointer-events-auto">
+          <div className="border border-gray-700 rounded-lg overflow-hidden shadow-2xl bg-black/60 backdrop-blur-sm">
+            <div className="w-full bg-[#1a1a1a] p-3 flex items-center gap-2 sticky top-0 z-20 border-b border-gray-800">
+              <div className="flex gap-2 mr-4" aria-hidden="true">
+                <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400" />
+                <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400" />
+              </div>
+              <div className="flex-1 text-center text-xs md:text-sm text-gray-500 font-bold select-none">
+                {t('home.terminalTitle', { user: getUserHandle() })}
+              </div>
+            </div>
+
+            <div className="min-h-[80vh] p-4 md:p-8 text-gray-300">
+              {/* 400ms: enough for first paint and fonts to settle so the
+                  visitor's eye is on the prompt when the first keystroke lands. */}
+              <TerminalCommand
+                command={t('home.introCommand')}
+                startDelay={400}
+              >
+                <TechHero onBootComplete={() => setHeroBootComplete(true)} />
+              </TerminalCommand>
+
+              {heroBootComplete && (
+                <RevealOnView className="mt-8">
+                  <div className="animate-content-reveal">
+                    <TerminalCommand
+                      path="~/projects"
+                      command={t('home.projectsCommand')}
+                      startDelay={200}
+                      onComplete={() => setProjectsCommandComplete(true)}
+                    >
+                      <FeaturedProjects />
+                    </TerminalCommand>
+                  </div>
+                </RevealOnView>
+              )}
+
+              {projectsCommandComplete && (
+                <div className="animate-content-reveal">
+                  <InteractiveTerminal />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
+  )
+}

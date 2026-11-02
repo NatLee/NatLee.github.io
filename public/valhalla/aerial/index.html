@@ -1,0 +1,87 @@
+﻿<!DOCTYPE HTML>
+<!--
+	Aerial by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+
+	Aerial 主題（2015 年的外觀）。名字、連結與吉祥物千代都在瀏覽器裡從 /content/site.json 讀取，
+	這個檔案本身不放任何個人資料。
+-->
+<html>
+	<head>
+		<title>Aerial · Valhalla</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<link rel="icon" href="assets/css/images/favicon.ico" type="image/x-icon" />
+	<meta name="robots" content="noindex" data-valhalla="aerial"><script src="/valhalla/_banner.js" data-valhalla="aerial" defer></script></head>
+	<body class="loading">
+		<div id="wrapper">
+			<div id="bg"></div>
+			<div id="overlay"></div>
+			<div id="main">
+
+				<!-- Header -->
+				<header id="header">
+					<h1 data-bind="name">&nbsp;</h1>
+					<p>Start &nbsp;&bull;&nbsp; 2015 &nbsp;&bull;&nbsp; Summer</p>
+					<nav>
+						<ul data-bind="socials"></ul>
+					</nav>
+					<iframe src="https://embed.windyty.com/?surface,wind,now,25.721,120.938,4,,menu,message,ip" title="Wind map" width="70% px" height="500 px" frameborder="0" scrolling="auto"></iframe>
+				</header>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<span class="copyright">&copy; <span data-bind="name"></span>. Design: <a href="http://html5up.net">HTML5 UP</a>.</span>
+				</footer>
+
+			</div>
+		</div>
+
+		<!-- 千代：共用的吉祥物腳本，台詞在 content/mascots.json -->
+		<div data-mascot="chiyo" data-locale="zh"></div>
+
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script>
+			window.onload = function() { document.body.className = ''; }
+			window.ontouchmove = function() { return false; }
+			window.onorientationchange = function() { document.body.scrollTop = 0; }
+		</script>
+		<script src="/shared/mascot.js"></script>
+		<script>
+			(function () {
+				// 原版只有 Facebook、Blog、GitHub 三顆；現在照內容檔裡的連結，取 Font Awesome 4.3 有圖示的幾個。
+				var ICON = { github: 'fa-github', blog: 'fa-smile-o', linkedin: 'fa-linkedin', medium: 'fa-medium' };
+				function bindName(name) {
+					Array.prototype.forEach.call(document.querySelectorAll('[data-bind="name"]'), function (el) { el.textContent = name; });
+				}
+				window.siteBundle.then(function (site) {
+					var profile = site.profile;
+					document.title = profile.name;
+					bindName(profile.name);
+					var list = document.querySelector('[data-bind="socials"]');
+					profile.socials.filter(function (s) { return ICON[s.icon]; }).forEach(function (s) {
+						var li = document.createElement('li');
+						var a = document.createElement('a');
+						a.href = s.url;
+						a.className = 'icon ' + ICON[s.icon];
+						a.target = '_blank';
+						a.rel = 'noopener noreferrer';
+						var label = document.createElement('span');
+						label.className = 'label';
+						label.textContent = s.name;
+						a.appendChild(label);
+						li.appendChild(a);
+						list.appendChild(li);
+					});
+				}).catch(function () {
+					bindName('Aerial');
+				});
+			})();
+		</script>
+	</body>
+</html>
