@@ -159,7 +159,7 @@
   },
   "experience": {
     "title": "Experience",
-    "intro": "Work, education, skills and open-source contributions on one page. It also prints cleanly as a one-page CV.",
+    "intro": "Work, education, skills and open-source contributions on one page. It also prints as a compact CV.",
     "print": "Print or save as PDF",
     "work": "Work",
     "education": "Education",

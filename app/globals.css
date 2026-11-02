@@ -288,6 +288,11 @@
 }
 
 /* ── Print（/experience 的「列印或存成 PDF」） ──────────────────────── */
+@page {
+  size: A4;
+  margin: 12mm 14mm;
+}
+
 @media print {
   :root,
   :root[data-theme],
@@ -305,8 +310,15 @@
   }
 
   body {
-    font-size: 10.5pt;
-    line-height: 1.5;
+    font-size: 9.5pt;
+    line-height: 1.4;
+  }
+
+  /* 頁面邊距交給 @page，不要再疊上 .shell 的左右留白。 */
+  .shell {
+    max-width: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   .no-print {
@@ -315,6 +327,21 @@
 
   .print-avoid-break {
     break-inside: avoid;
+  }
+
+  /* /experience 的精簡履歷 */
+  .cv h4 {
+    font-size: 10.5pt;
+  }
+
+  .cv .text-sm,
+  .cv .text-xs {
+    font-size: 9pt;
+  }
+
+  .cv p {
+    orphans: 3;
+    widows: 3;
   }
 
   a {

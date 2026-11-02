@@ -1,7 +1,8 @@
 'use client'
 
 // 履歷頁：工作（依集團分組）、學歷、技能（年資 + 用在哪些作品）、開源貢獻。
-// 「列印或存成 PDF」用瀏覽器列印；globals.css 的 @media print 會拿掉頁首頁尾、改成白底黑字。
+// 「列印或存成 PDF」用瀏覽器列印。列印版是一份精簡履歷：開頭換成姓名與聯絡方式，每個職位只留摘要與成果，
+// 技能改成一類一行；顏色、頁首頁尾與分頁規則在 globals.css 的 @media print。
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import Icon from '@/components/Icon'
@@ -10,20 +11,21 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { opensource } from '@/data/content'
 import { getEducationData } from '@/data/education'
 import { getExperienceData, type Experience } from '@/data/experience'
+import { getPersonalInfo } from '@/data/personal'
 import { getSkills, projectsUsingSkill } from '@/data/skills'
 import { pick } from '@/lib/i18n/localize'
 
 function Section({ id, title, children, intro }: { id: string; title: string; intro?: string; children: ReactNode }) {
   return (
-    <section className="mt-16 border-t border-line pt-12 print:mt-6 print:pt-4" aria-labelledby={id}>
+    <section className="mt-16 border-t border-line pt-12 print:mt-4 print:pt-3" aria-labelledby={id}>
       <div className="grid gap-8 lg:grid-cols-[12rem_minmax(0,1fr)] print:block">
         <div>
-          <h2 id={id} className="font-display text-2xl font-bold print:text-lg">
+          <h2 id={id} className="font-display text-2xl font-bold print:break-after-avoid print:text-[12pt] print:uppercase print:tracking-wider">
             {title}
           </h2>
           {intro && <p className="mt-2 text-sm text-muted print:hidden">{intro}</p>}
         </div>
-        <div className="min-w-0 print:mt-3">{children}</div>
+        <div className="min-w-0 print:mt-2">{children}</div>
       </div>
     </section>
   )
@@ -48,6 +50,7 @@ const roleTypeStyle: Record<string, string> = {
 
 export default function ExperiencePage() {
   const { locale, t } = useLanguage()
+  const me = getPersonalInfo(locale)
   const groups = groupRoles(getExperienceData(locale))
   const education = getEducationData(locale)
   const skills = getSkills(locale)
@@ -55,12 +58,24 @@ export default function ExperiencePage() {
   const period = (start: string, end: string) => `${start} – ${end === 'Present' ? present : end}`
 
   return (
-    <div className="shell pt-14 md:pt-20 print:pt-0">
+    <div className="cv shell pt-14 md:pt-20 print:pt-0">
       <header className="flex flex-wrap items-end justify-between gap-6">
-        <div>
-          <h1 className="font-display text-5xl font-bold tracking-tight md:text-6xl print:text-3xl">{t('experience.title')}</h1>
-          <p className="mt-4 max-w-[60ch] text-lg text-muted print:hidden">{t('experience.intro')}</p>
-          <p className="hidden print:block print:text-sm">Nat Lee · natlee.work@gmail.com · natlee.github.io</p>
+        <div className="print:hidden">
+          <h1 className="font-display text-5xl font-bold tracking-tight md:text-6xl">{t('experience.title')}</h1>
+          <p className="mt-4 max-w-[60ch] text-lg text-muted">{t('experience.intro')}</p>
+        </div>
+        {/* 列印版的開頭：履歷看的是人，不是頁面標題。 */}
+        <div className="hidden print:block">
+          <p className="font-display text-[22pt] font-bold leading-tight">
+            {me.displayName} <span className="text-[13pt] font-medium text-muted">{me.name}</span>
+          </p>
+          <p className="mt-1 text-[10pt]">
+            {me.title} · {me.location}
+          </p>
+          <p className="mt-0.5 font-mono text-[9pt] text-muted">
+            {me.email} · natlee.github.io · {me.socialLinks.find((link) => link.icon === 'linkedin')?.url.replace(/^https?:\/\/(www\.)?/, '')}
+          </p>
+          <p className="mt-2 max-w-none text-[10pt]">{me.description}</p>
         </div>
         <button type="button" onClick={() => window.print()} className="btn-ghost no-print">
           <Icon name="print" size={16} /> {t('experience.print')}
@@ -68,11 +83,12 @@ export default function ExperiencePage() {
       </header>
 
       <Section id="work-title" title={t('experience.work')}>
-        <ol className="grid gap-12 print:gap-5">
+        <ol className="grid gap-12 print:gap-4">
           {groups.map((group) => (
-            <li key={group.name} className="print-avoid-break">
-              <h3 className="font-display text-xl font-bold">{group.name}</h3>
-              <ol className="mt-5 grid gap-8 border-l-2 border-line pl-6 print:mt-2 print:gap-3 print:pl-4">
+            // 公司這一層不能設「不可分頁」：HD Renewables 一組比一頁還長，會整組跳到下一頁、留下空白頁。
+            <li key={group.name}>
+              <h3 className="font-display text-xl font-bold print:break-after-avoid print:text-[11.5pt]">{group.name}</h3>
+              <ol className="mt-5 grid gap-8 border-l-2 border-line pl-6 print:mt-1.5 print:gap-3 print:border-l print:pl-4">
                 {group.roles.map((role) => (
                   <li key={role.id} className="relative print-avoid-break">
                     <span
@@ -101,9 +117,10 @@ export default function ExperiencePage() {
                         {t('experience.assignment', { location: role.assignment.location })} · <span className="tabular">{period(role.assignment.start, role.assignment.end)}</span>
                       </p>
                     )}
-                    <p className="mt-3 max-w-prose">{role.summary}</p>
+                    <p className="mt-3 max-w-prose print:mt-1 print:max-w-none">{role.summary}</p>
+                    {/* 列印版不印職責清單：摘要已經講過一次，只留成果，篇幅少一半。 */}
                     {role.responsibilities.length > 0 && (
-                      <ul className="mt-3 grid max-w-prose gap-1.5 text-sm text-muted print:text-[9.5pt]">
+                      <ul className="mt-3 grid max-w-prose gap-1.5 text-sm text-muted print:hidden">
                         {role.responsibilities.map((item) => (
                           <li key={item} className="grid grid-cols-[0.75rem_minmax(0,1fr)] gap-2">
                             <span className="mt-[0.65em] h-1 w-1 rounded-full bg-muted" aria-hidden="true" />
@@ -113,9 +130,9 @@ export default function ExperiencePage() {
                       </ul>
                     )}
                     {role.achievements && role.achievements.length > 0 && (
-                      <div className="mt-3 max-w-prose">
-                        <p className="eyebrow">{t('experience.achievements')}</p>
-                        <ul className="mt-1.5 grid gap-1.5 text-sm">
+                      <div className="mt-3 max-w-prose print:mt-1 print:max-w-none">
+                        <p className="eyebrow print:hidden">{t('experience.achievements')}</p>
+                        <ul className="mt-1.5 grid gap-1.5 text-sm print:mt-0.5 print:gap-0.5">
                           {role.achievements.map((item) => (
                             <li key={item} className="grid grid-cols-[0.75rem_minmax(0,1fr)] gap-2">
                               <span className="mt-[0.6em] h-1.5 w-1.5 rounded-full bg-accent-fill" aria-hidden="true" />
@@ -160,9 +177,22 @@ export default function ExperiencePage() {
       </Section>
 
       <Section id="skills-title" title={t('experience.skills')} intro={t('experience.skillsIntro')}>
-        <div className="grid gap-8">
+        {/* 列印版：一類一行，「技術（年資）」。 */}
+        <dl className="hidden gap-1 text-[10pt] print:grid">
           {skills.map((category) => (
-            <div key={category.id} className="print-avoid-break">
+            <div key={category.id} className="grid grid-cols-[10rem_minmax(0,1fr)] gap-3">
+              <dt className="font-semibold">{category.name}</dt>
+              <dd>
+                {category.skills
+                  .map((skill) => (skill.years ? `${skill.name} (${t('experience.years', { count: skill.years })})` : skill.name))
+                  .join(', ')}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <div className="grid gap-8 print:hidden">
+          {skills.map((category) => (
+            <div key={category.id}>
               <h3 className="eyebrow">{category.name}</h3>
               <div className="mt-3 overflow-x-auto">
                 <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
