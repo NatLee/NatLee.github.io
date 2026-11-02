@@ -30,9 +30,15 @@ for (const file of fs.readdirSync(projectsDir).sort()) {
     continue
   }
   try {
-    const res = await fetch(source, { redirect: 'follow' })
-    if (!res.ok) throw new Error(String(res.status))
-    const input = Buffer.from(await res.arrayBuffer())
+    let input
+    if (source.startsWith('/')) {
+      // 站內圖片（不能公開的 repo 截圖放在 public/ 底下）。/ Site-local image under public/.
+      input = fs.readFileSync(path.join(root, 'public', source))
+    } else {
+      const res = await fetch(source, { redirect: 'follow' })
+      if (!res.ok) throw new Error(String(res.status))
+      input = Buffer.from(await res.arrayBuffer())
+    }
     await sharp(input, { animated: false })
       .resize({ width: 960, withoutEnlargement: true })
       .webp({ quality: 78 })

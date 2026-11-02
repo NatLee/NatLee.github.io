@@ -8,8 +8,14 @@
   "tier": "selected",
   "status": "In Progress",
   "opensource": false,
-  "images": [],
-  "description": "Spot-price forecasting and trading strategies for the Japanese and Australian power markets. The repository is private, so you will have to take my word for it.",
+  "images": [
+    "/images/projects/power-trading-ai/overview.webp",
+    "/images/projects/power-trading-ai/interconnection-map.webp",
+    "/images/projects/power-trading-ai/generation-mix.webp",
+    "/images/projects/power-trading-ai/regional-energy.webp",
+    "/images/projects/power-trading-ai/daily-compare.webp"
+  ],
+  "description": "Spot-price forecasting and trading strategies for the Japanese and Australian power markets. The repository is private, so screenshots will have to do.",
   "longDescription": "Leading the development of sophisticated AI trading strategies for international power markets. The system uses advanced time series analysis and machine learning models to predict electricity spot market prices, helping traders make data-driven decisions in volatile energy markets.",
   "technologies": [
     "Python",
@@ -18,7 +24,9 @@
     "Elasticsearch",
     "Docker",
     "Time Series Analysis",
-    "Deep Learning"
+    "Deep Learning",
+    "Next.js",
+    "FastAPI"
   ],
   "features": [
     "Spot market price prediction models",

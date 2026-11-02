@@ -12,7 +12,11 @@
     "description": { "type": "string", "description": "卡片上的一兩句介紹。可以自嘲，但事實要對。" },
     "longDescription": { "type": "string", "description": "作品頁的概要段落。" },
     "language": { "type": "string" },
-    "images": { "type": "array", "items": { "type": "string", "format": "uri" }, "description": "截圖網址；第一張是作品頁主圖，也是卡片縮圖的來源（node scripts/make-thumbs.mjs）。" },
+    "images": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^(https?://|/)" },
+      "description": "截圖：外部網址，或放在 public/ 底下的站內路徑（例如 /images/projects/<id>/1.webp，給不能公開的 repo 用）。第一張是作品頁主圖，也是卡片縮圖的來源（node scripts/make-thumbs.mjs）。"
+    },
     "githubUrl": { "type": "string", "format": "uri" },
     "category": {
       "enum": ["AI/ML", "Web Development", "Data Science", "Computer Vision", "Backend", "DevOps", "Medical Imaging", "Utilities", "Browser Extension", "Image Processing", "Data Collection", "API/SDK", "Web Application", "Web Automation", "Productivity Tools"]
