@@ -37,7 +37,7 @@ Personal site of Nat Lee. **One body of content, several looks ("themes").** The
 | `/projects/telepy` | `components/projects/TelepyCaseStudy.tsx` | telepy.json + `case-studies/telepy.json` |
 | `/projects/[id]` | `components/projects/ProjectPage.tsx` | one project (`generateStaticParams`) |
 | `/about` | `components/about/AboutPage.tsx` | personal |
-| `/experience` | `components/experience/ExperiencePage.tsx` | experience, education, skills, opensource (print styles) |
+| `/experience` | `components/experience/ExperiencePage.tsx` (screen), `PrintCV.tsx` (print-only CV) | experience, education, skills, opensource |
 | `/valhalla` | `components/valhalla/ValhallaHall.tsx` | valhalla.json |
 | `/content/site.json` | `app/content/site.json/route.ts` | everything (for themes) |
 
