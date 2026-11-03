@@ -2,7 +2,7 @@ import ExperiencePage from '@/components/experience/ExperiencePage'
 
 export const metadata = {
   title: 'Experience',
-  description: 'Work history, education, skills and open-source contributions of Nat Lee. Prints as a one-page CV.',
+  description: 'Work history, education, skills and open-source contributions of Nat Lee. Prints as a compact CV.',
   alternates: { canonical: '/experience/' },
 }
 

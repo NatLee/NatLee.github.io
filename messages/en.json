@@ -179,7 +179,9 @@
     "skill": "Skill",
     "experienceCol": "Experience",
     "notes": "Notes",
-    "usedIn": "Used in"
+    "usedIn": "Used in",
+    "languages": "Languages",
+    "cvTitle": "{name} — CV"
   },
   "valhalla": {
     "title": "Valhalla",
