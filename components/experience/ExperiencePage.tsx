@@ -10,7 +10,7 @@ import { ExternalLink } from '@/components/site/ui'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { opensource } from '@/data/content'
 import { getEducationData } from '@/data/education'
-import { getExperienceData, type Experience } from '@/data/experience'
+import { getExperienceData, groupRoles } from '@/data/experience'
 import { getPersonalInfo } from '@/data/personal'
 import { getSkills, projectsUsingSkill } from '@/data/skills'
 import { pick } from '@/lib/i18n/localize'
@@ -29,17 +29,6 @@ function Section({ id, title, children, intro }: { id: string; title: string; in
       </div>
     </section>
   )
-}
-
-function groupRoles(entries: Experience[]) {
-  const groups: { name: string; roles: Experience[] }[] = []
-  for (const entry of entries) {
-    const name = entry.group ?? entry.company
-    const existing = groups.find((group) => group.name === name)
-    if (existing) existing.roles.push(entry)
-    else groups.push({ name, roles: [entry] })
-  }
-  return groups
 }
 
 const roleTypeStyle: Record<string, string> = {
