@@ -8,8 +8,13 @@
   "tier": "archive",
   "status": "Completed",
   "opensource": false,
-  "images": [],
-  "description": "Time-series models that forecast solar output for an energy-storage demonstration site, scheduled with Airflow. The sun is punctual; the clouds are the problem.",
+  "images": [
+    "/images/projects/solar-prediction-system/forecast.webp",
+    "/images/projects/solar-prediction-system/weather.webp",
+    "/images/projects/solar-prediction-system/pipeline.webp",
+    "/images/projects/solar-prediction-system/performance.webp"
+  ],
+  "description": "Time-series models that forecast solar output for an energy-storage demonstration site, scheduled with Airflow. The sun is punctual; the clouds are the problem. The repository is private, so the dashboards here are redrawn on simulated data.",
   "longDescription": "Built a comprehensive solar power prediction system for Tainan FamilyMart Pingfeng store energy storage demonstration site. The system combines weather data, historical generation patterns, and machine learning models to provide accurate solar power forecasts.",
   "technologies": [
     "Python",
