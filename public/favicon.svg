@@ -1,5 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="6" fill="#050505"/>
-  <rect x="1" y="1" width="30" height="30" rx="5" stroke="#d4741e" stroke-width="1.5"/>
-  <text x="16" y="21" text-anchor="middle" font-family="monospace" font-size="14" font-weight="700" fill="#d4741e">&gt;_</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Persimmon：一顆柿子。顏色取自 Tapi（柿橘身體、梅褐輪廓、青綠十字髮夾 → 柿蒂）。
+       只用幾何形狀、不用文字，任何字體環境下 16px 都一樣清楚。
+       柿子的辨識點是「扁」和「寬大的柿蒂」，所以果實壓扁、柿蒂做大。 -->
+  <defs>
+    <radialGradient id="persimmon-body" cx="36%" cy="36%" r="74%">
+      <stop offset="0" stop-color="#ffa95a"/>
+      <stop offset="0.5" stop-color="#f28a38"/>
+      <stop offset="1" stop-color="#d4741e"/>
+    </radialGradient>
+  </defs>
+  <!-- 果實：扁圓 -->
+  <ellipse cx="32" cy="40.5" rx="27.5" ry="21" fill="url(#persimmon-body)" stroke="#4a2026" stroke-width="3.5"/>
+  <!-- 反光 -->
+  <ellipse cx="19.5" cy="34" rx="6" ry="3.3" fill="#ffd9b0" transform="rotate(-22 19.5 34)"/>
+  <!-- 柿蒂：左右兩片長葉 + 前面一片短葉 -->
+  <g fill="#3cc4a2" stroke="#4a2026" stroke-width="3" stroke-linejoin="round">
+    <path d="M32 20.5 C25 11.5 12 11.5 6.5 17 C12.5 23.5 25 24.5 32 20.5 Z"/>
+    <path d="M32 20.5 C39 11.5 52 11.5 57.5 17 C51.5 23.5 39 24.5 32 20.5 Z"/>
+    <path d="M32 28 C26.5 28 25 22 32 17 C39 22 37.5 28 32 28 Z"/>
+  </g>
+  <!-- 蒂頭 -->
+  <rect x="29.25" y="6" width="5.5" height="11" rx="2.75" fill="#4a2026"/>
 </svg>

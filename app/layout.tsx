@@ -17,7 +17,15 @@ export const metadata: Metadata = {
   },
   description: personalInfo.description,
   alternates: { canonical: '/' },
-  icons: { icon: '/favicon.svg' },
+  // 一顆柿子（public/favicon.svg 是原稿；.ico 與 PNG 都由它產生）。
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
   openGraph: {
     type: 'website',
     locale: 'en_US',
