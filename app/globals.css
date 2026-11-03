@@ -287,25 +287,38 @@
   }
 }
 
-/* ── Print（/experience 的「列印或存成 PDF」） ──────────────────────── */
+/* ── Print ───────────────────────────────────────────────────────────
+   /experience 有專門的列印版（components/experience/PrintCV.tsx）；其他頁列印時只拿掉頁首頁尾。
+   頁碼用 @page 的邊界盒（Chrome / Edge 131+），不支援的瀏覽器就是沒有頁碼。
+   邊界盒拿不到 next/font 的字體變數，只能寫系統字體。 */
 @page {
   size: A4;
-  margin: 12mm 14mm;
+  margin: 13mm 15mm 14mm;
+
+  @bottom-right {
+    content: counter(page) ' / ' counter(pages);
+    font-family: 'Cascadia Mono', Consolas, ui-monospace, monospace;
+    font-size: 7pt;
+    color: rgb(100 84 86);
+  }
 }
 
 @media print {
+  /* 列印永遠是淺色：白紙、梅褐墨色、柿橘與青綠點綴。細線比螢幕深一點，印出來才看得到。 */
   :root,
   :root[data-theme],
   :root:not([data-theme='light']) {
     --paper: 255 255 255;
     --surface: 255 255 255;
-    --ink: 0 0 0;
-    --muted: 70 70 70;
-    --line: 205 205 205;
-    --accent: 120 55 10;
-    --accent-soft: 255 255 255;
-    --clip: 0 90 70;
-    --clip-soft: 255 255 255;
+    --ink: 42 29 31;
+    --muted: 100 84 86;
+    --line: 214 200 198;
+    --accent: 176 84 15;
+    --accent-fill: 212 116 30;
+    --accent-soft: 250 234 220;
+    --clip: 17 115 93;
+    --clip-soft: 222 242 235;
+    --plum: 74 32 38;
     color-scheme: light;
   }
 
@@ -325,26 +338,46 @@
     display: none !important;
   }
 
-  .print-avoid-break {
+  a {
+    text-decoration: none;
+  }
+
+  /* 列印版履歷。標籤、圓點與 N 字標靠底色，所以強制印出背景（使用者沒勾「背景圖形」也一樣）。 */
+  .cv-print {
+    font-size: 9pt;
+    line-height: 1.4;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cv-print p {
+    orphans: 2;
+    widows: 2;
+  }
+
+  .cv-keep {
     break-inside: avoid;
   }
 
-  /* /experience 的精簡履歷 */
-  .cv h4 {
-    font-size: 10.5pt;
+  .cv-keep-next {
+    break-after: avoid;
   }
 
-  .cv .text-sm,
-  .cv .text-xs {
-    font-size: 9pt;
+  /* 時間軸圓點：壓在職位左邊的細線上（線寬 0.75pt，圓心對準線心），垂直對齊職稱那一行。 */
+  .cv-dot {
+    position: absolute;
+    left: calc(-1.1mm - 0.375pt);
+    top: 1.45mm;
+    width: 2.2mm;
+    height: 2.2mm;
+    border-radius: 9999px;
+    border: 0.75pt solid rgb(var(--muted) / 0.55);
+    background: rgb(var(--paper));
   }
 
-  .cv p {
-    orphans: 3;
-    widows: 3;
-  }
-
-  a {
-    text-decoration: none;
+  .cv-dot-now {
+    border-color: rgb(var(--accent-fill));
+    background: rgb(var(--accent-fill));
+    outline: 0.8mm solid rgb(var(--accent-soft));
   }
 }

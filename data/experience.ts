@@ -76,3 +76,15 @@ export function getExperienceData(locale: Locale = 'en'): Experience[] {
 }
 
 export const experienceData = rawExperience
+
+/** Roles merged per corporate group (`group`, else `company`), keeping the data's newest-first order. */
+export function groupRoles(entries: Experience[]) {
+  const groups: { name: string; roles: Experience[] }[] = []
+  for (const entry of entries) {
+    const name = entry.group ?? entry.company
+    const existing = groups.find((group) => group.name === name)
+    if (existing) existing.roles.push(entry)
+    else groups.push({ name, roles: [entry] })
+  }
+  return groups
+}

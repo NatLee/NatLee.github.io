@@ -179,7 +179,9 @@
     "skill": "技能",
     "experienceCol": "年資",
     "notes": "說明",
-    "usedIn": "用在"
+    "usedIn": "用在",
+    "languages": "語言",
+    "cvTitle": "{name} 履歷"
   },
   "valhalla": {
     "title": "英靈殿",
