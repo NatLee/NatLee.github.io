@@ -1,12 +1,12 @@
 # CLAUDE.md
 
-Personal site of Nat Lee. **One body of content, several looks ("themes").** The main theme, **Persimmon**, is the Next.js 14 App Router app at the repo root (React 18 + TypeScript + Tailwind, static export with `trailingSlash: true`), auto-deployed to GitHub Pages on push to `main`. Older themes live under `/valhalla/<name>/` and read the same content at runtime from `/content/site.json`.
+Personal site of Nat Lee. **One body of content, several looks ("themes").** The main theme, **Persimmon**, is the Next.js 15 App Router app at the repo root (React 19 + TypeScript + Tailwind 3, static export with `trailingSlash: true`), auto-deployed to GitHub Pages on push to `main`. Older themes live under `/valhalla/<name>/` and read the same content at runtime from `/content/site.json`.
 
 ## Commands
 
-- `npx next dev` / `npx next build` / `npx next lint`
+- `npx next dev` / `npx next build` (ESLint is not installed and the build skips lint — there was never a config; type-check still runs)
 - On Windows, `npm run build` fails (scripts use Unix `NODE_OPTIONS=` syntax) — call `npx next ...` directly.
-- `npx next build` runs lint + type-check and statically exports all pages to `out/` (including `/content/site.json`) — this is the full verification.
+- `npx next build` type-checks and statically exports all pages to `out/` (including `/content/site.json`) — this is the full verification.
 - `node scripts/sync-github.mjs` — refresh star counts into `content/_generated/github.json` (CI runs it before every build; fails soft).
 - `node scripts/make-thumbs.mjs [--force]` — card thumbnails `public/images/projects/<id>.webp` + `content/_generated/thumbnails.json` (uses `sharp`; run by hand after adding a project).
 - `node scripts/valhalla/build-theme.mjs <name>` — rebuild one Valhalla theme (only when its code changes). `node scripts/valhalla/serve-local.mjs` — preview themes locally.
@@ -75,3 +75,4 @@ Rules (full brief: `themes/README.md`): themes contain **no personal content** �
 
 - Never read: `package-lock.json`, `node_modules/`, `.next/`, `out/`, `public/valhalla/{flat,terminal,stonk}/` (build output), `themes/*/node_modules`.
 - Content-only changes need no component reads — edit `content/` / `messages/` and build.
+- Next 15: route `params` are Promises (`await params`); metadata routes (`robots.ts`, `sitemap.ts`) need `export const dynamic = 'force-static'`. Each `package.json` overrides `next`'s nested `postcss` to a patched 8.5.x — keep it when bumping Next.

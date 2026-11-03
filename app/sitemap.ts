@@ -3,6 +3,8 @@ import { allProjectsData } from '@/data/projects'
 
 const siteUrl = 'https://natlee.github.io'
 
+export const dynamic = 'force-static'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: [string, number][] = [
     ['', 1],

@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[397],{2663:(e,n,s)=>{Promise.resolve().then(s.bind(s,5833))},5833:(e,n,s)=>{"use strict";s.r(n),s.d(n,{default:()=>i});var a=s(5155);function i(e){let{children:n}=e;return(0,a.jsx)("div",{className:"animate-fade-in min-h-screen",children:n})}s(2115)}},e=>{e.O(0,[441,255,358],()=>e(e.s=2663)),_N_E=e.O()}]);

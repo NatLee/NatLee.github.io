@@ -6,16 +6,18 @@ import { allProjectsData, getProjectById } from '@/data/projects'
 
 const siteUrl = 'https://natlee.github.io'
 
+// Next.js 15：params 是 Promise，要 await。
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export function generateStaticParams() {
   return allProjectsData.map((project) => ({ id: project.id }))
 }
 
-export function generateMetadata({ params }: Props) {
-  const project = getProjectById(params.id)
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params
+  const project = getProjectById(id)
   if (!project) return { title: 'Project not found' }
 
   const canonicalPath = `/projects/${project.id}/`
@@ -40,8 +42,9 @@ export function generateMetadata({ params }: Props) {
   }
 }
 
-export default function ProjectDetailPage({ params }: Props) {
-  const project = getProjectById(params.id)
+export default async function ProjectDetailPage({ params }: Props) {
+  const { id } = await params
+  const project = getProjectById(id)
   if (!project) notFound()
 
   return (
