@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   description: personalInfo.description,
   alternates: { canonical: '/' },
-  // 一顆柿子（public/favicon.svg 是原稿；.ico 與 PNG 都由它產生）。
+  // natlee 的 N 字標（public/favicon.svg 是原稿；.ico 與 PNG 都由同一組形狀產生）。
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },

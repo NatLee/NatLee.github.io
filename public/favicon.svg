@@ -1,24 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Persimmon：一顆柿子。顏色取自 Tapi（柿橘身體、梅褐輪廓、青綠十字髮夾 → 柿蒂）。
-       只用幾何形狀、不用文字，任何字體環境下 16px 都一樣清楚。
-       柿子的辨識點是「扁」和「寬大的柿蒂」，所以果實壓扁、柿蒂做大。 -->
-  <defs>
-    <radialGradient id="persimmon-body" cx="36%" cy="36%" r="74%">
-      <stop offset="0" stop-color="#ffa95a"/>
-      <stop offset="0.5" stop-color="#f28a38"/>
-      <stop offset="1" stop-color="#d4741e"/>
-    </radialGradient>
-  </defs>
-  <!-- 果實：扁圓 -->
-  <ellipse cx="32" cy="40.5" rx="27.5" ry="21" fill="url(#persimmon-body)" stroke="#4a2026" stroke-width="3.5"/>
-  <!-- 反光 -->
-  <ellipse cx="19.5" cy="34" rx="6" ry="3.3" fill="#ffd9b0" transform="rotate(-22 19.5 34)"/>
-  <!-- 柿蒂：左右兩片長葉 + 前面一片短葉 -->
-  <g fill="#3cc4a2" stroke="#4a2026" stroke-width="3" stroke-linejoin="round">
-    <path d="M32 20.5 C25 11.5 12 11.5 6.5 17 C12.5 23.5 25 24.5 32 20.5 Z"/>
-    <path d="M32 20.5 C39 11.5 52 11.5 57.5 17 C51.5 23.5 39 24.5 32 20.5 Z"/>
-    <path d="M32 28 C26.5 28 25 22 32 17 C39 22 37.5 28 32 28 Z"/>
-  </g>
-  <!-- 蒂頭 -->
-  <rect x="29.25" y="6" width="5.5" height="11" rx="2.75" fill="#4a2026"/>
+  <!-- natlee 的 N：墨色方塊、紙色的兩根直筆、柿橘色的斜筆。只用幾何形狀，不依賴字體，16px 也清楚。
+       app 圖示（apple-touch-icon、icon-192/512）用同一組形狀，改成滿版方形（系統會自己裁圓角）。 -->
+  <rect width="64" height="64" rx="14" fill="#2a1d1f"/>
+  <path d="M15 13h10v38H15zM39 13h10v38H39z" fill="#f7f3f2"/>
+  <path d="M15 13h10l24 38H39z" fill="#f28a38"/>
 </svg>
