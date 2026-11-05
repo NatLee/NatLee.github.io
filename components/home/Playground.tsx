@@ -36,7 +36,7 @@ export default function Playground() {
                 {project.thumbnail && (
                   <div className="aspect-video overflow-hidden border-b border-line bg-paper">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={project.thumbnail} alt="" loading="lazy" decoding="async" width={960} height={540} className="h-full w-full object-cover object-top" />
+                    <img src={project.thumbnail} alt="" loading="lazy" decoding="async" width={960} height={540} className="h-full w-full object-contain" />
                   </div>
                 )}
                 <div className="flex flex-1 flex-col p-5">

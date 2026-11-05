@@ -45,7 +45,7 @@ export default function ProjectCard({ project }: { project: ProjectDetail }) {
             alt=""
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+            className="h-full w-full object-contain"
           />
         ) : (
           <TypePlaceholder project={project} />
