@@ -10,6 +10,15 @@
       }
     },
     {
+      "repo": "Eugeny/russh",
+      "url": "https://github.com/Eugeny/russh/pull/805",
+      "count": 1,
+      "summary": {
+        "en": "Fixed Dropbear client connections to russh servers under strict key exchange by accounting for an ignored guessed packet.",
+        "zh": "修正 Dropbear 在嚴格金鑰交換下無法連上 russh 伺服器的問題，正確處理被忽略的猜測封包。"
+      }
+    },
+    {
       "repo": "serengil/deepface",
       "url": "https://github.com/serengil/deepface/pull/1396",
       "count": 1,
