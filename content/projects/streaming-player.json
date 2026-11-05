@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "streaming-player",
+  "title": "Streaming Player",
+  "category": "Web Application",
+  "theme": "web",
+  "tier": "selected",
+  "status": "Completed",
+  "opensource": true,
+  "language": "rust",
+  "images": [
+    "/images/projects/streaming-player/cover.webp"
+  ],
+  "technologies": [
+    "Rust",
+    "axum",
+    "React",
+    "Tailwind CSS",
+    "WebSocket",
+    "Docker"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [
+    "Version 2.0.0 released with a Rust backend and React dashboard",
+    "One Docker image for self-hosted deployment"
+  ],
+  "githubUrl": "https://github.com/NatLee/streaming-player",
+  "links": {
+    "github": "https://github.com/NatLee/streaming-player"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Creator & Maintainer",
+  "subtitle": "Song requests, from chat to OBS",
+  "description": "Twitch, YouTube live chat and chat bots share one song queue. A Rust backend keeps the OBS player, overlay and moderator dashboard in sync.",
+  "longDescription": "Streaming Player 2.0 is a self-hosted song request system rebuilt with Rust and React. Viewers request songs from Twitch, YouTube live chat or an HTTP API; moderators manage the same queue from a dashboard. Dedicated OBS browser sources provide playback and a transparent now-playing overlay. It replaces the earlier Flask players.",
+  "features": [
+    "Twitch, YouTube live chat and HTTP chat-bot requests",
+    "Queue limits, cooldowns, voting and block lists",
+    "OBS player and transparent now-playing overlay",
+    "Roles, permission points and personal API tokens",
+    "Settings backups and song-library export"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "word-net-game",
+  "title": "Word Net",
+  "category": "Web Application",
+  "theme": "web",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "language": "typescript",
+  "images": [
+    "/images/projects/word-net-game/cover.webp"
+  ],
+  "technologies": [
+    "TypeScript",
+    "React",
+    "Tailwind CSS"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [],
+  "githubUrl": "https://github.com/NatLee/word-net-game",
+  "links": {
+    "github": "https://github.com/NatLee/word-net-game",
+    "demo": "https://natlee.github.io/word-net-game/"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Creator & Maintainer",
+  "subtitle": "Catch the feeling behind a sentence",
+  "description": "Read a sentence, cast a net on the sad-to-happy scale and reveal its reference score. Five modes, including daily challenges and two-player games.",
+  "longDescription": "A Traditional Chinese mood-guessing game about what people mean, including sarcasm and self-deprecation. Play classic, timed, survival, daily or two-player modes, then take away a result card with your emotion map. Scores are editorial references, not psychological measurements.",
+  "features": [
+    "Five game modes, including same-device two-player",
+    "Original sentences with explanations and varied feedback",
+    "Streaks, achievements and a shareable emotion-map card",
+    "Keyboard and touch controls"
+  ]
+}

@@ -1,59 +1,53 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "play-qwop-by-using-ai-agent",
-  "title": "Play-QWOP-by-Using-AI-Agent",
-  "subtitle": "Reinforcement Learning Game AI",
-  "description": "A reinforcement-learning agent that learns to play QWOP with TensorFlow 2. It walks better than I do in that game, which is a low bar.",
-  "longDescription": "An innovative reinforcement learning project that teaches an AI agent to play the notoriously difficult QWOP game using TensorFlow 2. The project demonstrates advanced RL techniques including actor-critic methods and policy gradient optimization.",
+  "title": "QWOP with PPO",
+  "subtitle": "Learning to finish, one knee-scoot at a time",
+  "description": "A PyTorch PPO agent plays the real QWOP browser game through Playwright. Six evaluation races, six 100 m finishes. Grace was not part of the reward function.",
+  "longDescription": "Rebuilt in 2026 with Stable-Baselines3 PPO, PyTorch and a Gymnasium environment driving the official browser game through Playwright. Eight browser environments trained for 22 minutes. The recorded evaluation finished all six races; the best normal-speed game time was 193.8 seconds.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/Play-QWOP-by-Using-AI-Agent/raw/master/docs/train.gif"
+    "/images/projects/play-qwop-by-using-ai-agent/cover.webp"
   ],
-  "githubUrl": "https://github.com/NatLee/Play-QWOP-by-Using-AI-Agent",
+  "githubUrl": "https://github.com/NatLee/play-qwop-by-using-ai-agent",
   "category": "AI/ML",
   "theme": "ai",
-  "tier": "archive",
+  "tier": "selected",
   "status": "Completed",
   "opensource": true,
   "technologies": [
     "Python",
-    "TensorFlow",
-    "Reinforcement Learning",
-    "OpenAI Gym",
-    "Neural Networks"
+    "PyTorch",
+    "Stable-Baselines3",
+    "Gymnasium",
+    "Playwright",
+    "PPO"
   ],
   "features": [
-    "Actor-critic RL implementation",
-    "QWOP game environment integration",
-    "Training visualization",
-    "Model checkpointing",
-    "Performance metrics tracking"
+    "Official QWOP game in headless Chromium",
+    "Eight parallel training environments",
+    "OCR distance feedback and shaped rewards",
+    "Training curves, checkpoints and run GIFs"
   ],
   "challenges": [
-    "Complex game physics simulation",
-    "Reward function design",
-    "Training stability",
-    "Action space optimization"
+    "Learning a stable gait from browser-game observations",
+    "Measuring normal-speed game time consistently"
   ],
   "solutions": [
-    "Implemented custom game environment",
-    "Designed shaped reward functions",
-    "Added training stabilization techniques",
-    "Optimized action space representation"
+    "PPO with a Gymnasium environment and Playwright controls",
+    "Fixed 60-frame game seconds and explicit evaluation records"
   ],
   "results": [
-    "Successfully trained QWOP-playing agent",
-    "Achieved consistent goal completion",
-    "Demonstrated RL effectiveness",
-    "Educational value for RL community"
+    "Completed 100 m in all six recorded evaluation races",
+    "Best normal-speed game time: 193.8 seconds",
+    "Training run: 22 minutes across eight browser environments"
   ],
   "timeline": {
     "start": "2019",
-    "end": "2020",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/Play-QWOP-by-Using-AI-Agent"
+    "github": "https://github.com/NatLee/play-qwop-by-using-ai-agent"
   }
 }

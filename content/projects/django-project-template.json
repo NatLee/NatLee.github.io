@@ -3,11 +3,11 @@
   "id": "django-project-template",
   "title": "django-project-template",
   "subtitle": "Full-Featured Django Template",
-  "description": "A Django starter with Docker, third-party login, JWT, WebSockets, an admin UI and django-q. Everything I kept setting up by hand, set up once.",
-  "longDescription": "A comprehensive Django project template that includes modern web development features such as Docker containerization, third-party authentication, JWT token management, WebSocket support, and advanced admin interface. Perfect for kickstarting new Django projects with best practices built-in.",
+  "description": "A Django starter with PostgreSQL, Redis, JWT, social login, Channels and django-q2. The setup I kept repeating, now tested end to end.",
+  "longDescription": "A Docker Compose backend template with Django, PostgreSQL and Redis. It combines JWT and Google/Microsoft login, Channels WebSockets and django-q2 background tasks, configured from environment variables and checked end to end in CI.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/django-project-template/raw/main/doc/cover.png"
+    "/images/projects/django-project-template/cover.webp"
   ],
   "githubUrl": "https://github.com/NatLee/django-project-template",
   "category": "Web Development",
@@ -18,43 +18,26 @@
   "technologies": [
     "Python",
     "Django",
-    "Docker",
-    "JWT",
-    "WebSocket",
-    "OAuth",
-    "Celery"
+    "PostgreSQL",
+    "Redis",
+    "Channels",
+    "django-q2",
+    "Docker"
   ],
   "features": [
-    "Docker containerization",
-    "Third-party authentication (Google, GitHub)",
-    "JWT token management",
-    "WebSocket real-time communication",
-    "Advanced admin interface",
-    "Background task processing with django-q",
-    "API documentation with Swagger"
+    "JWT with Google and Microsoft login",
+    "Channels WebSockets and django-q2 tasks",
+    "PostgreSQL and Redis in Docker Compose",
+    "Environment-based settings and end-to-end CI"
   ],
-  "challenges": [
-    "Integrating multiple authentication providers",
-    "Managing JWT token lifecycle",
-    "WebSocket connection handling",
-    "Docker environment configuration"
-  ],
-  "solutions": [
-    "Implemented OAuth2 with multiple providers",
-    "Created secure JWT refresh mechanism",
-    "Built robust WebSocket middleware",
-    "Configured multi-stage Docker builds"
-  ],
+  "challenges": [],
+  "solutions": [],
   "results": [
-    "Accelerated Django project setup",
-    "Reduced development time by 60%",
-    "Improved security with modern auth",
-    "Active community adoption"
+    "Reusable backend template with an end-to-end verification workflow"
   ],
   "timeline": {
     "start": "2021",
-    "end": "Present",
-    "duration": "Ongoing"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {

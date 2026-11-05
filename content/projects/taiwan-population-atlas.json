@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "taiwan-population-atlas",
+  "title": "Taiwan Population Atlas",
+  "category": "Data Science",
+  "theme": "web",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "language": "typescript",
+  "images": [
+    "/images/projects/taiwan-population-atlas/cover.webp"
+  ],
+  "technologies": [
+    "TypeScript",
+    "React",
+    "D3",
+    "Government Open Data"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [],
+  "githubUrl": "https://github.com/NatLee/taiwan-population-atlas",
+  "links": {
+    "github": "https://github.com/NatLee/taiwan-population-atlas",
+    "demo": "https://natlee.github.io/taiwan-population-atlas/"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Hackathon team member & 2026 rewrite maintainer",
+  "subtitle": "Three decades of Taiwan, on a map",
+  "description": "Play through population change across Taiwan’s 22 counties, compare their trends and explore household income. A 2017 hackathon project, rebuilt in 2026.",
+  "longDescription": "An interactive atlas of population and household finances across Taiwan. Monthly population data starts in 1997, with annual income and savings indicators alongside it. A playback timeline, county comparison charts and shareable URLs turn the original 2017 Chiayi hackathon project into a tool for exploring change.",
+  "features": [
+    "Population, migration, income and savings indicators",
+    "Animated timeline with adjustable playback speed",
+    "Compare trends across up to four counties",
+    "Government open data with reproducible conversion scripts"
+  ]
+}

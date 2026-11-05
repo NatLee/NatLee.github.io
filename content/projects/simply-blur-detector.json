@@ -2,12 +2,12 @@
   "$schema": "../schema/project.schema.json",
   "id": "simply-blur-detector",
   "title": "simply-blur-detector",
-  "subtitle": "Image Quality Assessment",
-  "description": "A small OpenCV tool that tells you whether a photo is blurry. Your eyes can do this too, just not for ten thousand photos.",
-  "longDescription": "A lightweight and efficient tool for detecting blur in images using advanced computer vision algorithms. This application assesses image quality and determines if an image is blurry, making it useful for quality control in photography and image processing pipelines.",
+  "subtitle": "CNN meets Laplacian, in your browser",
+  "description": "Drop in a picture and compare a small Keras CNN with Laplacian variance, including a window-by-window blur heat map. No upload needed.",
+  "longDescription": "A TensorFlow / Keras CNN trained on sharp illustrations and copies blurred with blur-generator. The 2026 version includes original training artwork, x86 and ARM Docker support, and ONNX export for a browser demo that compares the CNN with Laplacian variance. Its verdict is a model estimate, with both methods visible for comparison.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/simply-blur-detector/raw/main/docs/results.png"
+    "/images/projects/simply-blur-detector/cover.webp"
   ],
   "githubUrl": "https://github.com/NatLee/simply-blur-detector",
   "category": "Computer Vision",
@@ -17,44 +17,35 @@
   "opensource": true,
   "technologies": [
     "Python",
+    "TensorFlow",
+    "Keras",
+    "ONNX Runtime Web",
     "OpenCV",
-    "NumPy",
-    "Scikit-learn",
-    "PIL",
-    "Image Processing"
+    "Docker"
   ],
   "features": [
-    "Automatic blur detection",
-    "Batch processing support",
-    "Multiple detection algorithms",
-    "Confidence scoring",
-    "Easy API integration"
+    "Browser-local inference and patch-by-patch heat maps",
+    "CNN and Laplacian variance side by side",
+    "Original sharp and blurred training illustrations",
+    "Docker training and ONNX export"
   ],
   "challenges": [
-    "Accurate blur detection",
-    "Different types of blur handling",
-    "Processing speed optimization",
-    "False positive reduction"
+    "Matching preprocessing between Python training and browser inference"
   ],
   "solutions": [
-    "Implemented multiple detection algorithms",
-    "Used ensemble methods for accuracy",
-    "Optimized image processing pipeline",
-    "Created comprehensive test suite"
+    "The same equalisation, resize and normalisation steps across training and export"
   ],
   "results": [
-    "High accuracy blur detection",
-    "Fast processing speed",
-    "Widely used in image processing",
-    "Active community contributions"
+    "Interactive GitHub Pages demo with local image processing",
+    "Reproducible training assets and model evaluation in the repository"
   ],
   "timeline": {
     "start": "2019",
-    "end": "2020",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/simply-blur-detector"
+    "github": "https://github.com/NatLee/simply-blur-detector",
+    "demo": "https://natlee.github.io/simply-blur-detector/"
   }
 }

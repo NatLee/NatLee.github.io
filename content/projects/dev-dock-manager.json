@@ -7,10 +7,10 @@
   "longDescription": "A sophisticated development environment management system built with Django and Docker. This platform provides isolated, containerized development environments for multiple users on the same machine, complete with pre-configured tools and packages for various development workflows.",
   "language": "python",
   "images": [
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/login.gif",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/create.gif",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/console.gif",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/refs/heads/main/doc/novnc.gif"
+    "/images/projects/dev-dock-manager/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/doc/create.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/doc/console.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/doc/novnc.gif"
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock-manager",
   "category": "DevOps",

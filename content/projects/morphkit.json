@@ -7,8 +7,7 @@
   "longDescription": "MorphKit is a browser-based file converter and editor with no backend at all: every file is processed client-side, so nothing ever leaves the user's machine. It converts between common image formats (PNG, JPG, WEBP, BMP, GIF, APNG, AVIF), audio formats (MP3, WAV, OGG, FLAC, M4A, AAC, OPUS), and video formats (MP4, WEBM, MOV, AVI, MKV), and goes beyond conversion with a full editing toolkit — a layered image editor with brushes, shapes, text, crop, and background removal; audio/video trimming with volume and speed controls; and GIF/APNG frame-by-frame editing with captions and speed, reverse, and boomerang effects. Batch processing with ZIP download, file metadata inspection (EXIF, bitrate, duration), and clipboard integration round out the workflow. The site is built with Vite, React, and TypeScript, and deploys to GitHub Pages via GitHub Actions.",
   "language": "typescript",
   "images": [
-    "https://raw.githubusercontent.com/NatLee/morphkit/refs/heads/main/docs/imgs/index.png",
-    "https://raw.githubusercontent.com/NatLee/morphkit/refs/heads/main/docs/imgs/image-editor.png"
+    "/images/projects/morphkit/cover.webp"
   ],
   "githubUrl": "https://github.com/NatLee/morphkit",
   "category": "Web Application",

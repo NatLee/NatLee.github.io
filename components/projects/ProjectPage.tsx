@@ -121,7 +121,7 @@ export default function ProjectPage({ id }: { id: string }) {
       <header className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_17rem]">
         <div>
           <p className="eyebrow">{localizeCategory(project.category, locale)}</p>
-          <h1 className="mt-3 font-display text-5xl font-bold tracking-tight md:text-6xl">{project.title}</h1>
+          <h1 className="mt-3 break-words font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">{project.title}</h1>
           <p className="mt-3 font-display text-xl text-muted md:text-2xl">{project.subtitle}</p>
           <p className="mt-6 max-w-prose text-lg">{project.description}</p>
           <div className="mt-8">

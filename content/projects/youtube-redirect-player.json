@@ -3,45 +3,34 @@
   "id": "youtube-redirect-player",
   "title": "youtube-redirect-player",
   "subtitle": "YouTube Video Player with WebSocket",
-  "description": "A Flask and WebSocket player that plays YouTube videos through their original links. A small exercise in over-engineering.",
-  "longDescription": "An advanced YouTube video player built with Flask and WebSocket technology. This application provides real-time video playback control and redirection capabilities through WebSocket communication.",
+  "description": "A Flask + Socket.IO player with request, default and history playlists synchronised across screens. New development continues in Streaming Player.",
+  "longDescription": "The Flask player synchronises a request queue, default playlist and playback history over Socket.IO. Its final version resolves media with yt-dlp and includes Docker and regression tests. The Rust + React Streaming Player carries on the song-request workflow.",
   "language": "python",
   "images": [
-    "https://user-images.githubusercontent.com/10178964/214097192-32ef6390-4481-4301-8743-98571192449f.png"
+    "/images/projects/youtube-redirect-player/cover.webp"
   ],
   "githubUrl": "https://github.com/NatLee/youtube-redirect-player",
   "category": "Web Application",
   "theme": "web",
   "tier": "archive",
-  "status": "Completed",
+  "status": "Archived",
   "opensource": true,
   "technologies": [
     "Python",
     "Flask",
-    "WebSocket",
-    "YouTube API",
-    "Real-time Communication"
+    "Socket.IO",
+    "yt-dlp",
+    "Docker"
   ],
   "features": [
-    "Real-time video control",
-    "WebSocket communication",
-    "YouTube integration",
-    "Multi-user support"
+    "Request, default and history playlists",
+    "Playback state synchronised over Socket.IO",
+    "yt-dlp media resolution and Docker deployment"
   ],
-  "challenges": [
-    "Redirecting YouTube videos to a local server for playback",
-    "Synchronizing playlists and history across different locations in real-time",
-    "Managing multiple playlist types including Default, Request, and History"
-  ],
-  "solutions": [
-    "Built a backend using Flask and WebSockets for real-time synchronization",
-    "Implemented a structured system to handle three distinct playlist tables",
-    "Extended the functionality of the youtube-video-redirector project"
-  ],
+  "challenges": [],
+  "solutions": [],
   "results": [
-    "A synchronized YouTube video player with persistent history (up to 200 records) and queueing system",
-    "A robust API system for managing video requests and playlists",
-    "Ability to play videos anywhere while maintaining state through WebSockets"
+    "Final Flask version preserved; song requests continue in Streaming Player"
   ],
   "timeline": {
     "start": "2022",
@@ -50,6 +39,7 @@
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/youtube-redirect-player"
+    "github": "https://github.com/NatLee/youtube-redirect-player",
+    "documentation": "https://github.com/NatLee/streaming-player"
   }
 }

@@ -1,15 +1,15 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "nipype-preprocess-on-brain-mr",
-  "title": "nipype-preprocess-on-brain-MR",
-  "subtitle": "Brain MR Image Preprocessing",
-  "description": "Brain MRI preprocessing with Nipype, FSL and ANTs: AC-PC alignment, skull stripping, segmentation. Proof that I once understood neuroimaging pipelines.",
-  "longDescription": "A specialized neuroimaging preprocessing pipeline built with Nipype for brain MR image analysis. This tool automates the complex preprocessing steps required for neuroimaging research and clinical applications.",
+  "title": "Brain MRI Pipeline",
+  "subtitle": "From a T1 scan to tissue maps and QC",
+  "description": "An end-to-end Nipype pipeline with FSL FAST, K-means and ANTs Atropos segmentation, tissue volumes, bias-correction metrics and an interactive 3D brain.",
+  "longDescription": "A research and learning pipeline for T1-weighted MRI: AC-PC alignment, MNI152 registration, skull stripping and N4 bias correction, followed by a choice of FSL FAST, K-means or ANTs Atropos. It compares segmentation agreement, reports tissue volumes and QC metrics, and produces a 3D view and HTML report per scan. Demo scans come from openly licensed OpenNeuro data.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/nipype-preprocess-on-brain-MR/raw/master/docs/WM@map.png"
+    "/images/projects/nipype-preprocess-on-brain-mr/cover.webp"
   ],
-  "githubUrl": "https://github.com/NatLee/nipype-preprocess-on-brain-MR",
+  "githubUrl": "https://github.com/NatLee/nipype-preprocess-on-brain-mr",
   "category": "Medical Imaging",
   "theme": "ai",
   "tier": "selected",
@@ -18,39 +18,35 @@
   "technologies": [
     "Python",
     "Nipype",
-    "Medical Imaging",
-    "MRI Processing",
-    "Neuroimaging"
+    "FSL",
+    "ANTs",
+    "Nilearn",
+    "Docker"
   ],
   "features": [
-    "Automated MR preprocessing",
-    "Brain tissue segmentation",
-    "Image registration",
-    "Quality control metrics",
-    "Batch processing support"
+    "AC-PC alignment, registration, skull stripping and N4 correction",
+    "Selectable FAST, K-means or Atropos segmentation",
+    "Tissue volumes, Dice agreement and before/after QC",
+    "Interactive 3D brain, turntable GIF and HTML reports"
   ],
   "challenges": [
-    "Automating a multi-stage neuroimaging pipeline involving complex tasks like AC-PC alignment and skull stripping.",
-    "Managing large-scale dependencies and environment consistency for niche medical imaging tools like FSL and ANTs.",
-    "Ensuring efficient data flow and intermediate file management across various analysis nodes."
+    "Keeping specialised imaging tools reproducible",
+    "Comparing tissue segmentation methods on the same corrected scan"
   ],
   "solutions": [
-    "Leveraged Nipype to build a modular and reproducible workflow connecting multiple specialized neuroimaging toolsets.",
-    "Utilized Docker and Neurodocker to containerize the entire software stack, eliminating 'it works on my machine' issues.",
-    "Integrated K-means clustering for automated tissue segmentation and Nilearn for high-quality result visualization."
+    "A focused Docker image containing the required tools",
+    "Shared N4-corrected inputs with selectable primary segmentation"
   ],
   "results": [
-    "Developed a robust, automated pipeline that processes .nii brain MR images with high precision and minimal manual intervention.",
-    "Achieved a highly portable research environment that facilitates reproducible science in medical imaging.",
-    "Provided clear visual outputs for tissue segmentation (GM, WM, CSF), enabling easier data verification and subsequent analysis."
+    "Reproducible CPU pipeline with openly licensed demo scans",
+    "Per-scan tissue maps, quantitative QC and HTML reports"
   ],
   "timeline": {
     "start": "2018",
-    "end": "2019",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/nipype-preprocess-on-brain-MR"
+    "github": "https://github.com/NatLee/nipype-preprocess-on-brain-mr"
   }
 }

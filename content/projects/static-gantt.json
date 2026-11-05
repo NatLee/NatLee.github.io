@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "static-gantt",
+  "title": "Gantt Studio",
+  "category": "Productivity Tools",
+  "theme": "web",
+  "tier": "selected",
+  "status": "Completed",
+  "opensource": true,
+  "language": "typescript",
+  "images": [
+    "/images/projects/static-gantt/cover.webp"
+  ],
+  "technologies": [
+    "TypeScript",
+    "Next.js",
+    "React",
+    "Mermaid",
+    "Tailwind CSS"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [],
+  "githubUrl": "https://github.com/NatLee/static-gantt",
+  "links": {
+    "github": "https://github.com/NatLee/static-gantt",
+    "demo": "https://natlee.github.io/static-gantt/"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Creator & Maintainer",
+  "subtitle": "Plan visually. Edit as Mermaid.",
+  "description": "Drag a schedule into place, draw dependencies and see the critical path. Switch to Mermaid text without losing the plan. Everything stays in your browser.",
+  "longDescription": "A browser-only Gantt editor with visual scheduling and two-way Mermaid editing. Tasks, dependencies, baselines and working-day calendars live in localStorage. It needs no account or backend and exports PNG, Excel and JSON.",
+  "features": [
+    "Drag tasks, resize durations and draw dependencies",
+    "Two-way Mermaid editing with metadata preserved",
+    "Automatic scheduling, critical path and baselines",
+    "Keyboard controls and four interface languages",
+    "PNG, Excel and JSON export"
+  ]
+}

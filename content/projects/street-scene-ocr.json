@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "street-scene-ocr",
+  "title": "Street Scene OCR",
+  "category": "Computer Vision",
+  "theme": "ai",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "language": "python",
+  "images": [
+    "/images/projects/street-scene-ocr/cover.webp"
+  ],
+  "technologies": [
+    "Python",
+    "FastAPI",
+    "EasyOCR",
+    "RapidOCR",
+    "PaddleOCR",
+    "Docker"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [],
+  "githubUrl": "https://github.com/NatLee/street-scene-ocr",
+  "links": {
+    "github": "https://github.com/NatLee/street-scene-ocr"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Creator & Maintainer",
+  "subtitle": "Three readers. One street sign.",
+  "description": "Compare EasyOCR, RapidOCR and PaddleOCR on Traditional Chinese street signs, with text boxes, timings and a small public-domain benchmark.",
+  "longDescription": "A learning project for Traditional Chinese scene-text recognition. The same photo runs through three engines behind one API and web interface. Documentation follows detection, recognition and post-processing with actual model outputs, while a small CC0 photo benchmark makes the comparison reproducible.",
+  "features": [
+    "Side-by-side results from three OCR engines",
+    "Text boxes, recognised text and stage timings",
+    "FastAPI JSON service and web interface",
+    "CC0 photos and reproducible benchmark scripts"
+  ]
+}

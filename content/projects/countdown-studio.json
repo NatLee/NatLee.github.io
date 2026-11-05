@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "countdown-studio",
+  "title": "Countdown Studio",
+  "category": "Productivity Tools",
+  "theme": "web",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "language": "typescript",
+  "images": [
+    "/images/projects/countdown-studio/cover.webp"
+  ],
+  "technologies": [
+    "TypeScript",
+    "React",
+    "Tailwind CSS"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [],
+  "githubUrl": "https://github.com/NatLee/countdown-studio",
+  "links": {
+    "github": "https://github.com/NatLee/countdown-studio",
+    "demo": "https://natlee.github.io/countdown-studio/"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Creator & Maintainer",
+  "subtitle": "Give time a little stage",
+  "description": "Run several timers or count down to a date in another time zone. Full-screen stage mode, four themes and share links, all in your browser.",
+  "longDescription": "A browser-only countdown studio for deadlines, launches, meetings and focus sessions. Run multiple timers side by side or put one on a full-screen stage. Time-zone-aware dates, themes and share links work without an account or server.",
+  "features": [
+    "Multiple timers and time-zone-aware target dates",
+    "Full-screen presentation mode",
+    "Four visual themes and shareable links",
+    "Local browser storage and completion sounds"
+  ]
+}

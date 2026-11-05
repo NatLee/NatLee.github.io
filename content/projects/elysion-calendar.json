@@ -1,13 +1,13 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "elysion-calendar",
-  "title": "elysion-calendar",
-  "subtitle": "Elysion Daily Calendar",
-  "description": "A small calendar for checking Elysion's daily K at a glance. Extremely niche, and extremely useful to the people in that niche.",
-  "longDescription": "A specialized calendar application designed for quick reference of Elysion daily K-line data. This TypeScript-based tool provides an intuitive interface for traders and analysts to quickly access historical trading information.",
+  "title": "Elysion Calendar",
+  "subtitle": "Find a karaoke room, without the tab shuffle",
+  "description": "A room-availability calendar for Elysion karaoke. Compare rooms and half-hour slots in daily and weekly views, using the shop’s official booking data.",
+  "longDescription": "A small web app that reads Elysion’s official booking page and presents private karaoke-room availability as room cards, a daily timetable and a weekly overview. Mobile layouts and Taiwan-time slot handling make it easier to find a free room.",
   "language": "typescript",
   "images": [
-    "https://github.com/NatLee/elysion-calendar/raw/main/doc/demo.gif"
+    "/images/projects/elysion-calendar/cover.webp"
   ],
   "githubUrl": "https://github.com/NatLee/elysion-calendar",
   "category": "Web Development",
@@ -22,30 +22,19 @@
     "Calendar API"
   ],
   "features": [
-    "Quick K-line data lookup",
-    "Interactive calendar interface",
-    "Historical data visualization",
-    "Responsive design"
+    "Room cards, daily timetable and weekly availability",
+    "Official booking-page data with background caching",
+    "Taiwan-time handling for past and current slots",
+    "Responsive light and dark interface"
   ],
-  "challenges": [
-    "Efficiently managing and displaying complex daily K-line data in a responsive calendar interface.",
-    "Handling asynchronous cache updates for real-time room data without impacting frontend performance.",
-    "Orchestrating multiple services (Frontend, Backend, Redis, Nginx) for a consistent development and production environment."
-  ],
-  "solutions": [
-    "Implemented a Redis-based caching system to handle asynchronous updates and speed up data retrieval.",
-    "Utilized Docker Compose to containerize the environment, ensuring seamless deployment and cross-platform compatibility.",
-    "Developed a specialized frontend using TypeScript to manage complex calendar logic and navigation views."
-  ],
+  "challenges": [],
+  "solutions": [],
   "results": [
-    "Created a streamlined tool for quickly querying Elysion daily K data in a user-friendly calendar format.",
-    "Optimized application performance by offloading heavy data processing to a background cache layer.",
-    "Simplified local development and production deployment through automated shell scripts and containerization."
+    "Room availability organised around the shop’s booking data"
   ],
   "timeline": {
     "start": "2022",
-    "end": "2023",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {

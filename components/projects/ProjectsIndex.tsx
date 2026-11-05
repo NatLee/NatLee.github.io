@@ -10,6 +10,7 @@ import TelepyLogo from '@/components/projects/TelepyLogo'
 import { StarCount, ThemeLabel } from '@/components/site/ui'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { PROJECT_THEMES, getLocalizedProjects, getProjectStars, projectYear, type ProjectDetail, type ProjectTheme } from '@/data/projects'
+import { projectFilterSearch, readProjectFilters } from '@/lib/project-filters'
 
 type ThemeFilter = ProjectTheme | 'all'
 
@@ -22,24 +23,30 @@ export default function ProjectsIndex() {
   const projects = useMemo(() => getLocalizedProjects(locale), [locale])
   const [query, setQuery] = useState('')
   const [theme, setTheme] = useState<ThemeFilter>('all')
+  const [demoOnly, setDemoOnly] = useState(false)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const fromUrl = params.get('theme')
-    if (fromUrl && (PROJECT_THEMES as readonly string[]).includes(fromUrl)) setTheme(fromUrl as ProjectTheme)
-    setQuery(params.get('q') ?? '')
+    function restoreFilters() {
+      const filters = readProjectFilters(window.location.search, PROJECT_THEMES)
+      setTheme(filters.theme as ThemeFilter)
+      setQuery(filters.query)
+      setDemoOnly(filters.demoOnly)
+      setReady(true)
+    }
+    restoreFilters()
+    window.addEventListener('popstate', restoreFilters)
+    return () => window.removeEventListener('popstate', restoreFilters)
   }, [])
 
   useEffect(() => {
-    const params = new URLSearchParams()
-    if (theme !== 'all') params.set('theme', theme)
-    if (query.trim()) params.set('q', query.trim())
-    const search = params.toString()
-    window.history.replaceState(null, '', `${window.location.pathname}${search ? `?${search}` : ''}`)
-  }, [theme, query])
+    if (!ready) return
+    const search = projectFilterSearch({ theme, query, demoOnly })
+    window.history.replaceState(window.history.state, '', `${window.location.pathname}${search}${window.location.hash}`)
+  }, [theme, query, demoOnly, ready])
 
   const needle = query.trim().toLowerCase()
-  const byQuery = projects.filter((project) => !needle || haystack(project).includes(needle))
+  const byQuery = projects.filter((project) => (!demoOnly || Boolean(project.links.demo)) && (!needle || haystack(project).includes(needle)))
   const visible = byQuery.filter((project) => theme === 'all' || project.theme === theme)
   const countFor = (value: ThemeFilter) => (value === 'all' ? byQuery.length : byQuery.filter((p) => p.theme === value).length)
 
@@ -50,6 +57,7 @@ export default function ProjectsIndex() {
   function clear() {
     setQuery('')
     setTheme('all')
+    setDemoOnly(false)
   }
 
   return (
@@ -92,6 +100,10 @@ export default function ProjectsIndex() {
             </button>
           ))}
         </div>
+        <label className="flex w-fit cursor-pointer items-center gap-2 text-sm text-muted">
+          <input type="checkbox" checked={demoOnly} onChange={event => setDemoOnly(event.target.checked)} className="h-4 w-4 accent-[rgb(var(--clip))]" />
+          {t('projects.demoOnly')}
+        </label>
         <p className="font-mono text-xs text-muted" aria-live="polite">
           {t('projects.shown', { shown: visible.length, total: projects.length })}
         </p>
@@ -160,16 +172,16 @@ export default function ProjectsIndex() {
                   className="group grid gap-x-6 gap-y-1 py-4 md:grid-cols-[minmax(0,1fr)_14rem_4rem_4rem] md:items-baseline"
                 >
                   <span className="min-w-0">
-                    <span className="font-display text-lg font-bold transition-colors group-hover:text-accent">{project.title}</span>
+                    <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <span className="break-words font-display text-lg font-bold transition-colors group-hover:text-accent">{project.title}</span>
+                      <StatusTag status={project.status} />
+                    </span>
                     <span className="mt-0.5 block text-sm text-muted md:truncate">{project.description}</span>
                   </span>
                   <ThemeLabel theme={project.theme} />
                   <span className="tabular font-mono text-xs text-muted">{projectYear(project)}</span>
                   <span className="flex items-center gap-3 md:justify-end">
                     <StarCount stars={getProjectStars(project)} />
-                    <span className="md:hidden">
-                      <StatusTag status={project.status} />
-                    </span>
                   </span>
                 </Link>
               </li>

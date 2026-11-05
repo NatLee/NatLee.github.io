@@ -46,7 +46,10 @@
       "nowCmd": "$ cat now.txt",
       "cta": "See projects",
       "about": "About me",
-      "avatarAlt": "Nat Lee's avatar, a chibi drawing by seseren"
+      "avatarAlt": "Nat Lee's avatar, a chibi drawing by seseren",
+      "try": "Try something",
+      "projects": "Projects",
+      "demos": "Live demos"
     },
     "flagship": {
       "eyebrow": "Flagship project",
@@ -56,7 +59,7 @@
     },
     "selected": {
       "title": "Selected work",
-      "intro": "A few projects that show the range: trading data, developer infrastructure, computer vision and small tools people actually install.",
+      "intro": "A closer look at infrastructure, streaming, planning, energy forecasting, reinforcement learning and medical imaging.",
       "all": "All {count} projects"
     },
     "opensource": {
@@ -78,11 +81,19 @@
     },
     "writing": {
       "title": "Writing"
+    },
+    "playground": {
+      "eyebrow": "Open in your browser",
+      "title": "Less reading. More trying.",
+      "intro": "Plan a project, explore a map, label an image or guess a little sarcasm. These projects are live; pick one and have a go.",
+      "all": "All live demos",
+      "try": "Try it",
+      "open": "Try {title}"
     }
   },
   "projects": {
     "title": "Projects",
-    "intro": "Things I built at work and on my own time, {count} in all. Telepy first, then the ones I'd show in an interview, then everything else.",
+    "intro": "{count} projects across backend systems, forecasting, machine learning and browser tools. Explore the case studies, or filter for something you can try now.",
     "searchLabel": "Search projects",
     "searchPlaceholder": "Search by name, technology or topic",
     "all": "All",
@@ -94,7 +105,7 @@
       "web": "Web apps & extensions"
     },
     "selected": "Selected",
-    "more": "Everything else",
+    "more": "More projects & earlier work",
     "shown": "{shown} of {total} shown",
     "empty": "Nothing matches “{query}”. Try a technology such as Django, OpenCV or Rust.",
     "clear": "Clear search and filters",
@@ -102,7 +113,8 @@
       "Completed": "Completed",
       "In Progress": "Active",
       "Archived": "Archived"
-    }
+    },
+    "demoOnly": "Only projects with a live demo"
   },
   "project": {
     "back": "All projects",

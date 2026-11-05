@@ -7,7 +7,7 @@
   "longDescription": "A powerful web-based interface for managing Docker containers and images, featuring a fully functional terminal emulator. This tool provides system administrators and developers with an intuitive way to manage Docker environments through a web browser.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/django-docker-gui/raw/main/doc/operation.gif"
+    "/images/projects/django-docker-gui/cover.webp"
   ],
   "githubUrl": "https://github.com/NatLee/django-docker-gui",
   "category": "DevOps",

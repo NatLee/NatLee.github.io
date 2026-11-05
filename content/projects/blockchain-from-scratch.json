@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "blockchain-from-scratch",
+  "title": "Blockchain from Scratch",
+  "category": "Backend",
+  "theme": "infra",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "language": "rust",
+  "images": [
+    "/images/projects/blockchain-from-scratch/cover.webp"
+  ],
+  "technologies": [
+    "Rust",
+    "WebAssembly",
+    "TypeScript",
+    "Docker"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [],
+  "githubUrl": "https://github.com/NatLee/blockchain-from-scratch",
+  "links": {
+    "github": "https://github.com/NatLee/blockchain-from-scratch",
+    "demo": "https://natlee.github.io/blockchain-from-scratch/"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Creator & Maintainer",
+  "subtitle": "A blockchain you can take apart",
+  "description": "Nine hands-on chapters, from hashing to a peer-to-peer network. The same Rust code powers interactive WebAssembly demonstrations in your browser.",
+  "longDescription": "A learning project that builds a blockchain in Rust, one executable chapter at a time: hashes, blocks, mining, signatures, a mempool, networking, consensus and file proofs. Browser demonstrations compile the same Rust core to WebAssembly; Docker Compose runs a three-node network.",
+  "features": [
+    "Nine chapters with runnable examples and exercises",
+    "Interactive hashing, mining and tampering demonstrations",
+    "Shared Rust core compiled to WebAssembly",
+    "Three-node Docker network and a file-proof application"
+  ]
+}

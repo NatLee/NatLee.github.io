@@ -4,10 +4,12 @@
   "title": "HEIC2PNG",
   "subtitle": "Image Format Converter",
   "description": "Turns iPhone HEIC photos into PNG from the CLI, a shell pipe or Python. A small tool for a small, recurring annoyance.",
-  "longDescription": "A simple yet effective Python tool for converting HEIC images to PNG format. This utility addresses the common need to convert Apple's HEIC format to more universally supported PNG format.",
+  "longDescription": "Convert iPhone HEIC photos to PNG or JPEG through Python, a CLI or shell pipes. A Pillow / pillow-heif implementation handles transparency, with explicit quality controls for PNG palette reduction and JPEG output.",
   "language": "python",
-  "images": [],
-  "githubUrl": "https://github.com/NatLee/HEIC2PNG",
+  "images": [
+    "/images/projects/heic2png/cover.webp"
+  ],
+  "githubUrl": "https://github.com/NatLee/heic2png",
   "category": "Utilities",
   "theme": "libraries",
   "tier": "selected",
@@ -15,24 +17,22 @@
   "opensource": true,
   "technologies": [
     "Python",
-    "Image Processing",
-    "File Conversion",
-    "PIL/Pillow"
+    "Pillow",
+    "pillow-heif"
   ],
   "features": [
-    "HEIC to PNG conversion",
-    "Batch processing support",
-    "Command-line interface",
-    "Quality preservation"
+    "PNG and JPEG output",
+    "CLI, Python API and shell-pipe input/output",
+    "Batch conversion and transparency handling",
+    "Explicit output-quality controls"
   ],
   "timeline": {
     "start": "2019",
-    "end": "2020",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/HEIC2PNG",
+    "github": "https://github.com/NatLee/heic2png",
     "pypi": "https://pypi.org/project/HEIC2PNG/"
   }
 }

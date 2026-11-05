@@ -15,7 +15,7 @@ One JSON file per project: `content/projects/<id>.json`. Schema = `ProjectDetail
 - **Chinese text**: optional per-id overlay in `content/i18n/projects.zh.json` (only fields: title, subtitle, description, longDescription, role, features, challenges, solutions, results — partial OK, English is the fallback).
 - `category` must be a canonical English value from the `ProjectCategory` union. `theme`: `energy` | `infra` | `ai` | `libraries` | `web`. `tier`: `flagship` (Telepy only) | `selected` (card grid; home shows the first 6) | `archive` (list). `status`: `Completed` | `In Progress` | `Archived`.
 - `links`: `github` (or top-level `githubUrl`), `demo`, `pypi`, `documentation`, `article`.
-- `images` are external URLs (usually `https://github.com/NatLee/<repo>/raw/main/doc/...`); `images[0]` is the detail-page hero and the source for the local thumbnail; `[]` is valid.
+- `images` use local paths under `public/` or verified external URLs. Prefer a local WebP cover; retain verified screenshots in the gallery. `images[0]` is the detail-page hero and the source for the local thumbnail; `[]` is valid.
 - Telepy's case-study page reads extra content from `content/case-studies/telepy.json`.
 - Verify with `npx next build` (each project generates a static page at `/projects/<id>`).
 - Every project file starts with `"$schema": "../schema/project.schema.json"` (editor autocomplete + validation); keep it when adding one.

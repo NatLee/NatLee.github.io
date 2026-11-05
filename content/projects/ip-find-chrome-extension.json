@@ -6,8 +6,10 @@
   "description": "One click and Chrome tells you your IP. A whole extension for something you could search for; in my defence, it is faster.",
   "longDescription": "A Chrome extension that quickly identifies and displays the current network's IP address. This tool is useful for network diagnostics and understanding your current network configuration.",
   "language": "javascript",
-  "images": [],
-  "githubUrl": "https://github.com/NatLee/IP-FIND-ChromeExtension",
+  "images": [
+    "/images/projects/ip-find-chrome-extension/cover.webp"
+  ],
+  "githubUrl": "https://github.com/NatLee/ip-find-chrome-extension",
   "category": "Browser Extension",
   "theme": "web",
   "tier": "archive",
@@ -32,6 +34,6 @@
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/IP-FIND-ChromeExtension"
+    "github": "https://github.com/NatLee/ip-find-chrome-extension"
   }
 }

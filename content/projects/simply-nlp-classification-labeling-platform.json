@@ -1,13 +1,13 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "simply-nlp-classification-labeling-platform",
-  "title": "simply-nlp-classification-labeling-platform",
-  "subtitle": "Text Classification Labeling Tool",
-  "description": "A small Flask tool for sorting text into classes. Labelling data is nobody's favourite job; this made it slightly less awful.",
-  "longDescription": "A comprehensive text classification labeling platform built with Flask. This tool provides an intuitive interface for annotating text data, supporting various classification tasks and enabling efficient dataset creation for NLP model training.",
-  "language": "python",
+  "title": "Multimodal Labeling",
+  "subtitle": "Text, images and audio, with review built in",
+  "description": "A Rust + React labeling platform with configurable schemas, multi-annotator agreement and optional model-assisted pre-labeling. One Docker image to self-host.",
+  "longDescription": "A Rust + React labeling platform with configurable schemas, multi-annotator agreement and optional model-assisted pre-labeling. One Docker image to self-host. Rewritten from the original Flask application in 2026, keeping annotation, review and export in one workspace.",
+  "language": "rust",
   "images": [
-    "https://github.com/NatLee/simply-nlp-classification-labeling-platform/raw/main/doc/demo.gif"
+    "/images/projects/simply-nlp-classification-labeling-platform/cover.webp"
   ],
   "githubUrl": "https://github.com/NatLee/simply-nlp-classification-labeling-platform",
   "category": "AI/ML",
@@ -16,42 +16,27 @@
   "status": "Completed",
   "opensource": true,
   "technologies": [
-    "Python",
-    "Flask",
-    "NLP",
-    "Data Annotation",
-    "Machine Learning",
-    "SQLite"
+    "Rust",
+    "axum",
+    "React",
+    "TypeScript",
+    "SQLite",
+    "Docker"
   ],
   "features": [
-    "Web-based text annotation",
-    "Multi-class classification support",
-    "User management system",
-    "Export functionality",
-    "Progress tracking"
+    "Configurable schemas for text, image and audio classification",
+    "Multi-annotator agreement statistics",
+    "Optional model-assisted pre-labeling and built-in login",
+    "Single-image Docker deployment"
   ],
-  "challenges": [
-    "Efficient annotation workflow",
-    "Data quality assurance",
-    "User interface optimization",
-    "Large dataset handling"
-  ],
-  "solutions": [
-    "Designed intuitive annotation interface",
-    "Implemented quality control measures",
-    "Created efficient data storage",
-    "Added batch processing capabilities"
-  ],
+  "challenges": [],
+  "solutions": [],
   "results": [
-    "Accelerated dataset creation",
-    "Improved annotation quality",
-    "Enhanced team collaboration",
-    "Widely used in NLP projects"
+    "2026 Rust and React rewrite with import, annotation, review and export"
   ],
   "timeline": {
     "start": "2020",
-    "end": "2021",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {

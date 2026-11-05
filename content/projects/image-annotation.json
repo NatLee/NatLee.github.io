@@ -2,61 +2,39 @@
   "$schema": "../schema/project.schema.json",
   "id": "image-annotation",
   "title": "Image Annotation",
-  "subtitle": "React + Next.js Bounding Box Annotation Tool",
+  "subtitle": "Box it. Label it. Export it.",
   "category": "Web Development",
   "theme": "web",
   "tier": "archive",
   "status": "Completed",
   "opensource": true,
   "images": [
-    "https://raw.githubusercontent.com/NatLee/image-annotation/master/docs/index.png"
+    "/images/projects/image-annotation/cover.webp"
   ],
-  "description": "Draw bounding boxes on images and export the labels. First written in 2017, later rebuilt in React and Next.js, which is more care than most labelling tools ever get.",
-  "longDescription": "A comprehensive web-based image annotation tool built with React and Next.js that streamlines the process of creating bounding box annotations. The application features automatic image loading, intuitive drag-and-drop interface, real-time annotation editing, and robust data management with localStorage integration and JSON export functionality.",
+  "description": "A keyboard-first bounding-box editor that runs in your browser. Open your own images, label boxes and export JSON, COCO, YOLO or Pascal VOC.",
+  "longDescription": "The original 2017 image-labeling tool, rebuilt with React and Vite. Draw and review bounding boxes with zoom, pan, undo and keyboard shortcuts. Images and annotations stay in the browser, with common dataset formats available for import and export.",
   "language": "javascript",
   "githubUrl": "https://github.com/NatLee/image-annotation",
   "technologies": [
+    "TypeScript",
     "React",
-    "Next.js",
-    "JavaScript",
-    "HTML/CSS",
-    "localStorage API",
-    "JSON"
+    "Vite",
+    "Canvas API"
   ],
   "features": [
-    "Auto-load random images on startup",
-    "Immediate bounding box creation and editing",
-    "Drag to move and resize with corner handles",
-    "Original coordinate storage with scale factor handling",
-    "Window resize handling and responsive design",
-    "Submit annotation with validation",
-    "Export all data to JSON format",
-    "Annotation leaderboard and progress tracking",
-    "Grid overlay for validation (keyboard shortcut)",
-    "Dark theme with green bounding boxes"
+    "Bounding boxes with class colours and keyboard shortcuts",
+    "Folder import, zoom, pan, undo and redo",
+    "JSON, COCO, YOLO and Pascal VOC import/export",
+    "Local browser storage and offline sample images"
   ],
-  "challenges": [
-    "Real-time coordinate scaling across different display sizes",
-    "Maintaining annotation accuracy during window resize",
-    "Efficient data storage and retrieval in browser",
-    "User-friendly annotation workflow design"
-  ],
-  "solutions": [
-    "Implemented scale factor calculation for coordinate accuracy",
-    "Built responsive design with automatic resize handling",
-    "Created comprehensive localStorage data structure",
-    "Designed intuitive keyboard shortcuts and UI controls"
-  ],
+  "challenges": [],
+  "solutions": [],
   "results": [
-    "Streamlined annotation workflow with immediate box creation",
-    "Accurate coordinate preservation across display changes",
-    "Comprehensive data export with metadata",
-    "Enhanced user experience with keyboard shortcuts"
+    "Static GitHub Pages app with browser-local annotation and export"
   ],
   "timeline": {
     "start": "2017",
-    "end": "2025",
-    "duration": "8 years"
+    "end": "2026-11"
   },
   "role": "Creator",
   "links": {

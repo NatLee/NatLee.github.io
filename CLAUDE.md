@@ -5,7 +5,8 @@ Personal site of Nat Lee. **One body of content, several looks ("themes").** The
 ## Commands
 
 - `npx next dev` / `npx next build` (ESLint is not installed and the build skips lint — there was never a config; type-check still runs)
-- On Windows, `npm run build` fails (scripts use Unix `NODE_OPTIONS=` syntax) — call `npx next ...` directly.
+- `npm run dev` / `npm run build` work on Windows and Unix. Node.js 22+ is used locally and in CI.
+- `npm test` checks project registration, local images, bilingual strings and shared filter URLs. PRs build without deploying; main deploys to Pages.
 - `npx next build` type-checks and statically exports all pages to `out/` (including `/content/site.json`) — this is the full verification.
 - `node scripts/sync-github.mjs` — refresh star counts into `content/_generated/github.json` (CI runs it before every build; fails soft).
 - `node scripts/make-thumbs.mjs [--force]` — card thumbnails `public/images/projects/<id>.webp` + `content/_generated/thumbnails.json` (uses `sharp`; run by hand after adding a project).
@@ -17,6 +18,7 @@ Personal site of Nat Lee. **One body of content, several looks ("themes").** The
 
 - **Projects: one file per project** — `content/projects/<id>.json` (with `"$schema": "../schema/project.schema.json"`), registered in `data/projects-list.ts`. Each has `theme` (energy | infra | ai | libraries | web) and `tier` (flagship | selected | archive). Recipe: `.claude/rules/projects-data.md`. `/add-project` skill automates adding one.
 - `personal.json`: name, tagline (`**…**` marks the accented phrase), now, story, howIWork, eras, languages, socials. zh fields sit beside the English ones with a `Zh` suffix.
+- `playground.json`: ordered project IDs for the homepage's direct-demo cards; each project must have `links.demo`.
 - `mascots.json`: Tapi and Chiyo (names, images, lines).
 - Bilingual `{ "en": …, "zh": … }` files, read with `pick(locale, value)`: `case-studies/telepy.json`, `opensource.json`, `writing.json`, `valhalla.json`.
 - Chinese overlays for list data: `content/i18n/*.zh.json` (projects, experience, education, skills) — partial fields keyed by id, English fallback (details: `.claude/rules/i18n.md`).
@@ -32,7 +34,7 @@ Personal site of Nat Lee. **One body of content, several looks ("themes").** The
 
 | Route | Component | Data |
 |---|---|---|
-| `/` | `components/home/Hero.tsx`, `Flagship.tsx`, `HomeSections.tsx` | personal, Telepy + case study, selected projects, opensource, writing |
+| `/` | `components/home/Hero.tsx`, `Flagship.tsx`, `Playground.tsx`, `HomeSections.tsx` | personal, Telepy + case study, playground, selected projects, opensource, writing |
 | `/projects` | `components/projects/ProjectsIndex.tsx` | all projects (search + theme filter, tiers) |
 | `/projects/telepy` | `components/projects/TelepyCaseStudy.tsx` | telepy.json + `case-studies/telepy.json` |
 | `/projects/[id]` | `components/projects/ProjectPage.tsx` | one project (`generateStaticParams`) |
