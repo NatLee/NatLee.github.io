@@ -46,7 +46,10 @@
       "nowCmd": "$ cat now.txt",
       "cta": "看作品",
       "about": "關於我",
-      "avatarAlt": "Nat Lee 的大頭貼，seseren 繪的 Q 版人物"
+      "avatarAlt": "Nat Lee 的大頭貼，seseren 繪的 Q 版人物",
+      "try": "直接試用作品",
+      "projects": "收錄作品",
+      "demos": "線上試用"
     },
     "flagship": {
       "eyebrow": "旗艦作品",
@@ -56,7 +59,7 @@
     },
     "selected": {
       "title": "精選作品",
-      "intro": "幾個能看出範圍的作品：交易資料、開發者基礎設施、電腦視覺，還有一些真的有人在裝的小工具。",
+      "intro": "從基礎設施、直播點歌與排程，到能源預測、強化學習與醫學影像，看看各自解決了什麼問題。",
       "all": "全部 {count} 個作品"
     },
     "opensource": {
@@ -78,11 +81,19 @@
     },
     "writing": {
       "title": "文章"
+    },
+    "playground": {
+      "eyebrow": "打開瀏覽器就能用",
+      "title": "看介紹，也動手試試。",
+      "intro": "排一份計畫、看看地圖、標註圖片，或猜猜一句反諷。這些作品已經上線，挑一個玩玩看。",
+      "all": "所有線上作品",
+      "try": "開啟試用",
+      "open": "試用「{title}」"
     }
   },
   "projects": {
     "title": "作品",
-    "intro": "工作上和自己做的東西，一共 {count} 個。Telepy 排第一，接著是面試時會拿出來講的，最後是其他全部。",
+    "intro": "共 {count} 個作品，涵蓋後端系統、預測、機器學習與瀏覽器工具。可以深入看案例，也能篩出現在就能試用的作品。",
     "searchLabel": "搜尋作品",
     "searchPlaceholder": "用名稱、技術或主題搜尋",
     "all": "全部",
@@ -94,7 +105,7 @@
       "web": "網頁應用與擴充功能"
     },
     "selected": "精選",
-    "more": "其他作品",
+    "more": "更多專案與早期作品",
     "shown": "顯示 {shown} / {total}",
     "empty": "找不到「{query}」。試試看技術名稱，例如 Django、OpenCV 或 Rust。",
     "clear": "清除搜尋與篩選",
@@ -102,7 +113,8 @@
       "Completed": "已完成",
       "In Progress": "進行中",
       "Archived": "已封存"
-    }
+    },
+    "demoOnly": "只顯示可線上試用的作品"
   },
   "project": {
     "back": "所有作品",

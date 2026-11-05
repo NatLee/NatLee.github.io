@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "playwright-snap",
+  "title": "playwright-snap",
+  "category": "Web Automation",
+  "theme": "libraries",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "language": "python",
+  "images": [
+    "/images/projects/playwright-snap/cover.webp"
+  ],
+  "technologies": [
+    "Python",
+    "Playwright",
+    "Chromium"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [],
+  "githubUrl": "https://github.com/NatLee/playwright-snap",
+  "links": {
+    "github": "https://github.com/NatLee/playwright-snap"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Creator & Maintainer",
+  "subtitle": "Website snapshots, with a maintained browser",
+  "description": "Render a page with Playwright and return a PNG or PDF as base64. Moving from pyppeteer-snap takes a one-line import change.",
+  "longDescription": "The maintained successor to pyppeteer-snap uses Playwright-driven Chromium to render JavaScript-heavy pages. It keeps the same function names, arguments and return types, with a Python API and command-line interface for PNG and PDF snapshots.",
+  "features": [
+    "PNG and PDF snapshots returned as base64",
+    "Playwright-driven headless Chromium",
+    "Python functions and a command-line interface",
+    "Matching pyppeteer-snap arguments and return types"
+  ]
+}

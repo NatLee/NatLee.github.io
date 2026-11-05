@@ -9,15 +9,15 @@
   "locationZh": "台灣台北",
   "careerStartYear": 2018,
   "avatar": "https://avatars.githubusercontent.com/u/10178964?v=4",
-  "description": "Software engineer in Taipei. Backend, data platforms and forecasting, plus a few open-source tools.",
-  "descriptionZh": "台北的軟體工程師，做後端、資料平台與預測，也維護幾個開源工具。",
+  "description": "Software engineer in Taipei building backend systems, data platforms and forecasting tools. Explore Rust services, Python libraries and interactive web projects.",
+  "descriptionZh": "台北的軟體工程師，做後端系統、資料平台與預測工具。這裡有 Rust 服務、Python 套件，以及可以直接試用的互動作品。",
   "tagline": {
-    "lead": "An engineer who got promoted into meetings and keeps **sneaking back into the codebase**.",
-    "sub": "These days I forecast Japan's electricity prices, and build tools so I never have to open a VPN again."
+    "lead": "I build systems that do the work, and **tools worth opening twice**.",
+    "sub": "Backend engineering, data platforms and forecasting. From Japan’s electricity market to open-source tools you can try right here."
   },
   "taglineZh": {
-    "lead": "被升進會議室、卻還是常**偷溜回 codebase** 的工程師。",
-    "sub": "最近在預測日本電價，順便寫工具，讓自己再也不用開 VPN。"
+    "lead": "讓系統把事情做好，讓工具**值得再打開一次**。",
+    "sub": "專注後端、資料平台與預測。從日本電力交易系統，到可以直接試用的開源工具。"
   },
   "now": "building power-trading systems for Japan's electricity market: market and weather data pipelines, bidding tools, spot-price forecasts.",
   "nowZh": "替日本電力市場打造交易系統：市場與氣象資料管線、競價工具、現貨價格預測。",

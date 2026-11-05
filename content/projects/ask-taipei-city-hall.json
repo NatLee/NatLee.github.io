@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "ask-taipei-city-hall",
+  "title": "Ask Taipei City Hall",
+  "category": "Web Application",
+  "theme": "web",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "language": "typescript",
+  "images": [
+    "/images/projects/ask-taipei-city-hall/cover.webp"
+  ],
+  "technologies": [
+    "TypeScript",
+    "React",
+    "BM25",
+    "Web Workers"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [],
+  "githubUrl": "https://github.com/NatLee/ask-taipei-city-hall",
+  "links": {
+    "github": "https://github.com/NatLee/ask-taipei-city-hall",
+    "demo": "https://natlee.github.io/ask-taipei-city-hall/"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Creator & Maintainer",
+  "subtitle": "City-service answers, with sources",
+  "description": "Search 8,000-plus Taipei city-service FAQs in your browser. Every result links back to its source; an optional model-assisted mode can summarise the answers.",
+  "longDescription": "The 2017 Taipei city-government chatbot competition project, rebuilt in 2026 as a static web app. Chinese BM25 retrieval runs locally in a Web Worker and returns the issuing agency, date and source for each FAQ. An optional mode uses your own API key to summarise the retrieved material.",
+  "features": [
+    "Local search across 8,000-plus public FAQs",
+    "Agency, update date and original source on results",
+    "Chinese retrieval in a Web Worker",
+    "Optional answers grounded in retrieved FAQs"
+  ]
+}

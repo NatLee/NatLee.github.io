@@ -36,7 +36,7 @@ export function StatusTag({ status }: { status: ProjectDetail['status'] }) {
 
 export default function ProjectCard({ project }: { project: ProjectDetail }) {
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-ink/30">
+    <article className="group relative flex min-w-0 flex-1 flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-ink/30 focus-within:ring-2 focus-within:ring-accent">
       <div className="aspect-[16/10] overflow-hidden border-b border-line bg-paper">
         {project.thumbnail ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -56,7 +56,7 @@ export default function ProjectCard({ project }: { project: ProjectDetail }) {
           <ThemeLabel theme={project.theme} />
           <StarCount stars={getProjectStars(project)} />
         </div>
-        <h3 className="font-display text-xl font-bold leading-snug">
+        <h3 className="break-words font-display text-xl font-bold leading-snug">
           <Link href={`/projects/${project.id}/`} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none group-focus-within:underline">
             {project.title}
           </Link>

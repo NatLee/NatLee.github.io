@@ -4,10 +4,11 @@
   "title": "fisheye-warping",
   "subtitle": "Fisheye Image Processing Tool",
   "description": "Unrolls top-down fisheye images into panoramas and rolls them back again, so nobody has to squint at round photos.",
-  "longDescription": "An advanced computer vision tool for processing fisheye images, providing both dewarping and rewarping capabilities. This tool is essential for applications involving fisheye cameras and panoramic image processing.",
+  "longDescription": "An OpenCV Python package and CLI that dewarps top-down fisheye images into panoramas and rewarps panoramas into fisheye circles. Coordinate meshes are cached by image size so repeated conversions can reuse the mapping.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/fisheye-warping/raw/main/doc/101-fisheye.jpg"
+    "/images/projects/fisheye-warping/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/fisheye-warping/main/doc/101-fisheye.jpg"
   ],
   "githubUrl": "https://github.com/NatLee/fisheye-warping",
   "category": "Computer Vision",
@@ -23,15 +24,14 @@
     "NumPy"
   ],
   "features": [
-    "Fisheye image dewarping",
-    "Image rewarping capabilities",
-    "Top-down view conversion",
-    "Calibration support"
+    "Top-down fisheye to panorama conversion",
+    "Panorama to fisheye rewarping",
+    "Reusable coordinate meshes",
+    "Python API and command-line tools"
   ],
   "timeline": {
     "start": "2020",
-    "end": "2021",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {

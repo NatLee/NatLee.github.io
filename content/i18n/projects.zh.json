@@ -209,55 +209,56 @@
     ]
   },
   "heic2png": {
-    "subtitle": "影像格式轉換工具",
-    "description": "把 iPhone 的 HEIC 照片轉成 PNG，CLI、管線或 Python 都行。專治那種小小但一直出現的煩。",
-    "longDescription": "簡單實用的 Python 工具，可將 HEIC 圖片轉為 PNG 格式。解決一個常見的需求：把 Apple 的 HEIC 格式轉成支援度更廣的 PNG。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "HEIC 照片轉檔工具",
+    "description": "從命令列、管線或 Python 把 iPhone 的 HEIC 照片轉成 PNG 或 JPEG，處理透明度與輸出品質。",
+    "longDescription": "以 Pillow 與 pillow-heif 轉換 HEIC 照片。可從 CLI、Python 或 shell 管線輸入輸出，支援批次與透明度，並明確控制 PNG 色盤縮減和 JPEG 品質。",
     "features": [
-      "HEIC 轉 PNG",
-      "支援批次處理",
-      "命令列介面",
-      "保留影像品質"
+      "輸出 PNG 與 JPEG",
+      "CLI、Python API 與管線輸入輸出",
+      "批次轉檔與透明度處理",
+      "明確的輸出品質控制"
     ]
   },
   "batch-crop-images": {
-    "subtitle": "批次影像裁切工具",
-    "description": "框一次，整個資料夾的相似圖片一起裁。因為我拒絕一張一張裁，看來也有不少人跟我一樣拒絕。",
-    "longDescription": "高效率的批次影像處理工具，提供直覺的介面，可同時裁切多張相似的影像。對於需要以相同方式裁切大量影像的情境，能簡化整個處理流程。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "一個框，裁完整個資料夾",
+    "description": "用 OpenCV 畫一次裁切框，套用到整個資料夾；也能傳入 --box 或預設檔，不開視窗完成批次裁切。",
+    "longDescription": "以 OpenCV 和 NumPy 實作批次裁切。互動式選框或命令列座標共用同一套裁切流程，重複工作可保存為預設檔。",
     "features": [
-      "批次影像裁切",
-      "互動式 GUI 介面",
-      "預覽功能",
-      "一致的裁切設定"
+      "在 OpenCV 視窗畫一次裁切框",
+      "同一個框套用到整個資料夾",
+      "--box 無視窗模式與預設檔"
+    ],
+    "challenges": [],
+    "solutions": [],
+    "results": [
+      "可用 pip 安裝的互動式與無視窗批次裁切工具"
     ]
   },
   "nipype-preprocess-on-brain-mr": {
-    "subtitle": "腦部 MR 影像前處理",
-    "description": "用 Nipype、FSL 與 ANTs 做腦部 MRI 前處理：AC-PC 校正、去頭骨、分割。證明我曾經懂過神經影像流程。",
-    "longDescription": "以 Nipype 打造、專為腦部 MR 影像分析設計的神經影像前處理流程，將神經影像研究與臨床應用所需的繁複前處理步驟自動化。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "title": "腦部 MRI 前處理流程",
+    "subtitle": "從 T1 掃描到組織圖與品質報告",
+    "description": "完整 Nipype 流程，比較 FSL FAST、K-means 與 ANTs Atropos，產出組織體積、偏差校正指標與互動 3D 腦。",
+    "longDescription": "供研究與學習使用的 T1 MRI 流程：AC-PC 對齊、MNI152 配準、去顱骨與 N4 校正，再選擇 FSL FAST、K-means 或 ANTs Atropos 分割。比較三者的一致性、組織體積與品質指標，每筆掃描產出 3D 圖與 HTML 報告，示範資料來自開放授權的 OpenNeuro。",
     "features": [
-      "MR 影像自動化前處理",
-      "腦組織分割",
-      "影像對位",
-      "品質控管指標",
-      "支援批次處理"
+      "AC-PC 對齊、配準、去顱骨與 N4 校正",
+      "可選 FAST、K-means 或 Atropos 分割",
+      "組織體積、Dice 一致性與校正前後品質比較",
+      "互動 3D 腦、旋轉 GIF 與 HTML 報告"
     ],
     "challenges": [
-      "將包含 AC-PC 校正、頭骨去除（skull stripping）等複雜步驟的多階段神經影像流程自動化。",
-      "管理 FSL、ANTs 等小眾醫學影像工具的大量相依套件，並維持環境一致性。",
-      "確保各分析節點之間的資料流有效率，並妥善管理中間檔案。"
+      "讓專門的醫學影像工具能重現執行",
+      "用同一份校正影像比較組織分割方法"
     ],
     "solutions": [
-      "運用 Nipype 建立模組化且可重現的工作流程，串接多套專業神經影像工具。",
-      "使用 Docker 與 Neurodocker 將整套軟體環境容器化，解決「在我電腦上可以跑」的問題。",
-      "整合 K-means 分群進行自動化組織分割，並以 Nilearn 產生高品質的結果視覺化。"
+      "Docker 映像檔只安裝流程需要的工具",
+      "共用 N4 校正結果，主分割方法可選"
     ],
     "results": [
-      "開發出穩健的自動化流程，能以高精確度處理 .nii 腦部 MR 影像，幾乎不需人工介入。",
-      "建立高度可攜的研究環境，有助於醫學影像研究的可重現性。",
-      "為組織分割結果（GM、WM、CSF）提供清楚的視覺化輸出，方便資料驗證與後續分析。"
+      "可在 CPU 重現執行，附開放授權示範掃描",
+      "每筆掃描產出組織圖、量化品質指標與 HTML 報告"
     ]
   },
   "solar-prediction-system": {
@@ -331,36 +332,20 @@
     ]
   },
   "django-project-template": {
-    "subtitle": "功能齊全的 Django 專案模板",
-    "description": "Django 起手式：Docker、第三方登入、JWT、WebSocket、管理介面與 django-q。把每次都要手動設的東西，一次設好。",
-    "longDescription": "完整的 Django 專案模板，內含現代 Web 開發常用的功能，例如 Docker 容器化、第三方登入驗證、JWT token 管理、WebSocket 支援與進階的管理介面。內建最佳實務，非常適合用來快速啟動新的 Django 專案。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "Django 後端起點",
+    "description": "整合 PostgreSQL、Redis、JWT、社群登入、Channels 與 django-q2 的 Django 範本。反覆做的設定，現在也有端對端驗證。",
+    "longDescription": "以 Docker Compose 啟動 Django、PostgreSQL 與 Redis。整合 JWT、Google／Microsoft 登入、Channels WebSocket 與 django-q2 背景工作，透過環境變數設定，CI 驗證端對端流程。",
     "features": [
-      "Docker 容器化",
-      "第三方登入驗證（Google、GitHub）",
-      "JWT token 管理",
-      "WebSocket 即時通訊",
-      "進階管理介面",
-      "以 django-q 處理背景任務",
-      "以 Swagger 產生 API 文件"
+      "JWT 與 Google、Microsoft 登入",
+      "Channels WebSocket 與 django-q2 背景工作",
+      "Docker Compose 啟動 PostgreSQL 和 Redis",
+      "環境變數設定與端對端 CI"
     ],
-    "challenges": [
-      "整合多個身分驗證提供者",
-      "管理 JWT token 的生命週期",
-      "處理 WebSocket 連線",
-      "設定 Docker 環境"
-    ],
-    "solutions": [
-      "實作支援多個提供者的 OAuth2",
-      "建立安全的 JWT refresh 機制",
-      "打造穩定的 WebSocket middleware",
-      "設定 multi-stage Docker build"
-    ],
+    "challenges": [],
+    "solutions": [],
     "results": [
-      "加快 Django 專案的建置速度",
-      "開發時間縮短 60%",
-      "透過現代化的驗證機制提升安全性",
-      "社群積極採用"
+      "可重用的後端範本，附端對端驗證流程"
     ]
   },
   "django-docker-gui": {
@@ -459,154 +444,101 @@
     ]
   },
   "simply-blur-detector": {
-    "subtitle": "簡易模糊偵測工具",
-    "description": "判斷照片是不是糊掉的 OpenCV 小工具。用眼睛也看得出來，只是看不了一萬張。",
-    "longDescription": "輕量且高效率的影像模糊偵測工具，採用進階的電腦視覺演算法。能評估影像品質並判斷影像是否模糊，適合用於攝影與影像處理流程中的品質控管。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "在瀏覽器比較 CNN 與 Laplacian",
+    "description": "放入圖片，比較 Keras 小型 CNN 和 Laplacian variance 的判斷，還能看逐區塊模糊熱圖。不用上傳。",
+    "longDescription": "用清晰插圖與 blur-generator 產生的模糊版本訓練 TensorFlow／Keras CNN。2026 版包含原創訓練插圖、x86 與 ARM Docker 支援，以及 ONNX 匯出。網頁並排顯示 CNN 和 Laplacian variance，讓使用者自己比較兩種方法的判斷。",
     "features": [
-      "自動偵測模糊",
-      "支援批次處理",
-      "多種偵測演算法",
-      "信心分數",
-      "容易整合的 API"
+      "瀏覽器本機推論與區塊熱圖",
+      "CNN 與 Laplacian variance 並排比較",
+      "原創清晰與模糊訓練插圖",
+      "Docker 訓練與 ONNX 匯出"
     ],
     "challenges": [
-      "準確偵測模糊",
-      "處理不同類型的模糊",
-      "優化處理速度",
-      "減少誤判（false positive）"
+      "讓 Python 訓練與瀏覽器推論使用相同前處理"
     ],
     "solutions": [
-      "實作多種偵測演算法",
-      "使用 ensemble 方法提升準確度",
-      "優化影像處理流程",
-      "建立完整的測試套件"
+      "訓練到匯出共用均衡化、縮放與正規化步驟"
     ],
     "results": [
-      "高準確度的模糊偵測",
-      "處理速度快",
-      "廣泛用於影像處理",
-      "社群積極貢獻"
+      "GitHub Pages 互動示範，圖片在本機處理",
+      "專案包含可重現的訓練素材與模型評估"
     ]
   },
   "gura-gru-unit-for-recognizing-affect": {
-    "subtitle": "情緒分析模型",
-    "description": "用雙向 GRU 加 self-attention 做的情緒分類模型。取名叫 GURA，因為命名才是最難的部分。",
-    "longDescription": "結合雙向 GRU 網路與 Self-attention 機制的進階情緒分類模型。GURA（GRU Unit for Recognizing Affect）在情緒偵測與情感分析任務上達到 state-of-the-art 的表現。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "早期情緒分類實驗",
+    "description": "早期的 BiGRU＋self-attention 情緒分類實驗，保留作為參考；新的比較移到 Sentiment Bundle Benchmark。",
+    "longDescription": "介紹 MyAnimeList 評論與情緒資料集包時使用的早期分類模型。BiGRU 實驗已封存，由 sentiment-bundle-benchmark 以固定切分與可重現評測比較現代方法。",
     "features": [
-      "雙向 GRU 架構",
-      "Self-attention 機制",
-      "多類別情緒分類",
-      "支援遷移學習",
-      "模型可解釋性"
+      "歷史 BiGRU 與 self-attention 模型",
+      "MyAnimeList 情緒資料集的搭配實驗"
     ],
-    "challenges": [
-      "設計複雜的模型架構",
-      "優化 attention 機制",
-      "訓練穩定性",
-      "模型可解釋性"
-    ],
-    "solutions": [
-      "實作穩定的訓練流程",
-      "優化 attention 權重的計算",
-      "加入正規化技術",
-      "製作視覺化工具"
-    ],
+    "challenges": [],
+    "solutions": [],
     "results": [
-      "達到 state-of-the-art 的情緒分類準確率",
-      "提升模型可解釋性",
-      "成功應用遷移學習",
-      "獲研究社群採用"
+      "保留為 Sentiment Bundle Benchmark 的歷史基準"
     ]
   },
   "simply-nlp-classification-labeling-platform": {
-    "subtitle": "文本分類標註工具",
-    "description": "把文字標成各個類別的 Flask 小工具。標資料不是誰的最愛，這個讓它稍微沒那麼痛苦。",
-    "longDescription": "以 Flask 打造的完整文本分類標註平台。提供直覺的介面來標註文字資料，支援多種分類任務，能有效率地建立訓練 NLP 模型所需的資料集。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "title": "多模態分類標註平台",
+    "subtitle": "文字、圖片與音訊，共用一套審核流程",
+    "description": "Rust＋React 標註平台，可設定分類結構、比較多人一致性，也能選用模型預標註。單一 Docker 映像檔即可自架。",
+    "longDescription": "Rust＋React 標註平台，可設定分類結構、比較多人一致性，也能選用模型預標註。單一 Docker 映像檔即可自架。2026 年從原本的 Flask 應用重寫，將匯入、標註、審核與匯出放在同一個工作區。",
     "features": [
-      "Web 介面的文字標註",
-      "支援多類別分類",
-      "使用者管理系統",
-      "匯出功能",
-      "進度追蹤"
+      "可設定文字、圖片與音訊分類結構",
+      "多人標註一致性統計",
+      "選用模型預標註與內建登入",
+      "單一 Docker 映像檔部署"
     ],
-    "challenges": [
-      "有效率的標註流程",
-      "確保資料品質",
-      "優化使用者介面",
-      "處理大型資料集"
-    ],
-    "solutions": [
-      "設計直覺的標註介面",
-      "實作品質控管機制",
-      "建立高效率的資料儲存方式",
-      "加入批次處理功能"
-    ],
+    "challenges": [],
+    "solutions": [],
     "results": [
-      "加快資料集的建立",
-      "提升標註品質",
-      "強化團隊協作",
-      "廣泛用於 NLP 專案"
+      "2026 年以 Rust 和 React 重寫，串起匯入、標註、審核與匯出"
     ]
   },
   "play-qwop-by-using-ai-agent": {
-    "subtitle": "AI Agent 玩 QWOP",
-    "description": "用 TensorFlow 2 訓練強化學習代理人玩 QWOP。它走得比我好，雖然這個標準很低。",
-    "longDescription": "一個創新的強化學習專案，使用 TensorFlow 2 訓練 AI agent 玩以難度著稱的 QWOP 遊戲。專案展示了 actor-critic 方法與策略梯度（policy gradient）優化等進階強化學習技術。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "title": "用 PPO 玩 QWOP",
+    "subtitle": "學會完賽，姿勢就先別管了",
+    "description": "PyTorch PPO agent 透過 Playwright 玩真正的 QWOP 網頁遊戲。六場評估全部跑完 100 公尺；獎勵函數沒要求好看。",
+    "longDescription": "2026 年以 Stable-Baselines3 PPO、PyTorch 與 Gymnasium 重寫，透過 Playwright 操作官方網頁遊戲。八個瀏覽器環境訓練 22 分鐘，紀錄中的六場評估全部完賽，正常遊戲速度的最佳時間為 193.8 秒。",
     "features": [
-      "實作 actor-critic 強化學習",
-      "整合 QWOP 遊戲環境",
-      "訓練過程視覺化",
-      "儲存模型 checkpoint",
-      "追蹤表現指標"
+      "在無頭 Chromium 玩官方 QWOP",
+      "八個平行訓練環境",
+      "OCR 距離回饋與獎勵設計",
+      "學習曲線、checkpoint 與遊戲 GIF"
     ],
     "challenges": [
-      "複雜的遊戲物理模擬",
-      "設計獎勵函數",
-      "訓練穩定性",
-      "動作空間最佳化"
+      "從瀏覽器遊戲觀察學出穩定步態",
+      "一致量測正常速度的遊戲時間"
     ],
     "solutions": [
-      "實作自訂的遊戲環境",
-      "設計經過塑形（reward shaping）的獎勵函數",
-      "加入穩定訓練的技巧",
-      "優化動作空間的表示方式"
+      "PPO 搭配 Gymnasium 環境與 Playwright 操作",
+      "固定每遊戲秒 60 幀並記錄評估條件"
     ],
     "results": [
-      "成功訓練出會玩 QWOP 的 agent",
-      "能穩定抵達終點",
-      "證明強化學習的有效性",
-      "對強化學習社群具教學價值"
+      "六場有紀錄的評估全數完成 100 公尺",
+      "正常遊戲速度最佳時間 193.8 秒",
+      "八個瀏覽器環境訓練 22 分鐘"
     ]
   },
   "elysion-calendar": {
-    "subtitle": "Elysion 每日日曆",
-    "description": "快速查艾利森日 K 的小日曆。非常小眾，對那群小眾非常好用。",
-    "longDescription": "專為快速查閱 Elysion 日 K 線資料而設計的日曆應用。以 TypeScript 開發，提供直覺的介面，讓交易者與分析師能快速取得歷史交易資訊。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "不用來回切頁面，也找得到空包廂",
+    "description": "查看艾莉森日 K 包廂的空位，用每日與每週視圖比較房間和半小時時段，資料來自店家的官方訂位頁。",
+    "longDescription": "讀取艾莉森官方訂位頁，把私人卡拉 OK 包廂的空位整理成房間卡片、全天時間表與每週總覽。支援手機和深淺色，以台灣時間處理已開始和已過期的時段。",
     "features": [
-      "快速查詢 K 線資料",
-      "互動式日曆介面",
-      "歷史資料視覺化",
-      "響應式設計"
+      "房間卡片、全天時間表與每週空位",
+      "官方訂位資料與背景快取",
+      "依台灣時間判斷時段狀態",
+      "響應式深淺色介面"
     ],
-    "challenges": [
-      "在響應式日曆介面中，有效率地管理並呈現複雜的日 K 線資料。",
-      "非同步更新即時房間資料的快取，同時不影響前端效能。",
-      "協調多個服務（前端、後端、Redis、Nginx），讓開發與正式環境保持一致。"
-    ],
-    "solutions": [
-      "實作以 Redis 為基礎的快取系統，處理非同步更新並加快資料讀取。",
-      "使用 Docker Compose 將環境容器化，確保部署順暢並具跨平台相容性。",
-      "以 TypeScript 開發專屬前端，處理複雜的日曆邏輯與導覽檢視。"
-    ],
+    "challenges": [],
+    "solutions": [],
     "results": [
-      "打造一個精簡的工具，以易用的日曆形式快速查詢 Elysion 的日 K 資料。",
-      "將繁重的資料處理移到背景快取層，提升應用程式效能。",
-      "透過自動化 shell script 與容器化，簡化本機開發與正式環境部署。"
+      "以店家官方訂位資料整理包廂空位"
     ]
   },
   "ssh-reverse-tunnel-using-docker": {
@@ -622,31 +554,20 @@
     ]
   },
   "django-allauth-jwt-template": {
-    "subtitle": "Django 身分驗證模板",
-    "description": "把 Django Allauth 和 JWT 接好的範本，這樣我就不用再查怎麼接。結果我還是會去查。",
-    "longDescription": "完整的 Django 模板，示範如何整合 Django Allauth 與 JWT 驗證，為採用現代驗證模式、注重安全的 Web 應用提供穩固的基礎。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "給 SPA 與 API 的登入範本",
+    "description": "以 django-allauth headless 模式和內建 JWT 整合 Email、Google、Microsoft 與 LINE 登入。",
+    "longDescription": "使用 django-allauth headless 模式與內建 JWT 支援的 Django 驗證範本。示範獨立前端的 Email 與社群登入，附端對端驗證，取代原本自製的 session 到 JWT 橋接。",
     "features": [
-      "整合 Django Allauth",
-      "JWT token 驗證",
-      "支援社群帳號登入",
-      "使用者管理儀表板",
-      "API 驗證"
+      "Headless 驗證與內建 JWT",
+      "Email、Google、Microsoft 與 LINE 登入",
+      "SPA／API 前後端分離整合",
+      "端對端登入驗證"
     ],
-    "challenges": [
-      "銜接 Django Allauth 基於 session 的驗證機制與無狀態的 JWT 架構。",
-      "將多個第三方驗證提供者（Google、Microsoft、Line）整合進統一的 JWT 流程。",
-      "客製化驗證 adapter 以處理特定商業邏輯，例如針對社群登入有條件地管理密碼。"
-    ],
-    "solutions": [
-      "開發自訂的驗證橋接層，在 Django Allauth 社群登入成功後簽發 JWT token。",
-      "建立完整模板，示範第三方登入 callback 從前端到後端的整合方式。",
-      "以 Python 實作模組化的 view 與 adapter，有效率地管理使用者註冊與 token 生命週期。"
-    ],
+    "challenges": [],
+    "solutions": [],
     "results": [
-      "提供穩健、可重複使用的模板，大幅縮短需要 JWT 與社群登入的現代 Django 專案的建置時間。",
-      "成功將各種驗證來源整合為單一、安全的 token 驗證系統。",
-      "讓開發者能打造前後端分離、可擴展，且支援現代前端框架的後端。"
+      "以 django-allauth 支援的 headless 介面建立登入範本"
     ]
   },
   "dev-dock": {
@@ -691,206 +612,151 @@
     ]
   },
   "fisheye-warping": {
-    "subtitle": "魚眼影像處理工具",
-    "description": "把俯視魚眼影像展開成全景，也能捲回去，從此不用再瞇著眼看圓形的照片。",
-    "longDescription": "處理魚眼影像的進階電腦視覺工具，同時提供 dewarping 與 rewarping 功能。對於使用魚眼相機及環景影像處理的應用來說，是不可或缺的工具。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "魚眼與全景影像互轉",
+    "description": "把俯視魚眼影像展開成全景，也能捲回去。座標網格依尺寸快取，重複轉換可重用。",
+    "longDescription": "以 OpenCV 實作的 Python 套件與 CLI，支援俯視魚眼影像展開及全景影像重投影。座標網格依影像尺寸保存，重複處理同尺寸影像時可直接重用。",
     "features": [
-      "魚眼影像 dewarping（展開校正）",
-      "影像 rewarping 功能",
-      "俯視視角轉換",
-      "支援校正"
+      "俯視魚眼展開為全景",
+      "全景重投影為魚眼",
+      "可重用的座標網格",
+      "Python API 與命令列工具"
     ]
   },
   "myanimelist-comment-crawler": {
-    "subtitle": "動畫評論資料爬蟲",
-    "description": "把 MyAnimeList 上動畫的評論與資訊全部爬下來。說是研究資料，大致上是。",
-    "longDescription": "完整的網路爬蟲工具，用於從 MyAnimeList 擷取動畫作品的評論與資訊。可用於動畫資料分析、研究，以及建立動畫推薦系統。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "從動畫評論到可接續蒐集的資料集",
+    "description": "透過 Jikan 類型 API 或允許存取的 MAL 網頁蒐集動畫資訊與評論，用 SQLite 記錄進度，再匯出 CSV。",
+    "longDescription": "以 Scrapy 實作的爬蟲，JSON API 與 HTML 輸入共用 SQLite 資料表及 CSV 輸出。逐一請求、退避重試與接續執行，讓長時間蒐集能追查進度；HTML 模式遵守 robots.txt 限制。",
     "features": [
-      "自動擷取評論",
-      "蒐集動畫資訊",
-      "資料匯出功能",
-      "遵守請求頻率限制"
+      "JSON API 與 HTML 兩種輸入",
+      "SQLite 儲存進度與接續執行",
+      "對應 MyAnimeList 評論資料集的 CSV 輸出",
+      "逐一請求、退避重試與 robots.txt 處理"
     ]
   },
   "simply-labeling-platform-for-machine-reading": {
-    "subtitle": "機器閱讀標註工具",
-    "description": "在文章裡標出問題答案的小平台，一句一句用螢光筆畫出機器閱讀的資料集。",
-    "longDescription": "專為機器閱讀理解任務設計的標註平台，能有效率地標註文章中的問答配對，支援閱讀理解 AI 模型的開發。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "title": "閱讀理解標註平台",
+    "subtitle": "標出答案，也把審核流程放進來",
+    "description": "自架 Rust＋React 工作區，支援 SQuAD v1/v2：標記答案範圍、審核多人一致性，也可選用模型建議。",
+    "longDescription": "自架 Rust＋React 工作區，支援 SQuAD v1/v2：標記答案範圍、審核多人一致性，也可選用模型建議。2026 年從原本的 Flask 應用重寫，將匯入、標註、審核與匯出放在同一個工作區。",
     "features": [
-      "問答標註",
-      "文章文字標示",
-      "匯出功能",
-      "進度追蹤"
+      "答案範圍標註與 SQuAD v1/v2 匯入匯出",
+      "多人審核與一致性分數",
+      "選用模型建議與內建登入",
+      "單一 Docker 映像檔部署"
+    ],
+    "challenges": [],
+    "solutions": [],
+    "results": [
+      "2026 年以 Rust 和 React 重寫，串起匯入、標註、審核與匯出"
     ]
   },
   "yande-and-konachan-to-eagle": {
-    "subtitle": "圖片管理整合",
-    "description": "把兩個圖站的圖片直接抓進 Eagle，用的是自己寫的 Eagle 封裝。吃自己的狗糧，多了幾個步驟。",
-    "longDescription": "自動從 Yande.re 與 Konachan 網站抓取圖片，並整理到 Eagle 圖片管理軟體中的專用工具，為數位繪師與圖片收藏者簡化工作流程。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "找到圖片、保留標籤、送進 Eagle",
+    "description": "可用 pipx 安裝的 CLI，透過網站 JSON API 與 EagleWrapper 匯入圖片。先以 --dry-run 預覽，保留自己的標籤並略過已匯入項目。",
+    "longDescription": "把 yande.re 與 konachan.com 的圖片網址和中繼資料送到 Eagle 的命令列工具。2026 版改用 JSON API、EagleWrapper 與可接續的進度紀錄，可設定搜尋、數量上限、資料夾及預覽模式。",
     "features": [
-      "自動抓取圖片",
-      "整合 Eagle 軟體",
-      "保留中繼資料",
-      "批次處理"
+      "JSON API 搜尋與數量上限",
+      "自訂標籤與目的資料夾",
+      "預覽模式與略過重複項目",
+      "接續進度與 pipx 安裝"
     ]
   },
   "eagle-wrapper": {
-    "subtitle": "Eagle 軟體的 Python API",
-    "description": "圖片管理軟體 Eagle 的 Python API 封裝，讓我的腳本整理圖片比我自己快。",
-    "longDescription": "Eagle 圖片管理軟體的完整 Python wrapper，讓程式能直接存取 Eagle 的各項功能。開發者可藉此將 Eagle 強大的圖片管理能力整合進自己的 Python 應用程式。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "用 Python 操作 Eagle 的本機 API",
+    "description": "以 Eagle V1 與 V2 API 匯入、搜尋、標記檔案。桌面程式關閉時，也能直接讀取圖片庫。",
+    "longDescription": "封裝 Eagle 兩代本機 HTTP API 的 Python 套件。支援檔案匯入、搜尋、標籤與資料夾操作，也能直接讀取磁碟上的圖片庫；新版明確處理遠端驗證與 API 錯誤。",
     "features": [
-      "完整涵蓋 Eagle API",
-      "圖片操作功能",
-      "中繼資料管理",
-      "收藏整理"
+      "Eagle V1 與 V2 API 用戶端",
+      "匯入、搜尋、標籤與資料夾操作",
+      "不開桌面程式也能讀取圖片庫",
+      "明確的 API 錯誤與驗證支援"
     ]
   },
   "youtube-video-redirector": {
-    "subtitle": "YouTube 影片連結處理工具",
-    "description": "用一個小網頁拿到 YouTube 影片的原始連結，拿去別的地方播。是 redirect player 的前傳。",
-    "longDescription": "提供簡單方式處理並重新導向 YouTube 影片連結的 Web 應用程式。透過易用的 Web 介面，提供存取與操作 YouTube 影片網址的另一種方式。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "YouTube 影片連結與播放",
+    "description": "Flask 小工具，用 yt-dlp 取得 YouTube 原始媒體連結並播放。需要共用點歌清單與 OBS 的話，可看 Streaming Player。",
+    "longDescription": "接受影片 ID、以 yt-dlp 解析媒體網址並提供播放頁的 Flask 服務。最終版包含 Docker 與擷取所需的 JavaScript 執行環境，新的點歌與 OBS 功能由 Streaming Player 延續。",
     "features": [
-      "處理 YouTube 連結",
-      "擷取影片資訊",
-      "重新導向功能",
-      "Web 介面"
+      "影片 ID 網址參數",
+      "yt-dlp 解析媒體網址",
+      "Docker 部署"
     ],
-    "challenges": [
-      "透過 Web 應用程式的重新導向器，取得並播放 YouTube 影片的原始連結",
-      "簡化存取原始影片串流的流程"
-    ],
-    "solutions": [
-      "開發以 Flask 為基礎的 Web 應用程式處理重新導向",
-      "使用 youtube-dl 擷取影片原始連結",
-      "建立以 URL 操作的簡單影片重新導向介面"
-    ],
+    "challenges": [],
+    "solutions": [],
     "results": [
-      "將使用者重新導向至 YouTube 影片原始連結的輕量微服務",
-      "只要以 URL 參數傳入影片 ID 即可輕鬆整合（例如 http://localhost:5000/?v=VIDEO_ID）"
+      "保留可執行的最終版本，包含測試與 Docker"
     ]
   },
   "youtube-redirect-player": {
-    "subtitle": "使用 WebSocket 的 YouTube 影片播放器",
-    "description": "用 Flask 和 WebSocket 做的播放器，透過原始連結播 YouTube 影片。一次小小的過度設計練習。",
-    "longDescription": "以 Flask 與 WebSocket 技術打造的進階 YouTube 影片播放器，透過 WebSocket 通訊提供即時的播放控制與重新導向功能。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "跨畫面同步的 Flask 播放器",
+    "description": "Flask＋Socket.IO 播放器，在多個畫面同步點播、預設與歷史清單；後續開發移到 Streaming Player。",
+    "longDescription": "Flask 版以 Socket.IO 同步點播佇列、預設播放清單與歷史紀錄。最終版用 yt-dlp 解析媒體，包含 Docker 與回歸測試；Rust＋React 的 Streaming Player 延續點歌流程。",
     "features": [
-      "即時影片控制",
-      "WebSocket 通訊",
-      "整合 YouTube",
-      "支援多使用者"
+      "點播、預設與歷史播放清單",
+      "Socket.IO 同步播放狀態",
+      "yt-dlp 媒體解析與 Docker 部署"
     ],
-    "challenges": [
-      "將 YouTube 影片重新導向到本機伺服器播放",
-      "在不同地點之間即時同步播放清單與播放紀錄",
-      "管理多種播放清單類型，包括預設（Default）、點播（Request）與歷史（History）"
-    ],
-    "solutions": [
-      "以 Flask 與 WebSocket 建置後端，實現即時同步",
-      "實作結構化的機制，處理三張不同的播放清單資料表",
-      "延伸 youtube-video-redirector 專案的功能"
-    ],
+    "challenges": [],
+    "solutions": [],
     "results": [
-      "具同步功能的 YouTube 影片播放器，可保存播放紀錄（最多 200 筆）並具備點播排隊機制",
-      "穩健的 API 系統，用於管理點播請求與播放清單",
-      "可在任何地方播放影片，並透過 WebSocket 維持播放狀態"
+      "保留 Flask 最終版本，點歌功能由 Streaming Player 延續"
     ]
   },
   "pyppesnap": {
-    "subtitle": "網站截圖工具",
-    "description": "用 Pyppeteer 幫網頁截圖。跟按 Print Screen 差不多，只是相依套件多了一些。",
-    "longDescription": "以 Pyppeteer 打造、功能強大的網站截圖工具，可擷取高品質的網頁快照。適用於網站監控、測試與文件製作等用途。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "早期網頁快照工具",
+    "description": "原本的 Pyppeteer 截圖工具，現已封存；新專案 playwright-snap 沿用函式名稱、參數與回傳型別。",
+    "longDescription": "將網頁 PNG 與 PDF 快照以 base64 回傳的 Python 工具。由於 Pyppeteer 瀏覽器相依套件已停止維護，專案封存，後繼 playwright-snap 以 Playwright 驅動 Chromium 並沿用 API。",
     "features": [
-      "高品質截圖",
-      "批次處理",
-      "可自訂選項",
-      "Headless 瀏覽器自動化"
+      "PNG 與 PDF 快照以 base64 回傳",
+      "Python API 與命令列介面"
     ],
-    "challenges": [
-      "網址若未明確以「http」開頭，頁面導覽就會失敗",
-      "快照需要以 base64 編碼，才能無縫整合到 Web 框架",
-      "需要支援圖片、PDF 等多種匯出格式"
-    ],
-    "solutions": [
-      "運用 Pyppeteer 打造自動擷取網站快照的工具",
-      "實作專用函式，將網站圖片與 PDF 都轉為 base64 字串",
-      "提供 CLI 模式，方便快速測試與驗證參數"
-    ],
+    "challenges": [],
+    "solutions": [],
     "results": [
-      "已發布至 PyPI、可實際使用的 Python 套件",
-      "成功以 base64 格式輸出網站快照，方便在 Web API 中使用",
-      "提供可執行的範例，示範如何與 Web 框架整合"
+      "API 由 playwright-snap 延續"
     ]
   },
   "face-wall-generator-tool": {
-    "subtitle": "AI 模型測試工具",
-    "description": "產生一整面人臉牆，用來檢查人臉模型的表現。聽起來有點毛，實際上只毛一點點。",
-    "longDescription": "專門產生人臉牆的工具，用於測試與驗證 AI 模型，特別是人臉辨識與偵測相關的模型。可協助建立完整的測試資料集來驗證 AI 模型。",
-    "role": "創建者與維護者",
+    "role": "建立與維護",
+    "subtitle": "用可重現的人臉格子檢查偵測器",
+    "description": "把一個資料夾的人臉排成有固定種子的網格；一般照片可先用 OpenCV 的 YuNet 偵測器裁出人臉。",
+    "longDescription": "可用 pip 安裝的 Python CLI，產生已知人臉數量與位置的測試圖片。固定種子讓版面可重現，可先以 YuNet 裁切一般照片，專案附公眾領域肖像範例。",
     "features": [
-      "產生人臉牆",
-      "支援 AI 模型測試",
-      "批次處理",
-      "可自訂版面配置"
+      "固定種子與可調整的行列數",
+      "選用 YuNet 人臉裁切",
+      "可安裝的命令列工具",
+      "公眾領域肖像範例"
     ],
-    "challenges": [
-      "為驗證 AI 模型而手動製作影像網格（人臉牆）的流程十分繁瑣",
-      "需要結構化且隨機化的人臉資料集來測試人臉辨識效能",
-      "需要一個能依使用者輸入調整網格大小的工具"
-    ],
-    "solutions": [
-      "以 OpenCV 與 NumPy 撰寫 Python 腳本，自動將影像拼接成網格",
-      "整合 Python Fire，提供簡單的命令列介面來調整列數與欄數",
-      "自動從來源資料夾挑選影像並調整尺寸，維持一致的輸出品質"
-    ],
+    "challenges": [],
+    "solutions": [],
     "results": [
-      "可產生自訂「人臉牆」影像、供 AI 測試使用的工具",
-      "大幅縮短電腦視覺專案中準備資料集所需的時間",
-      "彈性的 CLI 工具，使用者可輕鬆指定輸出路徑與網格尺寸"
+      "可重現的人臉測試網格，位置與數量已知"
     ]
   },
   "image-annotation": {
-    "title": "影像標註",
-    "subtitle": "React + Next.js bounding box 標註工具",
-    "description": "在圖片上畫框、匯出標註。2017 年寫的，後來用 React 和 Next.js 重寫，比大多數標註工具得到的照顧還多。",
-    "longDescription": "以 React 與 Next.js 打造的完整 Web 影像標註工具，簡化建立 bounding box 標註的流程。具備自動載入影像、直覺的拖放介面與即時編輯標註，並透過 localStorage 與 JSON 匯出功能提供可靠的資料管理。",
-    "role": "創建者",
+    "role": "建立與維護",
+    "title": "影像標註工具",
+    "subtitle": "畫框、分類、匯出",
+    "description": "以鍵盤操作為主的瀏覽器標註工具。開啟自己的圖片、畫框分類，匯出 JSON、COCO、YOLO 或 Pascal VOC。",
+    "longDescription": "2017 年影像標註工具，以 React 和 Vite 重新改寫。支援縮放、平移、復原與鍵盤快捷鍵，圖片與標註留在瀏覽器，可匯入匯出常見資料集格式。",
     "features": [
-      "啟動時自動載入隨機影像",
-      "即時建立與編輯 bounding box",
-      "拖曳移動，並可用角落控點調整大小",
-      "以縮放比例換算，儲存原始座標",
-      "處理視窗縮放並支援響應式設計",
-      "送出標註前進行驗證",
-      "將所有資料匯出為 JSON 格式",
-      "標註排行榜與進度追蹤",
-      "可疊加格線協助檢查（鍵盤快捷鍵）",
-      "深色主題搭配綠色 bounding box"
+      "類別配色的標註框與鍵盤快捷鍵",
+      "資料夾匯入、縮放、平移、復原與重做",
+      "JSON、COCO、YOLO 與 Pascal VOC 匯入匯出",
+      "瀏覽器儲存與離線範例圖片"
     ],
-    "challenges": [
-      "在不同顯示尺寸間即時換算座標",
-      "視窗縮放時維持標註的準確度",
-      "在瀏覽器中有效率地儲存與讀取資料",
-      "設計易用的標註流程"
-    ],
-    "solutions": [
-      "實作縮放比例計算，確保座標準確",
-      "打造響應式設計，自動處理視窗縮放",
-      "設計完整的 localStorage 資料結構",
-      "設計直覺的鍵盤快捷鍵與 UI 控制項"
-    ],
+    "challenges": [],
+    "solutions": [],
     "results": [
-      "可立即建立標註框，簡化標註流程",
-      "顯示尺寸改變時仍能準確保留座標",
-      "完整匯出資料與中繼資料",
-      "透過鍵盤快捷鍵提升使用體驗"
+      "GitHub Pages 靜態應用，標註與匯出在瀏覽器完成"
     ]
   },
   "obsidian-attachmenter": {
@@ -923,6 +789,148 @@
       "簡化使用者的附件處理流程",
       "自動保存遠端圖片",
       "一致的 vault 結構"
+    ]
+  },
+  "streaming-player": {
+    "role": "建立與維護",
+    "subtitle": "從聊天室點歌，到 OBS 播放",
+    "description": "Twitch、YouTube 直播聊天室和聊天機器人共用一張點歌清單。Rust 後端同步 OBS 播放頁、透明小卡與管理介面。",
+    "longDescription": "Streaming Player 2.0 用 Rust 與 React 重寫自架點歌系統。觀眾從 Twitch、YouTube 直播聊天室或 HTTP API 點歌，管理員在同一個介面控歌。OBS 可分別加入播放頁與透明的播放資訊小卡，接替先前的 Flask 播放器。",
+    "features": [
+      "Twitch、YouTube 直播聊天室與 HTTP 點歌",
+      "佇列上限、冷卻時間、投票與封鎖名單",
+      "OBS 播放頁與透明播放資訊小卡",
+      "角色、權限點與個人 API token",
+      "設定備份與歌曲資料匯出"
+    ],
+    "results": [
+      "已發佈 2.0.0，使用 Rust 後端與 React 介面",
+      "以單一 Docker 映像檔自架"
+    ]
+  },
+  "static-gantt": {
+    "role": "建立與維護",
+    "subtitle": "拖曳排程，也能用 Mermaid 編輯",
+    "description": "拖曳任務、拉線建立相依關係，直接看到關鍵路徑；切到 Mermaid 文字模式仍保留同一份計畫。資料留在瀏覽器。",
+    "longDescription": "純前端的甘特圖編輯器，圖形排程和 Mermaid 文字雙向同步。支援任務相依、基準線與工作日計算，資料保存在 localStorage，不用帳號或後端，可匯出 PNG、Excel 和 JSON。",
+    "features": [
+      "拖曳任務、調整工期與建立相依關係",
+      "Mermaid 雙向編輯並保留任務欄位",
+      "自動排程、關鍵路徑與基準線",
+      "鍵盤操作與四種介面語言",
+      "匯出 PNG、Excel 和 JSON"
+    ]
+  },
+  "word-net-game": {
+    "role": "建立與維護",
+    "subtitle": "讀一句話，撒網猜心情",
+    "description": "把網子撒在「難過到開心」之間，揭曉句子的參考分數。五種玩法，包含每日挑戰與同機雙人對戰。",
+    "longDescription": "猜一句話背後心情的繁體中文遊戲，題目也包含反諷和自嘲。有經典、限時、生存、每日挑戰與雙人對戰，玩完可取得附情緒地圖的成績卡。分數是題目編寫的參考值。",
+    "features": [
+      "五種玩法，包含同機雙人對戰",
+      "原創題目、句意解說與多種作答回應",
+      "連擊、成就與可分享的情緒地圖成績卡",
+      "鍵盤與觸控操作"
+    ]
+  },
+  "taiwan-population-atlas": {
+    "role": "黑客松團隊成員與 2026 重寫維護者",
+    "title": "臺灣人口變遷地圖",
+    "subtitle": "在地圖上播放臺灣三十年的變化",
+    "description": "播放臺灣 22 縣市的人口變遷，比較各地趨勢，再對照家庭所得。2017 嘉義黑客松作品，2026 年重新改寫。",
+    "longDescription": "互動式人口與家庭收支地圖，人口月資料從 1997 年開始，另有年度所得與儲蓄指標。透過時間軸播放、縣市趨勢比較與可分享網址，延續 2017 嘉義黑客松作品。",
+    "features": [
+      "人口、遷徙、所得與儲蓄指標",
+      "可調播放速度的時間軸",
+      "最多比較四個縣市的歷年趨勢",
+      "政府開放資料與可重跑的轉換腳本"
+    ]
+  },
+  "taipei-transit-radar": {
+    "role": "黑客松團隊成員與 2026 重寫維護者",
+    "title": "大台北即時轉乘雷達",
+    "subtitle": "出發前，把幾種走法放在一起看",
+    "description": "走路、公車、捷運還是 YouBike？在同一張地圖比較時間與票價，搭配公車即時到站和自行車位資訊。",
+    "longDescription": "2016 資拓宏宇黑客松團隊作品，2026 年用 React 重寫。在大台北比較步行、公車、捷運、混合轉乘與 YouBike，含預估票價和即時到站資訊。原始團隊的貢獻與設計署名保留在專案說明。",
+    "features": [
+      "同一張地圖比較五種走法",
+      "公車即時到站與 YouBike 車位",
+      "依時間、票價或步行距離排序",
+      "用網址分享路線"
+    ]
+  },
+  "ask-taipei-city-hall": {
+    "role": "建立與維護",
+    "title": "問問台北市政府",
+    "subtitle": "市政問題，找到答案也找到出處",
+    "description": "在瀏覽器搜尋 8,000 多則台北市政 FAQ，每則結果附原始出處；也能選擇讓模型整理找到的答案。",
+    "longDescription": "2017 台北市政 ChatBot 應用競賽作品，2026 年重製為靜態網頁。中文 BM25 搜尋在 Web Worker 裡執行，結果列出發布機關、日期與來源。選用的模型模式可使用自己的 API key 整理檢索內容。",
+    "features": [
+      "在本機搜尋 8,000 多則公開 FAQ",
+      "結果附機關、更新日期與原始網頁",
+      "Web Worker 執行中文檢索",
+      "選用根據 FAQ 整理的回答"
+    ]
+  },
+  "countdown-studio": {
+    "role": "建立與維護",
+    "subtitle": "替時間留一個舞台",
+    "description": "同時跑幾個計時器，或倒數到另一個時區的指定時刻。有全螢幕舞台、四種主題與分享連結，直接在瀏覽器使用。",
+    "longDescription": "適合期限、發表、會議與專注工作的倒數工作室。多個計時器可並排，也能單獨放到全螢幕舞台。支援指定時區的日期、主題與分享網址，不用帳號或伺服器。",
+    "features": [
+      "多組計時器與跨時區目標日期",
+      "全螢幕展示模式",
+      "四種主題與分享網址",
+      "本機儲存與結束提示音"
+    ]
+  },
+  "blockchain-from-scratch": {
+    "role": "建立與維護",
+    "title": "從零開始寫區塊鏈",
+    "subtitle": "可以拆開來理解的區塊鏈",
+    "description": "九章實作，從雜湊一路做到 P2P 網路。同一份 Rust 核心編成 WebAssembly，直接在瀏覽器看運作。",
+    "longDescription": "逐章用 Rust 建立區塊鏈的學習專案：雜湊、區塊、挖礦、簽章、mempool、網路、共識到檔案存證。互動網頁使用同一份 Rust 核心編成 WebAssembly，Docker Compose 可啟動三節點網路。",
+    "features": [
+      "九章可執行範例與練習",
+      "雜湊、挖礦與竄改偵測的互動示範",
+      "共用 Rust 核心編成 WebAssembly",
+      "三節點 Docker 網路與檔案存證應用"
+    ]
+  },
+  "street-scene-ocr": {
+    "role": "建立與維護",
+    "subtitle": "同一面招牌，三種辨識結果",
+    "description": "用 EasyOCR、RapidOCR 和 PaddleOCR 比較街景繁體中文字，並排看文字框、耗時與公眾領域照片的小型評測。",
+    "longDescription": "繁體中文街景文字辨識的學習專案。同一張照片由三種引擎透過統一 API 與網頁比較。文件用真實模型輸出說明偵測、辨識與後處理，另附 CC0 照片與可重跑的小型評測。",
+    "features": [
+      "三種 OCR 引擎並排比較",
+      "文字框、辨識文字與各步驟耗時",
+      "FastAPI JSON 服務與網頁",
+      "CC0 照片與可重現的評測腳本"
+    ]
+  },
+  "sentiment-bundle-benchmark": {
+    "role": "建立與維護",
+    "subtitle": "讓情緒分類模型站在同一起跑線",
+    "description": "在六個情緒資料集的固定切分上，比較 TF-IDF、嵌入向量、微調編碼器與本機語言模型。接替早期的 GURA。",
+    "longDescription": "跨 MyAnimeList 評論與五個經典英文資料集的可重現評測。固定資料切分與種子，比較準確率、macro-F1、訓練時間、推論速度、記憶體與模型大小，接替先前 GURA 的 BiGRU 實驗。",
+    "features": [
+      "六個資料集，固定切分與種子",
+      "TF-IDF、嵌入向量、ModernBERT、DeBERTa-v3 與本機模型",
+      "準確率、macro-F1、耗時、記憶體與模型大小報告",
+      "Hugging Face 上的資料集包"
+    ]
+  },
+  "playwright-snap": {
+    "role": "建立與維護",
+    "subtitle": "用持續維護的瀏覽器幫網頁拍照",
+    "description": "用 Playwright 載入網頁，將 PNG 或 PDF 以 base64 回傳。從 pyppeteer-snap 搬過來，只要改一行 import。",
+    "longDescription": "pyppeteer-snap 的後繼專案，改用 Playwright 驅動 Chromium 載入含 JavaScript 的網頁。函式名稱、參數與回傳型別保持一致，提供 PNG、PDF 快照的 Python API 與命令列介面。",
+    "features": [
+      "PNG 與 PDF 快照以 base64 回傳",
+      "Playwright 驅動無頭 Chromium",
+      "Python 函式與命令列介面",
+      "沿用 pyppeteer-snap 的參數與回傳型別"
     ]
   }
 }

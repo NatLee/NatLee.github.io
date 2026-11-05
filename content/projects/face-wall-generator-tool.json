@@ -1,15 +1,15 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "face-wall-generator-tool",
-  "title": "Face-Wall-Generator-Tool",
-  "subtitle": "AI Model Testing Tool",
-  "description": "Generates walls of faces for checking how face models behave. Less creepy than it sounds, slightly.",
-  "longDescription": "A specialized tool designed to generate face walls for testing and verifying AI models, particularly those dealing with face recognition and detection. This tool helps in creating comprehensive test datasets for AI model validation.",
+  "title": "Face Wall Generator",
+  "subtitle": "Repeatable grids for checking face detectors",
+  "description": "Tile a folder of face pictures into a seeded grid. Optionally crop faces with OpenCV’s YuNet detector before building the wall.",
+  "longDescription": "A pip-installable Python CLI for building test images with known face counts and grid positions. Seeded selection makes layouts repeatable; optional YuNet face cropping prepares ordinary photos first. The repository includes public-domain portrait samples.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/Face-Wall-Generator-Tool/blob/main/docs/sample.png?raw=true"
+    "/images/projects/face-wall-generator-tool/cover.webp"
   ],
-  "githubUrl": "https://github.com/NatLee/Face-Wall-Generator-Tool",
+  "githubUrl": "https://github.com/NatLee/face-wall-generator-tool",
   "category": "AI/ML",
   "theme": "ai",
   "tier": "archive",
@@ -17,38 +17,27 @@
   "opensource": true,
   "technologies": [
     "Python",
-    "Computer Vision",
-    "AI Testing",
-    "Image Processing"
+    "OpenCV",
+    "NumPy",
+    "YuNet"
   ],
   "features": [
-    "Face wall generation",
-    "AI model testing support",
-    "Batch processing",
-    "Customizable layouts"
+    "Seeded layouts with configurable rows and columns",
+    "Optional YuNet face cropping",
+    "Installable command-line tool",
+    "Public-domain sample portraits"
   ],
-  "challenges": [
-    "Tedious manual process of creating image grids (face walls) for AI model verification",
-    "Need for structured and randomized face datasets to test face recognition performance",
-    "Requirement for a tool that can handle variable grid sizes based on user input"
-  ],
-  "solutions": [
-    "Developed a Python script using OpenCV and NumPy to automate the concatenation of images into grids",
-    "Integrated Python Fire to provide a simple command-line interface for adjusting row and column counts",
-    "Automated image selection and resizing from a source folder to maintain consistent output quality"
-  ],
+  "challenges": [],
+  "solutions": [],
   "results": [
-    "A utility capable of generating custom 'face wall' images for AI testing",
-    "Significantly reduced time required for dataset preparation in computer vision projects",
-    "A flexible CLI tool that allows users to specify output paths and grid dimensions easily"
+    "Repeatable test grids with known face positions"
   ],
   "timeline": {
     "start": "2021",
-    "end": "2022",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/Face-Wall-Generator-Tool"
+    "github": "https://github.com/NatLee/face-wall-generator-tool"
   }
 }

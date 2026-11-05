@@ -1,19 +1,19 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "gura-gru-unit-for-recognizing-affect",
-  "title": "GURA-gru-unit-for-recognizing-affect",
+  "title": "GURA",
   "subtitle": "Sentiment Analysis Model",
-  "description": "A sentiment classifier built on a bidirectional GRU with self-attention. Named GURA, because naming things is the hard part.",
-  "longDescription": "An advanced sentiment classification model that combines Bidirectional GRU networks with Self-attention mechanisms. GURA (GRU Unit for Recognizing Affect) provides state-of-the-art performance for emotion detection and sentiment analysis tasks.",
+  "description": "The earlier BiGRU + self-attention sentiment experiment. Preserved for reference; current comparisons live in Sentiment Bundle Benchmark.",
+  "longDescription": "A historical sentiment classifier used to introduce the MyAnimeList reviews and sentiment dataset bundle. The archived BiGRU experiment has been replaced by sentiment-bundle-benchmark, which compares modern methods with fixed data splits and reproducible evaluation.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/GURA-gru-unit-for-recognizing-affect/raw/main/doc/model.png"
+    "/images/projects/gura-gru-unit-for-recognizing-affect/cover.webp"
   ],
-  "githubUrl": "https://github.com/NatLee/GURA-gru-unit-for-recognizing-affect",
+  "githubUrl": "https://github.com/NatLee/gura-gru-unit-for-recognizing-affect",
   "category": "AI/ML",
   "theme": "ai",
   "tier": "archive",
-  "status": "Completed",
+  "status": "Archived",
   "opensource": true,
   "technologies": [
     "Python",
@@ -24,29 +24,13 @@
     "GRU"
   ],
   "features": [
-    "Bidirectional GRU architecture",
-    "Self-attention mechanisms",
-    "Multi-class sentiment classification",
-    "Transfer learning support",
-    "Model interpretability"
+    "Historical BiGRU and self-attention model",
+    "Companion to the MyAnimeList sentiment datasets"
   ],
-  "challenges": [
-    "Complex model architecture design",
-    "Attention mechanism optimization",
-    "Training stability",
-    "Model interpretability"
-  ],
-  "solutions": [
-    "Implemented stable training procedures",
-    "Optimized attention weight calculations",
-    "Added regularization techniques",
-    "Created visualization tools"
-  ],
+  "challenges": [],
+  "solutions": [],
   "results": [
-    "State-of-the-art sentiment accuracy",
-    "Improved model interpretability",
-    "Successful transfer learning",
-    "Research community adoption"
+    "Preserved as the historical baseline for Sentiment Bundle Benchmark"
   ],
   "timeline": {
     "start": "2021",
@@ -55,6 +39,7 @@
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/GURA-gru-unit-for-recognizing-affect"
+    "github": "https://github.com/NatLee/gura-gru-unit-for-recognizing-affect",
+    "documentation": "https://github.com/NatLee/sentiment-bundle-benchmark"
   }
 }

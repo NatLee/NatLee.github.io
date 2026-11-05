@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "taipei-transit-radar",
+  "title": "Taipei Transit Radar",
+  "category": "Web Application",
+  "theme": "web",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "language": "typescript",
+  "images": [
+    "/images/projects/taipei-transit-radar/cover.webp"
+  ],
+  "technologies": [
+    "TypeScript",
+    "React",
+    "MapLibre",
+    "Tailwind CSS",
+    "Government Open Data"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [],
+  "githubUrl": "https://github.com/NatLee/taipei-transit-radar",
+  "links": {
+    "github": "https://github.com/NatLee/taipei-transit-radar",
+    "demo": "https://natlee.github.io/taipei-transit-radar/"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Hackathon team member & 2026 rewrite maintainer",
+  "subtitle": "Compare a trip before you take it",
+  "description": "Walking, bus, MRT or YouBike? Compare travel time and fares on one map, with live bus arrivals and bike availability.",
+  "longDescription": "A 2026 React rewrite of a team project from the 2016 IISI hackathon. Compare walking, bus, MRT, mixed transit and YouBike routes around Greater Taipei, including estimated fares and live arrival information. Original work by the hackathon team is credited in the repository.",
+  "features": [
+    "Compare five travel options on one map",
+    "Live bus arrivals and YouBike availability",
+    "Sort routes by time, fare or walking distance",
+    "Share a route through its URL"
+  ]
+}

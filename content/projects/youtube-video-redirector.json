@@ -1,44 +1,36 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "youtube-video-redirector",
-  "title": "youtube-video-redirector",
+  "title": "YouTube Video Redirect Service",
   "subtitle": "YouTube Video Link Handler",
-  "description": "A small web app that fetches a YouTube video's original link so you can play it elsewhere. The prequel to the redirect player.",
-  "longDescription": "A web application that provides an easy method to handle and redirect YouTube video links. This tool offers alternative ways to access and manipulate YouTube video URLs through a user-friendly web interface.",
+  "description": "A small Flask app that uses yt-dlp to find a YouTube video’s direct media link and play it. For a shared song queue and OBS, see Streaming Player.",
+  "longDescription": "A Flask service that accepts a video ID, resolves a direct media URL with yt-dlp and renders a player. The final version includes Docker and a JavaScript runtime for extraction. New song-request and OBS work continues in Streaming Player.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/youtube-video-redirector/blob/main/docs/example.png?raw=true"
+    "/images/projects/youtube-video-redirector/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/youtube-video-redirect-service/main/docs/example.png"
   ],
-  "githubUrl": "https://github.com/NatLee/youtube-video-redirector",
+  "githubUrl": "https://github.com/NatLee/youtube-video-redirect-service",
   "category": "Web Application",
   "theme": "web",
   "tier": "archive",
-  "status": "Completed",
+  "status": "Archived",
   "opensource": true,
   "technologies": [
     "Python",
     "Flask",
-    "YouTube API",
-    "Web Development"
+    "yt-dlp",
+    "Docker"
   ],
   "features": [
-    "YouTube link processing",
-    "Video information extraction",
-    "Redirect functionality",
-    "Web-based interface"
+    "Video-ID URL parameter",
+    "Direct media URL resolution with yt-dlp",
+    "Docker deployment"
   ],
-  "challenges": [
-    "Obtaining and playing original video links from YouTube via a web application redirector",
-    "Simplifying the process of accessing raw video streams"
-  ],
-  "solutions": [
-    "Developed a Flask-based web application to handle redirects",
-    "Utilized youtube-dl to extract original video links",
-    "Created a simple URL-based interface for video redirection"
-  ],
+  "challenges": [],
+  "solutions": [],
   "results": [
-    "A lightweight microservice that redirects users to original YouTube video links",
-    "Easy integration by passing a video ID as a URL parameter (e.g., http://localhost:5000/?v=VIDEO_ID)"
+    "Runnable final version preserved with tests and Docker"
   ],
   "timeline": {
     "start": "2021",
@@ -47,6 +39,7 @@
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/youtube-video-redirector"
+    "github": "https://github.com/NatLee/youtube-video-redirect-service",
+    "documentation": "https://github.com/NatLee/streaming-player"
   }
 }

@@ -2,12 +2,12 @@
   "$schema": "../schema/project.schema.json",
   "id": "yande-and-konachan-to-eagle",
   "title": "yande-and-konachan-to-eagle",
-  "subtitle": "Image Management Integration",
-  "description": "Fetches images from two image boards straight into Eagle, using my own Eagle wrapper. Dogfooding, with extra steps.",
-  "longDescription": "A specialized tool that automates the process of fetching and organizing images from Yande.re and Konachan websites into Eagle image management software. This tool streamlines the workflow for digital artists and image collectors.",
+  "subtitle": "Find images. Keep the tags. Send to Eagle.",
+  "description": "A pipx-installable CLI using the sites’ JSON APIs and EagleWrapper. Preview with --dry-run, keep your own tags and skip items already imported.",
+  "longDescription": "A command-line importer for yande.re and konachan.com that sends image URLs and metadata to Eagle. The 2026 version uses JSON APIs, EagleWrapper and resumable state, with configurable searches, item limits, folders and a dry-run preview.",
   "language": "python",
   "images": [
-    "https://user-images.githubusercontent.com/10178964/234870235-f0dbe874-c1e8-4320-9c52-d6d920fa274d.png"
+    "/images/projects/yande-and-konachan-to-eagle/cover.webp"
   ],
   "githubUrl": "https://github.com/NatLee/yande-and-konachan-to-eagle",
   "category": "Utilities",
@@ -17,20 +17,19 @@
   "opensource": true,
   "technologies": [
     "Python",
-    "Web Scraping",
-    "Eagle API",
-    "Image Management"
+    "JSON APIs",
+    "EagleWrapper",
+    "pipx"
   ],
   "features": [
-    "Automated image fetching",
-    "Eagle software integration",
-    "Metadata preservation",
-    "Batch processing"
+    "JSON-API searches with item limits",
+    "Custom tags and destination folders",
+    "Dry-run preview and duplicate skipping",
+    "Resumable progress and pipx installation"
   ],
   "timeline": {
     "start": "2022",
-    "end": "2023",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {

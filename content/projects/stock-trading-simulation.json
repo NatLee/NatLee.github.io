@@ -11,12 +11,12 @@
   "status": "In Progress",
   "opensource": true,
   "images": [
-    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/simulation.png",
-    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/simulation-settings.png",
-    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/learn-center.png",
-    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/learn-sub-page.png",
-    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/k-chart-practice.png",
-    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/refs/heads/main/docs/guess-practice.png"
+    "/images/projects/stock-trading-simulation/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/simulation-settings.png",
+    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/learn-center.png",
+    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/learn-sub-page.png",
+    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/k-chart-practice.png",
+    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/guess-practice.png"
   ],
   "githubUrl": "https://github.com/NatLee/stock-trading-simulation",
   "technologies": [
@@ -73,6 +73,7 @@
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/stock-trading-simulation"
+    "github": "https://github.com/NatLee/stock-trading-simulation",
+    "demo": "https://natlee.github.io/stock-trading-simulation/"
   }
 }

@@ -1,15 +1,15 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "batch-crop-images",
-  "title": "Batch-crop-images",
+  "title": "batch-crop-images",
   "subtitle": "Batch Image Cropping Tool",
   "description": "Draw a crop box once and it is applied to a whole folder of similar images. Written because I refused to crop them one by one, and apparently other people refused too.",
   "longDescription": "An efficient batch image processing tool that provides an intuitive interface for cropping multiple similar images simultaneously. This tool streamlines the workflow for processing large sets of images with consistent cropping requirements.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/Batch-crop-images/raw/main/img/processing.png"
+    "/images/projects/batch-crop-images/cover.webp"
   ],
-  "githubUrl": "https://github.com/NatLee/Batch-crop-images",
+  "githubUrl": "https://github.com/NatLee/batch-crop-images",
   "category": "Image Processing",
   "theme": "libraries",
   "tier": "selected",
@@ -17,23 +17,25 @@
   "opensource": true,
   "technologies": [
     "Python",
-    "PIL/Pillow",
-    "Tkinter",
-    "Image Processing"
+    "OpenCV",
+    "NumPy"
   ],
   "features": [
-    "Batch image cropping",
-    "Interactive GUI interface",
-    "Preview functionality",
-    "Consistent crop settings"
+    "Draw one crop box in an OpenCV window",
+    "Apply the same box across a folder",
+    "Headless --box input and saved presets"
   ],
   "timeline": {
     "start": "2019",
-    "end": "2020",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/Batch-crop-images"
-  }
+    "github": "https://github.com/NatLee/batch-crop-images"
+  },
+  "challenges": [],
+  "solutions": [],
+  "results": [
+    "Interactive or headless batch cropping with a pip-installable CLI"
+  ]
 }

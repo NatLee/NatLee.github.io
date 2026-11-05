@@ -1,15 +1,16 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "eagle-wrapper",
-  "title": "Eagle-Wrapper",
-  "subtitle": "Eagle Software Python API",
-  "description": "A Python wrapper for the API of Eagle, an image manager, so my scripts can file images faster than I can.",
-  "longDescription": "A comprehensive Python wrapper for Eagle image management software, providing programmatic access to Eagle's features. This wrapper enables developers to integrate Eagle's powerful image management capabilities into their Python applications.",
+  "title": "EagleWrapper",
+  "subtitle": "Eagle’s local APIs, in Python",
+  "description": "Script Eagle’s V1 and V2 APIs to import, search and tag files. Also read a library from disk when the desktop app is closed.",
+  "longDescription": "A Python wrapper for both generations of Eagle’s local HTTP API. It supports file import, search, tags and folders, plus reading a library directly from disk. The updated client makes remote authentication and API errors explicit.",
   "language": "python",
   "images": [
-    "https://raw.githubusercontent.com/NatLee/Eagle-Wrapper/main/doc/add-from-url.png"
+    "/images/projects/eagle-wrapper/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/eagle-wrapper/main/doc/add-from-url.png"
   ],
-  "githubUrl": "https://github.com/NatLee/Eagle-Wrapper",
+  "githubUrl": "https://github.com/NatLee/eagle-wrapper",
   "category": "API/SDK",
   "theme": "libraries",
   "tier": "archive",
@@ -17,24 +18,22 @@
   "opensource": true,
   "technologies": [
     "Python",
-    "API Development",
-    "Image Management",
-    "Software Integration"
+    "HTTP API",
+    "Eagle V1 / V2"
   ],
   "features": [
-    "Complete Eagle API coverage",
-    "Image manipulation functions",
-    "Metadata management",
-    "Collection organization"
+    "Clients for Eagle V1 and V2 APIs",
+    "File import, search, tags and folder operations",
+    "Direct library reads without the desktop app",
+    "Explicit API errors and authentication support"
   ],
   "timeline": {
     "start": "2022",
-    "end": "2023",
-    "duration": "1 year"
+    "end": "2026-11"
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/Eagle-Wrapper",
+    "github": "https://github.com/NatLee/eagle-wrapper",
     "pypi": "https://pypi.org/project/EagleWrapper/"
   }
 }

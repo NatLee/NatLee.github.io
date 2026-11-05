@@ -26,8 +26,8 @@ Adding a project means editing one JSON file and pushing once. The main site is 
 
 | Page | What it shows |
 |---|---|
-| `/` | Who I am, Telepy, selected work, open source, career eras, how I work, writing |
-| `/projects` | All projects with search and theme filters |
+| `/` | Who I am, Telepy, live playground, selected work, open source, career eras, how I work, writing |
+| `/projects` | All projects with search, theme and live-demo filters; filters can be shared as URLs |
 | `/projects/telepy` | Case study: architecture, features, the Django → Rust benchmarks |
 | `/about` | The longer story, languages, contact |
 | `/experience` | Work, education, skills and upstream contributions; prints as a CV |
@@ -50,12 +50,13 @@ How themes work and how to change one: [`themes/README.md`](./themes/README.md).
 ## Develop
 
 ```bash
-npm ci
-npx next dev        # http://localhost:3000
-npx next build      # lint + type-check + static export to out/
+npm ci             # Node.js 22+
+npm run dev        # http://localhost:3000
+npm test           # content, asset and shared-filter checks
+npm run build      # type-check + static export to out/
 ```
 
-On Windows, call `npx next …` directly (`npm run build` uses Unix env syntax).
+These commands work on Windows and Unix. Pull requests run the checks and static build; pushes to `main` also deploy to GitHub Pages.
 
 ```bash
 node scripts/sync-github.mjs                 # refresh star counts (CI does this on deploy)
@@ -63,4 +64,4 @@ node scripts/make-thumbs.mjs                 # card thumbnails after adding a pr
 node scripts/valhalla/build-theme.mjs <name> # rebuild a theme after changing its code
 ```
 
-Content lives in `content/` (with JSON Schemas for editor autocomplete); UI strings in `messages/`. See [`CLAUDE.md`](./CLAUDE.md) for conventions.
+Content lives in `content/` (with JSON Schemas for editor autocomplete); UI strings in `messages/`. `content/playground.json` chooses the live projects on the homepage; every entry needs a `links.demo` URL. Local WebP covers keep project images available without third-party image hosts. See [`CLAUDE.md`](./CLAUDE.md) for conventions.

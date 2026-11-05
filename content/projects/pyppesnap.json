@@ -1,19 +1,19 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "pyppesnap",
-  "title": "PyppeSnap",
+  "title": "pyppeteer-snap",
   "subtitle": "Website Screenshot Tool",
-  "description": "Takes a screenshot of a website with Pyppeteer. Like pressing Print Screen, with more dependencies.",
-  "longDescription": "A powerful website screenshot tool built with Pyppeteer that captures high-quality snapshots of web pages. This tool is useful for web monitoring, testing, and documentation purposes.",
+  "description": "The original Pyppeteer screenshot helper. Archived; new work uses playwright-snap with the same function names, arguments and return types.",
+  "longDescription": "A Python helper returning website PNG and PDF snapshots as base64. The project is archived because its Pyppeteer browser dependency is no longer maintained. Its successor, playwright-snap, keeps the same API with Playwright-driven Chromium.",
   "language": "python",
   "images": [
-    "https://i.imgur.com/JLe9bYi.png"
+    "/images/projects/pyppesnap/cover.webp"
   ],
-  "githubUrl": "https://github.com/NatLee/PyppeSnap",
+  "githubUrl": "https://github.com/NatLee/pyppeteer-snap",
   "category": "Web Automation",
   "theme": "libraries",
   "tier": "archive",
-  "status": "Completed",
+  "status": "Archived",
   "opensource": true,
   "technologies": [
     "Python",
@@ -22,25 +22,13 @@
     "Automation"
   ],
   "features": [
-    "High-quality screenshots",
-    "Batch processing",
-    "Customizable options",
-    "Headless browser automation"
+    "PNG and PDF snapshots as base64",
+    "Python API and command-line interface"
   ],
-  "challenges": [
-    "Navigation failure if URLs do not explicitly start with 'http'",
-    "Need for snapshots to be base64-encoded for seamless web framework integration",
-    "Requirement to support multiple export formats like image and PDF"
-  ],
-  "solutions": [
-    "Built a tool leveraging Pyppeteer for automated website snapshot capture",
-    "Implemented dedicated functions for converting both website images and PDFs into base64 strings",
-    "Created a CLI mode to facilitate rapid testing and parameter verification"
-  ],
+  "challenges": [],
+  "solutions": [],
   "results": [
-    "A functional Python package published on PyPI",
-    "Successful delivery of website snapshots in base64 format for easy use in web APIs",
-    "Provision of a working example demonstrating integration with web frameworks"
+    "API carried forward by playwright-snap"
   ],
   "timeline": {
     "start": "2020",
@@ -49,6 +37,7 @@
   },
   "role": "Creator & Maintainer",
   "links": {
-    "github": "https://github.com/NatLee/PyppeSnap"
+    "github": "https://github.com/NatLee/pyppeteer-snap",
+    "documentation": "https://github.com/NatLee/playwright-snap"
   }
 }

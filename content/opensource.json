@@ -13,67 +13,97 @@
       "repo": "serengil/deepface",
       "url": "https://github.com/serengil/deepface/pull/1396",
       "count": 1,
-      "summary": { "en": "Batch age and gender prediction.", "zh": "批次年齡與性別預測。" }
+      "summary": {
+        "en": "Batch age and gender prediction.",
+        "zh": "批次年齡與性別預測。"
+      }
     },
     {
       "repo": "tensorflow/models",
       "url": "https://github.com/tensorflow/models/pull/6587",
       "count": 1,
-      "summary": { "en": "Compatibility fixes for newer TensorFlow and Python 3.", "zh": "相容新版 TensorFlow 與 Python 3 的修正。" }
+      "summary": {
+        "en": "Compatibility fixes for newer TensorFlow and Python 3.",
+        "zh": "相容新版 TensorFlow 與 Python 3 的修正。"
+      }
     },
     {
       "repo": "nipy/nipype",
       "url": "https://github.com/nipy/nipype/pull/3107",
       "count": 1,
-      "summary": { "en": "A docs fix in the example code.", "zh": "範例程式碼的文件修正。" }
+      "summary": {
+        "en": "A docs fix in the example code.",
+        "zh": "範例程式碼的文件修正。"
+      }
     }
   ],
   "packages": [
     {
       "name": "BlurGenerator",
-      "repo": "NatLee/Blur-Generator",
+      "repo": "NatLee/blur-generator",
       "project": "blur-generator",
       "url": "https://pypi.org/project/BlurGenerator/",
-      "summary": { "en": "Motion, lens, Gaussian and depth-aware blur for making blurry training data.", "zh": "動態、鏡頭、高斯與景深模糊，用來產生模糊的訓練資料。" }
+      "summary": {
+        "en": "Motion, lens, Gaussian and depth-aware blur for making blurry training data.",
+        "zh": "動態、鏡頭、高斯與景深模糊，用來產生模糊的訓練資料。"
+      }
     },
     {
       "name": "HEIC2PNG",
-      "repo": "NatLee/HEIC2PNG",
+      "repo": "NatLee/heic2png",
       "project": "heic2png",
       "url": "https://pypi.org/project/HEIC2PNG/",
-      "summary": { "en": "Turn iPhone HEIC photos into PNG from the CLI, a shell pipe or Python.", "zh": "把 iPhone 的 HEIC 照片轉成 PNG，CLI、管線或 Python 都能用。" }
+      "summary": {
+        "en": "Turn iPhone HEIC photos into PNG from the CLI, a shell pipe or Python.",
+        "zh": "把 iPhone 的 HEIC 照片轉成 PNG，CLI、管線或 Python 都能用。"
+      }
     },
     {
       "name": "FisheyeWarping",
       "repo": "NatLee/fisheye-warping",
       "project": "fisheye-warping",
       "url": "https://pypi.org/project/FisheyeWarping/",
-      "summary": { "en": "Dewarp top-down fisheye images to panoramas and back.", "zh": "把俯視魚眼影像展開成全景，也能轉回去。" }
+      "summary": {
+        "en": "Dewarp top-down fisheye images to panoramas and back.",
+        "zh": "把俯視魚眼影像展開成全景，也能轉回去。"
+      }
     },
     {
       "name": "EagleWrapper",
-      "repo": "NatLee/Eagle-Wrapper",
+      "repo": "NatLee/eagle-wrapper",
       "project": "eagle-wrapper",
       "url": "https://pypi.org/project/EagleWrapper/",
-      "summary": { "en": "A Python wrapper for the Eagle image manager's API.", "zh": "圖片管理軟體 Eagle 的 Python API 封裝。" }
+      "summary": {
+        "en": "A Python wrapper for the Eagle image manager's API.",
+        "zh": "圖片管理軟體 Eagle 的 Python API 封裝。"
+      }
     },
     {
       "name": "ShowSys",
       "repo": "NatLee/show-system-info",
       "url": "https://pypi.org/project/ShowSys/",
-      "summary": { "en": "Print system information from Python or the shell.", "zh": "從 Python 或 shell 印出系統資訊。" }
+      "summary": {
+        "en": "Print system information from Python or the shell.",
+        "zh": "從 Python 或 shell 印出系統資訊。"
+      }
     },
     {
       "name": "django-simple-third-party-jwt",
-      "repo": "NatLee/Django-Simple-3rd-Party-JWT",
+      "repo": "NatLee/django-simple-3rd-party-jwt",
       "url": "https://pypi.org/project/django-simple-third-party-jwt/",
-      "summary": { "en": "Third-party login and JWT in one Django app.", "zh": "在同一個 Django 應用裡結合第三方登入與 JWT。" }
+      "summary": {
+        "en": "Third-party login and JWT in one Django app.",
+        "zh": "在同一個 Django 應用裡結合第三方登入與 JWT。"
+      }
     },
     {
       "name": "django-simple-api-proxy",
-      "repo": "NatLee/Django-Simple-API-Proxy",
+      "repo": "NatLee/django-simple-api-proxy",
       "url": "https://pypi.org/project/django-simple-api-proxy/",
-      "summary": { "en": "Proxy any API through a Django server.", "zh": "透過 Django 伺服器代理任何 API。" }
+      "summary": {
+        "en": "Proxy any API through a Django server.",
+        "zh": "透過 Django 伺服器代理任何 API。"
+      }
     }
   ]
 }

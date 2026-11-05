@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "sentiment-bundle-benchmark",
+  "title": "Sentiment Bundle Benchmark",
+  "category": "AI/ML",
+  "theme": "ai",
+  "tier": "archive",
+  "status": "Completed",
+  "opensource": true,
+  "language": "python",
+  "images": [
+    "/images/projects/sentiment-bundle-benchmark/cover.webp"
+  ],
+  "technologies": [
+    "Python",
+    "PyTorch",
+    "scikit-learn",
+    "Transformers",
+    "Parquet"
+  ],
+  "challenges": [],
+  "solutions": [],
+  "results": [],
+  "githubUrl": "https://github.com/NatLee/sentiment-bundle-benchmark",
+  "links": {
+    "github": "https://github.com/NatLee/sentiment-bundle-benchmark",
+    "documentation": "https://huggingface.co/datasets/NatLee/sentiment-classification-dataset-bundle"
+  },
+  "timeline": {
+    "start": "2026",
+    "end": "2026-11"
+  },
+  "role": "Creator & Maintainer",
+  "subtitle": "Compare sentiment models on the same terms",
+  "description": "TF-IDF, embeddings, fine-tuned encoders and a local language model, evaluated on fixed splits across six sentiment datasets. The successor to GURA.",
+  "longDescription": "A reproducible sentiment-classification benchmark across MyAnimeList reviews and five classic English datasets. Fixed splits and seeds support comparisons of accuracy, macro-F1, training time, inference speed, memory and model size. It replaces the older GURA BiGRU experiment.",
+  "features": [
+    "Six datasets with fixed splits and seeds",
+    "TF-IDF, embeddings, ModernBERT, DeBERTa-v3 and local-model baselines",
+    "Accuracy, macro-F1, runtime, memory and model-size reports",
+    "Dataset bundle available on Hugging Face"
+  ]
+}
