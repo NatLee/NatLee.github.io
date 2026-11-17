@@ -35,6 +35,43 @@
   "results": [
     "Authentication template built on django-allauth’s supported headless interfaces"
   ],
+  "why": "Every project needs sign-up, password reset and a 'Continue with Google' button, and none of them is why you started the project. The first version glued Simple JWT onto allauth by hand; now allauth issues the tokens itself, which leaves far less homemade auth code to get wrong.",
+  "architecture": [
+    {
+      "title": "Your frontend",
+      "items": [
+        "SPA or app",
+        "demo page",
+        "curl walkthrough"
+      ],
+      "next": "signs in"
+    },
+    {
+      "title": "Django + allauth",
+      "items": [
+        "headless JSON API",
+        "Google, Microsoft, LINE",
+        "email rules adapter"
+      ],
+      "next": "issues",
+      "core": true
+    },
+    {
+      "title": "JWT pair",
+      "items": [
+        "5-minute access token",
+        "rotating refresh token"
+      ],
+      "next": "Bearer header"
+    },
+    {
+      "title": "Your API",
+      "items": [
+        "/api/me example",
+        "DRF views"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2021",
     "end": "2026-11"

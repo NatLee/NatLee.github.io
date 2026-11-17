@@ -33,7 +33,7 @@
     "Single-image Docker deployment"
   ],
   "timeline": {
-    "start": "2020",
+    "start": "2019-07",
     "end": "2026-11"
   },
   "role": "Creator & Maintainer",
@@ -44,5 +44,44 @@
   "solutions": [],
   "results": [
     "2026 Rust and React rewrite with import, annotation, review and export"
+  ],
+  "why": "My first job had a Chinese reading-comprehension service to feed, and it needed questions with their answers marked exactly in the passage. I did the labelling myself too, which is the quickest way to learn what a labelling tool gets wrong.",
+  "architecture": [
+    {
+      "title": "Import",
+      "items": [
+        "SQuAD v1/v2 JSON",
+        "Hugging Face JSONL",
+        "Legacy mrc.label"
+      ],
+      "next": "drafted by"
+    },
+    {
+      "title": "AI suggestions (optional)",
+      "items": [
+        "Claude API",
+        "OpenAI-compatible, e.g. Ollama",
+        "Exact-span check"
+      ],
+      "next": "confirmed in"
+    },
+    {
+      "title": "Annotation and review",
+      "items": [
+        "Rust axum, SQLite",
+        "React span selection",
+        "Agreement F1"
+      ],
+      "next": "exported as",
+      "core": true
+    },
+    {
+      "title": "Datasets out",
+      "items": [
+        "SQuAD v1/v2",
+        "Hugging Face JSONL",
+        "RAG and chat JSONL"
+      ]
+    }
   ]
 }

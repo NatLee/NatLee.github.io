@@ -32,6 +32,42 @@
   "results": [
     "API carried forward by playwright-snap"
   ],
+  "why": "Sometimes a page snapshot has to go into JSON, a database or an email rather than onto disk, so PyppeSnap returned it as base64 from one function call. It is archived now: Pyppeteer stopped being maintained, and the Chromium it downloads stays exactly as old as it was.",
+  "architecture": [
+    {
+      "title": "Caller",
+      "items": [
+        "Python script",
+        "example/ Flask app"
+      ],
+      "next": "URL"
+    },
+    {
+      "title": "PyppeSnap",
+      "items": [
+        "get_image_snapshot_by_url",
+        "get_pdf_snapshot_by_url",
+        "pyppesnap CLI"
+      ],
+      "next": "launches",
+      "core": true
+    },
+    {
+      "title": "Headless browser",
+      "items": [
+        "Pyppeteer",
+        "Its own old Chromium"
+      ],
+      "next": "renders"
+    },
+    {
+      "title": "Base64 snapshot",
+      "items": [
+        "PNG as str",
+        "PDF as bytes"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2020",
     "end": "2021",

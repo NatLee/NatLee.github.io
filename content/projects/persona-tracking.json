@@ -49,6 +49,39 @@
     "Shipped an embedded ad recommendation system that reads the demographics of the crowd in front of a screen",
     "Later rebuilt as a personal project, Open Persona, with whole-body tracking and interest estimates"
   ],
+  "why": "Built at Infortrend for an embedded digital-signage system, so a screen could choose its ad from the people actually standing in front of it. Faces far away are small and blurry, so the system keeps refining its guess as people walk closer. Patience, implemented as an average.",
+  "architecture": [
+    {
+      "title": "Camera by the screen",
+      "items": [],
+      "next": "frames to"
+    },
+    {
+      "title": "Jetson vision pipeline",
+      "items": [
+        "Face detection and tracking",
+        "Gender and age group",
+        "Facing-the-screen check"
+      ],
+      "next": "writes",
+      "core": true
+    },
+    {
+      "title": "Daily records",
+      "items": [
+        "SQLite",
+        "Small HTTP API"
+      ],
+      "next": "read by"
+    },
+    {
+      "title": "Ad selection service",
+      "items": [
+        "Scores ads per audience",
+        "Plays the best match"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2019-10",
     "end": "2021-03",

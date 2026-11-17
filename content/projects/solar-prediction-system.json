@@ -53,6 +53,41 @@
     "Successfully deployed to demonstration site",
     "Enhanced AI showcase for the facility"
   ],
+  "why": "Built at HD Renewables for an energy-storage demonstration site, which needs to know how much solar power is on the way. The forecast combines weather data, past generation and time-series models. A solar forecast, it turns out, is a weather forecast with extra steps.",
+  "architecture": [
+    {
+      "title": "Weather and generation",
+      "items": [
+        "Several weather sources",
+        "Historical generation"
+      ],
+      "next": "scheduled by"
+    },
+    {
+      "title": "Airflow pipeline",
+      "items": [
+        "Automated data jobs"
+      ],
+      "next": "feeds"
+    },
+    {
+      "title": "Forecast system",
+      "items": [
+        "PyTorch time series",
+        "Seasonal adjustment, ensembles",
+        "Django, MySQL"
+      ],
+      "next": "shown on",
+      "core": true
+    },
+    {
+      "title": "Dashboards",
+      "items": [
+        "Solar output forecasts",
+        "Performance monitoring"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2023-04",
     "end": "2024-12",

@@ -29,6 +29,34 @@
     "Batch conversion and transparency handling",
     "Explicit output-quality controls"
   ],
+  "why": "iPhones save photos as HEIC, and a lot of software still won't open them. heic2png turns them into PNG or JPEG from a command, a shell pipe or Python, with nothing to compile. HEIC is a perfectly good format; the trouble is everyone else.",
+  "architecture": [
+    {
+      "title": "iPhone photo",
+      "items": [
+        ".heic file",
+        "stdin or BytesIO"
+      ],
+      "next": "-i or pipe"
+    },
+    {
+      "title": "heic2png",
+      "items": [
+        "HEIC2PNG class",
+        "heic2png CLI",
+        "Pillow + pillow-heif"
+      ],
+      "next": "converts to",
+      "core": true
+    },
+    {
+      "title": "PNG or JPEG",
+      "items": [
+        "Next to the input",
+        "Or stdout"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2022-09",
     "end": "2026-11"

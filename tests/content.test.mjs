@@ -44,6 +44,36 @@ test('every project belongs to listed categories, and old themes still get one o
   }
 })
 
+test('why and architecture are bilingual and the diagram has one core step', () => {
+  const overlays = read('content/i18n/projects.zh.json')
+  for (const project of projects) {
+    const zh = overlays[project.id] ?? {}
+    if (project.why) assert.ok(zh.why, `${project.id}: why needs a Chinese version`)
+    if (zh.why) assert.ok(project.why, `${project.id}: Chinese why without an English one`)
+    const steps = project.architecture
+    if (!steps) {
+      assert.ok(!zh.architecture, `${project.id}: Chinese architecture without an English one`)
+      continue
+    }
+    // 作品頁橫排最多放五步；少於兩步就不是流程了。
+    assert.ok(steps.length >= 2 && steps.length <= 5, `${project.id}: architecture needs 2–5 steps`)
+    assert.equal(steps.filter(step => step.core).length, 1, `${project.id}: exactly one step is the project itself (core)`)
+    steps.forEach((step, index) => {
+      assert.ok(step.title, `${project.id}: step ${index + 1} needs a title`)
+      assert.ok(Array.isArray(step.items) && step.items.length <= 3, `${project.id}: step ${index + 1} lists 0–3 items`)
+      const last = index === steps.length - 1
+      assert.ok(!(last && step.next), `${project.id}: the last step has no arrow`)
+    })
+    assert.ok(Array.isArray(zh.architecture), `${project.id}: architecture needs a Chinese version`)
+    assert.equal(zh.architecture.length, steps.length, `${project.id}: Chinese architecture must have the same steps`)
+    zh.architecture.forEach((step, index) => {
+      assert.ok(step.title, `${project.id}: Chinese step ${index + 1} needs a title`)
+      assert.ok(!('core' in step), `${project.id}: write core only in English`)
+      assert.equal(Boolean(step.next), Boolean(steps[index].next), `${project.id}: step ${index + 1} arrow label must exist in both languages`)
+    })
+  }
+})
+
 test('every theme keeps an identical copy of the site.json contract', () => {
   const contract = fs.readFileSync(path.join(root, 'lib/content/contract.ts'), 'utf8')
   for (const copy of ['themes/flat/lib/site-contract.ts', 'themes/stonk/lib/site-contract.ts', 'themes/terminal/lib/site/contract.ts']) {

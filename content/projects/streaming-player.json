@@ -27,6 +27,36 @@
     "Version 2.0.0 released with a Rust backend and React dashboard",
     "One Docker image for self-hosted deployment"
   ],
+  "why": "Song requests arrive from Twitch chat, YouTube chat and assorted chat bots, and something has to turn them into one queue that plays in OBS. Version 2 swapped v1's Django, Redis, nginx and supervisord for a single Rust container: three fewer things to restart in the middle of a stream.",
+  "architecture": [
+    {
+      "title": "Chat",
+      "items": [
+        "Twitch EventSub",
+        "YouTube Live Chat API",
+        "Chat bots over HTTP"
+      ],
+      "next": "!sr requests"
+    },
+    {
+      "title": "Streaming Player",
+      "items": [
+        "axum command engine",
+        "Queue rules + SQLite",
+        "yt-dlp lookups"
+      ],
+      "next": "WebSocket",
+      "core": true
+    },
+    {
+      "title": "Browser pages",
+      "items": [
+        "OBS player, overlay",
+        "Admin dashboard",
+        "Viewer queue page"
+      ]
+    }
+  ],
   "githubUrl": "https://github.com/NatLee/streaming-player",
   "links": {
     "github": "https://github.com/NatLee/streaming-player"

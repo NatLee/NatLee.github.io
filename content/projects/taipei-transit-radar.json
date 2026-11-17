@@ -23,6 +23,43 @@
   "challenges": [],
   "solutions": [],
   "results": [],
+  "why": "Team 3 built it at the 2016 IISI hackathon around one everyday question: how should someone in Taipei get to work without a car or scooter? The 2026 rewrite replaced Google Directions with government open data that needs no key, because a static site has nowhere to hide one.",
+  "architecture": [
+    {
+      "title": "Open data",
+      "items": [
+        "OpenStreetMap metro lines",
+        "data.taipei fares",
+        "Taipei e-bus routes"
+      ],
+      "next": "data:metro, data:bus"
+    },
+    {
+      "title": "Network files",
+      "items": [
+        "metro.json",
+        "bus.json"
+      ],
+      "next": "loaded"
+    },
+    {
+      "title": "Transit Radar",
+      "items": [
+        "Route planner, fares",
+        "Live bus, YouBike",
+        "MapLibre map"
+      ],
+      "next": "five options",
+      "core": true
+    },
+    {
+      "title": "Comparison",
+      "items": [
+        "Cards and bubbles",
+        "Shareable URL"
+      ]
+    }
+  ],
   "githubUrl": "https://github.com/NatLee/taipei-transit-radar",
   "links": {
     "github": "https://github.com/NatLee/taipei-transit-radar",

@@ -32,6 +32,32 @@
     "Reusable coordinate meshes",
     "Python API and command-line tools"
   ],
+  "why": "At Infortrend, pose recognition ran on top-down fisheye cameras in narrow spaces, and this was the step before it: unrolling the round frame into a panorama. Working out where each pixel goes is slow, so it is done once per image size and saved, on the safe bet that the camera won't change resolution by itself.",
+  "architecture": [
+    {
+      "title": "Fisheye image",
+      "items": [
+        "Top-down camera frame"
+      ],
+      "next": "dewarp"
+    },
+    {
+      "title": "FisheyeWarping",
+      "items": [
+        "Mesh per image size",
+        "cv2.remap",
+        "fisheyewarping CLI"
+      ],
+      "next": "unrolled",
+      "core": true
+    },
+    {
+      "title": "Panorama",
+      "items": [
+        "dewarp-output.png"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2020",
     "end": "2026-11"

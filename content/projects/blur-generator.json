@@ -53,6 +53,33 @@
     "Efficient batch processing",
     "Positive community feedback"
   ],
+  "why": "The blur detector from the Infortrend vision work needed blurry photos to learn from, and real cameras only take those when nobody wants them. Blur Generator makes them on demand from sharp images: motion, lens or Gaussian, with the strength as a number, or varied by depth with a depth map.",
+  "architecture": [
+    {
+      "title": "Sharp image",
+      "items": [
+        "OpenCV image array",
+        "Optional depth map"
+      ],
+      "next": "blur settings"
+    },
+    {
+      "title": "BlurGenerator",
+      "items": [
+        "Motion, lens, Gaussian",
+        "Depth-layer blur",
+        "blurgenerator CLI"
+      ],
+      "next": "blurred copies",
+      "core": true
+    },
+    {
+      "title": "Training data",
+      "items": [
+        "simply-blur-detector"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2021-05",
     "end": "2026-11"

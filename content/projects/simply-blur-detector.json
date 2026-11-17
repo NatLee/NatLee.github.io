@@ -42,6 +42,43 @@
     "Interactive GitHub Pages demo with local image processing",
     "Reproducible training assets and model evaluation in the repository"
   ],
+  "why": "At Infortrend a small CNN told sharp camera frames from blurry ones. The rebuild sets it beside Laplacian variance, the classic that needs no training at all, so anyone can check in a browser whether the neural network is earning its keep.",
+  "architecture": [
+    {
+      "title": "Sharp pictures",
+      "items": [
+        "120 own illustrations",
+        "data/*/nonblur"
+      ],
+      "next": "blurred by"
+    },
+    {
+      "title": "blur-generator",
+      "items": [
+        "blurgenerator package",
+        "lens, Gaussian, motion"
+      ],
+      "next": "training data"
+    },
+    {
+      "title": "Blur detector",
+      "items": [
+        "Keras CNN",
+        "model/model.h5",
+        "ONNX export"
+      ],
+      "next": "deployed to",
+      "core": true
+    },
+    {
+      "title": "Browser demo",
+      "items": [
+        "ONNX Runtime Web",
+        "Laplacian variance",
+        "GitHub Pages"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2019",
     "end": "2026-11"

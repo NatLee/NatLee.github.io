@@ -120,8 +120,12 @@
   "project": {
     "back": "All projects",
     "overview": "Overview",
+    "why": "Why I built it",
     "problem": "The problem",
     "approach": "What I did",
+    "architecture": "How it fits together",
+    "architectureNote": "Simplified on purpose. The real thing has more arrows and at least one config file nobody understands.",
+    "architectureCore": "This one",
     "results": "Results",
     "features": "Features",
     "stack": "Stack",

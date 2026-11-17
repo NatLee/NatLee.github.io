@@ -37,8 +37,45 @@
   "results": [
     "2026 Rust and React rewrite with import, annotation, review and export"
   ],
+  "why": "The models at my first job needed labelled sentences, and the 2019 Flask version, emoLabel, scored the emotion in each one. The 2026 rewrite lets a model suggest labels first. A 2B model is 90 to 100% sure of nearly every answer, so a person still presses the key.",
+  "architecture": [
+    {
+      "title": "Import",
+      "items": [
+        "CSV, JSONL, zip",
+        "Text, images, audio",
+        "Legacy emoLabel.db"
+      ],
+      "next": "labelled in"
+    },
+    {
+      "title": "Labeling platform",
+      "items": [
+        "Rust axum, SQLite",
+        "React keyboard labeling",
+        "AI pre-labels (optional)"
+      ],
+      "next": "checked by",
+      "core": true
+    },
+    {
+      "title": "Agreement stats",
+      "items": [
+        "Cohen's, Fleiss' kappa",
+        "Krippendorff's alpha"
+      ],
+      "next": "exported as"
+    },
+    {
+      "title": "Export",
+      "items": [
+        "CSV, JSONL, zip",
+        "Chat JSONL for fine-tuning"
+      ]
+    }
+  ],
   "timeline": {
-    "start": "2020",
+    "start": "2019-05",
     "end": "2026-11"
   },
   "role": "Creator & Maintainer",

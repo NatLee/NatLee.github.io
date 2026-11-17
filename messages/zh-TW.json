@@ -120,8 +120,12 @@
   "project": {
     "back": "所有作品",
     "overview": "概要",
+    "why": "為什麼做這個",
     "problem": "問題",
     "approach": "我做了什麼",
+    "architecture": "架構",
+    "architectureNote": "刻意畫得很簡單。實際上箭頭更多，還有至少一個沒人看得懂的設定檔。",
+    "architectureCore": "就是它",
     "results": "成果",
     "features": "功能",
     "stack": "技術",

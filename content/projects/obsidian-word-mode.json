@@ -56,6 +56,32 @@
     "Released on GitHub; install by copying three files into the vault's plugins folder",
     "No telemetry, no account, and no files touched outside the vault"
   ],
+  "why": "In Obsidian, formatting a note still means Markdown syntax; even the shortcuts just type the symbols for you. Word Mode lets you work with toolbar buttons and word-processor shortcuts on the same .md files, and writes back only the blocks you changed, so fixing one typo doesn't turn into a diff of the whole note.",
+  "architecture": [
+    {
+      "title": "Markdown note",
+      "items": [
+        ".md file in vault"
+      ],
+      "next": "opens in"
+    },
+    {
+      "title": "Word Mode editor",
+      "items": [
+        "markdown-it parser",
+        "ProseMirror document",
+        "Ribbon toolbar"
+      ],
+      "next": "changed blocks only",
+      "core": true
+    },
+    {
+      "title": "Same .md file",
+      "items": [
+        "Plain Markdown on disk"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2026",
     "end": "Present",

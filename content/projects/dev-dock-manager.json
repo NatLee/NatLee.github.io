@@ -54,6 +54,42 @@
     "Enhanced security through isolation",
     "Simplified onboarding process"
   ],
+  "why": "dev-dock puts a desktop in a container, but someone still has to run docker for each person. On a shared machine that someone shouldn't be everyone, since holding the Docker socket is close to holding root on the host. So this dashboard sits in between: log in, click create, get your own desktop.",
+  "architecture": [
+    {
+      "title": "Browser",
+      "items": [
+        "login",
+        "web terminal",
+        "NoVNC desktop"
+      ],
+      "next": "port 8000"
+    },
+    {
+      "title": "Traefik",
+      "items": [
+        "routes by path"
+      ],
+      "next": "/api, /ws"
+    },
+    {
+      "title": "Dev Dock Manager",
+      "items": [
+        "Django + Channels API",
+        "Next.js dashboard",
+        "RQ worker, Redis"
+      ],
+      "next": "Docker socket",
+      "core": true
+    },
+    {
+      "title": "Desktop containers",
+      "items": [
+        "gui-vnc image",
+        "Xfce, noVNC, SSH"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2022",
     "end": "2023",

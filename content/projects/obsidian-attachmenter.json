@@ -50,6 +50,35 @@
     "Automated remote image archiving",
     "Consistent vault structure"
   ],
+  "why": "I wanted one attachment folder per note, right next to it, so moving or archiving a note takes its pictures along. Remote images should become local files rather than links you hope still work, and an existing vault needed tools to get into line.",
+  "architecture": [
+    {
+      "title": "What you do",
+      "items": [
+        "Paste an image",
+        "Rename or move notes",
+        "Remote image links"
+      ],
+      "next": "vault events"
+    },
+    {
+      "title": "Attachmenter",
+      "items": [
+        "Paste image handler",
+        "Remote image downloader",
+        "Path check and repair"
+      ],
+      "next": "moves and relinks",
+      "core": true
+    },
+    {
+      "title": "Per-note attachment folder",
+      "items": [
+        "<note>_Attachments/",
+        "Links updated"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2026",
     "end": "Present",

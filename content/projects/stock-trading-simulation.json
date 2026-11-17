@@ -73,6 +73,35 @@
     "Implemented real-time market analysis tools for trend and pattern detection",
     "Achieved smooth performance with high-frequency order processing"
   ],
+  "why": "A price chart makes more sense once you have watched one being made. Here the price is simply the last trade between three bots and you, so order books, spreads and partial fills stop being vocabulary and start happening to your orders. The 19 courses are there for when the market maker wins.",
+  "architecture": [
+    {
+      "title": "Traders",
+      "items": [
+        "You",
+        "Three bots",
+        "Tuned by 12 scenarios"
+      ],
+      "next": "orders"
+    },
+    {
+      "title": "Stonk! simulator",
+      "items": [
+        "MatchingEngine + OrderBook",
+        "100 ms MarketSimulation tick",
+        "CandleAggregator"
+      ],
+      "next": "fills",
+      "core": true
+    },
+    {
+      "title": "Trading screen",
+      "items": [
+        "Canvas candlestick chart",
+        "Order book, holdings"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2026",
     "end": "Present",

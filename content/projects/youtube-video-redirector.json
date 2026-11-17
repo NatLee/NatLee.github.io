@@ -34,6 +34,40 @@
   "results": [
     "Runnable final version preserved with tests and Docker"
   ],
+  "why": "The 2021 question was simple: where does a YouTube video actually live? Behind each watch page sits a plain file on Google's servers, youtube-dl could find it, and the idea came from zdwolfe/yt-redirector. In 2026 the link still comes back; whether the video plays depends on what YouTube changed that week.",
+  "architecture": [
+    {
+      "title": "Browser",
+      "items": [
+        "/?v=<video id>"
+      ],
+      "next": "GET"
+    },
+    {
+      "title": "Flask app",
+      "items": [
+        "main.py",
+        "One template"
+      ],
+      "next": "extract_info",
+      "core": true
+    },
+    {
+      "title": "yt-dlp",
+      "items": [
+        "Format \"best\"",
+        "Deno runs player JS"
+      ],
+      "next": "direct link"
+    },
+    {
+      "title": "Player page",
+      "items": [
+        "Video.js",
+        "Plain <video> tag"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2021",
     "end": "2022",

@@ -34,6 +34,35 @@
   "results": [
     "Room availability organised around the shop’s booking data"
   ],
+  "why": "Elysion's booking page shows one day at a time, with a separate table for every room, so finding a free room means reading them all. This app reads them for you and lines the rooms up. It needs a whole backend for one reason: the official site will not let a page from another site read it.",
+  "architecture": [
+    {
+      "title": "Official booking page",
+      "items": [
+        "calendar.elysion.com.tw",
+        "One table per room"
+      ],
+      "next": "read, cached"
+    },
+    {
+      "title": "Elysion Calendar",
+      "items": [
+        "FastAPI + Redis",
+        "Next.js frontend",
+        "nginx on :3000"
+      ],
+      "next": "rooms and slots",
+      "core": true
+    },
+    {
+      "title": "Your browser",
+      "items": [
+        "Room cards",
+        "Time table",
+        "Weekly overview"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2022",
     "end": "2026-11"

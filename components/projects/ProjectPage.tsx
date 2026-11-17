@@ -4,6 +4,7 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import Icon from '@/components/Icon'
+import ArchitectureFlow from '@/components/projects/ArchitectureFlow'
 import ProjectCard, { StatusTag } from '@/components/projects/ProjectCard'
 import { StarCount, ThemeLabels } from '@/components/site/ui'
 import OriginBadge from '@/components/work/OriginBadge'
@@ -191,6 +192,11 @@ export default function ProjectPage({ id }: { id: string }) {
           <Block title={t('project.overview')}>
             <p>{project.longDescription}</p>
           </Block>
+          {project.why && (
+            <Block title={t('project.why')}>
+              <p>{project.why}</p>
+            </Block>
+          )}
           {project.challenges.length > 0 && (
             <Block title={t('project.problem')}>
               <Bullets items={project.challenges} />
@@ -223,6 +229,18 @@ export default function ProjectPage({ id }: { id: string }) {
           </ul>
         </aside>
       </div>
+
+      {project.architecture && project.architecture.length > 0 && (
+        <section className="mt-20" aria-labelledby="architecture-title">
+          <h2 id="architecture-title" className="font-display text-2xl font-bold">
+            {t('project.architecture')}
+          </h2>
+          <p className="mt-2 max-w-prose text-sm text-muted">{t('project.architectureNote')}</p>
+          <div className="mt-6">
+            <ArchitectureFlow steps={project.architecture} />
+          </div>
+        </section>
+      )}
 
       {gallery.length > 0 && (
         <section className="mt-20" aria-labelledby="gallery-title">

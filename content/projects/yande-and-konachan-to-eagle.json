@@ -29,6 +29,40 @@
     "Dry-run preview and duplicate skipping",
     "Resumable progress and pipx installation"
   ],
+  "why": "Collecting pictures from yande.re and konachan.com into Eagle by hand means saving each file and retyping its English tags in your own words. This sends each post to Eagle with the tags already mapped and remembers where it stopped. Eagle does the actual downloading; the script just hands it the list.",
+  "architecture": [
+    {
+      "title": "yande.re or konachan.com",
+      "items": [
+        "/post.json API"
+      ],
+      "next": "posts and tags"
+    },
+    {
+      "title": "yk2eagle CLI",
+      "items": [
+        "moebooru.py reader",
+        "map.yaml tag map",
+        "imported.txt history"
+      ],
+      "next": "image URLs",
+      "core": true
+    },
+    {
+      "title": "EagleWrapper",
+      "items": [
+        "add_from_url"
+      ],
+      "next": "local API"
+    },
+    {
+      "title": "Eagle app",
+      "items": [
+        "localhost:41595",
+        "Downloads the file"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2022",
     "end": "2026-11"

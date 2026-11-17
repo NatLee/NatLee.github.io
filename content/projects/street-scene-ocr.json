@@ -25,6 +25,43 @@
   "challenges": [],
   "solutions": [],
   "results": [],
+  "why": "It began in 2021 as a take-home test for a job interview: build a service that reads Chinese and English street signs, with a Docker deployment plan. In 2026 it became a learning project with a benchmark anyone can re-run. The interview is long over; the homework got a sequel.",
+  "architecture": [
+    {
+      "title": "Street sign photo",
+      "items": [
+        "Web upload page",
+        "JSON API request"
+      ],
+      "next": "sent through"
+    },
+    {
+      "title": "Traefik",
+      "items": [
+        "Spreads across containers",
+        "HTTPS in production"
+      ],
+      "next": "one container runs"
+    },
+    {
+      "title": "OCR service",
+      "items": [
+        "FastAPI",
+        "EasyOCR, RapidOCR, PaddleOCR",
+        "Threshold, reading order"
+      ],
+      "next": "returns",
+      "core": true
+    },
+    {
+      "title": "Results",
+      "items": [
+        "Boxes and text",
+        "Per-stage timings",
+        "Annotated PNG"
+      ]
+    }
+  ],
   "githubUrl": "https://github.com/NatLee/street-scene-ocr",
   "links": {
     "github": "https://github.com/NatLee/street-scene-ocr"

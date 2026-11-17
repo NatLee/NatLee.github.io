@@ -29,6 +29,34 @@
     "Direct library reads without the desktop app",
     "Explicit API errors and authentication support"
   ],
+  "why": "While Eagle is open it runs a small HTTP server, so any script can feed it files, after writing the same requests and error checks yet again. EagleWrapper turns them into Python methods, so a downloader or tagging job is a few lines. It has read the API docs so you don't have to.",
+  "architecture": [
+    {
+      "title": "Your script",
+      "items": [
+        "Downloader or tagger",
+        "yande-and-konachan-to-eagle"
+      ],
+      "next": "Python calls"
+    },
+    {
+      "title": "EagleWrapper",
+      "items": [
+        "Eagle() V1 methods",
+        "Eagle().v2 Web API",
+        "Library folder reader"
+      ],
+      "next": "HTTP or disk",
+      "core": true
+    },
+    {
+      "title": "Eagle library",
+      "items": [
+        "Eagle app, port 41595",
+        "metadata.json on disk"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2022",
     "end": "2026-11"

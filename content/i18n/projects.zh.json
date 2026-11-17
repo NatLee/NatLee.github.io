@@ -68,6 +68,41 @@
       "型別安全的程式碼提升了安全性",
       "更好的並行處理能力",
       "以 Docker Compose 簡化部署"
+    ],
+    "why": "Django 版要 Django、Daphne 加上 RQ worker 一起跑，閒著也吃 175 MiB。Rust 版只有一個執行檔，閒著 5.5 MiB，啟動快了大約六倍，機器的資源留給真正要用的桌面。",
+    "architecture": [
+      {
+        "title": "瀏覽器",
+        "items": [
+          "登入",
+          "網頁終端機",
+          "NoVNC 桌面"
+        ],
+        "next": "8000 埠"
+      },
+      {
+        "title": "Traefik",
+        "items": [
+          "依路徑轉送"
+        ],
+        "next": "轉給後端"
+      },
+      {
+        "title": "開發機管理器",
+        "items": [
+          "axum + bollard API",
+          "Next.js 儀表板",
+          "SQLite、Redis 佇列"
+        ],
+        "next": "開容器"
+      },
+      {
+        "title": "桌面容器",
+        "items": [
+          "gui-vnc 映像檔",
+          "可選 NVIDIA GPU"
+        ]
+      }
     ]
   },
   "morphkit": {
@@ -105,6 +140,33 @@
       "免費且注重隱私的轉檔與編輯工具——檔案從不離開瀏覽器。",
       "單一工具即涵蓋圖片、音訊、影片、動畫、PDF 與文件的轉檔與編輯。",
       "完全運行於 GitHub Pages，沒有主機費用，也不需維護伺服器。"
+    ],
+    "why": "線上轉檔服務通常要先把檔案收進自己的伺服器。MorphKit 改在瀏覽器分頁裡做完。代價是速度：編成 WebAssembly 的 ffmpeg 比原生慢 5 到 20 倍，隱私用耐心來付。",
+    "architecture": [
+      {
+        "title": "你的檔案",
+        "items": [
+          "圖片、音訊、影片",
+          "PDF 與文件"
+        ],
+        "next": "不上傳"
+      },
+      {
+        "title": "MorphKit",
+        "items": [
+          "Canvas API",
+          "ffmpeg.wasm",
+          "pdf.js + pdf-lib"
+        ],
+        "next": "轉檔或編輯"
+      },
+      {
+        "title": "成品",
+        "items": [
+          "下載或 ZIP",
+          "IndexedDB 專案"
+        ]
+      }
     ]
   },
   "stock-trading-simulation": {
@@ -152,6 +214,34 @@
       "開發互動式練習環境，培養交易技巧",
       "實作即時市場分析工具，偵測趨勢與型態",
       "在高頻委託處理下仍維持流暢效能"
+    ],
+    "why": "K 線是怎麼長出來的，親眼看它成交最快懂。這裡的價格就是三個機器人和你的最後一筆成交，委託簿、價差、部分成交不再只是名詞。被造市機器人吃掉的時候，旁邊還有 19 堂課。",
+    "architecture": [
+      {
+        "title": "交易者",
+        "items": [
+          "你",
+          "三個機器人",
+          "12 種劇本調參"
+        ],
+        "next": "委託單"
+      },
+      {
+        "title": "模擬器核心",
+        "items": [
+          "MatchingEngine + OrderBook",
+          "每 100 ms 一輪 MarketSimulation",
+          "CandleAggregator"
+        ],
+        "next": "成交"
+      },
+      {
+        "title": "交易畫面",
+        "items": [
+          "Canvas K 線圖",
+          "委託簿與持倉"
+        ]
+      }
     ]
   },
   "power-trading-ai": {
@@ -184,6 +274,48 @@
       "價格趨勢預測準確率達 85%",
       "交易決策時間縮短 60%",
       "支援拓展至澳洲市場"
+    ],
+    "why": "在 HD Renewables 替日本、後來加上澳洲的電力交易團隊開發，讓交易員下單前先看到現貨電價的預測。市場照樣暴衝，至少決策不必跟著衝。",
+    "architecture": [
+      {
+        "title": "市場與氣象資料",
+        "items": [
+          "日本電力市場",
+          "氣象資料"
+        ],
+        "next": "收進"
+      },
+      {
+        "title": "數據平台",
+        "items": [
+          "Elasticsearch 資料管線"
+        ],
+        "next": "餵給"
+      },
+      {
+        "title": "預測與策略",
+        "items": [
+          "PyTorch 現貨電價模型",
+          "策略優化",
+          "風險評估"
+        ],
+        "next": "透過"
+      },
+      {
+        "title": "API 與儀表板",
+        "items": [
+          "Django、FastAPI",
+          "Next.js"
+        ],
+        "next": "提供給"
+      },
+      {
+        "title": "交易團隊",
+        "items": [
+          "日本",
+          "澳洲"
+        ]
+      }
     ]
   },
   "blur-generator": {
@@ -216,6 +348,32 @@
       "廣泛用於機器學習的資料增強",
       "高效率的批次處理",
       "獲得社群正面回饋"
+    ],
+    "why": "Infortrend 影像工作裡的模糊偵測模型，需要很多糊掉的照片來學；真的相機只會在你不想要的時候拍糊。所以從清楚的照片自己做，種類和強度都能指定，也能照深度圖決定哪裡糊。",
+    "architecture": [
+      {
+        "title": "清楚的照片",
+        "items": [
+          "OpenCV 影像陣列",
+          "深度圖（可選）"
+        ],
+        "next": "模糊設定"
+      },
+      {
+        "title": "模糊產生器",
+        "items": [
+          "動態、鏡頭、高斯",
+          "依深度分層模糊",
+          "blurgenerator CLI"
+        ],
+        "next": "糊掉的副本"
+      },
+      {
+        "title": "訓練資料",
+        "items": [
+          "simply-blur-detector"
+        ]
+      }
     ]
   },
   "heic2png": {
@@ -228,6 +386,33 @@
       "CLI、Python API 與管線輸入輸出",
       "批次轉檔與透明度處理",
       "明確的輸出品質控制"
+    ],
+    "why": "iPhone 拍的照片是 HEIC，很多軟體到現在還打不開。heic2png 用一行指令、管線或 Python 把它轉成 PNG 或 JPEG，不用編譯任何東西。HEIC 本身沒什麼不好，問題出在其他人。",
+    "architecture": [
+      {
+        "title": "iPhone 照片",
+        "items": [
+          ".heic 檔",
+          "stdin 或 BytesIO"
+        ],
+        "next": "-i 或管線"
+      },
+      {
+        "title": "heic2png",
+        "items": [
+          "HEIC2PNG 類別",
+          "heic2png CLI",
+          "Pillow + pillow-heif"
+        ],
+        "next": "轉成"
+      },
+      {
+        "title": "PNG 或 JPEG",
+        "items": [
+          "放在原檔旁邊",
+          "或輸出到 stdout"
+        ]
+      }
     ]
   },
   "batch-crop-images": {
@@ -245,6 +430,33 @@
     "solutions": [],
     "results": [
       "可用 pip 安裝的互動式與無視窗批次裁切工具"
+    ],
+    "why": "Infortrend 影像工作裡的雜事：整個資料夾版面相同的圖，都要裁掉同一塊。每張重畫一次框，得靠手完全不抖；這裡框只畫一次，之後照座標裁，有沒有視窗都行。",
+    "architecture": [
+      {
+        "title": "輸入資料夾",
+        "items": [
+          "版面相同的圖",
+          "參考圖"
+        ],
+        "next": "依檔名第一張"
+      },
+      {
+        "title": "batch-crop",
+        "items": [
+          "OpenCV 裁切視窗",
+          "--box 或 --preset",
+          "平行裁切引擎"
+        ],
+        "next": "同一個框"
+      },
+      {
+        "title": "輸出資料夾",
+        "items": [
+          "檔名與格式不變",
+          "保留 EXIF 和 ICC"
+        ]
+      }
     ]
   },
   "nipype-preprocess-on-brain-mr": {
@@ -270,6 +482,34 @@
     "results": [
       "可在 CPU 重現執行，附開放授權示範掃描",
       "每筆掃描產出組織圖、量化品質指標與 HTML 報告"
+    ],
+    "why": "源自在 Infortrend 替阿茲海默症診斷專案做的腦部 MRI 前處理。公開版把 FSL、ANTs 和 AC-PC 偵測接成 nipype 流程，裝進 2 GB 的映像檔，想學不必先下載 4.1 GB 的 FSL。",
+    "architecture": [
+      {
+        "title": "T1 掃描",
+        "items": [
+          "NIfTI 檔",
+          "OpenNeuro 示範掃描"
+        ],
+        "next": "掛進容器"
+      },
+      {
+        "title": "nipype 流程",
+        "items": [
+          "acpcdetect、FLIRT、BET",
+          "ANTs N4 校正",
+          "FAST、K-means、Atropos"
+        ],
+        "next": "輸出"
+      },
+      {
+        "title": "每筆掃描結果",
+        "items": [
+          "組織圖與體積",
+          "Dice 與品質指標",
+          "3D 腦與 HTML 報告"
+        ]
+      }
     ]
   },
   "solar-prediction-system": {
@@ -302,6 +542,40 @@
       "儲能成本降低 25%",
       "成功部署至示範案場",
       "強化案場的 AI 展示效果"
+    ],
+    "why": "在 HD Renewables 替儲能示範場開發。儲能得先知道接下來有多少太陽能進來，所以結合氣象資料、歷史發電和時間序列模型做預測。做久了才懂：太陽能預測，說穿了是多加幾道工的天氣預報。",
+    "architecture": [
+      {
+        "title": "氣象與發電資料",
+        "items": [
+          "多個氣象來源",
+          "歷史發電紀錄"
+        ],
+        "next": "交給"
+      },
+      {
+        "title": "Airflow 排程",
+        "items": [
+          "自動化資料管線"
+        ],
+        "next": "餵給"
+      },
+      {
+        "title": "預測系統",
+        "items": [
+          "PyTorch 時間序列",
+          "季節調整、ensemble",
+          "Django、MySQL"
+        ],
+        "next": "顯示在"
+      },
+      {
+        "title": "儀表板",
+        "items": [
+          "太陽能發電預測",
+          "成效監控"
+        ]
+      }
     ]
   },
   "sentiment-analysis-platform": {
@@ -340,6 +614,39 @@
       "將情緒分析整合至 Keypo 與 DailyView 平台",
       "讓終端使用者能即時進行網路輿情與聲量分析",
       "部署可擴展的微服務架構，支援大量資料處理"
+    ],
+    "why": "Keypo 和 DailyView 把爬下來的貼文做成聲量與情緒報告，每一篇都得先標上情緒才算數。這個引擎負責標；那個量要是交給人讀，人大概會先讀到懷疑人生。",
+    "architecture": [
+      {
+        "title": "網路爬蟲",
+        "items": [
+          "每天的爬蟲資料"
+        ],
+        "next": "存進"
+      },
+      {
+        "title": "貼文資料庫",
+        "items": [
+          "Elasticsearch"
+        ],
+        "next": "交給"
+      },
+      {
+        "title": "情緒分析引擎",
+        "items": [
+          "PaddlePaddle 情緒模型",
+          "Docker 服務",
+          "Kubernetes 擴展"
+        ],
+        "next": "結果送到"
+      },
+      {
+        "title": "輿情產品",
+        "items": [
+          "Keypo",
+          "DailyView"
+        ]
+      }
     ]
   },
   "django-project-template": {
@@ -358,6 +665,41 @@
     "solutions": [],
     "results": [
       "可重用的後端範本，附端對端驗證流程"
+    ],
+    "why": "AI 幾秒就寫得出 JWT view，卻不能保證這組套件開得起來、WebSocket 穿過 NGINX 還活著、DEBUG=false 真的安全。這些事，CI 每次 push 都用改了名的副本驗一遍。",
+    "architecture": [
+      {
+        "title": "你的前端",
+        "items": [
+          "瀏覽器",
+          "frontend/ 建置檔"
+        ],
+        "next": "連進來"
+      },
+      {
+        "title": "NGINX",
+        "items": [
+          "/ 放靜態檔",
+          "/api 與 /ws"
+        ],
+        "next": "轉送"
+      },
+      {
+        "title": "Django 後端",
+        "items": [
+          "REST、JWT、allauth",
+          "Channels WebSocket",
+          "django-q2 worker"
+        ],
+        "next": "存到"
+      },
+      {
+        "title": "資料服務",
+        "items": [
+          "PostgreSQL 18",
+          "Redis 8"
+        ]
+      }
     ]
   },
   "django-docker-gui": {
@@ -391,6 +733,34 @@
       "提升開發者生產力",
       "強化系統管理",
       "減少對命令列的依賴"
+    ],
+    "why": "Docker 指令很好用，前提是你記得容器 ID。這個網頁幫你列好，啟動、停止、拉映像檔都變成按鈕，還能在瀏覽器開進任何容器的 shell。最早改寫自 MahmoudAlyy 的 docker-django-ui。",
+    "architecture": [
+      {
+        "title": "瀏覽器",
+        "items": [
+          "HTML 頁面",
+          "xterm.js 終端機"
+        ],
+        "next": "JWT 連線"
+      },
+      {
+        "title": "網頁管理介面",
+        "items": [
+          "Django + Channels",
+          "RQ worker + Redis",
+          "只限 superuser"
+        ],
+        "next": "下指令"
+      },
+      {
+        "title": "Docker 引擎",
+        "items": [
+          "主機上的容器",
+          "映像檔",
+          "Docker Hub 搜尋"
+        ]
+      }
     ]
   },
   "dev-dock-manager": {
@@ -424,6 +794,41 @@
       "提升開發團隊生產力",
       "透過隔離強化安全性",
       "簡化新人上手流程"
+    ],
+    "why": "dev-dock 把桌面裝進容器，但每個人的容器還是得有人去開。共用的機器上不能人人都碰 Docker socket，那幾乎等於整台主機的 root。所以讓這個儀表板居中：登入、按建立，就有自己的桌面。",
+    "architecture": [
+      {
+        "title": "瀏覽器",
+        "items": [
+          "登入",
+          "網頁終端機",
+          "NoVNC 桌面"
+        ],
+        "next": "8000 埠"
+      },
+      {
+        "title": "Traefik",
+        "items": [
+          "依路徑轉送"
+        ],
+        "next": "轉給後端"
+      },
+      {
+        "title": "開發機管理器",
+        "items": [
+          "Django + Channels API",
+          "Next.js 儀表板",
+          "RQ worker、Redis"
+        ],
+        "next": "開容器"
+      },
+      {
+        "title": "桌面容器",
+        "items": [
+          "gui-vnc 映像檔",
+          "Xfce、noVNC、SSH"
+        ]
+      }
     ]
   },
   "openpose-detect-hands-with-heatmap": {
@@ -453,6 +858,41 @@
     "results": [
       "一行 Docker 指令就能產生整段影片的動作熱力圖",
       "可重現的 CPU 映像檔（Python 3.12、TensorFlow 2.21）"
+    ],
+    "why": "Infortrend 的零售專案想知道商品在哪裡最受注意。這個示範留下那個做法：在影片裡追手腕，只留落在指定區域的點，讓熱區自己疊出來，比派人拿板夾站在貨架旁邊數划算。",
+    "architecture": [
+      {
+        "title": "影片檔",
+        "items": [
+          "data/test.mp4",
+          "每 30 格取一格"
+        ],
+        "next": "畫面"
+      },
+      {
+        "title": "姿勢模型",
+        "items": [
+          "六階段 Keras 網路",
+          "model/weights.h5",
+          "TensorFlow、tf-keras"
+        ],
+        "next": "手腕座標"
+      },
+      {
+        "title": "ROI 熱力圖",
+        "items": [
+          "Shapely 多邊形 ROI",
+          "HeatMappy 繪圖"
+        ],
+        "next": "存成"
+      },
+      {
+        "title": "PNG 疊圖",
+        "items": [
+          "tmp/ 資料夾",
+          "00000.heatmap.png"
+        ]
+      }
     ]
   },
   "persona-tracking": {
@@ -482,6 +922,38 @@
     "results": [
       "交付能讀取螢幕前人群組成的嵌入式廣告推薦系統",
       "後來以個人專案 Open Persona 重寫，加入全身追蹤與興趣推估"
+    ],
+    "why": "在 Infortrend 替嵌入式數位看板開發，讓螢幕依眼前的人挑廣告。遠處的臉又小又糊，只好等人走近，一路修正猜測。看板終於學會看人，只是有點近視。",
+    "architecture": [
+      {
+        "title": "螢幕旁的攝影機",
+        "items": [],
+        "next": "影像送往"
+      },
+      {
+        "title": "Jetson 辨識",
+        "items": [
+          "人臉偵測與追蹤編號",
+          "估計性別與年齡層",
+          "判斷是否朝向螢幕"
+        ],
+        "next": "寫入"
+      },
+      {
+        "title": "每日紀錄",
+        "items": [
+          "SQLite",
+          "小型 HTTP API"
+        ],
+        "next": "提供給"
+      },
+      {
+        "title": "廣告挑選服務",
+        "items": [
+          "依觀眾替廣告評分",
+          "播放最適合的一支"
+        ]
+      }
     ]
   },
   "preproc-imdb-study": {
@@ -509,6 +981,42 @@
     "results": [
       "結果表把這個 repo 的準確率和論文並排，涵蓋每種前處理與模型",
       "CNN+LSTM 和論文很接近，例如原樣文字 88.6，論文是 88.9"
+    ],
+    "why": "碩士研究想知道：轉小寫、詞形還原、合併多字詞，會不會改變神經網路情緒模型學到的東西，於是重跑一篇論文的 IMDb 實驗。重跑完發現，換個亂數種子的影響，比換前處理還大。",
+    "architecture": [
+      {
+        "title": "IMDb 文字版本",
+        "items": [
+          "原樣、小寫",
+          "詞形還原、多字詞",
+          "UMBC 詞向量"
+        ],
+        "next": "交給"
+      },
+      {
+        "title": "訓練程式",
+        "items": [
+          "依詞頻編號",
+          "CNN 或 CNN+LSTM",
+          "Keras 3.15、TensorFlow 2.21"
+        ],
+        "next": "寫出"
+      },
+      {
+        "title": "每次執行的資料夾",
+        "items": [
+          "results.json",
+          "predictions.tsv",
+          "model.keras"
+        ],
+        "next": "整理成"
+      },
+      {
+        "title": "和論文對照",
+        "items": [
+          "表 2 與表 3"
+        ]
+      }
     ]
   },
   "simply-blur-detector": {
@@ -532,6 +1040,42 @@
     "results": [
       "GitHub Pages 互動示範，圖片在本機處理",
       "專案包含可重現的訓練素材與模型評估"
+    ],
+    "why": "在 Infortrend 時，有個小 CNN 負責分辨相機畫面清不清楚。重做的版本讓它和完全不用訓練的老方法 Laplacian variance 並排，在瀏覽器裡就能看神經網路到底有沒有比較行。",
+    "architecture": [
+      {
+        "title": "清晰圖片",
+        "items": [
+          "120 張原創插圖",
+          "data/*/nonblur"
+        ],
+        "next": "交給"
+      },
+      {
+        "title": "模糊產生器",
+        "items": [
+          "blurgenerator 套件",
+          "鏡頭、高斯、動態模糊"
+        ],
+        "next": "訓練資料"
+      },
+      {
+        "title": "模糊偵測器",
+        "items": [
+          "Keras CNN",
+          "model/model.h5",
+          "ONNX 匯出"
+        ],
+        "next": "部署到"
+      },
+      {
+        "title": "瀏覽器示範",
+        "items": [
+          "ONNX Runtime Web",
+          "Laplacian variance",
+          "GitHub Pages"
+        ]
+      }
     ]
   },
   "gura-gru-unit-for-recognizing-affect": {
@@ -547,6 +1091,42 @@
     "solutions": [],
     "results": [
       "保留為 Sentiment Bundle Benchmark 的歷史基準"
+    ],
+    "why": "2019 年替 MyAnimeList 評論資料集寫的範例模型，讓資料集附上一個真的能訓練的例子。後來的接班專案把它數字的問題一一點名。前任的帳，總是由下一任來算。",
+    "architecture": [
+      {
+        "title": "資料集包",
+        "items": [
+          "MyAnimeList 評論",
+          "五個經典資料集",
+          "Hugging Face"
+        ],
+        "next": "斷詞"
+      },
+      {
+        "title": "斷詞與詞向量",
+        "items": [
+          "Keras tokenizer",
+          "GloVe 840B 詞向量"
+        ],
+        "next": "送進"
+      },
+      {
+        "title": "GURA 模型",
+        "items": [
+          "雙向 GRU",
+          "self-attention",
+          "Keras＋TensorFlow"
+        ],
+        "next": "存下"
+      },
+      {
+        "title": "訓練結果",
+        "items": [
+          "準確率圖表",
+          "最佳 epoch 模型檔"
+        ]
+      }
     ]
   },
   "simply-nlp-classification-labeling-platform": {
@@ -565,6 +1145,42 @@
     "solutions": [],
     "results": [
       "2026 年以 Rust 和 React 重寫，串起匯入、標註、審核與匯出"
+    ],
+    "why": "第一份工作的模型需要標好的句子，2019 年的 Flask 版 emoLabel 就是替句子的情緒打分數。2026 年重寫後能先讓模型給建議，只是 2B 小模型幾乎每筆都說九成以上有把握，最後還是得由人按鍵。",
+    "architecture": [
+      {
+        "title": "匯入資料",
+        "items": [
+          "CSV、JSONL、zip",
+          "文字、圖片、音訊",
+          "舊版 emoLabel.db"
+        ],
+        "next": "送進"
+      },
+      {
+        "title": "標註平台",
+        "items": [
+          "Rust axum、SQLite",
+          "React 鍵盤標註",
+          "AI 預標（選用）"
+        ],
+        "next": "統計"
+      },
+      {
+        "title": "一致性統計",
+        "items": [
+          "Cohen's、Fleiss' kappa",
+          "Krippendorff's alpha"
+        ],
+        "next": "匯出成"
+      },
+      {
+        "title": "匯出",
+        "items": [
+          "CSV、JSONL、zip",
+          "微調用聊天格式 JSONL"
+        ]
+      }
     ]
   },
   "play-qwop-by-using-ai-agent": {
@@ -591,6 +1207,41 @@
       "六場有紀錄的評估全數完成 100 公尺",
       "正常遊戲速度最佳時間 193.8 秒",
       "八個瀏覽器環境訓練 22 分鐘"
+    ],
+    "why": "QWOP 只給四個鍵，選手動不動就跌個狗吃屎，拿來考強化學習剛剛好：看畫面、按鍵、跑多遠就是獎勵。2020 年那版跑完大概要 99 分鐘，2026 年這版只要三分多鐘。",
+    "architecture": [
+      {
+        "title": "官方 QWOP 遊戲",
+        "items": [
+          "foddy.net 網頁"
+        ],
+        "next": "由它操作"
+      },
+      {
+        "title": "Playwright",
+        "items": [
+          "8 個無頭 Chromium",
+          "clock.js 虛擬時間"
+        ],
+        "next": "畫面截圖"
+      },
+      {
+        "title": "QWOP agent",
+        "items": [
+          "Gymnasium 環境",
+          "Tesseract 讀距離",
+          "Stable-Baselines3 PPO"
+        ],
+        "next": "產出"
+      },
+      {
+        "title": "訓練成果",
+        "items": [
+          "policy checkpoint",
+          "比賽 GIF",
+          "TensorBoard 曲線"
+        ]
+      }
     ]
   },
   "elysion-calendar": {
@@ -609,6 +1260,34 @@
     "solutions": [],
     "results": [
       "以店家官方訂位資料整理包廂空位"
+    ],
+    "why": "艾莉森的訂位頁一次一天、一間包廂一張表，想找空房只能一張張看。這個 App 替你看完，把包廂排在一起。整個後端只為一件事存在：官方網站不讓別的網頁讀它。",
+    "architecture": [
+      {
+        "title": "官方訂位頁",
+        "items": [
+          "calendar.elysion.com.tw",
+          "一間包廂一張表"
+        ],
+        "next": "讀取並快取"
+      },
+      {
+        "title": "艾莉森行事曆",
+        "items": [
+          "FastAPI + Redis",
+          "Next.js 前端",
+          "nginx（:3000）"
+        ],
+        "next": "包廂與時段"
+      },
+      {
+        "title": "你的瀏覽器",
+        "items": [
+          "包廂卡片",
+          "時間表格",
+          "單週總覽"
+        ]
+      }
     ]
   },
   "ssh-reverse-tunnel-using-docker": {
@@ -622,6 +1301,39 @@
       "網路穿透能力",
       "自動化設定腳本",
       "安全隔離"
+    ],
+    "why": "防火牆很在意誰要進來，對誰要出去倒是寬鬆得多。所以讓內網機器主動連到你的伺服器並一直掛著，你 SSH 到那台伺服器，就從內網那頭冒出來，內網一個對外的 port 都不用開。",
+    "architecture": [
+      {
+        "title": "你的電腦",
+        "items": [
+          "ssh -p 22224"
+        ],
+        "next": "連到"
+      },
+      {
+        "title": "外部伺服器",
+        "items": [
+          "reverse-outside-server",
+          "有公開 IP 的 VPS"
+        ],
+        "next": "走回通道"
+      },
+      {
+        "title": "內網機器",
+        "items": [
+          "reverse-inside-tunnel",
+          "sshd + autossh",
+          "tunnel.sh 安裝"
+        ],
+        "next": "再跳過去"
+      },
+      {
+        "title": "內部網路",
+        "items": [
+          "其他機器"
+        ]
+      }
     ]
   },
   "django-allauth-jwt-template": {
@@ -640,6 +1352,42 @@
     "solutions": [],
     "results": [
       "以 django-allauth 支援的 headless 介面建立登入範本"
+    ],
+    "why": "每個專案都要註冊、忘記密碼和「用 Google 登入」，但沒人為了這些才開專案。舊版手工把 Simple JWT 黏在 allauth 上，新版讓 allauth 自己發 token，手寫的程式少了，能寫錯的地方也少了。",
+    "architecture": [
+      {
+        "title": "你的前端",
+        "items": [
+          "SPA 或 App",
+          "示範頁",
+          "curl 範例腳本"
+        ],
+        "next": "登入"
+      },
+      {
+        "title": "allauth 後端",
+        "items": [
+          "headless JSON API",
+          "Google、Microsoft、LINE",
+          "Email 網域規則"
+        ],
+        "next": "發出"
+      },
+      {
+        "title": "JWT 權杖組",
+        "items": [
+          "5 分鐘 access token",
+          "輪替的 refresh token"
+        ],
+        "next": "帶在標頭"
+      },
+      {
+        "title": "你的 API",
+        "items": [
+          "/api/me 範例",
+          "DRF view"
+        ]
+      }
     ]
   },
   "dev-dock": {
@@ -670,6 +1418,34 @@
       "功能完整的 GUI 開發容器，可透過瀏覽器或 VNC 用戶端存取",
       "支援多種協定，包括 VNC（5901）、noVNC（6901）與 SSH（22）",
       "高度可攜且一致的開發環境"
+    ],
+    "why": "裝一台有 VS Code、Firefox、Miniconda 和中文輸入法的 Linux 桌面，第一次還好，之後每次都是重複勞動。乾脆全部包進映像檔，每個容器一開就是同一台開發機。",
+    "architecture": [
+      {
+        "title": "安裝腳本",
+        "items": [
+          "debian:bookworm-slim",
+          "六個安裝腳本"
+        ],
+        "next": "建置"
+      },
+      {
+        "title": "桌面映像檔",
+        "items": [
+          "Xfce + TigerVNC",
+          "noVNC",
+          "sshd（supervisord 管理）"
+        ],
+        "next": "開放埠號"
+      },
+      {
+        "title": "你",
+        "items": [
+          "瀏覽器（noVNC）",
+          "VNC 用戶端",
+          "SSH"
+        ]
+      }
     ]
   },
   "ip-find-chrome-extension": {
@@ -683,6 +1459,31 @@
       "顯示網路資訊",
       "簡單易用的介面",
       "從瀏覽器快速開啟"
+    ],
+    "why": "每次切換 VPN 或 Wi-Fi，就會想知道現在的 IP 是多少、被定位到哪裡。IP Find 在工具列點一下就回答，也能查別的 IP。它只要剪貼簿權限，就算想偷看你的網頁也沒辦法。",
+    "architecture": [
+      {
+        "title": "工具列按鈕",
+        "items": [
+          "Chrome 或 Edge"
+        ],
+        "next": "打開"
+      },
+      {
+        "title": "IP Find 視窗",
+        "items": [
+          "popup.js",
+          "lookup.js",
+          "Manifest V3"
+        ],
+        "next": "查詢一次"
+      },
+      {
+        "title": "IP 定位服務",
+        "items": [
+          "geoiplookup.io"
+        ]
+      }
     ]
   },
   "fisheye-warping": {
@@ -696,6 +1497,31 @@
       "全景重投影為魚眼",
       "可重用的座標網格",
       "Python API 與命令列工具"
+    ],
+    "why": "在 Infortrend 做狹小空間的俯視魚眼姿態辨識，第一步要把圓形畫面攤平成全景，這個套件就是那一步。算每個像素該去哪裡最花時間，所以同一種尺寸只算一次存起來，反正相機不會自己換解析度。",
+    "architecture": [
+      {
+        "title": "魚眼影像",
+        "items": [
+          "俯視相機畫面"
+        ],
+        "next": "展開"
+      },
+      {
+        "title": "魚眼展開套件",
+        "items": [
+          "依影像尺寸的 mesh",
+          "cv2.remap",
+          "fisheyewarping CLI"
+        ],
+        "next": "攤成一條"
+      },
+      {
+        "title": "全景影像",
+        "items": [
+          "dewarp-output.png"
+        ]
+      }
     ]
   },
   "myanimelist-comment-crawler": {
@@ -709,6 +1535,43 @@
       "SQLite 儲存進度與接續執行",
       "對應 MyAnimeList 評論資料集的 CSV 輸出",
       "逐一請求、退避重試與 robots.txt 處理"
+    ],
+    "why": "當時的輿情工作和碩士論文都需要情緒資料，於是寫了這支爬蟲，把 MyAnimeList 的評論整理成 Kaggle 上的 MALCoD 資料集。評論者自己會打分數，等於有人先幫忙標好了。",
+    "architecture": [
+      {
+        "title": "評論來源",
+        "items": [
+          "Jikan-Edge JSON API",
+          "MyAnimeList 網頁"
+        ],
+        "next": "交給"
+      },
+      {
+        "title": "Scrapy 爬蟲",
+        "items": [
+          "info_spider：作品資訊",
+          "review_spider：評論",
+          "接續執行與退避重試"
+        ],
+        "next": "存進"
+      },
+      {
+        "title": "SQLite 資料庫",
+        "items": [
+          "animeList",
+          "reviews",
+          "crawlProgress"
+        ],
+        "next": "匯出成"
+      },
+      {
+        "title": "CSV 資料集",
+        "items": [
+          "anime_list.csv",
+          "reviews.csv",
+          "MALCoD 資料集"
+        ]
+      }
     ]
   },
   "simply-labeling-platform-for-machine-reading": {
@@ -727,6 +1590,44 @@
     "solutions": [],
     "results": [
       "2026 年以 Rust 和 React 重寫，串起匯入、標註、審核與匯出"
+    ],
+    "why": "第一份工作要餵一個中文閱讀理解服務，需要一堆問題，以及答案在文章裡的精準位置。資料也是我自己標的；想知道標註工具哪裡難用，自己標最快。",
+    "architecture": [
+      {
+        "title": "匯入",
+        "items": [
+          "SQuAD v1/v2 JSON",
+          "Hugging Face JSONL",
+          "舊版 mrc.label"
+        ],
+        "next": "交給"
+      },
+      {
+        "title": "AI 建議（選用）",
+        "items": [
+          "Claude API",
+          "OpenAI 相容服務，如 Ollama",
+          "檢查是否為原文片段"
+        ],
+        "next": "由人確認"
+      },
+      {
+        "title": "標註與審核",
+        "items": [
+          "Rust axum、SQLite",
+          "React 框選答案",
+          "一致性 F1"
+        ],
+        "next": "匯出成"
+      },
+      {
+        "title": "匯出資料集",
+        "items": [
+          "SQuAD v1/v2",
+          "Hugging Face JSONL",
+          "RAG 與對話 JSONL"
+        ]
+      }
     ]
   },
   "yande-and-konachan-to-eagle": {
@@ -740,6 +1641,41 @@
       "自訂標籤與目的資料夾",
       "預覽模式與略過重複項目",
       "接續進度與 pipx 安裝"
+    ],
+    "why": "手動把 yande.re、konachan.com 的圖收進 Eagle，要一張張存，再把英文 tag 改成自己的叫法。這個工具把貼文和換好的 tag 交給 Eagle，記得做到哪；真正下載的是 Eagle，它只開清單。",
+    "architecture": [
+      {
+        "title": "圖片網站",
+        "items": [
+          "yande.re、konachan.com",
+          "/post.json API"
+        ],
+        "next": "貼文和標籤"
+      },
+      {
+        "title": "yk2eagle",
+        "items": [
+          "moebooru.py 讀取貼文",
+          "map.yaml 標籤對應",
+          "imported.txt 匯入紀錄"
+        ],
+        "next": "圖片網址"
+      },
+      {
+        "title": "Python 套件",
+        "items": [
+          "EagleWrapper",
+          "add_from_url"
+        ],
+        "next": "本機 API"
+      },
+      {
+        "title": "Eagle 圖庫",
+        "items": [
+          "localhost:41595",
+          "由 Eagle 自己下載"
+        ]
+      }
     ]
   },
   "eagle-wrapper": {
@@ -753,6 +1689,33 @@
       "匯入、搜尋、標籤與資料夾操作",
       "不開桌面程式也能讀取圖片庫",
       "明確的 API 錯誤與驗證支援"
+    ],
+    "why": "Eagle 開著時會在本機跑 HTTP 伺服器，腳本都能把檔案丟進去，只是每次都要重寫一樣的請求和錯誤處理。EagleWrapper 把這些包成 Python 方法，下載或整理標籤幾行就寫完，API 文件它替你讀過了。",
+    "architecture": [
+      {
+        "title": "你的腳本",
+        "items": [
+          "下載器或標籤整理",
+          "yande-and-konachan-to-eagle"
+        ],
+        "next": "呼叫方法"
+      },
+      {
+        "title": "Python 套件",
+        "items": [
+          "Eagle() V1 方法",
+          "Eagle().v2 Web API",
+          "圖庫資料夾讀取"
+        ],
+        "next": "連線或讀檔"
+      },
+      {
+        "title": "Eagle 圖庫",
+        "items": [
+          "Eagle 程式，port 41595",
+          "磁碟上的 metadata.json"
+        ]
+      }
     ]
   },
   "youtube-video-redirector": {
@@ -770,6 +1733,39 @@
     "solutions": [],
     "results": [
       "保留可執行的最終版本，包含測試與 Docker"
+    ],
+    "why": "2021 年的疑問很單純：YouTube 影片到底住在哪？每個觀看頁背後都有一個 Google 伺服器上的檔案，youtube-dl 找得到。2026 年，連結照給，影片能不能播，看 YouTube 最近又改了什麼。",
+    "architecture": [
+      {
+        "title": "瀏覽器",
+        "items": [
+          "/?v=<影片 ID>"
+        ],
+        "next": "送出 ID"
+      },
+      {
+        "title": "Flask App",
+        "items": [
+          "main.py",
+          "一個模板"
+        ],
+        "next": "查格式"
+      },
+      {
+        "title": "yt-dlp",
+        "items": [
+          "格式 \"best\"",
+          "Deno 執行播放器 JS"
+        ],
+        "next": "直連網址"
+      },
+      {
+        "title": "播放頁",
+        "items": [
+          "Video.js",
+          "單純的 <video>"
+        ]
+      }
     ]
   },
   "youtube-redirect-player": {
@@ -787,6 +1783,39 @@
     "solutions": [],
     "results": [
       "保留 Flask 最終版本，點歌功能由 Streaming Player 延續"
+    ],
+    "why": "從網址列播一支影片很簡單，難的是下一支放什麼、在哪個螢幕放。它維護一份共用清單，把每次點播和暫停送到所有分頁，一個按鈕就能讓筆電和電視同時安靜。",
+    "architecture": [
+      {
+        "title": "每個開著的分頁",
+        "items": [
+          "筆電、電視、手機"
+        ],
+        "next": "點播、暫停"
+      },
+      {
+        "title": "Flask App",
+        "items": [
+          "Socket.IO 廣播",
+          "playlist.py API",
+          "SQLite：三份清單"
+        ],
+        "next": "查詢"
+      },
+      {
+        "title": "yt-dlp",
+        "items": [
+          "get_yt_info",
+          "Deno 執行環境"
+        ],
+        "next": "直連網址"
+      },
+      {
+        "title": "同步播放",
+        "items": [
+          "每個分頁的 Video.js"
+        ]
+      }
     ]
   },
   "pyppesnap": {
@@ -803,6 +1832,41 @@
     "solutions": [],
     "results": [
       "API 由 playwright-snap 延續"
+    ],
+    "why": "網頁快照有時要放進 JSON、資料庫或 email，而不是存成檔案，所以 PyppeSnap 一個函式就回傳 base64。現在已經封存：Pyppeteer 沒人維護，它下載的 Chromium 也就永遠停在那個年紀。",
+    "architecture": [
+      {
+        "title": "呼叫端",
+        "items": [
+          "Python 腳本",
+          "example/ Flask 範例"
+        ],
+        "next": "網址"
+      },
+      {
+        "title": "PyppeSnap",
+        "items": [
+          "get_image_snapshot_by_url",
+          "get_pdf_snapshot_by_url",
+          "pyppesnap CLI"
+        ],
+        "next": "啟動"
+      },
+      {
+        "title": "無視窗瀏覽器",
+        "items": [
+          "Pyppeteer",
+          "自帶的舊版 Chromium"
+        ],
+        "next": "載入網頁"
+      },
+      {
+        "title": "base64 快照",
+        "items": [
+          "PNG（str）",
+          "PDF（bytes）"
+        ]
+      }
     ]
   },
   "face-wall-generator-tool": {
@@ -821,6 +1885,40 @@
     "solutions": [],
     "results": [
       "可重現的人臉測試網格，位置與數量已知"
+    ],
+    "why": "要考人臉偵測器，得先知道答案：有幾張臉、各在哪裡。隨手拍的照片不附解答，所以這個工具先把考卷和答案一起印好。原本是 Infortrend 影像工作裡的測試道具。",
+    "architecture": [
+      {
+        "title": "人臉資料夾",
+        "items": [
+          "faces/ 範例",
+          "png、jpg、jpeg"
+        ],
+        "next": "讀進"
+      },
+      {
+        "title": "face-wall",
+        "items": [
+          "YuNet 裁臉（選用）",
+          "固定種子隨機排",
+          "OpenCV、NumPy"
+        ],
+        "next": "存成"
+      },
+      {
+        "title": "人臉牆圖片",
+        "items": [
+          "已知人臉數量",
+          "已知位置"
+        ],
+        "next": "拿去考"
+      },
+      {
+        "title": "你的偵測器",
+        "items": [
+          "和格子對答案"
+        ]
+      }
     ]
   },
   "image-annotation": {
@@ -839,6 +1937,34 @@
     "solutions": [],
     "results": [
       "GitHub Pages 靜態應用，標註與匯出在瀏覽器完成"
+    ],
+    "why": "2017 年它是群眾標註動漫人臉的小網頁，有排行榜，還有一條家規：框頭，整顆頭！重寫後兩樣都留著，但也能開自己的整個資料夾，畢竟需要框的不只是臉。",
+    "architecture": [
+      {
+        "title": "圖片",
+        "items": [
+          "內建範例",
+          "nekos.best 或 Danbooru",
+          "自己的檔案與資料夾"
+        ],
+        "next": "圖片清單"
+      },
+      {
+        "title": "影像標註工具",
+        "items": [
+          "標註框、類別、復原",
+          "縮放與平移",
+          "localStorage"
+        ],
+        "next": "匯出"
+      },
+      {
+        "title": "資料集檔案",
+        "items": [
+          "JSON、COCO",
+          "YOLO、Pascal VOC"
+        ]
+      }
     ]
   },
   "obsidian-attachmenter": {
@@ -872,6 +1998,34 @@
       "簡化使用者的附件處理流程",
       "自動保存遠端圖片",
       "一致的 vault 結構"
+    ],
+    "why": "我想要每篇筆記旁邊就有自己的附件資料夾，搬移或封存筆記時，圖片會跟著走。遠端圖片要變成本機檔案，不要只是一串不知道還連不連得到的網址；舊的 vault 也要有工具整理成同一套規則。",
+    "architecture": [
+      {
+        "title": "你的操作",
+        "items": [
+          "貼上圖片",
+          "改名或搬移筆記",
+          "遠端圖片連結"
+        ],
+        "next": "觸發事件"
+      },
+      {
+        "title": "附件管理外掛",
+        "items": [
+          "貼上圖片處理",
+          "遠端圖片下載",
+          "路徑檢查與修復"
+        ],
+        "next": "搬檔改連結"
+      },
+      {
+        "title": "每篇筆記的附件夾",
+        "items": [
+          "<note>_Attachments/",
+          "連結已更新"
+        ]
+      }
     ]
   },
   "obsidian-word-mode": {
@@ -907,6 +2061,31 @@
       "筆記維持乾淨的 Markdown；無法視覺編輯的內容原樣存回",
       "在 GitHub 發佈，把三個檔案複製到 vault 的外掛資料夾就能安裝",
       "沒有遙測、不需帳號，也不碰 vault 以外的檔案"
+    ],
+    "why": "在 Obsidian 裡排版，說到底就是 Markdown 語法，快速鍵也只是幫你打符號。Word Mode 讓同一份 .md 檔改用工具列和文書軟體的快速鍵編輯，只寫回改過的區塊；改一個錯字，不會變成整篇的 diff。",
+    "architecture": [
+      {
+        "title": "原本的筆記",
+        "items": [
+          "vault 裡的 .md 檔"
+        ],
+        "next": "打開"
+      },
+      {
+        "title": "Word 模式編輯器",
+        "items": [
+          "markdown-it 解析",
+          "ProseMirror 文件模型",
+          "功能區工具列"
+        ],
+        "next": "只寫回改過的"
+      },
+      {
+        "title": "同一個 .md 檔",
+        "items": [
+          "磁碟上仍是純 Markdown"
+        ]
+      }
     ]
   },
   "streaming-player": {
@@ -925,6 +2104,35 @@
     "results": [
       "已發佈 2.0.0，使用 Rust 後端與 React 介面",
       "以單一 Docker 映像檔自架"
+    ],
+    "why": "點歌從 Twitch、YouTube 聊天室和聊天機器人湧進來，得有人排成歌單送進 OBS。第二版把 Django、Redis、nginx、supervisord 換成一個 Rust 容器，直播中能出事的東西少了三個。",
+    "architecture": [
+      {
+        "title": "聊天室",
+        "items": [
+          "Twitch EventSub",
+          "YouTube Live Chat API",
+          "HTTP 聊天機器人"
+        ],
+        "next": "!sr 點歌"
+      },
+      {
+        "title": "直播點歌播放器",
+        "items": [
+          "axum 指令引擎",
+          "佇列規則 + SQLite",
+          "yt-dlp 查詢"
+        ],
+        "next": "即時同步"
+      },
+      {
+        "title": "網頁",
+        "items": [
+          "OBS 播放頁與小卡",
+          "管理介面",
+          "觀眾歌單頁"
+        ]
+      }
     ]
   },
   "static-gantt": {
@@ -939,6 +2147,34 @@
       "自動排程、關鍵路徑與基準線",
       "鍵盤操作與四種介面語言",
       "匯出 PNG、Excel 和 JSON"
+    ],
+    "why": "Mermaid 幾行字就能畫出甘特圖，改期卻得手動改日期。這裡直接拖，Mermaid 自動寫回，它寫不出來的欄位也照留。時程表從此可以進 PR 給人審，雖然沒人要求過。",
+    "architecture": [
+      {
+        "title": "兩種編輯模式",
+        "items": [
+          "拖曳時間軸",
+          "Mermaid（CodeMirror）"
+        ],
+        "next": "操作"
+      },
+      {
+        "title": "甘特圖工作室",
+        "items": [
+          "ganttReducer + 復原",
+          "computeSchedule",
+          "parseMermaid"
+        ],
+        "next": "存檔、匯出"
+      },
+      {
+        "title": "儲存與匯出",
+        "items": [
+          "localStorage",
+          "PNG、Excel、JSON",
+          "SVG 與 .mmd"
+        ]
+      }
     ]
   },
   "word-net-game": {
@@ -951,6 +2187,33 @@
       "原創題目、句意解說與多種作答回應",
       "連擊、成就與可分享的情緒地圖成績卡",
       "鍵盤與觸控操作"
+    ],
+    "why": "2018 年它是收集情緒標註的網頁，分數送進 Google 表單。2026 年 Heroku 上的句子服務和試算表舊 API 都沒了，就改成 600 句原創題的遊戲。現在它不替誰收資料，答案、連擊和段位都留在瀏覽器裡。",
+    "architecture": [
+      {
+        "title": "題庫",
+        "items": [
+          "src/data/packs/*.json",
+          "600 句原創題目"
+        ],
+        "next": "發題"
+      },
+      {
+        "title": "Word Net",
+        "items": [
+          "src/game 規則",
+          "五種玩法",
+          "React + Tailwind"
+        ],
+        "next": "成績"
+      },
+      {
+        "title": "你的瀏覽器",
+        "items": [
+          "localStorage",
+          "成績卡 PNG"
+        ]
+      }
     ]
   },
   "taiwan-population-atlas": {
@@ -964,6 +2227,41 @@
       "可調播放速度的時間軸",
       "最多比較四個縣市的歷年趨勢",
       "政府開放資料與可重跑的轉換腳本"
+    ],
+    "why": "人口和家庭收支都是政府開放資料，但拿到的是表格，三十年的表格沒有人會一格一格看。這張地圖讓數字照時間播放。2026 年重寫時，也換掉了紅綠色盲分不出來的綠到紅色階。",
+    "architecture": [
+      {
+        "title": "政府開放資料",
+        "items": [
+          "data.gov.tw 表格",
+          "維基百科大事記",
+          "taiwan-atlas 縣市界線"
+        ],
+        "next": "下載資料"
+      },
+      {
+        "title": "資料轉換腳本",
+        "items": [
+          "fetch.ts 和 build.ts",
+          "縣市代碼對照表"
+        ],
+        "next": "輸出檔案"
+      },
+      {
+        "title": "地圖網頁",
+        "items": [
+          "React 19",
+          "D3 地圖",
+          "Vite"
+        ],
+        "next": "部署到"
+      },
+      {
+        "title": "靜態網站託管",
+        "items": [
+          "GitHub Pages"
+        ]
+      }
     ]
   },
   "taipei-transit-radar": {
@@ -977,6 +2275,42 @@
       "公車即時到站與 YouBike 車位",
       "依時間、票價或步行距離排序",
       "用網址分享路線"
+    ],
+    "why": "2016 年資拓宏宇黑客松第三隊的作品，想回答上班族天天遇到的問題：不開車、不騎車，怎麼去上班最好？2026 年重寫時把 Google Directions 換成免金鑰的政府開放資料，因為靜態網站藏不住金鑰。",
+    "architecture": [
+      {
+        "title": "開放資料",
+        "items": [
+          "OpenStreetMap 捷運路線",
+          "data.taipei 票價",
+          "臺北市公車路網"
+        ],
+        "next": "建置腳本"
+      },
+      {
+        "title": "路網檔",
+        "items": [
+          "metro.json",
+          "bus.json"
+        ],
+        "next": "載入"
+      },
+      {
+        "title": "轉乘雷達",
+        "items": [
+          "路徑規劃與票價",
+          "公車、YouBike 即時資料",
+          "MapLibre 地圖"
+        ],
+        "next": "五種走法"
+      },
+      {
+        "title": "比較結果",
+        "items": [
+          "比較卡片與泡泡圖",
+          "可分享的網址"
+        ]
+      }
     ]
   },
   "ask-taipei-city-hall": {
@@ -990,6 +2324,42 @@
       "結果附機關、更新日期與原始網頁",
       "Web Worker 執行中文檢索",
       "選用根據 FAQ 整理的回答"
+    ],
+    "why": "為 2017 臺北市政 ChatBot 應用競賽而寫，在 Facebook 和 LINE 上用市府 FAQ 回答市政問題，可惜沒入選，倒是留了九年可以重寫。新版不要伺服器也不要機器人，每個答案照樣指回寫它的機關。",
+    "architecture": [
+      {
+        "title": "台北市開放資料",
+        "items": [
+          "data.taipei FAQ 完整檔",
+          "最新 50 筆 feed",
+          "捷運工程局 FAQ"
+        ],
+        "next": "每週建置"
+      },
+      {
+        "title": "faq.json",
+        "items": [
+          "8,284 則 FAQ",
+          "15 個主題"
+        ],
+        "next": "下載"
+      },
+      {
+        "title": "問問台北市政府",
+        "items": [
+          "Web Worker 裡的 BM25",
+          "二元組 + Intl.Segmenter",
+          "Yee 閒聊"
+        ],
+        "next": "自備金鑰"
+      },
+      {
+        "title": "Claude（選用）",
+        "items": [
+          "Anthropic Messages API",
+          "附出處的串流回答"
+        ]
+      }
     ]
   },
   "countdown-studio": {
@@ -1003,6 +2373,34 @@
       "全螢幕展示模式",
       "四種主題與分享網址",
       "本機儲存與結束提示音"
+    ],
+    "why": "前身 flask-simple-countdown 是一台 Flask 伺服器配一頁 jQuery，只會倒數到新年。會議、考試、番茄鐘要同時倒數，還要讓最後一排看得清楚，這些都用不到伺服器。於是伺服器走了，嗶聲留著。",
+    "architecture": [
+      {
+        "title": "倒數來源",
+        "items": [
+          "localStorage 裡的倒數",
+          "分享連結（?to=、?for=）",
+          "其他分頁"
+        ],
+        "next": "結束時間"
+      },
+      {
+        "title": "倒數計時工作室",
+        "items": [
+          "snapshot(countdown, now)",
+          "倒數清單 reducer",
+          "一個結束 timeout"
+        ],
+        "next": "顯示"
+      },
+      {
+        "title": "畫面上",
+        "items": [
+          "卡片與舞台模式",
+          "嗶聲、通知、火花"
+        ]
+      }
     ]
   },
   "blockchain-from-scratch": {
@@ -1016,6 +2414,41 @@
       "雜湊、挖礦與竄改偵測的互動示範",
       "共用 Rust 核心編成 WebAssembly",
       "三節點 Docker 網路與檔案存證應用"
+    ],
+    "why": "2018 年的版本是證明檔案存在過的小鏈，示範金鑰拿掉、套件過時之後就跑不動了。與其修，不如用 Rust 重寫成教材：區塊鏈要自己蓋一條、再親手竄改一次，才比較好懂。",
+    "architecture": [
+      {
+        "title": "學習者",
+        "items": [
+          "九章教材",
+          "動手做練習"
+        ],
+        "next": "執行"
+      },
+      {
+        "title": "Rust 核心",
+        "items": [
+          "src/core 函式庫",
+          "cargo 範例",
+          "每章的測試"
+        ],
+        "next": "包裝成"
+      },
+      {
+        "title": "節點與 WASM",
+        "items": [
+          "axum + websocket 節點",
+          "wasm-bindgen 編譯"
+        ],
+        "next": "跑在"
+      },
+      {
+        "title": "網路與瀏覽器",
+        "items": [
+          "三個 Docker 節點",
+          "React + Tailwind 網頁"
+        ]
+      }
     ]
   },
   "street-scene-ocr": {
@@ -1029,6 +2462,42 @@
       "文字框、辨識文字與各步驟耗時",
       "FastAPI JSON 服務與網頁",
       "CC0 照片與可重現的評測腳本"
+    ],
+    "why": "2021 年面試的回家作業：做一個能讀街景招牌中英文的服務，附 Docker 部署規劃。2026 年改寫成學習專案，加上誰都能重跑的評測。面試早就結束了，作業倒是出了續集。",
+    "architecture": [
+      {
+        "title": "街景招牌照片",
+        "items": [
+          "網頁上傳",
+          "JSON API 請求"
+        ],
+        "next": "送進"
+      },
+      {
+        "title": "Traefik",
+        "items": [
+          "分散到多個容器",
+          "正式環境 HTTPS"
+        ],
+        "next": "交給容器"
+      },
+      {
+        "title": "OCR 服務",
+        "items": [
+          "FastAPI",
+          "EasyOCR、RapidOCR、PaddleOCR",
+          "信心門檻、閱讀順序"
+        ],
+        "next": "回傳"
+      },
+      {
+        "title": "辨識結果",
+        "items": [
+          "文字框與文字",
+          "各步驟耗時",
+          "標註後的 PNG"
+        ]
+      }
     ]
   },
   "sentiment-bundle-benchmark": {
@@ -1042,6 +2511,42 @@
       "TF-IDF、嵌入向量、ModernBERT、DeBERTa-v3 與本機模型",
       "準確率、macro-F1、耗時、記憶體與模型大小報告",
       "Hugging Face 上的資料集包"
+    ],
+    "why": "GURA 當年的數字，驗證集混進了測試資料，所以「現在的情緒分類該怎麼做」得重新公平比一次。比完發現，TF-IDF 在 CPU 上跑半分鐘，就贏過 GURA 在 IMDB 自稱的最好成績。",
+    "architecture": [
+      {
+        "title": "資料集包",
+        "items": [
+          "Hugging Face Parquet",
+          "MyAnimeList＋五個經典資料集"
+        ],
+        "next": "切分成"
+      },
+      {
+        "title": "固定切分",
+        "items": [
+          "SHA-256 檢查",
+          "去重、seed 42"
+        ],
+        "next": "送進"
+      },
+      {
+        "title": "七種方法",
+        "items": [
+          "TF-IDF、凍結嵌入向量",
+          "ModernBERT、DeBERTa-v3",
+          "Qwen3.5-2B 0／8-shot"
+        ],
+        "next": "寫出結果"
+      },
+      {
+        "title": "報告",
+        "items": [
+          "排行榜表格",
+          "圖表",
+          "README 結果"
+        ]
+      }
     ]
   },
   "playwright-snap": {
@@ -1055,6 +2560,41 @@
       "Playwright 驅動無頭 Chromium",
       "Python 函式與命令列介面",
       "沿用 pyppeteer-snap 的參數與回傳型別"
+    ],
+    "why": "舊版底下的 Pyppeteer 已經沒人維護，它下載的 Chromium 也不會再變新。playwright-snap 把引擎換成 Playwright，函式名稱、參數和回傳型別都不動，畢竟呼叫它的程式沒做錯事。",
+    "architecture": [
+      {
+        "title": "呼叫端",
+        "items": [
+          "Python 腳本",
+          "example/ Flask 範例"
+        ],
+        "next": "網址和選項"
+      },
+      {
+        "title": "playsnap",
+        "items": [
+          "snap_png / snap_pdf",
+          "SnapSession",
+          "playwright-snap CLI"
+        ],
+        "next": "驅動"
+      },
+      {
+        "title": "無視窗瀏覽器",
+        "items": [
+          "Playwright",
+          "Chromium"
+        ],
+        "next": "載入網頁"
+      },
+      {
+        "title": "快照",
+        "items": [
+          "PNG 或 PDF",
+          "base64 或 bytes"
+        ]
+      }
     ]
   }
 }

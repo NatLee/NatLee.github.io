@@ -29,6 +29,32 @@
     "Easy-to-use interface",
     "Quick access from browser"
   ],
+  "why": "\"What's my IP?\" comes back every time you switch VPN or Wi-Fi, usually with \"and where does it think I am?\" IP Find answers both from a toolbar popup and looks up any other address too. It asks for the clipboard and nothing else, so it couldn't read your pages even if it wanted to.",
+  "architecture": [
+    {
+      "title": "Toolbar button",
+      "items": [
+        "Chrome or Edge"
+      ],
+      "next": "opens"
+    },
+    {
+      "title": "IP Find popup",
+      "items": [
+        "popup.js",
+        "lookup.js",
+        "Manifest V3"
+      ],
+      "next": "one request",
+      "core": true
+    },
+    {
+      "title": "IP location service",
+      "items": [
+        "geoiplookup.io"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2018",
     "end": "2019",

@@ -22,6 +22,42 @@
   "challenges": [],
   "solutions": [],
   "results": [],
+  "why": "The 2018 version, a small chain for proving files existed, stopped running once its demo keys were pulled and its libraries aged out. Rather than patch it, it was rewritten in Rust as a course, since a blockchain is easier to understand after you have built one and broken it on purpose.",
+  "architecture": [
+    {
+      "title": "Learner",
+      "items": [
+        "nine chapter docs",
+        "hands-on exercises"
+      ],
+      "next": "runs"
+    },
+    {
+      "title": "Rust core",
+      "items": [
+        "src/core library",
+        "cargo examples",
+        "tests per chapter"
+      ],
+      "next": "wrapped as",
+      "core": true
+    },
+    {
+      "title": "Node and WASM",
+      "items": [
+        "axum + websocket node",
+        "wasm-bindgen build"
+      ],
+      "next": "shows up in"
+    },
+    {
+      "title": "Network and browser",
+      "items": [
+        "three Docker nodes",
+        "React + Tailwind demos"
+      ]
+    }
+  ],
   "githubUrl": "https://github.com/NatLee/blockchain-from-scratch",
   "links": {
     "github": "https://github.com/NatLee/blockchain-from-scratch",

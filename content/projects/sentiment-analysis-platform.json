@@ -56,6 +56,40 @@
     "Enabled real-time online sentiment and buzz analysis for end users",
     "Deployed scalable microservices architecture supporting high-volume processing"
   ],
+  "why": "Big Data's products, Keypo and DailyView, turn crawled posts into buzz and sentiment reports, and every post needs a sentiment label before it counts. This engine does the labelling, at a volume no team of human readers would survive.",
+  "architecture": [
+    {
+      "title": "Web crawlers",
+      "items": [
+        "Daily crawl"
+      ],
+      "next": "stored in"
+    },
+    {
+      "title": "Crawled post store",
+      "items": [
+        "Elasticsearch"
+      ],
+      "next": "read by"
+    },
+    {
+      "title": "Sentiment engine",
+      "items": [
+        "PaddlePaddle emotion model",
+        "Docker services",
+        "Kubernetes scaling"
+      ],
+      "next": "labels feed",
+      "core": true
+    },
+    {
+      "title": "Social-listening products",
+      "items": [
+        "Keypo",
+        "DailyView"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2021-12",
     "end": "2023-04",
