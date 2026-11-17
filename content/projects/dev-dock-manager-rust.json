@@ -8,10 +8,10 @@
   "language": "rust",
   "images": [
     "/images/projects/dev-dock-manager-rust/cover.webp",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/doc/login.gif",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/doc/create.gif",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/doc/console.gif",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/doc/novnc.gif"
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/login.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/create.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/console.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/novnc.gif"
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock-manager-rust",
   "category": "DevOps",

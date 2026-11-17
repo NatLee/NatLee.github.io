@@ -8,9 +8,9 @@
   "language": "python",
   "images": [
     "/images/projects/dev-dock-manager/cover.webp",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/doc/create.gif",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/doc/console.gif",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/doc/novnc.gif"
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/create.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/console.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/novnc.gif"
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock-manager",
   "category": "DevOps",
