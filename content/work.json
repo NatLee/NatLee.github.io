@@ -3,7 +3,10 @@
     {
       "id": "hd-renewables",
       "name": "HD Renewables",
-      "companyIds": ["hd-renewables", "star-trade"],
+      "companyIds": [
+        "hd-renewables",
+        "star-trade"
+      ],
       "era": "2023 – now",
       "title": {
         "en": "From solar forecasts to Japan's power market",
@@ -24,7 +27,9 @@
     {
       "id": "big-data",
       "name": "Big Data",
-      "companyIds": ["big-data"],
+      "companyIds": [
+        "big-data"
+      ],
       "era": "2021 – 2023",
       "title": {
         "en": "Sentiment over three billion posts",
@@ -44,8 +49,8 @@
         {
           "id": "gura-gru-unit-for-recognizing-affect",
           "note": {
-            "en": "The BiGRU sentiment model I experimented with at the time, published with its datasets.",
-            "zh": "當時試做的 BiGRU 情緒模型，連同資料集一起公開。"
+            "en": "Sentiment classification was the day job here too; GURA and its datasets went public in 2023.",
+            "zh": "情緒分類也是這份工作的主題；GURA 和它的資料集在 2023 年公開。"
           }
         },
         {
@@ -61,7 +66,9 @@
     {
       "id": "infortrend",
       "name": "Infortrend",
-      "companyIds": ["infortrend"],
+      "companyIds": [
+        "infortrend"
+      ],
       "era": "2019 – 2021",
       "title": {
         "en": "Computer vision on edge devices",
@@ -104,7 +111,9 @@
     {
       "id": "leopard-mobile",
       "name": "Leopard Mobile",
-      "companyIds": ["leopard-mobile"],
+      "companyIds": [
+        "leopard-mobile"
+      ],
       "era": "2018 – 2019",
       "title": {
         "en": "Crawlers, public opinion and a thesis",
@@ -125,16 +134,25 @@
           "id": "thesis",
           "kind": "study",
           "educationId": "ntust-master",
-          "label": { "en": "Master's thesis", "zh": "碩士論文" }
+          "label": {
+            "en": "Master's thesis",
+            "zh": "碩士論文"
+          }
         },
         {
           "id": "contracts",
           "kind": "contract",
-          "label": { "en": "Contract work", "zh": "外包案" },
+          "label": {
+            "en": "Contract work",
+            "zh": "外包案"
+          },
           "note": {
             "en": "A blockchain project for a financial training institute and a XOOPS website for a school. Only the blockchain work has a public repo.",
             "zh": "替一間金融訓練機構做的區塊鏈案，以及替一間學校做的 XOOPS 網站；只有區塊鏈有公開的 repo。"
-          }
+          },
+          "start": "2018",
+          "end": "2019",
+          "approximate": true
         }
       ],
       "spinoffs": [
@@ -172,6 +190,31 @@
           "note": {
             "en": "Thesis research: re-running a paper's IMDb experiments on how text preprocessing changes sentiment models.",
             "zh": "論文研究：重跑一篇論文的 IMDb 實驗，看文字前處理怎麼影響情緒模型。"
+          }
+        },
+        {
+          "id": "myanimelist-comment-crawler",
+          "source": "thesis",
+          "note": {
+            "en": "Built the MyAnimeList review dataset (MALCoD) during the thesis work.",
+            "zh": "碩士研究期間用它建立 MyAnimeList 評論資料集（MALCoD）。"
+          }
+        },
+        {
+          "id": "gura-gru-unit-for-recognizing-affect",
+          "source": "thesis",
+          "note": {
+            "en": "The 2019 BiGRU + attention model written to introduce those datasets.",
+            "zh": "2019 年寫來介紹這批資料集的 BiGRU + attention 模型。"
+          }
+        },
+        {
+          "id": "sentiment-bundle-benchmark",
+          "source": "thesis",
+          "from": "gura-gru-unit-for-recognizing-affect",
+          "note": {
+            "en": "GURA’s successor: the same datasets, today’s methods, fixed splits.",
+            "zh": "GURA 的後繼：同一批資料集，用現在的方法在固定切分上比較。"
           }
         },
         {

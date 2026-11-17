@@ -9,26 +9,73 @@ import { formatPeriod } from '@/components/projects/ProjectPage'
 import { StarCount, ThemeLabel } from '@/components/site/ui'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getProjectStars, type ProjectDetail } from '@/data/projects'
-import { buildYear, getWorkChapters, yearValue, type SourceKind, type SpinoffGroup, type WorkChapter } from '@/data/work'
+import { buildYear, endValue, getCareerMap, getWorkChapters, yearValue, type CareerLane, type SourceKind, type SpinoffGroup, type WorkChapter } from '@/data/work'
 
 /** 把年份換成時間軸上的百分比。 */
 function scale(start: number, end: number) {
   return (value: number) => Math.min(100, Math.max(0, ((value - start) / (end - start)) * 100))
 }
 
-/** 結束時間只寫年份（"2021"）時算到那年年底，不然一年的作品會畫成零長度。 */
-function endValue(value: string | undefined) {
-  return value && /^\d{4}$/.test(value) ? Number(value) + 11 / 12 : yearValue(value)
+/** 空檔壓縮後佔的長度（年）：看得到斷軸記號，但不佔空間。 */
+const GAP_WIDTH = 0.18
+
+/**
+ * 有斷軸的比例尺：空檔（gaps）壓成 GAP_WIDTH，其他照日曆。
+ * 回傳的函式把年份換成 0–100 的百分比。
+ */
+function brokenScale(start: number, end: number, gaps: [number, number][]) {
+  const squeezed = (value: number) => {
+    let offset = value - start
+    for (const [from, to] of gaps) {
+      if (value <= from) break
+      const inside = Math.min(value, to) - from
+      offset -= inside - (inside / (to - from)) * GAP_WIDTH
+    }
+    return offset
+  }
+  const total = squeezed(end)
+  return (value: number) => Math.min(100, Math.max(0, (squeezed(value) / total) * 100))
 }
 
 function displayDate(value: string, present: string) {
   return value === 'Present' ? present : value
 }
 
-/** 每份工作一段，長度照任職時間；只畫有章節的工作，段與段之間不留空白。 */
-function CareerRibbon({ chapters }: { chapters: WorkChapter[] }) {
-  const { t } = useLanguage()
-  const ordered = [...chapters].sort((a, b) => yearValue(a.start) - yearValue(b.start))
+const LANE_BAR: Record<CareerLane['kind'], string> = {
+  work: 'bg-accent-fill/80 font-semibold text-paper',
+  study: 'border border-plum/40 bg-plum/10 text-plum',
+  contract: 'border border-dashed border-ink/40 bg-ink/5 text-ink',
+}
+
+/**
+ * 多軌時間軸：工作、學業、外包各一軌，照日曆畫，看得出彼此重疊；
+ * 什麼都沒有的空檔用斷軸壓縮（≈），最下面一軌用點標出每個衍生 repo 開始的時間。
+ */
+function CareerMap({ chapters }: { chapters: WorkChapter[] }) {
+  const { locale, t } = useLanguage()
+  const map = getCareerMap(locale)
+  const at = brokenScale(map.start, map.end, map.gaps)
+  const years = Array.from({ length: Math.floor(map.end) - map.start + 1 }, (_, index) => map.start + index).filter(
+    (year) => !map.gaps.some(([from, to]) => year > from && year < to)
+  )
+  const gapMarks = map.gaps.map(([from, to]) => at((from + to) / 2))
+
+  // 同一年開始的衍生 repo 疊成一欄。
+  const stacks = new Map<number, number>()
+  const dots = map.dots.map((dot) => {
+    const year = Math.floor(yearValue(dot.project.timeline.start))
+    const level = stacks.get(year) ?? 0
+    stacks.set(year, level + 1)
+    return { ...dot, x: at(yearValue(dot.project.timeline.start)), level }
+  })
+  const dotRows = Math.max(1, ...stacks.values())
+
+  const laneLabel = 'font-mono text-[11px] uppercase tracking-wider text-muted'
+  const marks = gapMarks.map((left) => (
+    <span key={left} className="absolute inset-y-0 grid w-3 -translate-x-1/2 place-items-center font-mono text-xs text-muted" style={{ left: `${left}%` }} aria-hidden="true">
+      ≈
+    </span>
+  ))
 
   return (
     <section aria-labelledby="ribbon-title" className="mt-14">
@@ -36,28 +83,74 @@ function CareerRibbon({ chapters }: { chapters: WorkChapter[] }) {
         <h2 id="ribbon-title" className="eyebrow">
           {t('work.ribbon')}
         </h2>
-        <p className="text-sm text-muted">{t('work.ribbonNote')}</p>
+        <p className="max-w-[62ch] text-sm text-muted">{t('work.ribbonNote')}</p>
       </div>
-      <ol className="mt-4 flex gap-0.5">
-        {ordered.map((chapter, index) => {
-          const years = endValue(chapter.end) - yearValue(chapter.start)
-          const period = `${chapter.start} – ${displayDate(chapter.end, t('common.present'))}`
-          return (
-            <li key={chapter.id} className="min-w-0" style={{ flex: `${years} 1 0%` }}>
-              <a
-                href={`#${chapter.id}`}
-                title={`${chapter.name} · ${period}`}
-                className={`flex h-9 items-center overflow-hidden px-2 font-mono text-[11px] font-semibold text-paper transition-[filter] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink ${
-                  index === ordered.length - 1 ? 'rounded-r-md bg-accent-fill' : 'bg-accent-fill/80'
-                } ${index === 0 ? 'rounded-l-md' : ''}`}
-              >
-                <span className="truncate">{chapter.name}</span>
-              </a>
-              <span className="tabular mt-1.5 block break-words px-0.5 font-mono text-[10px] leading-tight text-muted">{period}</span>
-            </li>
-          )
-        })}
-      </ol>
+
+      <div className="mt-5 grid gap-3">
+        {map.lanes.map((lane) => (
+          <div key={lane.kind} className="grid gap-x-4 gap-y-1 sm:grid-cols-[6.5rem_minmax(0,1fr)] sm:items-center">
+            <span className={laneLabel}>{t(`work.lanes.${lane.kind}`)}</span>
+            <ol className="relative h-8">
+              {marks}
+              {lane.bars.map((bar) => {
+                const left = at(yearValue(bar.start))
+                const width = at(endValue(bar.end)) - left
+                const period = `${bar.approximate ? `${t('work.about')} ` : ''}${bar.start} – ${displayDate(bar.end, t('common.present'))}`
+                const style: CSSProperties = { left: `${left}%`, width: `calc(${width}% - 2px)` }
+                const base = `absolute inset-y-0 flex items-center overflow-hidden rounded-md px-2 font-mono text-[11px] whitespace-nowrap ${LANE_BAR[lane.kind]}`
+                return (
+                  <li key={bar.label} className="contents">
+                    {bar.chapterId ? (
+                      <a
+                        href={`#${bar.chapterId}`}
+                        title={`${bar.label} · ${period}`}
+                        aria-label={`${bar.label} · ${period}`}
+                        style={style}
+                        className={`${base} ${bar.current ? '!bg-accent-fill' : ''} transition-[filter] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink`}
+                      >
+                        <span className="truncate">{bar.label}</span>
+                      </a>
+                    ) : (
+                      <span title={`${bar.label} · ${period}`} aria-label={`${bar.label} · ${period}`} style={style} className={base}>
+                        <span className="truncate">{bar.label}</span>
+                      </span>
+                    )}
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+        ))}
+
+        <div className="grid gap-x-4 gap-y-1 sm:grid-cols-[6.5rem_minmax(0,1fr)] sm:items-end">
+          <span className={laneLabel}>{t('work.lanes.spinoffs')}</span>
+          <ul className="relative" style={{ height: dotRows * 12 + 4 }}>
+            {marks}
+            {dots.map((dot) => (
+              <li key={dot.project.id} className="absolute -translate-x-1/2" style={{ left: `${dot.x}%`, bottom: dot.level * 12 }}>
+                <Link
+                  href={`/projects/${dot.project.id}/`}
+                  title={`${dot.project.title} · ${dot.project.timeline.start} · ${dot.labels.join(' + ')}`}
+                  aria-label={`${dot.project.title}, ${dot.project.timeline.start}, ${dot.labels.join(' + ')}`}
+                  className="block h-2.5 w-2.5 rounded-full bg-clip ring-2 ring-paper transition-transform hover:scale-150 focus-visible:scale-150 focus-visible:outline-none focus-visible:ring-ink"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="grid gap-x-4 sm:grid-cols-[6.5rem_minmax(0,1fr)]" aria-hidden="true">
+          <span className="hidden sm:block" />
+          <div className="relative h-5 border-t border-line">
+            {marks}
+            {years.map((year) => (
+              <span key={year} className="tabular absolute top-1 -translate-x-1/2 font-mono text-[10px] text-muted" style={{ left: `${at(year)}%` }}>
+                {year}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <ol className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {chapters.map((chapter) => (
@@ -208,7 +301,7 @@ function SourceTrunk({ group, at, axisStart }: { group: SpinoffGroup; at: (value
           <p className="font-display font-bold">{title}</p>
           {group.start && (
             <p className="tabular font-mono text-xs text-muted">
-              {group.start} – {displayDate(group.end ?? '', t('common.present'))}
+              {group.approximate ? `${t('work.about')} ` : ''}{group.start} – {displayDate(group.end ?? '', t('common.present'))}
             </p>
           )}
           {group.note && <p className="mt-1 max-w-prose text-sm text-muted">{group.note}</p>}
@@ -331,7 +424,7 @@ export default function WorkPage() {
         <p className="mt-4 max-w-[62ch] text-lg text-muted">{t('work.intro')}</p>
       </header>
 
-      <CareerRibbon chapters={chapters} />
+      <CareerMap chapters={chapters} />
 
       {chapters.map((chapter) => (
         <Chapter key={chapter.id} chapter={chapter} />
