@@ -8,9 +8,11 @@ import {
   LuCheck,
   LuCopy,
   LuFileText,
+  LuGitBranch,
   LuGitPullRequest,
   LuGlobe,
   LuKeyboard,
+  LuLock,
   LuMail,
   LuMenu,
   LuMoon,
@@ -52,6 +54,8 @@ const registry = {
   package: LuPackage,
   pr: LuGitPullRequest,
   globe: LuGlobe,
+  lock: LuLock,
+  branch: LuGitBranch,
 } satisfies Record<string, IconType>
 
 export type IconName = keyof typeof registry

@@ -7,11 +7,11 @@ export default function HomePage() {
   return (
     <main id="main" tabIndex={-1} className="focus:outline-none">
       <Hero />
+      <Career />
       <Flagship />
       <Playground />
       <SelectedWork />
       <OpenSource />
-      <Career />
       <WorkAndWriting />
     </main>
   )

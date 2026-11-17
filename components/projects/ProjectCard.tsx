@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { StarCount, ThemeLabel } from '@/components/site/ui'
+import OriginBadge from '@/components/work/OriginBadge'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getProjectStars, projectYear, type ProjectDetail } from '@/data/projects'
 
@@ -37,7 +38,8 @@ export function StatusTag({ status }: { status: ProjectDetail['status'] }) {
 export default function ProjectCard({ project }: { project: ProjectDetail }) {
   return (
     <article className="group relative flex min-w-0 flex-1 flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-ink/30 focus-within:ring-2 focus-within:ring-accent">
-      <div className="aspect-[16/10] overflow-hidden border-b border-line bg-paper">
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-paper">
+        <OriginBadge projectId={project.id} className="absolute left-3 top-3 shadow-sm" />
         {project.thumbnail ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img

@@ -8,6 +8,7 @@ export const dynamic = 'force-static'
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: [string, number][] = [
     ['', 1],
+    ['work', 0.9],
     ['projects', 0.9],
     ['about', 0.8],
     ['experience', 0.8],

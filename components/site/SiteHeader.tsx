@@ -1,7 +1,8 @@
 'use client'
 
-// 全站頁首：品牌、三個主要頁面、語言、主題、鍵盤快捷鍵。
-// 單鍵快捷鍵（1–4、/、?）預設開啟，可以在快捷鍵面板關掉（WCAG 2.1.4），設定存在這個瀏覽器。
+// 全站頁首：品牌、四個主要頁面、語言、主題、鍵盤快捷鍵。
+// 單鍵快捷鍵（1–5、/、?）預設開啟，可以在快捷鍵面板關掉（WCAG 2.1.4），設定存在這個瀏覽器。
+// 數字鍵照首頁加上導覽列的順序排，NAV 改了它就跟著改。
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -11,12 +12,14 @@ import ThemeToggle from '@/components/site/ThemeToggle'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const NAV = [
+  { href: '/work/', key: 'work' },
   { href: '/projects/', key: 'projects' },
   { href: '/about/', key: 'about' },
   { href: '/experience/', key: 'experience' },
 ] as const
 
-const SHORTCUT_ROUTES: Record<string, string> = { '1': '/', '2': '/projects/', '3': '/about/', '4': '/experience/' }
+const SHORTCUT_PAGES = [{ href: '/', key: 'home' }, ...NAV]
+const SHORTCUT_ROUTES: Record<string, string> = Object.fromEntries(SHORTCUT_PAGES.map((page, index) => [String(index + 1), page.href]))
 const SHORTCUTS_KEY = 'natlee-shortcuts'
 /** 頁尾的「鍵盤快捷鍵」按鈕用這個事件打開面板。 */
 export const OPEN_SHORTCUTS_EVENT = 'natlee:open-shortcuts'
@@ -97,10 +100,7 @@ export default function SiteHeader() {
   ))
 
   const rows: [string, string][] = [
-    ['1', t('shortcuts.home')],
-    ['2', t('shortcuts.projects')],
-    ['3', t('shortcuts.about')],
-    ['4', t('shortcuts.experience')],
+    ...SHORTCUT_PAGES.map((page, index): [string, string] => [String(index + 1), t(`shortcuts.${page.key}`)]),
     ['/', t('shortcuts.search')],
     ['?', t('shortcuts.help')],
   ]

@@ -11,6 +11,7 @@ import { opensource } from '@/data/content'
 import { getEducationData } from '@/data/education'
 import { getExperienceData, groupRoles } from '@/data/experience'
 import { getSkills, projectsUsingSkill } from '@/data/skills'
+import { chapterIdForCompany } from '@/data/work'
 import { pick } from '@/lib/i18n/localize'
 import PrintCV from './PrintCV'
 
@@ -59,9 +60,18 @@ export default function ExperiencePage() {
 
         <Section id="work-title" title={t('experience.work')}>
           <ol className="grid gap-12">
-            {groups.map((group) => (
+            {groups.map((group) => {
+              const chapterId = group.roles.map((role) => chapterIdForCompany(role.companyId)).find(Boolean)
+              return (
               <li key={group.name}>
-                <h3 className="font-display text-xl font-bold">{group.name}</h3>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                  <h3 className="font-display text-xl font-bold">{group.name}</h3>
+                  {chapterId && (
+                    <Link href={`/work/#${chapterId}`} className="link no-print inline-flex items-center gap-1.5 text-sm font-semibold">
+                      <Icon name="lock" size={14} /> {t('experience.workLink')}
+                    </Link>
+                  )}
+                </div>
                 <ol className="mt-5 grid gap-8 border-l-2 border-line pl-6">
                   {group.roles.map((role) => (
                     <li key={role.id} className="relative">
@@ -128,7 +138,8 @@ export default function ExperiencePage() {
                   ))}
                 </ol>
               </li>
-            ))}
+              )
+            })}
           </ol>
         </Section>
 
@@ -152,7 +163,8 @@ export default function ExperiencePage() {
         <Section id="skills-title" title={t('experience.skills')} intro={t('experience.skillsIntro')}>
           <div className="grid gap-8">
             {skills.map((category) => (
-              <div key={category.id}>
+              // min-w-0：不然 grid 項目會被表格的最小寬度撐開，手機上整頁變成可以左右捲。
+              <div key={category.id} className="min-w-0">
                 <h3 className="eyebrow">{category.name}</h3>
                 <div className="mt-3 overflow-x-auto">
                   <table className="w-full min-w-[34rem] border-collapse text-left text-sm">

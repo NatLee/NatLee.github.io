@@ -1,0 +1,105 @@
+{
+  "chapters": [
+    {
+      "id": "hd-renewables",
+      "name": "HD Renewables",
+      "companyIds": ["hd-renewables", "star-trade"],
+      "era": "2023 – now",
+      "title": {
+        "en": "From solar forecasts to Japan's power market",
+        "zh": "從太陽能預測到日本電力市場"
+      },
+      "summary": {
+        "en": [
+          "I joined the Smart Services Division to forecast solar output for an energy-storage demonstration site at a FamilyMart store in Tainan, and to speed up the power-matching algorithms around it.",
+          "At the end of 2024 I moved to the International Power Trading Division and built spot-price and spread models for the Japan and Australia trading desks. As Principal Engineer I took technical ownership of that stack; as Deputy Manager I started the data platform that collects Japan's market and weather data. In 2026 I moved to the group's subsidiary Star Trade to lead the engineering of overseas power trading, including three months on site in Tokyo with the vendors."
+        ],
+        "zh": [
+          "一開始在智慧服務處，替台南一家全家便利商店的儲能示範場預測太陽能發電量，也優化周邊的電力媒合演算法。",
+          "2024 年底調到國際電力交易處，替日本與澳洲交易團隊建置現貨電價與價差模型。升任主任工程師後負責整套系統的技術，轉任副理後開始建置收集日本電力市場與氣象資料的數據平台。2026 年轉調集團子公司星星電力，帶領海外電力交易的工程開發，並在東京駐點三個月，和乙方廠商一起做需求與系統設計。"
+        ]
+      },
+      "spinoffs": []
+    },
+    {
+      "id": "big-data",
+      "name": "Big Data",
+      "companyIds": ["big-data"],
+      "era": "2021 – 2023",
+      "title": {
+        "en": "Sentiment over three billion posts",
+        "zh": "三十億筆資料的情緒分析"
+      },
+      "summary": {
+        "en": [
+          "Big Data's products, Keypo and DailyView, turn crawled posts into online buzz and sentiment reports. I led the sentiment engine behind them: the model that labels every crawled post, and the Docker services that run it over the daily crawl stored in Elasticsearch.",
+          "Around it I built monitoring dashboards for different clients, internal annotation and data-management tools, and a customer data platform on FastAPI and Elasticsearch that recognises the same user across websites."
+        ],
+        "zh": [
+          "Big Data 的產品 Keypo（大數據引擎）和 DailyView（網路溫度計）把爬下來的貼文變成網路聲量與情緒報告。我負責背後的情緒分析引擎：替每一筆爬蟲資料標上情緒的模型，以及用 Docker 在每天存進 Elasticsearch 的爬蟲資料上執行它的服務。",
+          "周邊還做了依客戶需求客製的輿情監控儀表板、內部的資料管理與標註工具，以及用 FastAPI 和 Elasticsearch 建置、能跨網站辨識同一位使用者的 CDP 平台。"
+        ]
+      },
+      "spinoffs": [
+        {
+          "id": "gura-gru-unit-for-recognizing-affect",
+          "note": {
+            "en": "The BiGRU sentiment model I experimented with at the time, published with its datasets.",
+            "zh": "當時試做的 BiGRU 情緒模型，連同資料集一起公開。"
+          }
+        },
+        {
+          "id": "sentiment-bundle-benchmark",
+          "from": "gura-gru-unit-for-recognizing-affect",
+          "note": {
+            "en": "GURA's successor: the same question, with today's methods compared on fixed splits.",
+            "zh": "GURA 的後繼：同樣的問題，用現在的方法在固定切分上比較。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "infortrend",
+      "name": "Infortrend",
+      "companyIds": ["infortrend"],
+      "era": "2019 – 2021",
+      "title": {
+        "en": "Computer vision on edge devices",
+        "zh": "在邊緣裝置上做電腦視覺"
+      },
+      "summary": {
+        "en": [
+          "In Infortrend's R&D department I built computer-vision applications, several of them on Nvidia Jetson edge devices: an ad recommendation system that reads the crowd in front of a digital sign, human pose recognition for top-down fisheye cameras in narrow spaces, and heat maps that show retail stores where their products get attention.",
+          "On the medical side I worked on MRI and PET brain preprocessing, including automatic AC-PC correction, for an Alzheimer's disease diagnosis project."
+        ],
+        "zh": [
+          "在 Infortrend 研發部做電腦視覺應用，其中好幾個跑在 Nvidia Jetson 邊緣裝置上：讀取數位看板前人群的廣告推薦系統、狹小空間用的俯視魚眼相機人體姿態辨識，以及幫零售門市優化商品曝光的熱區偵測。",
+          "醫療方面，替阿茲海默症診斷專案做 MRI 與 PET 腦部影像前處理，包括自動 AC-PC 校正。"
+        ]
+      },
+      "spinoffs": [
+        {
+          "id": "simply-blur-detector",
+          "note": {
+            "en": "The small CNN that told sharp camera frames from blurry ones, rebuilt with a browser demo.",
+            "zh": "分辨清楚與模糊影像的小型 CNN，重新做成可以在瀏覽器試用的版本。"
+          }
+        },
+        {
+          "id": "fisheye-warping",
+          "note": {
+            "en": "The fisheye-to-panorama step that came before pose recognition.",
+            "zh": "姿態辨識之前，把魚眼影像攤平成全景的那一步。"
+          }
+        },
+        {
+          "id": "openpose-detect-hands-with-heatmap",
+          "note": {
+            "en": "The motion heat maps from the retail work.",
+            "zh": "零售分析裡的動作熱區圖。"
+          }
+        }
+      ]
+    }
+  ]
+}

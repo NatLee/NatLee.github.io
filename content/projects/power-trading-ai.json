@@ -1,8 +1,8 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "power-trading-ai",
-  "title": "Power Trading AI System",
-  "subtitle": "International Power Trading Strategy Development",
+  "title": "Japan Power Trading Dashboard",
+  "subtitle": "Spot-Price Forecasting for Japan's Power Market",
   "category": "AI/ML",
   "theme": "energy",
   "tier": "selected",
@@ -15,7 +15,7 @@
     "/images/projects/power-trading-ai/regional-energy.webp",
     "/images/projects/power-trading-ai/daily-compare.webp"
   ],
-  "description": "Spot-price forecasting and trading strategies for the Japanese and Australian power markets. The repository is private, so screenshots will have to do.",
+  "description": "Spot-price forecasting and trading strategies for the Japanese power market, later extended to Australia. It turns out electricity prices have moods too.",
   "longDescription": "Leading the development of sophisticated AI trading strategies for international power markets. The system uses advanced time series analysis and machine learning models to predict electricity spot market prices, helping traders make data-driven decisions in volatile energy markets.",
   "technologies": [
     "Python",
