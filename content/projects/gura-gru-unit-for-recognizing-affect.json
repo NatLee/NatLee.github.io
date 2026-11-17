@@ -37,6 +37,50 @@
     "Preserved as the historical baseline for Sentiment Bundle Benchmark"
   ],
   "why": "Written in 2019 as the sample model for the MyAnimeList review dataset, so the data came with something that actually trains on it. Its successor later explained what was wrong with its numbers, which is what successors are for.",
+  "gains": "Every benchmark needs a 'before' photo, and GURA is it. It stays online read-only with the 2019 BiGRU recipe and the dataset bundle it introduced, so the successor's then-and-now table points at real code.",
+  "flow": [
+    {
+      "id": "tok",
+      "label": "Fit the Keras tokenizer",
+      "kind": "start"
+    },
+    {
+      "id": "emb",
+      "label": "Look up GloVe 840B vectors"
+    },
+    {
+      "id": "train",
+      "label": "Train the BiGRU with self-attention",
+      "detail": "Five epochs, best one saved"
+    },
+    {
+      "id": "keep",
+      "label": "Keep only the top checkpoint",
+      "detail": "The rest get deleted"
+    },
+    {
+      "id": "hit",
+      "label": "Above the target accuracy?",
+      "kind": "decision",
+      "detail": "Ask again until it says yes",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "train"
+      }
+    },
+    {
+      "id": "done",
+      "label": "Stop retraining",
+      "kind": "end",
+      "detail": "Best checkpoint and charts kept"
+    }
+  ],
+  "lessons": [
+    "The stop-word list removed not, no, never and nothing, so 'not good' and 'good' looked the same to the model.",
+    "Validation data included the official test split, and command.py retrained until it beat a target: the reported score was the luckiest try.",
+    "Its 68.5% on MyAnimeList is below the 83% you get by always answering 'positive' on the same validation set."
+  ],
   "architecture": [
     {
       "title": "Dataset bundle",

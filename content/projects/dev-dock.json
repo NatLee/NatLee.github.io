@@ -48,6 +48,12 @@
     "A highly portable and consistent development environment"
   ],
   "why": "Setting up a Linux desktop with VS Code, Firefox, Miniconda and a Chinese input method is fine once and tedious every time after. So it all goes into one image, and every container starts as the same dev box, whether you open it in a browser, a VNC client or over SSH.",
+  "gains": "Supplies the desktops both Dev Dock managers hand out. On its own it's a Linux workstation you can start as many copies of as you like, on x86_64 or arm64, with a GPU compose file for NVIDIA machines. Xfce is the lightweight part; the image is about 5.2 GB.",
+  "lessons": [
+    "Build on the same architecture as the host, or Firefox and VS Code fail with \"Dynamic loader not found\".",
+    "TigerVNC 1.16 dropped the classic vncserver wrapper, so the entrypoint starts Xvnc directly, the same way on both architectures.",
+    "A folder mounted under /root never shows on the VNC desktop, because that desktop belongs to DEFAULT_USER, not root."
+  ],
   "architecture": [
     {
       "title": "Install scripts",

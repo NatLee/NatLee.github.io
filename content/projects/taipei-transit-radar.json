@@ -24,6 +24,12 @@
   "solutions": [],
   "results": [],
   "why": "Team 3 built it at the 2016 IISI hackathon around one everyday question: how should someone in Taipei get to work without a car or scooter? The 2026 rewrite replaced Google Directions with government open data that needs no key, because a static site has nowhere to hide one.",
+  "gains": "Useful before leaving the house in Greater Taipei: five ways to get there side by side, with the wait, arrival time, fare and calories. The calories assume a 60 kg traveller, as in 2016, whoever is actually travelling.",
+  "lessons": [
+    "TDX, the national transport data service, now refuses requests without a key and allows guests about 20 a day per IP, which rules it out for a static site.",
+    "When a bus won't come, the live feed sends a code instead of a time: last bus gone, no service today, or skipped for traffic control. Those routes drop out.",
+    "GitHub disables scheduled workflows after 60 days without repo activity, so the weekly bus-data rebuild can stop until someone presses Run workflow."
+  ],
   "architecture": [
     {
       "title": "Open data",

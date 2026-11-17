@@ -36,6 +36,11 @@
     "Repeatable test grids with known face positions"
   ],
   "why": "Checking a face detector needs pictures where you already know the answer: how many faces, and where. Photos from the wild don't come with one, so this tool prints the answer key before the exam. It started as a test rig for the vision work at Infortrend.",
+  "gains": "Handy in regression tests: the same seed and the same faces always give the same wall, so a detector's score changes only when the detector does. It needs only NumPy and headless OpenCV, so it runs in containers and CI, and the YuNet model ships inside the package.",
+  "lessons": [
+    "Without cropping, a half-length portrait squeezed into a 72 px tile becomes a tiny person and a lot of background, hence --crop-faces.",
+    "Public-domain photos still show people with personality rights, so the samples are test data, not advert material."
+  ],
   "architecture": [
     {
       "title": "Face folder",

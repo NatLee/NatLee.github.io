@@ -43,6 +43,12 @@
     "Reproducible training assets and model evaluation in the repository"
   ],
   "why": "At Infortrend a small CNN told sharp camera frames from blurry ones. The rebuild sets it beside Laplacian variance, the classic that needs no training at all, so anyone can check in a browser whether the neural network is earning its keep.",
+  "gains": "For anyone sorting photos or camera frames by sharpness: try both scores on your own pictures, watch them react as a stress test blurs the picture step by step, then train the same CNN on your own sharp pictures. blur-generator makes the blurry half for you.",
+  "lessons": [
+    "A model trained on code-drawn cartoons scored 40 of 40 on its own test set and 34 of 40 on the repo's illustrations. Perfect at home proves little.",
+    "Until November 2026 the training folder held anime character art with an unclear licence. It is now 120 of the project's own illustrations.",
+    "The publishing gate counts whole pictures: 85% means 34 of 40. It was 90% until it was lowered on 2026-11-04 for that day's anime model."
+  ],
   "architecture": [
     {
       "title": "Sharp pictures",

@@ -30,6 +30,12 @@
     "Explicit output-quality controls"
   ],
   "why": "iPhones save photos as HEIC, and a lot of software still won't open them. heic2png turns them into PNG or JPEG from a command, a shell pipe or Python, with nothing to compile. HEIC is a perfectly good format; the trouble is everyone else.",
+  "gains": "Converts one photo, a folder (with a shell loop) or bytes already in memory, such as an upload, without temporary files. The README's quality table also ends the guessing: -q 100 keeps every colour, -f jpg gives the smallest file.",
+  "lessons": [
+    "Any PNG quality below 100 means a palette of at most 256 colours: at the default -q 80 the sample photo drops from 155,763 colours to 204.",
+    "For photos, JPEG is the small option: 2.1 MB, against 6.5 MB for the default palette PNG, and smaller even than the 2.4 MB HEIC it came from.",
+    "Up to 1.2.2, -o photo.jpg got PNG data under a .jpg name; now the file name and the contents agree."
+  ],
   "architecture": [
     {
       "title": "iPhone photo",

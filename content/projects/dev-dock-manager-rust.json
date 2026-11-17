@@ -70,6 +70,55 @@
     "Simplified deployment with Docker Compose"
   ],
   "why": "The Django manager needed Django, Daphne and an RQ worker under supervisord, and idled at 175 MiB doing nothing. The Rust version is one binary that idles at 5.5 MiB and starts about six times faster, which leaves more of the machine for the desktops it hands out.",
+  "gains": "The pick for new setups: the same dashboard, routes and permissions as the Django version, so users can't tell which one they got, while the backend image shrinks from 687 MB to 144 MB and there's one binary to babysit instead of Daphne plus an RQ worker.",
+  "flow": [
+    {
+      "id": "login",
+      "label": "Log in, keep a JWT pair",
+      "kind": "start",
+      "detail": "access token lasts an hour"
+    },
+    {
+      "id": "create",
+      "label": "Fill in the create dialog",
+      "detail": "name, SSH port, optional GPU"
+    },
+    {
+      "id": "check",
+      "label": "Name valid and port free?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "create"
+      }
+    },
+    {
+      "id": "queue",
+      "label": "Job queued, task_id returned",
+      "detail": "the API answers right away"
+    },
+    {
+      "id": "start",
+      "label": "Worker starts a gui-vnc container",
+      "detail": "owner label and Traefik route"
+    },
+    {
+      "id": "notify",
+      "label": "CREATED reaches owner and admins",
+      "detail": "over the notifications WebSocket"
+    },
+    {
+      "id": "open",
+      "label": "Open terminal, NoVNC or SSH",
+      "kind": "end"
+    }
+  ],
+  "lessons": [
+    "The rewrite answers most calls 4 to 6 times faster, but the two list calls mostly wait for Docker, so there the gap is only 1.2 to 1.6 times.",
+    "Log-in time is mostly password hashing (Argon2 here, PBKDF2 in Django), so not all of that speed-up belongs to the language.",
+    "/health lives on the API inside the Docker network. Traefik doesn't route it, so localhost:8000/health from the host gets the frontend's 404."
+  ],
   "architecture": [
     {
       "title": "Browser",

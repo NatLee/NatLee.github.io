@@ -30,6 +30,12 @@
     "Quick access from browser"
   ],
   "why": "\"What's my IP?\" comes back every time you switch VPN or Wi-Fi, usually with \"and where does it think I am?\" IP Find answers both from a toolbar popup and looks up any other address too. It asks for the clipboard and nothing else, so it couldn't read your pages even if it wanted to.",
+  "gains": "It also answers the other usual question: whose IP is this? Paste one and get its city, ISP and AS number, the time there and a map link, with the last six lookups a click away. A 192.168 address is told plainly it isn't on the map, not handed an empty card.",
+  "lessons": [
+    "geoiplookup.io ignores an ?ip= query and answers with your own IP instead, so the address to look up has to go in the URL path.",
+    "Private and reserved ranges come back as HTTP 200 with success: false, so 'no data' is read from the body, not the status code.",
+    "The API stopped sending current_time, so the popup now works out the local time from the timezone name by itself."
+  ],
   "architecture": [
     {
       "title": "Toolbar button",

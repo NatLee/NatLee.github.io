@@ -30,6 +30,12 @@
     "Explicit API errors and authentication support"
   ],
   "why": "While Eagle is open it runs a small HTTP server, so any script can feed it files, after writing the same requests and error checks yet again. EagleWrapper turns them into Python methods, so a downloader or tagging job is a few lines. It has read the API docs so you don't have to.",
+  "gains": "Scripts written for the 2023 release run unchanged, so upgrading costs nothing, and the README maps the V1 calls to their V2 counterparts for when you move. Big libraries can also be read straight from disk, faster than the API and with Eagle closed.",
+  "lessons": [
+    "add_from_path returns Eagle's whole reply as a dict, and a dict is always truthy, so if eagle.add_from_path(...) passes even when Eagle refused the file.",
+    "1.1.1 treated a single string filter as one prefix per character; since 1.2.0 it is one prefix, as anyone would have guessed.",
+    "Version numbers now follow Eagle's API generation, so major 2 means Web API V2; 2.0.0 is the 1.2.0 code with that rule written down."
+  ],
   "architecture": [
     {
       "title": "Your script",

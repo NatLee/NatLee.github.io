@@ -22,6 +22,12 @@
   "solutions": [],
   "results": [],
   "why": "pyppeteer-snap ran on Pyppeteer, which is no longer maintained, so the Chromium it downloads never gets any newer. playwright-snap swaps the engine for Playwright and leaves the function names, arguments and return types alone, since the code calling them had done nothing wrong.",
+  "gains": "Good for jobs that snapshot many pages: SnapSession keeps one Chromium for all of them, and every page gets a fresh browser context, so one site's cookies never follow you to the next. Phone layouts and retina-sharp PNGs are one option away.",
+  "lessons": [
+    "The import name can't start with 'playwright', or Playwright mistakes the package's code for its own; hence playsnap.",
+    "Fetching Chromium on the first snapshot meant a surprise 100–200 MB download mid-request; it is now installed once, up front.",
+    "Failure reasons go to stderr, so they can't end up inside the base64 you are piping somewhere."
+  ],
   "architecture": [
     {
       "title": "Caller",

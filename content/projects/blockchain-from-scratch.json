@@ -23,6 +23,60 @@
   "solutions": [],
   "results": [],
   "why": "The 2018 version, a small chain for proving files existed, stopped running once its demo keys were pulled and its libraries aged out. Rather than patch it, it was rewritten in Rust as a course, since a blockchain is easier to understand after you have built one and broken it on purpose.",
+  "gains": "For anyone who has written a little code and wants to see what a blockchain does underneath: no cryptography background needed, and Rust newcomers get comments on ownership and async. Every exercise ships with a tested answer, so cargo test tells you whether you got it, not a forum.",
+  "flow": [
+    {
+      "id": "recv",
+      "label": "A peer sends a block",
+      "kind": "start"
+    },
+    {
+      "id": "seen",
+      "label": "Seen this block already?",
+      "kind": "decision",
+      "detail": "keeps messages from looping forever",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "wait"
+      }
+    },
+    {
+      "id": "fits",
+      "label": "Fits after my latest block?",
+      "kind": "decision",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "adopt"
+      }
+    },
+    {
+      "id": "ask",
+      "label": "Ask for the whole chain",
+      "detail": "QUERY_ALL"
+    },
+    {
+      "id": "work",
+      "label": "Compare total proof of work",
+      "detail": "more work wins, not length"
+    },
+    {
+      "id": "adopt",
+      "label": "Adopt if valid, tell peers",
+      "detail": "broadcast the new latest block"
+    },
+    {
+      "id": "wait",
+      "label": "Wait for the next message",
+      "kind": "end"
+    }
+  ],
+  "lessons": [
+    "The 2018 node signed only the ciphertext, so a record's name, hash and level could be changed on the way. The rewrite signs the whole record.",
+    "Receiving any chain used to empty the mempool and lose queued records. Now only mined transactions leave, and ones dropped in a reorg are rechecked.",
+    "Rust's rsa crate has an unfixed timing advisory (RUSTSEC-2023-0071), bad news for a node that decrypts for others all day, so the rewrite uses X25519."
+  ],
   "architecture": [
     {
       "title": "Learner",

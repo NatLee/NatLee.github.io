@@ -52,6 +52,12 @@
     "Reduced command-line dependency"
   ],
   "why": "Docker's command line is fine as long as you remember the container ID. This page lists them for you, puts start, stop and pull behind buttons, and opens a real shell in any container from the browser. It began as a refactor of MahmoudAlyy's docker-django-ui.",
+  "gains": "Handy for one person or a small trusted team on one machine: restart, pull or open a shell from a browser tab, even in Alpine images that have no bash. Every account is a superuser by design, so hand out logins the way you'd hand out root.",
+  "lessons": [
+    "Docker has no call to end an exec'd shell, and one left behind keeps running, so the shell writes its PID first and closing the tab sends it kill -HUP.",
+    "Browsers can't add headers to WebSockets, so the login token rides along as a token.<base64> subprotocol.",
+    "Any Console can reach the container holding the Docker socket, so smaller roles would be theatre: only active superusers get in, checked in one file."
+  ],
   "architecture": [
     {
       "title": "Browser",

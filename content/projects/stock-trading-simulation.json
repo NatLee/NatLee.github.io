@@ -74,6 +74,12 @@
     "Achieved smooth performance with high-frequency order processing"
   ],
   "why": "A price chart makes more sense once you have watched one being made. Here the price is simply the last trade between three bots and you, so order books, spreads and partial fills stop being vocabulary and start happening to your orders. The 19 courses are there for when the market maker wins.",
+  "gains": "Useful for someone new to the Taiwan market: tick sizes, odd lots, the minimum fee and the day-trade tax follow local rules, and red means up unless you switch it. The pattern drills let you rewind a chart, which real markets have so far declined to offer.",
+  "lessons": [
+    "Without the market maker's inventory shift nothing pulled its position back: in pump-and-dump runs it peaked at 770 lots, against 99 with the shift on.",
+    "Each scenario name is a promise checked in CI with seeded runs: a crash must fall 8–15% in its own phase in every run, and calm must stay within 1%.",
+    "Some quirks stay on purpose: the noise bot's 3-lot maximum can never come up, but fixing it would change how the game feels, so it is written down instead."
+  ],
   "architecture": [
     {
       "title": "Traders",

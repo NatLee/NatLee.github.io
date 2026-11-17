@@ -55,6 +55,12 @@
     "Simplified onboarding process"
   ],
   "why": "dev-dock puts a desktop in a container, but someone still has to run docker for each person. On a shared machine that someone shouldn't be everyone, since holding the Docker socket is close to holding root on the host. So this dashboard sits in between: log in, click create, get your own desktop.",
+  "gains": "Lets an admin run a shared Linux box for several people from one Users page: create accounts, make admins, disable someone, reset a password. Kept for setups that want Python or the Django admin. Users see only their own desktops; anyone else's answers 404, as if it never existed.",
+  "lessons": [
+    "Container and image lists once took 8.4 s and 13.5 s because docker-py inspected everything on the host. Now: one list call, then only desktops you may see.",
+    "The backend lists only containers whose image is named exactly gui-vnc, so a pulled image needs that tag before the dashboard sees anything.",
+    "Desktops created before ownership labels existed have no owner, so only admins can see them."
+  ],
   "architecture": [
     {
       "title": "Browser",

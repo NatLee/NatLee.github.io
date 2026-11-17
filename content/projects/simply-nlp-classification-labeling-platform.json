@@ -38,6 +38,12 @@
     "2026 Rust and React rewrite with import, annotation, review and export"
   ],
   "why": "The models at my first job needed labelled sentences, and the 2019 Flask version, emoLabel, scored the emotion in each one. The 2026 rewrite lets a model suggest labels first. A 2B model is 90 to 100% sure of nearly every answer, so a person still presses the key.",
+  "gains": "For turning text, images or audio into training or evaluation data: one self-hosted Docker image, a schema per project, keyboard labelling, and kappa scores showing whether people and the model agree. The chat export shares the prompt, so a model tuned on it can return as the one making suggestions.",
+  "lessons": [
+    "Thinking models used up Ollama's default 4,096-token context and got cut off mid-answer; the -instruct model or an 8,192 context fixed it.",
+    "The old database declared text as INTEGER, so SQLite stored a text like '2019' as a number; the importer casts it back.",
+    "Batch pre-labelling hit 'database is locked' because deferred transactions don't wait for the lock; BEGIN IMMEDIATE fixed it."
+  ],
   "architecture": [
     {
       "title": "Import",

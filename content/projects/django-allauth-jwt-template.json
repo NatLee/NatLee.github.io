@@ -36,6 +36,61 @@
     "Authentication template built on django-allauth’s supported headless interfaces"
   ],
   "why": "Every project needs sign-up, password reset and a 'Continue with Google' button, and none of them is why you started the project. The first version glued Simple JWT onto allauth by hand; now allauth issues the tokens itself, which leaves far less homemade auth code to get wrong.",
+  "gains": "For a project with its own frontend that wants real accounts from day one: sign-up, email confirmation, password reset, account linking and three social logins, with 65 tests behind them. The Dummy provider lets you log in as anyone locally; Django refuses to start with it once debug is off.",
+  "flow": [
+    {
+      "id": "login",
+      "label": "Sign up or log in",
+      "kind": "start",
+      "detail": "email or three social logins"
+    },
+    {
+      "id": "pair",
+      "label": "Get a JWT pair",
+      "detail": "access plus refresh token"
+    },
+    {
+      "id": "call",
+      "label": "Call your API with Bearer"
+    },
+    {
+      "id": "exp",
+      "label": "Access token expired?",
+      "kind": "decision",
+      "detail": "it lives five minutes",
+      "next": "yes",
+      "branch": {
+        "when": "not yet",
+        "to": "call"
+      }
+    },
+    {
+      "id": "refresh",
+      "label": "Refresh for a new pair",
+      "detail": "old refresh token works once"
+    },
+    {
+      "id": "more",
+      "label": "Still using the API?",
+      "kind": "decision",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "call"
+      }
+    },
+    {
+      "id": "out",
+      "label": "Log out, both tokens die",
+      "kind": "end",
+      "detail": "a 401 here means success"
+    }
+  ],
+  "lessons": [
+    "The old template's Simple JWT access token lived 60 hours; allauth's lives five minutes, and each refresh token works exactly once.",
+    "Logout ends access tokens at once only with JWT_STATEFUL_VALIDATION on; turn it off and they live until expiry, saving a session lookup per request.",
+    "A provider login whose email already has an account is refused, so owning a Google account with the same address isn't enough to get in."
+  ],
   "architecture": [
     {
       "title": "Your frontend",

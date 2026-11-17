@@ -38,6 +38,12 @@
     "Reusable backend template with an end-to-end verification workflow"
   ],
   "why": "An AI assistant can write a JWT view in seconds. It can't promise that this exact mix of Django, Channels, django-q2, PostgreSQL and Redis boots, that the websocket survives the NGINX hop, or that DEBUG=false is safe. CI checks all of that on a renamed copy on every push.",
+  "gains": "Starting a new backend becomes copy, edit one .env, docker compose up; even the rename is a single variable, since the Python package is called backend on purpose. It also hands a coding assistant a tested codebase to copy from and one command to check its own changes.",
+  "lessons": [
+    "A plain GitHub template plus .env beat startproject --template and cookiecutter: a template full of {{ project_name }} can't run, so it can't be tested as-is.",
+    "ALLOWED_HOSTS has to keep localhost, because the container health check needs it.",
+    "check --deploy passes with DEBUG=false but still nags about HSTS and HTTPS redirects, which only make sense once TLS sits in front of NGINX."
+  ],
   "architecture": [
     {
       "title": "Your frontend",

@@ -30,6 +30,55 @@
     "Security isolation"
   ],
   "why": "Firewalls are strict about who comes in and far more relaxed about who goes out. So the machine behind NAT calls a server you control and keeps the line open; you SSH to that server and come out on the inside, without opening a single inbound port on the inside network.",
+  "gains": "Reaches a machine behind NAT over plain SSH, set up with one command per end. If the inside machine and its key get stolen, the thief gets no shell, no sudo and no other port on your server, and uninstall --all leaves the folder exactly as you cloned it.",
+  "flow": [
+    {
+      "id": "server",
+      "label": "Install the outside server",
+      "kind": "start",
+      "detail": "asks ports, makes host keys"
+    },
+    {
+      "id": "client",
+      "label": "Install the inside machine",
+      "detail": "makes tunnel and login keys"
+    },
+    {
+      "id": "auth",
+      "label": "Authorize its key on the server",
+      "detail": "tunnel port only, no shell"
+    },
+    {
+      "id": "accepted",
+      "label": "Server accepts the tunnel key?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "auth"
+      }
+    },
+    {
+      "id": "dial",
+      "label": "autossh dials out, holds on",
+      "detail": "redials whenever it drops"
+    },
+    {
+      "id": "self",
+      "label": "Install logs in through it",
+      "detail": "proves the tunnel works"
+    },
+    {
+      "id": "you",
+      "label": "You ssh -p 22224 in",
+      "kind": "end"
+    }
+  ],
+  "lessons": [
+    "The old setup accepted any host key; now autossh remembers the server's key after you confirm it once and refuses a different one.",
+    "Tunnel keys used to sit on the outside server with no limits, shell included. Since November 2026 each one opens only its own tunnel port.",
+    "No curl | bash installer on purpose: piping a download into bash runs code you haven't seen, or half of it if the download breaks."
+  ],
   "architecture": [
     {
       "title": "Your computer",

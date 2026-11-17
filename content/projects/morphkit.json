@@ -69,6 +69,61 @@
     "Runs entirely on GitHub Pages with zero hosting cost or server maintenance."
   ],
   "why": "Online converters usually want your file on their server before they will touch it. MorphKit does the work inside the browser tab instead. The catch is speed: ffmpeg compiled to WebAssembly runs 5 to 20 times slower than the native one, so privacy gets paid for in patience.",
+  "gains": "Handy when an upload form says \"max 500 KB\", this podcast episode is quieter than the last, or a scanned PDF needs its text back. Size targets count in decimal bytes, so a 500 KB result passes the limit however the site counts.",
+  "flow": [
+    {
+      "id": "target",
+      "label": "Pick a size target",
+      "kind": "start",
+      "detail": "images: 100 KB to 5 MB"
+    },
+    {
+      "id": "encode",
+      "label": "Encode at your quality setting",
+      "detail": "at the current dimensions"
+    },
+    {
+      "id": "fits",
+      "label": "Under the target?",
+      "kind": "decision",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "done"
+      }
+    },
+    {
+      "id": "floor",
+      "label": "Try the lowest quality",
+      "detail": "40 percent"
+    },
+    {
+      "id": "floorfits",
+      "label": "Fits at the lowest quality?",
+      "kind": "decision",
+      "detail": "gives up after six shrinks",
+      "next": "yes",
+      "branch": {
+        "when": "no, shrink it",
+        "to": "encode"
+      }
+    },
+    {
+      "id": "search",
+      "label": "Search for the best quality",
+      "detail": "binary search in between"
+    },
+    {
+      "id": "done",
+      "label": "Download the result",
+      "kind": "end"
+    }
+  ],
+  "lessons": [
+    "After a few dozen jobs in one visit the ffmpeg.wasm core can trap and fail every job after it; such a job now runs once more on a fresh instance.",
+    "Chrome and Edge refuse SVG in createImageBitmap, so every SVG conversion failed until all image decoding went through one helper with an <img> fallback.",
+    "Tesseract reads transparent pixels as black, so images are flattened onto white first: black text on black defeats even an OCR engine."
+  ],
   "architecture": [
     {
       "title": "Your files",

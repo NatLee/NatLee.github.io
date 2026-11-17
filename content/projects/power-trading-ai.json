@@ -57,6 +57,7 @@
     "Enabled expansion to Australia market"
   ],
   "why": "Built at HD Renewables for the power-trading desks in Japan and later Australia, who need a view of the spot price before they trade. The market stays volatile; the idea was that the decisions would not.",
+  "gains": "Puts a spot-price forecast and a strategy view in front of the Japan and Australia trading desks before they trade. The project records 85% accuracy on price trends and 60% less time per trading decision, which leaves more time to worry about the other 15%.",
   "architecture": [
     {
       "title": "Inputs",
