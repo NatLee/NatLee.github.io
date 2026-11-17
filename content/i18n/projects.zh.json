@@ -477,6 +477,33 @@
       "後來以個人專案 Open Persona 重寫，加入全身追蹤與興趣推估"
     ]
   },
+  "preproc-imdb-study": {
+    "title": "IMDb 前處理研究",
+    "subtitle": "神經網路文字分類的文字前處理",
+    "description": "非官方、可重現地重跑 BlackboxNLP 2018 一篇論文的 IMDb 實驗：四種文字前處理、兩種神經網路模型，每次執行都留下紀錄。2019 年為了碩士論文開始做，當年的版本有三個 bug，現在的版本把它們修好，也寫明出在哪裡。",
+    "longDescription": "訓練神經網路文字分類器之前，先轉小寫、做詞形還原或把多字詞組合起來，到底有沒有差？Camacho-Collados 與 Pilehvar 在〈On the Role of Text Preprocessing in Neural Network Architectures〉（BlackboxNLP 2018）量過這件事。這個 repo 重新實作論文裡 IMDb 的部分：選四種前處理（原樣、小寫、詞形還原、多字詞）其中一種、兩種模型（CNN 或 CNN+LSTM）其中一種，preproc-imdb 會用 25,000 則訓練評論訓練，再回報 25,000 則測試評論的準確率。每次執行都會留下一個資料夾，記錄設定、套件版本、訓練過程和每一筆預測。2019 年為了碩士研究，從作者的 sensecnn 程式碼移植到 Python 3 開始，2026 年改用 Keras 3.15 與 TensorFlow 2.21 重寫，並修正 2019 年移植版的三個 bug。",
+    "role": "創建者與維護者",
+    "features": [
+      "四種前處理：原樣、小寫、詞形還原、多字詞",
+      "論文的兩種模型：CNN 與 CNN+LSTM",
+      "用 25,000 則 IMDb 評論訓練，另外 25,000 則測試",
+      "每次執行都保存設定、套件版本、訓練過程與預測結果",
+      "固定亂數種子，同樣的設定會得到同樣的準確率",
+      "鎖定 Keras 與 TensorFlow 版本，也可以用 Docker 執行"
+    ],
+    "challenges": [
+      "2019 年的移植版有三個 bug，默默改變了結果",
+      "結果表上的每個數字都要能追溯到某一次執行"
+    ],
+    "solutions": [
+      "重做詞彙編號、詞向量列與提前停止，並把 2019 年的每個 bug 和修法寫在一起",
+      "每次執行都寫出一個資料夾，記錄設定、版本、訓練過程與每一筆預測"
+    ],
+    "results": [
+      "結果表把這個 repo 的準確率和論文並排，涵蓋每種前處理與模型",
+      "CNN+LSTM 和論文很接近，例如原樣文字 88.6，論文是 88.9"
+    ]
+  },
   "simply-blur-detector": {
     "role": "建立與維護",
     "subtitle": "在瀏覽器比較 CNN 與 Laplacian",
