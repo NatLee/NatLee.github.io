@@ -105,6 +105,27 @@
             "en": "The motion heat maps from the retail work.",
             "zh": "零售分析裡的動作熱區圖。"
           }
+        },
+        {
+          "id": "batch-crop-images",
+          "note": {
+            "en": "Crops a whole folder of images with one box, a chore from the image work.",
+            "zh": "一個框裁切整個資料夾的影像，源自影像工作裡的雜事。"
+          }
+        },
+        {
+          "id": "nipype-preprocess-on-brain-mr",
+          "note": {
+            "en": "The brain MRI preprocessing from the medical-imaging work: AC-PC alignment, skull stripping and segmentation.",
+            "zh": "醫學影像工作裡的腦部 MRI 前處理：AC-PC 對齊、去頭骨與分割。"
+          }
+        },
+        {
+          "id": "blur-generator",
+          "note": {
+            "en": "Makes blurry training data, the other half of the blur detector.",
+            "zh": "產生模糊的訓練資料，和模糊偵測是一組。"
+          }
         }
       ]
     },
