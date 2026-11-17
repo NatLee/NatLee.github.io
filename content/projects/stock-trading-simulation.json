@@ -12,6 +12,8 @@
   "opensource": true,
   "images": [
     "/images/projects/stock-trading-simulation/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/simulation.png",
+    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/images/scenarios-light.png",
     "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/simulation-settings.png",
     "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/learn-center.png",
     "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/learn-sub-page.png",
