@@ -22,6 +22,12 @@
   "solutions": [],
   "results": [],
   "why": "It began as flask-simple-countdown, a Flask server and a jQuery page whose only job was counting down to New Year. Meetings, exams and pomodoros wanted several countdowns and digits readable from the back of the room, none of which needs a server. So the server went, and the beep stayed.",
+  "gains": "Useful when a room has to watch one clock: an exam, a talk, a standup that keeps running long. Open stage mode on the projector in a second window and drive it from your laptop; a share link carries the end time, so every copy hits zero together.",
+  "lessons": [
+    "The old page counted by subtracting 1 every second, so it drifted and fell behind in background tabs; every number now comes from the end time.",
+    "Browsers slow repeating timers in hidden tabs (Chrome to once a minute after five minutes), so the alarm is a single timeout for the soonest end.",
+    "The Flask version counted down to the server's New Year. Docker runs on UTC by default, so in Taipei the year turned over at 8 a.m."
+  ],
   "architecture": [
     {
       "title": "Countdowns in",

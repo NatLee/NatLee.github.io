@@ -44,6 +44,61 @@
     "Per-scan tissue maps, quantitative QC and HTML reports"
   ],
   "why": "It comes from the brain MRI preprocessing I did at Infortrend for an Alzheimer's diagnosis project. The open version wires FSL, ANTs and an AC-PC detector into one nipype graph in a 2 GB Docker image, so learning the steps no longer begins with downloading all 4.1 GB of FSL.",
+  "gains": "Lets students and researchers watch each preprocessing step instead of trusting a black box: every node writes its own folder, so any in-between image opens in FSLeyes or ITK-SNAP. It's a teaching tool, not a medical device, and the README says so out loud.",
+  "flow": [
+    {
+      "id": "scan",
+      "label": "Take a T1 scan",
+      "kind": "start",
+      "detail": ".nii or .nii.gz"
+    },
+    {
+      "id": "acpc",
+      "label": "Find AC-PC, align the head",
+      "detail": "ART acpcdetect"
+    },
+    {
+      "id": "mni",
+      "label": "Register to the MNI152 template",
+      "detail": "FLIRT, 12 dof"
+    },
+    {
+      "id": "clean",
+      "label": "Strip the skull, fix bias",
+      "detail": "BET, then ANTs N4"
+    },
+    {
+      "id": "seg",
+      "label": "Segment the tissue three ways",
+      "detail": "FAST primary, two for comparison"
+    },
+    {
+      "id": "report",
+      "label": "Write the scan's HTML report",
+      "detail": "volumes, Dice, 3D brain"
+    },
+    {
+      "id": "more",
+      "label": "More scans left?",
+      "kind": "decision",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "scan"
+      }
+    },
+    {
+      "id": "index",
+      "label": "One overview page for the run",
+      "kind": "end",
+      "detail": "plus the cohort volumes CSV"
+    }
+  ],
+  "lessons": [
+    "The first comparison had K-means cut every brain into near-equal thirds. The pipeline did it: K-means clustered the equalised image, whose histogram is flat.",
+    "K-means sorts voxels by brightness alone and gave 5 to 7 points less grey matter than FAST, so FAST became the default in November 2026.",
+    "N4 bias correction lowered the grey/white CJV on every demo scan (sub-01: 0.64 to 0.56), so the step earns its place with numbers."
+  ],
   "architecture": [
     {
       "title": "T1 scans",

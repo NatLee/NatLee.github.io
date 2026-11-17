@@ -36,6 +36,12 @@
     "Static GitHub Pages app with browser-local annotation and export"
   ],
   "why": "It began in 2017 as a small crowd-sourcing page for boxing anime faces, with a leaderboard and one house rule: box the head, the whole head. The rebuild keeps both, but opens any folder of your own images, since faces turned out not to be the only thing that needs a box.",
+  "gains": "For a small labelling job that doesn't justify a labelling server: open a folder, draw boxes, pick classes with the number keys, export what your training code wants. LabelImg files that still remember a C:\\ drive find their images by the end of the path.",
+  "lessons": [
+    "When Danbooru was down it answered with no CORS header, which a browser can only report as \"failed to fetch\"; failures now carry a code like danbooru/network.",
+    "Committing the last rendered preview left a fast-dragged box a few pixels short; the final box is now computed from where the pointer was released.",
+    "The original JSON export is unchanged field for field, and a test rebuilds a real old export byte for byte, so files from the original app still import."
+  ],
   "architecture": [
     {
       "title": "Images",

@@ -28,6 +28,55 @@
     "One Docker image for self-hosted deployment"
   ],
   "why": "Song requests arrive from Twitch chat, YouTube chat and assorted chat bots, and something has to turn them into one queue that plays in OBS. Version 2 swapped v1's Django, Redis, nginx and supervisord for a single Rust container: three fewer things to restart in the middle of a stream.",
+  "gains": "For a streamer taking requests from Twitch, YouTube and a chat bot at once: one queue, one set of rules, run from chat or the dashboard. When the queue runs dry, your starred songs take over, so dead air stops being part of the show.",
+  "flow": [
+    {
+      "id": "type",
+      "label": "Viewer types !sr and a link",
+      "kind": "start"
+    },
+    {
+      "id": "clean",
+      "label": "Strip invisible characters",
+      "detail": "7TV appends U+E0000"
+    },
+    {
+      "id": "perm",
+      "label": "Check permission and cooldown"
+    },
+    {
+      "id": "lookup",
+      "label": "Look up title and length",
+      "detail": "skipped for songs it knows"
+    },
+    {
+      "id": "rules",
+      "label": "Passes the queue rules?",
+      "kind": "decision",
+      "detail": "length, limits, block list",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "reply"
+      }
+    },
+    {
+      "id": "queue",
+      "label": "Join the queue",
+      "detail": "every page updates over WebSocket"
+    },
+    {
+      "id": "reply",
+      "label": "Reply in chat",
+      "kind": "end",
+      "detail": "place and wait, or why not"
+    }
+  ],
+  "lessons": [
+    "SQLite's plain BEGIN starts as a reader, so a read-then-write queue update could fail with \"database is locked\" at once; writes now use BEGIN IMMEDIATE.",
+    "Since 2025 YouTube's embedded player shows error 153 when the page sends no Referer, so a proxy's no-referrer \"security\" preset quietly breaks playback.",
+    "The first page of YouTube live chat is old chat. It is skipped, or every restart would replay old !sr requests."
+  ],
   "architecture": [
     {
       "title": "Chat",

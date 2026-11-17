@@ -45,6 +45,67 @@
     "Training run: 22 minutes across eight browser environments"
   ],
   "why": "QWOP gives you four keys and a sprinter who mostly falls over, which makes it a neat reinforcement-learning test: pixels in, keys out, distance as the reward. The 2020 agent's finish probably took about 99 minutes; the 2026 one needs a bit over three.",
+  "gains": "Shows how to train against a real browser game without a simulator or a modified game: Playwright presses the keys, a virtual clock makes every step exactly six frames, and the same keys replay the same race. A busy machine just plays slower, not differently.",
+  "flow": [
+    {
+      "id": "look",
+      "label": "Look at the runner",
+      "kind": "start",
+      "detail": "84x84 grayscale, last 4 stacked"
+    },
+    {
+      "id": "act",
+      "label": "Hold one of nine key combos",
+      "detail": "Q/W thighs, O/P calves"
+    },
+    {
+      "id": "clock",
+      "label": "Advance exactly six frames",
+      "detail": "0.1 s on a virtual clock"
+    },
+    {
+      "id": "read",
+      "label": "Read the distance with OCR",
+      "detail": "Jumps over 2 m ignored"
+    },
+    {
+      "id": "reward",
+      "label": "Score progress, time, fall, finish",
+      "detail": "Falls cheap, or it freezes"
+    },
+    {
+      "id": "over",
+      "label": "Race over?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "look"
+      }
+    },
+    {
+      "id": "three",
+      "label": "Finished 100 m three times?",
+      "kind": "decision",
+      "detail": "Restart is the R key",
+      "next": "yes",
+      "branch": {
+        "when": "not yet",
+        "to": "look"
+      }
+    },
+    {
+      "id": "stop",
+      "label": "Stop training",
+      "kind": "end",
+      "detail": "Main run: 22 minutes"
+    }
+  ],
+  "lessons": [
+    "The finish screen shows a tenth of the real time, so '19.4 seconds' was a 193.8-second race.",
+    "Judging a finish by the score at the top booked 7 races that ended at 99.5 to 99.9 m as falls; now the end screen decides.",
+    "Skipping WebGL draw calls on frames between observations made stepping about 40% faster without changing the race."
+  ],
   "architecture": [
     {
       "title": "Official QWOP game",

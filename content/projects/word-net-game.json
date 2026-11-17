@@ -23,6 +23,66 @@
   "solutions": [],
   "results": [],
   "why": "In 2018 it collected sentiment labels: read a sentence, drag a slider, send it to a Google Form. By 2026 its Heroku sentence server and the old Sheets API were gone, so it came back as a game with 600 original sentences. Now it labels nothing for anyone: your answers, streaks and ranks never leave the browser.",
+  "gains": "A few minutes of reading what people mean rather than what they say: sarcasm, self-mockery and hidden meanings each have a pack, and every sentence has its own reply at the reveal. The two-player mode settles who in the room actually reads the room.",
+  "flow": [
+    {
+      "id": "read",
+      "label": "Read a sentence",
+      "kind": "start"
+    },
+    {
+      "id": "cast",
+      "label": "Cast the net on the scale",
+      "detail": "−1 sad to +1 happy"
+    },
+    {
+      "id": "gap",
+      "label": "Measure the gap to the reference",
+      "detail": "0 exact, 2 opposite"
+    },
+    {
+      "id": "close",
+      "label": "Within 0.25?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no, streak resets",
+        "to": "score"
+      }
+    },
+    {
+      "id": "streak",
+      "label": "Add one to the streak",
+      "detail": "+0.25× from the second"
+    },
+    {
+      "id": "score",
+      "label": "Base points times the bonus",
+      "detail": "capped at 2×"
+    },
+    {
+      "id": "more",
+      "label": "Keep playing?",
+      "kind": "decision",
+      "detail": "sentences, time or hearts left",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "read"
+      }
+    },
+    {
+      "id": "card",
+      "label": "Get the result card",
+      "kind": "end",
+      "detail": "with your emotion map"
+    }
+  ],
+  "lessons": [
+    "Appending a note to the MIT LICENSE made GitHub list it as \"Other\"; the note moved to the README and the sentence packs' own licence file.",
+    "Every pack must be at least 15% clearly sad and 15% clearly happy, or a single-pack game turns into a long run of \"slightly negative\".",
+    "The irony explanation was on screen but not in the live region, so screen-reader users heard the score without the part that trips people up."
+  ],
   "architecture": [
     {
       "title": "Sentence packs",

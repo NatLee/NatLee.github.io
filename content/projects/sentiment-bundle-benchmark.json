@@ -25,6 +25,60 @@
   "solutions": [],
   "results": [],
   "why": "GURA's numbers came from validation sets that mixed in the test split, so the question of how to classify sentiment today needed a fair rerun. Spoiler: half a minute of TF-IDF on a CPU beats GURA's best IMDB claim.",
+  "gains": "Before choosing a sentiment model, see what each option costs as well as what it scores: accuracy and macro-F1 next to training time, speed, VRAM and size, on identical splits. The best frozen embedding lands within two points of fine-tuning, so the budget gets a vote too.",
+  "flow": [
+    {
+      "id": "dl",
+      "label": "Download the Parquet bundle",
+      "kind": "start",
+      "detail": "Pinned revision, SHA-256 checked"
+    },
+    {
+      "id": "prep",
+      "label": "Clean, dedupe, split with seed 42",
+      "detail": "Row ids fingerprinted"
+    },
+    {
+      "id": "done",
+      "label": "Result file already there?",
+      "kind": "decision",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "more"
+      }
+    },
+    {
+      "id": "fit",
+      "label": "Fit or prompt the method",
+      "detail": "Validation picks C or epoch"
+    },
+    {
+      "id": "test",
+      "label": "Score the test split once",
+      "detail": "Once, not until it agrees"
+    },
+    {
+      "id": "more",
+      "label": "Another method or dataset left?",
+      "kind": "decision",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "done"
+      }
+    },
+    {
+      "id": "report",
+      "label": "Write tables, charts and README",
+      "kind": "end"
+    }
+  ],
+  "lessons": [
+    "Re-running ModernBERT on IMDB with the same seed moved macro-F1 from 91.6 to 90.9, so gaps under a point between fine-tuned models are noise.",
+    "Zero-shot, the 2B LLM called 98% of SUBJ sentences 'subjective'; eight examples in the prompt fixed that but hurt MR and MyAnimeList.",
+    "Re-reading the 2023 bundle found half the IMDB training set was generated word salad and the MyAnimeList scores slid out of line with their text."
+  ],
   "architecture": [
     {
       "title": "Dataset bundle",

@@ -23,6 +23,62 @@
   "solutions": [],
   "results": [],
   "why": "It was written for the 2017 Taipei City Government ChatBot contest, answering city-service questions on Facebook Messenger and LINE from the city's own FAQs. It was not selected, which left nine years for a rewrite. This one has no server and no bots, and every answer still points back to the agency that wrote it.",
+  "gains": "For a Taipei resident with a city-service question: ask in everyday words (狗, not 犬) and get the official FAQ with its agency, date and page, so you can judge whether it still applies. Free mode costs nothing; AI mode bills your own key and shows how much.",
+  "flow": [
+    {
+      "id": "ask",
+      "label": "Type a question",
+      "kind": "start"
+    },
+    {
+      "id": "tidy",
+      "label": "Strip filler, use the city's words",
+      "detail": "狗 is filed under 犬"
+    },
+    {
+      "id": "rank",
+      "label": "Rank the FAQs with BM25",
+      "detail": "inside a Web Worker"
+    },
+    {
+      "id": "close",
+      "label": "Anything close enough?",
+      "kind": "decision",
+      "detail": "under 35%: links instead",
+      "next": "yes",
+      "branch": {
+        "when": "no, rephrase",
+        "to": "ask"
+      }
+    },
+    {
+      "id": "sure",
+      "label": "One clear winner?",
+      "kind": "decision",
+      "detail": "covers 80%, beats the runner-up",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "answer"
+      }
+    },
+    {
+      "id": "suggest",
+      "label": "Offer three candidates",
+      "detail": "\"Did you mean…?\""
+    },
+    {
+      "id": "answer",
+      "label": "Answer with its source",
+      "kind": "end",
+      "detail": "agency, date, original page"
+    }
+  ],
+  "lessons": [
+    "\"身分證不見了\" (my ID card is gone) used to rank a lost house-number plate first: the colloquial 不見 outweighed 遺失, the city's word. Synonyms now count as one idea.",
+    "A Chinese embedding model would add about 38 MB of downloads, over 15 times the gzipped FAQ file, so meaning is left to the optional AI mode.",
+    "Word matching has limits: asking about moving to Mars (火星移民) lists questions for new immigrants, thanks to the word 移民."
+  ],
   "architecture": [
     {
       "title": "Taipei open data",

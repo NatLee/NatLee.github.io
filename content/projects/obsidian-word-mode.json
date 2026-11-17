@@ -57,6 +57,46 @@
     "No telemetry, no account, and no files touched outside the vault"
   ],
   "why": "In Obsidian, formatting a note still means Markdown syntax; even the shortcuts just type the symbols for you. Word Mode lets you work with toolbar buttons and word-processor shortcuts on the same .md files, and writes back only the blocks you changed, so fixing one typo doesn't turn into a diff of the whole note.",
+  "gains": "Someone who has never typed a Markdown asterisk can work in the same vault: tables, properties, images, diagrams and equations all have buttons. The files stay ordinary .md, so sync and other tools never learn that someone switched editors.",
+  "flow": [
+    {
+      "id": "edit",
+      "label": "Edit the note in Word mode",
+      "kind": "start",
+      "detail": "Autosave follows your edits"
+    },
+    {
+      "id": "disk",
+      "label": "File changed elsewhere meanwhile?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "blocks"
+      }
+    },
+    {
+      "id": "choose",
+      "label": "Pick the version to keep",
+      "detail": "Theirs, yours, or both"
+    },
+    {
+      "id": "blocks",
+      "label": "Rewrite only the changed blocks",
+      "detail": "The rest stays character for character"
+    },
+    {
+      "id": "save",
+      "label": "Save the same .md file",
+      "kind": "end",
+      "detail": "Raw blocks saved unchanged"
+    }
+  ],
+  "lessons": [
+    "The release tag must match the version exactly, with no v in front, because Obsidian looks for a release under that exact tag.",
+    "Keep the source folder and node_modules out of folders a sync client watches, such as Synology Drive.",
+    "Not checked yet: mobile use on real devices, and the Japanese and Korean translations by native speakers."
+  ],
   "architecture": [
     {
       "title": "Markdown note",

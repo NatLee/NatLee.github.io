@@ -33,6 +33,12 @@
     "Python API and command-line tools"
   ],
   "why": "At Infortrend, pose recognition ran on top-down fisheye cameras in narrow spaces, and this was the step before it: unrolling the round frame into a panorama. Working out where each pixel goes is slow, so it is done once per image size and saved, on the safe bet that the camera won't change resolution by itself.",
+  "gains": "Ceiling cameras, 360° cameras pointed up or down and tiny-planet photos become flat panoramas, and panoramas can be wrapped back into circles. After one mesh per resolution, each frame takes well under a second, even on a server or in a slim Docker image.",
+  "lessons": [
+    "Mesh cost grows with the pixel count: 1024 × 1024 takes 4 s and 0.5 GB on 32 cores, so a 4096 × 4096 image would need about 8 GB.",
+    "The centre pixel of a rewarped image is always black: the angle at the exact centre is undefined, and no amount of maths will pick one.",
+    "Up to 1.0.2, running the command with options missing still exited with 0, success; it now exits with 2 and prints the usage line."
+  ],
   "architecture": [
     {
       "title": "Fisheye image",

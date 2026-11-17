@@ -24,6 +24,50 @@
   "solutions": [],
   "results": [],
   "why": "Mermaid turns a few lines of text into a tidy Gantt chart, but rescheduling it means retyping dates. Gantt Studio lets you drag the bars and writes the Mermaid back, keeping the fields Mermaid has no syntax for. A schedule you can review in a pull request: possible now, if not exactly requested.",
+  "gains": "Handy for a small team planning without a project-management account. Dependencies push later tasks along by themselves, and a baseline shows how many days each task has drifted from the original plan: useful information, rarely good news.",
+  "flow": [
+    {
+      "id": "drag",
+      "label": "Drag from a bar's end dot",
+      "kind": "start"
+    },
+    {
+      "id": "drop",
+      "label": "Drop it on another task"
+    },
+    {
+      "id": "loop",
+      "label": "Would it close a loop?",
+      "kind": "decision",
+      "detail": "the line turns red",
+      "next": "no",
+      "branch": {
+        "when": "yes, refused",
+        "to": "drag"
+      }
+    },
+    {
+      "id": "link",
+      "label": "Save the dependency",
+      "detail": "the task's fixed date goes"
+    },
+    {
+      "id": "start",
+      "label": "Start after the latest predecessor",
+      "detail": "weekends skipped if you choose"
+    },
+    {
+      "id": "crit",
+      "label": "Redraw the critical path",
+      "kind": "end",
+      "detail": "tooltips show each task's float"
+    }
+  ],
+  "lessons": [
+    "Dates stored at 00:00 UTC but read with local getters showed the day before anywhere west of UTC, and in Taipei \"today\" jumped to tomorrow at 20:00.",
+    "The scheduler gave up after 100 sweeps, so in big projects a chain stored backwards fell off the chart; it now walks the graph in topological order.",
+    "Exporting to Mermaid kept only each task's last predecessor, though Mermaid takes \"after a b\"; a round-trip test now expects the sample back unchanged."
+  ],
   "architecture": [
     {
       "title": "Two ways to edit",

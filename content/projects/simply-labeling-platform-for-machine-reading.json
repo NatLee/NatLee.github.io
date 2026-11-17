@@ -46,6 +46,61 @@
     "2026 Rust and React rewrite with import, annotation, review and export"
   ],
   "why": "My first job had a Chinese reading-comprehension service to feed, and it needed questions with their answers marked exactly in the passage. I did the labelling myself too, which is the quickest way to learn what a labelling tool gets wrong.",
+  "gains": "For teams building extractive QA or RAG evaluation sets: answers are stored as exact character offsets, a model can draft the first pass, and disagreements show up in review rather than in the trained model's answers.",
+  "flow": [
+    {
+      "id": "import",
+      "label": "Import passages or SQuAD files",
+      "kind": "start",
+      "detail": "Answer offsets rechecked"
+    },
+    {
+      "id": "ai",
+      "label": "Ask a model first?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "mark"
+      }
+    },
+    {
+      "id": "keep",
+      "label": "Keep only answers copied exactly",
+      "detail": "Paraphrases don't count"
+    },
+    {
+      "id": "mark",
+      "label": "Accept, edit or select answers",
+      "detail": "Others' answers hidden until done"
+    },
+    {
+      "id": "review",
+      "label": "Reviewer checks agreement",
+      "detail": "Exact match and F1"
+    },
+    {
+      "id": "ok",
+      "label": "Approved?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "returned",
+        "to": "mark"
+      }
+    },
+    {
+      "id": "export",
+      "label": "Export the dataset",
+      "kind": "end",
+      "detail": "SQuAD, JSONL, RAG or chat"
+    }
+  ],
+  "lessons": [
+    "Small local models write shaky questions, sometimes in the wrong language or with off-topic answers, which is why every suggestion needs a human click.",
+    "Browsers count UTF-16 units while SQuAD and Python count characters; the old version stored browser offsets, which an emoji throws off.",
+    "The old front end could submit without selecting an answer, stored as 0; those rows now import as questions still waiting for one."
+  ],
   "architecture": [
     {
       "title": "Import",

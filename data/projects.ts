@@ -4,7 +4,7 @@ import projectsZh from '@/content/i18n/projects.zh.json'
 import thumbnails from '@/content/_generated/thumbnails.json'
 import type { Locale } from '@/lib/i18n/config'
 import { localizedArray, localizedField } from '@/lib/i18n/localize'
-import type { ArchitectureStep } from '@/lib/content/contract'
+import type { ArchitectureStep, FlowStep } from '@/lib/content/contract'
 import { getRepoStats } from './github'
 
 export type ProjectCategory =
@@ -24,7 +24,25 @@ export type ProjectCategory =
   | 'Web Automation'
   | 'Productivity Tools'
 
-export type { ArchitectureKind, ArchitectureNode, ArchitectureStep } from '@/lib/content/contract'
+export type { ArchitectureKind, ArchitectureNode, ArchitectureStep, FlowStep } from '@/lib/content/contract'
+
+/** 中文的流程圖：照英文的順序寫，只換字；id、kind、branch.to 只寫在英文。 */
+type FlowStepZh = { label?: string; detail?: string; next?: string; branch?: { when?: string } }
+
+/** 把中文的流程圖疊到英文上：步數不一樣就用英文（npm test 會擋下這種情況）。作品頁和 site.json 共用。 */
+export function localizeFlow(en: FlowStep[], zh?: FlowStepZh[]): FlowStep[] {
+  if (!zh || zh.length !== en.length) return en
+  return en.map((step, index) => {
+    const z = zh[index]
+    return {
+      ...step,
+      label: z.label || step.label,
+      ...(step.detail ? { detail: z.detail || step.detail } : {}),
+      ...(step.next ? { next: z.next || step.next } : {}),
+      ...(step.branch ? { branch: { ...step.branch, when: z.branch?.when || step.branch.when } } : {}),
+    }
+  })
+}
 
 /** 中文的一個節點：照英文的順序寫，只換字；id、kind、core、to 只寫在英文。 */
 interface ArchitectureTextZh {
@@ -98,14 +116,20 @@ export interface ProjectDetail {
   why?: string
   /** 簡單的架構圖（作品頁「架構」）。 */
   architecture?: ArchitectureStep[]
+  /** 能帶來什麼（作品頁「能帶來什麼」）。 */
+  gains?: string
+  /** 學到什麼，1–3 點（作品頁「學到什麼」）。 */
+  lessons?: string[]
+  /** 流程圖（作品頁「流程」）。 */
+  flow?: FlowStep[]
 }
 
 export type ProjectZhOverlay = Partial<
   Pick<
     ProjectDetail,
-    'title' | 'subtitle' | 'description' | 'longDescription' | 'role' | 'features' | 'challenges' | 'solutions' | 'results' | 'why'
+    'title' | 'subtitle' | 'description' | 'longDescription' | 'role' | 'features' | 'challenges' | 'solutions' | 'results' | 'why' | 'gains' | 'lessons'
   >
-> & { architecture?: ArchitectureStepZh[] }
+> & { architecture?: ArchitectureStepZh[]; flow?: FlowStepZh[] }
 
 const projectZhMap = projectsZh as Record<string, ProjectZhOverlay>
 const thumbnailMap = thumbnails as Record<string, string>
@@ -127,6 +151,9 @@ function localizeProject(project: ProjectDetail, locale: Locale): ProjectDetail 
     results: localizedArray(locale, project.results, zh.results),
     why: project.why && localizedField(locale, project.why, zh.why),
     architecture: project.architecture && localizeArchitecture(project.architecture, zh.architecture),
+    gains: project.gains && localizedField(locale, project.gains, zh.gains),
+    lessons: project.lessons && localizedArray(locale, project.lessons, zh.lessons),
+    flow: project.flow && localizeFlow(project.flow, zh.flow),
   }
 }
 

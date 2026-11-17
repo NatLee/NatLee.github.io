@@ -35,6 +35,12 @@
     "Runnable final version preserved with tests and Docker"
   ],
   "why": "The 2021 question was simple: where does a YouTube video actually live? Behind each watch page sits a plain file on Google's servers, youtube-dl could find it, and the idea came from zdwolfe/yt-redirector. In 2026 the link still comes back; whether the video plays depends on what YouTube changed that week.",
+  "gains": "Handy for seeing what yt-dlp actually returns for a page: the direct file link, title and type, above a plain player that recommends nothing afterwards. In the November 2026 tests YouTube stopped at the link; Wikimedia Commons pages still played end to end.",
+  "lessons": [
+    "On 2026-11-04 yt-dlp still found the googlevideo.com link, but Edge blocked YouTube's reply as ERR_BLOCKED_BY_ORB, the one step this app exists for.",
+    "YouTube rations links rather than refusing them: after about fifteen lookups in forty minutes it asked for a bot check; half an hour later they came back.",
+    "The format is \"best\" because a plain <video> tag cannot join separate video and audio streams, so only single-file formats qualify."
+  ],
   "architecture": [
     {
       "title": "Browser",

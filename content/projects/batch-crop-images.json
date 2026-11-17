@@ -42,6 +42,67 @@
     "Interactive or headless batch cropping with a pip-installable CLI"
   ],
   "why": "A chore from the computer-vision work at Infortrend: folders of same-layout images that all needed the same region cut out. Redrawing the box on every picture only works if your hand never drifts, so the box is drawn once and replayed as numbers, in the window or from the command line.",
+  "gains": "Screenshots, scans, video frames, product photos, dataset images: any folder that shares a layout gets the same crop in one pass. Names, formats, EXIF and colour profiles are kept, the originals are left alone, and a saved preset repeats the job later without a window.",
+  "flow": [
+    {
+      "id": "ref",
+      "label": "Open the reference picture",
+      "kind": "start",
+      "detail": "First file by name"
+    },
+    {
+      "id": "given",
+      "label": "Box already given?",
+      "kind": "decision",
+      "detail": "Via --box or a preset",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "sizes"
+      }
+    },
+    {
+      "id": "draw",
+      "label": "Draw and adjust the box",
+      "detail": "Esc quits, nothing written"
+    },
+    {
+      "id": "hint",
+      "label": "Print it as a --box value",
+      "detail": "For reruns without the window"
+    },
+    {
+      "id": "sizes",
+      "label": "Read every picture's size",
+      "detail": "Headers only, nothing written yet"
+    },
+    {
+      "id": "same",
+      "label": "Same size as the reference?",
+      "kind": "decision",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "write"
+      }
+    },
+    {
+      "id": "rule",
+      "label": "Apply the --mismatch rule",
+      "detail": "Ask, stretch, scale, anchor or skip"
+    },
+    {
+      "id": "write",
+      "label": "Crop and write in parallel",
+      "kind": "end",
+      "detail": "EXIF and ICC kept"
+    }
+  ],
+  "lessons": [
+    "Releasing the mouse used to start cropping at once; now Enter confirms, so the box can be adjusted first.",
+    "The size question used to come halfway through the batch. Planning now reads only image headers and asks first, so 'no' never leaves half a batch.",
+    "Upper-case extensions such as .JPG used to be skipped; now any letter case counts, and pictures go in name order."
+  ],
   "architecture": [
     {
       "title": "Input folder",

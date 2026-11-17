@@ -48,6 +48,12 @@
     "Close to the paper on CNN+LSTM, for example 88.6 against 88.9 on the vanilla text"
   ],
   "why": "My master's research needed to know whether lowercasing, lemmatizing or joining multiword phrases changes what a neural sentiment model learns, so I re-ran a paper's IMDb experiments. In the rerun, changing the random seed moved accuracy more than changing the preprocessing did.",
+  "gains": "For anyone wondering whether lowercasing or lemmatizing is worth it: pick a variant and a model, get an accuracy traceable to a folder, and compare it with the paper. Your own preprocessing needs four text files, one command and patience: a CNN+LSTM run takes 13 to 19 minutes on CPU.",
+  "lessons": [
+    "The 2019 port numbered words 'count + 2', so words with the same count shared an id and the most frequent words became unknown.",
+    "The 2019 port also stopped early on the test set; the rewrite trains 3 epochs by default, like the authors' code.",
+    "Fine-tuning hides missing vectors: on vanilla text the lowercased embeddings covered 13,265 of 19,998 words, yet accuracy barely moved."
+  ],
   "architecture": [
     {
       "title": "IMDb text variants",

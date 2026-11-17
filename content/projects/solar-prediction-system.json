@@ -54,6 +54,7 @@
     "Enhanced AI showcase for the facility"
   ],
   "why": "Built at HD Renewables for an energy-storage demonstration site, which needs to know how much solar power is on the way. The forecast combines weather data, past generation and time-series models. A solar forecast, it turns out, is a weather forecast with extra steps.",
+  "gains": "Gives an energy-storage site a forecast of the solar power on its way, so the storage plan is made with a forecast instead of a hunch. The project records 92% accuracy on daily forecasts and 25% lower storage costs.",
   "architecture": [
     {
       "title": "Inputs",

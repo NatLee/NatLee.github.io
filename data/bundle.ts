@@ -13,7 +13,7 @@ import { opensource, writing } from './content'
 import { getRepoStats } from './github'
 import { personalInfo } from './personal'
 import { legacyThemeOf, projectThemes } from './project-themes'
-import { allProjectsData, getProjectStars, localizeArchitecture, type ProjectZhOverlay } from './projects'
+import { allProjectsData, getProjectStars, localizeArchitecture, localizeFlow, type ProjectZhOverlay } from './projects'
 
 const SITE_URL = 'https://natlee.github.io'
 
@@ -80,6 +80,9 @@ export function buildSiteBundle(): SiteBundle {
         architecture: p.architecture
           ? { en: p.architecture, zh: localizeArchitecture(p.architecture, (pz[p.id] as ProjectZhOverlay | undefined)?.architecture) }
           : undefined,
+        gains: p.gains ? loc(p.gains, zh.gains) : undefined,
+        lessons: p.lessons ? loc(p.lessons, zh.lessons) : undefined,
+        flow: p.flow ? { en: p.flow, zh: localizeFlow(p.flow, (pz[p.id] as ProjectZhOverlay | undefined)?.flow) } : undefined,
         images: p.images,
         thumbnail: p.thumbnail,
         links: p.links,

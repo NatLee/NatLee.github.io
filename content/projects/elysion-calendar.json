@@ -35,6 +35,54 @@
     "Room availability organised around the shop’s booking data"
   ],
   "why": "Elysion's booking page shows one day at a time, with a separate table for every room, so finding a free room means reading them all. This app reads them for you and lines the rooms up. It needs a whole backend for one reason: the official site will not let a page from another site read it.",
+  "gains": "Handy when a group is picking a night: the weekly overview counts the free rooms in every half hour, and each card says whether the room runs JOYSOUND or DAM, a question some singers take very seriously.",
+  "flow": [
+    {
+      "id": "ask",
+      "label": "Ask for one day",
+      "kind": "start"
+    },
+    {
+      "id": "cached",
+      "label": "Already in Redis?",
+      "kind": "decision",
+      "detail": "over 5 min: refresh in background",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "send"
+      }
+    },
+    {
+      "id": "lock",
+      "label": "Take the day's lock",
+      "detail": "other requests wait their turn"
+    },
+    {
+      "id": "fetch",
+      "label": "Read the official booking page",
+      "detail": "one table per room"
+    },
+    {
+      "id": "parse",
+      "label": "Turn coloured cells into bookings",
+      "detail": "grid read from hour labels"
+    },
+    {
+      "id": "store",
+      "label": "Keep the copy for an hour"
+    },
+    {
+      "id": "send",
+      "label": "Send rooms and slots",
+      "kind": "end"
+    }
+  ],
+  "lessons": [
+    "The old parser counted hours by hand from 9:00, so a 7-hour booking from 23:30 ended at \"30:30\"; the grid now comes from the page's own hour labels.",
+    "Every uncached day answered HTTP 500: the Redis lock was released by its key string instead of the lock object, and a freshly written cache hid it.",
+    "Cache hits used to fetch the official site every time; now a copy is served as is for five minutes and refreshed in the background."
+  ],
   "architecture": [
     {
       "title": "Official booking page",

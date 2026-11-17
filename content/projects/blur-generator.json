@@ -54,6 +54,55 @@
     "Positive community feedback"
   ],
   "why": "The blur detector from the Infortrend vision work needed blurry photos to learn from, and real cameras only take those when nobody wants them. Blur Generator makes them on demand from sharp images: motion, lens or Gaussian, with the strength as a number, or varied by depth with a depth map.",
+  "gains": "For anyone training blur detection or deblurring models: every sharp photo becomes as many blurred copies as needed, each with a known type and strength. With a depth map and a focus point it also fakes a portrait mode, no new phone required.",
+  "flow": [
+    {
+      "id": "load",
+      "label": "Load the photo and depth map",
+      "kind": "start",
+      "detail": "Same size, depth 0–255"
+    },
+    {
+      "id": "focus",
+      "label": "Focus depth given?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "layers"
+      }
+    },
+    {
+      "id": "band",
+      "label": "Measure distance from the sharp band",
+      "detail": "The band itself stays sharp"
+    },
+    {
+      "id": "layers",
+      "label": "Cut the values into layers",
+      "detail": "10 layers by default"
+    },
+    {
+      "id": "amount",
+      "label": "Give each layer a blur amount",
+      "detail": "Between min_blur and max_blur"
+    },
+    {
+      "id": "blur",
+      "label": "Blur the photo once per layer",
+      "detail": "Whole photo each time, then masked"
+    },
+    {
+      "id": "merge",
+      "label": "Add the layers into one image",
+      "kind": "end"
+    }
+  ],
+  "lessons": [
+    "Up to 1.2.0 a decimal lens radius blurred like the next whole number: 2.5 gave the picture of 3. It now lands in between.",
+    "With the default sigma of 5, Gaussian kernels wider than about 31 px all look the same; sigma=0 lets the kernel size set the strength.",
+    "min_blur=0 used to crash motion and lens blur by depth; a blur amount of 0 now simply means an untouched copy."
+  ],
   "architecture": [
     {
       "title": "Sharp image",

@@ -57,6 +57,7 @@
     "Deployed scalable microservices architecture supporting high-volume processing"
   ],
   "why": "Big Data's products, Keypo and DailyView, turn crawled posts into buzz and sentiment reports, and every post needs a sentiment label before it counts. This engine does the labelling, at a volume no team of human readers would survive.",
+  "gains": "Gives Keypo and DailyView users sentiment and buzz trends in real time over more than three billion crawled posts. The 30% accuracy gain means fewer angry posts quietly counted as happy ones.",
   "architecture": [
     {
       "title": "Web crawlers",

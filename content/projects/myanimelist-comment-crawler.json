@@ -30,6 +30,61 @@
     "Sequential requests, backoff and robots.txt handling"
   ],
   "why": "Both the day job in public opinion and the master's thesis needed sentiment data, so this crawler turned MyAnimeList reviews into the MALCoD dataset on Kaggle. Reviewers rate what they review, which spares somebody a lot of labelling.",
+  "gains": "For research that needs review text in bulk: a crawl of many hours can stop and pick up at the last saved page, the API source stays under the rate limit, and the CSV columns match the 2023 Kaggle datasets, so code written for those keeps working, none the wiser.",
+  "flow": [
+    {
+      "id": "info",
+      "label": "Save titles from the ranking",
+      "kind": "start",
+      "detail": "info_spider fills animeList"
+    },
+    {
+      "id": "pick",
+      "label": "Take the next saved title",
+      "detail": "--resume skips finished ones"
+    },
+    {
+      "id": "page",
+      "label": "Fetch the next review page",
+      "detail": "Waits when the server asks"
+    },
+    {
+      "id": "save",
+      "label": "Save reviews, record the page",
+      "detail": "Ctrl+C any time, then --resume"
+    },
+    {
+      "id": "last",
+      "label": "Was that the last page?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "page"
+      }
+    },
+    {
+      "id": "more",
+      "label": "Any titles left?",
+      "kind": "decision",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "pick"
+      }
+    },
+    {
+      "id": "export",
+      "label": "Export the Kaggle CSV files",
+      "kind": "end",
+      "detail": "Reviews sorted oldest first"
+    }
+  ],
+  "lessons": [
+    "Scrapy 2.16 stopped calling start_requests(), so the 2023 code, freshly installed, exited silently without crawling anything.",
+    "MAL's robots.txt now disallows Scrapy and the public Jikan API shut down in October 2026, so the default source moved to Jikan-Edge.",
+    "The 2023 export sorted reviews by the date as text, so April came before January."
+  ],
   "architecture": [
     {
       "title": "Review sources",

@@ -53,6 +53,64 @@
     "A reproducible CPU image on Python 3.12 and TensorFlow 2.21"
   ],
   "why": "The retail work at Infortrend needed heat maps of where products got attention. This demo keeps the idea: follow wrists through a video, keep the ones inside chosen regions, and let the hot spots pile up. Cheaper than standing by the shelf with a clipboard.",
+  "gains": "Turns a recorded video into one picture of where the activity was, with a single docker compose up, on CPU, and no web service to keep alive. Swap the polygons for your own zones and it's a starting point for seeing which parts of a scene get the most movement.",
+  "flow": [
+    {
+      "id": "read",
+      "label": "Read the next video frame",
+      "kind": "start"
+    },
+    {
+      "id": "nth",
+      "label": "Every 30th frame?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "read"
+      }
+    },
+    {
+      "id": "crop",
+      "label": "Shrink and crop the frame",
+      "detail": "0.3 scale, 215 px square"
+    },
+    {
+      "id": "pose",
+      "label": "Run body OpenPose at two scales",
+      "detail": "0.5 and 1"
+    },
+    {
+      "id": "low",
+      "label": "Take each arm's lowest point",
+      "detail": "shifted up five pixels"
+    },
+    {
+      "id": "draw",
+      "label": "Draw ROI hits on the frame",
+      "detail": "saved as a PNG"
+    },
+    {
+      "id": "more",
+      "label": "More frames left?",
+      "kind": "decision",
+      "next": "no",
+      "branch": {
+        "when": "yes",
+        "to": "read"
+      }
+    },
+    {
+      "id": "sum",
+      "label": "Summary heatmap on frame one",
+      "kind": "end",
+      "detail": "all points, no shift, no ROI"
+    }
+  ],
+  "lessons": [
+    "ROI coordinates live in the shrunk, cropped 215 × 215 frame, so a different camera means reviewing the crop and the polygons together.",
+    "The tests build the real network and check channels, masks and boundaries, but measure no pose accuracy; GPU runs and the original weights aren't revalidated."
+  ],
   "architecture": [
     {
       "title": "Video file",

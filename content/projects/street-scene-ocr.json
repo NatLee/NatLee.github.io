@@ -26,6 +26,59 @@
   "solutions": [],
   "results": [],
   "why": "It began in 2021 as a take-home test for a job interview: build a service that reads Chinese and English street signs, with a Docker deployment plan. In 2026 it became a learning project with a benchmark anyone can re-run. The interview is long over; the homework got a sequel.",
+  "gains": "For anyone who has to read Traditional Chinese signs: one upload shows three engines' boxes, text and timings side by side, and a re-runnable CC0 benchmark says which one to start with. The choice comes from measurements, not from whichever README sounds most confident.",
+  "flow": [
+    {
+      "id": "photo",
+      "label": "Upload a street sign photo",
+      "kind": "start"
+    },
+    {
+      "id": "prep",
+      "label": "Rotate, convert to RGB, shrink",
+      "detail": "Longest side at most 2560 px"
+    },
+    {
+      "id": "det",
+      "label": "Find the text lines",
+      "detail": "CRAFT or DB heat maps"
+    },
+    {
+      "id": "rec",
+      "label": "Read each line",
+      "detail": "CTC decoding, with a confidence"
+    },
+    {
+      "id": "post",
+      "label": "Apply threshold, sort reading order",
+      "detail": "Below 30% drawn red"
+    },
+    {
+      "id": "conv",
+      "label": "Convert to Traditional?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no",
+        "to": "out"
+      }
+    },
+    {
+      "id": "opencc",
+      "label": "Fix Simplified forms with OpenCC",
+      "detail": "Fixes 賀, also breaks 台"
+    },
+    {
+      "id": "out",
+      "label": "Return JSON and annotated PNG",
+      "kind": "end"
+    }
+  ],
+  "lessons": [
+    "EasyOCR, the 2021 choice, has a 74.5% character error rate on the real sign photos; RapidOCR gets 18.4% and runs over ten times faster.",
+    "Most PP-OCR mistakes are Simplified forms of the right character. OpenCC fixes 賀 and 涼 but turns a correct 台 into 臺, so it stays off by default.",
+    "An engine's confidence says how sure it was, not whether it is right: it can be 99% sure of a wrong character."
+  ],
   "architecture": [
     {
       "title": "Street sign photo",

@@ -23,6 +23,56 @@
   "solutions": [],
   "results": [],
   "why": "Taiwan's population and household-income figures are open data, but they come as tables, and nobody reads thirty years of tables for fun. The atlas plays them on a map instead. It began at a 2017 Chiayi hackathon; the 2026 rewrite dropped a green-to-red scale that red-green colour-blind readers couldn't tell apart.",
+  "gains": "Anyone wondering whether a county grows from births or from people moving in can watch it month by month since 1997, with that month's news beside the map, and send the exact view as a link instead of a screenshot of a spreadsheet.",
+  "flow": [
+    {
+      "id": "fetch",
+      "label": "Download the newest official tables",
+      "kind": "start",
+      "detail": "Links looked up each time"
+    },
+    {
+      "id": "legacy",
+      "label": "Load the 2017 hackathon data",
+      "detail": "Nine years old, still checks out"
+    },
+    {
+      "id": "names",
+      "label": "Match names to county codes",
+      "detail": "Unknown name stops the build"
+    },
+    {
+      "id": "blank",
+      "label": "New cell blank?",
+      "kind": "decision",
+      "next": "no",
+      "branch": {
+        "when": "yes, keep old",
+        "to": "write"
+      }
+    },
+    {
+      "id": "replace",
+      "label": "Replace it and log differences",
+      "detail": "Every changed number gets reported"
+    },
+    {
+      "id": "write",
+      "label": "Write the JSON the app loads",
+      "detail": "No timestamps, same every time"
+    },
+    {
+      "id": "ci",
+      "label": "CI rebuilds and compares",
+      "kind": "end",
+      "detail": "Any difference fails the check"
+    }
+  ],
+  "lessons": [
+    "The 2017 JSON held up: of 20,082 overlapping population numbers only 5 differed, each by 0.01 from source corrections, and all 1,890 household figures matched.",
+    "Government tables write '-' for zero, and the data backs it: in 39 of the 40 months where natural increase is '-', total growth equals social growth.",
+    "Download links can't be hard-coded: the household-survey files change path every year, so each fetch looks them up on data.gov.tw first."
+  ],
   "architecture": [
     {
       "title": "Government open data",

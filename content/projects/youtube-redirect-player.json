@@ -35,6 +35,12 @@
     "Final Flask version preserved; song requests continue in Streaming Player"
   ],
   "why": "Playing one video from the address bar is easy. The harder question is what plays after it, and on which screen. This player keeps one shared queue and sends every request and pause to all open tabs, so a single button can silence the laptop and the TV at the same time.",
+  "gains": "Today it is mostly a small, readable example of Flask-SocketIO keeping several screens in step, with 34 tests that fake yt-dlp. It still plays Wikimedia Commons videos end to end; YouTube is the part that stopped cooperating.",
+  "lessons": [
+    "The history meant to keep 200 videos froze at 201: trimming called limit() without a number, and the swallowed error took the new row with it.",
+    "With an empty database the page asked for the playlist again and again, 248 requests in six seconds; it now asks once and waits for a request.",
+    "Flask-SocketIO runs under gunicorn as one worker with many threads, and its development server refuses to start without a terminal attached."
+  ],
   "architecture": [
     {
       "title": "Every open tab",

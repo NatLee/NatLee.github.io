@@ -51,6 +51,48 @@
     "Consistent vault structure"
   ],
   "why": "I wanted one attachment folder per note, right next to it, so moving or archiving a note takes its pictures along. Remote images should become local files rather than links you hope still work, and an existing vault needed tools to get into line.",
+  "gains": "Pasted images stop arriving as 'Pasted image …' files: each one is renamed after its note and filed beside it. File Explorer also marks which notes still lean on remote images, and one click saves them locally.",
+  "flow": [
+    {
+      "id": "find",
+      "label": "Find remote images in the note",
+      "kind": "start",
+      "detail": "Markdown links and Canvas cards"
+    },
+    {
+      "id": "get",
+      "label": "Download them all at once"
+    },
+    {
+      "id": "ok",
+      "label": "Arrived as a real image?",
+      "kind": "decision",
+      "next": "yes",
+      "branch": {
+        "when": "no, link stays",
+        "to": "report"
+      }
+    },
+    {
+      "id": "save",
+      "label": "Save into the note's folder",
+      "detail": "Named after the note and date"
+    },
+    {
+      "id": "link",
+      "label": "Point the link at the copy",
+      "detail": "Alt text kept"
+    },
+    {
+      "id": "report",
+      "label": "Report how many were replaced",
+      "kind": "end"
+    }
+  ],
+  "lessons": [
+    "While enabled, it borrows one Obsidian setting: newLinkFormat becomes relative unless it is already relative or shortest, and is put back on unload.",
+    "Renaming a single attachment means reading every .md and .canvas file in the vault, just to update the links to it."
+  ],
   "architecture": [
     {
       "title": "What you do",
