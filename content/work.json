@@ -126,6 +126,13 @@
             "en": "Makes blurry training data, the other half of the blur detector.",
             "zh": "產生模糊的訓練資料，和模糊偵測是一組。"
           }
+        },
+        {
+          "id": "face-wall-generator-tool",
+          "note": {
+            "en": "Lines up the same wall of faces every time to test face detectors on, a test rig from the vision work.",
+            "zh": "每次都排出一樣的人臉牆，拿來考人臉偵測器；影像工作裡的測試道具。"
+          }
         }
       ]
     },
