@@ -1,6 +1,6 @@
 'use client'
 
-// 首頁 Telepy 之後的區塊：精選作品、開源、經歷摘要、工作方式與文章。
+// 首頁的區塊：經歷時期（緊接在開頭介紹之後）、精選作品、開源、工作方式與文章。
 import Link from 'next/link'
 import Icon from '@/components/Icon'
 import ProjectCard from '@/components/projects/ProjectCard'
@@ -10,11 +10,15 @@ import { opensource, writing } from '@/data/content'
 import { getRepoStats } from '@/data/github'
 import { getPersonalInfo } from '@/data/personal'
 import { allProjectsData, getProjectsByTier } from '@/data/projects'
+import { getWorkChapters, isWorkProject } from '@/data/work'
 import { pick } from '@/lib/i18n/localize'
 
+/** 首頁精選只放個人作品；在公司做的由上面的「Where I've been」和 /work 介紹。 */
 export function SelectedWork() {
   const { locale, t } = useLanguage()
-  const projects = getProjectsByTier('selected', locale).slice(0, 6)
+  const projects = getProjectsByTier('selected', locale)
+    .filter((project) => !isWorkProject(project))
+    .slice(0, 6)
   return (
     <section aria-labelledby="selected-title" className="shell pt-24">
       <SectionHeader
@@ -95,9 +99,11 @@ export function OpenSource() {
   )
 }
 
+/** 職涯的四個時期；有工作專案的時期列出公司、做了什麼，並連到 /work 的那一章。 */
 export function Career() {
   const { locale, t } = useLanguage()
   const me = getPersonalInfo(locale)
+  const chapters = getWorkChapters(locale)
   return (
     <section aria-labelledby="career-title" className="shell pt-24">
       <SectionHeader
@@ -105,23 +111,53 @@ export function Career() {
         title={t('home.career.title')}
         intro={t('home.career.intro')}
         action={
-          <Link href="/experience/" className="link inline-flex items-center gap-1.5 text-sm font-semibold">
-            {t('home.career.full')} <Icon name="arrow" size={15} />
-          </Link>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link href="/work/" className="link inline-flex items-center gap-1.5 text-sm font-semibold">
+              {t('home.career.work')} <Icon name="arrow" size={15} />
+            </Link>
+            <Link href="/experience/" className="link inline-flex items-center gap-1.5 text-sm font-semibold">
+              {t('home.career.full')} <Icon name="arrow" size={15} />
+            </Link>
+          </div>
         }
       />
-      <ol className="mt-10 grid gap-6 border-t-2 border-ink pt-6 sm:grid-cols-2 lg:grid-cols-4">
-        {me.eras.map((era, index) => (
-          <li key={era.period} className="relative">
-            <span
-              className={`absolute -top-[31px] left-0 h-3 w-3 rounded-full border-2 border-ink ${index === me.eras.length - 1 ? 'bg-accent-fill' : 'bg-paper'}`}
-              aria-hidden="true"
-            />
-            <p className="tabular font-mono text-xs text-muted">{era.period}</p>
-            <h3 className="mt-2 font-display text-xl font-bold">{era.title}</h3>
-            <p className="mt-2 text-sm text-muted">{era.note}</p>
-          </li>
-        ))}
+      <ol className="mt-10 grid gap-x-6 gap-y-10 border-t-2 border-ink pt-6 sm:grid-cols-2 lg:grid-cols-4">
+        {me.eras.map((era, index) => {
+          const chapter = chapters.find((item) => item.era === era.period)
+          return (
+            <li key={era.period} className="relative flex flex-col">
+              <span
+                className={`absolute -top-[31px] left-0 h-3 w-3 rounded-full border-2 border-ink ${index === me.eras.length - 1 ? 'bg-accent-fill' : 'bg-paper'}`}
+                aria-hidden="true"
+              />
+              <p className="tabular font-mono text-xs text-muted">{era.period}</p>
+              <h3 className="mt-2 font-display text-xl font-bold">{era.title}</h3>
+              <p className="mt-2 text-sm text-muted">{era.note}</p>
+              {chapter && (
+                <div className="mt-4 grid gap-2 border-t border-dashed border-line pt-3">
+                  <p className="font-mono text-xs font-semibold uppercase tracking-wider text-plum">{chapter.name}</p>
+                  <ul className="grid gap-1">
+                    {chapter.projects.map((project) => (
+                      <li key={project.id} className="flex items-start gap-2 text-sm font-semibold">
+                        <Icon name="lock" size={13} className="mt-1 shrink-0 text-accent" />
+                        {project.title}
+                      </li>
+                    ))}
+                  </ul>
+                  {chapter.spinoffs.length > 0 && (
+                    <p className="flex items-center gap-2 text-xs text-muted">
+                      <Icon name="branch" size={13} className="shrink-0 text-clip" />
+                      {t('home.career.spinoffs', { count: chapter.spinoffs.length })}
+                    </p>
+                  )}
+                  <Link href={`/work/#${chapter.id}`} className="link mt-1 inline-flex w-fit items-center gap-1.5 text-sm font-semibold">
+                    {t('home.career.seeWork')} <Icon name="arrow" size={14} />
+                  </Link>
+                </div>
+              )}
+            </li>
+          )
+        })}
       </ol>
     </section>
   )

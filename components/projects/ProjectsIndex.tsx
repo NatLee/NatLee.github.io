@@ -8,6 +8,7 @@ import Icon from '@/components/Icon'
 import ProjectCard, { StatusTag } from '@/components/projects/ProjectCard'
 import TelepyLogo from '@/components/projects/TelepyLogo'
 import { StarCount, ThemeLabel } from '@/components/site/ui'
+import OriginBadge from '@/components/work/OriginBadge'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { PROJECT_THEMES, getLocalizedProjects, getProjectStars, projectYear, type ProjectDetail, type ProjectTheme } from '@/data/projects'
 import { projectFilterSearch, readProjectFilters } from '@/lib/project-filters'
@@ -65,6 +66,13 @@ export default function ProjectsIndex() {
       <header className="shell pt-14 md:pt-20">
         <h1 className="font-display text-5xl font-bold tracking-tight md:text-6xl">{t('projects.title')}</h1>
         <p className="mt-4 max-w-[60ch] text-lg text-muted">{t('projects.intro', { count: projects.length })}</p>
+        <p className="mt-4 max-w-[60ch] text-sm text-muted">
+          <Icon name="lock" size={14} className="mr-1.5 inline-block align-[-2px] text-accent" />
+          {t('projects.workNote')}{' '}
+          <Link href="/work/" className="link whitespace-nowrap font-semibold">
+            {t('projects.workLink')} <Icon name="arrow" size={14} className="inline-block align-[-2px]" />
+          </Link>
+        </p>
       </header>
 
       <div className="shell mt-10 grid gap-4">
@@ -175,6 +183,7 @@ export default function ProjectsIndex() {
                     <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
                       <span className="break-words font-display text-lg font-bold transition-colors group-hover:text-accent">{project.title}</span>
                       <StatusTag status={project.status} />
+                      <OriginBadge projectId={project.id} />
                     </span>
                     <span className="mt-0.5 block text-sm text-muted md:truncate">{project.description}</span>
                   </span>

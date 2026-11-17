@@ -6,8 +6,10 @@ import type { ReactNode } from 'react'
 import Icon from '@/components/Icon'
 import ProjectCard, { StatusTag } from '@/components/projects/ProjectCard'
 import { StarCount, ThemeLabel } from '@/components/site/ui'
+import OriginBadge from '@/components/work/OriginBadge'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getProjectById, getProjectStars, getRelatedProjects, localizeCategory, type ProjectDetail } from '@/data/projects'
+import { getProjectOrigin } from '@/data/work'
 
 const LINK_ORDER = ['github', 'demo', 'pypi', 'documentation', 'article'] as const
 const LINK_ICON: Record<(typeof LINK_ORDER)[number], string> = {
@@ -108,22 +110,46 @@ export default function ProjectPage({ id }: { id: string }) {
   if (!project) return null
   const [cover, ...gallery] = project.images
 
+  const origin = getProjectOrigin(project.id)
+  const chapterLink = origin && `/work/#${origin.chapterId}`
+
   const facts: [string, ReactNode][] = [
     [t('project.role'), project.role],
     [t('project.period'), <span key="period" className="tabular">{formatPeriod(project, t('common.present'))}</span>],
     [t('project.status'), <StatusTag key="status" status={project.status} />],
     [t('project.theme'), <ThemeLabel key="theme" theme={project.theme} />],
   ]
+  if (origin && chapterLink) {
+    facts.push(
+      origin.kind === 'work'
+        ? [t('project.company'), <Link key="company" href={chapterLink} className="link">{project.company}</Link>]
+        : [t('project.origin'), <Link key="origin" href={chapterLink} className="link">{t('project.spinoffOf', { name: origin.name })}</Link>]
+    )
+  }
 
   return (
     <div className="shell pt-10">
       <BackLink />
       <header className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_17rem]">
         <div>
-          <p className="eyebrow">{localizeCategory(project.category, locale)}</p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p className="eyebrow">{localizeCategory(project.category, locale)}</p>
+            <OriginBadge projectId={project.id} />
+          </div>
           <h1 className="mt-3 break-words font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">{project.title}</h1>
           <p className="mt-3 font-display text-xl text-muted md:text-2xl">{project.subtitle}</p>
           <p className="mt-6 max-w-prose text-lg">{project.description}</p>
+          {origin?.kind === 'work' && chapterLink && (
+            <p className="mt-6 flex max-w-prose gap-3 rounded-xl border border-accent-fill/50 bg-accent-soft/60 px-4 py-3 text-sm leading-relaxed">
+              <Icon name="lock" size={16} className="mt-0.5 shrink-0 text-accent" />
+              <span>
+                {t('project.workNotice', { company: origin.name })}{' '}
+                <Link href={chapterLink} className="link font-semibold">
+                  {t('project.workChapter')}
+                </Link>
+              </span>
+            </p>
+          )}
           <div className="mt-8">
             <ProjectLinks project={project} />
           </div>
