@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "django-docker-gui",
-  "title": "django-docker-gui",
+  "title": "Django Docker GUI",
   "subtitle": "Docker Management Interface",
   "description": "A web UI for Docker images and containers, with a real terminal in the browser. Telepy's great-grandparent, in spirit.",
   "longDescription": "A powerful web-based interface for managing Docker containers and images, featuring a fully functional terminal emulator. This tool provides system administrators and developers with an intuitive way to manage Docker environments through a web browser.",

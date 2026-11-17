@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "playwright-snap",
-  "title": "playwright-snap",
+  "title": "Playwright Snap",
   "category": "Web Automation",
   "themes": [
     "libraries"

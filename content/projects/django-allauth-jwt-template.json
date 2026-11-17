@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "django-allauth-jwt-template",
-  "title": "django-allauth-jwt-template",
+  "title": "Django Allauth JWT Template",
   "subtitle": "Django Authentication Template",
   "description": "Email, Google, Microsoft and LINE login for SPAs and APIs, using django-allauth’s headless mode and built-in JWTs.",
   "longDescription": "A Django authentication template built on django-allauth headless mode and its built-in JWT support. It demonstrates email and social login for separate frontends, with end-to-end verification rather than a custom session-to-JWT bridge.",

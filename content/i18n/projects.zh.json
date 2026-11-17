@@ -32,7 +32,8 @@
     ]
   },
   "dev-dock-manager-rust": {
-    "subtitle": "Rust 開發環境管理器",
+    "title": "開發機管理器（Rust 版）",
+    "subtitle": "每人一台 Docker 開發機，在瀏覽器裡用",
     "description": "每個使用者一台 Docker 開發機，附網頁終端機、noVNC 桌面，GPU 可選。是 Django 版的 Rust 重寫，一部分原因是想知道自己做不做得到。",
     "longDescription": "以 Rust 與 Docker 打造的高效能開發環境管理系統。平台為同一台機器上的多位使用者提供彼此隔離的容器化開發環境，包含以 Rust 撰寫、採用 JWT 驗證的後端 API，支援即時主控台存取的 WebSocket，以及 React／Next.js 前端。所有服務都透過 Traefik 反向代理對外提供，並可選擇啟用 Nvidia Docker。",
     "role": "創建者與維護者",
@@ -186,7 +187,8 @@
     ]
   },
   "blur-generator": {
-    "subtitle": "影像模糊生成工具",
+    "title": "模糊影像產生器",
+    "subtitle": "刻意做出爛照片，拿來訓練模型",
     "description": "刻意把好好的照片弄糊：動態、鏡頭、高斯與景深模糊，拿來訓練得面對爛照片的模型。",
     "longDescription": "使用 OpenCV 產生多種模糊效果的影像處理工具，包含動態模糊、鏡頭模糊與高斯模糊。特別適合用在機器學習專案的資料增強，或製作擬真的影像效果。",
     "role": "創建者與維護者",
@@ -229,6 +231,7 @@
     ]
   },
   "batch-crop-images": {
+    "title": "批次裁圖工具",
     "role": "建立與維護",
     "subtitle": "一個框，裁完整個資料夾",
     "description": "用 OpenCV 畫一次裁切框，套用到整個資料夾；也能傳入 --box 或預設檔，不開視窗完成批次裁切。",
@@ -340,6 +343,7 @@
     ]
   },
   "django-project-template": {
+    "title": "Django 專案範本",
     "role": "建立與維護",
     "subtitle": "Django 後端起點",
     "description": "整合 PostgreSQL、Redis、JWT、社群登入、Channels 與 django-q2 的 Django 範本。反覆做的設定，現在也有端對端驗證。",
@@ -357,7 +361,8 @@
     ]
   },
   "django-docker-gui": {
-    "subtitle": "Docker 容器管理 Web UI",
+    "title": "Docker 網頁管理介面",
+    "subtitle": "在瀏覽器管理容器，還有真的終端機",
     "description": "管理 Docker 映像檔與容器的網頁介面，瀏覽器裡有真的終端機。精神上算是 Telepy 的曾祖父。",
     "longDescription": "功能強大的 Web 介面，用於管理 Docker 容器與映像檔，並內建完整功能的終端模擬器。讓系統管理員與開發者能透過瀏覽器，以直覺的方式管理 Docker 環境。",
     "role": "創建者與維護者",
@@ -389,7 +394,8 @@
     ]
   },
   "dev-dock-manager": {
-    "subtitle": "開發環境管理工具",
+    "title": "開發機管理器（Django 版）",
+    "subtitle": "一台機器，多人各有隔離的 Docker 環境",
     "description": "開發機管理器的 Django 初代：一台機器上讓多個使用者各有隔離的 Docker 環境。後來被 Rust 版取代，但最早是它在扛。",
     "longDescription": "以 Django 與 Docker 打造的完整開發環境管理系統。平台為同一台機器上的多位使用者提供彼此隔離的容器化開發環境，並預先配置好各種開發流程所需的工具與套件。",
     "role": "創建者與維護者",
@@ -421,7 +427,8 @@
     ]
   },
   "openpose-detect-hands-with-heatmap": {
-    "subtitle": "用 OpenPose 畫手腕動作熱力圖",
+    "title": "OpenPose 手腕熱力圖",
+    "subtitle": "手腕去過哪裡，疊成一張圖",
     "description": "用身體姿勢版的 OpenPose 跑過一段影片，把手腕經過的位置疊成熱力圖。repo 名稱寫的是「手」，但這個模型其實只認得手腕。",
     "longDescription": "以檔案為輸入的示範程式：每 30 格取一格影像，用兩種縮放比例跑六階段的身體姿勢 OpenPose 網路（19 個熱力圖通道、38 個部位關聯通道），取每個手臂／手腕區域的最低點，只保留落在設定好的多邊形 ROI（感興趣區域）裡的點，再累積成熱力圖疊圖存成 PNG。它不會推論手指關節，也不追蹤手部細節。示範程式用 Docker Compose 執行，CPU 映像檔使用 Python 3.12、TensorFlow 2.21 與 tf-keras，載入原本的 Keras 權重；熱力圖繪製改自 HeatMappy，姿勢估計改自 Open-Pose-Keras。",
     "role": "創建者與維護者",
@@ -449,8 +456,8 @@
     ]
   },
   "persona-tracking": {
-    "title": "Persona Tracking",
-    "subtitle": "數位看板受眾分析",
+    "title": "看板受眾追蹤",
+    "subtitle": "看誰真的在看，再挑適合的廣告",
     "description": "數位看板旁的攝影機追蹤畫面前的人，估計性別與年齡層，看出誰真的在看，再挑一支適合他們的廣告。結果發現大部分的人都直接走過去。",
     "longDescription": "在 Infortrend 為嵌入式數位看板系統開發。螢幕旁的攝影機偵測人臉，替每個人指定一個跨畫面不變的追蹤編號，估計性別與年齡層，並判斷臉是否朝向螢幕。每個人的估計結果會在多個畫面間平均，所以遠處臉小、模糊時的猜測，會隨著人走近而修正。結果寫進每天一份的 SQLite 資料庫和一個小型 HTTP API，再由網頁服務依螢幕前的觀眾替每支廣告評分，播放最適合的那一支。系統跑在螢幕旁的 Nvidia Jetson 邊緣裝置上。封面是後來的個人改寫版 Open Persona，會追蹤整個人並推估興趣，尚未公開。",
     "role": "影像處理軟體工程師",
@@ -505,6 +512,7 @@
     ]
   },
   "simply-blur-detector": {
+    "title": "影像模糊偵測器",
     "role": "建立與維護",
     "subtitle": "在瀏覽器比較 CNN 與 Laplacian",
     "description": "放入圖片，比較 Keras 小型 CNN 和 Laplacian variance 的判斷，還能看逐區塊模糊熱圖。不用上傳。",
@@ -586,6 +594,7 @@
     ]
   },
   "elysion-calendar": {
+    "title": "艾莉森包廂行事曆",
     "role": "建立與維護",
     "subtitle": "不用來回切頁面，也找得到空包廂",
     "description": "查看艾莉森日 K 包廂的空位，用每日與每週視圖比較房間和半小時時段，資料來自店家的官方訂位頁。",
@@ -603,7 +612,8 @@
     ]
   },
   "ssh-reverse-tunnel-using-docker": {
-    "subtitle": "Docker SSH 通道方案",
+    "title": "Docker 反向 SSH 通道",
+    "subtitle": "Telepy 很粗糙的初稿",
     "description": "用容器和反向 SSH 隧道從內網挖一個洞出去。是 Telepy 很粗糙的初稿，那時它還沒有儀表板，也還沒有禮貌。",
     "longDescription": "以 Docker 建立反向 SSH 通道的容器化方案。透過在隔離環境中建立通道伺服器，協助穿越網路限制、建立安全連線。",
     "role": "創建者與維護者",
@@ -615,6 +625,7 @@
     ]
   },
   "django-allauth-jwt-template": {
+    "title": "Django 登入與 JWT 範本",
     "role": "建立與維護",
     "subtitle": "給 SPA 與 API 的登入範本",
     "description": "以 django-allauth headless 模式和內建 JWT 整合 Email、Google、Microsoft 與 LINE 登入。",
@@ -632,7 +643,8 @@
     ]
   },
   "dev-dock": {
-    "subtitle": "GUI 開發容器",
+    "title": "GUI 開發容器",
+    "subtitle": "給不肯住在終端機裡的工具一個桌面",
     "description": "附完整 GUI 桌面的 Docker 開發映像檔，因為有些工具就是不肯住在終端機裡。",
     "longDescription": "以 Docker 為基礎的開發環境，提供開發工作用的通用 GUI 介面。這套容器化方案能確保在不同系統上都有一致的開發環境。",
     "role": "創建者與維護者",
@@ -661,7 +673,8 @@
     ]
   },
   "ip-find-chrome-extension": {
-    "subtitle": "網路 IP 查詢工具",
+    "title": "IP 查詢擴充功能",
+    "subtitle": "點一下，就知道現在的 IP",
     "description": "點一下，Chrome 就告訴你目前的 IP。為了一個搜尋就查得到的東西寫了整個擴充功能；替自己辯護一下，它比較快。",
     "longDescription": "快速辨識並顯示目前網路 IP 位址的 Chrome 擴充功能。適合用於網路診斷，以及了解目前的網路設定。",
     "role": "創建者與維護者",
@@ -673,6 +686,7 @@
     ]
   },
   "fisheye-warping": {
+    "title": "魚眼影像展開",
     "role": "建立與維護",
     "subtitle": "魚眼與全景影像互轉",
     "description": "把俯視魚眼影像展開成全景，也能捲回去。座標網格依尺寸快取，重複轉換可重用。",
@@ -685,6 +699,7 @@
     ]
   },
   "myanimelist-comment-crawler": {
+    "title": "MyAnimeList 評論爬蟲",
     "role": "建立與維護",
     "subtitle": "從動畫評論到可接續蒐集的資料集",
     "description": "透過 Jikan 類型 API 或允許存取的 MAL 網頁蒐集動畫資訊與評論，用 SQLite 記錄進度，再匯出 CSV。",
@@ -715,6 +730,7 @@
     ]
   },
   "yande-and-konachan-to-eagle": {
+    "title": "圖站收藏匯入 Eagle",
     "role": "建立與維護",
     "subtitle": "找到圖片、保留標籤、送進 Eagle",
     "description": "可用 pipx 安裝的 CLI，透過網站 JSON API 與 EagleWrapper 匯入圖片。先以 --dry-run 預覽，保留自己的標籤並略過已匯入項目。",
@@ -727,6 +743,7 @@
     ]
   },
   "eagle-wrapper": {
+    "title": "Eagle Python 套件",
     "role": "建立與維護",
     "subtitle": "用 Python 操作 Eagle 的本機 API",
     "description": "以 Eagle V1 與 V2 API 匯入、搜尋、標記檔案。桌面程式關閉時，也能直接讀取圖片庫。",
@@ -739,8 +756,9 @@
     ]
   },
   "youtube-video-redirector": {
+    "title": "YouTube 影片直連服務",
     "role": "建立與維護",
-    "subtitle": "YouTube 影片連結與播放",
+    "subtitle": "用 yt-dlp 找出原始連結再播放",
     "description": "Flask 小工具，用 yt-dlp 取得 YouTube 原始媒體連結並播放。需要共用點歌清單與 OBS 的話，可看 Streaming Player。",
     "longDescription": "接受影片 ID、以 yt-dlp 解析媒體網址並提供播放頁的 Flask 服務。最終版包含 Docker 與擷取所需的 JavaScript 執行環境，新的點歌與 OBS 功能由 Streaming Player 延續。",
     "features": [
@@ -755,6 +773,7 @@
     ]
   },
   "youtube-redirect-player": {
+    "title": "YouTube 點歌播放器（Flask 版）",
     "role": "建立與維護",
     "subtitle": "跨畫面同步的 Flask 播放器",
     "description": "Flask＋Socket.IO 播放器，在多個畫面同步點播、預設與歷史清單；後續開發移到 Streaming Player。",
@@ -771,6 +790,7 @@
     ]
   },
   "pyppesnap": {
+    "title": "Pyppeteer 網頁快照",
     "role": "建立與維護",
     "subtitle": "早期網頁快照工具",
     "description": "原本的 Pyppeteer 截圖工具，現已封存；新專案 playwright-snap 沿用函式名稱、參數與回傳型別。",
@@ -786,6 +806,7 @@
     ]
   },
   "face-wall-generator-tool": {
+    "title": "人臉牆產生器",
     "role": "建立與維護",
     "subtitle": "用可重現的人臉格子檢查偵測器",
     "description": "把一個資料夾的人臉排成有固定種子的網格；一般照片可先用 OpenCV 的 YuNet 偵測器裁出人臉。",
@@ -821,7 +842,8 @@
     ]
   },
   "obsidian-attachmenter": {
-    "subtitle": "Obsidian 附件管理外掛",
+    "title": "Obsidian 附件整理外掛",
+    "subtitle": "附件依筆記分資料夾，遠端圖片也下載回來",
     "description": "Obsidian 外掛：附件依筆記分資料夾、下載遠端圖片、檢查路徑。給圖片比筆記多的人。",
     "longDescription": "功能完整的 Obsidian 外掛，用來簡化附件管理。它會為每篇筆記套用獨立的附件資料夾結構，讓 vault 保持井然有序。主要功能包括：自動將貼上的圖片移到正確的資料夾、將遠端圖片（包含 Canvas 中的圖片）下載到本機，以及提供檢查與修復失效附件路徑、清理空資料夾的工具。支援多國語言，並與 Obsidian 的檔案總管無縫整合。",
     "role": "創建者與維護者",
@@ -853,7 +875,8 @@
     ]
   },
   "obsidian-word-mode": {
-    "subtitle": "Obsidian 的 Word 式編輯外掛",
+    "title": "Obsidian Word 編輯模式",
+    "subtitle": "像 Word 一樣編輯，存回去還是 Markdown",
     "description": "Obsidian 外掛：像用 Word 一樣編輯 Markdown 筆記，有功能區工具列、表格和圖片，存回磁碟的仍是乾淨的 Markdown。給會寫 Markdown、但還是想按「粗體」按鈕的人。",
     "longDescription": "Word Mode 替 Obsidian 的 Markdown 筆記多加一種編輯器：畫面上看到的是排版好的文字，不是 Markdown 符號，用工具列按鈕和文書軟體常見的快速鍵就能設定格式。檔案仍然是純 Markdown：編輯時只有改過的區塊會重新輸出，其餘部分一字不差保留；HTML 區塊這類無法用 Word 方式編輯的內容，會顯示成原文區塊並原樣存回。功能包括常用、插入、校閱、檢視四個分頁的功能區工具列，直接編輯的表格、表單式的文件屬性、圖片、連結、尋找與取代、大綱側邊欄、輸入時自動套用格式、Mermaid 圖表與圖表編輯器、視覺化方程式編輯、內嵌內容、註腳、提示框與待辦清單；筆記在未存檔時被外部改動，也能選擇要保留哪一份。介面有繁體中文、英文、日文、韓文。以 TypeScript 搭配 ProseMirror 與 markdown-it 開發，用 esbuild 打包；測試用 jsdom 模擬 Obsidian 進行編輯，並能對整個真實 vault 做唯讀的往返轉換檢查。沒有遙測，也不會讀寫 vault 以外的檔案。",
     "role": "創建者與維護者",
@@ -887,6 +910,7 @@
     ]
   },
   "streaming-player": {
+    "title": "直播點歌播放器",
     "role": "建立與維護",
     "subtitle": "從聊天室點歌，到 OBS 播放",
     "description": "Twitch、YouTube 直播聊天室和聊天機器人共用一張點歌清單。Rust 後端同步 OBS 播放頁、透明小卡與管理介面。",
@@ -904,6 +928,7 @@
     ]
   },
   "static-gantt": {
+    "title": "甘特圖工作室",
     "role": "建立與維護",
     "subtitle": "拖曳排程，也能用 Mermaid 編輯",
     "description": "拖曳任務、拉線建立相依關係，直接看到關鍵路徑；切到 Mermaid 文字模式仍保留同一份計畫。資料留在瀏覽器。",
@@ -968,6 +993,7 @@
     ]
   },
   "countdown-studio": {
+    "title": "倒數計時工作室",
     "role": "建立與維護",
     "subtitle": "替時間留一個舞台",
     "description": "同時跑幾個計時器，或倒數到另一個時區的指定時刻。有全螢幕舞台、四種主題與分享連結，直接在瀏覽器使用。",
@@ -993,6 +1019,7 @@
     ]
   },
   "street-scene-ocr": {
+    "title": "街景文字辨識",
     "role": "建立與維護",
     "subtitle": "同一面招牌，三種辨識結果",
     "description": "用 EasyOCR、RapidOCR 和 PaddleOCR 比較街景繁體中文字，並排看文字框、耗時與公眾領域照片的小型評測。",
@@ -1005,6 +1032,7 @@
     ]
   },
   "sentiment-bundle-benchmark": {
+    "title": "情緒分類模型評測",
     "role": "建立與維護",
     "subtitle": "讓情緒分類模型站在同一起跑線",
     "description": "在六個情緒資料集的固定切分上，比較 TF-IDF、嵌入向量、微調編碼器與本機語言模型。接替早期的 GURA。",
@@ -1017,6 +1045,7 @@
     ]
   },
   "playwright-snap": {
+    "title": "Playwright 網頁快照",
     "role": "建立與維護",
     "subtitle": "用持續維護的瀏覽器幫網頁拍照",
     "description": "用 Playwright 載入網頁，將 PNG 或 PDF 以 base64 回傳。從 pyppeteer-snap 搬過來，只要改一行 import。",

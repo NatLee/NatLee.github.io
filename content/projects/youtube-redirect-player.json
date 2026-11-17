@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "youtube-redirect-player",
-  "title": "youtube-redirect-player",
+  "title": "YouTube Redirect Player",
   "subtitle": "YouTube Video Player with WebSocket",
   "description": "A Flask + Socket.IO player with request, default and history playlists synchronised across screens. New development continues in Streaming Player.",
   "longDescription": "The Flask player synchronises a request queue, default playlist and playback history over Socket.IO. Its final version resolves media with yt-dlp and includes Docker and regression tests. The Rust + React Streaming Player carries on the song-request workflow.",

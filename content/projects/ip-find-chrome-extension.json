@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "ip-find-chrome-extension",
-  "title": "IP-FIND-ChromeExtension",
+  "title": "IP Find for Chrome",
   "subtitle": "Network IP Discovery Tool",
   "description": "One click and Chrome tells you your IP. A whole extension for something you could search for; in my defence, it is faster.",
   "longDescription": "A Chrome extension that quickly identifies and displays the current network's IP address. This tool is useful for network diagnostics and understanding your current network configuration.",

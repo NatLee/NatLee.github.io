@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "fisheye-warping",
-  "title": "fisheye-warping",
+  "title": "Fisheye Warping",
   "subtitle": "Fisheye Image Processing Tool",
   "description": "Unrolls top-down fisheye images into panoramas and rolls them back again, so nobody has to squint at round photos.",
   "longDescription": "An OpenCV Python package and CLI that dewarps top-down fisheye images into panoramas and rewarps panoramas into fisheye circles. Coordinate meshes are cached by image size so repeated conversions can reuse the mapping.",

@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "pyppesnap",
-  "title": "pyppeteer-snap",
+  "title": "Pyppeteer Snap",
   "subtitle": "Website Screenshot Tool",
   "description": "The original Pyppeteer screenshot helper. Archived; new work uses playwright-snap with the same function names, arguments and return types.",
   "longDescription": "A Python helper returning website PNG and PDF snapshots as base64. The project is archived because its Pyppeteer browser dependency is no longer maintained. Its successor, playwright-snap, keeps the same API with Playwright-driven Chromium.",
