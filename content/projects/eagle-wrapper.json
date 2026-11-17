@@ -8,7 +8,7 @@
   "language": "python",
   "images": [
     "/images/projects/eagle-wrapper/cover.webp",
-    "https://raw.githubusercontent.com/NatLee/eagle-wrapper/main/doc/add-from-url.png"
+    "https://raw.githubusercontent.com/NatLee/eagle-wrapper/main/docs/images/add-from-url.png"
   ],
   "githubUrl": "https://github.com/NatLee/eagle-wrapper",
   "category": "API/SDK",
