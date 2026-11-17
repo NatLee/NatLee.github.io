@@ -2,12 +2,15 @@
   "$schema": "../schema/project.schema.json",
   "id": "morphkit",
   "title": "morphkit",
-  "subtitle": "In-Browser Media Converter & Editor",
-  "description": "Converts and edits images, audio, video and GIFs entirely in the browser. Nothing gets uploaded, mostly because there is nowhere to upload it to.",
-  "longDescription": "MorphKit is a browser-based file converter and editor with no backend at all: every file is processed client-side, so nothing ever leaves the user's machine. It converts between common image formats (PNG, JPG, WEBP, BMP, GIF, APNG, AVIF), audio formats (MP3, WAV, OGG, FLAC, M4A, AAC, OPUS), and video formats (MP4, WEBM, MOV, AVI, MKV), and goes beyond conversion with a full editing toolkit — a layered image editor with brushes, shapes, text, crop, and background removal; audio/video trimming with volume and speed controls; and GIF/APNG frame-by-frame editing with captions and speed, reverse, and boomerang effects. Batch processing with ZIP download, file metadata inspection (EXIF, bitrate, duration), and clipboard integration round out the workflow. The site is built with Vite, React, and TypeScript, and deploys to GitHub Pages via GitHub Actions.",
+  "subtitle": "In-Browser File Converter & Editors",
+  "description": "Converts and edits images, audio, video, PDFs and documents entirely in the browser. Nothing gets uploaded, mostly because there is nowhere to upload it to.",
+  "longDescription": "MorphKit is a file converter with a set of small editors and no backend at all: every file is processed in the browser, so nothing leaves the user's machine. Images go through the Canvas API, audio and video through ffmpeg.wasm, PDFs through pdf.js and pdf-lib, and Word, PowerPoint, Markdown, HTML, CSV, Excel and JSON through one sanitised-HTML pipeline. On top of plain conversion it can squeeze images and videos under a target file size, turn any image into an ICO icon, pull the audio out of a video, even out loudness across files, and read text from photos and scanned PDF pages with OCR, whose engine downloads only after the user agrees. Six editors cover image layers, GIF/APNG frames, PDF pages, documents, spreadsheets and audio/video trimming; Projects keep longer work, such as a multi-track audio mix, in the browser's IndexedDB; a QR tool makes and reads codes. It is a static Vite + React + TypeScript site, installable as a PWA, in English, Traditional Chinese and Japanese, deployed to GitHub Pages by GitHub Actions and released under the MIT license.",
   "language": "typescript",
   "images": [
-    "/images/projects/morphkit/cover.webp"
+    "/images/projects/morphkit/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/home-en-light.webp",
+    "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/formats-en.webp",
+    "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/editors-en.webp"
   ],
   "githubUrl": "https://github.com/NatLee/morphkit",
   "category": "Web Application",
@@ -21,6 +24,11 @@
     "Vite",
     "ffmpeg.wasm",
     "Canvas API",
+    "pdf.js",
+    "pdf-lib",
+    "tesseract.js",
+    "IndexedDB",
+    "PWA",
     "gifuct-js",
     "gifenc",
     "upng-js",
@@ -28,28 +36,34 @@
     "GitHub Pages"
   ],
   "features": [
-    "Client-side conversion for images (PNG, JPG, WEBP, BMP, GIF, APNG, AVIF), audio (MP3, WAV, OGG, FLAC, M4A, AAC, OPUS), and video (MP4, WEBM, MOV, AVI, MKV)",
-    "Layered image editor with brushes, shapes, text, crop, rotate/flip, and background removal",
-    "Audio/video trimming, volume adjustment, speed control, and rotation",
-    "GIF/APNG editing with frame manipulation, captions, and speed/reverse/boomerang effects",
-    "Batch processing with ZIP download",
-    "File metadata display (EXIF, bitrate, duration)",
-    "Clipboard integration for paste-and-convert workflows",
+    "Batch conversion for images, audio, video, PDFs and documents, with Download all (ZIP) and Merge to PDF",
+    "Fit images and videos under a target file size (100 KB – 5 MB for images, 10 – 100 MB for video)",
+    "Text recognition (OCR) for photos, screenshots and scanned PDF pages in Chinese, Japanese, Korean and English",
+    "Even loudness across files at −14, −16 or −23 LUFS, measured first and adjusted once",
+    "ICO icons from any image, and any audio format from a video",
+    "Six editors: layered images, GIF/APNG frames, PDF pages, documents, spreadsheets and audio/video trimming",
+    "PDF page tools: reorder, rotate, watermark, page numbers, smaller images, blank-page finder, split and AES-256 encryption",
+    "Projects kept in the browser, including a multi-track audio mixer and video projects that export MP4",
+    "QR code maker and reader",
+    "File details: EXIF with GPS, bitrate, duration, page and word counts, and QR codes found inside images",
+    "Installable PWA in English, Traditional Chinese and Japanese, with light and dark themes",
     "100% static site — no server, no file uploads, privacy by design"
   ],
   "challenges": [
     "Processing large media files entirely in the browser under its ~2 GB memory ceiling.",
     "Supporting a wide matrix of image, audio, and video formats without any server-side help.",
-    "Editing animated formats (GIF/APNG) frame by frame while keeping the UI responsive."
+    "Editing animated formats (GIF/APNG) frame by frame while keeping the UI responsive.",
+    "Offering OCR without making every visitor download a multi-megabyte engine."
   ],
   "solutions": [
-    "Used ffmpeg.wasm for audio/video transcoding and the Canvas API for static images, keeping every byte on the user's machine.",
+    "Used ffmpeg.wasm for audio and video, the Canvas API for images, and pdf.js and pdf-lib for PDFs, keeping every byte on the user's machine.",
     "Combined specialized codecs (gifuct-js, gifenc, upng-js) for animation decoding and encoding, with a frame cap to stay within memory limits.",
-    "Built as a fully static Vite + React site deployed to GitHub Pages via GitHub Actions, so the whole tool ships without any infrastructure."
+    "Built as a fully static Vite + React site deployed to GitHub Pages via GitHub Actions, so the whole tool ships without any infrastructure.",
+    "The OCR engine and language data (about 4–8 MB) download only after the user agrees, once, and then stay in the browser."
   ],
   "results": [
     "A free, privacy-friendly converter and editor — files never leave the browser.",
-    "Covers conversion and editing for images, audio, video, GIF, and APNG in a single tool.",
+    "Covers conversion and editing for images, audio, video, animations, PDFs and documents in a single tool.",
     "Runs entirely on GitHub Pages with zero hosting cost or server maintenance."
   ],
   "timeline": {
