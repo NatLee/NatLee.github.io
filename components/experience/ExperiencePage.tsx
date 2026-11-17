@@ -152,7 +152,8 @@ export default function ExperiencePage() {
         <Section id="skills-title" title={t('experience.skills')} intro={t('experience.skillsIntro')}>
           <div className="grid gap-8">
             {skills.map((category) => (
-              <div key={category.id}>
+              // min-w-0：不然 grid 項目會被表格的最小寬度撐開，手機上整頁變成可以左右捲。
+              <div key={category.id} className="min-w-0">
                 <h3 className="eyebrow">{category.name}</h3>
                 <div className="mt-3 overflow-x-auto">
                   <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
