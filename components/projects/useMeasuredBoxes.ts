@@ -13,7 +13,21 @@ export interface Box {
   cy: number
 }
 
-export function useMeasuredBoxes<T>(compute: (boxes: Map<string, Box>, base: DOMRect) => T, deps: DependencyList) {
+/** 在容器裡放一個暫時的元素量文字大小（和實際標籤同樣的 class），量完就拿掉。 */
+export function measureText(container: HTMLElement, text: string, className: string, maxWidth: number) {
+  const probe = document.createElement('span')
+  probe.className = `${className} invisible absolute left-0 top-0`
+  probe.style.maxWidth = `${maxWidth}px`
+  probe.textContent = text
+  container.appendChild(probe)
+  // offsetWidth 會捨去小數；照它設寬度，文字可能多折一行變高，所以無條件進位再多留 1px。
+  const rect = probe.getBoundingClientRect()
+  const size = { width: Math.ceil(rect.width) + 1, height: Math.ceil(rect.height) }
+  probe.remove()
+  return size
+}
+
+export function useMeasuredBoxes<T>(compute: (boxes: Map<string, Box>, base: DOMRect, container: HTMLDivElement) => T, deps: DependencyList) {
   const root = useRef<HTMLDivElement>(null)
   const [result, setResult] = useState<T | null>(null)
 
@@ -29,7 +43,7 @@ export function useMeasuredBoxes<T>(compute: (boxes: Map<string, Box>, base: DOM
         const top = r.top - base.top
         boxes.set(target.getAttribute('data-box')!, { left, right: left + r.width, top, bottom: top + r.height, cx: left + r.width / 2, cy: top + r.height / 2 })
       }
-      setResult(compute(boxes, base))
+      setResult(compute(boxes, base, el))
     }
     measure()
     const observer = new ResizeObserver(measure)

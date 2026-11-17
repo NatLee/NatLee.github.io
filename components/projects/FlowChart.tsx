@@ -27,8 +27,8 @@ interface Geometry {
 function StepBox({ step }: { step: FlowStep }) {
   const text = (
     <>
-      <span className="block text-sm font-semibold leading-snug">{step.label}</span>
-      {step.detail && <span className="mt-0.5 block font-mono text-[11px] leading-snug text-muted">{step.detail}</span>}
+      <span className="block text-sm font-semibold leading-snug [overflow-wrap:anywhere]">{step.label}</span>
+      {step.detail && <span className="mt-0.5 block font-mono text-[11px] leading-snug text-muted [overflow-wrap:anywhere]">{step.detail}</span>}
     </>
   )
   if (step.kind === 'decision') {
@@ -82,7 +82,8 @@ export default function FlowChart({ steps }: { steps: FlowStep[] }) {
       result.branches.push(
         `M${s.right},${s.cy} H${x - CORNER} Q${x},${s.cy} ${x},${s.cy + dir * CORNER} V${t.cy - dir * CORNER} Q${x},${t.cy} ${x - CORNER},${t.cy} H${end}`
       )
-      result.branchLabels.push({ text: step.branch!.when, x: s.right + 6, y: s.cy - 4, maxWidth: x - s.right - 12 })
+      // 條件文字放在判斷右邊、最內側通道之前；寬度不超過那段空間（不夠就換行），才不會跨過任何一條通道。
+      result.branchLabels.push({ text: step.branch!.when, x: s.right + 6, y: s.cy - 4, maxWidth: columnRight + LANE.first - s.right - 12 })
     })
     return result
   }, [steps])
@@ -108,7 +109,7 @@ export default function FlowChart({ steps }: { steps: FlowStep[] }) {
 
       <ol className="relative grid w-full max-w-[22rem] gap-y-[var(--step-gap)]" style={{ '--step-gap': STEP_GAP } as CSSProperties}>
         {steps.map((step) => (
-          <li key={step.id} className="flex">
+          <li key={step.id} className="flex min-w-0">
             <StepBox step={step} />
             {step.next && <span className="sr-only">→ {step.next}</span>}
             {step.branch && (
@@ -121,15 +122,16 @@ export default function FlowChart({ steps }: { steps: FlowStep[] }) {
       </ol>
 
       {geometry?.nextLabels.map((label, index) => (
-        <span key={`n${index}`} aria-hidden="true" className="pointer-events-none absolute -translate-y-1/2 font-mono text-[11px] leading-tight text-muted" style={{ left: label.x, top: label.y }}>
+        <span key={`n${index}`} data-diagram-label="" aria-hidden="true" className="pointer-events-none absolute -translate-y-1/2 rounded bg-paper px-1 font-mono text-[11px] leading-tight text-muted" style={{ left: label.x, top: label.y }}>
           {label.text}
         </span>
       ))}
       {geometry?.branchLabels.map((label, index) => (
         <span
           key={`b${index}`}
+          data-diagram-label=""
           aria-hidden="true"
-          className="pointer-events-none absolute -translate-y-full font-mono text-[11px] leading-tight text-clip"
+          className="pointer-events-none absolute -translate-y-full rounded bg-paper px-1 font-mono text-[11px] leading-tight text-clip [overflow-wrap:anywhere]"
           style={{ left: label.x, top: label.y, maxWidth: label.maxWidth }}
         >
           {label.text}
