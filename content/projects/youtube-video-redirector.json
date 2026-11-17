@@ -38,6 +38,7 @@
   "architecture": [
     {
       "title": "Browser",
+      "kind": "screen",
       "items": [
         "/?v=<video id>"
       ],
@@ -45,6 +46,7 @@
     },
     {
       "title": "Flask app",
+      "kind": "app",
       "items": [
         "main.py",
         "One template"
@@ -54,6 +56,7 @@
     },
     {
       "title": "yt-dlp",
+      "kind": "external",
       "items": [
         "Format \"best\"",
         "Deno runs player JS"
@@ -62,6 +65,7 @@
     },
     {
       "title": "Player page",
+      "kind": "screen",
       "items": [
         "Video.js",
         "Plain <video> tag"

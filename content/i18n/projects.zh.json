@@ -83,16 +83,25 @@
       {
         "title": "Traefik",
         "items": [
-          "依路徑轉送"
+          "/ → 儀表板",
+          "/api、/ws → API"
         ],
-        "next": "轉給後端"
+        "next": "轉送"
       },
       {
         "title": "開發機管理器",
-        "items": [
-          "axum + bollard API",
-          "Next.js 儀表板",
-          "SQLite、Redis 佇列"
+        "nodes": [
+          {
+            "title": "Next.js 儀表板",
+            "items": []
+          },
+          {
+            "title": "axum + bollard API",
+            "items": [
+              "SQLite",
+              "Redis 佇列"
+            ]
+          }
         ],
         "next": "開容器"
       },
@@ -153,10 +162,26 @@
       },
       {
         "title": "MorphKit",
-        "items": [
-          "Canvas API",
-          "ffmpeg.wasm",
-          "pdf.js + pdf-lib"
+        "nodes": [
+          {
+            "title": "Canvas API",
+            "items": [
+              "圖片"
+            ]
+          },
+          {
+            "title": "ffmpeg.wasm",
+            "items": [
+              "音訊、影片"
+            ]
+          },
+          {
+            "title": "PDF 與文件工具",
+            "items": [
+              "pdf.js + pdf-lib",
+              "清理過的 HTML 流程"
+            ]
+          }
         ],
         "next": "轉檔或編輯"
       },
@@ -219,10 +244,17 @@
     "architecture": [
       {
         "title": "交易者",
-        "items": [
-          "你",
-          "三個機器人",
-          "12 種劇本調參"
+        "nodes": [
+          {
+            "title": "你",
+            "items": []
+          },
+          {
+            "title": "三個機器人",
+            "items": [
+              "12 種劇本調參"
+            ]
+          }
         ],
         "next": "委託單"
       },
@@ -278,10 +310,16 @@
     "why": "在 HD Renewables 替日本、後來加上澳洲的電力交易團隊開發，讓交易員下單前先看到現貨電價的預測。市場照樣暴衝，至少決策不必跟著衝。",
     "architecture": [
       {
-        "title": "市場與氣象資料",
-        "items": [
-          "日本電力市場",
-          "氣象資料"
+        "title": "資料來源",
+        "nodes": [
+          {
+            "title": "日本電力市場",
+            "items": []
+          },
+          {
+            "title": "氣象資料",
+            "items": []
+          }
         ],
         "next": "收進"
       },
@@ -546,10 +584,18 @@
     "why": "在 HD Renewables 替儲能示範場開發。儲能得先知道接下來有多少太陽能進來，所以結合氣象資料、歷史發電和時間序列模型做預測。做久了才懂：太陽能預測，說穿了是多加幾道工的天氣預報。",
     "architecture": [
       {
-        "title": "氣象與發電資料",
-        "items": [
-          "多個氣象來源",
-          "歷史發電紀錄"
+        "title": "資料來源",
+        "nodes": [
+          {
+            "title": "氣象資料",
+            "items": [
+              "多個來源"
+            ]
+          },
+          {
+            "title": "歷史發電紀錄",
+            "items": []
+          }
         ],
         "next": "交給"
       },
@@ -642,9 +688,15 @@
       },
       {
         "title": "輿情產品",
-        "items": [
-          "Keypo",
-          "DailyView"
+        "nodes": [
+          {
+            "title": "Keypo",
+            "items": []
+          },
+          {
+            "title": "DailyView",
+            "items": []
+          }
         ]
       }
     ]
@@ -671,33 +723,49 @@
       {
         "title": "你的前端",
         "items": [
-          "瀏覽器",
-          "frontend/ 建置檔"
+          "瀏覽器"
         ],
         "next": "連進來"
       },
       {
         "title": "NGINX",
         "items": [
-          "/ 放靜態檔",
-          "/api 與 /ws"
+          "/ → 靜態檔",
+          "/api、/ws → Django"
         ],
         "next": "轉送"
       },
       {
-        "title": "Django 後端",
-        "items": [
-          "REST、JWT、allauth",
-          "Channels WebSocket",
-          "django-q2 worker"
+        "title": "NGINX 後面",
+        "nodes": [
+          {
+            "title": "靜態檔",
+            "items": [
+              "frontend/ 建置檔"
+            ]
+          },
+          {
+            "title": "Django 後端",
+            "items": [
+              "REST、JWT、allauth",
+              "Channels WebSocket",
+              "django-q2 worker"
+            ]
+          }
         ],
         "next": "存到"
       },
       {
         "title": "資料服務",
-        "items": [
-          "PostgreSQL 18",
-          "Redis 8"
+        "nodes": [
+          {
+            "title": "PostgreSQL 18",
+            "items": []
+          },
+          {
+            "title": "Redis 8",
+            "items": []
+          }
         ]
       }
     ]
@@ -809,16 +877,25 @@
       {
         "title": "Traefik",
         "items": [
-          "依路徑轉送"
+          "/ → 儀表板",
+          "/api、/ws → API"
         ],
-        "next": "轉給後端"
+        "next": "轉送"
       },
       {
         "title": "開發機管理器",
-        "items": [
-          "Django + Channels API",
-          "Next.js 儀表板",
-          "RQ worker、Redis"
+        "nodes": [
+          {
+            "title": "Next.js 儀表板",
+            "items": []
+          },
+          {
+            "title": "Django + Channels API",
+            "items": [
+              "RQ worker",
+              "Redis"
+            ]
+          }
         ],
         "next": "開容器"
       },
@@ -1440,10 +1517,21 @@
       },
       {
         "title": "你",
-        "items": [
-          "瀏覽器（noVNC）",
-          "VNC 用戶端",
-          "SSH"
+        "nodes": [
+          {
+            "title": "瀏覽器",
+            "items": [
+              "noVNC"
+            ]
+          },
+          {
+            "title": "VNC 用戶端",
+            "items": []
+          },
+          {
+            "title": "SSH",
+            "items": []
+          }
         ]
       }
     ]
@@ -1711,9 +1799,19 @@
       },
       {
         "title": "Eagle 圖庫",
-        "items": [
-          "Eagle 程式，port 41595",
-          "磁碟上的 metadata.json"
+        "nodes": [
+          {
+            "title": "Eagle 程式",
+            "items": [
+              "port 41595"
+            ]
+          },
+          {
+            "title": "圖庫資料夾",
+            "items": [
+              "磁碟上的 metadata.json"
+            ]
+          }
         ]
       }
     ]
@@ -1942,10 +2040,19 @@
     "architecture": [
       {
         "title": "圖片",
-        "items": [
-          "內建範例",
-          "nekos.best 或 Danbooru",
-          "自己的檔案與資料夾"
+        "nodes": [
+          {
+            "title": "內建範例",
+            "items": []
+          },
+          {
+            "title": "nekos.best 或 Danbooru",
+            "items": []
+          },
+          {
+            "title": "自己的檔案與資料夾",
+            "items": []
+          }
         ],
         "next": "圖片清單"
       },
@@ -2109,10 +2216,25 @@
     "architecture": [
       {
         "title": "聊天室",
-        "items": [
-          "Twitch EventSub",
-          "YouTube Live Chat API",
-          "HTTP 聊天機器人"
+        "nodes": [
+          {
+            "title": "Twitch",
+            "items": [
+              "EventSub"
+            ]
+          },
+          {
+            "title": "YouTube",
+            "items": [
+              "Live Chat API"
+            ]
+          },
+          {
+            "title": "聊天機器人",
+            "items": [
+              "走 HTTP"
+            ]
+          }
         ],
         "next": "!sr 點歌"
       },
@@ -2127,10 +2249,21 @@
       },
       {
         "title": "網頁",
-        "items": [
-          "OBS 播放頁與小卡",
-          "管理介面",
-          "觀眾歌單頁"
+        "nodes": [
+          {
+            "title": "OBS 播放頁",
+            "items": [
+              "透明小卡"
+            ]
+          },
+          {
+            "title": "管理介面",
+            "items": []
+          },
+          {
+            "title": "觀眾歌單頁",
+            "items": []
+          }
         ]
       }
     ]
@@ -2151,10 +2284,20 @@
     "why": "Mermaid 幾行字就能畫出甘特圖，改期卻得手動改日期。這裡直接拖，Mermaid 自動寫回，它寫不出來的欄位也照留。時程表從此可以進 PR 給人審，雖然沒人要求過。",
     "architecture": [
       {
-        "title": "兩種編輯模式",
-        "items": [
-          "拖曳時間軸",
-          "Mermaid（CodeMirror）"
+        "title": "兩種編輯方式",
+        "nodes": [
+          {
+            "title": "時間軸",
+            "items": [
+              "拖曳、拉線"
+            ]
+          },
+          {
+            "title": "Mermaid 文字",
+            "items": [
+              "CodeMirror"
+            ]
+          }
         ],
         "next": "操作"
       },
@@ -2169,10 +2312,20 @@
       },
       {
         "title": "儲存與匯出",
-        "items": [
-          "localStorage",
-          "PNG、Excel、JSON",
-          "SVG 與 .mmd"
+        "nodes": [
+          {
+            "title": "localStorage",
+            "items": [
+              "自動存檔"
+            ]
+          },
+          {
+            "title": "匯出",
+            "items": [
+              "PNG、Excel、JSON",
+              "SVG 與 .mmd"
+            ]
+          }
         ]
       }
     ]
@@ -2378,10 +2531,23 @@
     "architecture": [
       {
         "title": "倒數來源",
-        "items": [
-          "localStorage 裡的倒數",
-          "分享連結（?to=、?for=）",
-          "其他分頁"
+        "nodes": [
+          {
+            "title": "存下的倒數",
+            "items": [
+              "localStorage"
+            ]
+          },
+          {
+            "title": "分享連結",
+            "items": [
+              "?to=、?for="
+            ]
+          },
+          {
+            "title": "其他分頁",
+            "items": []
+          }
         ],
         "next": "結束時間"
       },
@@ -2435,18 +2601,38 @@
         "next": "包裝成"
       },
       {
-        "title": "節點與 WASM",
-        "items": [
-          "axum + websocket 節點",
-          "wasm-bindgen 編譯"
+        "title": "包裝",
+        "nodes": [
+          {
+            "title": "網路節點",
+            "items": [
+              "axum + websocket"
+            ]
+          },
+          {
+            "title": "WASM 編譯",
+            "items": [
+              "wasm-bindgen"
+            ]
+          }
         ],
         "next": "跑在"
       },
       {
-        "title": "網路與瀏覽器",
-        "items": [
-          "三個 Docker 節點",
-          "React + Tailwind 網頁"
+        "title": "跑在哪裡",
+        "nodes": [
+          {
+            "title": "Docker 網路",
+            "items": [
+              "三個節點"
+            ]
+          },
+          {
+            "title": "瀏覽器示範",
+            "items": [
+              "React + Tailwind"
+            ]
+          }
         ]
       }
     ]

@@ -33,6 +33,7 @@
   "architecture": [
     {
       "title": "Your computer",
+      "kind": "user",
       "items": [
         "ssh -p 22224"
       ],
@@ -40,6 +41,7 @@
     },
     {
       "title": "Outside server",
+      "kind": "server",
       "items": [
         "reverse-outside-server",
         "any public VPS"
@@ -48,6 +50,7 @@
     },
     {
       "title": "Inside machine",
+      "kind": "device",
       "items": [
         "reverse-inside-tunnel",
         "sshd + autossh",
@@ -58,6 +61,7 @@
     },
     {
       "title": "Inside network",
+      "kind": "server",
       "items": [
         "other machines"
       ]

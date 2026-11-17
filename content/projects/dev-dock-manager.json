@@ -58,6 +58,7 @@
   "architecture": [
     {
       "title": "Browser",
+      "kind": "screen",
       "items": [
         "login",
         "web terminal",
@@ -67,23 +68,40 @@
     },
     {
       "title": "Traefik",
+      "kind": "server",
       "items": [
-        "routes by path"
+        "/ → dashboard",
+        "/api, /ws → API"
       ],
-      "next": "/api, /ws"
+      "next": "routes"
     },
     {
       "title": "Dev Dock Manager",
-      "items": [
-        "Django + Channels API",
-        "Next.js dashboard",
-        "RQ worker, Redis"
+      "items": [],
+      "nodes": [
+        {
+          "id": "web",
+          "title": "Next.js dashboard",
+          "kind": "screen",
+          "items": [],
+          "to": []
+        },
+        {
+          "id": "api",
+          "title": "Django + Channels API",
+          "kind": "app",
+          "items": [
+            "RQ worker",
+            "Redis"
+          ]
+        }
       ],
       "next": "Docker socket",
       "core": true
     },
     {
       "title": "Desktop containers",
+      "kind": "server",
       "items": [
         "gui-vnc image",
         "Xfce, noVNC, SSH"

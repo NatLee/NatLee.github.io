@@ -26,6 +26,7 @@
   "architecture": [
     {
       "title": "Government open data",
+      "kind": "external",
       "items": [
         "data.gov.tw tables",
         "Wikipedia yearly events",
@@ -35,6 +36,7 @@
     },
     {
       "title": "Data scripts",
+      "kind": "app",
       "items": [
         "fetch.ts and build.ts",
         "County code table"
@@ -43,6 +45,7 @@
     },
     {
       "title": "Atlas web app",
+      "kind": "app",
       "items": [
         "React 19",
         "D3 map",
@@ -53,6 +56,7 @@
     },
     {
       "title": "Static hosting",
+      "kind": "server",
       "items": [
         "GitHub Pages"
       ]

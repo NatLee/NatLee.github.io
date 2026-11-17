@@ -60,6 +60,7 @@
   "architecture": [
     {
       "title": "Markdown note",
+      "kind": "file",
       "items": [
         ".md file in vault"
       ],
@@ -67,6 +68,7 @@
     },
     {
       "title": "Word Mode editor",
+      "kind": "app",
       "items": [
         "markdown-it parser",
         "ProseMirror document",
@@ -77,6 +79,7 @@
     },
     {
       "title": "Same .md file",
+      "kind": "file",
       "items": [
         "Plain Markdown on disk"
       ]

@@ -28,6 +28,7 @@
   "architecture": [
     {
       "title": "Dataset bundle",
+      "kind": "data",
       "items": [
         "Hugging Face Parquet",
         "MyAnimeList + five classics"
@@ -36,6 +37,7 @@
     },
     {
       "title": "Fixed splits",
+      "kind": "data",
       "items": [
         "SHA-256 checked",
         "Deduplicated, seed 42"
@@ -44,6 +46,7 @@
     },
     {
       "title": "Seven methods",
+      "kind": "model",
       "items": [
         "TF-IDF, frozen embeddings",
         "ModernBERT, DeBERTa-v3",
@@ -54,6 +57,7 @@
     },
     {
       "title": "Report",
+      "kind": "file",
       "items": [
         "Leaderboard tables",
         "Charts",

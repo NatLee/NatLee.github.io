@@ -39,15 +39,32 @@
   "architecture": [
     {
       "title": "Images",
-      "items": [
-        "Bundled samples",
-        "nekos.best or Danbooru",
-        "Your files and folders"
+      "items": [],
+      "nodes": [
+        {
+          "id": "samples",
+          "title": "Bundled samples",
+          "kind": "data",
+          "items": []
+        },
+        {
+          "id": "online",
+          "title": "nekos.best or Danbooru",
+          "kind": "external",
+          "items": []
+        },
+        {
+          "id": "yours",
+          "title": "Your files and folders",
+          "kind": "file",
+          "items": []
+        }
       ],
       "next": "image list"
     },
     {
       "title": "Image Annotation",
+      "kind": "app",
       "items": [
         "Boxes, classes, undo",
         "Zoom and pan",
@@ -58,6 +75,7 @@
     },
     {
       "title": "Dataset files",
+      "kind": "file",
       "items": [
         "JSON, COCO",
         "YOLO, Pascal VOC"

@@ -40,6 +40,7 @@
   "architecture": [
     {
       "title": "Dataset bundle",
+      "kind": "data",
       "items": [
         "MyAnimeList reviews",
         "Five classic datasets",
@@ -49,6 +50,7 @@
     },
     {
       "title": "Tokenizer and embeddings",
+      "kind": "model",
       "items": [
         "Keras tokenizer",
         "GloVe 840B vectors"
@@ -57,6 +59,7 @@
     },
     {
       "title": "GURA model",
+      "kind": "model",
       "items": [
         "Bidirectional GRU",
         "Self-attention",
@@ -67,6 +70,7 @@
     },
     {
       "title": "Training results",
+      "kind": "file",
       "items": [
         "Accuracy charts",
         "Best-epoch checkpoints"

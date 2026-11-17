@@ -49,6 +49,7 @@
   "architecture": [
     {
       "title": "Import",
+      "kind": "file",
       "items": [
         "SQuAD v1/v2 JSON",
         "Hugging Face JSONL",
@@ -58,6 +59,7 @@
     },
     {
       "title": "AI suggestions (optional)",
+      "kind": "model",
       "items": [
         "Claude API",
         "OpenAI-compatible, e.g. Ollama",
@@ -67,6 +69,7 @@
     },
     {
       "title": "Annotation and review",
+      "kind": "app",
       "items": [
         "Rust axum, SQLite",
         "React span selection",
@@ -77,6 +80,7 @@
     },
     {
       "title": "Datasets out",
+      "kind": "file",
       "items": [
         "SQuAD v1/v2",
         "Hugging Face JSONL",

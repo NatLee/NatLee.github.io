@@ -48,6 +48,7 @@
   "architecture": [
     {
       "title": "Official QWOP game",
+      "kind": "external",
       "items": [
         "foddy.net page"
       ],
@@ -55,6 +56,7 @@
     },
     {
       "title": "Playwright Chromium",
+      "kind": "screen",
       "items": [
         "8 headless browsers",
         "clock.js virtual time"
@@ -63,6 +65,7 @@
     },
     {
       "title": "QWOP agent",
+      "kind": "model",
       "items": [
         "Gymnasium environment",
         "Tesseract distance OCR",
@@ -73,6 +76,7 @@
     },
     {
       "title": "Training outputs",
+      "kind": "file",
       "items": [
         "Policy checkpoints",
         "Race GIFs",

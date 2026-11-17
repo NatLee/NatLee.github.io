@@ -38,6 +38,7 @@
   "architecture": [
     {
       "title": "Official booking page",
+      "kind": "external",
       "items": [
         "calendar.elysion.com.tw",
         "One table per room"
@@ -46,6 +47,7 @@
     },
     {
       "title": "Elysion Calendar",
+      "kind": "app",
       "items": [
         "FastAPI + Redis",
         "Next.js frontend",
@@ -56,6 +58,7 @@
     },
     {
       "title": "Your browser",
+      "kind": "screen",
       "items": [
         "Room cards",
         "Time table",

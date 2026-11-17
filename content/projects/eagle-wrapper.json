@@ -33,6 +33,7 @@
   "architecture": [
     {
       "title": "Your script",
+      "kind": "user",
       "items": [
         "Downloader or tagger",
         "yande-and-konachan-to-eagle"
@@ -41,6 +42,7 @@
     },
     {
       "title": "EagleWrapper",
+      "kind": "app",
       "items": [
         "Eagle() V1 methods",
         "Eagle().v2 Web API",
@@ -51,9 +53,24 @@
     },
     {
       "title": "Eagle library",
-      "items": [
-        "Eagle app, port 41595",
-        "metadata.json on disk"
+      "items": [],
+      "nodes": [
+        {
+          "id": "eagle",
+          "title": "Eagle app",
+          "kind": "screen",
+          "items": [
+            "port 41595"
+          ]
+        },
+        {
+          "id": "folder",
+          "title": "Library folder",
+          "kind": "data",
+          "items": [
+            "metadata.json on disk"
+          ]
+        }
       ]
     }
   ],

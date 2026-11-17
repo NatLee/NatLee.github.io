@@ -45,6 +45,7 @@
   "architecture": [
     {
       "title": "Input folder",
+      "kind": "data",
       "items": [
         "Same-layout images",
         "Reference image"
@@ -53,6 +54,7 @@
     },
     {
       "title": "batch-crop",
+      "kind": "app",
       "items": [
         "OpenCV crop window",
         "--box or --preset",
@@ -63,6 +65,7 @@
     },
     {
       "title": "Output folder",
+      "kind": "data",
       "items": [
         "Same names and formats",
         "EXIF and ICC kept"

@@ -33,6 +33,7 @@
   "architecture": [
     {
       "title": "iPhone photo",
+      "kind": "file",
       "items": [
         ".heic file",
         "stdin or BytesIO"
@@ -41,6 +42,7 @@
     },
     {
       "title": "heic2png",
+      "kind": "app",
       "items": [
         "HEIC2PNG class",
         "heic2png CLI",
@@ -51,6 +53,7 @@
     },
     {
       "title": "PNG or JPEG",
+      "kind": "file",
       "items": [
         "Next to the input",
         "Or stdout"

@@ -29,6 +29,7 @@
   "architecture": [
     {
       "title": "Street sign photo",
+      "kind": "file",
       "items": [
         "Web upload page",
         "JSON API request"
@@ -37,6 +38,7 @@
     },
     {
       "title": "Traefik",
+      "kind": "server",
       "items": [
         "Spreads across containers",
         "HTTPS in production"
@@ -45,6 +47,7 @@
     },
     {
       "title": "OCR service",
+      "kind": "model",
       "items": [
         "FastAPI",
         "EasyOCR, RapidOCR, PaddleOCR",
@@ -55,6 +58,7 @@
     },
     {
       "title": "Results",
+      "kind": "file",
       "items": [
         "Boxes and text",
         "Per-stage timings",

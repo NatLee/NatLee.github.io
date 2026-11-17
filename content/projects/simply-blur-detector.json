@@ -46,6 +46,7 @@
   "architecture": [
     {
       "title": "Sharp pictures",
+      "kind": "data",
       "items": [
         "120 own illustrations",
         "data/*/nonblur"
@@ -54,6 +55,7 @@
     },
     {
       "title": "blur-generator",
+      "kind": "app",
       "items": [
         "blurgenerator package",
         "lens, Gaussian, motion"
@@ -62,6 +64,7 @@
     },
     {
       "title": "Blur detector",
+      "kind": "model",
       "items": [
         "Keras CNN",
         "model/model.h5",
@@ -72,6 +75,7 @@
     },
     {
       "title": "Browser demo",
+      "kind": "screen",
       "items": [
         "ONNX Runtime Web",
         "Laplacian variance",

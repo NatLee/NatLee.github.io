@@ -60,6 +60,7 @@
   "architecture": [
     {
       "title": "Web crawlers",
+      "kind": "server",
       "items": [
         "Daily crawl"
       ],
@@ -67,6 +68,7 @@
     },
     {
       "title": "Crawled post store",
+      "kind": "data",
       "items": [
         "Elasticsearch"
       ],
@@ -74,6 +76,7 @@
     },
     {
       "title": "Sentiment engine",
+      "kind": "model",
       "items": [
         "PaddlePaddle emotion model",
         "Docker services",
@@ -84,9 +87,20 @@
     },
     {
       "title": "Social-listening products",
-      "items": [
-        "Keypo",
-        "DailyView"
+      "items": [],
+      "nodes": [
+        {
+          "id": "keypo",
+          "title": "Keypo",
+          "kind": "screen",
+          "items": []
+        },
+        {
+          "id": "dailyview",
+          "title": "DailyView",
+          "kind": "screen",
+          "items": []
+        }
       ]
     }
   ],

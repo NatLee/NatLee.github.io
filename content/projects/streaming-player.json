@@ -31,15 +31,38 @@
   "architecture": [
     {
       "title": "Chat",
-      "items": [
-        "Twitch EventSub",
-        "YouTube Live Chat API",
-        "Chat bots over HTTP"
+      "items": [],
+      "nodes": [
+        {
+          "id": "twitch",
+          "title": "Twitch",
+          "kind": "external",
+          "items": [
+            "EventSub"
+          ]
+        },
+        {
+          "id": "youtube",
+          "title": "YouTube",
+          "kind": "external",
+          "items": [
+            "Live Chat API"
+          ]
+        },
+        {
+          "id": "bots",
+          "title": "Chat bots",
+          "kind": "external",
+          "items": [
+            "over HTTP"
+          ]
+        }
       ],
       "next": "!sr requests"
     },
     {
       "title": "Streaming Player",
+      "kind": "app",
       "items": [
         "axum command engine",
         "Queue rules + SQLite",
@@ -50,10 +73,28 @@
     },
     {
       "title": "Browser pages",
-      "items": [
-        "OBS player, overlay",
-        "Admin dashboard",
-        "Viewer queue page"
+      "items": [],
+      "nodes": [
+        {
+          "id": "obs",
+          "title": "OBS player",
+          "kind": "screen",
+          "items": [
+            "overlay card"
+          ]
+        },
+        {
+          "id": "admin",
+          "title": "Admin dashboard",
+          "kind": "screen",
+          "items": []
+        },
+        {
+          "id": "viewers",
+          "title": "Viewer queue page",
+          "kind": "user",
+          "items": []
+        }
       ]
     }
   ],

@@ -54,6 +54,7 @@
   "architecture": [
     {
       "title": "What you do",
+      "kind": "user",
       "items": [
         "Paste an image",
         "Rename or move notes",
@@ -63,6 +64,7 @@
     },
     {
       "title": "Attachmenter",
+      "kind": "app",
       "items": [
         "Paste image handler",
         "Remote image downloader",
@@ -73,6 +75,7 @@
     },
     {
       "title": "Per-note attachment folder",
+      "kind": "data",
       "items": [
         "<note>_Attachments/",
         "Links updated"

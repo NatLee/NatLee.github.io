@@ -51,6 +51,7 @@
   "architecture": [
     {
       "title": "Install scripts",
+      "kind": "file",
       "items": [
         "debian:bookworm-slim",
         "six install scripts"
@@ -59,6 +60,7 @@
     },
     {
       "title": "gui-vnc image",
+      "kind": "app",
       "items": [
         "Xfce + TigerVNC",
         "noVNC",
@@ -69,10 +71,28 @@
     },
     {
       "title": "You",
-      "items": [
-        "browser (noVNC)",
-        "VNC client",
-        "SSH"
+      "items": [],
+      "nodes": [
+        {
+          "id": "browser",
+          "title": "Browser",
+          "kind": "screen",
+          "items": [
+            "noVNC"
+          ]
+        },
+        {
+          "id": "vnc",
+          "title": "VNC client",
+          "kind": "screen",
+          "items": []
+        },
+        {
+          "id": "ssh",
+          "title": "SSH",
+          "kind": "app",
+          "items": []
+        }
       ]
     }
   ],

@@ -26,15 +26,31 @@
   "why": "Mermaid turns a few lines of text into a tidy Gantt chart, but rescheduling it means retyping dates. Gantt Studio lets you drag the bars and writes the Mermaid back, keeping the fields Mermaid has no syntax for. A schedule you can review in a pull request: possible now, if not exactly requested.",
   "architecture": [
     {
-      "title": "Two editing modes",
-      "items": [
-        "Drag on the timeline",
-        "Mermaid in CodeMirror"
+      "title": "Two ways to edit",
+      "items": [],
+      "nodes": [
+        {
+          "id": "timeline",
+          "title": "Timeline",
+          "kind": "screen",
+          "items": [
+            "drag bars, draw links"
+          ]
+        },
+        {
+          "id": "mermaid",
+          "title": "Mermaid text",
+          "kind": "file",
+          "items": [
+            "CodeMirror"
+          ]
+        }
       ],
       "next": "actions"
     },
     {
       "title": "Gantt Studio",
+      "kind": "app",
       "items": [
         "ganttReducer + undo",
         "computeSchedule",
@@ -45,10 +61,25 @@
     },
     {
       "title": "Saved and exported",
-      "items": [
-        "localStorage",
-        "PNG, Excel, JSON",
-        "SVG and .mmd"
+      "items": [],
+      "nodes": [
+        {
+          "id": "local",
+          "title": "localStorage",
+          "kind": "data",
+          "items": [
+            "autosave"
+          ]
+        },
+        {
+          "id": "exports",
+          "title": "Exports",
+          "kind": "file",
+          "items": [
+            "PNG, Excel, JSON",
+            "SVG and .mmd"
+          ]
+        }
       ]
     }
   ],

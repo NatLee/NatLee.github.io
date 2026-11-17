@@ -36,6 +36,7 @@
   "architecture": [
     {
       "title": "Fisheye image",
+      "kind": "file",
       "items": [
         "Top-down camera frame"
       ],
@@ -43,6 +44,7 @@
     },
     {
       "title": "FisheyeWarping",
+      "kind": "app",
       "items": [
         "Mesh per image size",
         "cv2.remap",
@@ -53,6 +55,7 @@
     },
     {
       "title": "Panorama",
+      "kind": "file",
       "items": [
         "dewarp-output.png"
       ]

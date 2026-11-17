@@ -55,6 +55,7 @@
   "architecture": [
     {
       "title": "Browser",
+      "kind": "screen",
       "items": [
         "plain HTML pages",
         "xterm.js terminal"
@@ -63,6 +64,7 @@
     },
     {
       "title": "d-docker-web",
+      "kind": "app",
       "items": [
         "Django + Channels",
         "RQ worker + Redis",
@@ -73,6 +75,7 @@
     },
     {
       "title": "Docker daemon",
+      "kind": "server",
       "items": [
         "host containers",
         "images",
