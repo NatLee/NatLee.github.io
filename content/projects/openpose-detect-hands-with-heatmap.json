@@ -7,7 +7,7 @@
   "longDescription": "An advanced computer vision application that leverages OpenPose for hand detection and provides intuitive heatmap visualizations. This tool is particularly useful for gesture analysis, motion studies, and interactive applications requiring hand tracking.",
   "language": "python",
   "images": [
-    "https://github.com/NatLee/openpose-detect-hands-with-heatmap/raw/main/doc/heatmap-motion.gif"
+    "https://github.com/NatLee/openpose-detect-hands-with-heatmap/raw/main/docs/images/heatmap-motion.gif"
   ],
   "githubUrl": "https://github.com/NatLee/openpose-detect-hands-with-heatmap",
   "category": "Computer Vision",

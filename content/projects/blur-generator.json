@@ -8,9 +8,9 @@
   "language": "python",
   "images": [
     "/images/projects/blur-generator/cover.webp",
-    "https://raw.githubusercontent.com/NatLee/blur-generator/main/doc/motion.png",
-    "https://raw.githubusercontent.com/NatLee/blur-generator/main/doc/depth-lens-output.png",
-    "https://raw.githubusercontent.com/NatLee/blur-generator/main/doc/depth-map-test.png"
+    "https://raw.githubusercontent.com/NatLee/blur-generator/main/docs/images/motion.png",
+    "https://raw.githubusercontent.com/NatLee/blur-generator/main/docs/images/depth-lens-output.png",
+    "https://raw.githubusercontent.com/NatLee/blur-generator/main/docs/images/depth-map-test.png"
   ],
   "githubUrl": "https://github.com/NatLee/blur-generator",
   "category": "Computer Vision",
