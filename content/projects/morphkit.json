@@ -72,6 +72,7 @@
   "architecture": [
     {
       "title": "Your files",
+      "kind": "data",
       "items": [
         "Images, audio, video",
         "PDFs and documents"
@@ -80,16 +81,40 @@
     },
     {
       "title": "MorphKit",
-      "items": [
-        "Canvas API",
-        "ffmpeg.wasm",
-        "pdf.js + pdf-lib"
+      "items": [],
+      "nodes": [
+        {
+          "id": "canvas",
+          "title": "Canvas API",
+          "kind": "app",
+          "items": [
+            "images"
+          ]
+        },
+        {
+          "id": "ffmpeg",
+          "title": "ffmpeg.wasm",
+          "kind": "app",
+          "items": [
+            "audio, video"
+          ]
+        },
+        {
+          "id": "docs",
+          "title": "PDF and document tools",
+          "kind": "app",
+          "items": [
+            "pdf.js + pdf-lib",
+            "sanitised HTML pipeline"
+          ]
+        }
       ],
       "next": "converted or edited",
       "core": true
     },
     {
       "title": "Results",
+      "kind": "file",
       "items": [
         "Download or ZIP",
         "IndexedDB projects"

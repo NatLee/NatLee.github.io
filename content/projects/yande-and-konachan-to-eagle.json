@@ -33,6 +33,7 @@
   "architecture": [
     {
       "title": "yande.re or konachan.com",
+      "kind": "external",
       "items": [
         "/post.json API"
       ],
@@ -40,6 +41,7 @@
     },
     {
       "title": "yk2eagle CLI",
+      "kind": "app",
       "items": [
         "moebooru.py reader",
         "map.yaml tag map",
@@ -50,6 +52,7 @@
     },
     {
       "title": "EagleWrapper",
+      "kind": "app",
       "items": [
         "add_from_url"
       ],
@@ -57,6 +60,7 @@
     },
     {
       "title": "Eagle app",
+      "kind": "screen",
       "items": [
         "localhost:41595",
         "Downloads the file"

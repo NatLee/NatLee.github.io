@@ -51,6 +51,7 @@
   "architecture": [
     {
       "title": "IMDb text variants",
+      "kind": "data",
       "items": [
         "Vanilla, lowercased",
         "Lemmatized, multiword",
@@ -60,6 +61,7 @@
     },
     {
       "title": "preproc-imdb",
+      "kind": "model",
       "items": [
         "Frequency-ranked word ids",
         "CNN or CNN+LSTM",
@@ -70,6 +72,7 @@
     },
     {
       "title": "Run folder",
+      "kind": "data",
       "items": [
         "results.json",
         "predictions.tsv",
@@ -79,6 +82,7 @@
     },
     {
       "title": "Paper comparison",
+      "kind": "file",
       "items": [
         "Tables 2 and 3"
       ]

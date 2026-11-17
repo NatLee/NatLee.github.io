@@ -53,11 +53,13 @@
   "architecture": [
     {
       "title": "Camera by the screen",
+      "kind": "device",
       "items": [],
       "next": "frames to"
     },
     {
       "title": "Jetson vision pipeline",
+      "kind": "model",
       "items": [
         "Face detection and tracking",
         "Gender and age group",
@@ -68,6 +70,7 @@
     },
     {
       "title": "Daily records",
+      "kind": "data",
       "items": [
         "SQLite",
         "Small HTTP API"
@@ -76,6 +79,7 @@
     },
     {
       "title": "Ad selection service",
+      "kind": "screen",
       "items": [
         "Scores ads per audience",
         "Plays the best match"

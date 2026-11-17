@@ -44,8 +44,13 @@ test('every project belongs to listed categories, and old themes still get one o
   }
 })
 
-test('why and architecture are bilingual and the diagram has one core step', () => {
+test('why and architecture are bilingual, and each diagram is well formed', () => {
   const overlays = read('content/i18n/projects.zh.json')
+  // 節點種類只接受合約裡寫的那幾種（lib/content/contract.ts 的 ArchitectureKind）。
+  const contract = fs.readFileSync(path.join(root, 'lib/content/contract.ts'), 'utf8')
+  const kinds = [...contract.match(/^export type ArchitectureKind = (.+)$/m)[1].matchAll(/'([a-z]+)'/g)].map(match => match[1])
+  // 只寫在英文的欄位：中文照順序疊上去，不能自己另外標。
+  const englishOnly = ['core', 'kind', 'id', 'to']
   for (const project of projects) {
     const zh = overlays[project.id] ?? {}
     if (project.why) assert.ok(zh.why, `${project.id}: why needs a Chinese version`)
@@ -55,21 +60,50 @@ test('why and architecture are bilingual and the diagram has one core step', () 
       assert.ok(!zh.architecture, `${project.id}: Chinese architecture without an English one`)
       continue
     }
-    // 作品頁橫排最多放五步；少於兩步就不是流程了。
-    assert.ok(steps.length >= 2 && steps.length <= 5, `${project.id}: architecture needs 2–5 steps`)
-    assert.equal(steps.filter(step => step.core).length, 1, `${project.id}: exactly one step is the project itself (core)`)
+    const where = (index, node) => `${project.id}: layer ${index + 1}${node ? ` node ${node}` : ''}`
+    const checkNode = (node, label) => {
+      assert.ok(node.title, `${label} needs a title`)
+      assert.ok(Array.isArray(node.items) && node.items.length <= 3, `${label} lists 0–3 items`)
+      if (node.kind) assert.ok(kinds.includes(node.kind), `${label}: kind must be one of ${kinds.join(', ')}`)
+    }
+    // 作品頁橫排最多放五層；少於兩層就不是流程了。每層最多三個並排的節點。
+    assert.ok(steps.length >= 2 && steps.length <= 5, `${project.id}: architecture needs 2–5 layers`)
+    const idsOf = step => (step.nodes ? step.nodes.map(node => node.id) : [step.id].filter(Boolean))
+    let cores = 0
     steps.forEach((step, index) => {
-      assert.ok(step.title, `${project.id}: step ${index + 1} needs a title`)
-      assert.ok(Array.isArray(step.items) && step.items.length <= 3, `${project.id}: step ${index + 1} lists 0–3 items`)
       const last = index === steps.length - 1
-      assert.ok(!(last && step.next), `${project.id}: the last step has no arrow`)
+      assert.ok(!(last && step.next), `${where(index)}: the last layer has no arrow`)
+      if (step.core) cores++
+      const nodes = step.nodes ?? [step]
+      if (step.nodes) {
+        assert.ok(step.nodes.length >= 2 && step.nodes.length <= 3, `${where(index)}: a layer with nodes has 2–3 of them`)
+        assert.ok(step.title, `${where(index)}: a layer with nodes needs a caption (title)`)
+        assert.equal(new Set(idsOf(step)).size, step.nodes.length, `${where(index)}: node ids must be unique`)
+        assert.ok(!step.kind && !step.to && !step.id && !step.items.length, `${where(index)}: with nodes, put kind/to/id/items on the nodes`)
+      }
+      nodes.forEach((node, i) => {
+        if (step.nodes && node.core) cores++
+        checkNode(node, where(index, step.nodes ? i + 1 : undefined))
+        if (node.to) {
+          assert.ok(!last, `${where(index)}: the last layer cannot point anywhere`)
+          const nextIds = idsOf(steps[index + 1])
+          for (const id of node.to) assert.ok(nextIds.includes(id), `${where(index)}: to "${id}" is not an id in the next layer`)
+        }
+      })
     })
+    assert.equal(cores, 1, `${project.id}: exactly one node or layer is the project itself (core)`)
+
     assert.ok(Array.isArray(zh.architecture), `${project.id}: architecture needs a Chinese version`)
-    assert.equal(zh.architecture.length, steps.length, `${project.id}: Chinese architecture must have the same steps`)
+    assert.equal(zh.architecture.length, steps.length, `${project.id}: Chinese architecture must have the same layers`)
     zh.architecture.forEach((step, index) => {
-      assert.ok(step.title, `${project.id}: Chinese step ${index + 1} needs a title`)
-      assert.ok(!('core' in step), `${project.id}: write core only in English`)
-      assert.equal(Boolean(step.next), Boolean(steps[index].next), `${project.id}: step ${index + 1} arrow label must exist in both languages`)
+      const en = steps[index]
+      assert.ok(step.title, `${where(index)}: Chinese title missing`)
+      assert.equal(Boolean(step.next), Boolean(en.next), `${where(index)}: arrow label must exist in both languages`)
+      assert.equal(step.nodes?.length ?? 0, en.nodes?.length ?? 0, `${where(index)}: Chinese must have the same nodes`)
+      for (const node of [step, ...(step.nodes ?? [])]) {
+        for (const key of englishOnly) assert.ok(!(key in node), `${where(index)}: write ${key} only in English`)
+      }
+      ;(step.nodes ?? []).forEach((node, i) => assert.ok(node.title, `${where(index, i + 1)}: Chinese title missing`))
     })
   }
 })

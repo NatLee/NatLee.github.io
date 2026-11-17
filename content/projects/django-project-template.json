@@ -41,35 +41,64 @@
   "architecture": [
     {
       "title": "Your frontend",
+      "kind": "screen",
       "items": [
-        "browser",
-        "frontend/ build"
+        "browser"
       ],
       "next": "HOST_PORT"
     },
     {
       "title": "NGINX",
+      "kind": "server",
       "items": [
-        "static files at /",
-        "/api and /ws"
+        "/ → static files",
+        "/api, /ws → Django"
       ],
       "next": "proxies"
     },
     {
-      "title": "Django backend",
-      "items": [
-        "REST, JWT, allauth",
-        "Channels websockets",
-        "django-q2 worker"
+      "title": "Behind NGINX",
+      "items": [],
+      "nodes": [
+        {
+          "id": "static",
+          "title": "Static files",
+          "kind": "file",
+          "items": [
+            "frontend/ build"
+          ],
+          "to": []
+        },
+        {
+          "id": "django",
+          "title": "Django backend",
+          "kind": "app",
+          "items": [
+            "REST, JWT, allauth",
+            "Channels websockets",
+            "django-q2 worker"
+          ],
+          "core": true
+        }
       ],
-      "next": "stores in",
-      "core": true
+      "next": "stores in"
     },
     {
       "title": "Data services",
-      "items": [
-        "PostgreSQL 18",
-        "Redis 8"
+      "items": [],
+      "nodes": [
+        {
+          "id": "pg",
+          "title": "PostgreSQL 18",
+          "kind": "data",
+          "items": []
+        },
+        {
+          "id": "redis",
+          "title": "Redis 8",
+          "kind": "data",
+          "items": []
+        }
       ]
     }
   ],

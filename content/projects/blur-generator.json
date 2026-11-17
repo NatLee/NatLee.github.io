@@ -57,6 +57,7 @@
   "architecture": [
     {
       "title": "Sharp image",
+      "kind": "file",
       "items": [
         "OpenCV image array",
         "Optional depth map"
@@ -65,6 +66,7 @@
     },
     {
       "title": "BlurGenerator",
+      "kind": "app",
       "items": [
         "Motion, lens, Gaussian",
         "Depth-layer blur",
@@ -75,6 +77,7 @@
     },
     {
       "title": "Training data",
+      "kind": "data",
       "items": [
         "simply-blur-detector"
       ]

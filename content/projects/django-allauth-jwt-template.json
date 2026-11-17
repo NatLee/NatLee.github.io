@@ -39,6 +39,7 @@
   "architecture": [
     {
       "title": "Your frontend",
+      "kind": "screen",
       "items": [
         "SPA or app",
         "demo page",
@@ -48,6 +49,7 @@
     },
     {
       "title": "Django + allauth",
+      "kind": "app",
       "items": [
         "headless JSON API",
         "Google, Microsoft, LINE",
@@ -58,6 +60,7 @@
     },
     {
       "title": "JWT pair",
+      "kind": "file",
       "items": [
         "5-minute access token",
         "rotating refresh token"
@@ -66,6 +69,7 @@
     },
     {
       "title": "Your API",
+      "kind": "server",
       "items": [
         "/api/me example",
         "DRF views"

@@ -4,6 +4,7 @@ import projectsZh from '@/content/i18n/projects.zh.json'
 import thumbnails from '@/content/_generated/thumbnails.json'
 import type { Locale } from '@/lib/i18n/config'
 import { localizedArray, localizedField } from '@/lib/i18n/localize'
+import type { ArchitectureStep } from '@/lib/content/contract'
 import { getRepoStats } from './github'
 
 export type ProjectCategory =
@@ -23,30 +24,35 @@ export type ProjectCategory =
   | 'Web Automation'
   | 'Productivity Tools'
 
-/** 架構圖的一步。架構圖是由左到右的幾步，core 標出這個作品本身。 */
-export interface ArchitectureStep {
-  title: string
-  items: string[]
-  /** 往下一步的箭頭上寫的字；最後一步沒有。 */
-  next?: string
-  core?: boolean
+export type { ArchitectureKind, ArchitectureNode, ArchitectureStep } from '@/lib/content/contract'
+
+/** 中文的一個節點：照英文的順序寫，只換字；id、kind、core、to 只寫在英文。 */
+interface ArchitectureTextZh {
+  title?: string
+  items?: string[]
+}
+type ArchitectureStepZh = ArchitectureTextZh & { next?: string; nodes?: ArchitectureTextZh[] }
+
+/** 把一個節點的中文疊上去（沒寫的欄位用英文）。 */
+function localizeText<T extends { title: string; items: string[] }>(en: T, zh?: ArchitectureTextZh): T {
+  return { ...en, title: zh?.title || en.title, items: zh?.items?.length ? zh.items : en.items }
 }
 
-/** 中文的架構圖照英文的步驟順序寫，只換字；core 只寫在英文。 */
-type ArchitectureStepZh = Partial<Omit<ArchitectureStep, 'core'>>
-
 /**
- * 把中文的架構圖疊到英文上：步數不一樣就整個用英文（npm test 會擋下這種情況）。
+ * 把中文的架構圖疊到英文上：層數或節點數不一樣就用英文（npm test 會擋下這種情況）。
  * 作品頁和 site.json 都用它，兩邊的結果才會一樣。
  */
 export function localizeArchitecture(en: ArchitectureStep[], zh?: ArchitectureStepZh[]): ArchitectureStep[] {
   if (!zh || zh.length !== en.length) return en
-  return en.map((step, index) => ({
-    ...step,
-    title: zh[index].title || step.title,
-    items: zh[index].items?.length ? zh[index].items! : step.items,
-    next: step.next === undefined ? undefined : zh[index].next || step.next,
-  }))
+  return en.map((step, index) => {
+    const z = zh[index]
+    const nodes = step.nodes && z.nodes?.length === step.nodes.length ? step.nodes.map((node, i) => localizeText(node, z.nodes![i])) : step.nodes
+    return {
+      ...localizeText(step, z),
+      next: step.next === undefined ? undefined : z.next || step.next,
+      ...(nodes ? { nodes } : {}),
+    }
+  })
 }
 
 /** flagship = Telepy（首頁獨立區塊）；selected = 精選卡片；archive = 其他（列表）。 */

@@ -33,6 +33,7 @@
   "architecture": [
     {
       "title": "Review sources",
+      "kind": "external",
       "items": [
         "Jikan-Edge JSON API",
         "MyAnimeList web pages"
@@ -41,6 +42,7 @@
     },
     {
       "title": "Scrapy spiders",
+      "kind": "app",
       "items": [
         "info_spider: titles",
         "review_spider: reviews",
@@ -51,6 +53,7 @@
     },
     {
       "title": "SQLite database",
+      "kind": "data",
       "items": [
         "animeList",
         "reviews",
@@ -60,6 +63,7 @@
     },
     {
       "title": "Kaggle-ready CSV",
+      "kind": "file",
       "items": [
         "anime_list.csv",
         "reviews.csv",

@@ -38,6 +38,7 @@
   "architecture": [
     {
       "title": "Every open tab",
+      "kind": "screen",
       "items": [
         "Laptop, TV, phone"
       ],
@@ -45,6 +46,7 @@
     },
     {
       "title": "Flask app",
+      "kind": "app",
       "items": [
         "Socket.IO broadcasts",
         "playlist.py API",
@@ -55,6 +57,7 @@
     },
     {
       "title": "yt-dlp",
+      "kind": "external",
       "items": [
         "get_yt_info",
         "Deno runtime"
@@ -63,6 +66,7 @@
     },
     {
       "title": "Synced playback",
+      "kind": "screen",
       "items": [
         "Video.js in each tab"
       ]

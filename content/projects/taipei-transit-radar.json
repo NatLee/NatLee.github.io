@@ -27,6 +27,7 @@
   "architecture": [
     {
       "title": "Open data",
+      "kind": "external",
       "items": [
         "OpenStreetMap metro lines",
         "data.taipei fares",
@@ -36,6 +37,7 @@
     },
     {
       "title": "Network files",
+      "kind": "data",
       "items": [
         "metro.json",
         "bus.json"
@@ -44,6 +46,7 @@
     },
     {
       "title": "Transit Radar",
+      "kind": "app",
       "items": [
         "Route planner, fares",
         "Live bus, YouBike",
@@ -54,6 +57,7 @@
     },
     {
       "title": "Comparison",
+      "kind": "screen",
       "items": [
         "Cards and bubbles",
         "Shareable URL"

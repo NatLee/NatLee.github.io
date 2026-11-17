@@ -25,6 +25,7 @@
   "architecture": [
     {
       "title": "Caller",
+      "kind": "user",
       "items": [
         "Python script",
         "example/ Flask app"
@@ -33,6 +34,7 @@
     },
     {
       "title": "playsnap",
+      "kind": "app",
       "items": [
         "snap_png / snap_pdf",
         "SnapSession",
@@ -43,6 +45,7 @@
     },
     {
       "title": "Headless browser",
+      "kind": "screen",
       "items": [
         "Playwright",
         "Chromium"
@@ -51,6 +54,7 @@
     },
     {
       "title": "Snapshot",
+      "kind": "file",
       "items": [
         "PNG or PDF",
         "base64 or bytes"

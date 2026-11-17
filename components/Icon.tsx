@@ -6,8 +6,14 @@ import {
   LuArrowUpRight,
   LuBriefcase,
   LuBookOpen,
+  LuBoxes,
+  LuBrain,
   LuCheck,
+  LuCloud,
   LuCopy,
+  LuCpu,
+  LuDatabase,
+  LuFileOutput,
   LuFileText,
   LuGitBranch,
   LuGitPullRequest,
@@ -17,13 +23,16 @@ import {
   LuLock,
   LuMail,
   LuMenu,
+  LuMonitor,
   LuMoon,
   LuPackage,
   LuPlay,
   LuPrinter,
   LuSearch,
+  LuServer,
   LuStar,
   LuSun,
+  LuUser,
   LuX,
 } from 'react-icons/lu'
 import { SiGithub, SiHexo, SiHuggingface, SiKaggle, SiLeetcode, SiMedium, SiPypi } from 'react-icons/si'
@@ -60,6 +69,16 @@ const registry = {
   branch: LuGitBranch,
   study: LuGraduationCap,
   contract: LuBriefcase,
+  // 架構圖節點的種類（ArchitectureKind）
+  user: LuUser,
+  screen: LuMonitor,
+  app: LuBoxes,
+  server: LuServer,
+  data: LuDatabase,
+  cloud: LuCloud,
+  device: LuCpu,
+  model: LuBrain,
+  file: LuFileOutput,
 } satisfies Record<string, IconType>
 
 export type IconName = keyof typeof registry

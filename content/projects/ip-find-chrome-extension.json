@@ -33,6 +33,7 @@
   "architecture": [
     {
       "title": "Toolbar button",
+      "kind": "user",
       "items": [
         "Chrome or Edge"
       ],
@@ -40,6 +41,7 @@
     },
     {
       "title": "IP Find popup",
+      "kind": "app",
       "items": [
         "popup.js",
         "lookup.js",
@@ -50,6 +52,7 @@
     },
     {
       "title": "IP location service",
+      "kind": "external",
       "items": [
         "geoiplookup.io"
       ]

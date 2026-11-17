@@ -36,6 +36,7 @@
   "architecture": [
     {
       "title": "Caller",
+      "kind": "user",
       "items": [
         "Python script",
         "example/ Flask app"
@@ -44,6 +45,7 @@
     },
     {
       "title": "PyppeSnap",
+      "kind": "app",
       "items": [
         "get_image_snapshot_by_url",
         "get_pdf_snapshot_by_url",
@@ -54,6 +56,7 @@
     },
     {
       "title": "Headless browser",
+      "kind": "screen",
       "items": [
         "Pyppeteer",
         "Its own old Chromium"
@@ -62,6 +65,7 @@
     },
     {
       "title": "Base64 snapshot",
+      "kind": "file",
       "items": [
         "PNG as str",
         "PDF as bytes"

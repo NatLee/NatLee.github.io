@@ -26,6 +26,7 @@
   "architecture": [
     {
       "title": "Learner",
+      "kind": "user",
       "items": [
         "nine chapter docs",
         "hands-on exercises"
@@ -34,6 +35,7 @@
     },
     {
       "title": "Rust core",
+      "kind": "app",
       "items": [
         "src/core library",
         "cargo examples",
@@ -43,18 +45,54 @@
       "core": true
     },
     {
-      "title": "Node and WASM",
-      "items": [
-        "axum + websocket node",
-        "wasm-bindgen build"
+      "title": "Wrappers",
+      "items": [],
+      "nodes": [
+        {
+          "id": "node",
+          "title": "Network node",
+          "kind": "server",
+          "items": [
+            "axum + websocket"
+          ],
+          "to": [
+            "network"
+          ]
+        },
+        {
+          "id": "wasm",
+          "title": "WASM build",
+          "kind": "file",
+          "items": [
+            "wasm-bindgen"
+          ],
+          "to": [
+            "demos"
+          ]
+        }
       ],
       "next": "shows up in"
     },
     {
-      "title": "Network and browser",
-      "items": [
-        "three Docker nodes",
-        "React + Tailwind demos"
+      "title": "Where it runs",
+      "items": [],
+      "nodes": [
+        {
+          "id": "network",
+          "title": "Docker network",
+          "kind": "server",
+          "items": [
+            "three nodes"
+          ]
+        },
+        {
+          "id": "demos",
+          "title": "Browser demos",
+          "kind": "screen",
+          "items": [
+            "React + Tailwind"
+          ]
+        }
       ]
     }
   ],

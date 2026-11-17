@@ -73,6 +73,7 @@
   "architecture": [
     {
       "title": "Browser",
+      "kind": "screen",
       "items": [
         "login",
         "web terminal",
@@ -82,23 +83,40 @@
     },
     {
       "title": "Traefik",
+      "kind": "server",
       "items": [
-        "routes by path"
+        "/ → dashboard",
+        "/api, /ws → API"
       ],
-      "next": "/api, /ws"
+      "next": "routes"
     },
     {
       "title": "Dev Dock Manager",
-      "items": [
-        "axum + bollard API",
-        "Next.js dashboard",
-        "SQLite, Redis queue"
+      "items": [],
+      "nodes": [
+        {
+          "id": "web",
+          "title": "Next.js dashboard",
+          "kind": "screen",
+          "items": [],
+          "to": []
+        },
+        {
+          "id": "api",
+          "title": "axum + bollard API",
+          "kind": "app",
+          "items": [
+            "SQLite",
+            "Redis queue"
+          ]
+        }
       ],
       "next": "Docker socket",
       "core": true
     },
     {
       "title": "Desktop containers",
+      "kind": "server",
       "items": [
         "gui-vnc image",
         "optional NVIDIA GPU"

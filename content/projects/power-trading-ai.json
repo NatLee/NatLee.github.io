@@ -59,15 +59,27 @@
   "why": "Built at HD Renewables for the power-trading desks in Japan and later Australia, who need a view of the spot price before they trade. The market stays volatile; the idea was that the decisions would not.",
   "architecture": [
     {
-      "title": "Market and weather data",
-      "items": [
-        "Japan power market",
-        "Weather data"
+      "title": "Inputs",
+      "items": [],
+      "nodes": [
+        {
+          "id": "market",
+          "title": "Japan power market",
+          "kind": "external",
+          "items": []
+        },
+        {
+          "id": "weather",
+          "title": "Weather data",
+          "kind": "external",
+          "items": []
+        }
       ],
       "next": "collected into"
     },
     {
       "title": "Data platform",
+      "kind": "data",
       "items": [
         "Elasticsearch pipeline"
       ],
@@ -75,6 +87,7 @@
     },
     {
       "title": "Forecasts and strategies",
+      "kind": "model",
       "items": [
         "PyTorch spot-price models",
         "Strategy optimization",
@@ -85,6 +98,7 @@
     },
     {
       "title": "APIs and dashboard",
+      "kind": "screen",
       "items": [
         "Django, FastAPI",
         "Next.js"
@@ -93,6 +107,7 @@
     },
     {
       "title": "Trading desks",
+      "kind": "user",
       "items": [
         "Japan",
         "Australia"

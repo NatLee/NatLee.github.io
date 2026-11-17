@@ -41,7 +41,7 @@
       "type": "array",
       "minItems": 2,
       "maxItems": 5,
-      "description": "簡單的架構圖：由左到右的幾步。只有一步 core: true（這個作品本身），最後一步不寫 next。中文照同樣的步數寫在 projects.zh.json 的 architecture（不寫 core）。",
+      "description": "簡單的架構圖：一層一層由左到右，每層一個節點，或 2–3 個並排的節點（nodes）。相鄰兩層預設全部互連，要例外就用 to。整張圖只有一個 core: true（這個作品本身，可以是一個節點或整層）。最後一層不寫 next。中文照同樣的層與節點順序寫在 projects.zh.json 的 architecture，只寫 title、items、next。",
       "items": {
         "type": "object",
         "required": ["title", "items"],
@@ -49,8 +49,30 @@
         "properties": {
           "title": { "type": "string" },
           "items": { "type": "array", "maxItems": 3, "items": { "type": "string" } },
-          "next": { "type": "string", "description": "往下一步的箭頭上寫的字。" },
-          "core": { "const": true }
+          "next": { "type": "string", "description": "往下一層的箭頭上寫的字。" },
+          "core": { "const": true },
+          "kind": { "type": "string", "description": "節點種類，決定圖示。可用的值寫在 lib/content/contract.ts 的 ArchitectureKind（npm test 會檢查）。" },
+          "id": { "type": "string", "description": "只有一個節點時的 id，給上一層的 to 用。" },
+          "to": { "type": "array", "items": { "type": "string" }, "description": "只連到下一層的哪幾個節點（填 id）。沒寫就和下一層全部互連。" },
+          "nodes": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 3,
+            "description": "這一層並排的節點；有 nodes 時，title 是這一層的標題，items 留空。",
+            "items": {
+              "type": "object",
+              "required": ["id", "title", "items"],
+              "additionalProperties": false,
+              "properties": {
+                "id": { "type": "string" },
+                "title": { "type": "string" },
+                "items": { "type": "array", "maxItems": 3, "items": { "type": "string" } },
+                "kind": { "type": "string", "description": "節點種類，決定圖示。可用的值寫在 lib/content/contract.ts 的 ArchitectureKind（npm test 會檢查）。" },
+                "core": { "const": true },
+                "to": { "type": "array", "items": { "type": "string" }, "description": "只連到下一層的哪幾個節點（填 id）。沒寫就和下一層全部互連。" }
+              }
+            }
+          }
         }
       }
     },

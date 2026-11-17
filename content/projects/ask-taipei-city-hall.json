@@ -26,6 +26,7 @@
   "architecture": [
     {
       "title": "Taipei open data",
+      "kind": "external",
       "items": [
         "data.taipei FAQ dump",
         "Latest-50 feed",
@@ -35,6 +36,7 @@
     },
     {
       "title": "faq.json",
+      "kind": "data",
       "items": [
         "8,284 FAQs",
         "15 topics"
@@ -43,6 +45,7 @@
     },
     {
       "title": "Ask Taipei City Hall",
+      "kind": "app",
       "items": [
         "BM25 in Web Worker",
         "Bigrams + Intl.Segmenter",
@@ -53,6 +56,7 @@
     },
     {
       "title": "Claude, optional",
+      "kind": "external",
       "items": [
         "Anthropic Messages API",
         "Cited, streamed answers"

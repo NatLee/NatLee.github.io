@@ -56,6 +56,7 @@
   "architecture": [
     {
       "title": "Video file",
+      "kind": "file",
       "items": [
         "data/test.mp4",
         "every 30th frame"
@@ -64,6 +65,7 @@
     },
     {
       "title": "Body OpenPose",
+      "kind": "model",
       "items": [
         "six-stage Keras network",
         "model/weights.h5",
@@ -73,6 +75,7 @@
     },
     {
       "title": "ROI heatmap",
+      "kind": "app",
       "items": [
         "Shapely polygon ROIs",
         "HeatMappy rendering"
@@ -82,6 +85,7 @@
     },
     {
       "title": "PNG overlays",
+      "kind": "file",
       "items": [
         "tmp/ folder",
         "00000.heatmap.png"
