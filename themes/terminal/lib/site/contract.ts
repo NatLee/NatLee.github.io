@@ -34,13 +34,40 @@ export interface SiteBundle {
   mascots: Record<string, Mascot>
 }
 
+/** 架構圖節點的種類，決定圖示。（2026-11 新增） */
+export type ArchitectureKind = 'user' | 'screen' | 'app' | 'server' | 'data' | 'external' | 'device' | 'model' | 'file'
+
+/** 架構圖的一個節點。（2026-11 新增） */
+export interface ArchitectureNode {
+  id: string
+  title: string
+  items: string[]
+  kind?: ArchitectureKind
+  core?: boolean
+  /** 只連到下一層的哪幾個節點（id）；沒寫就全部都連。 */
+  to?: string[]
+}
+
+/**
+ * 架構圖的一層。只有一個節點時，title、items、kind 就是那個節點；
+ * 有 nodes 時，這一層有好幾個並排的節點，title 是這一層的標題。
+ * 相鄰兩層預設全部互連；core 標出這個作品本身（節點或整層）。
+ */
 export interface ArchitectureStep {
   title: string
   items: string[]
-  /** 往下一步的箭頭上寫的字；最後一步沒有。 */
+  /** 往下一層的箭頭上寫的字；最後一層沒有。 */
   next?: string
-  /** 這一步就是這個作品本身。 */
+  /** 這一層（或這個節點）就是這個作品本身。 */
   core?: boolean
+  /** 只有一個節點時的圖示種類。（2026-11 新增） */
+  kind?: ArchitectureKind
+  /** 只有一個節點時的 id，給上一層的 to 用。（2026-11 新增） */
+  id?: string
+  /** 只有一個節點時，只連到下一層的哪幾個節點。（2026-11 新增） */
+  to?: string[]
+  /** 這一層並排的節點。（2026-11 新增） */
+  nodes?: ArchitectureNode[]
 }
 
 export interface ProjectTheme {
