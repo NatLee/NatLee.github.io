@@ -174,7 +174,7 @@
     "title": "What I built at work",
     "intro": "Projects from the companies I worked at. The code stays with them, so each chapter covers what the job needed, my part and what shipped, plus the open-source projects that grew out of it.",
     "ribbon": "Career at a glance",
-    "ribbonNote": "Drawn to calendar scale, so overlaps show. ≈ squeezes a stretch with nothing on it. Dots are open-source spin-offs and squares are the side projects I pin on GitHub, each placed where it started.",
+    "ribbonNote": "Drawn to calendar scale, so overlaps show. The striped strip is a stretch with nothing on it, squeezed down. Dots are open-source spin-offs and squares are the side projects I pin on GitHub, each placed where it started.",
     "lanes": {
       "work": "Work",
       "study": "Study",

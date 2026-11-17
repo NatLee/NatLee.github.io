@@ -137,6 +137,19 @@
     @apply inline-flex items-center gap-1 rounded-md border border-line bg-paper px-2 py-0.5 font-mono text-xs leading-5 text-muted;
   }
 
+  /* /work 時間軸被壓縮的空檔：斜線細條貫穿各軌，年份軸在同一處斷開，兩端各一道斜線（斷軸符號）。 */
+  .timeline-gap {
+    border-radius: 2px;
+    background-image: repeating-linear-gradient(135deg, rgb(var(--muted) / 0.4) 0 1px, transparent 1px 4px);
+  }
+
+  .timeline-gap-break {
+    @apply border-x border-muted bg-paper;
+    top: -5px;
+    height: 9px;
+    transform: translateX(-50%) skewX(-20deg);
+  }
+
   .btn {
     @apply inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-colors;
     transition-duration: var(--motion-fast);
