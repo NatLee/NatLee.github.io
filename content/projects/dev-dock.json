@@ -47,6 +47,35 @@
     "Support for multiple protocols including VNC (5901), noVNC (6901), and SSH (22)",
     "A highly portable and consistent development environment"
   ],
+  "why": "Setting up a Linux desktop with VS Code, Firefox, Miniconda and a Chinese input method is fine once and tedious every time after. So it all goes into one image, and every container starts as the same dev box, whether you open it in a browser, a VNC client or over SSH.",
+  "architecture": [
+    {
+      "title": "Install scripts",
+      "items": [
+        "debian:bookworm-slim",
+        "six install scripts"
+      ],
+      "next": "docker build"
+    },
+    {
+      "title": "gui-vnc image",
+      "items": [
+        "Xfce + TigerVNC",
+        "noVNC",
+        "sshd under supervisord"
+      ],
+      "next": "published ports",
+      "core": true
+    },
+    {
+      "title": "You",
+      "items": [
+        "browser (noVNC)",
+        "VNC client",
+        "SSH"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2020",
     "end": "2021",

@@ -22,6 +22,43 @@
   "challenges": [],
   "solutions": [],
   "results": [],
+  "why": "It was written for the 2017 Taipei City Government ChatBot contest, answering city-service questions on Facebook Messenger and LINE from the city's own FAQs. It was not selected, which left nine years for a rewrite. This one has no server and no bots, and every answer still points back to the agency that wrote it.",
+  "architecture": [
+    {
+      "title": "Taipei open data",
+      "items": [
+        "data.taipei FAQ dump",
+        "Latest-50 feed",
+        "MRT engineering FAQs"
+      ],
+      "next": "weekly build"
+    },
+    {
+      "title": "faq.json",
+      "items": [
+        "8,284 FAQs",
+        "15 topics"
+      ],
+      "next": "downloaded"
+    },
+    {
+      "title": "Ask Taipei City Hall",
+      "items": [
+        "BM25 in Web Worker",
+        "Bigrams + Intl.Segmenter",
+        "Yee small talk"
+      ],
+      "next": "your own key",
+      "core": true
+    },
+    {
+      "title": "Claude, optional",
+      "items": [
+        "Anthropic Messages API",
+        "Cited, streamed answers"
+      ]
+    }
+  ],
   "githubUrl": "https://github.com/NatLee/ask-taipei-city-hall",
   "links": {
     "github": "https://github.com/NatLee/ask-taipei-city-hall",

@@ -68,6 +68,34 @@
     "Covers conversion and editing for images, audio, video, animations, PDFs and documents in a single tool.",
     "Runs entirely on GitHub Pages with zero hosting cost or server maintenance."
   ],
+  "why": "Online converters usually want your file on their server before they will touch it. MorphKit does the work inside the browser tab instead. The catch is speed: ffmpeg compiled to WebAssembly runs 5 to 20 times slower than the native one, so privacy gets paid for in patience.",
+  "architecture": [
+    {
+      "title": "Your files",
+      "items": [
+        "Images, audio, video",
+        "PDFs and documents"
+      ],
+      "next": "never uploaded"
+    },
+    {
+      "title": "MorphKit",
+      "items": [
+        "Canvas API",
+        "ffmpeg.wasm",
+        "pdf.js + pdf-lib"
+      ],
+      "next": "converted or edited",
+      "core": true
+    },
+    {
+      "title": "Results",
+      "items": [
+        "Download or ZIP",
+        "IndexedDB projects"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2026-08",
     "end": "Present",

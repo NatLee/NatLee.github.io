@@ -40,5 +40,33 @@
   "solutions": [],
   "results": [
     "Interactive or headless batch cropping with a pip-installable CLI"
+  ],
+  "why": "A chore from the computer-vision work at Infortrend: folders of same-layout images that all needed the same region cut out. Redrawing the box on every picture only works if your hand never drifts, so the box is drawn once and replayed as numbers, in the window or from the command line.",
+  "architecture": [
+    {
+      "title": "Input folder",
+      "items": [
+        "Same-layout images",
+        "Reference image"
+      ],
+      "next": "first by name"
+    },
+    {
+      "title": "batch-crop",
+      "items": [
+        "OpenCV crop window",
+        "--box or --preset",
+        "Parallel crop engine"
+      ],
+      "next": "same box",
+      "core": true
+    },
+    {
+      "title": "Output folder",
+      "items": [
+        "Same names and formats",
+        "EXIF and ICC kept"
+      ]
+    }
   ]
 }

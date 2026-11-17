@@ -21,6 +21,42 @@
   "challenges": [],
   "solutions": [],
   "results": [],
+  "why": "pyppeteer-snap ran on Pyppeteer, which is no longer maintained, so the Chromium it downloads never gets any newer. playwright-snap swaps the engine for Playwright and leaves the function names, arguments and return types alone, since the code calling them had done nothing wrong.",
+  "architecture": [
+    {
+      "title": "Caller",
+      "items": [
+        "Python script",
+        "example/ Flask app"
+      ],
+      "next": "URL + options"
+    },
+    {
+      "title": "playsnap",
+      "items": [
+        "snap_png / snap_pdf",
+        "SnapSession",
+        "playwright-snap CLI"
+      ],
+      "next": "drives",
+      "core": true
+    },
+    {
+      "title": "Headless browser",
+      "items": [
+        "Playwright",
+        "Chromium"
+      ],
+      "next": "renders"
+    },
+    {
+      "title": "Snapshot",
+      "items": [
+        "PNG or PDF",
+        "base64 or bytes"
+      ]
+    }
+  ],
   "githubUrl": "https://github.com/NatLee/playwright-snap",
   "links": {
     "github": "https://github.com/NatLee/playwright-snap"

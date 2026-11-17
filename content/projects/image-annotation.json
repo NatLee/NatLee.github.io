@@ -35,6 +35,35 @@
   "results": [
     "Static GitHub Pages app with browser-local annotation and export"
   ],
+  "why": "It began in 2017 as a small crowd-sourcing page for boxing anime faces, with a leaderboard and one house rule: box the head, the whole head. The rebuild keeps both, but opens any folder of your own images, since faces turned out not to be the only thing that needs a box.",
+  "architecture": [
+    {
+      "title": "Images",
+      "items": [
+        "Bundled samples",
+        "nekos.best or Danbooru",
+        "Your files and folders"
+      ],
+      "next": "image list"
+    },
+    {
+      "title": "Image Annotation",
+      "items": [
+        "Boxes, classes, undo",
+        "Zoom and pan",
+        "localStorage"
+      ],
+      "next": "export",
+      "core": true
+    },
+    {
+      "title": "Dataset files",
+      "items": [
+        "JSON, COCO",
+        "YOLO, Pascal VOC"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2017",
     "end": "2026-11"

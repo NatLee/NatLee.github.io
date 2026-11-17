@@ -44,6 +44,42 @@
     "Best normal-speed game time: 193.8 seconds",
     "Training run: 22 minutes across eight browser environments"
   ],
+  "why": "QWOP gives you four keys and a sprinter who mostly falls over, which makes it a neat reinforcement-learning test: pixels in, keys out, distance as the reward. The 2020 agent's finish probably took about 99 minutes; the 2026 one needs a bit over three.",
+  "architecture": [
+    {
+      "title": "Official QWOP game",
+      "items": [
+        "foddy.net page"
+      ],
+      "next": "driven by"
+    },
+    {
+      "title": "Playwright Chromium",
+      "items": [
+        "8 headless browsers",
+        "clock.js virtual time"
+      ],
+      "next": "canvas crops"
+    },
+    {
+      "title": "QWOP agent",
+      "items": [
+        "Gymnasium environment",
+        "Tesseract distance OCR",
+        "Stable-Baselines3 PPO"
+      ],
+      "next": "produces",
+      "core": true
+    },
+    {
+      "title": "Training outputs",
+      "items": [
+        "Policy checkpoints",
+        "Race GIFs",
+        "TensorBoard curves"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2020-01",
     "end": "2026-11"

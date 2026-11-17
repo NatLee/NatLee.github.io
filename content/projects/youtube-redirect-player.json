@@ -34,6 +34,40 @@
   "results": [
     "Final Flask version preserved; song requests continue in Streaming Player"
   ],
+  "why": "Playing one video from the address bar is easy. The harder question is what plays after it, and on which screen. This player keeps one shared queue and sends every request and pause to all open tabs, so a single button can silence the laptop and the TV at the same time.",
+  "architecture": [
+    {
+      "title": "Every open tab",
+      "items": [
+        "Laptop, TV, phone"
+      ],
+      "next": "requests, pause"
+    },
+    {
+      "title": "Flask app",
+      "items": [
+        "Socket.IO broadcasts",
+        "playlist.py API",
+        "SQLite: three playlists"
+      ],
+      "next": "asks",
+      "core": true
+    },
+    {
+      "title": "yt-dlp",
+      "items": [
+        "get_yt_info",
+        "Deno runtime"
+      ],
+      "next": "direct link"
+    },
+    {
+      "title": "Synced playback",
+      "items": [
+        "Video.js in each tab"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2022",
     "end": "2023",

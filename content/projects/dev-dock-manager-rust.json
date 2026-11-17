@@ -69,6 +69,42 @@
     "Better concurrency handling",
     "Simplified deployment with Docker Compose"
   ],
+  "why": "The Django manager needed Django, Daphne and an RQ worker under supervisord, and idled at 175 MiB doing nothing. The Rust version is one binary that idles at 5.5 MiB and starts about six times faster, which leaves more of the machine for the desktops it hands out.",
+  "architecture": [
+    {
+      "title": "Browser",
+      "items": [
+        "login",
+        "web terminal",
+        "NoVNC desktop"
+      ],
+      "next": "port 8000"
+    },
+    {
+      "title": "Traefik",
+      "items": [
+        "routes by path"
+      ],
+      "next": "/api, /ws"
+    },
+    {
+      "title": "Dev Dock Manager",
+      "items": [
+        "axum + bollard API",
+        "Next.js dashboard",
+        "SQLite, Redis queue"
+      ],
+      "next": "Docker socket",
+      "core": true
+    },
+    {
+      "title": "Desktop containers",
+      "items": [
+        "gui-vnc image",
+        "optional NVIDIA GPU"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2023-11",
     "end": "Present",

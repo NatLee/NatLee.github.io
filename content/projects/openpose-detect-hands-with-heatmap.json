@@ -52,6 +52,42 @@
     "Motion heatmaps for a whole video from a single Docker command",
     "A reproducible CPU image on Python 3.12 and TensorFlow 2.21"
   ],
+  "why": "The retail work at Infortrend needed heat maps of where products got attention. This demo keeps the idea: follow wrists through a video, keep the ones inside chosen regions, and let the hot spots pile up. Cheaper than standing by the shelf with a clipboard.",
+  "architecture": [
+    {
+      "title": "Video file",
+      "items": [
+        "data/test.mp4",
+        "every 30th frame"
+      ],
+      "next": "frames"
+    },
+    {
+      "title": "Body OpenPose",
+      "items": [
+        "six-stage Keras network",
+        "model/weights.h5",
+        "TensorFlow, tf-keras"
+      ],
+      "next": "wrist points"
+    },
+    {
+      "title": "ROI heatmap",
+      "items": [
+        "Shapely polygon ROIs",
+        "HeatMappy rendering"
+      ],
+      "next": "saved as",
+      "core": true
+    },
+    {
+      "title": "PNG overlays",
+      "items": [
+        "tmp/ folder",
+        "00000.heatmap.png"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2020",
     "end": "2021",

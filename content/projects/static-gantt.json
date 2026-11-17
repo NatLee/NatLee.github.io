@@ -23,6 +23,35 @@
   "challenges": [],
   "solutions": [],
   "results": [],
+  "why": "Mermaid turns a few lines of text into a tidy Gantt chart, but rescheduling it means retyping dates. Gantt Studio lets you drag the bars and writes the Mermaid back, keeping the fields Mermaid has no syntax for. A schedule you can review in a pull request: possible now, if not exactly requested.",
+  "architecture": [
+    {
+      "title": "Two editing modes",
+      "items": [
+        "Drag on the timeline",
+        "Mermaid in CodeMirror"
+      ],
+      "next": "actions"
+    },
+    {
+      "title": "Gantt Studio",
+      "items": [
+        "ganttReducer + undo",
+        "computeSchedule",
+        "parseMermaid"
+      ],
+      "next": "autosave, export",
+      "core": true
+    },
+    {
+      "title": "Saved and exported",
+      "items": [
+        "localStorage",
+        "PNG, Excel, JSON",
+        "SVG and .mmd"
+      ]
+    }
+  ],
   "githubUrl": "https://github.com/NatLee/static-gantt",
   "links": {
     "github": "https://github.com/NatLee/static-gantt",

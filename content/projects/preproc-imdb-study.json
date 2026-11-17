@@ -47,6 +47,43 @@
     "A results table that puts this repository's accuracy next to the paper's for every variant and model",
     "Close to the paper on CNN+LSTM, for example 88.6 against 88.9 on the vanilla text"
   ],
+  "why": "My master's research needed to know whether lowercasing, lemmatizing or joining multiword phrases changes what a neural sentiment model learns, so I re-ran a paper's IMDb experiments. In the rerun, changing the random seed moved accuracy more than changing the preprocessing did.",
+  "architecture": [
+    {
+      "title": "IMDb text variants",
+      "items": [
+        "Vanilla, lowercased",
+        "Lemmatized, multiword",
+        "UMBC word embeddings"
+      ],
+      "next": "trained by"
+    },
+    {
+      "title": "preproc-imdb",
+      "items": [
+        "Frequency-ranked word ids",
+        "CNN or CNN+LSTM",
+        "Keras 3.15, TensorFlow 2.21"
+      ],
+      "next": "writes",
+      "core": true
+    },
+    {
+      "title": "Run folder",
+      "items": [
+        "results.json",
+        "predictions.tsv",
+        "model.keras"
+      ],
+      "next": "summarized in"
+    },
+    {
+      "title": "Paper comparison",
+      "items": [
+        "Tables 2 and 3"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2019",
     "end": "2026-11"

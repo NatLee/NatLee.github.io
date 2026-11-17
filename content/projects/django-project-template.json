@@ -37,6 +37,42 @@
   "results": [
     "Reusable backend template with an end-to-end verification workflow"
   ],
+  "why": "An AI assistant can write a JWT view in seconds. It can't promise that this exact mix of Django, Channels, django-q2, PostgreSQL and Redis boots, that the websocket survives the NGINX hop, or that DEBUG=false is safe. CI checks all of that on a renamed copy on every push.",
+  "architecture": [
+    {
+      "title": "Your frontend",
+      "items": [
+        "browser",
+        "frontend/ build"
+      ],
+      "next": "HOST_PORT"
+    },
+    {
+      "title": "NGINX",
+      "items": [
+        "static files at /",
+        "/api and /ws"
+      ],
+      "next": "proxies"
+    },
+    {
+      "title": "Django backend",
+      "items": [
+        "REST, JWT, allauth",
+        "Channels websockets",
+        "django-q2 worker"
+      ],
+      "next": "stores in",
+      "core": true
+    },
+    {
+      "title": "Data services",
+      "items": [
+        "PostgreSQL 18",
+        "Redis 8"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2021",
     "end": "2026-11"

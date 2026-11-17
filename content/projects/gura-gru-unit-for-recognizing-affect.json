@@ -36,6 +36,43 @@
   "results": [
     "Preserved as the historical baseline for Sentiment Bundle Benchmark"
   ],
+  "why": "Written in 2019 as the sample model for the MyAnimeList review dataset, so the data came with something that actually trains on it. Its successor later explained what was wrong with its numbers, which is what successors are for.",
+  "architecture": [
+    {
+      "title": "Dataset bundle",
+      "items": [
+        "MyAnimeList reviews",
+        "Five classic datasets",
+        "Hugging Face"
+      ],
+      "next": "tokenized with"
+    },
+    {
+      "title": "Tokenizer and embeddings",
+      "items": [
+        "Keras tokenizer",
+        "GloVe 840B vectors"
+      ],
+      "next": "fed to"
+    },
+    {
+      "title": "GURA model",
+      "items": [
+        "Bidirectional GRU",
+        "Self-attention",
+        "Keras on TensorFlow"
+      ],
+      "next": "saves",
+      "core": true
+    },
+    {
+      "title": "Training results",
+      "items": [
+        "Accuracy charts",
+        "Best-epoch checkpoints"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2019",
     "end": "2023"

@@ -24,6 +24,43 @@
   "challenges": [],
   "solutions": [],
   "results": [],
+  "why": "GURA's numbers came from validation sets that mixed in the test split, so the question of how to classify sentiment today needed a fair rerun. Spoiler: half a minute of TF-IDF on a CPU beats GURA's best IMDB claim.",
+  "architecture": [
+    {
+      "title": "Dataset bundle",
+      "items": [
+        "Hugging Face Parquet",
+        "MyAnimeList + five classics"
+      ],
+      "next": "prepared into"
+    },
+    {
+      "title": "Fixed splits",
+      "items": [
+        "SHA-256 checked",
+        "Deduplicated, seed 42"
+      ],
+      "next": "run through"
+    },
+    {
+      "title": "Seven methods",
+      "items": [
+        "TF-IDF, frozen embeddings",
+        "ModernBERT, DeBERTa-v3",
+        "Qwen3.5-2B, 0/8-shot"
+      ],
+      "next": "one JSON each",
+      "core": true
+    },
+    {
+      "title": "Report",
+      "items": [
+        "Leaderboard tables",
+        "Charts",
+        "README results"
+      ]
+    }
+  ],
   "githubUrl": "https://github.com/NatLee/sentiment-bundle-benchmark",
   "links": {
     "github": "https://github.com/NatLee/sentiment-bundle-benchmark",

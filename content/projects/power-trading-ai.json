@@ -56,6 +56,49 @@
     "Reduced trading decision time by 60%",
     "Enabled expansion to Australia market"
   ],
+  "why": "Built at HD Renewables for the power-trading desks in Japan and later Australia, who need a view of the spot price before they trade. The market stays volatile; the idea was that the decisions would not.",
+  "architecture": [
+    {
+      "title": "Market and weather data",
+      "items": [
+        "Japan power market",
+        "Weather data"
+      ],
+      "next": "collected into"
+    },
+    {
+      "title": "Data platform",
+      "items": [
+        "Elasticsearch pipeline"
+      ],
+      "next": "feeds"
+    },
+    {
+      "title": "Forecasts and strategies",
+      "items": [
+        "PyTorch spot-price models",
+        "Strategy optimization",
+        "Risk assessment"
+      ],
+      "next": "served through",
+      "core": true
+    },
+    {
+      "title": "APIs and dashboard",
+      "items": [
+        "Django, FastAPI",
+        "Next.js"
+      ],
+      "next": "used by"
+    },
+    {
+      "title": "Trading desks",
+      "items": [
+        "Japan",
+        "Australia"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2024-12",
     "duration": "Ongoing"

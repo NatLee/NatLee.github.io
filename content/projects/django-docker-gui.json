@@ -51,6 +51,35 @@
     "Enhanced system administration",
     "Reduced command-line dependency"
   ],
+  "why": "Docker's command line is fine as long as you remember the container ID. This page lists them for you, puts start, stop and pull behind buttons, and opens a real shell in any container from the browser. It began as a refactor of MahmoudAlyy's docker-django-ui.",
+  "architecture": [
+    {
+      "title": "Browser",
+      "items": [
+        "plain HTML pages",
+        "xterm.js terminal"
+      ],
+      "next": "JWT, WebSockets"
+    },
+    {
+      "title": "d-docker-web",
+      "items": [
+        "Django + Channels",
+        "RQ worker + Redis",
+        "superuser-only access"
+      ],
+      "next": "Docker socket",
+      "core": true
+    },
+    {
+      "title": "Docker daemon",
+      "items": [
+        "host containers",
+        "images",
+        "Docker Hub search"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2020",
     "end": "2021",

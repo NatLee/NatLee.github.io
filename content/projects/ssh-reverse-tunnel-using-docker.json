@@ -29,6 +29,40 @@
     "Automated setup scripts",
     "Security isolation"
   ],
+  "why": "Firewalls are strict about who comes in and far more relaxed about who goes out. So the machine behind NAT calls a server you control and keeps the line open; you SSH to that server and come out on the inside, without opening a single inbound port on the inside network.",
+  "architecture": [
+    {
+      "title": "Your computer",
+      "items": [
+        "ssh -p 22224"
+      ],
+      "next": "connects to"
+    },
+    {
+      "title": "Outside server",
+      "items": [
+        "reverse-outside-server",
+        "any public VPS"
+      ],
+      "next": "back through tunnel"
+    },
+    {
+      "title": "Inside machine",
+      "items": [
+        "reverse-inside-tunnel",
+        "sshd + autossh",
+        "tunnel.sh setup"
+      ],
+      "next": "ssh -L hop",
+      "core": true
+    },
+    {
+      "title": "Inside network",
+      "items": [
+        "other machines"
+      ]
+    }
+  ],
   "timeline": {
     "start": "2020",
     "end": "2021",

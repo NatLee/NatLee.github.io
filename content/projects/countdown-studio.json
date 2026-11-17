@@ -21,6 +21,35 @@
   "challenges": [],
   "solutions": [],
   "results": [],
+  "why": "It began as flask-simple-countdown, a Flask server and a jQuery page whose only job was counting down to New Year. Meetings, exams and pomodoros wanted several countdowns and digits readable from the back of the room, none of which needs a server. So the server went, and the beep stayed.",
+  "architecture": [
+    {
+      "title": "Countdowns in",
+      "items": [
+        "Saved in localStorage",
+        "Share link (?to=, ?for=)",
+        "Other open tabs"
+      ],
+      "next": "end times"
+    },
+    {
+      "title": "Countdown Studio",
+      "items": [
+        "snapshot(countdown, now)",
+        "Countdown reducer",
+        "One alarm timeout"
+      ],
+      "next": "renders",
+      "core": true
+    },
+    {
+      "title": "On screen",
+      "items": [
+        "Cards and stage mode",
+        "Beep, notification, sparks"
+      ]
+    }
+  ],
   "githubUrl": "https://github.com/NatLee/countdown-studio",
   "links": {
     "github": "https://github.com/NatLee/countdown-studio",

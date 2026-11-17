@@ -22,6 +22,34 @@
   "challenges": [],
   "solutions": [],
   "results": [],
+  "why": "In 2018 it collected sentiment labels: read a sentence, drag a slider, send it to a Google Form. By 2026 its Heroku sentence server and the old Sheets API were gone, so it came back as a game with 600 original sentences. Now it labels nothing for anyone: your answers, streaks and ranks never leave the browser.",
+  "architecture": [
+    {
+      "title": "Sentence packs",
+      "items": [
+        "src/data/packs/*.json",
+        "600 original sentences"
+      ],
+      "next": "dealt"
+    },
+    {
+      "title": "Word Net",
+      "items": [
+        "src/game rules",
+        "Five modes",
+        "React + Tailwind"
+      ],
+      "next": "results",
+      "core": true
+    },
+    {
+      "title": "Your browser",
+      "items": [
+        "localStorage",
+        "Result card PNG"
+      ]
+    }
+  ],
   "githubUrl": "https://github.com/NatLee/word-net-game",
   "links": {
     "github": "https://github.com/NatLee/word-net-game",
