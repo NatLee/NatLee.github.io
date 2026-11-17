@@ -39,6 +39,7 @@ import p_myanimelist_comment_crawler from '@/content/projects/myanimelist-commen
 import p_obsidian_attachmenter from '@/content/projects/obsidian-attachmenter.json'
 import p_obsidian_word_mode from '@/content/projects/obsidian-word-mode.json'
 import p_openpose_detect_hands_with_heatmap from '@/content/projects/openpose-detect-hands-with-heatmap.json'
+import p_persona_tracking from '@/content/projects/persona-tracking.json'
 import p_pyppesnap from '@/content/projects/pyppesnap.json'
 import p_sentiment_analysis_platform from '@/content/projects/sentiment-analysis-platform.json'
 import p_simply_blur_detector from '@/content/projects/simply-blur-detector.json'
@@ -88,6 +89,7 @@ export const projectsJsonData = [
   p_obsidian_attachmenter,
   p_obsidian_word_mode,
   p_openpose_detect_hands_with_heatmap,
+  p_persona_tracking,
   p_pyppesnap,
   p_sentiment_analysis_platform,
   p_simply_blur_detector,
