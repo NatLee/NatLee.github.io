@@ -37,6 +37,7 @@ import p_image_annotation from '@/content/projects/image-annotation.json'
 import p_ip_find_chrome_extension from '@/content/projects/ip-find-chrome-extension.json'
 import p_myanimelist_comment_crawler from '@/content/projects/myanimelist-comment-crawler.json'
 import p_obsidian_attachmenter from '@/content/projects/obsidian-attachmenter.json'
+import p_obsidian_word_mode from '@/content/projects/obsidian-word-mode.json'
 import p_openpose_detect_hands_with_heatmap from '@/content/projects/openpose-detect-hands-with-heatmap.json'
 import p_pyppesnap from '@/content/projects/pyppesnap.json'
 import p_sentiment_analysis_platform from '@/content/projects/sentiment-analysis-platform.json'
@@ -85,6 +86,7 @@ export const projectsJsonData = [
   p_ip_find_chrome_extension,
   p_myanimelist_comment_crawler,
   p_obsidian_attachmenter,
+  p_obsidian_word_mode,
   p_openpose_detect_hands_with_heatmap,
   p_pyppesnap,
   p_sentiment_analysis_platform,

@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/project.schema.json",
+  "id": "obsidian-word-mode",
+  "title": "Obsidian Word Mode",
+  "subtitle": "Word-style Editor Plugin for Obsidian",
+  "description": "An Obsidian plugin for editing Markdown notes like a Word document, with a ribbon toolbar, tables and images, while the file on disk stays clean Markdown. For people who know Markdown and would still rather click Bold.",
+  "longDescription": "Word Mode adds a second editor for Markdown notes in Obsidian: you see formatted text instead of Markdown syntax and format with toolbar buttons and familiar word-processor shortcuts. Files stay plain Markdown. When a note is edited, only the changed blocks are written again and everything else is kept character for character; anything it cannot edit visually, such as HTML blocks, is shown as a raw block and saved unchanged. It covers a ribbon toolbar with Home, Insert, Review and View tabs, in-place tables, a properties form, images, links, find and replace, an outline sidebar, formatting as you type, Mermaid diagrams with a diagram editor, a visual equation editor, embeds, footnotes, callouts and task lists, plus a choice of versions when a note changes on disk during unsaved edits. The interface comes in Traditional Chinese, English, Japanese and Korean. It is written in TypeScript on ProseMirror and markdown-it, bundled with esbuild, and tested with editing tests that simulate Obsidian in jsdom and a read-only round trip over a real vault. No telemetry, and it never touches files outside the vault.",
+  "language": "typescript",
+  "images": [
+    "/images/projects/obsidian-word-mode/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/obsidian-word-mode/main/docs/images/saving.en.svg",
+    "https://raw.githubusercontent.com/NatLee/obsidian-word-mode/main/docs/images/ribbon.en.svg"
+  ],
+  "githubUrl": "https://github.com/NatLee/obsidian-word-mode",
+  "category": "Productivity Tools",
+  "theme": "web",
+  "tier": "archive",
+  "status": "In Progress",
+  "opensource": true,
+  "technologies": [
+    "TypeScript",
+    "Obsidian API",
+    "ProseMirror",
+    "markdown-it",
+    "esbuild",
+    "jsdom",
+    "ESLint"
+  ],
+  "features": [
+    "Ribbon toolbar with Home, Insert, Review and View tabs",
+    "Only changed blocks are rewritten; the rest of the file stays character for character",
+    "Tables edited in place, including sorting and pasting cells from a spreadsheet",
+    "Properties as a form, with tags and links as chips",
+    "Images you can paste, pick and resize by dragging",
+    "Formatting as you type, with each change as its own undo step",
+    "Mermaid diagrams with a diagram editor, and a visual equation editor",
+    "Embeds, footnotes, callouts and task lists with custom statuses",
+    "Find and replace, outline sidebar and heading folding",
+    "Sync conflict handling when a note changes on disk during unsaved edits",
+    "Interface in Traditional Chinese, English, Japanese and Korean"
+  ],
+  "challenges": [
+    "Editing notes visually without changing the Markdown the user didn't touch",
+    "Testing an editor that only runs inside Obsidian",
+    "Relying on Obsidian APIs that aren't public"
+  ],
+  "solutions": [
+    "Only blocks that changed are serialized again, and a read-only round trip over a real vault (notExact and lossyBlocks must both be 0) guards the converter",
+    "Editing tests simulate Obsidian with jsdom, and ESLint runs the rules Obsidian uses to review community plugins",
+    "Non-public APIs are declared in one place, each optional and checked before use; the obsidian typings are pinned to the minimum supported app version"
+  ],
+  "results": [
+    "Notes stay clean Markdown; anything it can't edit visually is saved unchanged",
+    "Released on GitHub; install by copying three files into the vault's plugins folder",
+    "No telemetry, no account, and no files touched outside the vault"
+  ],
+  "timeline": {
+    "start": "2026",
+    "end": "Present",
+    "duration": "Ongoing"
+  },
+  "role": "Creator & Maintainer",
+  "links": {
+    "github": "https://github.com/NatLee/obsidian-word-mode"
+  }
+}
