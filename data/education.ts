@@ -7,6 +7,7 @@ export interface Education {
   id: string
   school: string
   schoolEn: string
+  schoolAbbr?: string
   degree: string
   major: string
   minor?: string

@@ -100,6 +100,89 @@
           }
         }
       ]
+    },
+    {
+      "id": "leopard-mobile",
+      "name": "Leopard Mobile",
+      "companyIds": ["leopard-mobile"],
+      "era": "2018 – 2019",
+      "title": {
+        "en": "Crawlers, public opinion and a thesis",
+        "zh": "爬蟲、輿情與碩士論文"
+      },
+      "summary": {
+        "en": [
+          "My first job, in Leopard Mobile's Tool Product Division, while I was still writing my master's thesis. I wrote crawlers for Twitter, Facebook and Telegram, kept the public-opinion database in MySQL, and built the NLP behind an ICO sentiment platform, Rating Token & Coin Master. Around it came content classification for a voice assistant, a Taiwanese Hokkien song recognition model for smart speakers, a Chinese reading-comprehension service, and the annotation platforms that fed those models.",
+          "There is no single flagship project from this job. What lasted are the tools around it: the crawlers and labeling platforms, the experiments for my thesis, and two contract jobs on the side."
+        ],
+        "zh": [
+          "第一份工作，在 Leopard Mobile 的工具產品事業部，同時還在寫碩士論文。我寫了 Twitter、Facebook、Telegram 的爬蟲，用 MySQL 管理輿情資料庫，也做了 ICO 輿情平台「Rating Token & Coin Master」背後的 NLP。周邊還有語音助理的內容分類、智慧音箱用的台語歌曲辨識模型、中文閱讀理解服務，以及替這些模型準備資料的標註平台。",
+          "這份工作沒有一個能代表的主要專案，留下來的是周邊的工具：爬蟲和標註平台、碩士論文的實驗，以及同時接的兩個外包案。"
+        ]
+      },
+      "sources": [
+        {
+          "id": "thesis",
+          "kind": "study",
+          "educationId": "ntust-master",
+          "label": { "en": "Master's thesis", "zh": "碩士論文" }
+        },
+        {
+          "id": "contracts",
+          "kind": "contract",
+          "label": { "en": "Contract work", "zh": "外包案" },
+          "note": {
+            "en": "A blockchain project for a financial training institute and a XOOPS website for a school. Only the blockchain work has a public repo.",
+            "zh": "替一間金融訓練機構做的區塊鏈案，以及替一間學校做的 XOOPS 網站；只有區塊鏈有公開的 repo。"
+          }
+        }
+      ],
+      "spinoffs": [
+        {
+          "id": "myanimelist-comment-crawler",
+          "note": {
+            "en": "A review crawler from the public-opinion work, used to collect sentiment data.",
+            "zh": "輿情工作裡的評論爬蟲，用來蒐集情緒資料。"
+          }
+        },
+        {
+          "id": "word-net-game",
+          "note": {
+            "en": "Started as a way to collect how happy or sad people find a sentence; now it is a game.",
+            "zh": "原本是蒐集「一句話讓人覺得多開心或多難過」的工具，現在變成遊戲。"
+          }
+        },
+        {
+          "id": "simply-labeling-platform-for-machine-reading",
+          "note": {
+            "en": "The labeling tool for the reading-comprehension data. I did the labeling myself too.",
+            "zh": "替閱讀理解資料做的標註工具；資料也是自己標的。"
+          }
+        },
+        {
+          "id": "simply-nlp-classification-labeling-platform",
+          "note": {
+            "en": "The same idea for text-classification labels.",
+            "zh": "同樣的想法，用在文字分類的標註。"
+          }
+        },
+        {
+          "id": "preproc-imdb-study",
+          "source": "thesis",
+          "note": {
+            "en": "Thesis research: re-running a paper's IMDb experiments on how text preprocessing changes sentiment models.",
+            "zh": "論文研究：重跑一篇論文的 IMDb 實驗，看文字前處理怎麼影響情緒模型。"
+          }
+        },
+        {
+          "id": "blockchain-from-scratch",
+          "source": "contracts",
+          "note": {
+            "en": "Grew out of the blockchain contract job.",
+            "zh": "源自那個區塊鏈外包案。"
+          }
+        }
+      ]
     }
   ]
 }

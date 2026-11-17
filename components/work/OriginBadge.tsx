@@ -5,6 +5,7 @@
 import Icon from '@/components/Icon'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getProjectOrigin } from '@/data/work'
+import { pick } from '@/lib/i18n/localize'
 
 const TONE = {
   work: 'bg-accent-soft text-accent',
@@ -12,13 +13,13 @@ const TONE = {
 } as const
 
 export default function OriginBadge({ projectId, className = '' }: { projectId: string; className?: string }) {
-  const { t } = useLanguage()
+  const { locale, t } = useLanguage()
   const origin = getProjectOrigin(projectId)
   if (!origin) return null
   return (
     <span className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 font-mono text-[11px] font-medium leading-none ${TONE[origin.kind]} ${className}`}>
       <Icon name={origin.kind === 'work' ? 'lock' : 'branch'} size={12} />
-      {t(`origin.${origin.kind}`, { name: origin.name })}
+      {t(`origin.${origin.kind}`, { name: pick(locale, origin.label) })}
     </span>
   )
 }

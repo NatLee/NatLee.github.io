@@ -1,16 +1,32 @@
-// 工作專案（/work）：在公司做的作品依公司分章，加上從那段工作長出來的開源 repo。
-// 章節文字與衍生 repo 在 content/work.json（雙語）。章節裡有哪些工作專案不另外列：
+// 工作專案（/work）：在公司做的作品依公司分章，加上從那段時期長出來的開源 repo。
+// 章節文字、衍生 repo 和它們的來源在 content/work.json（雙語）。章節裡有哪些工作專案不另外列：
 // 作品的 company 欄位對到章節涵蓋的經歷（companyIds）的公司或集團名稱，就屬於那一章。
+// 衍生 repo 預設來自那間公司；同時期的碩士論文、外包案等其他來源寫在章節的 sources，衍生 repo 用 source 指過去。
 import workJson from '@/content/work.json'
 import type { Locale } from '@/lib/i18n/config'
 import { pick, type Bilingual } from '@/lib/i18n/localize'
-import { experienceData, getExperienceData, groupRoles, type Experience } from './experience'
+import { educationData } from './education'
+import { experienceData, getExperienceData, type Experience } from './experience'
 import { allProjectsData, getLocalizedProjects, type ProjectDetail } from './projects'
+
+/** 衍生 repo 的來源種類：公司（預設）、學校研究、外包案。 */
+export type SourceKind = 'company' | 'study' | 'contract'
+
+interface SourceEntry {
+  id: string
+  kind: Exclude<SourceKind, 'company'>
+  label: Bilingual
+  note?: Bilingual
+  /** study：對到 education.json 的 id，期間從學歷資料來。 */
+  educationId?: string
+}
 
 interface SpinoffEntry {
   id: string
   /** 從另一個衍生 repo 延續下來（後繼版本），就寫那個 repo 的 id。 */
   from?: string
+  /** 不是來自公司時，寫 sources 裡的 id。 */
+  source?: string
   note: Bilingual
 }
 
@@ -22,6 +38,7 @@ interface ChapterEntry {
   era: string
   title: Bilingual
   summary: Bilingual<string[]>
+  sources?: SourceEntry[]
   spinoffs: SpinoffEntry[]
 }
 
@@ -57,20 +74,28 @@ function companyNames(entry: ChapterEntry) {
   return names
 }
 
+function sourceOf(entry: ChapterEntry, id?: string) {
+  return id ? entry.sources?.find((source) => source.id === id) : undefined
+}
+
 export interface ProjectOrigin {
-  /** work：在公司做的；spinoff：從那段工作長出來的開源 repo。 */
+  /** work：在公司做的；spinoff：從那段時期長出來的開源 repo。 */
   kind: 'work' | 'spinoff'
   chapterId: string
-  name: string
+  /** 顯示用的出處：公司名稱，或碩士論文、外包案這類來源。 */
+  label: Bilingual
 }
 
 const origins = new Map<string, ProjectOrigin>()
 for (const entry of chapterEntries) {
   const names = companyNames(entry)
   for (const project of allProjectsData) {
-    if (project.company && names.has(project.company)) origins.set(project.id, { kind: 'work', chapterId: entry.id, name: entry.name })
+    if (project.company && names.has(project.company)) origins.set(project.id, { kind: 'work', chapterId: entry.id, label: { en: entry.name } })
   }
-  for (const spinoff of entry.spinoffs) origins.set(spinoff.id, { kind: 'spinoff', chapterId: entry.id, name: entry.name })
+  for (const spinoff of entry.spinoffs) {
+    const source = sourceOf(entry, spinoff.source)
+    origins.set(spinoff.id, { kind: 'spinoff', chapterId: entry.id, label: source?.label ?? { en: entry.name } })
+  }
 }
 
 export function getProjectOrigin(id: string): ProjectOrigin | undefined {
@@ -93,6 +118,19 @@ export interface WorkSpinoff {
   note: string
 }
 
+/** 分支圖的一條主幹：公司，或同時期的學校研究、外包案，以及從它長出來的 repo。 */
+export interface SpinoffGroup {
+  kind: SourceKind
+  label: string
+  /** 學校研究加上學校縮寫；公司沒有。 */
+  detail?: string
+  note?: string
+  /** 期間（經歷或學歷資料的格式）；外包案沒有資料就不畫。 */
+  start?: string
+  end?: string
+  spinoffs: WorkSpinoff[]
+}
+
 export interface WorkChapter {
   id: string
   name: string
@@ -105,7 +143,9 @@ export interface WorkChapter {
   /** 舊到新。 */
   roles: Experience[]
   projects: ProjectDetail[]
-  spinoffs: WorkSpinoff[]
+  /** 公司那一組在最前面，其他來源照 work.json 的順序；沒有 repo 的來源也保留，因為它可能有說明。 */
+  spinoffGroups: SpinoffGroup[]
+  spinoffCount: number
 }
 
 export function getWorkChapters(locale: Locale = 'en'): WorkChapter[] {
@@ -115,50 +155,48 @@ export function getWorkChapters(locale: Locale = 'en'): WorkChapter[] {
   return chapterEntries.map((entry) => {
     const chapterRoles = rolesOf(entry, roles).sort((a, b) => yearValue(a.start) - yearValue(b.start))
     const ends = chapterRoles.map((role) => role.end)
+    const start = chapterRoles[0]?.start ?? ''
+    const end = ends.includes('Present') ? 'Present' : ends.sort((a, b) => yearValue(b) - yearValue(a))[0] ?? ''
+
+    const spinoffsOf = (sourceId?: string): WorkSpinoff[] =>
+      entry.spinoffs
+        .filter((spinoff) => spinoff.source === sourceId)
+        .flatMap((spinoff) => {
+          const project = byId.get(spinoff.id)
+          if (!project) return []
+          return [{ project, from: spinoff.from ? byId.get(spinoff.from) : undefined, note: pick(locale, spinoff.note) }]
+        })
+
+    const companyGroup: SpinoffGroup = { kind: 'company', label: entry.name, start, end, spinoffs: spinoffsOf(undefined) }
+    const otherGroups = (entry.sources ?? []).map((source): SpinoffGroup => {
+      const school = source.educationId ? educationData.find((item) => item.id === source.educationId) : undefined
+      return {
+        kind: source.kind,
+        label: pick(locale, source.label),
+        detail: school?.schoolAbbr,
+        note: source.note ? pick(locale, source.note) : undefined,
+        start: school?.startYear,
+        end: school?.endYear,
+        spinoffs: spinoffsOf(source.id),
+      }
+    })
+    const spinoffGroups = [companyGroup, ...otherGroups].filter((group) => group.spinoffs.length > 0 || group.note)
+
     return {
       id: entry.id,
       name: entry.name,
       era: entry.era,
       title: pick(locale, entry.title),
       summary: pick(locale, entry.summary),
-      start: chapterRoles[0]?.start ?? '',
-      end: ends.includes('Present') ? 'Present' : ends.sort((a, b) => yearValue(b) - yearValue(a))[0] ?? '',
+      start,
+      end,
       roles: chapterRoles,
       // 新到舊，和章節的順序一致：最上面是那段工作最近做的東西。
       projects: projects
         .filter((project) => origins.get(project.id)?.kind === 'work' && origins.get(project.id)?.chapterId === entry.id)
         .sort((a, b) => yearValue(b.timeline.start) - yearValue(a.timeline.start)),
-      spinoffs: entry.spinoffs.flatMap((spinoff) => {
-        const project = byId.get(spinoff.id)
-        if (!project) return []
-        return [{ project, from: spinoff.from ? byId.get(spinoff.from) : undefined, note: pick(locale, spinoff.note) }]
-      }),
+      spinoffGroups,
+      spinoffCount: entry.spinoffs.filter((spinoff) => byId.has(spinoff.id)).length,
     }
   })
-}
-
-export interface CareerSpan {
-  name: string
-  start: string
-  end: string
-  chapterId?: string
-}
-
-/** 職涯時間帶：每個公司（集團）一段，有章節的可以點。 */
-export function getCareerSpans(): CareerSpan[] {
-  return groupRoles(experienceData).map((group) => {
-    const starts = group.roles.map((role) => role.start).sort((a, b) => yearValue(a) - yearValue(b))
-    const ends = group.roles.map((role) => role.end)
-    return {
-      name: group.name,
-      start: starts[0],
-      end: ends.includes('Present') ? 'Present' : ends.sort((a, b) => yearValue(b) - yearValue(a))[0],
-      chapterId: group.roles.map((role) => chapterIdForCompany(role.companyId)).find(Boolean),
-    }
-  })
-}
-
-/** 首頁時期對應的章節（用 era 的 period 字串對）。 */
-export function chapterForEra(period: string, locale: Locale = 'en'): WorkChapter | undefined {
-  return getWorkChapters(locale).find((chapter) => chapter.era === period)
 }

@@ -49,9 +49,16 @@ test('every work chapter points to real roles, an existing era and real spin-off
     const chapterRoles = roles.filter(role => chapter.companyIds.includes(role.companyId))
     for (const companyId of chapter.companyIds) assert.ok(chapterRoles.some(role => role.companyId === companyId), `${chapter.id}: no role with companyId ${companyId}`)
     for (const role of chapterRoles) for (const name of [role.company, role.group].filter(Boolean)) claimed.set(name, chapter.id)
+    const education = new Set(read('content/education.json').map(item => item.id))
+    const sources = new Set((chapter.sources ?? []).map(source => source.id))
+    for (const source of chapter.sources ?? []) {
+      assert.ok(source.label?.en && source.label?.zh, `${chapter.id}: source ${source.id} needs a label in both languages`)
+      if (source.educationId) assert.ok(education.has(source.educationId), `${chapter.id}: unknown education ${source.educationId}`)
+    }
     const seen = []
     for (const spinoff of chapter.spinoffs) {
       assert.ok(ids.has(spinoff.id), `${chapter.id}: unknown spin-off ${spinoff.id}`)
+      if (spinoff.source) assert.ok(sources.has(spinoff.source), `${chapter.id}: ${spinoff.id} names an unknown source ${spinoff.source}`)
       if (spinoff.from) assert.ok(seen.includes(spinoff.from), `${chapter.id}: ${spinoff.id} continues ${spinoff.from}, which must be listed before it`)
       assert.ok(spinoff.note?.en && spinoff.note?.zh, `${chapter.id}: ${spinoff.id} needs a note in both languages`)
       seen.push(spinoff.id)

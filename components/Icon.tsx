@@ -4,6 +4,7 @@ import { FaLinkedin } from 'react-icons/fa'
 import {
   LuArrowRight,
   LuArrowUpRight,
+  LuBriefcase,
   LuBookOpen,
   LuCheck,
   LuCopy,
@@ -11,6 +12,7 @@ import {
   LuGitBranch,
   LuGitPullRequest,
   LuGlobe,
+  LuGraduationCap,
   LuKeyboard,
   LuLock,
   LuMail,
@@ -56,6 +58,8 @@ const registry = {
   globe: LuGlobe,
   lock: LuLock,
   branch: LuGitBranch,
+  study: LuGraduationCap,
+  contract: LuBriefcase,
 } satisfies Record<string, IconType>
 
 export type IconName = keyof typeof registry

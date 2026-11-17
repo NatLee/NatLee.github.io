@@ -10,6 +10,7 @@ import OriginBadge from '@/components/work/OriginBadge'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getProjectById, getProjectStars, getRelatedProjects, localizeCategory, type ProjectDetail } from '@/data/projects'
 import { getProjectOrigin } from '@/data/work'
+import { pick } from '@/lib/i18n/localize'
 
 const LINK_ORDER = ['github', 'demo', 'pypi', 'documentation', 'article'] as const
 const LINK_ICON: Record<(typeof LINK_ORDER)[number], string> = {
@@ -123,7 +124,7 @@ export default function ProjectPage({ id }: { id: string }) {
     facts.push(
       origin.kind === 'work'
         ? [t('project.company'), <Link key="company" href={chapterLink} className="link">{project.company}</Link>]
-        : [t('project.origin'), <Link key="origin" href={chapterLink} className="link">{t('project.spinoffOf', { name: origin.name })}</Link>]
+        : [t('project.origin'), <Link key="origin" href={chapterLink} className="link">{pick(locale, origin.label)}</Link>]
     )
   }
 
@@ -143,7 +144,7 @@ export default function ProjectPage({ id }: { id: string }) {
             <p className="mt-6 flex max-w-prose gap-3 rounded-xl border border-accent-fill/50 bg-accent-soft/60 px-4 py-3 text-sm leading-relaxed">
               <Icon name="lock" size={16} className="mt-0.5 shrink-0 text-accent" />
               <span>
-                {t('project.workNotice', { company: origin.name })}{' '}
+                {t('project.workNotice', { company: pick(locale, origin.label) })}{' '}
                 <Link href={chapterLink} className="link font-semibold">
                   {t('project.workChapter')}
                 </Link>

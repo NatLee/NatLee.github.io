@@ -136,18 +136,20 @@ export function Career() {
               {chapter && (
                 <div className="mt-4 grid gap-2 border-t border-dashed border-line pt-3">
                   <p className="font-mono text-xs font-semibold uppercase tracking-wider text-plum">{chapter.name}</p>
-                  <ul className="grid gap-1">
-                    {chapter.projects.map((project) => (
-                      <li key={project.id} className="flex items-start gap-2 text-sm font-semibold">
-                        <Icon name="lock" size={13} className="mt-1 shrink-0 text-accent" />
-                        {project.title}
-                      </li>
-                    ))}
-                  </ul>
-                  {chapter.spinoffs.length > 0 && (
+                  {chapter.projects.length > 0 && (
+                    <ul className="grid gap-1">
+                      {chapter.projects.map((project) => (
+                        <li key={project.id} className="flex items-start gap-2 text-sm font-semibold">
+                          <Icon name="lock" size={13} className="mt-1 shrink-0 text-accent" />
+                          {project.title}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {chapter.spinoffCount > 0 && (
                     <p className="flex items-center gap-2 text-xs text-muted">
                       <Icon name="branch" size={13} className="shrink-0 text-clip" />
-                      {t('home.career.spinoffs', { count: chapter.spinoffs.length })}
+                      {t('home.career.spinoffs', { count: chapter.spinoffCount })}
                     </p>
                   )}
                   <Link href={`/work/#${chapter.id}`} className="link mt-1 inline-flex w-fit items-center gap-1.5 text-sm font-semibold">
