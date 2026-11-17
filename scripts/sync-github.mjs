@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// 抓各 repo 的 GitHub 星數，寫進 content/github.json。
+// 抓各 repo 的 GitHub 星數和個人頁置頂的 repo，寫進 content/_generated/github.json。
 // 部署流程在 build 前執行（有 GITHUB_TOKEN 就帶上）；網路或 API 出問題時保留原本的快照，不讓部署失敗。
 //   node scripts/sync-github.mjs
 import fs from 'node:fs'
@@ -40,6 +40,25 @@ for (const repo of [...repos].sort((a, b) => a.localeCompare(b))) {
   } catch (err) {
     failed.push(`${repo} (${err.message})`)
     if (previous.repos?.[repo]) next.repos[repo] = previous.repos[repo]
+  }
+}
+
+// 個人頁置頂的 repo（/work 的 side project 代表作）。GraphQL 一定要 token；沒有 token 或失敗就沿用上次的清單。
+const owner = 'NatLee'
+next.pinned = previous.pinned ?? []
+if (token) {
+  try {
+    const res = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: `query { user(login: "${owner}") { pinnedItems(first: 6, types: REPOSITORY) { nodes { ... on Repository { nameWithOwner } } } } }` }),
+    })
+    if (!res.ok) throw new Error(String(res.status))
+    const nodes = (await res.json())?.data?.user?.pinnedItems?.nodes
+    if (!Array.isArray(nodes)) throw new Error('no pinnedItems in the response')
+    next.pinned = nodes.map((node) => node.nameWithOwner)
+  } catch (err) {
+    console.warn(`sync-github: pinned repos not updated (${err.message}), keeping ${next.pinned.length} from the last snapshot`)
   }
 }
 

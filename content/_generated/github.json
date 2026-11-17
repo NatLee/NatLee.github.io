@@ -1,25 +1,37 @@
 {
-  "generatedAt": "2026-11-05T22:49:35.877Z",
+  "generatedAt": "2026-11-17T14:03:57.731Z",
   "repos": {
+    "NatLee/ask-taipei-city-hall": {
+      "stars": 1,
+      "pushedAt": "2026-11-04"
+    },
     "NatLee/batch-crop-images": {
       "stars": 76,
       "pushedAt": "2026-11-04"
     },
+    "NatLee/blockchain-from-scratch": {
+      "stars": 1,
+      "pushedAt": "2026-11-04"
+    },
     "NatLee/blur-generator": {
       "stars": 70,
-      "pushedAt": "2026-11-03"
+      "pushedAt": "2026-11-17"
     },
-    "NatLee/dev-dock-manager-rust": {
-      "stars": 6,
-      "pushedAt": "2026-11-03"
-    },
-    "NatLee/dev-dock-manager": {
-      "stars": 10,
+    "NatLee/countdown-studio": {
+      "stars": 1,
       "pushedAt": "2026-11-03"
     },
     "NatLee/dev-dock": {
       "stars": 4,
-      "pushedAt": "2026-11-03"
+      "pushedAt": "2026-11-17"
+    },
+    "NatLee/dev-dock-manager": {
+      "stars": 10,
+      "pushedAt": "2026-11-17"
+    },
+    "NatLee/dev-dock-manager-rust": {
+      "stars": 6,
+      "pushedAt": "2026-11-17"
     },
     "NatLee/django-allauth-jwt-template": {
       "stars": 3,
@@ -33,29 +45,37 @@
       "stars": 3,
       "pushedAt": "2026-11-04"
     },
+    "NatLee/django-simple-3rd-party-jwt": {
+      "stars": 2,
+      "pushedAt": "2026-11-17"
+    },
+    "NatLee/django-simple-api-proxy": {
+      "stars": 5,
+      "pushedAt": "2026-11-03"
+    },
     "NatLee/eagle-wrapper": {
       "stars": 8,
-      "pushedAt": "2026-11-03"
+      "pushedAt": "2026-11-17"
     },
     "NatLee/elysion-calendar": {
       "stars": 3,
-      "pushedAt": "2026-11-03"
+      "pushedAt": "2026-11-17"
     },
     "NatLee/face-wall-generator-tool": {
       "stars": 1,
-      "pushedAt": "2026-11-03"
+      "pushedAt": "2026-11-17"
     },
     "NatLee/fisheye-warping": {
       "stars": 16,
-      "pushedAt": "2026-11-03"
+      "pushedAt": "2026-11-17"
     },
     "NatLee/gura-gru-unit-for-recognizing-affect": {
       "stars": 3,
-      "pushedAt": "2026-11-04"
+      "pushedAt": "2026-11-17"
     },
     "NatLee/heic2png": {
       "stars": 26,
-      "pushedAt": "2026-11-03"
+      "pushedAt": "2026-11-17"
     },
     "NatLee/image-annotation": {
       "stars": 1,
@@ -66,8 +86,8 @@
       "pushedAt": "2026-11-03"
     },
     "NatLee/morphkit": {
-      "stars": 2,
-      "pushedAt": "2026-11-03"
+      "stars": 3,
+      "pushedAt": "2026-11-17"
     },
     "NatLee/myanimelist-comment-crawler": {
       "stars": 4,
@@ -81,17 +101,37 @@
       "stars": 6,
       "pushedAt": "2026-11-03"
     },
+    "NatLee/obsidian-word-mode": {
+      "stars": 1,
+      "pushedAt": "2026-11-17"
+    },
     "NatLee/openpose-detect-hands-with-heatmap": {
       "stars": 3,
-      "pushedAt": "2023-05-30"
+      "pushedAt": "2026-11-17"
     },
     "NatLee/play-qwop-by-using-ai-agent": {
       "stars": 3,
       "pushedAt": "2026-11-05"
     },
+    "NatLee/playwright-snap": {
+      "stars": 1,
+      "pushedAt": "2026-11-03"
+    },
+    "NatLee/preproc-imdb-study": {
+      "stars": 1,
+      "pushedAt": "2026-11-03"
+    },
     "NatLee/pyppeteer-snap": {
       "stars": 3,
-      "pushedAt": "2026-11-03"
+      "pushedAt": "2026-11-17"
+    },
+    "NatLee/sentiment-bundle-benchmark": {
+      "stars": 1,
+      "pushedAt": "2026-11-04"
+    },
+    "NatLee/show-system-info": {
+      "stars": 6,
+      "pushedAt": "2026-11-17"
     },
     "NatLee/simply-blur-detector": {
       "stars": 10,
@@ -109,17 +149,41 @@
       "stars": 3,
       "pushedAt": "2026-11-04"
     },
+    "NatLee/static-gantt": {
+      "stars": 1,
+      "pushedAt": "2026-11-04"
+    },
     "NatLee/stock-trading-simulation": {
       "stars": 1,
+      "pushedAt": "2026-11-17"
+    },
+    "NatLee/streaming-player": {
+      "stars": 7,
+      "pushedAt": "2026-11-05"
+    },
+    "NatLee/street-scene-ocr": {
+      "stars": 1,
+      "pushedAt": "2026-11-04"
+    },
+    "NatLee/taipei-transit-radar": {
+      "stars": 1,
+      "pushedAt": "2026-11-04"
+    },
+    "NatLee/taiwan-population-atlas": {
+      "stars": 2,
       "pushedAt": "2026-11-03"
     },
     "NatLee/telepy": {
       "stars": 13,
-      "pushedAt": "2026-11-03"
+      "pushedAt": "2026-11-15"
+    },
+    "NatLee/word-net-game": {
+      "stars": 1,
+      "pushedAt": "2026-11-05"
     },
     "NatLee/yande-and-konachan-to-eagle": {
       "stars": 2,
-      "pushedAt": "2026-11-04"
+      "pushedAt": "2026-11-17"
     },
     "NatLee/youtube-redirect-player": {
       "stars": 1,
@@ -128,62 +192,14 @@
     "NatLee/youtube-video-redirect-service": {
       "stars": 1,
       "pushedAt": "2026-11-05"
-    },
-    "NatLee/streaming-player": {
-      "stars": 7,
-      "pushedAt": "2026-11-05"
-    },
-    "NatLee/static-gantt": {
-      "stars": 1,
-      "pushedAt": "2026-11-04"
-    },
-    "NatLee/word-net-game": {
-      "stars": 1,
-      "pushedAt": "2026-11-05"
-    },
-    "NatLee/taiwan-population-atlas": {
-      "stars": 2,
-      "pushedAt": "2026-11-03"
-    },
-    "NatLee/taipei-transit-radar": {
-      "stars": 1,
-      "pushedAt": "2026-11-04"
-    },
-    "NatLee/ask-taipei-city-hall": {
-      "stars": 1,
-      "pushedAt": "2026-11-04"
-    },
-    "NatLee/countdown-studio": {
-      "stars": 1,
-      "pushedAt": "2026-11-03"
-    },
-    "NatLee/blockchain-from-scratch": {
-      "stars": 1,
-      "pushedAt": "2026-11-04"
-    },
-    "NatLee/street-scene-ocr": {
-      "stars": 1,
-      "pushedAt": "2026-11-04"
-    },
-    "NatLee/sentiment-bundle-benchmark": {
-      "stars": 1,
-      "pushedAt": "2026-11-04"
-    },
-    "NatLee/playwright-snap": {
-      "stars": 1,
-      "pushedAt": "2026-11-03"
-    },
-    "NatLee/show-system-info": {
-      "stars": 6,
-      "pushedAt": "2026-11-03"
-    },
-    "NatLee/django-simple-3rd-party-jwt": {
-      "stars": 2,
-      "pushedAt": "2026-11-03"
-    },
-    "NatLee/django-simple-api-proxy": {
-      "stars": 5,
-      "pushedAt": "2026-11-03"
     }
-  }
+  },
+  "pinned": [
+    "NatLee/telepy",
+    "NatLee/dev-dock-manager-rust",
+    "NatLee/blur-generator",
+    "NatLee/nipype-preprocess-on-brain-mr",
+    "NatLee/batch-crop-images",
+    "NatLee/heic2png"
+  ]
 }

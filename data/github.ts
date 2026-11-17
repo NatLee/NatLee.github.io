@@ -9,6 +9,8 @@ export interface RepoStats {
 interface GithubSnapshot {
   generatedAt: string
   repos: Record<string, RepoStats>
+  /** 個人頁置頂的 repo（owner/name），照置頂順序。 */
+  pinned?: string[]
 }
 
 const snapshot = githubJson as GithubSnapshot
@@ -16,4 +18,9 @@ const byLowerName = new Map(Object.entries(snapshot.repos).map(([name, stats]) =
 
 export function getRepoStats(repo: string): RepoStats | undefined {
   return byLowerName.get(repo.toLowerCase())
+}
+
+/** 個人頁置頂的 repo，照置頂順序；快照裡沒有就是空的。 */
+export function getPinnedRepos(): string[] {
+  return snapshot.pinned ?? []
 }
