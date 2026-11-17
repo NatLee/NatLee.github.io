@@ -8,7 +8,8 @@ import type { Locale } from '@/lib/i18n/config'
 import { pick, type Bilingual } from '@/lib/i18n/localize'
 import { educationData } from './education'
 import { experienceData, getExperienceData, type Experience } from './experience'
-import { allProjectsData, getLocalizedProjects, type ProjectDetail } from './projects'
+import { getPinnedRepos } from './github'
+import { allProjectsData, getLocalizedProjects, repoOf, type ProjectDetail } from './projects'
 
 /** 衍生 repo 的來源種類：公司（預設）、學校研究、外包案。 */
 export type SourceKind = 'company' | 'study' | 'contract'
@@ -233,6 +234,28 @@ export function getWorkChapters(locale: Locale = 'en'): WorkChapter[] {
   })
 }
 
+/**
+ * 代表性的 side project：個人頁置頂、又不是工作專案或衍生專案的作品。
+ * flagship 等級的（Telepy）永遠排第一，其餘照置頂順序。
+ */
+export function getSideProjects(locale: Locale = 'en'): ProjectDetail[] {
+  const pinned = getPinnedRepos().map((repo) => repo.toLowerCase())
+  const rank = (project: ProjectDetail) => pinned.indexOf(repoOf(project)?.toLowerCase() ?? '')
+  return getLocalizedProjects(locale)
+    .filter((project) => rank(project) >= 0 && getProjectOrigins(project.id).length === 0)
+    .sort((a, b) => Number(b.tier === 'flagship') - Number(a.tier === 'flagship') || rank(a) - rank(b))
+}
+
+/** 某段期間開始的代表作（/work 各章的「同時期」），最多 limit 個。 */
+export function sideProjectsBetween(start: string, end: string, locale: Locale = 'en', limit = 2): ProjectDetail[] {
+  return getSideProjects(locale)
+    .filter((project) => {
+      const at = yearValue(project.timeline.start)
+      return at >= yearValue(start) && at <= endValue(end)
+    })
+    .slice(0, limit)
+}
+
 export interface CareerBar {
   label: string
   start: string
@@ -257,6 +280,8 @@ export interface CareerDot {
 export interface CareerMap {
   lanes: CareerLane[]
   dots: CareerDot[]
+  /** 代表性的 side project（個人頁置頂），flagship 在前。 */
+  sides: ProjectDetail[]
   /** 時間軸起訖（帶小數的年份）。 */
   start: number
   end: number
@@ -305,16 +330,23 @@ export function getCareerMap(locale: Locale = 'en'): CareerMap {
   }
   const dots = [...dotsById.values()].sort((a, b) => yearValue(a.project.timeline.start) - yearValue(b.project.timeline.start))
 
-  // 有東西的期間合併起來，中間超過 MIN_GAP 的空白就是空檔。
-  const spans = lanes
-    .flatMap((lane) => lane.bars.map((bar): [number, number] => [yearValue(bar.start), endValue(bar.end)]))
-    .sort((a, b) => a[0] - b[0])
+  const sides = getSideProjects(locale)
+
+  // 有東西的期間合併起來，中間超過 MIN_GAP 的空白就是空檔。衍生 repo 和 side project 開始的時間點也算「有東西」，
+  // 所以落在空檔裡的點會把空檔切開，不會被壓進斷軸。
+  const points = [...dots.map((dot) => dot.project), ...sides].map((project): [number, number] => {
+    const at = yearValue(project.timeline.start)
+    return [at, at]
+  })
+  const spans = [...lanes.flatMap((lane) => lane.bars.map((bar): [number, number] => [yearValue(bar.start), endValue(bar.end)])), ...points].sort(
+    (a, b) => a[0] - b[0]
+  )
   const gaps: [number, number][] = []
   let reach = spans[0]?.[1] ?? BUILD_YEAR
   for (const [from, to] of spans.slice(1)) {
     if (from - reach > MIN_GAP) gaps.push([reach, from])
     reach = Math.max(reach, to)
   }
-  const start = Math.floor(Math.min(...spans.map((span) => span[0]), ...dots.map((dot) => yearValue(dot.project.timeline.start))))
-  return { lanes, dots, start, end: BUILD_YEAR, gaps }
+  const start = Math.floor(Math.min(...spans.map((span) => span[0])))
+  return { lanes, dots, sides, start, end: BUILD_YEAR, gaps }
 }

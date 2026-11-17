@@ -9,7 +9,7 @@ import { formatPeriod } from '@/components/projects/ProjectPage'
 import { StarCount, ThemeLabel } from '@/components/site/ui'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getProjectStars, type ProjectDetail } from '@/data/projects'
-import { buildYear, endValue, getCareerMap, getWorkChapters, yearValue, type CareerLane, type SourceKind, type SpinoffGroup, type WorkChapter } from '@/data/work'
+import { buildYear, endValue, getCareerMap, getWorkChapters, sideProjectsBetween, yearValue, type CareerLane, type SourceKind, type SpinoffGroup, type WorkChapter } from '@/data/work'
 
 /** 把年份換成時間軸上的百分比。 */
 function scale(start: number, end: number) {
@@ -69,6 +69,26 @@ function CareerMap({ chapters }: { chapters: WorkChapter[] }) {
     return { ...dot, x: at(yearValue(dot.project.timeline.start)), level }
   })
   const dotRows = Math.max(1, ...stacks.values())
+
+  // side project 的名字比點寬。右半邊的名字往左長（方框在右），才不會超出畫面；
+  // 依名字長度估計佔用的範圍（%），放進第一個不會和前一個名字重疊的列。
+  const labelSpan = (title: string) => title.length * 0.8 + 3
+  const rowEnds: number[] = []
+  const sides = [...map.sides]
+    .map((project) => {
+      const x = at(yearValue(project.timeline.start))
+      const flip = x > 50
+      const span = labelSpan(project.title)
+      return { project, x, flip, from: flip ? x - span : x, to: flip ? x : x + span, flagship: project.tier === 'flagship' }
+    })
+    .sort((a, b) => a.from - b.from)
+    .map((side) => {
+      let row = rowEnds.findIndex((end) => end <= side.from)
+      if (row < 0) row = rowEnds.length
+      rowEnds[row] = side.to
+      return { ...side, row }
+    })
+  const sideRows = Math.max(1, rowEnds.length)
 
   const laneLabel = 'font-mono text-[11px] uppercase tracking-wider text-muted'
   const marks = gapMarks.map((left) => (
@@ -139,6 +159,33 @@ function CareerMap({ chapters }: { chapters: WorkChapter[] }) {
           </ul>
         </div>
 
+        {sides.length > 0 && (
+          <div className="grid gap-x-4 gap-y-1 sm:grid-cols-[6.5rem_minmax(0,1fr)] sm:items-center">
+            <span className={laneLabel}>{t('work.lanes.side')}</span>
+            <ul className="relative" style={{ height: sideRows * 22 + 2 }}>
+              {marks}
+              {sides.map((side) => (
+                <li
+                  key={side.project.id}
+                  className="absolute"
+                  style={{ left: `${side.x}%`, top: side.row * 22, transform: side.flip ? 'translateX(calc(-100% + 5px))' : 'translateX(-5px)' }}
+                >
+                  <Link
+                    href={`/projects/${side.project.id}/`}
+                    title={`${side.project.title} · ${side.project.timeline.start}`}
+                    className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded font-mono text-[11px] leading-5 transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink ${
+                      side.flip ? 'flex-row-reverse' : ''
+                    } ${side.flagship ? `bg-accent-soft font-semibold text-accent ${side.flip ? 'pl-1.5' : 'pr-1.5'}` : 'text-ink'}`}
+                  >
+                    <span className={`h-2.5 w-2.5 shrink-0 rounded-[2px] border-2 ${side.flagship ? 'border-accent-fill bg-accent-fill' : 'border-ink/70 bg-surface'}`} aria-hidden="true" />
+                    {side.project.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <div className="grid gap-x-4 sm:grid-cols-[6.5rem_minmax(0,1fr)]" aria-hidden="true">
           <span className="hidden sm:block" />
           <div className="relative h-5 border-t border-line">
@@ -193,6 +240,33 @@ function RolePath({ chapter }: { chapter: WorkChapter }) {
       <Link href="/experience/" className="link mt-4 inline-flex items-center gap-1.5 text-sm">
         {t('work.rolesLink')} <Icon name="arrow" size={14} />
       </Link>
+    </div>
+  )
+}
+
+/** 這段工作期間開始的代表性 side project（個人頁置頂），最多兩個；沒有就不顯示。 */
+function Meanwhile({ chapter }: { chapter: WorkChapter }) {
+  const { locale, t } = useLanguage()
+  const projects = sideProjectsBetween(chapter.start, chapter.end, locale)
+  if (!projects.length) return null
+  return (
+    <div>
+      <h3 className="eyebrow">{t('work.meanwhile')}</h3>
+      <ul className="mt-3 grid gap-2.5">
+        {projects.map((project) => (
+          <li key={project.id}>
+            <Link href={`/projects/${project.id}/`} className="group inline-flex items-center gap-2 text-sm font-semibold transition-colors hover:text-accent">
+              <span
+                className={`h-2.5 w-2.5 shrink-0 rounded-[2px] border-2 ${project.tier === 'flagship' ? 'border-accent-fill bg-accent-fill' : 'border-ink/70 bg-surface'}`}
+                aria-hidden="true"
+              />
+              {project.title}
+              <Icon name="arrow" size={13} className="text-muted transition-transform group-hover:translate-x-0.5" />
+            </Link>
+            <span className="tabular block pl-[18px] font-mono text-[11px] text-muted">{project.timeline.start.replace('-', '.')}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
@@ -386,6 +460,7 @@ function Chapter({ chapter }: { chapter: WorkChapter }) {
             <p className="mt-2 font-display text-lg leading-snug text-plum">{chapter.title}</p>
           </div>
           <RolePath chapter={chapter} />
+          <Meanwhile chapter={chapter} />
         </div>
 
         <div className="grid min-w-0 gap-12">
