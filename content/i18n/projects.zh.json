@@ -1,7 +1,7 @@
 {
   "telepy": {
     "subtitle": "管理 NAT 後方機器的自架 Web 主控台",
-    "description": "每台裝置只要往外建立一條反向 SSH 通道，就能在瀏覽器裡使用終端機、檔案、遠端桌面、遠端瀏覽器，還能連到它背後的區域網路。不用設定 port forwarding、不用 VPN，也不需要公開 IP。",
+    "description": "每台裝置只要往外連一條反向 SSH 通道，就能在瀏覽器用終端機、檔案、遠端桌面和遠端瀏覽器，連背後的區網也進得去。不用開 port、不用 VPN、不用公開 IP，機器會自己打電話回家。",
     "longDescription": "Telepy 是一套自架的 Web 主控台，專門用來管理那些無法直接連線的機器：NAT 後方的伺服器、家裡的 Raspberry Pi、防火牆後的辦公室電腦，或是一台 OpenWrt 路由器。每台裝置主動往外連一條反向 SSH 通道到 Telepy 伺服器，之後就能直接在瀏覽器裡操作它：終端機、檔案、RDP／VNC／RustDesk 遠端桌面、一個從該裝置上網的 Chromium，以及同一個網路裡的其他主機。團隊可以使用細緻的分享設定、功能權限、指令規則、即時 session 控管，以及可偵測竄改的稽核日誌；所有操作也都能透過 CLI、REST API，以及提供給 AI agent 的 MCP 自動化。這個專案在 2024 年以 Django 應用起步，2026 年改寫為單一 Rust 行程。",
     "role": "創建者與維護者",
     "features": [
@@ -33,7 +33,7 @@
   },
   "dev-dock-manager-rust": {
     "title": "開發機管理器（Rust 版）",
-    "subtitle": "每人一台 Docker 開發機，在瀏覽器裡用",
+    "subtitle": "重寫一次，這次用 Rust",
     "description": "每個使用者一台 Docker 開發機，附網頁終端機、noVNC 桌面，GPU 可選。是 Django 版的 Rust 重寫，一部分原因是想知道自己做不做得到。",
     "longDescription": "以 Rust 與 Docker 打造的高效能開發環境管理系統。平台為同一台機器上的多位使用者提供彼此隔離的容器化開發環境，包含以 Rust 撰寫、採用 JWT 驗證的後端 API，支援即時主控台存取的 WebSocket，以及 React／Next.js 前端。所有服務都透過 Traefik 反向代理對外提供，並可選擇啟用 Nvidia Docker。",
     "role": "創建者與維護者",
@@ -220,8 +220,8 @@
   },
   "heic2png": {
     "role": "建立與維護",
-    "subtitle": "HEIC 照片轉檔工具",
-    "description": "從命令列、管線或 Python 把 iPhone 的 HEIC 照片轉成 PNG 或 JPEG，處理透明度與輸出品質。",
+    "subtitle": "iPhone 照片，換成大家都打得開的格式",
+    "description": "從命令列、管線或 Python 把 iPhone 的 HEIC 照片轉成 PNG 或 JPEG。小麻煩一再出現，就值得一個小工具。",
     "longDescription": "以 Pillow 與 pillow-heif 轉換 HEIC 照片。可從 CLI、Python 或 shell 管線輸入輸出，支援批次與透明度，並明確控制 PNG 色盤縮減和 JPEG 品質。",
     "features": [
       "輸出 PNG 與 JPEG",
@@ -234,7 +234,7 @@
     "title": "批次裁圖工具",
     "role": "建立與維護",
     "subtitle": "一個框，裁完整個資料夾",
-    "description": "用 OpenCV 畫一次裁切框，套用到整個資料夾；也能傳入 --box 或預設檔，不開視窗完成批次裁切。",
+    "description": "畫一次裁切框，整個資料夾的相似圖片都照著裁。會寫它，是因為我不想一張一張裁；看來不想的人還不少。",
     "longDescription": "以 OpenCV 和 NumPy 實作批次裁切。互動式選框或命令列座標共用同一套裁切流程，重複工作可保存為預設檔。",
     "features": [
       "在 OpenCV 視窗畫一次裁切框",
@@ -251,7 +251,7 @@
     "role": "建立與維護",
     "title": "腦部 MRI 前處理流程",
     "subtitle": "從 T1 掃描到組織圖與品質報告",
-    "description": "完整 Nipype 流程，比較 FSL FAST、K-means 與 ANTs Atropos，產出組織體積、偏差校正指標與互動 3D 腦。",
+    "description": "完整的 Nipype 流程，用三種方法切同一顆腦，算出組織體積與品質指標，還能轉著看 3D。三種切法不完全一樣，這正是要比的。",
     "longDescription": "供研究與學習使用的 T1 MRI 流程：AC-PC 對齊、MNI152 配準、去顱骨與 N4 校正，再選擇 FSL FAST、K-means 或 ANTs Atropos 分割。比較三者的一致性、組織體積與品質指標，每筆掃描產出 3D 圖與 HTML 報告，示範資料來自開放授權的 OpenNeuro。",
     "features": [
       "AC-PC 對齊、配準、去顱骨與 N4 校正",
@@ -346,7 +346,7 @@
     "title": "Django 專案範本",
     "role": "建立與維護",
     "subtitle": "Django 後端起點",
-    "description": "整合 PostgreSQL、Redis、JWT、社群登入、Channels 與 django-q2 的 Django 範本。反覆做的設定，現在也有端對端驗證。",
+    "description": "整合 PostgreSQL、Redis、JWT、社群登入、Channels 與 django-q2 的 Django 範本。同一套設定做到第 N 次，終於決定存起來，還補上端對端測試。",
     "longDescription": "以 Docker Compose 啟動 Django、PostgreSQL 與 Redis。整合 JWT、Google／Microsoft 登入、Channels WebSocket 與 django-q2 背景工作，透過環境變數設定，CI 驗證端對端流程。",
     "features": [
       "JWT 與 Google、Microsoft 登入",
@@ -515,7 +515,7 @@
     "title": "影像模糊偵測器",
     "role": "建立與維護",
     "subtitle": "在瀏覽器比較 CNN 與 Laplacian",
-    "description": "放入圖片，比較 Keras 小型 CNN 和 Laplacian variance 的判斷，還能看逐區塊模糊熱圖。不用上傳。",
+    "description": "放一張圖，比較 Keras 小型 CNN 和 Laplacian variance 的判斷，還有逐區塊的模糊熱圖。不用上傳，糊掉的照片留在自己電腦就好。",
     "longDescription": "用清晰插圖與 blur-generator 產生的模糊版本訓練 TensorFlow／Keras CNN。2026 版包含原創訓練插圖、x86 與 ARM Docker 支援，以及 ONNX 匯出。網頁並排顯示 CNN 和 Laplacian variance，讓使用者自己比較兩種方法的判斷。",
     "features": [
       "瀏覽器本機推論與區塊熱圖",
@@ -537,7 +537,7 @@
   "gura-gru-unit-for-recognizing-affect": {
     "role": "建立與維護",
     "subtitle": "早期情緒分類實驗",
-    "description": "早期的 BiGRU＋self-attention 情緒分類實驗，保留作為參考；新的比較移到 Sentiment Bundle Benchmark。",
+    "description": "早期的 BiGRU＋self-attention 情緒分類實驗，留著當參考；新的比較都搬到 Sentiment Bundle Benchmark。退休了，但還沒被刪。",
     "longDescription": "介紹 MyAnimeList 評論與情緒資料集包時使用的早期分類模型。BiGRU 實驗已封存，由 sentiment-bundle-benchmark 以固定切分與可重現評測比較現代方法。",
     "features": [
       "歷史 BiGRU 與 self-attention 模型",
@@ -553,7 +553,7 @@
     "role": "建立與維護",
     "title": "多模態分類標註平台",
     "subtitle": "文字、圖片與音訊，共用一套審核流程",
-    "description": "Rust＋React 標註平台，可設定分類結構、比較多人一致性，也能選用模型預標註。單一 Docker 映像檔即可自架。",
+    "description": "Rust＋React 標註平台，分類結構自己定，能比較多人一致性，也能先讓模型預標。一個 Docker 映像檔就能自架，省下的時間剛好拿去標資料。",
     "longDescription": "Rust＋React 標註平台，可設定分類結構、比較多人一致性，也能選用模型預標註。單一 Docker 映像檔即可自架。2026 年從原本的 Flask 應用重寫，將匯入、標註、審核與匯出放在同一個工作區。",
     "features": [
       "可設定文字、圖片與音訊分類結構",
@@ -597,7 +597,7 @@
     "title": "艾莉森包廂行事曆",
     "role": "建立與維護",
     "subtitle": "不用來回切頁面，也找得到空包廂",
-    "description": "查看艾莉森日 K 包廂的空位，用每日與每週視圖比較房間和半小時時段，資料來自店家的官方訂位頁。",
+    "description": "查艾莉森日 K 的包廂空位，用日、週視圖比較房間與半小時時段，資料來自店家官方訂位頁。想唱的心很急，訂位頁的分頁很多。",
     "longDescription": "讀取艾莉森官方訂位頁，把私人卡拉 OK 包廂的空位整理成房間卡片、全天時間表與每週總覽。支援手機和深淺色，以台灣時間處理已開始和已過期的時段。",
     "features": [
       "房間卡片、全天時間表與每週空位",
@@ -628,7 +628,7 @@
     "title": "Django 登入與 JWT 範本",
     "role": "建立與維護",
     "subtitle": "給 SPA 與 API 的登入範本",
-    "description": "以 django-allauth headless 模式和內建 JWT 整合 Email、Google、Microsoft 與 LINE 登入。",
+    "description": "用 django-allauth 的 headless 模式和內建 JWT，接好 Email、Google、Microsoft 與 LINE 登入。這種東西，寫一次就夠了。",
     "longDescription": "使用 django-allauth headless 模式與內建 JWT 支援的 Django 驗證範本。示範獨立前端的 Email 與社群登入，附端對端驗證，取代原本自製的 session 到 JWT 橋接。",
     "features": [
       "Headless 驗證與內建 JWT",
@@ -674,7 +674,7 @@
   },
   "ip-find-chrome-extension": {
     "title": "IP 查詢擴充功能",
-    "subtitle": "點一下，就知道現在的 IP",
+    "subtitle": "比打開搜尋引擎快一點點",
     "description": "點一下，Chrome 就告訴你目前的 IP。為了一個搜尋就查得到的東西寫了整個擴充功能；替自己辯護一下，它比較快。",
     "longDescription": "快速辨識並顯示目前網路 IP 位址的 Chrome 擴充功能。適合用於網路診斷，以及了解目前的網路設定。",
     "role": "創建者與維護者",
@@ -689,7 +689,7 @@
     "title": "魚眼影像展開",
     "role": "建立與維護",
     "subtitle": "魚眼與全景影像互轉",
-    "description": "把俯視魚眼影像展開成全景，也能捲回去。座標網格依尺寸快取，重複轉換可重用。",
+    "description": "把俯視的魚眼影像展開成全景，也能再捲回去。從此不必對著圓形照片瞇眼睛。",
     "longDescription": "以 OpenCV 實作的 Python 套件與 CLI，支援俯視魚眼影像展開及全景影像重投影。座標網格依影像尺寸保存，重複處理同尺寸影像時可直接重用。",
     "features": [
       "俯視魚眼展開為全景",
@@ -702,7 +702,7 @@
     "title": "MyAnimeList 評論爬蟲",
     "role": "建立與維護",
     "subtitle": "從動畫評論到可接續蒐集的資料集",
-    "description": "透過 Jikan 類型 API 或允許存取的 MAL 網頁蒐集動畫資訊與評論，用 SQLite 記錄進度，再匯出 CSV。",
+    "description": "透過 Jikan 類型的 API 或允許存取的 MAL 網頁蒐集動畫資訊與評論，用 SQLite 記錄進度再匯出 CSV。中斷了能接著抓，畢竟評論比耐心多。",
     "longDescription": "以 Scrapy 實作的爬蟲，JSON API 與 HTML 輸入共用 SQLite 資料表及 CSV 輸出。逐一請求、退避重試與接續執行，讓長時間蒐集能追查進度；HTML 模式遵守 robots.txt 限制。",
     "features": [
       "JSON API 與 HTML 兩種輸入",
@@ -715,7 +715,7 @@
     "role": "建立與維護",
     "title": "閱讀理解標註平台",
     "subtitle": "標出答案，也把審核流程放進來",
-    "description": "自架 Rust＋React 工作區，支援 SQuAD v1/v2：標記答案範圍、審核多人一致性，也可選用模型建議。",
+    "description": "自架的 Rust＋React 工作區，支援 SQuAD v1/v2：標出答案範圍、審核多人一致性，也能請模型給建議。標註最難的不是畫線，是大家同意線畫在哪。",
     "longDescription": "自架 Rust＋React 工作區，支援 SQuAD v1/v2：標記答案範圍、審核多人一致性，也可選用模型建議。2026 年從原本的 Flask 應用重寫，將匯入、標註、審核與匯出放在同一個工作區。",
     "features": [
       "答案範圍標註與 SQuAD v1/v2 匯入匯出",
@@ -733,7 +733,7 @@
     "title": "圖站收藏匯入 Eagle",
     "role": "建立與維護",
     "subtitle": "找到圖片、保留標籤、送進 Eagle",
-    "description": "可用 pipx 安裝的 CLI，透過網站 JSON API 與 EagleWrapper 匯入圖片。先以 --dry-run 預覽，保留自己的標籤並略過已匯入項目。",
+    "description": "用 pipx 安裝的 CLI，透過網站 JSON API 和 EagleWrapper 匯入圖片；先 --dry-run 預覽，保留自己的標籤，匯入過的會跳過。收藏不會變少，只會變整齊。",
     "longDescription": "把 yande.re 與 konachan.com 的圖片網址和中繼資料送到 Eagle 的命令列工具。2026 版改用 JSON API、EagleWrapper 與可接續的進度紀錄，可設定搜尋、數量上限、資料夾及預覽模式。",
     "features": [
       "JSON API 搜尋與數量上限",
@@ -746,7 +746,7 @@
     "title": "Eagle Python 套件",
     "role": "建立與維護",
     "subtitle": "用 Python 操作 Eagle 的本機 API",
-    "description": "以 Eagle V1 與 V2 API 匯入、搜尋、標記檔案。桌面程式關閉時，也能直接讀取圖片庫。",
+    "description": "用 Eagle 的 V1、V2 API 匯入、搜尋、標記檔案；桌面程式沒開，也能直接讀圖片庫。給圖多到手動整理不完的人。",
     "longDescription": "封裝 Eagle 兩代本機 HTTP API 的 Python 套件。支援檔案匯入、搜尋、標籤與資料夾操作，也能直接讀取磁碟上的圖片庫；新版明確處理遠端驗證與 API 錯誤。",
     "features": [
       "Eagle V1 與 V2 API 用戶端",
@@ -758,8 +758,8 @@
   "youtube-video-redirector": {
     "title": "YouTube 影片直連服務",
     "role": "建立與維護",
-    "subtitle": "用 yt-dlp 找出原始連結再播放",
-    "description": "Flask 小工具，用 yt-dlp 取得 YouTube 原始媒體連結並播放。需要共用點歌清單與 OBS 的話，可看 Streaming Player。",
+    "subtitle": "YouTube 影片，少繞一點路",
+    "description": "Flask 小工具，用 yt-dlp 找出 YouTube 影片的原始媒體連結再播放。要共用點歌清單或接 OBS，請找它的後輩 Streaming Player。",
     "longDescription": "接受影片 ID、以 yt-dlp 解析媒體網址並提供播放頁的 Flask 服務。最終版包含 Docker 與擷取所需的 JavaScript 執行環境，新的點歌與 OBS 功能由 Streaming Player 延續。",
     "features": [
       "影片 ID 網址參數",
@@ -776,7 +776,7 @@
     "title": "YouTube 點歌播放器（Flask 版）",
     "role": "建立與維護",
     "subtitle": "跨畫面同步的 Flask 播放器",
-    "description": "Flask＋Socket.IO 播放器，在多個畫面同步點播、預設與歷史清單；後續開發移到 Streaming Player。",
+    "description": "Flask＋Socket.IO 播放器，在多個畫面同步點播、預設和歷史清單。後續開發交給了 Streaming Player，它算是光榮退休。",
     "longDescription": "Flask 版以 Socket.IO 同步點播佇列、預設播放清單與歷史紀錄。最終版用 yt-dlp 解析媒體，包含 Docker 與回歸測試；Rust＋React 的 Streaming Player 延續點歌流程。",
     "features": [
       "點播、預設與歷史播放清單",
@@ -792,8 +792,8 @@
   "pyppesnap": {
     "title": "Pyppeteer 網頁快照",
     "role": "建立與維護",
-    "subtitle": "早期網頁快照工具",
-    "description": "原本的 Pyppeteer 截圖工具，現已封存；新專案 playwright-snap 沿用函式名稱、參數與回傳型別。",
+    "subtitle": "playwright-snap 的前任",
+    "description": "原本的 Pyppeteer 截圖工具，已經封存。接班的 playwright-snap 連函式名稱、參數和回傳型別都照舊，交接得很徹底。",
     "longDescription": "將網頁 PNG 與 PDF 快照以 base64 回傳的 Python 工具。由於 Pyppeteer 瀏覽器相依套件已停止維護，專案封存，後繼 playwright-snap 以 Playwright 驅動 Chromium 並沿用 API。",
     "features": [
       "PNG 與 PDF 快照以 base64 回傳",
@@ -809,7 +809,7 @@
     "title": "人臉牆產生器",
     "role": "建立與維護",
     "subtitle": "用可重現的人臉格子檢查偵測器",
-    "description": "把一個資料夾的人臉排成有固定種子的網格；一般照片可先用 OpenCV 的 YuNet 偵測器裁出人臉。",
+    "description": "把一整個資料夾的人臉排成固定種子的格子，一般照片可先用 YuNet 裁出臉。種子固定，偵測器漏掉誰，每次都漏得一模一樣。",
     "longDescription": "可用 pip 安裝的 Python CLI，產生已知人臉數量與位置的測試圖片。固定種子讓版面可重現，可先以 YuNet 裁切一般照片，專案附公眾領域肖像範例。",
     "features": [
       "固定種子與可調整的行列數",
@@ -827,7 +827,7 @@
     "role": "建立與維護",
     "title": "影像標註工具",
     "subtitle": "畫框、分類、匯出",
-    "description": "以鍵盤操作為主的瀏覽器標註工具。開啟自己的圖片、畫框分類，匯出 JSON、COCO、YOLO 或 Pascal VOC。",
+    "description": "以鍵盤為主的瀏覽器標註工具：開自己的圖、畫框、分類，再匯出 JSON、COCO、YOLO 或 Pascal VOC。四種格式都給，因為每個框架都覺得自己的才標準。",
     "longDescription": "2017 年影像標註工具，以 React 和 Vite 重新改寫。支援縮放、平移、復原與鍵盤快捷鍵，圖片與標註留在瀏覽器，可匯入匯出常見資料集格式。",
     "features": [
       "類別配色的標註框與鍵盤快捷鍵",
@@ -843,7 +843,7 @@
   },
   "obsidian-attachmenter": {
     "title": "Obsidian 附件整理外掛",
-    "subtitle": "附件依筆記分資料夾，遠端圖片也下載回來",
+    "subtitle": "讓附件各回各的家",
     "description": "Obsidian 外掛：附件依筆記分資料夾、下載遠端圖片、檢查路徑。給圖片比筆記多的人。",
     "longDescription": "功能完整的 Obsidian 外掛，用來簡化附件管理。它會為每篇筆記套用獨立的附件資料夾結構，讓 vault 保持井然有序。主要功能包括：自動將貼上的圖片移到正確的資料夾、將遠端圖片（包含 Canvas 中的圖片）下載到本機，以及提供檢查與修復失效附件路徑、清理空資料夾的工具。支援多國語言，並與 Obsidian 的檔案總管無縫整合。",
     "role": "創建者與維護者",
@@ -913,7 +913,7 @@
     "title": "直播點歌播放器",
     "role": "建立與維護",
     "subtitle": "從聊天室點歌，到 OBS 播放",
-    "description": "Twitch、YouTube 直播聊天室和聊天機器人共用一張點歌清單。Rust 後端同步 OBS 播放頁、透明小卡與管理介面。",
+    "description": "Twitch、YouTube 聊天室和聊天機器人共用一張點歌清單，Rust 後端讓 OBS 播放頁、小卡與管理介面同步。觀眾點什麼歌，它就不管了。",
     "longDescription": "Streaming Player 2.0 用 Rust 與 React 重寫自架點歌系統。觀眾從 Twitch、YouTube 直播聊天室或 HTTP API 點歌，管理員在同一個介面控歌。OBS 可分別加入播放頁與透明的播放資訊小卡，接替先前的 Flask 播放器。",
     "features": [
       "Twitch、YouTube 直播聊天室與 HTTP 點歌",
@@ -931,7 +931,7 @@
     "title": "甘特圖工作室",
     "role": "建立與維護",
     "subtitle": "拖曳排程，也能用 Mermaid 編輯",
-    "description": "拖曳任務、拉線建立相依關係，直接看到關鍵路徑；切到 Mermaid 文字模式仍保留同一份計畫。資料留在瀏覽器。",
+    "description": "拖曳排程、拉線設相依，直接看到關鍵路徑；切到 Mermaid 文字也不會弄丟計畫。排好時程很容易，照著做是另一回事。",
     "longDescription": "純前端的甘特圖編輯器，圖形排程和 Mermaid 文字雙向同步。支援任務相依、基準線與工作日計算，資料保存在 localStorage，不用帳號或後端，可匯出 PNG、Excel 和 JSON。",
     "features": [
       "拖曳任務、調整工期與建立相依關係",
@@ -944,7 +944,7 @@
   "word-net-game": {
     "role": "建立與維護",
     "subtitle": "讀一句話，撒網猜心情",
-    "description": "把網子撒在「難過到開心」之間，揭曉句子的參考分數。五種玩法，包含每日挑戰與同機雙人對戰。",
+    "description": "讀一句話，把網子撒在「難過到開心」之間，揭曉參考分數。五種玩法，含每日挑戰和同機雙人對戰。原本是為了蒐集情緒資料，玩著玩著就變成遊戲了。",
     "longDescription": "猜一句話背後心情的繁體中文遊戲，題目也包含反諷和自嘲。有經典、限時、生存、每日挑戰與雙人對戰，玩完可取得附情緒地圖的成績卡。分數是題目編寫的參考值。",
     "features": [
       "五種玩法，包含同機雙人對戰",
@@ -957,7 +957,7 @@
     "role": "黑客松團隊成員與 2026 重寫維護者",
     "title": "臺灣人口變遷地圖",
     "subtitle": "在地圖上播放臺灣三十年的變化",
-    "description": "播放臺灣 22 縣市的人口變遷，比較各地趨勢，再對照家庭所得。2017 嘉義黑客松作品，2026 年重新改寫。",
+    "description": "播放臺灣 22 縣市的人口變遷，比較各地趨勢，再對照家庭所得。2017 年嘉義黑客松的作品，隔了九年才重寫，翻修速度跟老房子差不多。",
     "longDescription": "互動式人口與家庭收支地圖，人口月資料從 1997 年開始，另有年度所得與儲蓄指標。透過時間軸播放、縣市趨勢比較與可分享網址，延續 2017 嘉義黑客松作品。",
     "features": [
       "人口、遷徙、所得與儲蓄指標",
@@ -970,7 +970,7 @@
     "role": "黑客松團隊成員與 2026 重寫維護者",
     "title": "大台北即時轉乘雷達",
     "subtitle": "出發前，把幾種走法放在一起看",
-    "description": "走路、公車、捷運還是 YouBike？在同一張地圖比較時間與票價，搭配公車即時到站和自行車位資訊。",
+    "description": "走路、公車、捷運還是 YouBike？在同一張地圖比時間和票價，還有公車到站和 YouBike 車位。它負責比較，猶豫的部分還是你的。",
     "longDescription": "2016 資拓宏宇黑客松團隊作品，2026 年用 React 重寫。在大台北比較步行、公車、捷運、混合轉乘與 YouBike，含預估票價和即時到站資訊。原始團隊的貢獻與設計署名保留在專案說明。",
     "features": [
       "同一張地圖比較五種走法",
@@ -983,7 +983,7 @@
     "role": "建立與維護",
     "title": "問問台北市政府",
     "subtitle": "市政問題，找到答案也找到出處",
-    "description": "在瀏覽器搜尋 8,000 多則台北市政 FAQ，每則結果附原始出處；也能選擇讓模型整理找到的答案。",
+    "description": "在瀏覽器搜尋 8,000 多則台北市政 FAQ，每則結果附原始出處，也能讓模型整理答案。答案一直都在，只是以前很難找。",
     "longDescription": "2017 台北市政 ChatBot 應用競賽作品，2026 年重製為靜態網頁。中文 BM25 搜尋在 Web Worker 裡執行，結果列出發布機關、日期與來源。選用的模型模式可使用自己的 API key 整理檢索內容。",
     "features": [
       "在本機搜尋 8,000 多則公開 FAQ",
@@ -996,7 +996,7 @@
     "title": "倒數計時工作室",
     "role": "建立與維護",
     "subtitle": "替時間留一個舞台",
-    "description": "同時跑幾個計時器，或倒數到另一個時區的指定時刻。有全螢幕舞台、四種主題與分享連結，直接在瀏覽器使用。",
+    "description": "同時跑好幾個計時器，或倒數到別的時區的某個時刻，還有全螢幕舞台和分享連結。時間不會變多，但會變得很顯眼。",
     "longDescription": "適合期限、發表、會議與專注工作的倒數工作室。多個計時器可並排，也能單獨放到全螢幕舞台。支援指定時區的日期、主題與分享網址，不用帳號或伺服器。",
     "features": [
       "多組計時器與跨時區目標日期",
@@ -1009,7 +1009,7 @@
     "role": "建立與維護",
     "title": "從零開始寫區塊鏈",
     "subtitle": "可以拆開來理解的區塊鏈",
-    "description": "九章實作，從雜湊一路做到 P2P 網路。同一份 Rust 核心編成 WebAssembly，直接在瀏覽器看運作。",
+    "description": "九章實作，從雜湊一路做到 P2P 網路，同一份 Rust 核心編成 WebAssembly 在瀏覽器裡跑。不發幣，也不保證致富。",
     "longDescription": "逐章用 Rust 建立區塊鏈的學習專案：雜湊、區塊、挖礦、簽章、mempool、網路、共識到檔案存證。互動網頁使用同一份 Rust 核心編成 WebAssembly，Docker Compose 可啟動三節點網路。",
     "features": [
       "九章可執行範例與練習",
@@ -1022,7 +1022,7 @@
     "title": "街景文字辨識",
     "role": "建立與維護",
     "subtitle": "同一面招牌，三種辨識結果",
-    "description": "用 EasyOCR、RapidOCR 和 PaddleOCR 比較街景繁體中文字，並排看文字框、耗時與公眾領域照片的小型評測。",
+    "description": "讓 EasyOCR、RapidOCR 和 PaddleOCR 讀同一批繁體中文招牌，並排看文字框和耗時，附一組公眾領域照片的小評測。三套模型，各有各的誤會。",
     "longDescription": "繁體中文街景文字辨識的學習專案。同一張照片由三種引擎透過統一 API 與網頁比較。文件用真實模型輸出說明偵測、辨識與後處理，另附 CC0 照片與可重跑的小型評測。",
     "features": [
       "三種 OCR 引擎並排比較",
@@ -1035,7 +1035,7 @@
     "title": "情緒分類模型評測",
     "role": "建立與維護",
     "subtitle": "讓情緒分類模型站在同一起跑線",
-    "description": "在六個情緒資料集的固定切分上，比較 TF-IDF、嵌入向量、微調編碼器與本機語言模型。接替早期的 GURA。",
+    "description": "在六個情緒資料集的固定切分上，比較 TF-IDF、嵌入向量、微調編碼器和本機語言模型。接替 GURA，這次大家寫同一份考卷。",
     "longDescription": "跨 MyAnimeList 評論與五個經典英文資料集的可重現評測。固定資料切分與種子，比較準確率、macro-F1、訓練時間、推論速度、記憶體與模型大小，接替先前 GURA 的 BiGRU 實驗。",
     "features": [
       "六個資料集，固定切分與種子",
@@ -1048,7 +1048,7 @@
     "title": "Playwright 網頁快照",
     "role": "建立與維護",
     "subtitle": "用持續維護的瀏覽器幫網頁拍照",
-    "description": "用 Playwright 載入網頁，將 PNG 或 PDF 以 base64 回傳。從 pyppeteer-snap 搬過來，只要改一行 import。",
+    "description": "用 Playwright 載入網頁，把 PNG 或 PDF 以 base64 回傳。從 pyppeteer-snap 搬過來只要改一行 import，搬家很少這麼輕鬆。",
     "longDescription": "pyppeteer-snap 的後繼專案，改用 Playwright 驅動 Chromium 載入含 JavaScript 的網頁。函式名稱、參數與回傳型別保持一致，提供 PNG、PDF 快照的 Python API 與命令列介面。",
     "features": [
       "PNG 與 PDF 快照以 base64 回傳",
