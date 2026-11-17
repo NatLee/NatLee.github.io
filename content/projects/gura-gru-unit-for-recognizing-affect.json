@@ -20,7 +20,8 @@
   "opensource": true,
   "technologies": [
     "Python",
-    "PyTorch",
+    "Keras",
+    "TensorFlow",
     "NLP",
     "Deep Learning",
     "Attention Mechanisms",
