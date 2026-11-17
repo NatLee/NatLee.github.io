@@ -3,7 +3,9 @@
   "id": "taiwan-population-atlas",
   "title": "Taiwan Population Atlas",
   "category": "Data Science",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

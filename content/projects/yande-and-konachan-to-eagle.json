@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/yande-and-konachan-to-eagle",
   "category": "Utilities",
-  "theme": "libraries",
+  "themes": [
+    "libraries"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

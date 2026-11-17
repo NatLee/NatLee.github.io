@@ -11,7 +11,10 @@
   ],
   "githubUrl": "https://github.com/NatLee/batch-crop-images",
   "category": "Image Processing",
-  "theme": "libraries",
+  "themes": [
+    "libraries",
+    "vision"
+  ],
   "tier": "selected",
   "status": "Completed",
   "opensource": true,

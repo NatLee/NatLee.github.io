@@ -11,7 +11,10 @@
   ],
   "githubUrl": "https://github.com/NatLee/heic2png",
   "category": "Utilities",
-  "theme": "libraries",
+  "themes": [
+    "libraries",
+    "vision"
+  ],
   "tier": "selected",
   "status": "Completed",
   "opensource": true,

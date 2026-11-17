@@ -15,7 +15,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock-manager-rust",
   "category": "DevOps",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "selected",
   "status": "In Progress",
   "opensource": true,

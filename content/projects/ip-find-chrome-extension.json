@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/ip-find-chrome-extension",
   "category": "Browser Extension",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

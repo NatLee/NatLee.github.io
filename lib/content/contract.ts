@@ -21,6 +21,8 @@ export interface SiteBundle {
   siteUrl: string
   profile: Profile
   projects: Project[]
+  /** 作品分類清單，照網站上的順序。Project.themes 裡的 id 都在這裡。（2026-11 新增） */
+  projectThemes?: ProjectTheme[]
   experience: Role[]
   education: Education[]
   skills: SkillCategory[]
@@ -30,6 +32,11 @@ export interface SiteBundle {
   }
   writing: { title: Localized; description: Localized; source: string; url: string }[]
   mascots: Record<string, Mascot>
+}
+
+export interface ProjectTheme {
+  id: string
+  label: Localized
 }
 
 export interface Profile {
@@ -61,7 +68,10 @@ export interface Project {
   subtitle: Localized
   description: Localized
   longDescription: Localized
+  /** 主分類對應到的舊分類（只有這五種）。要完整分類請讀 themes。 */
   theme: 'energy' | 'infra' | 'ai' | 'libraries' | 'web'
+  /** 作品所屬的分類 id，第一個是主分類；名稱在 SiteBundle.projectThemes。（2026-11 新增） */
+  themes?: string[]
   tier: 'flagship' | 'selected' | 'archive'
   category: string
   status: 'Completed' | 'In Progress' | 'Archived'

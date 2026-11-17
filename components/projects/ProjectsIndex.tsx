@@ -7,16 +7,18 @@ import { useEffect, useMemo, useState } from 'react'
 import Icon from '@/components/Icon'
 import ProjectCard, { StatusTag } from '@/components/projects/ProjectCard'
 import TelepyLogo from '@/components/projects/TelepyLogo'
-import { StarCount, ThemeLabel } from '@/components/site/ui'
+import { StarCount, ThemeLabels } from '@/components/site/ui'
 import OriginBadge from '@/components/work/OriginBadge'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { PROJECT_THEMES, getLocalizedProjects, getProjectStars, projectYear, type ProjectDetail, type ProjectTheme } from '@/data/projects'
+import { PROJECT_THEMES, themeLabel } from '@/data/project-themes'
+import { getLocalizedProjects, getProjectStars, projectYear, type ProjectDetail } from '@/data/projects'
 import { projectFilterSearch, readProjectFilters } from '@/lib/project-filters'
 
-type ThemeFilter = ProjectTheme | 'all'
+type ThemeFilter = string
 
+/** 搜尋比對的文字：名稱、說明、分類，以及 repo 名稱（id），名稱改寫後用 repo 名稱也找得到。 */
 function haystack(project: ProjectDetail) {
-  return [project.title, project.subtitle, project.description, project.category, project.theme, ...project.technologies].join(' ').toLowerCase()
+  return [project.id, project.title, project.subtitle, project.description, project.category, ...project.themes, ...project.technologies].join(' ').toLowerCase()
 }
 
 export default function ProjectsIndex() {
@@ -48,8 +50,8 @@ export default function ProjectsIndex() {
 
   const needle = query.trim().toLowerCase()
   const byQuery = projects.filter((project) => (!demoOnly || Boolean(project.links.demo)) && (!needle || haystack(project).includes(needle)))
-  const visible = byQuery.filter((project) => theme === 'all' || project.theme === theme)
-  const countFor = (value: ThemeFilter) => (value === 'all' ? byQuery.length : byQuery.filter((p) => p.theme === value).length)
+  const visible = byQuery.filter((project) => theme === 'all' || project.themes.includes(theme))
+  const countFor = (value: ThemeFilter) => (value === 'all' ? byQuery.length : byQuery.filter((p) => p.themes.includes(value)).length)
 
   const flagship = visible.filter((p) => p.tier === 'flagship')
   const selected = visible.filter((p) => p.tier === 'selected')
@@ -103,7 +105,7 @@ export default function ProjectsIndex() {
                 theme === value ? 'border-ink bg-ink text-paper' : 'border-line bg-surface text-muted hover:border-ink/40 hover:text-ink'
               }`}
             >
-              {value === 'all' ? t('projects.all') : t(`projects.themes.${value}`)}
+              {value === 'all' ? t('projects.all') : themeLabel(value, locale)}
               <span className="tabular font-mono text-xs opacity-70">{countFor(value)}</span>
             </button>
           ))}
@@ -120,7 +122,7 @@ export default function ProjectsIndex() {
       {visible.length === 0 && (
         <div className="shell mt-10">
           <div className="rounded-2xl border border-dashed border-line p-8">
-            <p className="text-muted">{t('projects.empty', { query: query.trim() || t(`projects.themes.${theme}`) })}</p>
+            <p className="text-muted">{t('projects.empty', { query: query.trim() || themeLabel(theme, locale) })}</p>
             <button type="button" onClick={clear} className="btn-ghost mt-4">
               {t('projects.clear')}
             </button>
@@ -187,7 +189,7 @@ export default function ProjectsIndex() {
                     </span>
                     <span className="mt-0.5 block text-sm text-muted md:truncate">{project.description}</span>
                   </span>
-                  <ThemeLabel theme={project.theme} />
+                  <ThemeLabels themes={project.themes} />
                   <span className="tabular font-mono text-xs text-muted">{projectYear(project)}</span>
                   <span className="flex items-center gap-3 md:justify-end">
                     <StarCount stars={getProjectStars(project)} />

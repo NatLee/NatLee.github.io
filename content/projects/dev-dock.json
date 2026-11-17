@@ -12,7 +12,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock",
   "category": "DevOps",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

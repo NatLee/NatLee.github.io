@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/elysion-calendar",
   "category": "Web Development",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

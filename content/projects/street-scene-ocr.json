@@ -3,7 +3,10 @@
   "id": "street-scene-ocr",
   "title": "Street Scene OCR",
   "category": "Computer Vision",
-  "theme": "ai",
+  "themes": [
+    "vision",
+    "ai"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

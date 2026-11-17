@@ -14,7 +14,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/morphkit",
   "category": "Web Application",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "selected",
   "status": "In Progress",
   "opensource": true,

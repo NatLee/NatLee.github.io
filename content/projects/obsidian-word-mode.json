@@ -13,7 +13,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/obsidian-word-mode",
   "category": "Productivity Tools",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "archive",
   "status": "In Progress",
   "opensource": true,

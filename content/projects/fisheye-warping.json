@@ -12,7 +12,10 @@
   ],
   "githubUrl": "https://github.com/NatLee/fisheye-warping",
   "category": "Computer Vision",
-  "theme": "libraries",
+  "themes": [
+    "libraries",
+    "vision"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

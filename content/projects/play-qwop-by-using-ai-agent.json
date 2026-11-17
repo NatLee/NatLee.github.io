@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/play-qwop-by-using-ai-agent",
   "category": "AI/ML",
-  "theme": "ai",
+  "themes": [
+    "ai"
+  ],
   "tier": "selected",
   "status": "Completed",
   "opensource": true,

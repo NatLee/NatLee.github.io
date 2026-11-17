@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/django-allauth-jwt-template",
   "category": "Web Development",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

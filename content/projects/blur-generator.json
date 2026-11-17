@@ -14,7 +14,10 @@
   ],
   "githubUrl": "https://github.com/NatLee/blur-generator",
   "category": "Computer Vision",
-  "theme": "libraries",
+  "themes": [
+    "libraries",
+    "vision"
+  ],
   "tier": "selected",
   "status": "Completed",
   "opensource": true,

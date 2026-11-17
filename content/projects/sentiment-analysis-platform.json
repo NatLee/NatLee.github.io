@@ -4,7 +4,10 @@
   "title": "Sentiment Analysis Platform",
   "subtitle": "Large-Scale NLP Processing System",
   "category": "AI/ML",
-  "theme": "ai",
+  "themes": [
+    "language",
+    "ai"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": false,

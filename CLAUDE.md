@@ -16,7 +16,7 @@ Personal site of Nat Lee. **One body of content, several looks ("themes").** The
 
 `content/` is the single source of truth for every theme. `data/*.ts` are typed wrappers + selectors for Persimmon (touch only for schema/logic changes).
 
-- **Projects: one file per project** — `content/projects/<id>.json` (with `"$schema": "../schema/project.schema.json"`), registered in `data/projects-list.ts`. Each has `theme` (energy | infra | ai | libraries | web) and `tier` (flagship | selected | archive). Recipe: `.claude/rules/projects-data.md`. `/add-project` skill automates adding one.
+- **Projects: one file per project** — `content/projects/<id>.json` (with `"$schema": "../schema/project.schema.json"`), registered in `data/projects-list.ts`. Each lists its categories in `themes` (first = primary; a project may sit in several) and has a `tier` (flagship | selected | archive). The category list itself (ids, en/zh names, dot colour, the old five-value `theme` that site.json still carries for frozen themes) lives only in `content/project-themes.json`. Recipe: `.claude/rules/projects-data.md`. `/add-project` skill automates adding one.
 - `personal.json`: name, tagline (`**…**` marks the accented phrase), now, story, howIWork, eras, languages, socials. zh fields sit beside the English ones with a `Zh` suffix.
 - `playground.json`: ordered project IDs for the homepage's direct-demo cards; each project must have `links.demo`.
 - `mascots.json`: Tapi and Chiyo (names, images, lines).

@@ -105,13 +105,6 @@
     "searchLabel": "Search projects",
     "searchPlaceholder": "Search by name, technology or topic",
     "all": "All",
-    "themes": {
-      "energy": "Energy & forecasting",
-      "infra": "Infrastructure & backend",
-      "ai": "AI, vision & medical imaging",
-      "libraries": "Libraries & tools",
-      "web": "Web apps & extensions"
-    },
     "selected": "Selected",
     "more": "More projects & earlier work",
     "shown": "{shown} of {total} shown",
@@ -135,7 +128,7 @@
     "role": "Role",
     "period": "Period",
     "status": "Status",
-    "theme": "Theme",
+    "theme": "Categories",
     "company": "Company",
     "origin": "Origin",
     "workNotice": "Built at {company}. The code belongs to the company, so there is no source link, and the figures come from internal experiments at the time.",

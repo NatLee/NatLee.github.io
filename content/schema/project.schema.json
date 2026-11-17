@@ -3,7 +3,7 @@
   "title": "Project",
   "description": "一個作品（content/projects/<id>.json）。新增後記得在 data/projects-list.ts 登記。中文寫在 content/i18n/projects.zh.json。",
   "type": "object",
-  "required": ["id", "title", "subtitle", "description", "category", "theme", "tier", "status", "timeline", "role"],
+  "required": ["id", "title", "subtitle", "description", "category", "themes", "tier", "status", "timeline", "role"],
   "properties": {
     "$schema": { "type": "string" },
     "id": { "type": "string", "pattern": "^[a-z0-9.-]+$", "description": "網址用的代號：/projects/<id>/，要跟檔名一樣。" },
@@ -21,7 +21,13 @@
     "category": {
       "enum": ["AI/ML", "Web Development", "Data Science", "Computer Vision", "Backend", "DevOps", "Medical Imaging", "Utilities", "Browser Extension", "Image Processing", "Data Collection", "API/SDK", "Web Application", "Web Automation", "Productivity Tools"]
     },
-    "theme": { "enum": ["energy", "infra", "ai", "libraries", "web"], "description": "作品頁的篩選主題。" },
+    "themes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "所屬分類，第一個是主分類。可用的 id 和名稱只寫在 content/project-themes.json（npm test 會檢查）。別人用某個分類篩選時會預期看到這個作品，才加上那個分類。"
+    },
     "tier": { "enum": ["flagship", "selected", "archive"], "description": "flagship 只給 Telepy；selected 會出現在卡片區（首頁取前 6 個）；archive 在列表。" },
     "status": { "enum": ["Completed", "In Progress", "Archived"] },
     "opensource": { "type": "boolean" },

@@ -3,7 +3,9 @@
   "id": "countdown-studio",
   "title": "Countdown Studio",
   "category": "Productivity Tools",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

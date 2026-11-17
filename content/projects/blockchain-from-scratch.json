@@ -3,7 +3,9 @@
   "id": "blockchain-from-scratch",
   "title": "Blockchain from Scratch",
   "category": "Backend",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

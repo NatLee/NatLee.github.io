@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/youtube-redirect-player",
   "category": "Web Application",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "archive",
   "status": "Archived",
   "opensource": true,

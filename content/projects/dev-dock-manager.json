@@ -14,7 +14,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock-manager",
   "category": "DevOps",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import type { CSSProperties } from 'react'
 import Icon from '@/components/Icon'
 import { formatPeriod } from '@/components/projects/ProjectPage'
-import { StarCount, ThemeLabel } from '@/components/site/ui'
+import { StarCount, ThemeLabels } from '@/components/site/ui'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getProjectStars, type ProjectDetail } from '@/data/projects'
 import { buildYear, endValue, getCareerMap, getWorkChapters, sideProjectsBetween, yearValue, type CareerLane, type SourceKind, type SpinoffGroup, type WorkChapter } from '@/data/work'
@@ -31,6 +31,10 @@ const LABEL_CLEARANCE = { base: 4, sm: 2.5 }
 /** 軌道名稱欄的寬度和欄距：各軌和斜線細條都從這兩個變數算位置。 */
 const LANE_VARS = { '--lane-label': '6.5rem', '--lane-gap': '1rem' } as CSSProperties
 const LANE_ROW = 'grid gap-x-[var(--lane-gap)] gap-y-1 sm:grid-cols-[var(--lane-label)_minmax(0,1fr)]'
+
+/** 等寬字型裡，一個中日韓字約是英文字的幾倍寬（11px JetBrains Mono 約 6.6px，中文退回系統字約 11px）。 */
+const WIDE_CHAR = 1.7
+const WIDE_CHAR_PATTERN = /[⺀-鿿가-힯豈-﫿＀-￯　-〿]/
 
 type Anchor = 'start' | 'center' | 'end'
 
@@ -105,7 +109,8 @@ function CareerMap({ chapters }: { chapters: WorkChapter[] }) {
 
   // side project 的名字比點寬。右半邊的名字往左長（方框在右），才不會超出畫面；
   // 依名字長度估計佔用的範圍（%），放進第一個不會和前一個名字重疊的列。
-  const labelSpan = (title: string) => title.length * 0.8 + 3
+  // 中日韓字和全形符號約是等寬英文字的 WIDE_CHAR 倍寬，要算寬一點，不然中文名字會疊在一起。
+  const labelSpan = (title: string) => [...title].reduce((sum, char) => sum + (WIDE_CHAR_PATTERN.test(char) ? WIDE_CHAR : 1), 0) * 0.8 + 3
   const rowEnds: number[] = []
   const sides = [...map.sides]
     .map((project) => {
@@ -327,7 +332,7 @@ function WorkProjectCard({ project }: { project: ProjectDetail }) {
       </div>
       <div className="flex flex-col gap-3 p-6">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-          <ThemeLabel theme={project.theme} />
+          <ThemeLabels themes={project.themes} />
           <span className="tabular font-mono text-xs text-muted">{formatPeriod(project, t('common.present'))}</span>
         </div>
         <h3 className="font-display text-2xl font-bold leading-snug">

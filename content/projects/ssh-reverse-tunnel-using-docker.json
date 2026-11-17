@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/ssh-reverse-tunnel-using-docker",
   "category": "DevOps",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

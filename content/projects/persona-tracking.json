@@ -10,7 +10,10 @@
     "/images/projects/persona-tracking/cover.webp"
   ],
   "category": "Computer Vision",
-  "theme": "ai",
+  "themes": [
+    "vision",
+    "ai"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": false,

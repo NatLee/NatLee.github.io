@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/nipype-preprocess-on-brain-mr",
   "category": "Medical Imaging",
-  "theme": "ai",
+  "themes": [
+    "vision"
+  ],
   "tier": "selected",
   "status": "Completed",
   "opensource": true,

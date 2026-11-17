@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/django-docker-gui",
   "category": "DevOps",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

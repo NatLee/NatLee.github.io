@@ -16,7 +16,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/telepy",
   "category": "DevOps",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "flagship",
   "status": "In Progress",
   "opensource": true,

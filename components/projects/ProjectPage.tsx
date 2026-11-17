@@ -5,7 +5,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 import Icon from '@/components/Icon'
 import ProjectCard, { StatusTag } from '@/components/projects/ProjectCard'
-import { StarCount, ThemeLabel } from '@/components/site/ui'
+import { StarCount, ThemeLabels } from '@/components/site/ui'
 import OriginBadge from '@/components/work/OriginBadge'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getProjectById, getProjectStars, getRelatedProjects, localizeCategory, type ProjectDetail } from '@/data/projects'
@@ -119,7 +119,7 @@ export default function ProjectPage({ id }: { id: string }) {
     [t('project.role'), project.role],
     [t('project.period'), <span key="period" className="tabular">{formatPeriod(project, t('common.present'))}</span>],
     [t('project.status'), <StatusTag key="status" status={project.status} />],
-    [t('project.theme'), <ThemeLabel key="theme" theme={project.theme} />],
+    [t('project.theme'), <ThemeLabels key="theme" themes={project.themes} />],
   ]
   if (origin && chapterLink) {
     facts.push([t('project.company'), <Link key="company" href={chapterLink} className="link">{project.company}</Link>])

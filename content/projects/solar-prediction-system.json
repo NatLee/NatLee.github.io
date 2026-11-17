@@ -4,7 +4,10 @@
   "title": "Solar Power Prediction System",
   "subtitle": "AI-Powered Solar Energy Forecasting",
   "category": "AI/ML",
-  "theme": "energy",
+  "themes": [
+    "energy",
+    "ai"
+  ],
   "tier": "selected",
   "status": "Completed",
   "opensource": false,
