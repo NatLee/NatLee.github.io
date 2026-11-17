@@ -9,7 +9,7 @@ import { StarCount, ThemeLabel } from '@/components/site/ui'
 import OriginBadge from '@/components/work/OriginBadge'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getProjectById, getProjectStars, getRelatedProjects, localizeCategory, type ProjectDetail } from '@/data/projects'
-import { getProjectOrigin } from '@/data/work'
+import { getProjectOrigins } from '@/data/work'
 import { pick } from '@/lib/i18n/localize'
 
 const LINK_ORDER = ['github', 'demo', 'pypi', 'documentation', 'article'] as const
@@ -111,7 +111,8 @@ export default function ProjectPage({ id }: { id: string }) {
   if (!project) return null
   const [cover, ...gallery] = project.images
 
-  const origin = getProjectOrigin(project.id)
+  const origins = getProjectOrigins(project.id)
+  const origin = origins.find((item) => item.kind === 'work')
   const chapterLink = origin && `/work/#${origin.chapterId}`
 
   const facts: [string, ReactNode][] = [
@@ -121,11 +122,22 @@ export default function ProjectPage({ id }: { id: string }) {
     [t('project.theme'), <ThemeLabel key="theme" theme={project.theme} />],
   ]
   if (origin && chapterLink) {
-    facts.push(
-      origin.kind === 'work'
-        ? [t('project.company'), <Link key="company" href={chapterLink} className="link">{project.company}</Link>]
-        : [t('project.origin'), <Link key="origin" href={chapterLink} className="link">{pick(locale, origin.label)}</Link>]
-    )
+    facts.push([t('project.company'), <Link key="company" href={chapterLink} className="link">{project.company}</Link>])
+  } else if (origins.length) {
+    // 衍生 repo 可能有好幾個出處，每個都連到它在 /work 的那一章。
+    facts.push([
+      t('project.origin'),
+      <span key="origin" className="flex flex-wrap gap-x-2">
+        {origins.map((item, index) => (
+          <span key={`${item.chapterId}-${item.label.en}`}>
+            <Link href={`/work/#${item.chapterId}`} className="link">
+              {pick(locale, item.label)}
+            </Link>
+            {index < origins.length - 1 ? ' +' : ''}
+          </span>
+        ))}
+      </span>,
+    ])
   }
 
   return (

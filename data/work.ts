@@ -2,6 +2,7 @@
 // 章節文字、衍生 repo 和它們的來源在 content/work.json（雙語）。章節裡有哪些工作專案不另外列：
 // 作品的 company 欄位對到章節涵蓋的經歷（companyIds）的公司或集團名稱，就屬於那一章。
 // 衍生 repo 預設來自那間公司；同時期的碩士論文、外包案等其他來源寫在章節的 sources，衍生 repo 用 source 指過去。
+// 同一個 repo 可以出現在好幾個章節或來源（例如同時是碩士論文和工作的副產物）。
 import workJson from '@/content/work.json'
 import type { Locale } from '@/lib/i18n/config'
 import { pick, type Bilingual } from '@/lib/i18n/localize'
@@ -19,6 +20,11 @@ interface SourceEntry {
   note?: Bilingual
   /** study：對到 education.json 的 id，期間從學歷資料來。 */
   educationId?: string
+  /** 沒有學歷或經歷資料可推的來源（外包案）才直接寫期間。 */
+  start?: string
+  end?: string
+  /** 期間是大約的（使用者只記得「那時候」）。 */
+  approximate?: boolean
 }
 
 interface SpinoffEntry {
@@ -60,8 +66,22 @@ export function yearValue(value: string | undefined): number {
   return year + ((month || 1) - 1) / 12
 }
 
+/** 結束時間只寫年份（"2021"）時算到那年年底，不然一年的東西會畫成零長度。 */
+export function endValue(value: string | undefined): number {
+  return value && /^\d{4}$/.test(value) ? Number(value) + 11 / 12 : yearValue(value)
+}
+
 function rolesOf(entry: ChapterEntry, roles: Experience[]) {
   return roles.filter((role) => entry.companyIds.includes(role.companyId))
+}
+
+function periodOf(roles: Experience[]) {
+  const starts = roles.map((role) => role.start).sort((a, b) => yearValue(a) - yearValue(b))
+  const ends = roles.map((role) => role.end)
+  return {
+    start: starts[0] ?? '',
+    end: ends.includes('Present') ? 'Present' : ends.sort((a, b) => yearValue(b) - yearValue(a))[0] ?? '',
+  }
 }
 
 /** 章節涵蓋的公司與集團名稱，用來對作品的 company 欄位。 */
@@ -74,8 +94,10 @@ function companyNames(entry: ChapterEntry) {
   return names
 }
 
-function sourceOf(entry: ChapterEntry, id?: string) {
-  return id ? entry.sources?.find((source) => source.id === id) : undefined
+/** 來源的期間：學校研究看學歷資料，其他看 work.json 自己寫的。 */
+function sourcePeriod(source: SourceEntry) {
+  const school = source.educationId ? educationData.find((item) => item.id === source.educationId) : undefined
+  return { start: school?.startYear ?? source.start, end: school?.endYear ?? source.end, school }
 }
 
 export interface ProjectOrigin {
@@ -84,26 +106,36 @@ export interface ProjectOrigin {
   chapterId: string
   /** 顯示用的出處：公司名稱，或碩士論文、外包案這類來源。 */
   label: Bilingual
+  /** 排序用：出處開始的時間，早的在前。 */
+  since: number
 }
 
-const origins = new Map<string, ProjectOrigin>()
+const origins = new Map<string, ProjectOrigin[]>()
+function addOrigin(id: string, origin: ProjectOrigin) {
+  const list = origins.get(id) ?? []
+  if (!list.some((item) => item.chapterId === origin.chapterId && item.label.en === origin.label.en)) list.push(origin)
+  origins.set(id, list.sort((a, b) => a.since - b.since))
+}
 for (const entry of chapterEntries) {
   const names = companyNames(entry)
+  const since = yearValue(periodOf(rolesOf(entry, experienceData)).start)
   for (const project of allProjectsData) {
-    if (project.company && names.has(project.company)) origins.set(project.id, { kind: 'work', chapterId: entry.id, label: { en: entry.name } })
+    if (project.company && names.has(project.company)) addOrigin(project.id, { kind: 'work', chapterId: entry.id, label: { en: entry.name }, since })
   }
   for (const spinoff of entry.spinoffs) {
-    const source = sourceOf(entry, spinoff.source)
-    origins.set(spinoff.id, { kind: 'spinoff', chapterId: entry.id, label: source?.label ?? { en: entry.name } })
+    const source = spinoff.source ? entry.sources?.find((item) => item.id === spinoff.source) : undefined
+    const sourceSince = source ? yearValue(sourcePeriod(source).start) : since
+    addOrigin(spinoff.id, { kind: 'spinoff', chapterId: entry.id, label: source?.label ?? { en: entry.name }, since: Number.isFinite(sourceSince) ? sourceSince : since })
   }
 }
 
-export function getProjectOrigin(id: string): ProjectOrigin | undefined {
-  return origins.get(id)
+/** 一個作品的出處，早的在前；在公司做的作品只會有一個 work。 */
+export function getProjectOrigins(id: string): ProjectOrigin[] {
+  return origins.get(id) ?? []
 }
 
 export function isWorkProject(project: Pick<ProjectDetail, 'id'>): boolean {
-  return origins.get(project.id)?.kind === 'work'
+  return getProjectOrigins(project.id).some((origin) => origin.kind === 'work')
 }
 
 /** 經歷頁和首頁用：這間公司（companyId）有沒有一章。 */
@@ -125,9 +157,10 @@ export interface SpinoffGroup {
   /** 學校研究加上學校縮寫；公司沒有。 */
   detail?: string
   note?: string
-  /** 期間（經歷或學歷資料的格式）；外包案沒有資料就不畫。 */
+  /** 期間（經歷或學歷資料的格式）；沒有資料就不畫。 */
   start?: string
   end?: string
+  approximate?: boolean
   spinoffs: WorkSpinoff[]
 }
 
@@ -143,8 +176,9 @@ export interface WorkChapter {
   /** 舊到新。 */
   roles: Experience[]
   projects: ProjectDetail[]
-  /** 公司那一組在最前面，其他來源照 work.json 的順序；沒有 repo 的來源也保留，因為它可能有說明。 */
+  /** 公司那一組在最前面，其他來源照 work.json 的順序；沒有 repo 但有說明的來源也保留。 */
   spinoffGroups: SpinoffGroup[]
+  /** 不重複的衍生 repo 數（同一個 repo 在兩個來源只算一次）。 */
   spinoffCount: number
 }
 
@@ -154,9 +188,7 @@ export function getWorkChapters(locale: Locale = 'en'): WorkChapter[] {
   const byId = new Map(projects.map((project) => [project.id, project]))
   return chapterEntries.map((entry) => {
     const chapterRoles = rolesOf(entry, roles).sort((a, b) => yearValue(a.start) - yearValue(b.start))
-    const ends = chapterRoles.map((role) => role.end)
-    const start = chapterRoles[0]?.start ?? ''
-    const end = ends.includes('Present') ? 'Present' : ends.sort((a, b) => yearValue(b) - yearValue(a))[0] ?? ''
+    const { start, end } = periodOf(chapterRoles)
 
     const spinoffsOf = (sourceId?: string): WorkSpinoff[] =>
       entry.spinoffs
@@ -169,18 +201,18 @@ export function getWorkChapters(locale: Locale = 'en'): WorkChapter[] {
 
     const companyGroup: SpinoffGroup = { kind: 'company', label: entry.name, start, end, spinoffs: spinoffsOf(undefined) }
     const otherGroups = (entry.sources ?? []).map((source): SpinoffGroup => {
-      const school = source.educationId ? educationData.find((item) => item.id === source.educationId) : undefined
+      const period = sourcePeriod(source)
       return {
         kind: source.kind,
         label: pick(locale, source.label),
-        detail: school?.schoolAbbr,
+        detail: period.school?.schoolAbbr,
         note: source.note ? pick(locale, source.note) : undefined,
-        start: school?.startYear,
-        end: school?.endYear,
+        start: period.start,
+        end: period.end,
+        approximate: source.approximate,
         spinoffs: spinoffsOf(source.id),
       }
     })
-    const spinoffGroups = [companyGroup, ...otherGroups].filter((group) => group.spinoffs.length > 0 || group.note)
 
     return {
       id: entry.id,
@@ -193,10 +225,96 @@ export function getWorkChapters(locale: Locale = 'en'): WorkChapter[] {
       roles: chapterRoles,
       // 新到舊，和章節的順序一致：最上面是那段工作最近做的東西。
       projects: projects
-        .filter((project) => origins.get(project.id)?.kind === 'work' && origins.get(project.id)?.chapterId === entry.id)
+        .filter((project) => getProjectOrigins(project.id).some((origin) => origin.kind === 'work' && origin.chapterId === entry.id))
         .sort((a, b) => yearValue(b.timeline.start) - yearValue(a.timeline.start)),
-      spinoffGroups,
-      spinoffCount: entry.spinoffs.filter((spinoff) => byId.has(spinoff.id)).length,
+      spinoffGroups: [companyGroup, ...otherGroups].filter((group) => group.spinoffs.length > 0 || group.note),
+      spinoffCount: new Set(entry.spinoffs.filter((spinoff) => byId.has(spinoff.id)).map((spinoff) => spinoff.id)).size,
     }
   })
+}
+
+export interface CareerBar {
+  label: string
+  start: string
+  end: string
+  /** 有章節的工作才有，點了跳到那一章。 */
+  chapterId?: string
+  current?: boolean
+  approximate?: boolean
+}
+
+export interface CareerLane {
+  kind: 'work' | 'study' | 'contract'
+  bars: CareerBar[]
+}
+
+export interface CareerDot {
+  project: ProjectDetail
+  /** 出處（公司、碩士論文……），依時間排。 */
+  labels: string[]
+}
+
+export interface CareerMap {
+  lanes: CareerLane[]
+  dots: CareerDot[]
+  /** 時間軸起訖（帶小數的年份）。 */
+  start: number
+  end: number
+  /** 沒有工作、學業或外包的空檔（帶小數的年份），畫的時候壓縮。 */
+  gaps: [number, number][]
+}
+
+/** 空檔短於這個長度（年）就照實畫，不壓縮。 */
+const MIN_GAP = 0.25
+
+/** /work 最上面的多軌時間軸：工作、學業、外包各一軌，衍生 repo 以點標出開始的時間。 */
+export function getCareerMap(locale: Locale = 'en'): CareerMap {
+  const chapters = getWorkChapters(locale)
+  const work: CareerBar[] = [...chapters]
+    .sort((a, b) => yearValue(a.start) - yearValue(b.start))
+    .map((chapter) => ({ label: chapter.name, start: chapter.start, end: chapter.end, chapterId: chapter.id, current: chapter.end === 'Present' }))
+
+  // 學業和外包：從各章的來源收集，同一個來源只畫一次。
+  const seen = new Set<string>()
+  const study: CareerBar[] = []
+  const contract: CareerBar[] = []
+  for (const chapter of chapters) {
+    for (const group of chapter.spinoffGroups) {
+      if (group.kind === 'company' || !group.start) continue
+      const key = `${group.kind}:${group.label}`
+      if (seen.has(key)) continue
+      seen.add(key)
+      const bar = { label: [group.label, group.detail].filter(Boolean).join(' · '), start: group.start, end: group.end ?? group.start, approximate: group.approximate }
+      ;(group.kind === 'study' ? study : contract).push(bar)
+    }
+  }
+  const lanes: CareerLane[] = [
+    { kind: 'work' as const, bars: work },
+    { kind: 'study' as const, bars: study },
+    { kind: 'contract' as const, bars: contract },
+  ].filter((lane) => lane.bars.length > 0)
+
+  const dotsById = new Map<string, CareerDot>()
+  for (const chapter of chapters) {
+    for (const group of chapter.spinoffGroups) {
+      for (const row of group.spinoffs) {
+        const labels = getProjectOrigins(row.project.id).map((origin) => pick(locale, origin.label))
+        dotsById.set(row.project.id, { project: row.project, labels })
+      }
+    }
+  }
+  const dots = [...dotsById.values()].sort((a, b) => yearValue(a.project.timeline.start) - yearValue(b.project.timeline.start))
+
+  // 有東西的期間合併起來，中間超過 MIN_GAP 的空白就是空檔。
+  const spans = lanes
+    .flatMap((lane) => lane.bars.map((bar): [number, number] => [yearValue(bar.start), endValue(bar.end)]))
+    .sort((a, b) => a[0] - b[0])
+  const gaps: [number, number][] = []
+  let reach = spans[0]?.[1] ?? BUILD_YEAR
+  for (const [from, to] of spans.slice(1)) {
+    if (from - reach > MIN_GAP) gaps.push([reach, from])
+    reach = Math.max(reach, to)
+  }
+  const start = Math.floor(Math.min(...spans.map((span) => span[0]), ...dots.map((dot) => yearValue(dot.project.timeline.start))))
+  return { lanes, dots, start, end: BUILD_YEAR, gaps }
 }

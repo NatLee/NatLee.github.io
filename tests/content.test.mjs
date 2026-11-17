@@ -56,8 +56,13 @@ test('every work chapter points to real roles, an existing era and real spin-off
       if (source.educationId) assert.ok(education.has(source.educationId), `${chapter.id}: unknown education ${source.educationId}`)
     }
     const seen = []
+    const placed = new Set()
     for (const spinoff of chapter.spinoffs) {
       assert.ok(ids.has(spinoff.id), `${chapter.id}: unknown spin-off ${spinoff.id}`)
+      // 同一個 repo 可以屬於好幾個來源，但同一章同一個來源只能出現一次。
+      const place = `${spinoff.id}@${spinoff.source ?? 'company'}`
+      assert.ok(!placed.has(place), `${chapter.id}: ${spinoff.id} is listed twice under the same source`)
+      placed.add(place)
       if (spinoff.source) assert.ok(sources.has(spinoff.source), `${chapter.id}: ${spinoff.id} names an unknown source ${spinoff.source}`)
       if (spinoff.from) assert.ok(seen.includes(spinoff.from), `${chapter.id}: ${spinoff.id} continues ${spinoff.from}, which must be listed before it`)
       assert.ok(spinoff.note?.en && spinoff.note?.zh, `${chapter.id}: ${spinoff.id} needs a note in both languages`)

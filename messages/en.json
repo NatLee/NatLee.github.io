@@ -174,7 +174,14 @@
     "title": "What I built at work",
     "intro": "Projects from the companies I worked at. The code stays with them, so each chapter covers what the job needed, my part and what shipped, plus the open-source projects that grew out of it.",
     "ribbon": "Career at a glance",
-    "ribbonNote": "One band per job, sized by how long I was there.",
+    "ribbonNote": "Drawn to calendar scale, so overlaps show. ≈ squeezes a stretch with no job or study. Each dot is an open-source spin-off, placed where it started.",
+    "lanes": {
+      "work": "Work",
+      "study": "Study",
+      "contract": "Contract",
+      "spinoffs": "Spin-offs"
+    },
+    "about": "about",
     "roles": "Roles",
     "rolesLink": "All roles on the Experience page",
     "results": "Results at the time",
