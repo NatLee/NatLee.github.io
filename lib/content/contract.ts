@@ -34,6 +34,15 @@ export interface SiteBundle {
   mascots: Record<string, Mascot>
 }
 
+export interface ArchitectureStep {
+  title: string
+  items: string[]
+  /** 往下一步的箭頭上寫的字；最後一步沒有。 */
+  next?: string
+  /** 這一步就是這個作品本身。 */
+  core?: boolean
+}
+
 export interface ProjectTheme {
   id: string
   label: Localized
@@ -84,6 +93,10 @@ export interface Project {
   challenges: Localized<string[]>
   solutions: Localized<string[]>
   results: Localized<string[]>
+  /** 為什麼做這個作品。（2026-11 新增） */
+  why?: Localized
+  /** 簡單的架構圖：由左到右的幾步，中英文步數相同。（2026-11 新增） */
+  architecture?: Localized<ArchitectureStep[]>
   images: string[]
   /** 本地縮圖（/images/projects/<id>.webp），沒有就不給。 */
   thumbnail?: string

@@ -36,6 +36,24 @@
     "challenges": { "type": "array", "items": { "type": "string" } },
     "solutions": { "type": "array", "items": { "type": "string" } },
     "results": { "type": "array", "items": { "type": "string" } },
+    "why": { "type": "string", "description": "為什麼做這個作品，一到三句。語氣和介紹一樣，可以自嘲，但事實要對。中文寫在 content/i18n/projects.zh.json 的 why。" },
+    "architecture": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "description": "簡單的架構圖：由左到右的幾步。只有一步 core: true（這個作品本身），最後一步不寫 next。中文照同樣的步數寫在 projects.zh.json 的 architecture（不寫 core）。",
+      "items": {
+        "type": "object",
+        "required": ["title", "items"],
+        "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string" },
+          "items": { "type": "array", "maxItems": 3, "items": { "type": "string" } },
+          "next": { "type": "string", "description": "往下一步的箭頭上寫的字。" },
+          "core": { "const": true }
+        }
+      }
+    },
     "links": {
       "type": "object",
       "properties": {

@@ -23,6 +23,32 @@ export type ProjectCategory =
   | 'Web Automation'
   | 'Productivity Tools'
 
+/** 架構圖的一步。架構圖是由左到右的幾步，core 標出這個作品本身。 */
+export interface ArchitectureStep {
+  title: string
+  items: string[]
+  /** 往下一步的箭頭上寫的字；最後一步沒有。 */
+  next?: string
+  core?: boolean
+}
+
+/** 中文的架構圖照英文的步驟順序寫，只換字；core 只寫在英文。 */
+type ArchitectureStepZh = Partial<Omit<ArchitectureStep, 'core'>>
+
+/**
+ * 把中文的架構圖疊到英文上：步數不一樣就整個用英文（npm test 會擋下這種情況）。
+ * 作品頁和 site.json 都用它，兩邊的結果才會一樣。
+ */
+export function localizeArchitecture(en: ArchitectureStep[], zh?: ArchitectureStepZh[]): ArchitectureStep[] {
+  if (!zh || zh.length !== en.length) return en
+  return en.map((step, index) => ({
+    ...step,
+    title: zh[index].title || step.title,
+    items: zh[index].items?.length ? zh[index].items! : step.items,
+    next: step.next === undefined ? undefined : zh[index].next || step.next,
+  }))
+}
+
 /** flagship = Telepy（首頁獨立區塊）；selected = 精選卡片；archive = 其他（列表）。 */
 export type ProjectTier = 'flagship' | 'selected' | 'archive'
 
@@ -62,14 +88,18 @@ export interface ProjectDetail {
   }
   role: string
   company?: string
+  /** 為什麼做這個作品（作品頁「為什麼做這個」）。 */
+  why?: string
+  /** 簡單的架構圖（作品頁「架構」）。 */
+  architecture?: ArchitectureStep[]
 }
 
-type ProjectZhOverlay = Partial<
+export type ProjectZhOverlay = Partial<
   Pick<
     ProjectDetail,
-    'title' | 'subtitle' | 'description' | 'longDescription' | 'role' | 'features' | 'challenges' | 'solutions' | 'results'
+    'title' | 'subtitle' | 'description' | 'longDescription' | 'role' | 'features' | 'challenges' | 'solutions' | 'results' | 'why'
   >
->
+> & { architecture?: ArchitectureStepZh[] }
 
 const projectZhMap = projectsZh as Record<string, ProjectZhOverlay>
 const thumbnailMap = thumbnails as Record<string, string>
@@ -89,6 +119,8 @@ function localizeProject(project: ProjectDetail, locale: Locale): ProjectDetail 
     challenges: localizedArray(locale, project.challenges, zh.challenges),
     solutions: localizedArray(locale, project.solutions, zh.solutions),
     results: localizedArray(locale, project.results, zh.results),
+    why: project.why && localizedField(locale, project.why, zh.why),
+    architecture: project.architecture && localizeArchitecture(project.architecture, zh.architecture),
   }
 }
 
