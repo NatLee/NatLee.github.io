@@ -2,6 +2,7 @@
   "meta": {
     "siteTitle": "Nat Lee",
     "projectsTitle": "Projects | Nat Lee",
+    "workTitle": "Work | Nat Lee",
     "aboutTitle": "About | Nat Lee",
     "experienceTitle": "Experience | Nat Lee",
     "valhallaTitle": "Valhalla | Nat Lee"
@@ -15,6 +16,7 @@
   },
   "nav": {
     "home": "Home",
+    "work": "Work",
     "projects": "Projects",
     "about": "About",
     "experience": "Experience",
@@ -33,6 +35,7 @@
     "off": "Off",
     "hint": "Turn these off if they get in the way of a screen reader or voice control. The setting is saved in this browser.",
     "home": "Home",
+    "work": "Work",
     "projects": "Projects",
     "about": "About",
     "experience": "Experience",
@@ -58,8 +61,8 @@
       "tapi": "Tapi, Telepy's mascot, waving"
     },
     "selected": {
-      "title": "Selected work",
-      "intro": "A closer look at infrastructure, streaming, planning, energy forecasting, reinforcement learning and medical imaging.",
+      "title": "Selected projects",
+      "intro": "Things I built on my own time: infrastructure, streaming, planning, reinforcement learning, medical imaging and image tools.",
       "all": "All {count} projects"
     },
     "opensource": {
@@ -73,7 +76,10 @@
     "career": {
       "title": "Where I've been",
       "intro": "Four rooms so far. Each one taught me something the next one needed, usually the hard way.",
-      "full": "Full experience"
+      "full": "Full experience",
+      "work": "Work projects",
+      "seeWork": "See the work",
+      "spinoffs": "{count} open-source spin-offs"
     },
     "how": {
       "title": "How I work",
@@ -94,6 +100,8 @@
   "projects": {
     "title": "Projects",
     "intro": "{count} projects across backend systems, forecasting, machine learning and browser tools. Explore the case studies, or filter for something you can try now.",
+    "workNote": "Projects built at a job carry a lock badge. The story behind them, job by job, is on the Work page.",
+    "workLink": "Work projects",
     "searchLabel": "Search projects",
     "searchPlaceholder": "Search by name, technology or topic",
     "all": "All",
@@ -128,6 +136,11 @@
     "period": "Period",
     "status": "Status",
     "theme": "Theme",
+    "company": "Company",
+    "origin": "Origin",
+    "spinoffOf": "Spin-off from work at {name}",
+    "workNotice": "Built at {company}. The code belongs to the company, so there is no source link, and the figures come from internal experiments at the time.",
+    "workChapter": "Read the chapter on the Work page",
     "gallery": "Screenshots",
     "related": "Related projects",
     "links": {
@@ -157,6 +170,28 @@
     "cta": "Telepy on GitHub",
     "ctaNote": "Self-hosted with Docker Compose. AGPL-3.0."
   },
+  "work": {
+    "eyebrow": "Work",
+    "title": "What I built at work",
+    "intro": "Projects from the companies I worked at. The code stays with them, so each chapter covers what the job needed, my part and what shipped, plus the open-source projects that grew out of it.",
+    "ribbon": "Career at a glance",
+    "ribbonNote": "One band per company, drawn to scale. The coloured ones have a chapter below.",
+    "roles": "Roles",
+    "rolesLink": "All roles on the Experience page",
+    "results": "Results at the time",
+    "figures": "Figures are from internal experiments at the time and can’t be checked from outside.",
+    "open": "Read more",
+    "spinoffsTitle": "Open source that grew out of it",
+    "spinoffsIntro": "The company’s code stays private. Each of these repos took one idea from the job and kept going in public.",
+    "trunk": "{name} · company code",
+    "successor": "continues {name}",
+    "now": "now",
+    "closing": "Roles, education and skills are on the Experience page. Things I built on my own time are under Projects."
+  },
+  "origin": {
+    "work": "Work · {name}",
+    "spinoff": "Spin-off · {name}"
+  },
   "about": {
     "title": "About",
     "lead": "The longer version, for people who scrolled past the jokes.",
@@ -173,6 +208,7 @@
     "title": "Experience",
     "intro": "Work, education, skills and open-source contributions on one page. It also prints as a compact CV.",
     "print": "Print or save as PDF",
+    "workLink": "Work projects",
     "work": "Work",
     "education": "Education",
     "skills": "Skills",

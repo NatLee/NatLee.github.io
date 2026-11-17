@@ -2,6 +2,7 @@
   "meta": {
     "siteTitle": "Nat Lee",
     "projectsTitle": "作品 | Nat Lee",
+    "workTitle": "工作專案 | Nat Lee",
     "aboutTitle": "關於 | Nat Lee",
     "experienceTitle": "經歷 | Nat Lee",
     "valhallaTitle": "英靈殿 | Nat Lee"
@@ -15,6 +16,7 @@
   },
   "nav": {
     "home": "首頁",
+    "work": "工作",
     "projects": "作品",
     "about": "關於",
     "experience": "經歷",
@@ -33,6 +35,7 @@
     "off": "關閉",
     "hint": "如果它們干擾到螢幕閱讀器或語音控制，可以在這裡關掉。設定會存在這個瀏覽器。",
     "home": "首頁",
+    "work": "工作專案",
     "projects": "作品",
     "about": "關於",
     "experience": "經歷",
@@ -59,7 +62,7 @@
     },
     "selected": {
       "title": "精選作品",
-      "intro": "從基礎設施、直播點歌與排程，到能源預測、強化學習與醫學影像，看看各自解決了什麼問題。",
+      "intro": "下班後自己做的東西：基礎設施、直播點歌、排程、強化學習、醫學影像與影像工具。",
       "all": "全部 {count} 個作品"
     },
     "opensource": {
@@ -73,7 +76,10 @@
     "career": {
       "title": "一路走來",
       "intro": "目前走過四個房間，每一間都教了我下一間會用到的東西，通常是用比較痛的方式。",
-      "full": "完整經歷"
+      "full": "完整經歷",
+      "work": "工作專案",
+      "seeWork": "看這段工作",
+      "spinoffs": "{count} 個衍生開源專案"
     },
     "how": {
       "title": "工作方式",
@@ -94,6 +100,8 @@
   "projects": {
     "title": "作品",
     "intro": "共 {count} 個作品，涵蓋後端系統、預測、機器學習與瀏覽器工具。可以深入看案例，也能篩出現在就能試用的作品。",
+    "workNote": "在公司做的作品標有鎖頭徽章，依工作分章的完整說明在工作專案頁。",
+    "workLink": "工作專案",
     "searchLabel": "搜尋作品",
     "searchPlaceholder": "用名稱、技術或主題搜尋",
     "all": "全部",
@@ -128,6 +136,11 @@
     "period": "期間",
     "status": "狀態",
     "theme": "主題",
+    "company": "公司",
+    "origin": "出處",
+    "spinoffOf": "衍生自 {name} 的工作",
+    "workNotice": "在 {company} 開發。程式碼屬於公司，所以沒有原始碼連結；數字是當時內部實驗的結果。",
+    "workChapter": "看工作專案頁的這一章",
     "gallery": "截圖",
     "related": "相關作品",
     "links": {
@@ -157,6 +170,28 @@
     "cta": "到 GitHub 看 Telepy",
     "ctaNote": "用 Docker Compose 自架，AGPL-3.0 授權。"
   },
+  "work": {
+    "eyebrow": "工作",
+    "title": "在工作上做的東西",
+    "intro": "我在任職公司做的專案。程式碼留在公司，所以每一章寫的是那份工作需要什麼、我負責的部分、交付了什麼，以及從那段工作長出來的開源專案。",
+    "ribbon": "職涯一覽",
+    "ribbonNote": "每一段是一間公司，長度照實際任職時間。有顏色的在下面有一章。",
+    "roles": "職位",
+    "rolesLink": "經歷頁的完整職位",
+    "results": "當時的成果",
+    "figures": "數字是當時內部實驗的結果，外部無法查證。",
+    "open": "看詳細",
+    "spinoffsTitle": "從這段工作長出來的開源專案",
+    "spinoffsIntro": "公司的程式碼不公開。這些 repo 各自帶走了工作裡的一個想法，在外面繼續發展。",
+    "trunk": "{name} · 公司程式碼",
+    "successor": "延續 {name}",
+    "now": "現在",
+    "closing": "職位、學歷與技能在經歷頁；下班後自己做的東西在作品頁。"
+  },
+  "origin": {
+    "work": "工作 · {name}",
+    "spinoff": "衍生 · {name}"
+  },
   "about": {
     "title": "關於",
     "lead": "比較長的版本，給滑過那些笑話還想多了解一點的人。",
@@ -173,6 +208,7 @@
     "title": "經歷",
     "intro": "工作、學歷、技能與開源貢獻都在這一頁，也可以直接印成一份精簡的履歷。",
     "print": "列印或存成 PDF",
+    "workLink": "工作專案",
     "work": "工作",
     "education": "學歷",
     "skills": "技能",

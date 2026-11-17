@@ -38,6 +38,29 @@ test('every playground card points to a real project with an HTTPS demo', () => 
   }
 })
 
+test('every work chapter points to real roles, an existing era and real spin-offs', () => {
+  const { chapters } = read('content/work.json')
+  const roles = read('content/experience.json')
+  const eras = new Set(read('content/personal.json').eras.map(era => era.period))
+  assert.equal(new Set(chapters.map(chapter => chapter.id)).size, chapters.length)
+  const claimed = new Map()
+  for (const chapter of chapters) {
+    assert.ok(eras.has(chapter.era), `${chapter.id}: era "${chapter.era}" is not in personal.json`)
+    const chapterRoles = roles.filter(role => chapter.companyIds.includes(role.companyId))
+    for (const companyId of chapter.companyIds) assert.ok(chapterRoles.some(role => role.companyId === companyId), `${chapter.id}: no role with companyId ${companyId}`)
+    for (const role of chapterRoles) for (const name of [role.company, role.group].filter(Boolean)) claimed.set(name, chapter.id)
+    const seen = []
+    for (const spinoff of chapter.spinoffs) {
+      assert.ok(ids.has(spinoff.id), `${chapter.id}: unknown spin-off ${spinoff.id}`)
+      if (spinoff.from) assert.ok(seen.includes(spinoff.from), `${chapter.id}: ${spinoff.id} continues ${spinoff.from}, which must be listed before it`)
+      assert.ok(spinoff.note?.en && spinoff.note?.zh, `${chapter.id}: ${spinoff.id} needs a note in both languages`)
+      seen.push(spinoff.id)
+    }
+  }
+  // 有 company 的作品都要落在某一章，否則它會從 /work 和徽章裡消失。
+  for (const project of projects.filter(item => item.company)) assert.ok(claimed.has(project.company), `${project.id}: company "${project.company}" has no work chapter`)
+})
+
 function messageKeys(value, prefix = '') {
   return Object.entries(value).flatMap(([key, item]) => typeof item === 'string' ? [`${prefix}${key}`] : messageKeys(item, `${prefix}${key}.`)).sort()
 }

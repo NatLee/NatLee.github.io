@@ -10,6 +10,8 @@ const nextConfig = {
     unoptimized: true
   },
   assetPrefix: process.env.NODE_ENV === 'production' ? '/' : '',
+  // 建置當月（YYYY-MM）：/work 的時間軸用它當「現在」。在建置時固定下來，靜態輸出的 HTML 和瀏覽器端算出的位置才會一致。
+  env: { NEXT_PUBLIC_BUILD_MONTH: new Date().toISOString().slice(0, 7) },
 }
 
 module.exports = nextConfig

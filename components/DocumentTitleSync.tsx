@@ -18,6 +18,7 @@ export function DocumentTitleSync() {
   useEffect(() => {
     const projectId = getProjectId(pathname)
     if (pathname === '/') document.title = t('meta.siteTitle')
+    else if (pathname.startsWith('/work')) document.title = t('meta.workTitle')
     else if (pathname.startsWith('/about')) document.title = t('meta.aboutTitle')
     else if (pathname.startsWith('/experience')) document.title = t('meta.experienceTitle')
     else if (pathname.startsWith('/valhalla')) document.title = t('meta.valhallaTitle')
