@@ -16,8 +16,35 @@ function scale(start: number, end: number) {
   return (value: number) => Math.min(100, Math.max(0, ((value - start) / (end - start)) * 100))
 }
 
-/** 空檔壓縮後佔的長度（年）：看得到斷軸記號，但不佔空間。 */
+/** 空檔壓縮後佔的長度（年）：看得到斷軸的斜線細條，但不佔空間。 */
 const GAP_WIDTH = 0.18
+
+/** 斜線細條最窄的寬度：手機上壓縮後只剩幾 px，太窄就看不出斜線。 */
+const GAP_MIN_WIDTH = '8px'
+
+/**
+ * 年份標籤離斷口多近（軌道寬度的 %）就改成往外側對齊，不壓到斷口。
+ * 標籤約 24px 寬：手機軌道約 360px，一半寬約 3.4%；sm 以上軌道至少約 480px，一半寬約 2.5%。
+ */
+const LABEL_CLEARANCE = { base: 4, sm: 2.5 }
+
+/** 軌道名稱欄的寬度和欄距：各軌和斜線細條都從這兩個變數算位置。 */
+const LANE_VARS = { '--lane-label': '6.5rem', '--lane-gap': '1rem' } as CSSProperties
+const LANE_ROW = 'grid gap-x-[var(--lane-gap)] gap-y-1 sm:grid-cols-[var(--lane-label)_minmax(0,1fr)]'
+
+type Anchor = 'start' | 'center' | 'end'
+
+/** 年份標籤的對齊：太靠近斷口時往遠離斷口的方向長。 */
+function yearAnchor(x: number, strips: { left: number; right: number }[], clearance: number): Anchor {
+  for (const strip of strips) {
+    if (x >= strip.right && x - strip.right < clearance) return 'start'
+    if (x <= strip.left && strip.left - x < clearance) return 'end'
+  }
+  return 'center'
+}
+
+const ANCHOR_BASE: Record<Anchor, string> = { start: 'translate-x-[3px]', center: '-translate-x-1/2', end: '-translate-x-[calc(100%+3px)]' }
+const ANCHOR_SM: Record<Anchor, string> = { start: 'sm:translate-x-[3px]', center: 'sm:-translate-x-1/2', end: 'sm:-translate-x-[calc(100%+3px)]' }
 
 /**
  * 有斷軸的比例尺：空檔（gaps）壓成 GAP_WIDTH，其他照日曆。
@@ -49,7 +76,8 @@ const LANE_BAR: Record<CareerLane['kind'], string> = {
 
 /**
  * 多軌時間軸：工作、學業、外包各一軌，照日曆畫，看得出彼此重疊；
- * 什麼都沒有的空檔用斷軸壓縮（≈），最下面一軌用點標出每個衍生 repo 開始的時間。
+ * 什麼都沒有的空檔用斷軸壓縮：一條斜線細條貫穿各軌，年份軸在同一處斷開。
+ * 下面兩軌用點和方框標出每個衍生 repo 和 side project 開始的時間。
  */
 function CareerMap({ chapters }: { chapters: WorkChapter[] }) {
   const { locale, t } = useLanguage()
@@ -58,7 +86,12 @@ function CareerMap({ chapters }: { chapters: WorkChapter[] }) {
   const years = Array.from({ length: Math.floor(map.end) - map.start + 1 }, (_, index) => map.start + index).filter(
     (year) => !map.gaps.some(([from, to]) => year > from && year < to)
   )
-  const gapMarks = map.gaps.map(([from, to]) => at((from + to) / 2))
+  // 每個空檔壓縮後在軌道上的位置（%）。細條和年份軸的斷口都畫在這裡。
+  const strips = map.gaps.map(([from, to]) => ({ key: from, left: at(from), right: at(to) }))
+  const stripStyle = (strip: (typeof strips)[number]): CSSProperties => ({
+    left: `${(strip.left + strip.right) / 2}%`,
+    width: `max(${GAP_MIN_WIDTH}, ${strip.right - strip.left}%)`,
+  })
 
   // 同一年開始的衍生 repo 疊成一欄。
   const stacks = new Map<number, number>()
@@ -91,11 +124,6 @@ function CareerMap({ chapters }: { chapters: WorkChapter[] }) {
   const sideRows = Math.max(1, rowEnds.length)
 
   const laneLabel = 'font-mono text-[11px] uppercase tracking-wider text-muted'
-  const marks = gapMarks.map((left) => (
-    <span key={left} className="absolute inset-y-0 grid w-3 -translate-x-1/2 place-items-center font-mono text-xs text-muted" style={{ left: `${left}%` }} aria-hidden="true">
-      ≈
-    </span>
-  ))
 
   return (
     <section aria-labelledby="ribbon-title" className="mt-14">
@@ -106,95 +134,107 @@ function CareerMap({ chapters }: { chapters: WorkChapter[] }) {
         <p className="max-w-[62ch] text-sm text-muted">{t('work.ribbonNote')}</p>
       </div>
 
-      <div className="mt-5 grid gap-3">
-        {map.lanes.map((lane) => (
-          <div key={lane.kind} className="grid gap-x-4 gap-y-1 sm:grid-cols-[6.5rem_minmax(0,1fr)] sm:items-center">
-            <span className={laneLabel}>{t(`work.lanes.${lane.kind}`)}</span>
-            <ol className="relative h-8">
-              {marks}
-              {lane.bars.map((bar) => {
-                const left = at(yearValue(bar.start))
-                const width = at(endValue(bar.end)) - left
-                const period = `${bar.approximate ? `${t('work.about')} ` : ''}${bar.start} – ${displayDate(bar.end, t('common.present'))}`
-                const style: CSSProperties = { left: `${left}%`, width: `calc(${width}% - 2px)` }
-                const base = `absolute inset-y-0 flex items-center overflow-hidden rounded-md px-2 font-mono text-[11px] whitespace-nowrap ${LANE_BAR[lane.kind]}`
-                return (
-                  <li key={bar.label} className="contents">
-                    {bar.chapterId ? (
-                      <a
-                        href={`#${bar.chapterId}`}
-                        title={`${bar.label} · ${period}`}
-                        aria-label={`${bar.label} · ${period}`}
-                        style={style}
-                        className={`${base} ${bar.current ? '!bg-accent-fill' : ''} transition-[filter] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink`}
-                      >
-                        <span className="truncate">{bar.label}</span>
-                      </a>
-                    ) : (
-                      <span title={`${bar.label} · ${period}`} aria-label={`${bar.label} · ${period}`} style={style} className={base}>
-                        <span className="truncate">{bar.label}</span>
-                      </span>
-                    )}
-                  </li>
-                )
-              })}
-            </ol>
-          </div>
-        ))}
-
-        <div className="grid gap-x-4 gap-y-1 sm:grid-cols-[6.5rem_minmax(0,1fr)] sm:items-end">
-          <span className={laneLabel}>{t('work.lanes.spinoffs')}</span>
-          <ul className="relative" style={{ height: dotRows * 12 + 4 }}>
-            {marks}
-            {dots.map((dot) => (
-              <li key={dot.project.id} className="absolute -translate-x-1/2" style={{ left: `${dot.x}%`, bottom: dot.level * 12 }}>
-                <Link
-                  href={`/projects/${dot.project.id}/`}
-                  title={`${dot.project.title} · ${dot.project.timeline.start} · ${dot.labels.join(' + ')}`}
-                  aria-label={`${dot.project.title}, ${dot.project.timeline.start}, ${dot.labels.join(' + ')}`}
-                  className="block h-2.5 w-2.5 rounded-full bg-clip ring-2 ring-paper transition-transform hover:scale-150 focus-visible:scale-150 focus-visible:outline-none focus-visible:ring-ink"
-                />
-              </li>
-            ))}
-          </ul>
+      <div className="relative mt-5" style={LANE_VARS}>
+        {/* 斜線細條：從第一軌頂端畫到年份軸（年份軸那一列高 h-5），只畫一次。 */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-5 top-0 sm:left-[calc(var(--lane-label)+var(--lane-gap))]" aria-hidden="true">
+          {strips.map((strip) => (
+            <span key={strip.key} className="timeline-gap absolute inset-y-0 -translate-x-1/2" style={stripStyle(strip)} />
+          ))}
         </div>
 
-        {sides.length > 0 && (
-          <div className="grid gap-x-4 gap-y-1 sm:grid-cols-[6.5rem_minmax(0,1fr)] sm:items-center">
-            <span className={laneLabel}>{t('work.lanes.side')}</span>
-            <ul className="relative" style={{ height: sideRows * 22 + 2 }}>
-              {marks}
-              {sides.map((side) => (
-                <li
-                  key={side.project.id}
-                  className="absolute"
-                  style={{ left: `${side.x}%`, top: side.row * 22, transform: side.flip ? 'translateX(calc(-100% + 5px))' : 'translateX(-5px)' }}
-                >
+        <div className="relative grid gap-3">
+          {map.lanes.map((lane) => (
+            <div key={lane.kind} className={`${LANE_ROW} sm:items-center`}>
+              <span className={laneLabel}>{t(`work.lanes.${lane.kind}`)}</span>
+              <ol className="relative h-8">
+                {lane.bars.map((bar) => {
+                  const left = at(yearValue(bar.start))
+                  const width = at(endValue(bar.end)) - left
+                  const period = `${bar.approximate ? `${t('work.about')} ` : ''}${bar.start} – ${displayDate(bar.end, t('common.present'))}`
+                  const style: CSSProperties = { left: `${left}%`, width: `calc(${width}% - 2px)` }
+                  const base = `absolute inset-y-0 flex items-center overflow-hidden rounded-md px-2 font-mono text-[11px] whitespace-nowrap ${LANE_BAR[lane.kind]}`
+                  return (
+                    <li key={bar.label} className="contents">
+                      {bar.chapterId ? (
+                        <a
+                          href={`#${bar.chapterId}`}
+                          title={`${bar.label} · ${period}`}
+                          aria-label={`${bar.label} · ${period}`}
+                          style={style}
+                          className={`${base} ${bar.current ? '!bg-accent-fill' : ''} transition-[filter] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink`}
+                        >
+                          <span className="truncate">{bar.label}</span>
+                        </a>
+                      ) : (
+                        <span title={`${bar.label} · ${period}`} aria-label={`${bar.label} · ${period}`} style={style} className={base}>
+                          <span className="truncate">{bar.label}</span>
+                        </span>
+                      )}
+                    </li>
+                  )
+                })}
+              </ol>
+            </div>
+          ))}
+
+          <div className={`${LANE_ROW} sm:items-end`}>
+            <span className={laneLabel}>{t('work.lanes.spinoffs')}</span>
+            <ul className="relative" style={{ height: dotRows * 12 + 4 }}>
+              {dots.map((dot) => (
+                <li key={dot.project.id} className="absolute -translate-x-1/2" style={{ left: `${dot.x}%`, bottom: dot.level * 12 }}>
                   <Link
-                    href={`/projects/${side.project.id}/`}
-                    title={`${side.project.title} · ${side.project.timeline.start}`}
-                    className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded font-mono text-[11px] leading-5 transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink ${
-                      side.flip ? 'flex-row-reverse' : ''
-                    } ${side.flagship ? `bg-accent-soft font-semibold text-accent ${side.flip ? 'pl-1.5' : 'pr-1.5'}` : 'text-ink'}`}
-                  >
-                    <span className={`h-2.5 w-2.5 shrink-0 rounded-[2px] border-2 ${side.flagship ? 'border-accent-fill bg-accent-fill' : 'border-ink/70 bg-surface'}`} aria-hidden="true" />
-                    {side.project.title}
-                  </Link>
+                    href={`/projects/${dot.project.id}/`}
+                    title={`${dot.project.title} · ${dot.project.timeline.start} · ${dot.labels.join(' + ')}`}
+                    aria-label={`${dot.project.title}, ${dot.project.timeline.start}, ${dot.labels.join(' + ')}`}
+                    className="block h-2.5 w-2.5 rounded-full bg-clip ring-2 ring-paper transition-transform hover:scale-150 focus-visible:scale-150 focus-visible:outline-none focus-visible:ring-ink"
+                  />
                 </li>
               ))}
             </ul>
           </div>
-        )}
 
-        <div className="grid gap-x-4 sm:grid-cols-[6.5rem_minmax(0,1fr)]" aria-hidden="true">
-          <span className="hidden sm:block" />
-          <div className="relative h-5 border-t border-line">
-            {marks}
-            {years.map((year) => (
-              <span key={year} className="tabular absolute top-1 -translate-x-1/2 font-mono text-[10px] text-muted" style={{ left: `${at(year)}%` }}>
-                {year}
-              </span>
-            ))}
+          {sides.length > 0 && (
+            <div className={`${LANE_ROW} sm:items-center`}>
+              <span className={laneLabel}>{t('work.lanes.side')}</span>
+              <ul className="relative" style={{ height: sideRows * 22 + 2 }}>
+                {sides.map((side) => (
+                  <li
+                    key={side.project.id}
+                    className="absolute"
+                    style={{ left: `${side.x}%`, top: side.row * 22, transform: side.flip ? 'translateX(calc(-100% + 5px))' : 'translateX(-5px)' }}
+                  >
+                    <Link
+                      href={`/projects/${side.project.id}/`}
+                      title={`${side.project.title} · ${side.project.timeline.start}`}
+                      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded font-mono text-[11px] leading-5 transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink ${
+                        side.flip ? 'flex-row-reverse' : ''
+                      } ${side.flagship ? `bg-accent-soft font-semibold text-accent ${side.flip ? 'pl-1.5' : 'pr-1.5'}` : 'bg-paper text-ink'}`}
+                    >
+                      <span className={`h-2.5 w-2.5 shrink-0 rounded-[2px] border-2 ${side.flagship ? 'border-accent-fill bg-accent-fill' : 'border-ink/70 bg-surface'}`} aria-hidden="true" />
+                      {side.project.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div className={LANE_ROW} aria-hidden="true">
+            <span className="hidden sm:block" />
+            <div className="relative h-5 border-t border-line">
+              {strips.map((strip) => (
+                <span key={strip.key} className="timeline-gap-break absolute" style={stripStyle(strip)} />
+              ))}
+              {years.map((year) => {
+                const x = at(year)
+                const anchor = `${ANCHOR_BASE[yearAnchor(x, strips, LABEL_CLEARANCE.base)]} ${ANCHOR_SM[yearAnchor(x, strips, LABEL_CLEARANCE.sm)]}`
+                return (
+                  <span key={year} className={`tabular absolute top-1 font-mono text-[10px] text-muted ${anchor}`} style={{ left: `${x}%` }}>
+                    {year}
+                  </span>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>
