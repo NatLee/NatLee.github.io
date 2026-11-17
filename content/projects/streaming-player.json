@@ -3,7 +3,9 @@
   "id": "streaming-player",
   "title": "Streaming Player",
   "category": "Web Application",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "selected",
   "status": "Completed",
   "opensource": true,

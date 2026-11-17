@@ -3,7 +3,9 @@
   "id": "static-gantt",
   "title": "Gantt Studio",
   "category": "Productivity Tools",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "selected",
   "status": "Completed",
   "opensource": true,

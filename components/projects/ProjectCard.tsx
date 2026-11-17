@@ -1,23 +1,18 @@
 'use client'
 
 import Link from 'next/link'
-import { StarCount, ThemeLabel } from '@/components/site/ui'
+import { StarCount, ThemeLabels } from '@/components/site/ui'
 import OriginBadge from '@/components/work/OriginBadge'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { getProjectTheme } from '@/data/project-themes'
 import { getProjectStars, projectYear, type ProjectDetail } from '@/data/projects'
 
-const placeholderTone: Record<string, string> = {
-  energy: 'bg-accent-soft text-accent',
-  infra: 'bg-clip-soft text-clip',
-  ai: 'bg-paper text-plum',
-  libraries: 'bg-paper text-ink',
-  web: 'bg-paper text-muted',
-}
 
-/** 沒有截圖的作品（未公開或純命令列）用字當封面。 */
+/** 沒有截圖的作品（未公開或純命令列）用字當封面，底色取主分類的顏色。 */
 function TypePlaceholder({ project }: { project: ProjectDetail }) {
+  const color = getProjectTheme(project.themes[0])?.color ?? 'muted'
   return (
-    <div className={`flex h-full flex-col justify-between p-5 ${placeholderTone[project.theme] ?? 'bg-paper text-ink'}`}>
+    <div className="flex h-full flex-col justify-between p-5 text-ink" style={{ backgroundColor: `rgb(var(--${color}) / 0.12)` }}>
       <span className="font-mono text-xs opacity-80">{project.technologies.slice(0, 3).join(' · ')}</span>
       <span className="max-w-[18ch] font-display text-2xl font-bold leading-tight tracking-tight">{project.subtitle || project.title}</span>
     </div>
@@ -55,7 +50,7 @@ export default function ProjectCard({ project }: { project: ProjectDetail }) {
       </div>
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="flex items-center justify-between gap-3">
-          <ThemeLabel theme={project.theme} />
+          <ThemeLabels themes={project.themes} />
           <StarCount stars={getProjectStars(project)} />
         </div>
         <h3 className="break-words font-display text-xl font-bold leading-snug">

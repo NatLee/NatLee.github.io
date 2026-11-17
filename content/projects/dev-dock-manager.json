@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "dev-dock-manager",
-  "title": "dev-dock-manager",
+  "title": "Dev Dock Manager",
   "subtitle": "Development Environment Manager",
   "description": "The original Django dev-box manager: isolated Docker environments for several users on one machine. The Rust version replaced it, but this one carried the load first.",
   "longDescription": "A sophisticated development environment management system built with Django and Docker. This platform provides isolated, containerized development environments for multiple users on the same machine, complete with pre-configured tools and packages for various development workflows.",
@@ -14,7 +14,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock-manager",
   "category": "DevOps",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

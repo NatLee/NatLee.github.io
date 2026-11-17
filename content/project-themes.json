@@ -1,0 +1,54 @@
+{
+  "$comment": "作品分類的唯一清單。作品在 content/projects/<id>.json 的 themes 寫自己屬於哪些分類（第一個是主分類）。color 是 app/globals.css 的色票名稱，marker 是圓點樣式（dot 實心、ring 空心）。legacyTheme 是 /content/site.json 舊欄位 theme 的值：舊主題只認得 energy、infra、ai、libraries、web 五種，新分類在這裡對應回其中一種，舊主題才不會壞。",
+  "themes": [
+    {
+      "id": "energy",
+      "label": { "en": "Energy & forecasting", "zh": "能源與預測" },
+      "color": "accent-fill",
+      "marker": "dot",
+      "legacyTheme": "energy"
+    },
+    {
+      "id": "infra",
+      "label": { "en": "Infrastructure & backend", "zh": "基礎設施與後端" },
+      "color": "clip",
+      "marker": "dot",
+      "legacyTheme": "infra"
+    },
+    {
+      "id": "ai",
+      "label": { "en": "AI & machine learning", "zh": "AI 與機器學習" },
+      "color": "plum",
+      "marker": "dot",
+      "legacyTheme": "ai"
+    },
+    {
+      "id": "vision",
+      "label": { "en": "Vision & imaging", "zh": "視覺與影像" },
+      "color": "plum",
+      "marker": "ring",
+      "legacyTheme": "ai"
+    },
+    {
+      "id": "language",
+      "label": { "en": "Language & sentiment", "zh": "語言與情緒分析" },
+      "color": "accent-fill",
+      "marker": "ring",
+      "legacyTheme": "ai"
+    },
+    {
+      "id": "libraries",
+      "label": { "en": "Libraries & tools", "zh": "函式庫與工具" },
+      "color": "ink",
+      "marker": "dot",
+      "legacyTheme": "libraries"
+    },
+    {
+      "id": "web",
+      "label": { "en": "Web apps & extensions", "zh": "網頁應用與擴充功能" },
+      "color": "muted",
+      "marker": "dot",
+      "legacyTheme": "web"
+    }
+  ]
+}

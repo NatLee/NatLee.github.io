@@ -4,7 +4,10 @@
   "title": "Image Annotation",
   "subtitle": "Box it. Label it. Export it.",
   "category": "Web Development",
-  "theme": "web",
+  "themes": [
+    "web",
+    "vision"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

@@ -12,7 +12,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/eagle-wrapper",
   "category": "API/SDK",
-  "theme": "libraries",
+  "themes": [
+    "libraries"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

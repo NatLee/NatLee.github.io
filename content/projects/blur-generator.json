@@ -1,8 +1,8 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "blur-generator",
-  "title": "Blur-Generator",
-  "subtitle": "Image Blur Generation Tool",
+  "title": "Blur Generator",
+  "subtitle": "Bad photos on purpose, for training models",
   "description": "Makes perfectly good images worse on purpose: motion, lens, Gaussian and depth-aware blur, for training models that have to cope with bad photos.",
   "longDescription": "A comprehensive image processing tool that generates various types of blur effects including motion blur, lens blur, and gaussian blur using OpenCV. This tool is particularly useful for data augmentation in machine learning projects and creating realistic image effects.",
   "language": "python",
@@ -14,7 +14,10 @@
   ],
   "githubUrl": "https://github.com/NatLee/blur-generator",
   "category": "Computer Vision",
-  "theme": "libraries",
+  "themes": [
+    "libraries",
+    "vision"
+  ],
   "tier": "selected",
   "status": "Completed",
   "opensource": true,

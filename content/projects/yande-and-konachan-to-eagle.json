@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "yande-and-konachan-to-eagle",
-  "title": "yande-and-konachan-to-eagle",
+  "title": "Yande & Konachan to Eagle",
   "subtitle": "Find images. Keep the tags. Send to Eagle.",
   "description": "A pipx-installable CLI using the sites’ JSON APIs and EagleWrapper. Preview with --dry-run, keep your own tags and skip items already imported.",
   "longDescription": "A command-line importer for yande.re and konachan.com that sends image URLs and metadata to Eagle. The 2026 version uses JSON APIs, EagleWrapper and resumable state, with configurable searches, item limits, folders and a dry-run preview.",
@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/yande-and-konachan-to-eagle",
   "category": "Utilities",
-  "theme": "libraries",
+  "themes": [
+    "libraries"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

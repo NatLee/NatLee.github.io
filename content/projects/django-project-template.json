@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "django-project-template",
-  "title": "django-project-template",
+  "title": "Django Project Template",
   "subtitle": "Full-Featured Django Template",
   "description": "A Django starter with PostgreSQL, Redis, JWT, social login, Channels and django-q2. The setup I kept repeating, now tested end to end.",
   "longDescription": "A Docker Compose backend template with Django, PostgreSQL and Redis. It combines JWT and Google/Microsoft login, Channels WebSockets and django-q2 background tasks, configured from environment variables and checked end to end in CI.",
@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/django-project-template",
   "category": "Web Development",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

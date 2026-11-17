@@ -3,7 +3,9 @@
   "id": "ask-taipei-city-hall",
   "title": "Ask Taipei City Hall",
   "category": "Web Application",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

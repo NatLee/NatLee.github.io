@@ -3,7 +3,9 @@
   "id": "taipei-transit-radar",
   "title": "Taipei Transit Radar",
   "category": "Web Application",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

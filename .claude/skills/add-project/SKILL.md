@@ -5,8 +5,8 @@ description: Add a new project entry to the portfolio (per-project JSON + index 
 
 Add a new project to the portfolio. Steps:
 
-1. Gather from the user (or the given GitHub repo): id (kebab-case, becomes the URL `/projects/<id>`), title, subtitle, category, `theme`, `tier`, status, tech stack, and a short + long description. If a GitHub URL is given, derive fields from the repo README.
-   - `theme`: one of `energy` | `infra` | `ai` | `libraries` | `web` (the filter chips on /projects).
+1. Gather from the user (or the given GitHub repo): id (kebab-case, becomes the URL `/projects/<id>`), title, subtitle, category, `themes`, `tier`, status, tech stack, and a short + long description. If a GitHub URL is given, derive fields from the repo README.
+   - `themes`: one or more ids from `content/project-themes.json` (the filter chips on /projects), primary first. Add a second category only when someone filtering by it would expect to find the project.
    - `tier`: `selected` puts it in the card grid (home shows the first 6 selected); `archive` puts it in the list. `flagship` is reserved for Telepy.
 2. Create `content/projects/<id>.json` (keep the `"$schema"` line) following the `ProjectDetail` schema in `data/projects.ts`. Copy the field layout from one existing file in `content/projects/` (read only one, e.g. `morphkit.json`). Use canonical English `category` values from the `ProjectCategory` union; image URLs are external GitHub raw links (`[]` if none). Links: `links.demo`, `links.pypi`, `links.documentation`, `links.article` as available.
 3. Register it in `data/projects-list.ts`: one import line + one array entry. Array position = display order within its tier.

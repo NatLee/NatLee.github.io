@@ -1,9 +1,11 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "playwright-snap",
-  "title": "playwright-snap",
+  "title": "Playwright Snap",
   "category": "Web Automation",
-  "theme": "libraries",
+  "themes": [
+    "libraries"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

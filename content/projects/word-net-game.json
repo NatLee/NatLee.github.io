@@ -3,7 +3,10 @@
   "id": "word-net-game",
   "title": "Word Net",
   "category": "Web Application",
-  "theme": "web",
+  "themes": [
+    "web",
+    "language"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

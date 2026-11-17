@@ -105,13 +105,6 @@
     "searchLabel": "搜尋作品",
     "searchPlaceholder": "用名稱、技術或主題搜尋",
     "all": "全部",
-    "themes": {
-      "energy": "能源與預測",
-      "infra": "基礎設施與後端",
-      "ai": "AI、視覺與醫學影像",
-      "libraries": "函式庫與工具",
-      "web": "網頁應用與擴充功能"
-    },
     "selected": "精選",
     "more": "更多專案與早期作品",
     "shown": "顯示 {shown} / {total}",
@@ -135,7 +128,7 @@
     "role": "角色",
     "period": "期間",
     "status": "狀態",
-    "theme": "主題",
+    "theme": "分類",
     "company": "公司",
     "origin": "出處",
     "workNotice": "在 {company} 開發。程式碼屬於公司，所以沒有原始碼連結；數字是當時內部實驗的結果。",

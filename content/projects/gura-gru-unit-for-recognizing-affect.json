@@ -11,7 +11,10 @@
   ],
   "githubUrl": "https://github.com/NatLee/gura-gru-unit-for-recognizing-affect",
   "category": "AI/ML",
-  "theme": "ai",
+  "themes": [
+    "language",
+    "ai"
+  ],
   "tier": "archive",
   "status": "Archived",
   "opensource": true,

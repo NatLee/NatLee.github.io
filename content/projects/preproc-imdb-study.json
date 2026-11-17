@@ -12,7 +12,10 @@
   ],
   "githubUrl": "https://github.com/NatLee/preproc-imdb-study",
   "category": "AI/ML",
-  "theme": "ai",
+  "themes": [
+    "language",
+    "ai"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

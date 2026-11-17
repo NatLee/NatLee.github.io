@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "dev-dock-manager-rust",
-  "title": "dev-dock-manager-rust",
+  "title": "Dev Dock Manager (Rust)",
   "subtitle": "Development Environment Manager (Rust)",
   "description": "One Docker dev box per user, with a web terminal, a noVNC desktop and optional GPU. The Django version, rewritten in Rust, partly to find out whether I could.",
   "longDescription": "A high-performance development environment management system built with Rust and Docker. This platform provides isolated, containerized development environments for multiple users on the same machine, featuring a Rust-based backend API with JWT authentication, WebSocket support for real-time console access, and a React/Next.js frontend. All services run behind Traefik reverse proxy with optional Nvidia Docker support.",
@@ -15,7 +15,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock-manager-rust",
   "category": "DevOps",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "selected",
   "status": "In Progress",
   "opensource": true,

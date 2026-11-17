@@ -11,7 +11,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/myanimelist-comment-crawler",
   "category": "Data Collection",
-  "theme": "ai",
+  "themes": [
+    "language"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

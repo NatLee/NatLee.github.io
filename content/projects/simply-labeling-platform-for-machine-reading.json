@@ -11,7 +11,10 @@
   ],
   "githubUrl": "https://github.com/NatLee/simply-labeling-platform-for-machine-reading",
   "category": "AI/ML",
-  "theme": "ai",
+  "themes": [
+    "language",
+    "web"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

@@ -23,10 +23,6 @@ export type ProjectCategory =
   | 'Web Automation'
   | 'Productivity Tools'
 
-/** 五個主題，作品索引用來篩選。顯示名稱在 messages 的 projects.themes.*。 */
-export const PROJECT_THEMES = ['energy', 'infra', 'ai', 'libraries', 'web'] as const
-export type ProjectTheme = (typeof PROJECT_THEMES)[number]
-
 /** flagship = Telepy（首頁獨立區塊）；selected = 精選卡片；archive = 其他（列表）。 */
 export type ProjectTier = 'flagship' | 'selected' | 'archive'
 
@@ -35,7 +31,8 @@ export interface ProjectDetail {
   title: string
   subtitle: string
   category: ProjectCategory
-  theme: ProjectTheme
+  /** 所屬分類（content/project-themes.json 的 id），第一個是主分類。 */
+  themes: string[]
   tier: ProjectTier
   status: 'Completed' | 'In Progress' | 'Archived'
   opensource?: boolean
@@ -125,12 +122,13 @@ export function getProjectsByTier(tier: ProjectTier, locale: Locale = 'en'): Pro
   return getLocalizedProjects(locale).filter((project) => project.tier === tier)
 }
 
-/** 同主題的其他專案，精選優先。 */
+/** 和這個作品同分類的其他作品：共同分類多的優先，再來是精選優先。 */
 export function getRelatedProjects(project: ProjectDetail, locale: Locale = 'en', limit = 3): ProjectDetail[] {
   const tierRank: Record<ProjectTier, number> = { flagship: 0, selected: 1, archive: 2 }
+  const shared = (item: ProjectDetail) => item.themes.filter((theme) => project.themes.includes(theme)).length
   return getLocalizedProjects(locale)
-    .filter((item) => item.id !== project.id && item.theme === project.theme)
-    .sort((a, b) => tierRank[a.tier] - tierRank[b.tier])
+    .filter((item) => item.id !== project.id && shared(item) > 0)
+    .sort((a, b) => shared(b) - shared(a) || tierRank[a.tier] - tierRank[b.tier])
     .slice(0, limit)
 }
 

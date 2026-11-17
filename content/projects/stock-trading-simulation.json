@@ -6,7 +6,9 @@
   "description": "A trading simulator with a price-time matching engine, bot traders and a live order book. You can lose money here without losing any money.",
   "longDescription": "A stock trading simulator that runs entirely in the browser. A real matching engine with price-time priority sits in the middle, supporting market and limit orders with GTC, IOC and FOK conditions, and three bots (MarketMakerBot, TrendBot, NoiseBot) trade against each other and against you every 100 ms, so the price, the order book and the candles all come out of actual trades rather than a price formula. Twelve market scenarios retune the bots, from a calm, empty market to a pump and dump; each one is tuned with seeded runs so it does what its name says, and five of them hand over to the next by themselves. The integrated Learning Center offers 19 courses across 4 categories (Beginner, Intermediate, Advanced, Investment) with interactive quizzes and progress tracking. The Practice Center enables risk-free pattern recognition training and trading practice with rewind/replay. A rule-based analysis panel reads the live market: trend direction and strength, order book pressure, RSI-style momentum and candle patterns, each with a confidence score.",
   "category": "Web Development",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "selected",
   "status": "In Progress",
   "opensource": true,

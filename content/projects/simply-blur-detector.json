@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "simply-blur-detector",
-  "title": "simply-blur-detector",
+  "title": "Simply Blur Detector",
   "subtitle": "CNN meets Laplacian, in your browser",
   "description": "Drop in a picture and compare a small Keras CNN with Laplacian variance, including a window-by-window blur heat map. No upload needed.",
   "longDescription": "A TensorFlow / Keras CNN trained on sharp illustrations and copies blurred with blur-generator. The 2026 version includes original training artwork, x86 and ARM Docker support, and ONNX export for a browser demo that compares the CNN with Laplacian variance. Its verdict is a model estimate, with both methods visible for comparison.",
@@ -11,7 +11,10 @@
   ],
   "githubUrl": "https://github.com/NatLee/simply-blur-detector",
   "category": "Computer Vision",
-  "theme": "ai",
+  "themes": [
+    "vision",
+    "ai"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

@@ -3,7 +3,10 @@
   "id": "sentiment-bundle-benchmark",
   "title": "Sentiment Bundle Benchmark",
   "category": "AI/ML",
-  "theme": "ai",
+  "themes": [
+    "language",
+    "ai"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

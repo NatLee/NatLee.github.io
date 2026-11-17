@@ -4,7 +4,10 @@
   "title": "Japan Power Trading Dashboard",
   "subtitle": "Spot-Price Forecasting for Japan's Power Market",
   "category": "AI/ML",
-  "theme": "energy",
+  "themes": [
+    "energy",
+    "ai"
+  ],
   "tier": "selected",
   "status": "In Progress",
   "opensource": false,

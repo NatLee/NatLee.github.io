@@ -12,6 +12,7 @@ import { SCHEMA_VERSION, type Localized, type Mascot, type SiteBundle } from '@/
 import { opensource, writing } from './content'
 import { getRepoStats } from './github'
 import { personalInfo } from './personal'
+import { legacyThemeOf, projectThemes } from './project-themes'
 import { allProjectsData, getProjectStars } from './projects'
 
 const SITE_URL = 'https://natlee.github.io'
@@ -61,7 +62,8 @@ export function buildSiteBundle(): SiteBundle {
         subtitle: loc(p.subtitle, zh.subtitle),
         description: loc(p.description, zh.description),
         longDescription: loc(p.longDescription, zh.longDescription),
-        theme: p.theme,
+        theme: legacyThemeOf(p.themes),
+        themes: p.themes,
         tier: p.tier,
         category: p.category,
         status: p.status,
@@ -80,6 +82,7 @@ export function buildSiteBundle(): SiteBundle {
         stars: getProjectStars(p),
       }
     }),
+    projectThemes: projectThemes.map((theme) => ({ id: theme.id, label: loc(theme.label.en, theme.label.zh) })),
     experience: (experienceJson as Record<string, any>[]).map((r) => {
       const zh = (ez[r.id] ?? {}) as Record<string, any>
       return {

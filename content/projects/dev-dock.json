@@ -1,7 +1,7 @@
 {
   "$schema": "../schema/project.schema.json",
   "id": "dev-dock",
-  "title": "dev-dock",
+  "title": "Dev Dock",
   "subtitle": "GUI Development Container",
   "description": "A Docker image with a full GUI desktop for development, because some tools refuse to live in a terminal.",
   "longDescription": "A Docker-based development environment that provides a common GUI interface for development work. This containerized solution ensures consistent development environments across different systems.",
@@ -12,7 +12,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock",
   "category": "DevOps",
-  "theme": "infra",
+  "themes": [
+    "infra"
+  ],
   "tier": "archive",
   "status": "Completed",
   "opensource": true,

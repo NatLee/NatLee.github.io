@@ -1,9 +1,10 @@
 'use client'
 
-// 各頁共用的小元件：強調片語、區塊標題、外部連結、星數、主題標籤。
-import type { ReactNode } from 'react'
+// 各頁共用的小元件：強調片語、區塊標題、外部連結、星數、分類標籤。
+import type { CSSProperties, ReactNode } from 'react'
 import Icon from '@/components/Icon'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { getProjectTheme, themeLabel } from '@/data/project-themes'
 
 /** 把 **雙星號** 標起來的片語染成強調色。 */
 export function Emphasis({ text }: { text: string }) {
@@ -80,20 +81,25 @@ export function StarCount({ stars, tone = 'muted' }: { stars?: number; tone?: 'm
   )
 }
 
-const themeDot: Record<string, string> = {
-  energy: 'bg-accent-fill',
-  infra: 'bg-clip',
-  ai: 'bg-plum',
-  libraries: 'bg-ink',
-  web: 'bg-muted',
+/** 分類的小圓點：顏色和實心／空心照 content/project-themes.json。 */
+export function ThemeMarker({ theme, className = '' }: { theme: string; className?: string }) {
+  const info = getProjectTheme(theme)
+  const color = `rgb(var(--${info?.color ?? 'muted'}))`
+  const style: CSSProperties = info?.marker === 'ring' ? { boxShadow: `inset 0 0 0 1.5px ${color}` } : { backgroundColor: color }
+  return <span className={`inline-block h-2 w-2 shrink-0 rounded-full ${className}`} style={style} aria-hidden="true" />
 }
 
-export function ThemeLabel({ theme }: { theme: string }) {
-  const { t } = useLanguage()
+/** 作品所屬的分類，主分類在前，全部列出。 */
+export function ThemeLabels({ themes }: { themes: string[] }) {
+  const { locale } = useLanguage()
   return (
-    <span className="inline-flex items-center gap-2 font-mono text-xs text-muted">
-      <span className={`h-2 w-2 rounded-full ${themeDot[theme] ?? 'bg-muted'}`} aria-hidden="true" />
-      {t(`projects.themes.${theme}`)}
+    <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-muted">
+      {themes.map((theme) => (
+        <span key={theme} className="inline-flex items-center gap-2">
+          <ThemeMarker theme={theme} />
+          {themeLabel(theme, locale)}
+        </span>
+      ))}
     </span>
   )
 }

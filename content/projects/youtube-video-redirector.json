@@ -12,7 +12,9 @@
   ],
   "githubUrl": "https://github.com/NatLee/youtube-video-redirect-service",
   "category": "Web Application",
-  "theme": "web",
+  "themes": [
+    "web"
+  ],
   "tier": "archive",
   "status": "Archived",
   "opensource": true,
