@@ -108,6 +108,50 @@ test('why and architecture are bilingual, and each diagram is well formed', () =
   }
 })
 
+test('gains, lessons and flow charts are bilingual and well formed', () => {
+  const overlays = read('content/i18n/projects.zh.json')
+  // 步驟種類只接受合約裡 FlowStep 寫的那幾種。
+  const contract = fs.readFileSync(path.join(root, 'lib/content/contract.ts'), 'utf8')
+  const flowKinds = [...contract.match(/^ {2}kind\?: ('start'.+)$/m)[1].matchAll(/'([a-z]+)'/g)].map(match => match[1])
+  for (const project of projects) {
+    const zh = overlays[project.id] ?? {}
+    assert.equal(Boolean(project.gains), Boolean(zh.gains), `${project.id}: gains needs both languages`)
+    if (project.lessons || zh.lessons) {
+      assert.ok(Array.isArray(project.lessons) && project.lessons.length >= 1 && project.lessons.length <= 3, `${project.id}: lessons has 1–3 items`)
+      assert.equal(zh.lessons?.length, project.lessons.length, `${project.id}: Chinese lessons must have the same items`)
+    }
+    const steps = project.flow
+    if (!steps) {
+      assert.ok(!zh.flow, `${project.id}: Chinese flow without an English one`)
+      continue
+    }
+    const ids = steps.map(step => step.id)
+    // 流程圖放在內文欄：太短不像流程，太長要捲很久。分支走右邊的通道，最多兩條。
+    assert.ok(steps.length >= 3 && steps.length <= 8, `${project.id}: flow needs 3–8 steps`)
+    assert.equal(new Set(ids).size, ids.length, `${project.id}: flow step ids must be unique`)
+    assert.ok(steps.filter(step => step.branch).length <= 2, `${project.id}: at most two branches`)
+    steps.forEach((step, index) => {
+      assert.ok(step.id && step.label, `${project.id}: flow step ${index + 1} needs an id and a label`)
+      if (step.kind) assert.ok(flowKinds.includes(step.kind), `${project.id}: flow step ${index + 1} kind must be one of ${flowKinds.join(', ')}`)
+      assert.equal(step.kind === 'decision', Boolean(step.branch), `${project.id}: flow step ${index + 1}: decisions and only decisions branch`)
+      if (step.branch) {
+        assert.ok(step.branch.when, `${project.id}: flow step ${index + 1} branch needs a condition`)
+        assert.ok(ids.includes(step.branch.to) && step.branch.to !== step.id, `${project.id}: flow step ${index + 1} branch must go to another step`)
+      }
+      assert.ok(!(index === steps.length - 1 && step.next), `${project.id}: the last flow step has no arrow`)
+    })
+    assert.ok(Array.isArray(zh.flow) && zh.flow.length === steps.length, `${project.id}: Chinese flow must have the same steps`)
+    zh.flow.forEach((step, index) => {
+      const en = steps[index]
+      assert.ok(step.label, `${project.id}: Chinese flow step ${index + 1} needs a label`)
+      for (const key of ['id', 'kind']) assert.ok(!(key in step), `${project.id}: write ${key} only in English`)
+      assert.ok(!step.branch?.to, `${project.id}: write branch.to only in English`)
+      assert.equal(Boolean(step.next), Boolean(en.next), `${project.id}: flow step ${index + 1} arrow label must exist in both languages`)
+      assert.equal(Boolean(step.branch?.when), Boolean(en.branch), `${project.id}: flow step ${index + 1} branch condition must exist in both languages`)
+    })
+  }
+})
+
 test('every theme keeps an identical copy of the site.json contract', () => {
   const contract = fs.readFileSync(path.join(root, 'lib/content/contract.ts'), 'utf8')
   for (const copy of ['themes/flat/lib/site-contract.ts', 'themes/stonk/lib/site-contract.ts', 'themes/terminal/lib/site/contract.ts']) {

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 import Icon from '@/components/Icon'
 import ArchitectureFlow from '@/components/projects/ArchitectureFlow'
+import FlowChart from '@/components/projects/FlowChart'
 import ProjectCard, { StatusTag } from '@/components/projects/ProjectCard'
 import { StarCount, ThemeLabels } from '@/components/site/ui'
 import OriginBadge from '@/components/work/OriginBadge'
@@ -197,6 +198,16 @@ export default function ProjectPage({ id }: { id: string }) {
               <p>{project.why}</p>
             </Block>
           )}
+          {project.gains && (
+            <Block title={t('project.gains')}>
+              <p>{project.gains}</p>
+            </Block>
+          )}
+          {project.flow && project.flow.length > 0 && (
+            <Block title={t('project.flow')}>
+              <FlowChart steps={project.flow} />
+            </Block>
+          )}
           {project.challenges.length > 0 && (
             <Block title={t('project.problem')}>
               <Bullets items={project.challenges} />
@@ -215,6 +226,11 @@ export default function ProjectPage({ id }: { id: string }) {
           {project.features.length > 0 && (
             <Block title={t('project.features')}>
               <Bullets items={project.features} />
+            </Block>
+          )}
+          {project.lessons && project.lessons.length > 0 && (
+            <Block title={t('project.lessons')}>
+              <Bullets items={project.lessons} />
             </Block>
           )}
         </div>

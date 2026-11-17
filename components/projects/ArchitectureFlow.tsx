@@ -3,10 +3,11 @@
 // 作品頁的簡單架構圖：一層一層由左到右（手機由上到下），每層 1–3 個節點，相鄰兩層用曲線連起來。
 // 節點用 CSS 排版，線是量完節點位置後用 SVG 畫的，所以版面怎麼換行都接得上。
 // 資料在作品 JSON 的 architecture（格式見 lib/content/contract.ts 的 ArchitectureStep）。
-import { useId, useLayoutEffect, useRef, useState, type CSSProperties } from 'react'
+import { useId, type CSSProperties } from 'react'
 import Icon from '@/components/Icon'
 import { useLanguage } from '@/contexts/LanguageContext'
 import type { ArchitectureKind, ArchitectureStep } from '@/data/projects'
+import { useMeasuredBoxes } from './useMeasuredBoxes'
 
 /** 兩層之間的距離：橫排要放得下箭頭上的字，直排短一點。 */
 const FLOW_GAP = { x: '6.5rem', y: '3.5rem' }
@@ -71,7 +72,7 @@ interface Geometry {
 function NodeCard({ node, coreLabel }: { node: FlowNode; coreLabel: string }) {
   return (
     <div
-      data-node={node.key}
+      data-box={`node:${node.key}`}
       style={node.core ? { boxShadow: `0 0 0 ${CORE_HALO}px rgb(var(--accent-soft))` } : undefined}
       className={`relative flex h-full flex-col gap-2 rounded-xl border p-3 ${
         node.core ? 'border-accent-fill bg-accent-soft' : 'border-line bg-surface'
@@ -107,71 +108,51 @@ function NodeCard({ node, coreLabel }: { node: FlowNode; coreLabel: string }) {
 export default function ArchitectureFlow({ steps }: { steps: ArchitectureStep[] }) {
   const { t } = useLanguage()
   const uid = useId().replace(/:/g, '')
-  const root = useRef<HTMLDivElement>(null)
-  const [geometry, setGeometry] = useState<Geometry | null>(null)
   const layers = toLayers(steps)
 
-  // 量節點位置畫線。版面寬度、字型載入都會改變位置，所以用 ResizeObserver 重量。
-  useLayoutEffect(() => {
-    const el = root.current
-    if (!el) return
-    const measure = () => {
-      const base = el.getBoundingClientRect()
-      const box = (target: Element) => {
-        const r = target.getBoundingClientRect()
-        return { left: r.left - base.left, right: r.right - base.left, top: r.top - base.top, bottom: r.bottom - base.top, cx: r.left - base.left + r.width / 2, cy: r.top - base.top + r.height / 2 }
-      }
-      const nodeBox = new Map([...el.querySelectorAll('[data-node]')].map((n) => [n.getAttribute('data-node')!, box(n)]))
-      const layerBox = [...el.querySelectorAll('[data-layer]')].map(box)
-      // 下一層在這一層的下方（而不是右方），就是直排。
-      const vertical = layerBox.length > 1 && layerBox[1].top >= layerBox[0].bottom - 1
-      const edges: Geometry['edges'] = []
-      const labels: Geometry['labels'] = []
-      layers.slice(0, -1).forEach((layer, index) => {
-        const nextLayer = layers[index + 1]
-        for (const source of layer.nodes) {
-          const targets = source.to ? nextLayer.nodes.filter((n) => source.to!.includes(n.id)) : nextLayer.nodes
-          for (const target of targets) {
-            const s = nodeBox.get(source.key)
-            const e = nodeBox.get(target.key)
-            if (!s || !e) continue
-            const core = source.core || target.core || layer.core || nextLayer.core
-            // 箭頭停在節點外一點；作品本身那一格有一圈光暈，要停得更遠才看得到箭頭。
-            const stop = target.core ? CORE_HALO + ARROW_GAP : ARROW_GAP
-            if (vertical) {
-              const [x1, y1, x2, y2] = [s.cx, s.bottom, e.cx, e.top - stop]
-              const dy = (y2 - y1) / 2
-              edges.push({ d: `M${x1},${y1} C${x1},${y1 + dy} ${x2},${y2 - dy} ${x2},${y2}`, core })
-            } else {
-              const [x1, y1, x2, y2] = [s.right, s.cy, e.left - stop, e.cy]
-              const dx = (x2 - x1) / 2
-              edges.push({ d: `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`, core })
-            }
+  // 量節點位置畫線（量測在 useMeasuredBoxes）。layers 由 steps 算出來，steps 不變就不必重算。
+  const [root, geometry] = useMeasuredBoxes<Geometry>((boxes, base) => {
+    const nodeBox = (key: string) => boxes.get(`node:${key}`)
+    const layerBox = layers.map((_, i) => boxes.get(`layer:${i}`)!)
+    // 下一層在這一層的下方（而不是右方），就是直排。
+    const vertical = layerBox.length > 1 && layerBox[1].top >= layerBox[0].bottom - 1
+    const edges: Geometry['edges'] = []
+    const labels: Geometry['labels'] = []
+    layers.slice(0, -1).forEach((layer, index) => {
+      const nextLayer = layers[index + 1]
+      for (const source of layer.nodes) {
+        const targets = source.to ? nextLayer.nodes.filter((n) => source.to!.includes(n.id)) : nextLayer.nodes
+        for (const target of targets) {
+          const s = nodeBox(source.key)
+          const e = nodeBox(target.key)
+          if (!s || !e) continue
+          const core = source.core || target.core || layer.core || nextLayer.core
+          // 箭頭停在節點外一點；作品本身那一格有一圈光暈，要停得更遠才看得到箭頭。
+          const stop = target.core ? CORE_HALO + ARROW_GAP : ARROW_GAP
+          if (vertical) {
+            const [x1, y1, x2, y2] = [s.cx, s.bottom, e.cx, e.top - stop]
+            const dy = (y2 - y1) / 2
+            edges.push({ d: `M${x1},${y1} C${x1},${y1 + dy} ${x2},${y2 - dy} ${x2},${y2}`, core })
+          } else {
+            const [x1, y1, x2, y2] = [s.right, s.cy, e.left - stop, e.cy]
+            const dx = (x2 - x1) / 2
+            edges.push({ d: `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`, core })
           }
         }
-        if (!layer.next) return
-        // 箭頭上的字放在兩層中間。橫排時，有一邊只有一個節點就對齊那個節點（線都匯集在那裡）；
-        // 直排時放在空隙的最左邊，線多半從中間分岔，靠左才不會蓋到線。
-        const a = layerBox[index]
-        const b = layerBox[index + 1]
-        const trunk = nextLayer.nodes.length === 1 ? nodeBox.get(nextLayer.nodes[0].key) : layer.nodes.length === 1 ? nodeBox.get(layer.nodes[0].key) : undefined
-        if (vertical) {
-          labels.push({ text: layer.next, x: 0, y: (a.bottom + b.top) / 2, maxWidth: base.width / 3, vertical })
-        } else {
-          labels.push({ text: layer.next, x: (a.right + b.left) / 2, y: trunk ? trunk.cy : (a.top + a.bottom) / 2, maxWidth: b.left - a.right - 8, vertical })
-        }
-      })
-      setGeometry({ edges, labels })
-    }
-    measure()
-    // 外框大小不變、裡面的節點換行變高時，位置也會變，所以每一層、每個節點都要看。
-    const observer = new ResizeObserver(measure)
-    observer.observe(el)
-    el.querySelectorAll('[data-layer], [data-node]').forEach((target) => observer.observe(target))
-    document.fonts?.ready.then(measure).catch(() => {})
-    return () => observer.disconnect()
-    // layers 由 steps 算出來，steps 不變就不必重量。
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      }
+      if (!layer.next) return
+      // 箭頭上的字放在兩層中間。橫排時，有一邊只有一個節點就對齊那個節點（線都匯集在那裡）；
+      // 直排時放在空隙的最左邊，線多半從中間分岔，靠左才不會蓋到線。
+      const a = layerBox[index]
+      const b = layerBox[index + 1]
+      const trunk = nextLayer.nodes.length === 1 ? nodeBox(nextLayer.nodes[0].key) : layer.nodes.length === 1 ? nodeBox(layer.nodes[0].key) : undefined
+      if (vertical) {
+        labels.push({ text: layer.next, x: 0, y: (a.bottom + b.top) / 2, maxWidth: base.width / 3, vertical })
+      } else {
+        labels.push({ text: layer.next, x: (a.right + b.left) / 2, y: trunk ? trunk.cy : (a.top + a.bottom) / 2, maxWidth: b.left - a.right - 8, vertical })
+      }
+    })
+    return { edges, labels }
   }, [steps])
 
   const style = { '--layers': layers.length, '--flow-gap-x': FLOW_GAP.x, '--flow-gap-y': FLOW_GAP.y } as CSSProperties
@@ -210,7 +191,7 @@ export default function ArchitectureFlow({ steps }: { steps: ArchitectureStep[] 
             </div>
           )
           return (
-            <li key={index} data-layer={index}>
+            <li key={index} data-box={`layer:${index}`}>
               {layer.caption ? (
                 <div
                   className={`rounded-2xl border border-dashed p-2.5 ${layer.core ? 'border-accent-fill/70 bg-accent-soft/40' : 'border-ink/20'}`}

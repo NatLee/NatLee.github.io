@@ -34,6 +34,22 @@ export interface SiteBundle {
   mascots: Record<string, Mascot>
 }
 
+/**
+ * 流程圖的一步。步驟照順序由上到下；判斷（decision）一定有 branch，
+ * 從旁邊走到另一個步驟：往前是重來，往後是略過。（2026-11 新增）
+ */
+export interface FlowStep {
+  id: string
+  label: string
+  /** start、end 是起點和終點，decision 是判斷；沒寫就是一般步驟。 */
+  kind?: 'start' | 'end' | 'decision'
+  detail?: string
+  /** 往下一步的箭頭上寫的字。 */
+  next?: string
+  /** 判斷往旁邊走的那條路：when 是條件，to 是要去的步驟 id。 */
+  branch?: { when: string; to: string }
+}
+
 /** 架構圖節點的種類，決定圖示。（2026-11 新增） */
 export type ArchitectureKind = 'user' | 'screen' | 'app' | 'server' | 'data' | 'external' | 'device' | 'model' | 'file'
 
@@ -124,6 +140,12 @@ export interface Project {
   why?: Localized
   /** 簡單的架構圖：由左到右的幾步，中英文步數相同。（2026-11 新增） */
   architecture?: Localized<ArchitectureStep[]>
+  /** 能帶來什麼：幫了誰、省了什麼。（2026-11 新增） */
+  gains?: Localized
+  /** 學到什麼，1–3 點，中英文點數相同。（2026-11 新增） */
+  lessons?: Localized<string[]>
+  /** 流程圖：由上到下的步驟，中英文步數相同。（2026-11 新增） */
+  flow?: Localized<FlowStep[]>
   images: string[]
   /** 本地縮圖（/images/projects/<id>.webp），沒有就不給。 */
   thumbnail?: string
