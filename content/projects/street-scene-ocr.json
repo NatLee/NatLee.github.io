@@ -11,6 +11,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "python",
+  "mascotLines": [
+    "Confidence is how sure the model is, not how right. It can be 99% sure of a wrong character.",
+    "The interview ended years ago. The homework got a sequel."
+  ],
   "images": [
     "/images/projects/street-scene-ocr/cover.webp",
     "https://raw.githubusercontent.com/NatLee/street-scene-ocr/main/docs/images/ui.jpg",

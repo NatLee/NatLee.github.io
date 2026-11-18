@@ -6,6 +6,10 @@
   "description": "A Flask + Socket.IO player with request, default and history playlists synchronised across screens. New development continues in Streaming Player.",
   "longDescription": "The Flask player synchronises a request queue, default playlist and playback history over Socket.IO. Its final version resolves media with yt-dlp and includes Docker and regression tests. The Rust + React Streaming Player carries on the song-request workflow.",
   "language": "python",
+  "mascotLines": [
+    "An empty playlist used to trigger 248 requests in six seconds. Now it asks once and waits.",
+    "History was meant to keep 200 songs. It got stuck at 201."
+  ],
   "images": [
     "/images/projects/youtube-redirect-player/cover.webp",
     "https://raw.githubusercontent.com/NatLee/youtube-redirect-player/main/docs/images/screenshot-light.png"

@@ -6,6 +6,10 @@
   "description": "The original Django dev-box manager: isolated Docker environments for several users on one machine. The Rust version replaced it, but this one carried the load first.",
   "longDescription": "A sophisticated development environment management system built with Django and Docker. This platform provides isolated, containerized development environments for multiple users on the same machine, complete with pre-configured tools and packages for various development workflows.",
   "language": "python",
+  "mascotLines": [
+    "Other people's desktops answer 404, as if they never existed.",
+    "The list once took 13.5 seconds, because it asked about every container on the host."
+  ],
   "images": [
     "/images/projects/dev-dock-manager/cover.webp",
     "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/create.gif",

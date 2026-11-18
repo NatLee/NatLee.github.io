@@ -6,6 +6,10 @@
   "description": "An end-to-end Nipype pipeline with FSL FAST, K-means and ANTs Atropos segmentation, tissue volumes, bias-correction metrics and an interactive 3D brain.",
   "longDescription": "A research and learning pipeline for T1-weighted MRI: AC-PC alignment, MNI152 registration, skull stripping and N4 bias correction, followed by a choice of FSL FAST, K-means or ANTs Atropos. It compares segmentation agreement, reports tissue volumes and QC metrics, and produces a 3D view and HTML report per scan. Demo scans come from openly licensed OpenNeuro data.",
   "language": "python",
+  "mascotLines": [
+    "The first K-means run cut every brain into three equal parts. The brains were fine; the histogram wasn't.",
+    "N4 lowered the CJV on all three demo scans. Numbers, not vibes."
+  ],
   "images": [
     "/images/projects/nipype-preprocess-on-brain-mr/cover.webp",
     "https://raw.githubusercontent.com/NatLee/nipype-preprocess-on-brain-mr/master/docs/images/pipeline.png",

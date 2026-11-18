@@ -6,6 +6,10 @@
   "description": "The earlier BiGRU + self-attention sentiment experiment. Preserved for reference; current comparisons live in Sentiment Bundle Benchmark.",
   "longDescription": "A historical sentiment classifier used to introduce the MyAnimeList reviews and sentiment dataset bundle. The archived BiGRU experiment has been replaced by sentiment-bundle-benchmark, which compares modern methods with fixed data splits and reproducible evaluation.",
   "language": "python",
+  "mascotLines": [
+    "The stop-word list removed \"not\", so \"not good\" meant good.",
+    "68.5% on MyAnimeList. Answering \"positive\" every time scored 83%."
+  ],
   "images": [
     "/images/projects/gura-gru-unit-for-recognizing-affect/cover.webp",
     "https://raw.githubusercontent.com/NatLee/gura-gru-unit-for-recognizing-affect/main/docs/images/model-anime.png",

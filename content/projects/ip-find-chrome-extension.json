@@ -6,6 +6,10 @@
   "description": "One click and Chrome tells you your IP. A whole extension for something you could search for; in my defence, it is faster.",
   "longDescription": "A Chrome extension that quickly identifies and displays the current network's IP address. This tool is useful for network diagnostics and understanding your current network configuration.",
   "language": "javascript",
+  "mascotLines": [
+    "It only asks for the clipboard. It couldn't peek at your tabs if it wanted to.",
+    "geoiplookup.io ignores ?ip= and tells you about yourself instead."
+  ],
   "images": [
     "/images/projects/ip-find-chrome-extension/cover.webp",
     "https://raw.githubusercontent.com/NatLee/ip-find-chrome-extension/master/docs/images/popup-light.png",

@@ -10,6 +10,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "typescript",
+  "mascotLines": [
+    "The Flask version counted down to the server's New Year. In Taiwan, that's 8 am.",
+    "The server left. The beep stayed."
+  ],
   "images": [
     "/images/projects/countdown-studio/cover.webp",
     "https://raw.githubusercontent.com/NatLee/countdown-studio/main/docs/images/studio.jpg",

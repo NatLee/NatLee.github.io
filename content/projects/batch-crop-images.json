@@ -6,6 +6,10 @@
   "description": "Draw a crop box once and it is applied to a whole folder of similar images. Written because I refused to crop them one by one, and apparently other people refused too.",
   "longDescription": "An efficient batch image processing tool that provides an intuitive interface for cropping multiple similar images simultaneously. This tool streamlines the workflow for processing large sets of images with consistent cropping requirements.",
   "language": "python",
+  "mascotLines": [
+    "It used to start cropping the moment you let go of the mouse. Now it waits for Enter.",
+    "Draw the box once. Your hand only has to be steady one time."
+  ],
   "images": [
     "/images/projects/batch-crop-images/cover.webp",
     "https://raw.githubusercontent.com/NatLee/batch-crop-images/main/docs/images/demo.gif",

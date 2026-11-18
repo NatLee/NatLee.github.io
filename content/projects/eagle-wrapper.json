@@ -6,6 +6,10 @@
   "description": "Script Eagle’s V1 and V2 APIs to import, search and tag files. Also read a library from disk when the desktop app is closed.",
   "longDescription": "A Python wrapper for both generations of Eagle’s local HTTP API. It supports file import, search, tags and folders, plus reading a library directly from disk. The updated client makes remote authentication and API errors explicit.",
   "language": "python",
+  "mascotLines": [
+    "add_from_path returned a dict, and a dict is always true. Even when Eagle said no.",
+    "It read the API docs so you don't have to."
+  ],
   "images": [
     "/images/projects/eagle-wrapper/cover.webp",
     "https://raw.githubusercontent.com/NatLee/eagle-wrapper/main/docs/images/add-from-url.png",

@@ -10,6 +10,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "python",
+  "mascotLines": [
+    "The import is called playsnap. Anything starting with playwright, Playwright thinks is its own.",
+    "Errors go to stderr now, not into your base64."
+  ],
   "images": [
     "/images/projects/playwright-snap/cover.webp",
     "https://raw.githubusercontent.com/NatLee/playwright-snap/main/docs/images/demo-light.webp"

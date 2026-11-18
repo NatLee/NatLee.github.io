@@ -6,6 +6,10 @@
   "description": "A web UI for Docker images and containers, with a real terminal in the browser. Telepy's great-grandparent, in spirit.",
   "longDescription": "A powerful web-based interface for managing Docker containers and images, featuring a fully functional terminal emulator. This tool provides system administrators and developers with an intuitive way to manage Docker environments through a web browser.",
   "language": "python",
+  "mascotLines": [
+    "Every account is a superuser. Hand them out like root passwords.",
+    "Docker commands are easy, as long as you remember the container ID."
+  ],
   "images": [
     "/images/projects/django-docker-gui/cover.webp",
     "https://raw.githubusercontent.com/NatLee/django-docker-gui/main/docs/images/screenshot-console.webp",

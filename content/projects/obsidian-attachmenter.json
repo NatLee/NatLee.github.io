@@ -6,6 +6,10 @@
   "description": "An Obsidian plugin that gives attachments per-note folders, downloads remote images and checks paths. For people whose notes have more images than notes.",
   "longDescription": "A comprehensive Obsidian plugin designed to streamline attachment management. It enforces a per-note attachment folder structure, keeping your vault organized. Key capabilities include automatically moving pasted images to the correct folder, downloading remote images (including from Canvas) to local storage, and providing tools to check and repair broken attachment paths or clean up empty folders. It supports multiple languages and integrates seamlessly with Obsidian's file explorer.",
   "language": "typescript",
+  "mascotLines": [
+    "Pasted images stop being called \"Pasted image\". A small victory.",
+    "Renaming one attachment means reading every note in the vault. It does that so you don't."
+  ],
   "images": [
     "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/main/docs/attachment-tree.gif",
     "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/main/docs/attachment-manager.gif",

@@ -6,6 +6,10 @@
   "description": "Tile a folder of face pictures into a seeded grid. Optionally crop faces with OpenCV’s YuNet detector before building the wall.",
   "longDescription": "A pip-installable Python CLI for building test images with known face counts and grid positions. Seeded selection makes layouts repeatable; optional YuNet face cropping prepares ordinary photos first. The repository includes public-domain portrait samples.",
   "language": "python",
+  "mascotLines": [
+    "Same seed, same faces, same wall. If the score changes, the detector did.",
+    "People in public-domain photos still have portrait rights. Test data, yes; ads, no."
+  ],
   "images": [
     "/images/projects/face-wall-generator-tool/cover.webp",
     "https://raw.githubusercontent.com/NatLee/face-wall-generator-tool/main/docs/images/sample-wall.jpg",

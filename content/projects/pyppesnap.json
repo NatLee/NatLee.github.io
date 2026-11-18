@@ -6,6 +6,10 @@
   "description": "The original Pyppeteer screenshot helper. Archived; new work uses playwright-snap with the same function names, arguments and return types.",
   "longDescription": "A Python helper returning website PNG and PDF snapshots as base64. The project is archived because its Pyppeteer browser dependency is no longer maintained. Its successor, playwright-snap, keeps the same API with Playwright-driven Chromium.",
   "language": "python",
+  "mascotLines": [
+    "Pyppeteer's last Chromium is from 2023. On Python 3.7, from 2018.",
+    "Retired, but its replacement kept every function name."
+  ],
   "images": [
     "/images/projects/pyppesnap/cover.webp",
     "https://raw.githubusercontent.com/NatLee/pyppeteer-snap/main/docs/images/demo-light.png",

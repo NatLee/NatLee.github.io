@@ -10,6 +10,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "typescript",
+  "mascotLines": [
+    "\"I lost my ID card\" used to find \"I lost my house number plate\" first.",
+    "Ask about Mars immigration and you get the questions about new residents."
+  ],
   "images": [
     "/images/projects/ask-taipei-city-hall/cover.webp",
     "https://raw.githubusercontent.com/NatLee/ask-taipei-city-hall/main/docs/images/screenshot-answer.png",

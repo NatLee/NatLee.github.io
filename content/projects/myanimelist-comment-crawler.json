@@ -6,6 +6,10 @@
   "description": "Collect anime details and reviews through a Jikan-style API or permitted MAL pages, save progress in SQLite and export the dataset as CSV.",
   "longDescription": "A Scrapy-based crawler with interchangeable JSON-API and HTML inputs, using the same SQLite tables and CSV output. Sequential requests, retry delays and resume support make long-running collection traceable. The HTML mode follows robots.txt restrictions.",
   "language": "python",
+  "mascotLines": [
+    "The 2023 export sorted dates as text, so April came before January.",
+    "Reviewers score their own reviews, so the labelling was done for me."
+  ],
   "images": [
     "/images/projects/myanimelist-comment-crawler/cover.webp"
   ],

@@ -6,6 +6,10 @@
   "description": "A Docker image with a full GUI desktop for development, because some tools refuse to live in a terminal.",
   "longDescription": "A Docker-based development environment that provides a common GUI interface for development work. This containerized solution ensures consistent development environments across different systems.",
   "language": "shell",
+  "mascotLines": [
+    "Some tools refuse to live in a terminal. This is their house.",
+    "Folders under /root don't show up on the desktop, because the desktop isn't root."
+  ],
   "images": [
     "/images/projects/dev-dock/cover.webp",
     "https://raw.githubusercontent.com/NatLee/dev-dock/main/docs/images/cover.png",

@@ -6,6 +6,10 @@
   "description": "Drop in a picture and compare a small Keras CNN with Laplacian variance, including a window-by-window blur heat map. No upload needed.",
   "longDescription": "A TensorFlow / Keras CNN trained on sharp illustrations and copies blurred with blur-generator. The 2026 version includes original training artwork, x86 and ARM Docker support, and ONNX export for a browser demo that compares the CNN with Laplacian variance. Its verdict is a model estimate, with both methods visible for comparison.",
   "language": "python",
+  "mascotLines": [
+    "40 out of 40 on its own test set, 34 on the project's drawings. Home games are easier.",
+    "The blurry half of the training data comes from Blur Generator."
+  ],
   "images": [
     "/images/projects/simply-blur-detector/cover.webp",
     "https://raw.githubusercontent.com/NatLee/simply-blur-detector/main/docs/images/demo-light.png",

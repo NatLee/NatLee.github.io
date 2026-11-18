@@ -12,6 +12,10 @@
   "tier": "selected",
   "status": "In Progress",
   "opensource": true,
+  "mascotLines": [
+    "You can lose money here without losing any money. I've tested this a lot.",
+    "Pattern practice has a rewind button. Real markets still don't."
+  ],
   "images": [
     "/images/projects/stock-trading-simulation/cover.webp",
     "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/simulation.png",

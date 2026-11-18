@@ -10,6 +10,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "typescript",
+  "mascotLines": [
+    "Calories assume 60 kg, whoever is actually commuting.",
+    "GitHub pauses schedules after 60 quiet days, so the bus data waits for someone to click."
+  ],
   "images": [
     "/images/projects/taipei-transit-radar/cover.webp",
     "https://raw.githubusercontent.com/NatLee/taipei-transit-radar/main/docs/images/screenshot-desktop.jpg",
