@@ -11,7 +11,18 @@
   "opensource": true,
   "language": "typescript",
   "images": [
-    "/images/projects/taipei-transit-radar/cover.webp"
+    "/images/projects/taipei-transit-radar/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/taipei-transit-radar/main/docs/images/screenshot-desktop.jpg",
+    "https://raw.githubusercontent.com/NatLee/taipei-transit-radar/main/docs/images/screenshot-mobile.jpg",
+    "https://raw.githubusercontent.com/NatLee/taipei-transit-radar/main/docs/images/screenshot-nearby.jpg",
+    "https://raw.githubusercontent.com/NatLee/taipei-transit-radar/main/docs/2016/03-result.jpg"
+  ],
+  "imageCaptions": [
+    "",
+    "Desktop: NTNU to Neihu Science Park, with bus 235 then the Wenhu line recommended",
+    "On a phone: Taipei Main Station to Taipei 101, 23 minutes on the Tamsui–Xinyi line",
+    "Near Ximen station: the closest MRT stations and live bus arrivals at each stop",
+    "The 2016 hackathon version on an iPhone: one MRT trip with fare, times and distance"
   ],
   "technologies": [
     "TypeScript",

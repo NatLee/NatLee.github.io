@@ -189,6 +189,41 @@
   animation-delay: calc(var(--i, 0) * var(--stagger-step));
 }
 
+/* 作品頁的圖片和圖表：捲進畫面時浮上來。跟著捲動走（不是計時器），已經在畫面裡的東西一開始就是完整的樣子；
+   瀏覽器不支援捲動動畫、或使用者要求減少動態時，就直接顯示。 */
+@keyframes reveal-up {
+  from {
+    opacity: 0.15;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 90%;
+    }
+  }
+}
+
+/* 作品頁的圖：指到某個節點時，跟它相連的線變成往箭頭方向流動的虛線（減少動態時就是靜止的虛線）。 */
+@keyframes diagram-march {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.diagram-march {
+  stroke-dasharray: 6 4;
+  animation: diagram-march 0.8s linear infinite;
+}
+
 /* 首屏唯一編排過的時刻：`$ cat now.txt` 打字，接著輸出浮現。內容一直在 DOM 裡。 */
 @keyframes type-in {
   from {
@@ -392,5 +427,10 @@
     border-color: rgb(var(--accent-fill));
     background: rgb(var(--accent-fill));
     outline: 0.8mm solid rgb(var(--accent-soft));
+  }
+
+  /* 捲動動畫在紙上沒有意義，印出來一律是完整的樣子。 */
+  .reveal {
+    animation: none !important;
   }
 }

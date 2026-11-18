@@ -7,7 +7,16 @@
   "longDescription": "A pip-installable Python CLI for building test images with known face counts and grid positions. Seeded selection makes layouts repeatable; optional YuNet face cropping prepares ordinary photos first. The repository includes public-domain portrait samples.",
   "language": "python",
   "images": [
-    "/images/projects/face-wall-generator-tool/cover.webp"
+    "/images/projects/face-wall-generator-tool/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/face-wall-generator-tool/main/docs/images/sample-wall.jpg",
+    "https://raw.githubusercontent.com/NatLee/face-wall-generator-tool/main/docs/images/portraits-input.jpg",
+    "https://raw.githubusercontent.com/NatLee/face-wall-generator-tool/main/docs/images/crop-wall.jpg"
+  ],
+  "imageCaptions": [
+    "",
+    "An 8 × 4 wall, seed 1. Faces may repeat: the Mona Lisa turns up five times.",
+    "Four uncropped inputs: a painting, a full-length photo, a woodblock print, a portrait.",
+    "The same four after --crop-faces: YuNet finds each face and crops to it."
   ],
   "githubUrl": "https://github.com/NatLee/face-wall-generator-tool",
   "category": "AI/ML",

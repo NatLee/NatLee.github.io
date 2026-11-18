@@ -11,7 +11,18 @@
   "opensource": true,
   "language": "typescript",
   "images": [
-    "/images/projects/ask-taipei-city-hall/cover.webp"
+    "/images/projects/ask-taipei-city-hall/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/ask-taipei-city-hall/main/docs/images/screenshot-answer.png",
+    "https://raw.githubusercontent.com/NatLee/ask-taipei-city-hall/main/docs/images/screenshot-ai.png",
+    "https://raw.githubusercontent.com/NatLee/ask-taipei-city-hall/main/docs/images/screenshot-phone-dark.png",
+    "https://raw.githubusercontent.com/NatLee/ask-taipei-city-hall/main/docs/images/screenshot-browse.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Free mode answers a lost senior-card question with the agency, date and source link",
+    "AI mode: a short answer with numbered citations, the FAQs it used and what it cost",
+    "On a phone, dark mode: Did you mean…? choices, and polite defeat on a Mars expedition",
+    "Browsing a topic: tax and finance FAQs, newest first, filterable by agency"
   ],
   "technologies": [
     "TypeScript",
@@ -31,47 +42,132 @@
       "kind": "start"
     },
     {
+      "id": "small",
+      "label": "Just small talk?",
+      "kind": "decision",
+      "detail": "near-exact lines only",
+      "to": [
+        {
+          "id": "yee",
+          "label": "yes"
+        },
+        {
+          "id": "tidy",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "yee",
+      "label": "Yee chats back",
+      "kind": "end",
+      "detail": "lines from the 2017 bot"
+    },
+    {
       "id": "tidy",
       "label": "Strip filler, use the city's words",
-      "detail": "狗 is filed under 犬"
+      "detail": "狗 is filed under 犬",
+      "group": "Search in the browser"
     },
     {
       "id": "rank",
       "label": "Rank the FAQs with BM25",
-      "detail": "inside a Web Worker"
+      "detail": "inside a Web Worker",
+      "group": "Search in the browser"
+    },
+    {
+      "id": "mode",
+      "label": "AI mode on?",
+      "kind": "decision",
+      "detail": "uses your own API key",
+      "to": [
+        {
+          "id": "close",
+          "label": "no"
+        },
+        {
+          "id": "ai",
+          "label": "yes"
+        }
+      ]
     },
     {
       "id": "close",
       "label": "Anything close enough?",
       "kind": "decision",
-      "detail": "under 35%: links instead",
-      "next": "yes",
-      "branch": {
-        "when": "no, rephrase",
-        "to": "ask"
-      }
+      "detail": "covers 35% of the question",
+      "group": "Free mode",
+      "to": [
+        {
+          "id": "sure",
+          "label": "yes"
+        },
+        {
+          "id": "links",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "sure",
       "label": "One clear winner?",
       "kind": "decision",
-      "detail": "covers 80%, beats the runner-up",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "answer"
-      }
+      "detail": "80% match, 15% ahead",
+      "group": "Free mode",
+      "to": [
+        {
+          "id": "answer",
+          "label": "yes"
+        },
+        {
+          "id": "suggest",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "suggest",
       "label": "Offer three candidates",
-      "detail": "\"Did you mean…?\""
+      "detail": "\"Did you mean…?\"",
+      "group": "Free mode",
+      "to": [
+        {
+          "id": "answer",
+          "label": "one picked"
+        }
+      ]
+    },
+    {
+      "id": "links",
+      "label": "Offer search links instead",
+      "detail": "city site, Google and more",
+      "group": "Free mode",
+      "to": [
+        {
+          "id": "ask",
+          "label": "rephrase"
+        }
+      ]
     },
     {
       "id": "answer",
       "label": "Answer with its source",
       "kind": "end",
-      "detail": "agency, date, original page"
+      "detail": "agency, date, original page",
+      "group": "Free mode"
+    },
+    {
+      "id": "ai",
+      "label": "Send the top six to Claude",
+      "detail": "only FAQs sharing a word",
+      "group": "AI mode"
+    },
+    {
+      "id": "stream",
+      "label": "Stream a cited answer",
+      "kind": "end",
+      "detail": "cost shown, billed to your key",
+      "group": "AI mode"
     }
   ],
   "lessons": [

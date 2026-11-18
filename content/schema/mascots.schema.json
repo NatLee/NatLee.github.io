@@ -20,6 +20,18 @@
           "zh": { "type": "array", "items": { "type": "string" } }
         },
         "additionalProperties": false
+      },
+      "remarks": {
+        "type": "object",
+        "description": "在作品頁評論圖表的台詞，依段落分（flow 是流程圖、architecture 是架構圖）。中英文句數相同。",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "en": { "type": "array", "items": { "type": "string" } },
+            "zh": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": false
+        }
       }
     },
     "additionalProperties": false

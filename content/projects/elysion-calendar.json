@@ -7,7 +7,14 @@
   "longDescription": "A small web app that reads Elysion’s official booking page and presents private karaoke-room availability as room cards, a daily timetable and a weekly overview. Mobile layouts and Taiwan-time slot handling make it easier to find a free room.",
   "language": "typescript",
   "images": [
-    "/images/projects/elysion-calendar/cover.webp"
+    "/images/projects/elysion-calendar/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/elysion-calendar/main/docs/images/screenshot-phone.png",
+    "https://raw.githubusercontent.com/NatLee/elysion-calendar/main/docs/images/screenshot-week-dark.png"
+  ],
+  "imageCaptions": [
+    "",
+    "On a phone: room cards, the time table, and the weekly overview in dark mode",
+    "Weekly overview: free rooms per half hour; past days just say the site has no data"
   ],
   "githubUrl": "https://github.com/NatLee/elysion-calendar",
   "category": "Web Development",
@@ -34,48 +41,157 @@
   "results": [
     "Room availability organised around the shop’s booking data"
   ],
-  "why": "Elysion's booking page shows one day at a time, with a separate table for every room, so finding a free room means reading them all. This app reads them for you and lines the rooms up. It needs a whole backend for one reason: the official site will not let a page from another site read it.",
+  "why": "Elysion's booking page shows one day at a time, with a separate table for every room, so finding a free room means reading them all. This app reads them for you and lines the rooms up. It only needs a backend because the official site will not let pages from other sites read it.",
   "gains": "Handy when a group is picking a night: the weekly overview counts the free rooms in every half hour, and each card says whether the room runs JOYSOUND or DAM, a question some singers take very seriously.",
   "flow": [
     {
-      "id": "ask",
-      "label": "Ask for one day",
-      "kind": "start"
+      "id": "pick",
+      "label": "Pick a day",
+      "kind": "start",
+      "detail": "its whole week loads together",
+      "group": "In the browser"
+    },
+    {
+      "id": "have",
+      "label": "Already loaded on this page?",
+      "kind": "decision",
+      "group": "In the browser",
+      "to": [
+        {
+          "id": "show",
+          "label": "yes"
+        },
+        {
+          "id": "cached",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "cached",
       "label": "Already in Redis?",
       "kind": "decision",
-      "detail": "over 5 min: refresh in background",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "send"
-      }
+      "detail": "copies kept for an hour",
+      "group": "Redis cache",
+      "to": [
+        {
+          "id": "age",
+          "label": "yes"
+        },
+        {
+          "id": "wait",
+          "label": "no"
+        }
+      ]
     },
     {
-      "id": "lock",
+      "id": "age",
+      "label": "Older than five minutes?",
+      "kind": "decision",
+      "group": "Redis cache",
+      "to": [
+        {
+          "id": "send",
+          "label": "no"
+        },
+        {
+          "id": "refresh",
+          "label": "yes"
+        }
+      ]
+    },
+    {
+      "id": "refresh",
+      "label": "Refresh it in the background",
+      "detail": "this request still gets the copy",
+      "group": "Redis cache",
+      "to": [
+        {
+          "id": "send"
+        }
+      ]
+    },
+    {
+      "id": "wait",
       "label": "Take the day's lock",
-      "detail": "other requests wait their turn"
+      "detail": "other requests wait their turn",
+      "group": "Fetch once"
+    },
+    {
+      "id": "again",
+      "label": "Cached while waiting?",
+      "kind": "decision",
+      "group": "Fetch once",
+      "to": [
+        {
+          "id": "send",
+          "label": "yes"
+        },
+        {
+          "id": "fetch",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "fetch",
       "label": "Read the official booking page",
-      "detail": "one table per room"
+      "detail": "one table per room",
+      "group": "Fetch once"
     },
     {
       "id": "parse",
       "label": "Turn coloured cells into bookings",
-      "detail": "grid read from hour labels"
+      "detail": "grid read from hour labels",
+      "group": "Fetch once"
+    },
+    {
+      "id": "ok",
+      "label": "Read cleanly?",
+      "kind": "decision",
+      "detail": "site down or page changed",
+      "group": "Fetch once",
+      "to": [
+        {
+          "id": "store",
+          "label": "yes"
+        },
+        {
+          "id": "fail",
+          "label": "no, 502"
+        }
+      ]
     },
     {
       "id": "store",
-      "label": "Keep the copy for an hour"
+      "label": "Keep the copy for an hour",
+      "group": "Fetch once",
+      "to": [
+        {
+          "id": "send"
+        }
+      ]
+    },
+    {
+      "id": "fail",
+      "label": "Show the error",
+      "detail": "asking again fetches again",
+      "to": [
+        {
+          "id": "pick",
+          "label": "try again"
+        }
+      ]
     },
     {
       "id": "send",
-      "label": "Send rooms and slots",
-      "kind": "end"
+      "label": "Send rooms and slots"
+    },
+    {
+      "id": "show",
+      "label": "Draw cards, table or week",
+      "kind": "end",
+      "detail": "karaoke system shown, for purists"
     }
   ],
   "lessons": [

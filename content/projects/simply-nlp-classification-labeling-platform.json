@@ -7,7 +7,18 @@
   "longDescription": "A Rust + React labeling platform with configurable schemas, multi-annotator agreement and optional model-assisted pre-labeling. One Docker image to self-host. Rewritten from the original Flask application in 2026, keeping annotation, review and export in one workspace.",
   "language": "rust",
   "images": [
-    "/images/projects/simply-nlp-classification-labeling-platform/cover.webp"
+    "/images/projects/simply-nlp-classification-labeling-platform/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/simply-nlp-classification-labeling-platform/main/docs/images/screenshot-label.png",
+    "https://raw.githubusercontent.com/NatLee/simply-nlp-classification-labeling-platform/main/docs/images/screenshot-label-dark.png",
+    "https://raw.githubusercontent.com/NatLee/simply-nlp-classification-labeling-platform/main/docs/images/screenshot-stats.png",
+    "https://raw.githubusercontent.com/NatLee/simply-nlp-classification-labeling-platform/main/docs/images/screenshot-accounts.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Labelling a sentence: score, sentiment and type, next to the model's suggestion and reason",
+    "Image plus text, in dark mode; the model rates the cat picture a match for the crime",
+    "Progress and agreement: coverage, counts per annotator, Krippendorff's alpha and kappas",
+    "Optional login: accounts as annotator, reviewer or admin, with password resets"
   ],
   "githubUrl": "https://github.com/NatLee/simply-nlp-classification-labeling-platform",
   "category": "AI/ML",

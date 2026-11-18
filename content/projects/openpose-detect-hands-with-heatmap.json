@@ -8,7 +8,13 @@
   "language": "python",
   "images": [
     "/images/projects/openpose-detect-hands-with-heatmap/cover.webp",
-    "https://github.com/NatLee/openpose-detect-hands-with-heatmap/raw/main/docs/images/heatmap-motion.gif"
+    "https://github.com/NatLee/openpose-detect-hands-with-heatmap/raw/main/docs/images/heatmap-motion.gif",
+    "https://raw.githubusercontent.com/NatLee/openpose-detect-hands-with-heatmap/main/docs/images/original-frame.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Heat builds up frame by frame around the spots both wrists keep returning to.",
+    "A frame from the demo video with no heat on it, for comparison."
   ],
   "githubUrl": "https://github.com/NatLee/openpose-detect-hands-with-heatmap",
   "category": "Computer Vision",
@@ -56,55 +62,144 @@
   "gains": "Turns a recorded video into one picture of where the activity was, with a single docker compose up, on CPU, and no web service to keep alive. Swap the polygons for your own zones and it's a starting point for seeing which parts of a scene get the most movement.",
   "flow": [
     {
+      "id": "open",
+      "label": "Open the video file",
+      "kind": "start",
+      "detail": "data/test.mp4"
+    },
+    {
+      "id": "opens",
+      "label": "Video opens?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "read",
+          "label": "yes"
+        },
+        {
+          "id": "err",
+          "label": "no"
+        }
+      ]
+    },
+    {
       "id": "read",
-      "label": "Read the next video frame",
-      "kind": "start"
+      "label": "Read the next frame"
+    },
+    {
+      "id": "got",
+      "label": "Got a frame?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "nth",
+          "label": "yes"
+        },
+        {
+          "id": "first",
+          "label": "end of video"
+        }
+      ]
     },
     {
       "id": "nth",
       "label": "Every 30th frame?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "read"
-      }
+      "to": [
+        {
+          "id": "crop",
+          "label": "yes"
+        },
+        {
+          "id": "read",
+          "label": "no, skip"
+        }
+      ]
     },
     {
       "id": "crop",
       "label": "Shrink and crop the frame",
-      "detail": "0.3 scale, 215 px square"
+      "detail": "0.3 scale, 215 px square",
+      "group": "Find wrists"
     },
     {
       "id": "pose",
       "label": "Run body OpenPose at two scales",
-      "detail": "0.5 and 1"
+      "detail": "scales 0.5 and 1",
+      "group": "Find wrists"
     },
     {
-      "id": "low",
-      "label": "Take each arm's lowest point",
-      "detail": "shifted up five pixels"
+      "id": "found",
+      "label": "Any arm regions found?",
+      "kind": "decision",
+      "group": "Find wrists",
+      "to": [
+        {
+          "id": "keep",
+          "label": "yes"
+        },
+        {
+          "id": "points",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "keep",
+      "label": "Add them to the history",
+      "detail": "nothing is ever forgotten",
+      "group": "Find wrists"
+    },
+    {
+      "id": "points",
+      "label": "Lowest point of every region",
+      "detail": "whole history, five pixels up",
+      "group": "Draw heat"
+    },
+    {
+      "id": "roi",
+      "label": "Keep points inside the ROIs",
+      "detail": "boundary points excluded",
+      "group": "Draw heat"
     },
     {
       "id": "draw",
-      "label": "Draw ROI hits on the frame",
-      "detail": "saved as a PNG"
+      "label": "Save the frame with heat",
+      "detail": "a PNG in tmp/",
+      "group": "Draw heat",
+      "to": [
+        {
+          "id": "read",
+          "label": "next frame"
+        }
+      ]
     },
     {
-      "id": "more",
-      "label": "More frames left?",
+      "id": "first",
+      "label": "Frame one saved?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "read"
-      }
+      "to": [
+        {
+          "id": "sum",
+          "label": "yes"
+        },
+        {
+          "id": "err",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "sum",
       "label": "Summary heatmap on frame one",
       "kind": "end",
       "detail": "all points, no shift, no ROI"
+    },
+    {
+      "id": "err",
+      "label": "Stop with a clear error",
+      "kind": "end",
+      "detail": "no video, or no frames"
     }
   ],
   "lessons": [

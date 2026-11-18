@@ -12,7 +12,16 @@
   "status": "Completed",
   "opensource": true,
   "images": [
-    "/images/projects/image-annotation/cover.webp"
+    "/images/projects/image-annotation/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/image-annotation/master/docs/images/editor.jpg",
+    "https://raw.githubusercontent.com/NatLee/image-annotation/master/docs/images/workflow.gif",
+    "https://raw.githubusercontent.com/NatLee/image-annotation/master/docs/images/export.png"
+  ],
+  "imageCaptions": [
+    "",
+    "The editor: image list and progress, colour-coded boxes, classes and boxes on the right",
+    "Drawing boxes, zooming in, and submitting with Enter",
+    "Export dialog: JSON, COCO, YOLO or Pascal VOC, and each one imports back"
   ],
   "description": "A keyboard-first bounding-box editor that runs in your browser. Open your own images, label boxes and export JSON, COCO, YOLO or Pascal VOC.",
   "longDescription": "The original 2017 image-labeling tool, rebuilt with React and Vite. Draw and review bounding boxes with zoom, pan, undo and keyboard shortcuts. Images and annotations stay in the browser, with common dataset formats available for import and export.",

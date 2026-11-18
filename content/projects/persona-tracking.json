@@ -3,7 +3,7 @@
   "id": "persona-tracking",
   "title": "Persona Tracking",
   "subtitle": "Audience Analytics for Digital Signage",
-  "description": "A camera next to a digital sign tracks the people in front of it, guesses gender and age group, notices who is actually looking, and picks the ad that fits them. Most people, it turns out, walk past.",
+  "description": "A camera next to a digital sign tracks the people in front of it, guesses gender and age group, notices who is actually looking, and picks the ad that fits them. Most people walk straight past.",
   "longDescription": "Built at Infortrend for an embedded digital-signage system. A camera beside the screen detects faces, follows each person from frame to frame with a track ID, estimates gender and age group, and checks whether the face is turned toward the screen. Each person's estimates are averaged over frames, so guesses made on small, distant faces improve as people walk closer. The results go into a daily SQLite database and a small HTTP API, and a web service scored every ad against the audience in front of the screen and played the best match. It ran on Nvidia Jetson edge devices next to the screens. The cover shows Open Persona, a later personal rewrite that tracks whole bodies and infers interests; it is not public.",
   "language": "python",
   "images": [
@@ -49,7 +49,7 @@
     "Shipped an embedded ad recommendation system that reads the demographics of the crowd in front of a screen",
     "Later rebuilt as a personal project, Open Persona, with whole-body tracking and interest estimates"
   ],
-  "why": "Built at Infortrend for an embedded digital-signage system, so a screen could choose its ad from the people actually standing in front of it. Faces far away are small and blurry, so the system keeps refining its guess as people walk closer. Patience, implemented as an average.",
+  "why": "Built at Infortrend for an embedded digital-signage system, so a screen could choose its ad from the people actually standing in front of it. Faces far away are small and blurry, so the system keeps refining its guess as people walk closer.",
   "gains": "Lets a digital sign choose its ad for the people actually in front of it, and leaves daily records of who passed and who looked. It all runs on a Jetson beside the screen and keeps compact records instead of video, so nobody has to sit through the footage.",
   "architecture": [
     {

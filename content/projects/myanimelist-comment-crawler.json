@@ -30,48 +30,136 @@
     "Sequential requests, backoff and robots.txt handling"
   ],
   "why": "Both the day job in public opinion and the master's thesis needed sentiment data, so this crawler turned MyAnimeList reviews into the MALCoD dataset on Kaggle. Reviewers rate what they review, which spares somebody a lot of labelling.",
-  "gains": "For research that needs review text in bulk: a crawl of many hours can stop and pick up at the last saved page, the API source stays under the rate limit, and the CSV columns match the 2023 Kaggle datasets, so code written for those keeps working, none the wiser.",
+  "gains": "For research that needs review text in bulk: a crawl of many hours can stop and pick up at the last saved page, the API source stays under the rate limit, and the CSV columns match the 2023 Kaggle datasets, so code written for those keeps working.",
   "flow": [
     {
-      "id": "info",
-      "label": "Save titles from the ranking",
+      "id": "src",
+      "label": "Pick a source",
       "kind": "start",
-      "detail": "info_spider fills animeList"
+      "detail": "jikan-edge by default"
+    },
+    {
+      "id": "which",
+      "label": "Which source?",
+      "kind": "decision",
+      "group": "Source check",
+      "to": [
+        {
+          "id": "robots",
+          "label": "html pages"
+        },
+        {
+          "id": "titles",
+          "label": "Jikan-Edge API"
+        }
+      ]
+    },
+    {
+      "id": "robots",
+      "label": "robots.txt lets Scrapy in?",
+      "kind": "decision",
+      "group": "Source check",
+      "to": [
+        {
+          "id": "titles",
+          "label": "yes"
+        },
+        {
+          "id": "refused",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "refused",
+      "label": "Stop and suggest jikan-edge",
+      "kind": "end",
+      "detail": "MAL disallows Scrapy now",
+      "group": "Source check"
+    },
+    {
+      "id": "titles",
+      "label": "Save titles from the ranking",
+      "detail": "Saved ones skipped next time"
     },
     {
       "id": "pick",
-      "label": "Take the next saved title",
-      "detail": "--resume skips finished ones"
+      "label": "Take the next title",
+      "detail": "--resume skips finished ones",
+      "group": "Review spider loop"
     },
     {
       "id": "page",
       "label": "Fetch the next review page",
-      "detail": "Waits when the server asks"
+      "detail": "One request at a time",
+      "group": "Review spider loop"
+    },
+    {
+      "id": "limited",
+      "label": "Server says slow down?",
+      "kind": "decision",
+      "detail": "HTTP 429, 503 and the like",
+      "group": "Review spider loop",
+      "to": [
+        {
+          "id": "wait",
+          "label": "yes"
+        },
+        {
+          "id": "save",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "wait",
+      "label": "Wait as told, then retry",
+      "detail": "Up to four retries",
+      "group": "Review spider loop",
+      "to": [
+        {
+          "id": "page",
+          "label": "retry"
+        }
+      ]
     },
     {
       "id": "save",
       "label": "Save reviews, record the page",
-      "detail": "Ctrl+C any time, then --resume"
+      "detail": "Ctrl+C any time, then --resume",
+      "group": "Review spider loop"
     },
     {
       "id": "last",
       "label": "Was that the last page?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "page"
-      }
+      "group": "Review spider loop",
+      "to": [
+        {
+          "id": "page",
+          "label": "no"
+        },
+        {
+          "id": "more",
+          "label": "yes"
+        }
+      ]
     },
     {
       "id": "more",
       "label": "Any titles left?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "pick"
-      }
+      "group": "Review spider loop",
+      "to": [
+        {
+          "id": "pick",
+          "label": "yes"
+        },
+        {
+          "id": "export",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "export",

@@ -10,6 +10,10 @@
     "/images/projects/preproc-imdb-study/cover.webp",
     "https://raw.githubusercontent.com/NatLee/preproc-imdb-study/master/docs/images/models-light.png"
   ],
+  "imageCaptions": [
+    "",
+    "Two models, one trunk: embedding and Conv1D, then global max pool, or pool plus BiLSTM"
+  ],
   "githubUrl": "https://github.com/NatLee/preproc-imdb-study",
   "category": "AI/ML",
   "themes": [

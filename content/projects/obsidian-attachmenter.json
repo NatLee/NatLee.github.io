@@ -7,8 +7,20 @@
   "longDescription": "A comprehensive Obsidian plugin designed to streamline attachment management. It enforces a per-note attachment folder structure, keeping your vault organized. Key capabilities include automatically moving pasted images to the correct folder, downloading remote images (including from Canvas) to local storage, and providing tools to check and repair broken attachment paths or clean up empty folders. It supports multiple languages and integrates seamlessly with Obsidian's file explorer.",
   "language": "typescript",
   "images": [
-    "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/master/docs/attachment-tree.gif",
-    "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/master/docs/attachment-manager.gif"
+    "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/main/docs/attachment-tree.gif",
+    "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/main/docs/attachment-manager.gif",
+    "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/main/docs/paste-image.png",
+    "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/main/docs/right-click-download.gif",
+    "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/main/docs/download-image.gif",
+    "https://raw.githubusercontent.com/NatLee/obsidian-attachmenter/main/docs/path-checking.gif"
+  ],
+  "imageCaptions": [
+    "",
+    "Attachment Manager: every attachment folder in the vault, with preview, rename and delete",
+    "After a paste the image is already renamed and filed; keep it, delete it or move it",
+    "Right-click a note, pick Download remote images, and the link now points to a local file",
+    "A globe icon marks notes that still use remote images; one click in the tree saves them",
+    "Check paths counts files and links, finds a missing folder, previews the fix, then runs it"
   ],
   "githubUrl": "https://github.com/NatLee/obsidian-attachmenter",
   "category": "Productivity Tools",
@@ -54,39 +66,119 @@
   "gains": "Pasted images stop arriving as 'Pasted image …' files: each one is renamed after its note and filed beside it. File Explorer also marks which notes still lean on remote images, and one click saves them locally.",
   "flow": [
     {
-      "id": "find",
-      "label": "Find remote images in the note",
+      "id": "ask",
+      "label": "Ask to download remote images",
       "kind": "start",
-      "detail": "Markdown links and Canvas cards"
+      "detail": "Palette, right-click or the tree"
+    },
+    {
+      "id": "folder",
+      "label": "Create the note's folder if missing",
+      "detail": "Note name plus a suffix"
+    },
+    {
+      "id": "type",
+      "label": "Markdown note or Canvas?",
+      "kind": "decision",
+      "group": "Find remote images",
+      "to": [
+        {
+          "id": "md",
+          "label": "Markdown"
+        },
+        {
+          "id": "canvas",
+          "label": "Canvas"
+        }
+      ]
+    },
+    {
+      "id": "md",
+      "label": "Find image links to URLs",
+      "detail": "Local paths are left alone",
+      "group": "Find remote images",
+      "to": [
+        {
+          "id": "get"
+        }
+      ]
+    },
+    {
+      "id": "canvas",
+      "label": "Find link cards with URLs",
+      "group": "Find remote images"
     },
     {
       "id": "get",
-      "label": "Download them all at once"
+      "label": "Download them all at once",
+      "group": "Every image at once"
     },
     {
       "id": "ok",
       "label": "Arrived as a real image?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no, link stays",
-        "to": "report"
-      }
+      "detail": "Content type, else URL ending",
+      "group": "Every image at once",
+      "to": [
+        {
+          "id": "save",
+          "label": "yes"
+        },
+        {
+          "id": "stay",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "save",
       "label": "Save into the note's folder",
-      "detail": "Named after the note and date"
+      "detail": "Named after the note and date",
+      "group": "Every image at once"
     },
     {
-      "id": "link",
+      "id": "relink",
       "label": "Point the link at the copy",
-      "detail": "Alt text kept"
+      "detail": "Alt text kept; cards become files",
+      "group": "Every image at once",
+      "to": [
+        {
+          "id": "any"
+        }
+      ]
+    },
+    {
+      "id": "stay",
+      "label": "Leave that link as it was",
+      "detail": "Other images still download",
+      "group": "Every image at once"
+    },
+    {
+      "id": "any",
+      "label": "Anything replaced?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "report",
+          "label": "yes"
+        },
+        {
+          "id": "none",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "report",
-      "label": "Report how many were replaced",
-      "kind": "end"
+      "label": "Update the note, report the count",
+      "kind": "end",
+      "detail": "\"Replaced N remote image(s)\""
+    },
+    {
+      "id": "none",
+      "label": "Say no remote images found",
+      "kind": "end",
+      "detail": "Nothing to rescue today"
     }
   ],
   "lessons": [

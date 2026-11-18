@@ -12,7 +12,18 @@
   "opensource": true,
   "language": "typescript",
   "images": [
-    "/images/projects/word-net-game/cover.webp"
+    "/images/projects/word-net-game/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/word-net-game/master/docs/images/reveal.gif",
+    "https://raw.githubusercontent.com/NatLee/word-net-game/master/docs/images/mobile-light.webp",
+    "https://raw.githubusercontent.com/NatLee/word-net-game/master/docs/images/result-card.webp",
+    "https://raw.githubusercontent.com/NatLee/word-net-game/master/docs/images/duo-desktop-light.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "The reveal: the net drops, the reference score lands in it, and Perfect! pops up",
+    "On a phone: home with level and packs, casting the net, and the reveal",
+    "Result card: the closer your dots sit to the diagonal, the better you read the room",
+    "Two-player mode: both nets on one scale, and the round goes to the closer one"
   ],
   "technologies": [
     "TypeScript",
@@ -26,50 +37,118 @@
   "gains": "A few minutes of reading what people mean rather than what they say: sarcasm, self-mockery and hidden meanings each have a pack, and every sentence has its own reply at the reveal. The two-player mode settles who in the room actually reads the room.",
   "flow": [
     {
+      "id": "mode",
+      "label": "Pick a mode",
+      "kind": "start",
+      "detail": "and a sentence pack",
+      "group": "Deal the sentences"
+    },
+    {
+      "id": "daily",
+      "label": "Daily challenge?",
+      "kind": "decision",
+      "group": "Deal the sentences",
+      "to": [
+        {
+          "id": "seed",
+          "label": "yes"
+        },
+        {
+          "id": "shuffle",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "seed",
+      "label": "Shuffle with today's date as seed",
+      "detail": "every pack, same five for all",
+      "group": "Deal the sentences",
+      "to": [
+        {
+          "id": "read"
+        }
+      ]
+    },
+    {
+      "id": "shuffle",
+      "label": "Shuffle the chosen pack",
+      "detail": "classic keeps ten",
+      "group": "Deal the sentences"
+    },
+    {
       "id": "read",
       "label": "Read a sentence",
-      "kind": "start"
+      "detail": "sarcasm included",
+      "group": "Each round"
     },
     {
       "id": "cast",
       "label": "Cast the net on the scale",
-      "detail": "−1 sad to +1 happy"
+      "detail": "−1 sad to +1 happy",
+      "group": "Each round"
     },
     {
       "id": "gap",
       "label": "Measure the gap to the reference",
-      "detail": "0 exact, 2 opposite"
+      "detail": "0 exact, 2 opposite",
+      "group": "Each round"
     },
     {
       "id": "close",
       "label": "Within 0.25?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no, streak resets",
-        "to": "score"
-      }
+      "group": "Each round",
+      "to": [
+        {
+          "id": "streak",
+          "label": "yes"
+        },
+        {
+          "id": "reset",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "streak",
       "label": "Add one to the streak",
-      "detail": "+0.25× from the second"
+      "detail": "+0.25× from the second",
+      "group": "Each round",
+      "to": [
+        {
+          "id": "score"
+        }
+      ]
+    },
+    {
+      "id": "reset",
+      "label": "Streak resets",
+      "detail": "survival: a miss costs a heart",
+      "group": "Each round"
     },
     {
       "id": "score",
       "label": "Base points times the bonus",
-      "detail": "capped at 2×"
+      "detail": "capped at 2×",
+      "group": "Each round"
     },
     {
       "id": "more",
       "label": "Keep playing?",
       "kind": "decision",
       "detail": "sentences, time or hearts left",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "read"
-      }
+      "group": "Each round",
+      "to": [
+        {
+          "id": "read",
+          "label": "yes"
+        },
+        {
+          "id": "card",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "card",

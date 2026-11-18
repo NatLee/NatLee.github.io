@@ -11,6 +11,11 @@
     "https://raw.githubusercontent.com/NatLee/obsidian-word-mode/main/docs/images/saving.en.svg",
     "https://raw.githubusercontent.com/NatLee/obsidian-word-mode/main/docs/images/ribbon.en.svg"
   ],
+  "imageCaptions": [
+    "",
+    "Change one paragraph and only that block is rewritten; the rest is copied as it was",
+    "The Insert tab: tables, equations, diagrams, footnotes and more, no syntax to remember"
+  ],
   "githubUrl": "https://github.com/NatLee/obsidian-word-mode",
   "category": "Productivity Tools",
   "themes": [
@@ -60,36 +65,162 @@
   "gains": "Someone who has never typed a Markdown asterisk can work in the same vault: tables, properties, images, diagrams and equations all have buttons. The files stay ordinary .md, so sync and other tools never learn that someone switched editors.",
   "flow": [
     {
-      "id": "edit",
-      "label": "Edit the note in Word mode",
+      "id": "open",
+      "label": "Open a Markdown note",
       "kind": "start",
+      "detail": "Word mode by default"
+    },
+    {
+      "id": "eligible",
+      "label": "Allowed in Word mode?",
+      "kind": "decision",
+      "detail": "Excluded folders, word-mode: false",
+      "to": [
+        {
+          "id": "split",
+          "label": "yes"
+        },
+        {
+          "id": "md",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "md",
+      "label": "Open in the Markdown editor",
+      "kind": "end"
+    },
+    {
+      "id": "split",
+      "label": "Split the file into blocks",
+      "detail": "Each block keeps its source",
+      "group": "Opening the note"
+    },
+    {
+      "id": "visual",
+      "label": "Editable as formatted text?",
+      "kind": "decision",
+      "group": "Opening the note",
+      "to": [
+        {
+          "id": "rich",
+          "label": "yes"
+        },
+        {
+          "id": "raw",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "rich",
+      "label": "Show it as formatted text",
+      "detail": "markdown-it into ProseMirror",
+      "group": "Opening the note",
+      "to": [
+        {
+          "id": "edit"
+        }
+      ]
+    },
+    {
+      "id": "raw",
+      "label": "Show it as a raw block",
+      "detail": "HTML blocks, for example",
+      "group": "Opening the note"
+    },
+    {
+      "id": "edit",
+      "label": "Edit with toolbar and shortcuts",
       "detail": "Autosave follows your edits"
     },
     {
       "id": "disk",
       "label": "File changed elsewhere meanwhile?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "blocks"
-      }
+      "detail": "Sync, other devices, other plugins",
+      "group": "Sync conflict",
+      "to": [
+        {
+          "id": "same",
+          "label": "no"
+        },
+        {
+          "id": "choose",
+          "label": "yes"
+        }
+      ]
     },
     {
       "id": "choose",
-      "label": "Pick the version to keep",
-      "detail": "Theirs, yours, or both"
+      "label": "Which version to keep?",
+      "kind": "decision",
+      "group": "Sync conflict",
+      "to": [
+        {
+          "id": "split",
+          "label": "load new"
+        },
+        {
+          "id": "same",
+          "label": "keep mine"
+        },
+        {
+          "id": "copy",
+          "label": "keep both"
+        }
+      ]
     },
     {
-      "id": "blocks",
-      "label": "Rewrite only the changed blocks",
-      "detail": "The rest stays character for character"
+      "id": "copy",
+      "label": "Save your version as a copy",
+      "detail": "Next to the note",
+      "group": "Sync conflict",
+      "to": [
+        {
+          "id": "split"
+        }
+      ]
+    },
+    {
+      "id": "same",
+      "label": "Block unchanged since opening?",
+      "kind": "decision",
+      "group": "Saving block by block",
+      "to": [
+        {
+          "id": "keep",
+          "label": "yes"
+        },
+        {
+          "id": "rewrite",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "keep",
+      "label": "Write the original text",
+      "detail": "Character for character",
+      "group": "Saving block by block",
+      "to": [
+        {
+          "id": "save"
+        }
+      ]
+    },
+    {
+      "id": "rewrite",
+      "label": "Write fresh Markdown for it",
+      "detail": "Only blocks you changed",
+      "group": "Saving block by block"
     },
     {
       "id": "save",
       "label": "Save the same .md file",
       "kind": "end",
-      "detail": "Raw blocks saved unchanged"
+      "detail": "Sync tools never notice"
     }
   ],
   "lessons": [

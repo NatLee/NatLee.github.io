@@ -7,7 +7,14 @@
   "longDescription": "A Python helper returning website PNG and PDF snapshots as base64. The project is archived because its Pyppeteer browser dependency is no longer maintained. Its successor, playwright-snap, keeps the same API with Playwright-driven Chromium.",
   "language": "python",
   "images": [
-    "/images/projects/pyppesnap/cover.webp"
+    "/images/projects/pyppesnap/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/pyppeteer-snap/main/docs/images/demo-light.png",
+    "https://raw.githubusercontent.com/NatLee/pyppeteer-snap/main/docs/images/terminal.png"
+  ],
+  "imageCaptions": [
+    "",
+    "The same page twice: a PNG of the 1600 × 900 window and a PDF of the whole page",
+    "The CLI prints base64 (123,256 characters trimmed, mercifully) and pipes into a PDF"
   ],
   "githubUrl": "https://github.com/NatLee/pyppeteer-snap",
   "category": "Web Automation",

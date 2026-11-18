@@ -7,7 +7,18 @@
   "longDescription": "A powerful web-based interface for managing Docker containers and images, featuring a fully functional terminal emulator. This tool provides system administrators and developers with an intuitive way to manage Docker environments through a web browser.",
   "language": "python",
   "images": [
-    "/images/projects/django-docker-gui/cover.webp"
+    "/images/projects/django-docker-gui/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/django-docker-gui/main/docs/images/screenshot-console.webp",
+    "https://raw.githubusercontent.com/NatLee/django-docker-gui/main/docs/images/screenshot-docker-hub.webp",
+    "https://raw.githubusercontent.com/NatLee/django-docker-gui/main/docs/images/architecture-light.webp",
+    "https://raw.githubusercontent.com/NatLee/django-docker-gui/main/docs/images/terminal-session-light.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "A shell in the nginx container, opened from the browser. Even 你好 comes out right.",
+    "Docker Hub search for redis, with star counts, an Official badge and Pull buttons.",
+    "One web container holds the Docker socket; Redis carries the jobs and their events.",
+    "One console session, from opening the WebSocket to kill -HUP when you close the tab."
   ],
   "githubUrl": "https://github.com/NatLee/django-docker-gui",
   "category": "DevOps",

@@ -11,7 +11,16 @@
   "opensource": true,
   "language": "typescript",
   "images": [
-    "/images/projects/countdown-studio/cover.webp"
+    "/images/projects/countdown-studio/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/countdown-studio/main/docs/images/studio.jpg",
+    "https://raw.githubusercontent.com/NatLee/countdown-studio/main/docs/images/stage-flip.gif",
+    "https://raw.githubusercontent.com/NatLee/countdown-studio/main/docs/images/themes.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Six countdowns in the Neon theme, including a standup already 43 seconds over",
+    "Stage mode in the Flip theme: a 10-second lift-off counting down to Time's up!",
+    "The same stage in all four themes: Neon, Minimal, Flip and LED"
   ],
   "technologies": [
     "TypeScript",

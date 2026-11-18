@@ -14,7 +14,7 @@
   "images": [
     "https://image-cdn.learnin.tw/bnextmedia/image/album/2025-04/picture-54c6f4c8c0a2b9bf4df8a349d8faa927.png"
   ],
-  "description": "Led the sentiment engine behind a company's social-listening products, reading more than three billion crawled posts. Lesson learned: the internet is mostly complaints.",
+  "description": "Led the sentiment engine behind a company's social-listening products, reading more than three billion crawled posts. Most of them were complaints.",
   "longDescription": "As the lead engineer for the sentiment analysis AI engine, I developed and maintained the core emotion detection model that processes data from web crawlers. The system analyzes sentiment from crawled content and outputs emotion classification results, which are then integrated with the company's flagship products—Keypo (大數據引擎) and DailyView (網路溫度計)—to provide users with comprehensive online sentiment and buzz analysis. The platform successfully processed over 3 billion data points with a 30% accuracy improvement, enabling real-time sentiment monitoring and trend analysis for business intelligence.",
   "technologies": [
     "Python",
@@ -56,7 +56,7 @@
     "Enabled real-time online sentiment and buzz analysis for end users",
     "Deployed scalable microservices architecture supporting high-volume processing"
   ],
-  "why": "Big Data's products, Keypo and DailyView, turn crawled posts into buzz and sentiment reports, and every post needs a sentiment label before it counts. This engine does the labelling, at a volume no team of human readers would survive.",
+  "why": "Big Data's products, Keypo and DailyView, turn crawled posts into buzz and sentiment reports, and every post needs a sentiment label before it counts. This engine does the labelling, at a volume no team of human readers could keep up with.",
   "gains": "Gives Keypo and DailyView users sentiment and buzz trends in real time over more than three billion crawled posts. The 30% accuracy gain means fewer angry posts quietly counted as happy ones.",
   "architecture": [
     {

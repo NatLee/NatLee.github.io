@@ -7,7 +7,12 @@
   "longDescription": "Convert iPhone HEIC photos to PNG or JPEG through Python, a CLI or shell pipes. A Pillow / pillow-heif implementation handles transparency, with explicit quality controls for PNG palette reduction and JPEG output.",
   "language": "python",
   "images": [
-    "/images/projects/heic2png/cover.webp"
+    "/images/projects/heic2png/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/heic2png/main/docs/images/quality-comparison.png"
+  ],
+  "imageCaptions": [
+    "",
+    "-q 100 keeps all 155,763 colours; the default -q 80 leaves 204 and turns the lights grey"
   ],
   "githubUrl": "https://github.com/NatLee/heic2png",
   "category": "Utilities",

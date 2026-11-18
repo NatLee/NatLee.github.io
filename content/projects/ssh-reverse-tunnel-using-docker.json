@@ -36,42 +36,108 @@
       "id": "server",
       "label": "Install the outside server",
       "kind": "start",
-      "detail": "asks ports, makes host keys"
+      "detail": "asks ports, makes host keys",
+      "group": "One-time setup"
     },
     {
       "id": "client",
       "label": "Install the inside machine",
-      "detail": "makes tunnel and login keys"
+      "detail": "makes tunnel and login keys",
+      "group": "One-time setup"
     },
     {
       "id": "auth",
       "label": "Authorize its key on the server",
-      "detail": "tunnel port only, no shell"
+      "detail": "tunnel port only, no shell",
+      "group": "One-time setup"
     },
     {
       "id": "accepted",
       "label": "Server accepts the tunnel key?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "auth"
-      }
+      "detail": "you confirm its host key once",
+      "group": "One-time setup",
+      "to": [
+        {
+          "id": "auth",
+          "label": "no"
+        },
+        {
+          "id": "dial",
+          "label": "yes"
+        }
+      ]
     },
     {
       "id": "dial",
       "label": "autossh dials out, holds on",
-      "detail": "redials whenever it drops"
+      "detail": "redials whenever it drops",
+      "group": "Staying connected"
     },
     {
       "id": "self",
-      "label": "Install logs in through it",
-      "detail": "proves the tunnel works"
+      "label": "Log in through the tunnel",
+      "detail": "install proves it works",
+      "group": "Staying connected"
+    },
+    {
+      "id": "ok",
+      "label": "Tunnel check passed?",
+      "kind": "decision",
+      "group": "Staying connected",
+      "to": [
+        {
+          "id": "you",
+          "label": "yes"
+        },
+        {
+          "id": "fix",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "fix",
+      "label": "Check firewall, key and logs",
+      "detail": "autossh keeps trying meanwhile",
+      "group": "Staying connected",
+      "to": [
+        {
+          "id": "dial",
+          "label": "fixed"
+        }
+      ]
     },
     {
       "id": "you",
       "label": "You ssh -p 22224 in",
-      "kind": "end"
+      "detail": "anyone can knock; only keys enter"
+    },
+    {
+      "id": "hop",
+      "label": "Need another inside machine?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "fwd",
+          "label": "yes"
+        },
+        {
+          "id": "done",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "fwd",
+      "label": "Forward a port with ssh -L",
+      "detail": "e.g. its web page"
+    },
+    {
+      "id": "done",
+      "label": "Finished? tunnel.sh uninstall",
+      "kind": "end",
+      "detail": "--all: folder as cloned"
     }
   ],
   "lessons": [

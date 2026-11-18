@@ -12,7 +12,16 @@
   "opensource": true,
   "language": "python",
   "images": [
-    "/images/projects/sentiment-bundle-benchmark/cover.webp"
+    "/images/projects/sentiment-bundle-benchmark/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/sentiment-bundle-benchmark/main/docs/images/leaderboard.png",
+    "https://raw.githubusercontent.com/NatLee/sentiment-bundle-benchmark/main/docs/images/speed-vs-quality.png",
+    "https://raw.githubusercontent.com/NatLee/sentiment-bundle-benchmark/main/docs/images/gura-then-now.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Macro-F1 for all seven methods; zero-shot Qwen's 37.3 on SUBJ is not a typo",
+    "Quality against speed: fine-tuned encoders score highest, TF-IDF runs fastest",
+    "GURA's 2023 chart readings next to the best held-out test accuracy today"
   ],
   "technologies": [
     "Python",
@@ -31,42 +40,128 @@
       "id": "dl",
       "label": "Download the Parquet bundle",
       "kind": "start",
-      "detail": "Pinned revision, SHA-256 checked"
+      "detail": "Pinned Hugging Face revision",
+      "group": "Prepare once"
+    },
+    {
+      "id": "sha",
+      "label": "SHA-256 matches?",
+      "kind": "decision",
+      "group": "Prepare once",
+      "to": [
+        {
+          "id": "prep",
+          "label": "yes"
+        },
+        {
+          "id": "halt",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "halt",
+      "label": "Stop: the file changed",
+      "kind": "end",
+      "detail": "Update the config on purpose"
     },
     {
       "id": "prep",
       "label": "Clean, dedupe, split with seed 42",
-      "detail": "Row ids fingerprinted"
+      "detail": "Row ids fingerprinted",
+      "group": "Prepare once"
     },
     {
       "id": "done",
       "label": "Result file already there?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "more"
-      }
+      "group": "Each method and dataset",
+      "to": [
+        {
+          "id": "more",
+          "label": "yes, skip"
+        },
+        {
+          "id": "kind",
+          "label": "no"
+        }
+      ]
     },
     {
-      "id": "fit",
-      "label": "Fit or prompt the method",
-      "detail": "Validation picks C or epoch"
+      "id": "kind",
+      "label": "Which kind of method?",
+      "kind": "decision",
+      "group": "Each method and dataset",
+      "to": [
+        {
+          "id": "lr",
+          "label": "fixed features"
+        },
+        {
+          "id": "ft",
+          "label": "encoders"
+        },
+        {
+          "id": "llm",
+          "label": "local LLM"
+        }
+      ]
+    },
+    {
+      "id": "lr",
+      "label": "Fit LR, pick C on validation",
+      "detail": "TF-IDF or frozen embeddings",
+      "group": "Each method and dataset",
+      "to": [
+        {
+          "id": "test"
+        }
+      ]
+    },
+    {
+      "id": "ft",
+      "label": "Fine-tune, keep best epoch",
+      "detail": "By validation macro-F1",
+      "group": "Each method and dataset",
+      "to": [
+        {
+          "id": "test"
+        }
+      ]
+    },
+    {
+      "id": "llm",
+      "label": "Compare label words' first tokens",
+      "detail": "Zero- or eight-shot, no generation",
+      "group": "Each method and dataset"
     },
     {
       "id": "test",
       "label": "Score the test split once",
-      "detail": "Once, not until it agrees"
+      "detail": "Once, not until it agrees",
+      "group": "Each method and dataset"
+    },
+    {
+      "id": "json",
+      "label": "Write one JSON result",
+      "detail": "Scores, time, VRAM, size",
+      "group": "Each method and dataset"
     },
     {
       "id": "more",
       "label": "Another method or dataset left?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "done"
-      }
+      "group": "Each method and dataset",
+      "to": [
+        {
+          "id": "done",
+          "label": "yes"
+        },
+        {
+          "id": "report",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "report",
