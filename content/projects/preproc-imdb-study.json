@@ -6,6 +6,10 @@
   "description": "An unofficial, reproducible re-run of a BlackboxNLP 2018 paper's IMDb experiments: four ways to preprocess the text, two neural models, every run traceable. It started as research for my master's thesis in 2019. That version had three bugs; this one fixes them and says where they were.",
   "longDescription": "Does it matter whether you lowercase, lemmatize or group multiword expressions before training a neural text classifier? Camacho-Collados and Pilehvar measured it in On the Role of Text Preprocessing in Neural Network Architectures (BlackboxNLP 2018). This repository re-implements the IMDb part of that study: pick one of four preprocessing variants (vanilla, lowercased, lemmatized, multiword) and one of two models (CNN or CNN+LSTM), and preproc-imdb trains on the 25,000 training reviews and reports the accuracy on the 25,000 test reviews. Every run leaves a folder with its settings, library versions, training history and every prediction. It started in 2019 as a Python 3 port of the authors' sensecnn code for my master's research, and was rewritten in 2026 on Keras 3.15 and TensorFlow 2.21, fixing three bugs in the 2019 port.",
   "language": "python",
+  "mascotLines": [
+    "Changing the random seed mattered more than changing the preprocessing.",
+    "The 2019 version had three bugs. This one says where they were."
+  ],
   "images": [
     "/images/projects/preproc-imdb-study/cover.webp",
     "https://raw.githubusercontent.com/NatLee/preproc-imdb-study/master/docs/images/models-light.png"

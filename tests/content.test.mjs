@@ -179,12 +179,25 @@ test('image captions line up with the images, and Tapi has remarks in both langu
     assert.equal(zh.imageCaptions?.length, project.images.length, `${project.id}: Chinese captions must line up with the images`)
     project.imageCaptions.forEach((caption, i) => assert.equal(Boolean(caption), Boolean(zh.imageCaptions[i]), `${project.id}: caption ${i + 1} must exist in both languages`))
   }
+  // 作品頁上的 Tapi 不提通道（使用者 2026-11-18：通道是 Telepy 自己的頁面才講的事），通用台詞和作品自己的台詞都檢查。
+  const tunnel = /tunnel|通道|隧道|reverse ssh/i
   const mascots = read('content/mascots.json')
   for (const [id, mascot] of Object.entries(mascots)) {
     if (id === '$schema' || !mascot.remarks) continue
     for (const [section, set] of Object.entries(mascot.remarks)) {
       assert.ok(set.en?.length && set.en.length === set.zh?.length, `${id}.remarks.${section}: same number of lines in both languages`)
+      for (const line of [...set.en, ...set.zh]) assert.ok(!tunnel.test(line), `${id}.remarks.${section}: "${line}" talks about tunnels`)
     }
+  }
+  for (const project of projects) {
+    const zh = overlays[project.id] ?? {}
+    if (!project.mascotLines) {
+      assert.ok(!zh.mascotLines, `${project.id}: Chinese Tapi lines without English ones`)
+      continue
+    }
+    assert.ok(project.mascotLines.length >= 1 && project.mascotLines.length <= 3, `${project.id}: 1–3 Tapi lines`)
+    assert.equal(zh.mascotLines?.length, project.mascotLines.length, `${project.id}: same number of Tapi lines in both languages`)
+    for (const line of [...project.mascotLines, ...zh.mascotLines]) assert.ok(!tunnel.test(line), `${project.id}: Tapi line "${line}" talks about tunnels`)
   }
 })
 

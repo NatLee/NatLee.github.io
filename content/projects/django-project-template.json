@@ -6,6 +6,10 @@
   "description": "A Django starter with PostgreSQL, Redis, JWT, social login, Channels and django-q2. The setup I kept repeating, now tested end to end.",
   "longDescription": "A Docker Compose backend template with Django, PostgreSQL and Redis. It combines JWT and Google/Microsoft login, Channels WebSockets and django-q2 background tasks, configured from environment variables and checked end to end in CI.",
   "language": "python",
+  "mascotLines": [
+    "Same setup for the Nth time, so it finally got saved, with tests.",
+    "Keep localhost in ALLOWED_HOSTS. The container's health check lives there."
+  ],
   "images": [
     "/images/projects/django-project-template/cover.webp",
     "https://raw.githubusercontent.com/NatLee/django-project-template/main/docs/images/dashboard.png",

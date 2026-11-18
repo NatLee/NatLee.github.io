@@ -6,6 +6,10 @@
   "description": "A room-availability calendar for Elysion karaoke. Compare rooms and half-hour slots in daily and weekly views, using the shop’s official booking data.",
   "longDescription": "A small web app that reads Elysion’s official booking page and presents private karaoke-room availability as room cards, a daily timetable and a weekly overview. Mobile layouts and Taiwan-time slot handling make it easier to find a free room.",
   "language": "typescript",
+  "mascotLines": [
+    "The old parser let a seven-hour booking end at 30:30.",
+    "Some people care more about JOYSOUND or DAM than the time slot. The cards say which."
+  ],
   "images": [
     "/images/projects/elysion-calendar/cover.webp",
     "https://raw.githubusercontent.com/NatLee/elysion-calendar/main/docs/images/screenshot-phone.png",

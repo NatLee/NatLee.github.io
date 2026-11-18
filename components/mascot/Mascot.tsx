@@ -124,11 +124,12 @@ function seedIndex(seed: string, length: number) {
 
 /**
  * Tapi 在作品頁的圖表旁邊講一句話：對話框加吉祥物，點吉祥物換下一句。
- * seed 用作品 id，讓每個作品一開始講的不一樣。
+ * 作品有自己的台詞（own，作品 JSON 的 mascotLines）就講那些，沒有就用這一段的通用台詞。
+ * seed 用作品 id，讓每個作品一開始講的不一樣；同一個作品的兩段（流程、架構）也會從不同句開始。
  */
-export function MascotRemark({ id = 'tapi', section, seed, pose = 'idle' }: { id?: MascotId; section: string; seed: string; pose?: MascotPose }) {
+export function MascotRemark({ id = 'tapi', section, seed, pose = 'idle', own }: { id?: MascotId; section: string; seed: string; pose?: MascotPose; own?: string[] }) {
   const { locale } = useLanguage()
-  const lines = mascotRemarks(id, section, locale)
+  const lines = own?.length ? own : mascotRemarks(id, section, locale)
   const [offset, setOffset] = useState(0)
   if (!lines.length) return null
   const line = lines[(seedIndex(`${seed}:${section}`, lines.length) + offset) % lines.length]

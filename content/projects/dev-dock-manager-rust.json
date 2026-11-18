@@ -6,6 +6,10 @@
   "description": "One Docker dev box per user, with a web terminal, a noVNC desktop and optional GPU. The Django version, rewritten in Rust, partly to find out whether I could.",
   "longDescription": "A high-performance development environment management system built with Rust and Docker. This platform provides isolated, containerized development environments for multiple users on the same machine, featuring a Rust-based backend API with JWT authentication, WebSocket support for real-time console access, and a React/Next.js frontend. All services run behind Traefik reverse proxy with optional Nvidia Docker support.",
   "language": "rust",
+  "mascotLines": [
+    "The Django version idled at 175 MiB. This one idles at 5.5. I measured twice.",
+    "Most APIs got 4 to 6 times faster. The two list APIs mostly wait for Docker, so they didn't."
+  ],
   "images": [
     "/images/projects/dev-dock-manager-rust/cover.webp",
     "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/login.gif",

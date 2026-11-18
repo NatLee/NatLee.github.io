@@ -6,6 +6,10 @@
   "description": "Makes perfectly good images worse on purpose: motion, lens, Gaussian and depth-aware blur, for training models that have to cope with bad photos.",
   "longDescription": "A comprehensive image processing tool that generates various types of blur effects including motion blur, lens blur, and gaussian blur using OpenCV. This tool is particularly useful for data augmentation in machine learning projects and creating realistic image effects.",
   "language": "python",
+  "mascotLines": [
+    "Real cameras only blur when you don't want them to. This one blurs on request.",
+    "Before 1.2.0, a lens blur of 2.5 was quietly a 3."
+  ],
   "images": [
     "/images/projects/blur-generator/cover.webp",
     "https://raw.githubusercontent.com/NatLee/blur-generator/main/docs/images/motion.png",

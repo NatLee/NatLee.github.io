@@ -6,6 +6,10 @@
   "description": "A PyTorch PPO agent plays the real QWOP browser game through Playwright. Six evaluation races, six 100 m finishes. Grace was not part of the reward function.",
   "longDescription": "Rebuilt in 2026 with Stable-Baselines3 PPO, PyTorch and a Gymnasium environment driving the official browser game through Playwright. Eight browser environments trained for 22 minutes. The recorded evaluation finished all six races; the best normal-speed game time was 193.8 seconds.",
   "language": "python",
+  "mascotLines": [
+    "The finish screen said 19.4 seconds. It was 193.8.",
+    "Six races, six finishes. Nobody said it had to look good."
+  ],
   "images": [
     "/images/projects/play-qwop-by-using-ai-agent/cover.webp",
     "https://raw.githubusercontent.com/NatLee/play-qwop-by-using-ai-agent/master/docs/images/best-run.gif",

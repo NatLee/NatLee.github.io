@@ -10,6 +10,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "rust",
+  "mascotLines": [
+    "Version two has three fewer things that can break mid-stream.",
+    "Empty queue? It plays a favourite. Dead air is no longer part of the show."
+  ],
   "images": [
     "/images/projects/streaming-player/cover.webp",
     "https://raw.githubusercontent.com/NatLee/streaming-player/main/docs/images/obs-scene.jpg",

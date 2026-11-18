@@ -6,6 +6,10 @@
   "description": "A camera next to a digital sign tracks the people in front of it, guesses gender and age group, notices who is actually looking, and picks the ad that fits them. Most people walk straight past.",
   "longDescription": "Built at Infortrend for an embedded digital-signage system. A camera beside the screen detects faces, follows each person from frame to frame with a track ID, estimates gender and age group, and checks whether the face is turned toward the screen. Each person's estimates are averaged over frames, so guesses made on small, distant faces improve as people walk closer. The results go into a daily SQLite database and a small HTTP API, and a web service scored every ad against the audience in front of the screen and played the best match. It ran on Nvidia Jetson edge devices next to the screens. The cover shows Open Persona, a later personal rewrite that tracks whole bodies and infers interests; it is not public.",
   "language": "python",
+  "mascotLines": [
+    "Faces far away are small and blurry, so it waits for people to walk closer.",
+    "It keeps short records, not video. Nobody has to rewatch any footage."
+  ],
   "images": [
     "/images/projects/persona-tracking/cover.webp"
   ],

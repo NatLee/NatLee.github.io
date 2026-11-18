@@ -6,6 +6,10 @@
   "description": "Turns iPhone HEIC photos into PNG from the CLI, a shell pipe or Python. A small tool for a small, recurring annoyance.",
   "longDescription": "Convert iPhone HEIC photos to PNG or JPEG through Python, a CLI or shell pipes. A Pillow / pillow-heif implementation handles transparency, with explicit quality controls for PNG palette reduction and JPEG output.",
   "language": "python",
+  "mascotLines": [
+    "Before 1.2.2, photo.jpg could have a PNG inside. File names are honest now.",
+    "The default PNG keeps 204 of 155,763 colours. Use -q 100 if you liked the other 155,559."
+  ],
   "images": [
     "/images/projects/heic2png/cover.webp",
     "https://raw.githubusercontent.com/NatLee/heic2png/main/docs/images/quality-comparison.png"

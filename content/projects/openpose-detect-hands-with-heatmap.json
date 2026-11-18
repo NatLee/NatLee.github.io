@@ -6,6 +6,10 @@
   "description": "Runs the body OpenPose model over a video and piles up where the wrists went into a heatmap. The repo name says hands; the model only ever knew about wrists.",
   "longDescription": "A file-based demo that samples every 30th frame of a video, runs the six-stage body OpenPose network (19 heatmap and 38 part-affinity channels) at two scales, takes the lowest point of each arm/wrist region, keeps the points that fall inside configured polygon ROIs, and accumulates them into heatmap overlays saved as PNG files. It does not infer finger landmarks or hand articulation. The demo runs with Docker Compose on a CPU image with Python 3.12, TensorFlow 2.21 and tf-keras, loading the original Keras weights; the heatmap rendering derives from HeatMappy and the pose code from Open-Pose-Keras.",
   "language": "python",
+  "mascotLines": [
+    "The ROI coordinates live in a 215-pixel square. New camera, new homework.",
+    "Every point is kept. The heatmap remembers everything."
+  ],
   "images": [
     "/images/projects/openpose-detect-hands-with-heatmap/cover.webp",
     "https://github.com/NatLee/openpose-detect-hands-with-heatmap/raw/main/docs/images/heatmap-motion.gif",

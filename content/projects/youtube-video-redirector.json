@@ -6,6 +6,10 @@
   "description": "A small Flask app that uses yt-dlp to find a YouTube video’s direct media link and play it. For a shared song queue and OBS, see Streaming Player.",
   "longDescription": "A Flask service that accepts a video ID, resolves a direct media URL with yt-dlp and renders a player. The final version includes Docker and a JavaScript runtime for extraction. New song-request and OBS work continues in Streaming Player.",
   "language": "python",
+  "mascotLines": [
+    "In 2026 it still finds the link, then Edge blocks the video. That was its one job.",
+    "YouTube doesn't refuse, it rations: about 15 lookups per 40 minutes."
+  ],
   "images": [
     "/images/projects/youtube-video-redirector/cover.webp",
     "https://raw.githubusercontent.com/NatLee/youtube-video-redirect-service/main/docs/example.png",

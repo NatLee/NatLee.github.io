@@ -10,6 +10,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "rust",
+  "mascotLines": [
+    "Edit block 1 and nothing after it can be trusted. Go on, try it.",
+    "Every exercise has a tested answer. cargo test replies faster than a forum."
+  ],
   "images": [
     "/images/projects/blockchain-from-scratch/cover.webp",
     "https://raw.githubusercontent.com/NatLee/blockchain-from-scratch/master/docs/images/screenshots/chain-tampered.png",

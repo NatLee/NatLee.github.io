@@ -159,6 +159,8 @@ export interface Project {
   images: string[]
   /** 每張圖的說明，順序和 images 一樣；封面通常是空字串。（2026-11 新增） */
   imageCaptions?: Localized<string[]>
+  /** 這個作品頁上 Tapi 講的話（1–3 句，中英文句數相同）；沒有就用 mascots 的通用台詞。（2026-11 新增） */
+  mascotLines?: Localized<string[]>
   /** 本地縮圖（/images/projects/<id>.webp），沒有就不給。 */
   thumbnail?: string
   links: { github?: string; demo?: string; pypi?: string; documentation?: string; article?: string }

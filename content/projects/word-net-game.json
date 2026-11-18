@@ -11,6 +11,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "typescript",
+  "mascotLines": [
+    "One extra paragraph in the MIT licence, and GitHub called it \"Other\".",
+    "Two-player mode settles who in the room reads people best."
+  ],
   "images": [
     "/images/projects/word-net-game/cover.webp",
     "https://raw.githubusercontent.com/NatLee/word-net-game/master/docs/images/reveal.gif",

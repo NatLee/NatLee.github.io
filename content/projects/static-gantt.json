@@ -10,6 +10,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "typescript",
+  "mascotLines": [
+    "Dates stored at UTC midnight made \"today\" turn into tomorrow at 8 pm in Taipei.",
+    "It warns you when one person is scheduled as three."
+  ],
   "images": [
     "/images/projects/static-gantt/cover.webp",
     "https://raw.githubusercontent.com/NatLee/static-gantt/main/docs/images/demo.gif",

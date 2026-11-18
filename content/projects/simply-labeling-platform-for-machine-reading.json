@@ -6,6 +6,10 @@
   "description": "A self-hosted Rust + React workspace for SQuAD v1/v2 datasets: mark answer spans, review agreement and optionally request model suggestions.",
   "longDescription": "A self-hosted Rust + React workspace for SQuAD v1/v2 datasets: mark answer spans, review agreement and optionally request model suggestions. Rewritten from the original Flask application in 2026, keeping annotation, review and export in one workspace.",
   "language": "rust",
+  "mascotLines": [
+    "Browsers count positions in UTF-16. Emoji had opinions about that.",
+    "I labelled the data myself. Fastest way to learn what's annoying."
+  ],
   "images": [
     "/images/projects/simply-labeling-platform-for-machine-reading/cover.webp",
     "https://raw.githubusercontent.com/NatLee/simply-labeling-platform-for-machine-reading/main/docs/images/screenshot-annotate-light.png",

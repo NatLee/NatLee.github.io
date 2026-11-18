@@ -11,6 +11,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "python",
+  "mascotLines": [
+    "Half a minute of TF-IDF on a CPU beat GURA's best claimed IMDB score.",
+    "Half the 2023 IMDB training set turned out to be stitched-together fake reviews."
+  ],
   "images": [
     "/images/projects/sentiment-bundle-benchmark/cover.webp",
     "https://raw.githubusercontent.com/NatLee/sentiment-bundle-benchmark/main/docs/images/leaderboard.png",

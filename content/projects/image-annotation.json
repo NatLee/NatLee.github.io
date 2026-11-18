@@ -11,6 +11,10 @@
   "tier": "archive",
   "status": "Completed",
   "opensource": true,
+  "mascotLines": [
+    "The 2017 house rule: box the head. The whole head.",
+    "It even finds the pictures for LabelImg files that still remember an old Windows path."
+  ],
   "images": [
     "/images/projects/image-annotation/cover.webp",
     "https://raw.githubusercontent.com/NatLee/image-annotation/master/docs/images/editor.jpg",

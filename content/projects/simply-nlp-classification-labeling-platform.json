@@ -6,6 +6,9 @@
   "description": "A Rust + React labeling platform with configurable schemas, multi-annotator agreement and optional model-assisted pre-labeling. One Docker image to self-host.",
   "longDescription": "A Rust + React labeling platform with configurable schemas, multi-annotator agreement and optional model-assisted pre-labeling. One Docker image to self-host. Rewritten from the original Flask application in 2026, keeping annotation, review and export in one workspace.",
   "language": "rust",
+  "mascotLines": [
+    "The 2B model is over 90% sure about almost everything. A person still presses the key."
+  ],
   "images": [
     "/images/projects/simply-nlp-classification-labeling-platform/cover.webp",
     "https://raw.githubusercontent.com/NatLee/simply-nlp-classification-labeling-platform/main/docs/images/screenshot-label.png",

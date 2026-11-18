@@ -6,6 +6,10 @@
   "description": "Unrolls top-down fisheye images into panoramas and rolls them back again, so nobody has to squint at round photos.",
   "longDescription": "An OpenCV Python package and CLI that dewarps top-down fisheye images into panoramas and rewarps panoramas into fisheye circles. Coordinate meshes are cached by image size so repeated conversions can reuse the mapping.",
   "language": "python",
+  "mascotLines": [
+    "The centre pixel is always black. Even the maths can't say which way it faces.",
+    "The grid is built once per resolution. Cameras rarely change resolution on their own."
+  ],
   "images": [
     "/images/projects/fisheye-warping/cover.webp",
     "https://raw.githubusercontent.com/NatLee/fisheye-warping/main/docs/images/101-fisheye.jpg",

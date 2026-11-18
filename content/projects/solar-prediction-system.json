@@ -11,6 +11,9 @@
   "tier": "selected",
   "status": "Completed",
   "opensource": false,
+  "mascotLines": [
+    "The sun is punctual. The clouds are the problem."
+  ],
   "images": [
     "/images/projects/solar-prediction-system/forecast.webp",
     "/images/projects/solar-prediction-system/weather.webp",

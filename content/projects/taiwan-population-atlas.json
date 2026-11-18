@@ -10,6 +10,10 @@
   "status": "Completed",
   "opensource": true,
   "language": "typescript",
+  "mascotLines": [
+    "Nine years later: 20,082 overlapping numbers, 5 different, each by 0.01.",
+    "Nobody reads thirty years of tables cell by cell. The map plays them for you."
+  ],
   "images": [
     "/images/projects/taiwan-population-atlas/cover.webp",
     "https://raw.githubusercontent.com/NatLee/taiwan-population-atlas/master/docs/images/screenshot-desktop.png",

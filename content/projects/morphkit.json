@@ -6,6 +6,10 @@
   "description": "Converts and edits images, audio, video, PDFs and documents entirely in the browser. Nothing gets uploaded, mostly because there is nowhere to upload it to.",
   "longDescription": "MorphKit is a file converter with a set of small editors and no backend at all: every file is processed in the browser, so nothing leaves the user's machine. Images go through the Canvas API, audio and video through ffmpeg.wasm, PDFs through pdf.js and pdf-lib, and Word, PowerPoint, Markdown, HTML, CSV, Excel and JSON through one sanitised-HTML pipeline. On top of plain conversion it can squeeze images and videos under a target file size, turn any image into an ICO icon, pull the audio out of a video, even out loudness across files, and read text from photos and scanned PDF pages with OCR, whose engine downloads only after the user agrees. Six editors cover image layers, GIF/APNG frames, PDF pages, documents, spreadsheets and audio/video trimming; Projects keep longer work, such as a multi-track audio mix, in the browser's IndexedDB; a QR tool makes and reads codes. It is a static Vite + React + TypeScript site, installable as a PWA, in English, Traditional Chinese and Japanese, deployed to GitHub Pages by GitHub Actions and released under the MIT license.",
   "language": "typescript",
+  "mascotLines": [
+    "Tesseract reads transparent as black. Black text on black is hard for anyone.",
+    "500 KB here means 500,000 bytes, so the upload form can't argue."
+  ],
   "images": [
     "/images/projects/morphkit/cover.webp",
     "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/start-en-light.webp",

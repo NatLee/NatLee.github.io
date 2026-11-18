@@ -6,6 +6,10 @@
   "description": "A pipx-installable CLI using the sites’ JSON APIs and EagleWrapper. Preview with --dry-run, keep your own tags and skip items already imported.",
   "longDescription": "A command-line importer for yande.re and konachan.com that sends image URLs and metadata to Eagle. The 2026 version uses JSON APIs, EagleWrapper and resumable state, with configurable searches, item limits, folders and a dry-run preview.",
   "language": "python",
+  "mascotLines": [
+    "Add rating:s to the search and it's safe to open at work.",
+    "Eagle does the downloading. This tool just hands it the list."
+  ],
   "images": [
     "/images/projects/yande-and-konachan-to-eagle/cover.webp"
   ],

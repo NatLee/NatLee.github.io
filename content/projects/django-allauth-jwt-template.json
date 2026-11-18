@@ -6,6 +6,10 @@
   "description": "Email, Google, Microsoft and LINE login for SPAs and APIs, using django-allauth’s headless mode and built-in JWTs.",
   "longDescription": "A Django authentication template built on django-allauth headless mode and its built-in JWT support. It demonstrates email and social login for separate frontends, with end-to-end verification rather than a custom session-to-JWT bridge.",
   "language": "python",
+  "mascotLines": [
+    "After logging out, a 401 is the good news.",
+    "Old access tokens lived 60 hours. Now they get five minutes."
+  ],
   "images": [
     "/images/projects/django-allauth-jwt-template/cover.webp",
     "https://raw.githubusercontent.com/NatLee/django-allauth-jwt-template/main/docs/images/demo.png"
