@@ -7,7 +7,18 @@
   "longDescription": "A self-hosted Rust + React workspace for SQuAD v1/v2 datasets: mark answer spans, review agreement and optionally request model suggestions. Rewritten from the original Flask application in 2026, keeping annotation, review and export in one workspace.",
   "language": "rust",
   "images": [
-    "/images/projects/simply-labeling-platform-for-machine-reading/cover.webp"
+    "/images/projects/simply-labeling-platform-for-machine-reading/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/simply-labeling-platform-for-machine-reading/main/docs/images/screenshot-annotate-light.png",
+    "https://raw.githubusercontent.com/NatLee/simply-labeling-platform-for-machine-reading/main/docs/images/screenshot-review-light.png",
+    "https://raw.githubusercontent.com/NatLee/simply-labeling-platform-for-machine-reading/main/docs/images/screenshot-overview-light.png",
+    "https://raw.githubusercontent.com/NatLee/simply-labeling-platform-for-machine-reading/main/docs/images/screenshot-accounts-light.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Annotating: select a span in the passage; a small model's suggestions wait on the right",
+    "Review: answers of 2004 and 2004 年 agree at 67% F1, one character apart",
+    "Project overview: annotation and review progress, agreement F1, per-annotator counts",
+    "Optional login: admins add accounts, pick roles, reset passwords or disable them"
   ],
   "githubUrl": "https://github.com/NatLee/simply-labeling-platform-for-machine-reading",
   "category": "AI/ML",
@@ -52,42 +63,102 @@
       "id": "import",
       "label": "Import passages or SQuAD files",
       "kind": "start",
-      "detail": "Answer offsets rechecked"
+      "detail": "Old mrc.label files too",
+      "group": "Import check"
+    },
+    {
+      "id": "match",
+      "label": "Stored offset still matches?",
+      "kind": "decision",
+      "group": "Import check",
+      "to": [
+        {
+          "id": "ai",
+          "label": "yes"
+        },
+        {
+          "id": "near",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "near",
+      "label": "Use the nearest same text",
+      "detail": "None found: skipped, with warning",
+      "group": "Import check"
     },
     {
       "id": "ai",
       "label": "Ask a model first?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "mark"
-      }
+      "to": [
+        {
+          "id": "suggest",
+          "label": "yes"
+        },
+        {
+          "id": "mark",
+          "label": "no"
+        }
+      ]
     },
     {
-      "id": "keep",
-      "label": "Keep only answers copied exactly",
-      "detail": "Paraphrases don't count"
+      "id": "suggest",
+      "label": "Model drafts questions and answers",
+      "detail": "Claude or OpenAI-compatible API",
+      "group": "Optional AI suggestions"
+    },
+    {
+      "id": "exact",
+      "label": "Answer copied word for word?",
+      "kind": "decision",
+      "group": "Optional AI suggestions",
+      "to": [
+        {
+          "id": "mark",
+          "label": "yes"
+        },
+        {
+          "id": "drop",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "drop",
+      "label": "Drop it and say why",
+      "kind": "end",
+      "detail": "Paraphrases don't count",
+      "group": "Optional AI suggestions"
     },
     {
       "id": "mark",
       "label": "Accept, edit or select answers",
-      "detail": "Others' answers hidden until done"
+      "detail": "Others' answers hidden until done",
+      "group": "Annotation and review"
     },
     {
       "id": "review",
       "label": "Reviewer checks agreement",
-      "detail": "Exact match and F1"
+      "detail": "Exact match and F1",
+      "group": "Annotation and review"
     },
     {
       "id": "ok",
       "label": "Approved?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "returned",
-        "to": "mark"
-      }
+      "group": "Annotation and review",
+      "to": [
+        {
+          "id": "export",
+          "label": "approved"
+        },
+        {
+          "id": "mark",
+          "label": "returned"
+        }
+      ]
     },
     {
       "id": "export",

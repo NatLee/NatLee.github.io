@@ -18,7 +18,14 @@
     "/images/projects/power-trading-ai/regional-energy.webp",
     "/images/projects/power-trading-ai/daily-compare.webp"
   ],
-  "description": "Spot-price forecasting and trading strategies for the Japanese power market, later extended to Australia. It turns out electricity prices have moods too.",
+  "imageCaptions": [
+    "",
+    "Interconnection map: power flows between Japan's regions, line usage and area prices",
+    "Generation mix for one region: output by source, with plant outages underneath",
+    "Regional view: weather on a map of Japan next to spot price, demand and renewables",
+    "Day overlay: spot prices against the usual range; the day with a mood gets flagged"
+  ],
+  "description": "Spot-price forecasting and trading strategies for the Japanese power market, later extended to Australia.",
   "longDescription": "Leading the development of sophisticated AI trading strategies for international power markets. The system uses advanced time series analysis and machine learning models to predict electricity spot market prices, helping traders make data-driven decisions in volatile energy markets.",
   "technologies": [
     "Python",
@@ -56,8 +63,8 @@
     "Reduced trading decision time by 60%",
     "Enabled expansion to Australia market"
   ],
-  "why": "Built at HD Renewables for the power-trading desks in Japan and later Australia, who need a view of the spot price before they trade. The market stays volatile; the idea was that the decisions would not.",
-  "gains": "Puts a spot-price forecast and a strategy view in front of the Japan and Australia trading desks before they trade. The project records 85% accuracy on price trends and 60% less time per trading decision, which leaves more time to worry about the other 15%.",
+  "why": "Built at HD Renewables for the power-trading desks in Japan and later Australia, who need a view of the spot price before they trade.",
+  "gains": "Puts a spot-price forecast and a strategy view in front of the Japan and Australia trading desks before they trade. The project records 85% accuracy on price trends and 60% less time per trading decision.",
   "architecture": [
     {
       "title": "Inputs",

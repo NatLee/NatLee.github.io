@@ -12,7 +12,18 @@
   "opensource": true,
   "language": "python",
   "images": [
-    "/images/projects/street-scene-ocr/cover.webp"
+    "/images/projects/street-scene-ocr/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/street-scene-ocr/main/docs/images/ui.jpg",
+    "https://raw.githubusercontent.com/NatLee/street-scene-ocr/main/docs/images/detection-maps.jpg",
+    "https://raw.githubusercontent.com/NatLee/street-scene-ocr/main/docs/images/recognition.png",
+    "https://raw.githubusercontent.com/NatLee/street-scene-ocr/main/docs/images/ui-2021.jpg"
+  ],
+  "imageCaptions": [
+    "",
+    "The web page: one photo through all three engines, each with its boxes, text and timings",
+    "What the detectors see: CRAFT's character and link maps next to the PP-OCRv6 line map",
+    "Line by line: what each engine read; EasyOCR misses the vertical signs",
+    "The 2021 take-home, run unchanged: an upload form and a wall of raw numbers"
   ],
   "technologies": [
     "Python",
@@ -31,7 +42,28 @@
     {
       "id": "photo",
       "label": "Upload a street sign photo",
-      "kind": "start"
+      "kind": "start",
+      "detail": "Web page or JSON API"
+    },
+    {
+      "id": "loaded",
+      "label": "Engine loaded yet?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "prep",
+          "label": "yes"
+        },
+        {
+          "id": "load",
+          "label": "no, first use"
+        }
+      ]
+    },
+    {
+      "id": "load",
+      "label": "Load the engine's models",
+      "detail": "First read takes longer"
     },
     {
       "id": "prep",
@@ -39,34 +71,83 @@
       "detail": "Longest side at most 2560 px"
     },
     {
-      "id": "det",
-      "label": "Find the text lines",
-      "detail": "CRAFT or DB heat maps"
+      "id": "which",
+      "label": "Which detector?",
+      "kind": "decision",
+      "detail": "Set by the chosen engine",
+      "to": [
+        {
+          "id": "craft",
+          "label": "CRAFT"
+        },
+        {
+          "id": "db",
+          "label": "DB"
+        }
+      ]
     },
     {
-      "id": "rec",
-      "label": "Read each line",
-      "detail": "CTC decoding, with a confidence"
+      "id": "craft",
+      "label": "Map characters and their links",
+      "detail": "EasyOCR's detector",
+      "group": "Inside the engine"
     },
     {
-      "id": "post",
-      "label": "Apply threshold, sort reading order",
-      "detail": "Below 30% drawn red"
+      "id": "crnn",
+      "label": "CRNN reads each line",
+      "detail": "BiLSTM, then CTC decoding",
+      "group": "Inside the engine",
+      "to": [
+        {
+          "id": "thr"
+        }
+      ]
+    },
+    {
+      "id": "db",
+      "label": "Map shrunken text-line bars",
+      "detail": "Both PP-OCR engines",
+      "group": "Inside the engine"
+    },
+    {
+      "id": "svtr",
+      "label": "PP-OCR reads each line",
+      "detail": "Light SVTR blocks, CTC decoding",
+      "group": "Inside the engine"
+    },
+    {
+      "id": "thr",
+      "label": "Mark confident green, unsure red",
+      "detail": "30% threshold, nothing dropped",
+      "group": "Shared post-processing"
+    },
+    {
+      "id": "order",
+      "label": "Sort into reading order",
+      "detail": "Rows top-down, then left-right",
+      "group": "Shared post-processing"
     },
     {
       "id": "conv",
       "label": "Convert to Traditional?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "out"
-      }
+      "group": "Shared post-processing",
+      "to": [
+        {
+          "id": "opencc",
+          "label": "yes"
+        },
+        {
+          "id": "out",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "opencc",
       "label": "Fix Simplified forms with OpenCC",
-      "detail": "Fixes 賀, also breaks 台"
+      "detail": "Fixes 賀, also breaks 台",
+      "group": "Shared post-processing"
     },
     {
       "id": "out",

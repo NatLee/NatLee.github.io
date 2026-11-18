@@ -8,7 +8,13 @@
   "language": "shell",
   "images": [
     "/images/projects/dev-dock/cover.webp",
-    "https://raw.githubusercontent.com/NatLee/dev-dock/main/docs/images/cover.png"
+    "https://raw.githubusercontent.com/NatLee/dev-dock/main/docs/images/cover.png",
+    "https://raw.githubusercontent.com/NatLee/dev-dock/main/docs/images/dev-dock-flow-light.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "The Xfce desktop in a browser: Firefox, VS Code, a file manager and htop at once.",
+    "How gui-vnc is built from six scripts, and what supervisord starts in each container."
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock",
   "category": "DevOps",

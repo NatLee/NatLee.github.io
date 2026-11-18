@@ -7,7 +7,14 @@
   "longDescription": "A Docker Compose backend template with Django, PostgreSQL and Redis. It combines JWT and Google/Microsoft login, Channels WebSockets and django-q2 background tasks, configured from environment variables and checked end to end in CI.",
   "language": "python",
   "images": [
-    "/images/projects/django-project-template/cover.webp"
+    "/images/projects/django-project-template/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/django-project-template/main/docs/images/dashboard.png",
+    "https://raw.githubusercontent.com/NatLee/django-project-template/main/docs/images/realtime.png"
+  ],
+  "imageCaptions": [
+    "",
+    "The login playground: session, JWT and social login side by side, only while DEBUG is on.",
+    "WebSocket ping-pong through Channels, and a django-q2 task that answers pong."
   ],
   "githubUrl": "https://github.com/NatLee/django-project-template",
   "category": "Web Development",

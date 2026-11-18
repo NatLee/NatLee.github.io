@@ -11,7 +11,18 @@
     "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/login.gif",
     "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/create.gif",
     "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/console.gif",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/novnc.gif"
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/novnc.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/architecture-light.webp",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager-rust/main/docs/images/lifecycle-light.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "Signing in, then straight to your containers and the gui-vnc image.",
+    "Creating a desktop as an admin, privileged mode ticked; it shows up in the list live.",
+    "Console opens a root shell in the desktop over a WebSocket; exit closes it.",
+    "The NoVNC desktop: VNC password, then VS Code, Firefox and htop in the browser.",
+    "Same routes as the Django version, but the API is one Rust binary, queue worker included.",
+    "What each click does, from login to desktop. Access tokens last one hour here."
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock-manager-rust",
   "category": "DevOps",
@@ -79,29 +90,87 @@
       "detail": "access token lasts an hour"
     },
     {
-      "id": "create",
+      "id": "form",
       "label": "Fill in the create dialog",
-      "detail": "name, SSH port, optional GPU"
+      "detail": "name, SSH port, passwords"
     },
     {
-      "id": "check",
+      "id": "checks",
       "label": "Name valid and port free?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "create"
-      }
+      "detail": "privileged: admins only",
+      "group": "API",
+      "to": [
+        {
+          "id": "form",
+          "label": "no, fix it"
+        },
+        {
+          "id": "queue",
+          "label": "yes"
+        }
+      ]
     },
     {
       "id": "queue",
-      "label": "Job queued, task_id returned",
-      "detail": "the API answers right away"
+      "label": "Push a job onto Redis",
+      "group": "API",
+      "to": [
+        {
+          "id": "reply",
+          "label": "answer now"
+        },
+        {
+          "id": "pop",
+          "label": "in background"
+        }
+      ]
     },
     {
-      "id": "start",
-      "label": "Worker starts a gui-vnc container",
-      "detail": "owner label and Traefik route"
+      "id": "reply",
+      "label": "Return a task_id at once",
+      "group": "API",
+      "to": [
+        {
+          "id": "list",
+          "label": "wait for news"
+        }
+      ]
+    },
+    {
+      "id": "pop",
+      "label": "Worker pops the job",
+      "detail": "a task inside the API process",
+      "group": "Worker"
+    },
+    {
+      "id": "run",
+      "label": "Create and start gui-vnc",
+      "detail": "owner label, Traefik route",
+      "group": "Worker"
+    },
+    {
+      "id": "ok",
+      "label": "Did Docker say yes?",
+      "kind": "decision",
+      "group": "Worker",
+      "to": [
+        {
+          "id": "notify",
+          "label": "yes"
+        },
+        {
+          "id": "log",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "log",
+      "label": "Error goes to the log",
+      "kind": "end",
+      "detail": "no notification is sent",
+      "group": "Worker"
     },
     {
       "id": "notify",
@@ -109,9 +178,61 @@
       "detail": "over the notifications WebSocket"
     },
     {
-      "id": "open",
-      "label": "Open terminal, NoVNC or SSH",
-      "kind": "end"
+      "id": "list",
+      "label": "The list refreshes"
+    },
+    {
+      "id": "how",
+      "label": "How do you get in?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "term",
+          "label": "web terminal"
+        },
+        {
+          "id": "vnc",
+          "label": "desktop"
+        },
+        {
+          "id": "ssh",
+          "label": "SSH"
+        }
+      ]
+    },
+    {
+      "id": "term",
+      "label": "Shell over a WebSocket",
+      "detail": "docker exec bash, or attach",
+      "group": "Ways in",
+      "to": [
+        {
+          "id": "done"
+        }
+      ]
+    },
+    {
+      "id": "vnc",
+      "label": "NoVNC through Traefik",
+      "detail": "asks for the VNC password",
+      "group": "Ways in",
+      "to": [
+        {
+          "id": "done"
+        }
+      ]
+    },
+    {
+      "id": "ssh",
+      "label": "ssh -p your port",
+      "detail": "skips Traefik entirely",
+      "group": "Ways in"
+    },
+    {
+      "id": "done",
+      "label": "Your own Linux desktop",
+      "kind": "end",
+      "detail": "others' desktops answer 404"
     }
   ],
   "lessons": [

@@ -8,7 +8,13 @@
   "language": "python",
   "images": [
     "/images/projects/youtube-video-redirector/cover.webp",
-    "https://raw.githubusercontent.com/NatLee/youtube-video-redirect-service/main/docs/example.png"
+    "https://raw.githubusercontent.com/NatLee/youtube-video-redirect-service/main/docs/example.png",
+    "https://raw.githubusercontent.com/NatLee/youtube-video-redirect-service/main/docs/images/screenshot-light.png"
+  ],
+  "imageCaptions": [
+    "",
+    "The 2021 version: the raw direct link printed above the player. Styling was optional.",
+    "Today's version: paste a link, the file plays, and the direct link sits under it"
   ],
   "githubUrl": "https://github.com/NatLee/youtube-video-redirect-service",
   "category": "Web Application",

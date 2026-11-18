@@ -7,7 +7,14 @@
   "longDescription": "A historical sentiment classifier used to introduce the MyAnimeList reviews and sentiment dataset bundle. The archived BiGRU experiment has been replaced by sentiment-bundle-benchmark, which compares modern methods with fixed data splits and reproducible evaluation.",
   "language": "python",
   "images": [
-    "/images/projects/gura-gru-unit-for-recognizing-affect/cover.webp"
+    "/images/projects/gura-gru-unit-for-recognizing-affect/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/gura-gru-unit-for-recognizing-affect/main/docs/images/model-anime.png",
+    "https://raw.githubusercontent.com/NatLee/gura-gru-unit-for-recognizing-affect/main/docs/images/model-imdb.png"
+  ],
+  "imageCaptions": [
+    "",
+    "MyAnimeList run: training accuracy rises, validation peaks near 0.685 and slips back",
+    "IMDB run: training accuracy climbs to 0.80; validation stays near 0.73, unimpressed"
   ],
   "githubUrl": "https://github.com/NatLee/gura-gru-unit-for-recognizing-affect",
   "category": "AI/ML",
@@ -36,22 +43,101 @@
   "results": [
     "Preserved as the historical baseline for Sentiment Bundle Benchmark"
   ],
-  "why": "Written in 2019 as the sample model for the MyAnimeList review dataset, so the data came with something that actually trains on it. Its successor later explained what was wrong with its numbers, which is what successors are for.",
+  "why": "Written in 2019 as the sample model for the MyAnimeList review dataset, so the data came with something that actually trains on it. Its successor later explained what was wrong with its numbers.",
   "gains": "Every benchmark needs a 'before' photo, and GURA is it. It stays online read-only with the 2019 BiGRU recipe and the dataset bundle it introduced, so the successor's then-and-now table points at real code.",
   "flow": [
     {
       "id": "tok",
       "label": "Fit the Keras tokenizer",
-      "kind": "start"
+      "kind": "start",
+      "detail": "One vocabulary, six datasets"
     },
     {
-      "id": "emb",
-      "label": "Look up GloVe 840B vectors"
+      "id": "glove",
+      "label": "GloVe vectors on disk?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "build",
+          "label": "yes"
+        },
+        {
+          "id": "dl",
+          "label": "no"
+        }
+      ]
     },
     {
-      "id": "train",
-      "label": "Train the BiGRU with self-attention",
-      "detail": "Five epochs, best one saved"
+      "id": "dl",
+      "label": "Download GloVe 840B",
+      "detail": "Into the model folder"
+    },
+    {
+      "id": "build",
+      "label": "Build a frozen embedding layer",
+      "detail": "300 numbers per word"
+    },
+    {
+      "id": "clean",
+      "label": "Lower-case, drop stop words",
+      "detail": "Including not, no, never",
+      "group": "Data preparation"
+    },
+    {
+      "id": "split",
+      "label": "Set aside validation rows",
+      "detail": "Official test split mixed in",
+      "group": "Data preparation"
+    },
+    {
+      "id": "salad",
+      "label": "Top up with word salad",
+      "detail": "Random chunks of real text",
+      "group": "Data preparation"
+    },
+    {
+      "id": "epoch",
+      "label": "Train one epoch",
+      "detail": "BiGRU with self-attention",
+      "group": "Five epochs"
+    },
+    {
+      "id": "best",
+      "label": "Best validation accuracy yet?",
+      "kind": "decision",
+      "group": "Five epochs",
+      "to": [
+        {
+          "id": "save",
+          "label": "yes"
+        },
+        {
+          "id": "left",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "save",
+      "label": "Save a checkpoint",
+      "detail": "Accuracy in the file name",
+      "group": "Five epochs"
+    },
+    {
+      "id": "left",
+      "label": "Epochs left?",
+      "kind": "decision",
+      "group": "Five epochs",
+      "to": [
+        {
+          "id": "epoch",
+          "label": "yes"
+        },
+        {
+          "id": "keep",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "keep",
@@ -63,11 +149,16 @@
       "label": "Above the target accuracy?",
       "kind": "decision",
       "detail": "Ask again until it says yes",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "train"
-      }
+      "to": [
+        {
+          "id": "done",
+          "label": "yes"
+        },
+        {
+          "id": "build",
+          "label": "no, rerun"
+        }
+      ]
     },
     {
       "id": "done",

@@ -10,7 +10,15 @@
     "/images/projects/blur-generator/cover.webp",
     "https://raw.githubusercontent.com/NatLee/blur-generator/main/docs/images/motion.png",
     "https://raw.githubusercontent.com/NatLee/blur-generator/main/docs/images/depth-lens-output.png",
-    "https://raw.githubusercontent.com/NatLee/blur-generator/main/docs/images/depth-map-test.png"
+    "https://raw.githubusercontent.com/NatLee/blur-generator/main/docs/images/depth-map-test.png",
+    "https://raw.githubusercontent.com/NatLee/blur-generator/main/docs/images/readme/focus-rocks.jpg"
+  ],
+  "imageCaptions": [
+    "",
+    "Motion blur on a logo: the same colours, smeared along one direction",
+    "Lens blur by depth: the rocks up front melt into bokeh, the far temple stays sharp",
+    "The depth map it used: brighter means nearer, so the front gets the most blur",
+    "Focused on the rock pile instead, a homemade portrait mode"
   ],
   "githubUrl": "https://github.com/NatLee/blur-generator",
   "category": "Computer Vision",
@@ -54,48 +62,140 @@
     "Positive community feedback"
   ],
   "why": "The blur detector from the Infortrend vision work needed blurry photos to learn from, and real cameras only take those when nobody wants them. Blur Generator makes them on demand from sharp images: motion, lens or Gaussian, with the strength as a number, or varied by depth with a depth map.",
-  "gains": "For anyone training blur detection or deblurring models: every sharp photo becomes as many blurred copies as needed, each with a known type and strength. With a depth map and a focus point it also fakes a portrait mode, no new phone required.",
+  "gains": "For anyone training blur detection or deblurring models: every sharp photo becomes as many blurred copies as needed, each with a known type and strength. With a depth map and a focus point it also fakes a portrait mode.",
   "flow": [
     {
-      "id": "load",
-      "label": "Load the photo and depth map",
+      "id": "read",
+      "label": "Read the input photo",
       "kind": "start",
-      "detail": "Same size, depth 0–255"
+      "detail": "--type picks the blur"
+    },
+    {
+      "id": "depth",
+      "label": "Depth map given?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "check",
+          "label": "yes"
+        },
+        {
+          "id": "plain",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "plain",
+      "label": "Blur the whole photo once",
+      "detail": "Motion, lens or Gaussian",
+      "to": [
+        {
+          "id": "write"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "label": "Check the depth map",
+      "detail": "Same size, 8-bit, gray or BGR",
+      "group": "Blur by depth"
     },
     {
       "id": "focus",
       "label": "Focus depth given?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "layers"
-      }
+      "detail": "--depth_focus or a focus point",
+      "group": "Blur by depth",
+      "to": [
+        {
+          "id": "band",
+          "label": "yes"
+        },
+        {
+          "id": "layers",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "band",
       "label": "Measure distance from the sharp band",
-      "detail": "The band itself stays sharp"
+      "detail": "The band itself stays sharp",
+      "group": "Blur by depth"
     },
     {
       "id": "layers",
       "label": "Cut the values into layers",
-      "detail": "10 layers by default"
+      "detail": "10 layers by default",
+      "group": "Blur by depth"
     },
     {
       "id": "amount",
-      "label": "Give each layer a blur amount",
-      "detail": "Between min_blur and max_blur"
+      "label": "Pick this layer's blur amount",
+      "detail": "Between min_blur and max_blur",
+      "group": "Once per layer"
+    },
+    {
+      "id": "zero",
+      "label": "Blur amount is zero?",
+      "kind": "decision",
+      "group": "Once per layer",
+      "to": [
+        {
+          "id": "sharp",
+          "label": "yes"
+        },
+        {
+          "id": "blur",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "sharp",
+      "label": "Use the photo as it is",
+      "detail": "min_blur=0 used to crash here",
+      "group": "Once per layer",
+      "to": [
+        {
+          "id": "add"
+        }
+      ]
     },
     {
       "id": "blur",
-      "label": "Blur the photo once per layer",
-      "detail": "Whole photo each time, then masked"
+      "label": "Blur the whole photo",
+      "detail": "Same type, this layer's amount",
+      "group": "Once per layer"
     },
     {
-      "id": "merge",
-      "label": "Add the layers into one image",
-      "kind": "end"
+      "id": "add",
+      "label": "Keep this layer, add it in",
+      "detail": "Masked to its own pixels",
+      "group": "Once per layer"
+    },
+    {
+      "id": "more",
+      "label": "More layers left?",
+      "kind": "decision",
+      "group": "Once per layer",
+      "to": [
+        {
+          "id": "amount",
+          "label": "yes"
+        },
+        {
+          "id": "write",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "write",
+      "label": "Write the output image",
+      "kind": "end",
+      "detail": "Bad photo, made on purpose"
     }
   ],
   "lessons": [

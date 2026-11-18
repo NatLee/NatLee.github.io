@@ -7,7 +7,12 @@
   "longDescription": "A Django authentication template built on django-allauth headless mode and its built-in JWT support. It demonstrates email and social login for separate frontends, with end-to-end verification rather than a custom session-to-JWT bridge.",
   "language": "python",
   "images": [
-    "/images/projects/django-allauth-jwt-template/cover.webp"
+    "/images/projects/django-allauth-jwt-template/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/django-allauth-jwt-template/main/docs/images/demo.png"
+  ],
+  "imageCaptions": [
+    "",
+    "The demo page: the decoded access token, both JWTs and a 200 from /api/me. 4:54 left."
   ],
   "githubUrl": "https://github.com/NatLee/django-allauth-jwt-template",
   "category": "Web Development",
@@ -39,45 +44,111 @@
   "gains": "For a project with its own frontend that wants real accounts from day one: sign-up, email confirmation, password reset, account linking and three social logins, with 65 tests behind them. The Dummy provider lets you log in as anyone locally; Django refuses to start with it once debug is off.",
   "flow": [
     {
-      "id": "login",
+      "id": "start",
       "label": "Sign up or log in",
       "kind": "start",
       "detail": "email or three social logins"
     },
     {
+      "id": "which",
+      "label": "Password or a provider?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "pw",
+          "label": "password"
+        },
+        {
+          "id": "redirect",
+          "label": "social login"
+        }
+      ]
+    },
+    {
+      "id": "pw",
+      "label": "Post email and password",
+      "detail": "app endpoint, no cookies",
+      "to": [
+        {
+          "id": "pair"
+        }
+      ]
+    },
+    {
+      "id": "redirect",
+      "label": "Redirect to the provider",
+      "detail": "browser endpoint, session cookie",
+      "group": "Provider login"
+    },
+    {
+      "id": "known",
+      "label": "Email already has an account?",
+      "kind": "decision",
+      "group": "Provider login",
+      "to": [
+        {
+          "id": "start",
+          "label": "taken, log in"
+        },
+        {
+          "id": "swap",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "swap",
+      "label": "Swap the session for JWTs",
+      "detail": "POST /api/auth/jwt",
+      "group": "Provider login"
+    },
+    {
       "id": "pair",
       "label": "Get a JWT pair",
-      "detail": "access plus refresh token"
+      "detail": "5-minute access, 1-day refresh"
     },
     {
       "id": "call",
-      "label": "Call your API with Bearer"
+      "label": "Call your API with Bearer",
+      "group": "Using the tokens"
     },
     {
       "id": "exp",
       "label": "Access token expired?",
       "kind": "decision",
-      "detail": "it lives five minutes",
-      "next": "yes",
-      "branch": {
-        "when": "not yet",
-        "to": "call"
-      }
+      "group": "Using the tokens",
+      "to": [
+        {
+          "id": "call",
+          "label": "not yet"
+        },
+        {
+          "id": "refresh",
+          "label": "yes"
+        }
+      ]
     },
     {
       "id": "refresh",
       "label": "Refresh for a new pair",
-      "detail": "old refresh token works once"
+      "detail": "old refresh token works once",
+      "group": "Using the tokens"
     },
     {
       "id": "more",
       "label": "Still using the API?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "call"
-      }
+      "group": "Using the tokens",
+      "to": [
+        {
+          "id": "call",
+          "label": "yes"
+        },
+        {
+          "id": "out",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "out",

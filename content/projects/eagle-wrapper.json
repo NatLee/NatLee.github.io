@@ -8,7 +8,13 @@
   "language": "python",
   "images": [
     "/images/projects/eagle-wrapper/cover.webp",
-    "https://raw.githubusercontent.com/NatLee/eagle-wrapper/main/docs/images/add-from-url.png"
+    "https://raw.githubusercontent.com/NatLee/eagle-wrapper/main/docs/images/add-from-url.png",
+    "https://raw.githubusercontent.com/NatLee/eagle-wrapper/main/docs/images/api-overview.png"
+  ],
+  "imageCaptions": [
+    "",
+    "What one add_from_url call leaves in Eagle: the image, its name, tags, note and source URL",
+    "V1 and V2 clients talk to Eagle over HTTP, or it reads the library folder from disk"
   ],
   "githubUrl": "https://github.com/NatLee/eagle-wrapper",
   "category": "API/SDK",

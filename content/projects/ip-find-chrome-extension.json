@@ -7,7 +7,14 @@
   "longDescription": "A Chrome extension that quickly identifies and displays the current network's IP address. This tool is useful for network diagnostics and understanding your current network configuration.",
   "language": "javascript",
   "images": [
-    "/images/projects/ip-find-chrome-extension/cover.webp"
+    "/images/projects/ip-find-chrome-extension/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/ip-find-chrome-extension/master/docs/images/popup-light.png",
+    "https://raw.githubusercontent.com/NatLee/ip-find-chrome-extension/master/docs/images/privacy-light.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "The popup: your own IP on top, a lookup of 8.8.8.8 below, recent searches at the bottom",
+    "What leaves your browser: one request per lookup; history stays local, no tracking"
   ],
   "githubUrl": "https://github.com/NatLee/ip-find-chrome-extension",
   "category": "Browser Extension",

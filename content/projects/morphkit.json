@@ -10,7 +10,19 @@
     "/images/projects/morphkit/cover.webp",
     "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/start-en-light.webp",
     "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/formats-en.webp",
-    "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/editors-en.webp"
+    "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/editors-en.webp",
+    "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/home-en-light.webp",
+    "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/projects-en.webp",
+    "https://raw.githubusercontent.com/NatLee/morphkit/main/docs/images/mobile-en.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "Home: a drop zone, projects to continue, and the \"I have a ___ file and want to…\" panel",
+    "What converts to what: inputs and outputs for images, audio, video, PDFs and documents",
+    "The editors: image layers, PDF pages, GIF frames, documents, QR codes and projects",
+    "The file list: per-file options, size bars, and a 170 B note that became a 19 KB PDF",
+    "Projects page: kept in the browser, filtered by type, with backup state and a trash",
+    "On a phone: the home panel, the projects list and the image editor"
   ],
   "githubUrl": "https://github.com/NatLee/morphkit",
   "category": "Web Application",
@@ -72,46 +84,130 @@
   "gains": "Handy when an upload form says \"max 500 KB\", this podcast episode is quieter than the last, or a scanned PDF needs its text back. Size targets count in decimal bytes, so a 500 KB result passes the limit however the site counts.",
   "flow": [
     {
-      "id": "target",
-      "label": "Pick a size target",
+      "id": "pick",
+      "label": "Drop an image, pick a target",
       "kind": "start",
-      "detail": "images: 100 KB to 5 MB"
+      "detail": "100 KB to 5 MB"
+    },
+    {
+      "id": "decode",
+      "label": "Browser decodes it directly?",
+      "kind": "decision",
+      "detail": "the fast path first",
+      "group": "Read the image",
+      "to": [
+        {
+          "id": "encode",
+          "label": "yes"
+        },
+        {
+          "id": "heic",
+          "label": "no, HEIC"
+        },
+        {
+          "id": "svg",
+          "label": "no, e.g. SVG"
+        }
+      ]
+    },
+    {
+      "id": "heic",
+      "label": "Decode it with libheif",
+      "detail": "downloaded on first use",
+      "group": "Read the image",
+      "to": [
+        {
+          "id": "encode"
+        }
+      ]
+    },
+    {
+      "id": "svg",
+      "label": "Load it through an <img>",
+      "detail": "Chrome and Edge refuse SVG",
+      "group": "Read the image"
     },
     {
       "id": "encode",
       "label": "Encode at your quality setting",
-      "detail": "at the current dimensions"
+      "detail": "at the current size",
+      "group": "Fit loop"
     },
     {
       "id": "fits",
       "label": "Under the target?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "done"
-      }
+      "detail": "1 KB means 1,000 bytes",
+      "group": "Fit loop",
+      "to": [
+        {
+          "id": "done",
+          "label": "yes"
+        },
+        {
+          "id": "floor",
+          "label": "no"
+        },
+        {
+          "id": "shrink",
+          "label": "no, PNG"
+        }
+      ]
     },
     {
       "id": "floor",
       "label": "Try the lowest quality",
-      "detail": "40 percent"
+      "detail": "40 percent",
+      "group": "Fit loop"
     },
     {
       "id": "floorfits",
       "label": "Fits at the lowest quality?",
       "kind": "decision",
-      "detail": "gives up after six shrinks",
-      "next": "yes",
-      "branch": {
-        "when": "no, shrink it",
-        "to": "encode"
-      }
+      "group": "Fit loop",
+      "to": [
+        {
+          "id": "search",
+          "label": "yes"
+        },
+        {
+          "id": "shrink",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "shrink",
+      "label": "Shrink the dimensions",
+      "detail": "√(target ÷ size), 10% margin",
+      "group": "Fit loop"
+    },
+    {
+      "id": "rounds",
+      "label": "Shrunk six times already?",
+      "kind": "decision",
+      "group": "Fit loop",
+      "to": [
+        {
+          "id": "fail",
+          "label": "yes"
+        },
+        {
+          "id": "encode",
+          "label": "no, again"
+        }
+      ]
+    },
+    {
+      "id": "fail",
+      "label": "Report that it cannot fit",
+      "kind": "end",
+      "detail": "the file wins; try bigger"
     },
     {
       "id": "search",
-      "label": "Search for the best quality",
-      "detail": "binary search in between"
+      "label": "Binary-search the best quality",
+      "detail": "narrows to a 2% window"
     },
     {
       "id": "done",

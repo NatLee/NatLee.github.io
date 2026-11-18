@@ -33,20 +33,63 @@
   "gains": "Collectors end up with a library already tagged in their own words, and a search like 'beach rating:s' keeps it safe to open at work. It is also the worked example for EagleWrapper: a complete, small downloader to copy when feeding Eagle from some other site.",
   "flow": [
     {
+      "id": "load",
+      "label": "Load config and tag map",
+      "kind": "start",
+      "detail": "Both made on the first run"
+    },
+    {
+      "id": "search",
+      "label": "Given a --search?",
+      "kind": "decision",
+      "group": "Which posts",
+      "to": [
+        {
+          "id": "newer",
+          "label": "no"
+        },
+        {
+          "id": "query",
+          "label": "yes"
+        }
+      ]
+    },
+    {
+      "id": "newer",
+      "label": "Ask for posts after last ID",
+      "detail": "Oldest first, from config.ini",
+      "group": "Which posts",
+      "to": [
+        {
+          "id": "next"
+        }
+      ]
+    },
+    {
+      "id": "query",
+      "label": "Run the site's own search",
+      "detail": "Newest first, any site syntax",
+      "group": "Which posts"
+    },
+    {
       "id": "next",
       "label": "Take the next post",
-      "kind": "start",
-      "detail": "Fetched 100 per request"
+      "detail": "Pages of 100, a second apart"
     },
     {
       "id": "seen",
-      "label": "Already imported?",
+      "label": "Already in imported.txt?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes, skip",
-        "to": "mark"
-      }
+      "to": [
+        {
+          "id": "map",
+          "label": "no"
+        },
+        {
+          "id": "mark",
+          "label": "yes, skip"
+        }
+      ]
     },
     {
       "id": "map",
@@ -56,12 +99,41 @@
     {
       "id": "send",
       "label": "Hand the image URL to Eagle",
-      "detail": "Eagle fetches the file itself"
+      "detail": "Eagle does the heavy lifting",
+      "group": "Eagle's side"
+    },
+    {
+      "id": "accepted",
+      "label": "Did Eagle accept it?",
+      "kind": "decision",
+      "group": "Eagle's side",
+      "to": [
+        {
+          "id": "log",
+          "label": "yes"
+        },
+        {
+          "id": "refused",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "log",
-      "label": "Add it to the history",
-      "detail": "Only if Eagle accepted it"
+      "label": "Add it to imported.txt",
+      "detail": "So it never lands twice",
+      "group": "Eagle's side",
+      "to": [
+        {
+          "id": "mark"
+        }
+      ]
+    },
+    {
+      "id": "refused",
+      "label": "Note it as refused",
+      "detail": "Retry later with --search id:",
+      "group": "Eagle's side"
     },
     {
       "id": "mark",
@@ -72,11 +144,17 @@
       "id": "more",
       "label": "More posts to go?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "next"
-      }
+      "detail": "--limit can stop it early",
+      "to": [
+        {
+          "id": "next",
+          "label": "yes"
+        },
+        {
+          "id": "done",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "done",

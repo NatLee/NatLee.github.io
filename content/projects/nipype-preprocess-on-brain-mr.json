@@ -7,7 +7,18 @@
   "longDescription": "A research and learning pipeline for T1-weighted MRI: AC-PC alignment, MNI152 registration, skull stripping and N4 bias correction, followed by a choice of FSL FAST, K-means or ANTs Atropos. It compares segmentation agreement, reports tissue volumes and QC metrics, and produces a 3D view and HTML report per scan. Demo scans come from openly licensed OpenNeuro data.",
   "language": "python",
   "images": [
-    "/images/projects/nipype-preprocess-on-brain-mr/cover.webp"
+    "/images/projects/nipype-preprocess-on-brain-mr/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/nipype-preprocess-on-brain-mr/master/docs/images/pipeline.png",
+    "https://raw.githubusercontent.com/NatLee/nipype-preprocess-on-brain-mr/master/docs/images/segmentation.png",
+    "https://raw.githubusercontent.com/NatLee/nipype-preprocess-on-brain-mr/master/docs/images/bias_correction.png",
+    "https://raw.githubusercontent.com/NatLee/nipype-preprocess-on-brain-mr/master/docs/images/volumes.png"
+  ],
+  "imageCaptions": [
+    "",
+    "One demo scan after each step: original, AC-PC, registered, skull stripped, N4.",
+    "The same slices segmented three ways: K-means, FSL FAST and ANTs Atropos.",
+    "N4's estimated bias field, and the grey and white matter peaks pulling apart after it.",
+    "Tissue volumes of the three demo scans: grey matter lands near 45% every time."
   ],
   "githubUrl": "https://github.com/NatLee/nipype-preprocess-on-brain-mr",
   "category": "Medical Imaging",
@@ -48,44 +59,111 @@
   "flow": [
     {
       "id": "scan",
-      "label": "Take a T1 scan",
+      "label": "Take the next T1 scan",
       "kind": "start",
       "detail": ".nii or .nii.gz"
     },
     {
       "id": "acpc",
       "label": "Find AC-PC, align the head",
-      "detail": "ART acpcdetect"
+      "detail": "ART acpcdetect",
+      "group": "Preprocessing"
     },
     {
       "id": "mni",
       "label": "Register to the MNI152 template",
-      "detail": "FLIRT, 12 dof"
+      "detail": "FLIRT, 12 dof",
+      "group": "Preprocessing"
     },
     {
       "id": "clean",
       "label": "Strip the skull, fix bias",
-      "detail": "BET, then ANTs N4"
+      "detail": "BET, then ANTs N4",
+      "group": "Preprocessing",
+      "to": [
+        {
+          "id": "fast"
+        },
+        {
+          "id": "kmeans"
+        },
+        {
+          "id": "atropos"
+        }
+      ]
     },
     {
-      "id": "seg",
-      "label": "Segment the tissue three ways",
-      "detail": "FAST primary, two for comparison"
+      "id": "fast",
+      "label": "FSL FAST",
+      "detail": "the primary method",
+      "group": "Segmentation",
+      "to": [
+        {
+          "id": "measure"
+        }
+      ]
+    },
+    {
+      "id": "kmeans",
+      "label": "K-means",
+      "detail": "brightness is all it knows",
+      "group": "Segmentation",
+      "to": [
+        {
+          "id": "measure"
+        }
+      ]
+    },
+    {
+      "id": "atropos",
+      "label": "ANTs Atropos",
+      "detail": "spatial model, no partial volumes",
+      "group": "Segmentation"
+    },
+    {
+      "id": "measure",
+      "label": "Count volumes, measure agreement",
+      "detail": "agreement as Dice overlap"
+    },
+    {
+      "id": "render3d",
+      "label": "Render the 3D brain?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "surface",
+          "label": "yes, default"
+        },
+        {
+          "id": "report",
+          "label": "no (--no-3d)"
+        }
+      ]
+    },
+    {
+      "id": "surface",
+      "label": "Build a marching-cubes surface",
+      "detail": "turntable GIF, interactive page"
     },
     {
       "id": "report",
       "label": "Write the scan's HTML report",
-      "detail": "volumes, Dice, 3D brain"
+      "detail": "maps from the primary method"
     },
     {
       "id": "more",
       "label": "More scans left?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "scan"
-      }
+      "to": [
+        {
+          "id": "scan",
+          "label": "yes"
+        },
+        {
+          "id": "index",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "index",

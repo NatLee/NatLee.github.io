@@ -8,7 +8,13 @@
   "language": "python",
   "images": [
     "/images/projects/fisheye-warping/cover.webp",
-    "https://raw.githubusercontent.com/NatLee/fisheye-warping/main/docs/images/101-fisheye.jpg"
+    "https://raw.githubusercontent.com/NatLee/fisheye-warping/main/docs/images/101-fisheye.jpg",
+    "https://raw.githubusercontent.com/NatLee/fisheye-warping/main/docs/images/how-it-works.jpg"
+  ],
+  "imageCaptions": [
+    "",
+    "The input: a tiny-planet Taipei, with Taipei 101 sticking out like a clock hand",
+    "Angle becomes x, clockwise from 6 o'clock; radius becomes y, with the rim on top"
   ],
   "githubUrl": "https://github.com/NatLee/fisheye-warping",
   "category": "Computer Vision",

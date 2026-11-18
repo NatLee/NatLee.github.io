@@ -11,7 +11,16 @@
   "opensource": true,
   "language": "rust",
   "images": [
-    "/images/projects/blockchain-from-scratch/cover.webp"
+    "/images/projects/blockchain-from-scratch/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/blockchain-from-scratch/master/docs/images/screenshots/chain-tampered.png",
+    "https://raw.githubusercontent.com/NatLee/blockchain-from-scratch/master/docs/images/screenshots/network-double-spend.png",
+    "https://raw.githubusercontent.com/NatLee/blockchain-from-scratch/master/docs/images/screenshots/filechain-search.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Edit block 1 and it turns red; every block after it can no longer be trusted.",
+    "The double-spend demo after the fork heals: four nodes agree, and Bob's 50 is gone.",
+    "FileChain: upload a certificate, mine it into a block, then find it again by name."
   ],
   "technologies": [
     "Rust",
@@ -27,44 +36,128 @@
   "flow": [
     {
       "id": "recv",
-      "label": "A peer sends a block",
-      "kind": "start"
+      "label": "A peer sends blocks",
+      "kind": "start",
+      "detail": "a RESPONSE_BLOCKCHAIN message"
+    },
+    {
+      "id": "size",
+      "label": "One block or a chain?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "seen",
+          "label": "one block"
+        },
+        {
+          "id": "valid",
+          "label": "whole chain"
+        }
+      ]
     },
     {
       "id": "seen",
-      "label": "Seen this block already?",
+      "label": "Already have this block?",
       "kind": "decision",
-      "detail": "keeps messages from looping forever",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "wait"
-      }
+      "detail": "stops messages looping forever",
+      "group": "One block",
+      "to": [
+        {
+          "id": "wait",
+          "label": "yes, ignore"
+        },
+        {
+          "id": "fits",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "fits",
       "label": "Fits after my latest block?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "adopt"
-      }
+      "group": "One block",
+      "to": [
+        {
+          "id": "append",
+          "label": "yes"
+        },
+        {
+          "id": "ask",
+          "label": "newer, no fit"
+        },
+        {
+          "id": "wait",
+          "label": "older"
+        }
+      ]
     },
     {
       "id": "ask",
       "label": "Ask for the whole chain",
-      "detail": "QUERY_ALL"
+      "detail": "QUERY_ALL: admit you're behind",
+      "group": "One block",
+      "to": [
+        {
+          "id": "recv",
+          "label": "peer replies"
+        }
+      ]
+    },
+    {
+      "id": "append",
+      "label": "Check it, then append",
+      "detail": "trial run on a ledger copy",
+      "group": "One block",
+      "to": [
+        {
+          "id": "announce"
+        }
+      ]
+    },
+    {
+      "id": "valid",
+      "label": "Check every block from genesis",
+      "detail": "hash, link, difficulty, work",
+      "group": "Whole chain"
     },
     {
       "id": "work",
-      "label": "Compare total proof of work",
-      "detail": "more work wins, not length"
+      "label": "More total work than mine?",
+      "kind": "decision",
+      "detail": "work wins, not length",
+      "group": "Whole chain",
+      "to": [
+        {
+          "id": "replay",
+          "label": "yes"
+        },
+        {
+          "id": "wait",
+          "label": "no, or tie"
+        }
+      ]
     },
     {
-      "id": "adopt",
-      "label": "Adopt if valid, tell peers",
-      "detail": "broadcast the new latest block"
+      "id": "replay",
+      "label": "Replay the ledger from scratch",
+      "detail": "every transaction must hold",
+      "group": "Whole chain"
+    },
+    {
+      "id": "orphan",
+      "label": "Return orphaned transactions",
+      "detail": "rechecked; double spends dropped",
+      "group": "Whole chain"
+    },
+    {
+      "id": "switch",
+      "label": "Switch to the new chain",
+      "group": "Whole chain"
+    },
+    {
+      "id": "announce",
+      "label": "Broadcast my new latest block"
     },
     {
       "id": "wait",

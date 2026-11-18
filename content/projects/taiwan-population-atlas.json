@@ -11,7 +11,16 @@
   "opensource": true,
   "language": "typescript",
   "images": [
-    "/images/projects/taiwan-population-atlas/cover.webp"
+    "/images/projects/taiwan-population-atlas/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/taiwan-population-atlas/master/docs/images/screenshot-desktop.png",
+    "https://raw.githubusercontent.com/NatLee/taiwan-population-atlas/master/docs/images/screenshot-mobile.png",
+    "https://raw.githubusercontent.com/NatLee/taiwan-population-atlas/master/docs/images/2017-version.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Social increase in May 2008: New Taipei selected, compared with Taoyuan and Chiayi County",
+    "On a phone the metric menu folds into one button; here, total growth in June 2020",
+    "The 2017 original, in a green-to-red scale that red-green colour-blind readers can't use"
   ],
   "technologies": [
     "TypeScript",
@@ -26,46 +35,157 @@
   "gains": "Anyone wondering whether a county grows from births or from people moving in can watch it month by month since 1997, with that month's news beside the map, and send the exact view as a link instead of a screenshot of a spreadsheet.",
   "flow": [
     {
-      "id": "fetch",
-      "label": "Download the newest official tables",
+      "id": "update",
+      "label": "Run the data update",
       "kind": "start",
-      "detail": "Links looked up each time"
+      "detail": "npm run data:update",
+      "to": [
+        {
+          "id": "tables",
+          "label": "statistics"
+        },
+        {
+          "id": "wiki",
+          "label": "news"
+        }
+      ]
+    },
+    {
+      "id": "tables",
+      "label": "Download the official tables",
+      "detail": "Links looked up each time",
+      "group": "Download (data:fetch)",
+      "to": [
+        {
+          "id": "legacy"
+        }
+      ]
+    },
+    {
+      "id": "wiki",
+      "label": "Fetch Wikipedia's yearly events",
+      "detail": "One page at a time",
+      "group": "Download (data:fetch)"
     },
     {
       "id": "legacy",
       "label": "Load the 2017 hackathon data",
-      "detail": "Nine years old, still checks out"
+      "detail": "Nine years old, still checks out",
+      "group": "Build (data:build)"
     },
     {
       "id": "names",
-      "label": "Match names to county codes",
-      "detail": "Unknown name stops the build"
+      "label": "Every name in the county table?",
+      "kind": "decision",
+      "group": "Build (data:build)",
+      "to": [
+        {
+          "id": "cell",
+          "label": "yes"
+        },
+        {
+          "id": "stop",
+          "label": "no"
+        }
+      ]
     },
     {
-      "id": "blank",
-      "label": "New cell blank?",
+      "id": "stop",
+      "label": "Stop the build",
+      "kind": "end",
+      "detail": "Nothing dropped quietly",
+      "group": "Build (data:build)"
+    },
+    {
+      "id": "cell",
+      "label": "What's in the new cell?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes, keep old",
-        "to": "write"
-      }
+      "detail": "A dash means zero",
+      "group": "Build (data:build)",
+      "to": [
+        {
+          "id": "replace",
+          "label": "number or dash"
+        },
+        {
+          "id": "keep",
+          "label": "blank"
+        }
+      ]
     },
     {
       "id": "replace",
-      "label": "Replace it and log differences",
-      "detail": "Every changed number gets reported"
+      "label": "Overwrite and log the difference",
+      "detail": "Every changed number reported",
+      "group": "Build (data:build)",
+      "to": [
+        {
+          "id": "more"
+        }
+      ]
+    },
+    {
+      "id": "keep",
+      "label": "Keep the older value",
+      "detail": "Blank means unknown",
+      "group": "Build (data:build)"
+    },
+    {
+      "id": "more",
+      "label": "More cells to merge?",
+      "kind": "decision",
+      "group": "Build (data:build)",
+      "to": [
+        {
+          "id": "cell",
+          "label": "yes"
+        },
+        {
+          "id": "news",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "news",
+      "label": "Tag each event with counties",
+      "detail": "Old county names count too",
+      "group": "Build (data:build)"
     },
     {
       "id": "write",
       "label": "Write the JSON the app loads",
-      "detail": "No timestamps, same every time"
+      "detail": "No timestamps, same every time",
+      "group": "Build (data:build)"
     },
     {
       "id": "ci",
-      "label": "CI rebuilds and compares",
+      "label": "CI rebuild matches the commit?",
+      "kind": "decision",
+      "group": "CI check",
+      "to": [
+        {
+          "id": "pass",
+          "label": "same"
+        },
+        {
+          "id": "fail",
+          "label": "different"
+        }
+      ]
+    },
+    {
+      "id": "pass",
+      "label": "Check passes",
       "kind": "end",
-      "detail": "Any difference fails the check"
+      "group": "CI check"
+    },
+    {
+      "id": "fail",
+      "label": "Check fails",
+      "kind": "end",
+      "detail": "Data out of step with inputs",
+      "group": "CI check"
     }
   ],
   "lessons": [

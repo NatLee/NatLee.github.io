@@ -11,7 +11,16 @@
   "opensource": true,
   "language": "typescript",
   "images": [
-    "/images/projects/static-gantt/cover.webp"
+    "/images/projects/static-gantt/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/static-gantt/main/docs/images/demo.gif",
+    "https://raw.githubusercontent.com/NatLee/static-gantt/main/docs/images/screenshot-light-editor.png",
+    "https://raw.githubusercontent.com/NatLee/static-gantt/main/docs/images/screenshot-mermaid.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Dragging a bar to change its dates, then nudging it with the arrow keys",
+    "Light theme with the task panel open: duration, status, predecessor, progress, colour",
+    "Mermaid mode: the same plan as text on the left, a live preview on the right"
   ],
   "technologies": [
     "TypeScript",
@@ -28,39 +37,142 @@
   "flow": [
     {
       "id": "drag",
-      "label": "Drag from a bar's end dot",
-      "kind": "start"
+      "label": "Drag a line from a bar",
+      "kind": "start",
+      "detail": "from the dot at either end",
+      "group": "Draw a link"
+    },
+    {
+      "id": "dot",
+      "label": "Which end?",
+      "kind": "decision",
+      "group": "Draw a link",
+      "to": [
+        {
+          "id": "first",
+          "label": "right end"
+        },
+        {
+          "id": "second",
+          "label": "left end"
+        }
+      ]
+    },
+    {
+      "id": "first",
+      "label": "This task goes first",
+      "detail": "the target waits for it",
+      "group": "Draw a link",
+      "to": [
+        {
+          "id": "drop"
+        }
+      ]
+    },
+    {
+      "id": "second",
+      "label": "The target goes first",
+      "detail": "this task waits for it",
+      "group": "Draw a link"
     },
     {
       "id": "drop",
-      "label": "Drop it on another task"
+      "label": "Drop it on another task",
+      "group": "Draw a link"
     },
     {
-      "id": "loop",
+      "id": "cycle",
       "label": "Would it close a loop?",
       "kind": "decision",
       "detail": "the line turns red",
-      "next": "no",
-      "branch": {
-        "when": "yes, refused",
-        "to": "drag"
-      }
+      "group": "Draw a link",
+      "to": [
+        {
+          "id": "drag",
+          "label": "yes, refused"
+        },
+        {
+          "id": "save",
+          "label": "no"
+        }
+      ]
     },
     {
-      "id": "link",
+      "id": "save",
       "label": "Save the dependency",
-      "detail": "the task's fixed date goes"
+      "detail": "the task's fixed date goes",
+      "group": "Draw a link"
     },
     {
-      "id": "start",
+      "id": "order",
+      "label": "Walk tasks in dependency order",
+      "detail": "Kahn's topological sort",
+      "group": "Schedule"
+    },
+    {
+      "id": "pinned",
+      "label": "Fixed start date?",
+      "kind": "decision",
+      "group": "Schedule",
+      "to": [
+        {
+          "id": "pin",
+          "label": "yes"
+        },
+        {
+          "id": "after",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "pin",
+      "label": "Start on that date",
+      "group": "Schedule",
+      "to": [
+        {
+          "id": "finish"
+        }
+      ]
+    },
+    {
+      "id": "after",
       "label": "Start after the latest predecessor",
-      "detail": "weekends skipped if you choose"
+      "detail": "weekends skipped if you choose",
+      "group": "Schedule"
+    },
+    {
+      "id": "finish",
+      "label": "Work out its end day",
+      "group": "Schedule"
+    },
+    {
+      "id": "more",
+      "label": "Tasks still waiting?",
+      "kind": "decision",
+      "detail": "ready once predecessors are placed",
+      "group": "Schedule",
+      "to": [
+        {
+          "id": "pinned",
+          "label": "yes, next"
+        },
+        {
+          "id": "crit",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "crit",
-      "label": "Redraw the critical path",
-      "kind": "end",
+      "label": "Walk back for the critical path",
       "detail": "tooltips show each task's float"
+    },
+    {
+      "id": "redraw",
+      "label": "Redraw and autosave",
+      "kind": "end",
+      "detail": "into localStorage"
     }
   ],
   "lessons": [

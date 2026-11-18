@@ -11,7 +11,12 @@
   "opensource": true,
   "language": "python",
   "images": [
-    "/images/projects/playwright-snap/cover.webp"
+    "/images/projects/playwright-snap/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/playwright-snap/main/docs/images/demo-light.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "One page, three snapshots: a 1600 × 900 PNG, a phone-sized PNG and a one-sheet PDF"
   ],
   "technologies": [
     "Python",

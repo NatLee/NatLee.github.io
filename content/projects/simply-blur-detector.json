@@ -7,7 +7,18 @@
   "longDescription": "A TensorFlow / Keras CNN trained on sharp illustrations and copies blurred with blur-generator. The 2026 version includes original training artwork, x86 and ARM Docker support, and ONNX export for a browser demo that compares the CNN with Laplacian variance. Its verdict is a model estimate, with both methods visible for comparison.",
   "language": "python",
   "images": [
-    "/images/projects/simply-blur-detector/cover.webp"
+    "/images/projects/simply-blur-detector/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/simply-blur-detector/main/docs/images/demo-light.png",
+    "https://raw.githubusercontent.com/NatLee/simply-blur-detector/main/docs/images/demo-lens.png",
+    "https://raw.githubusercontent.com/NatLee/simply-blur-detector/main/data/train/nonblur/picture-001.jpg",
+    "https://raw.githubusercontent.com/NatLee/simply-blur-detector/main/data/train/blur/picture-001.jpg"
+  ],
+  "imageCaptions": [
+    "",
+    "The web demo on Seaside ride: CNN and Laplacian both say sharp, with the heat map on top.",
+    "Lens blur growing across a 4 × 4 grid: only the lightest, top left, still passes as clear.",
+    "A sharp training picture, one of the project's own 120 illustrations.",
+    "Its blurred copy from blur-generator, the other half of the training pair."
   ],
   "githubUrl": "https://github.com/NatLee/simply-blur-detector",
   "category": "Computer Vision",
@@ -45,7 +56,7 @@
   "why": "At Infortrend a small CNN told sharp camera frames from blurry ones. The rebuild sets it beside Laplacian variance, the classic that needs no training at all, so anyone can check in a browser whether the neural network is earning its keep.",
   "gains": "For anyone sorting photos or camera frames by sharpness: try both scores on your own pictures, watch them react as a stress test blurs the picture step by step, then train the same CNN on your own sharp pictures. blur-generator makes the blurry half for you.",
   "lessons": [
-    "A model trained on code-drawn cartoons scored 40 of 40 on its own test set and 34 of 40 on the repo's illustrations. Perfect at home proves little.",
+    "A model trained on code-drawn cartoons scored 40 of 40 on its own test set and 34 of 40 on the repo's illustrations.",
     "Until November 2026 the training folder held anime character art with an unclear licence. It is now 120 of the project's own illustrations.",
     "The publishing gate counts whole pictures: 85% means 34 of 40. It was 90% until it was lowered on 2026-11-04 for that day's anime model."
   ],

@@ -24,6 +24,38 @@
         "過節的時候髮夾會換顏色，寫在設定檔裡。",
         "對，我是幽靈。不，我不會在正式環境作祟。通常不會。"
       ]
+    },
+    "remarks": {
+      "flow": {
+        "en": [
+          "Press Walk through it. I'll follow the dot.",
+          "Start at the top. Everything flows down, except the dashed lines.",
+          "I took a dashed line once. It brought me back here.",
+          "This is the short version. The real one has more ifs.",
+          "Point at a step and its lines light up. I check mine every morning."
+        ],
+        "zh": [
+          "按「跑一遍」，我跟著那顆點走。",
+          "從最上面開始看，都是往下走，虛線除外。",
+          "我走過一次虛線，結果又回到這裡。",
+          "這是精簡版，實際上的 if 多很多。",
+          "指到一步，它的線就會亮。我每天早上也這樣檢查我的。"
+        ]
+      },
+      "architecture": {
+        "en": [
+          "The orange box is this project. The rest is who it talks to.",
+          "I build tunnels for a living, so I mostly look at the arrows.",
+          "Point at a box and its lines start moving. I find it relaxing.",
+          "Data goes where the arrows go. Usually."
+        ],
+        "zh": [
+          "橘色那格是這個專案，其他是它會打交道的對象。",
+          "我的工作是挖通道，所以都在看箭頭。",
+          "指到一格，它的線就會動起來。我覺得滿療癒的。",
+          "資料照著箭頭走。大部分的時候。"
+        ]
+      }
     }
   },
   "chiyo": {

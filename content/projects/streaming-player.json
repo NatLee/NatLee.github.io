@@ -11,7 +11,18 @@
   "opensource": true,
   "language": "rust",
   "images": [
-    "/images/projects/streaming-player/cover.webp"
+    "/images/projects/streaming-player/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/streaming-player/main/docs/images/obs-scene.jpg",
+    "https://raw.githubusercontent.com/NatLee/streaming-player/main/docs/images/admin-dashboard.png",
+    "https://raw.githubusercontent.com/NatLee/streaming-player/main/docs/images/viewer.png",
+    "https://raw.githubusercontent.com/NatLee/streaming-player/main/docs/images/users.png"
+  ],
+  "imageCaptions": [
+    "",
+    "The OBS player with the now-playing overlay and a pop-up for a new request",
+    "Dashboard: the song on air, playback controls, the request box, queue and activity",
+    "Viewer page: what is playing, your own requests, and how long each song still waits",
+    "Users and roles, where the last account that manages users cannot demote itself"
   ],
   "technologies": [
     "Rust",
@@ -36,40 +47,162 @@
       "kind": "start"
     },
     {
-      "id": "clean",
-      "label": "Strip invisible characters",
-      "detail": "7TV appends U+E0000"
+      "id": "where",
+      "label": "Where was it typed?",
+      "kind": "decision",
+      "to": [
+        {
+          "id": "twitch",
+          "label": "Twitch"
+        },
+        {
+          "id": "youtube",
+          "label": "YouTube"
+        },
+        {
+          "id": "bot",
+          "label": "chat bot"
+        }
+      ]
     },
     {
-      "id": "perm",
-      "label": "Check permission and cooldown"
+      "id": "twitch",
+      "label": "Arrives over EventSub",
+      "detail": "level from chat badges",
+      "group": "Chat sources",
+      "to": [
+        {
+          "id": "engine"
+        }
+      ]
+    },
+    {
+      "id": "youtube",
+      "label": "Polled from live chat",
+      "detail": "old first page skipped",
+      "group": "Chat sources",
+      "to": [
+        {
+          "id": "engine"
+        }
+      ]
+    },
+    {
+      "id": "bot",
+      "label": "Bot calls the HTTP API",
+      "detail": "level from query or header",
+      "group": "Chat sources"
+    },
+    {
+      "id": "engine",
+      "label": "Split into who, command, words",
+      "detail": "invisible characters stripped",
+      "group": "Command engine"
+    },
+    {
+      "id": "allowed",
+      "label": "Allowed and off cooldown?",
+      "kind": "decision",
+      "detail": "enabled, level, per-person cooldown",
+      "group": "Command engine",
+      "to": [
+        {
+          "id": "lookup",
+          "label": "yes"
+        },
+        {
+          "id": "reply",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "lookup",
       "label": "Look up title and length",
-      "detail": "skipped for songs it knows"
+      "detail": "skipped for songs it knows",
+      "group": "Command engine"
     },
     {
       "id": "rules",
       "label": "Passes the queue rules?",
       "kind": "decision",
       "detail": "length, limits, block list",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "reply"
-      }
+      "group": "Command engine",
+      "to": [
+        {
+          "id": "queue",
+          "label": "yes"
+        },
+        {
+          "id": "reply",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "queue",
       "label": "Join the queue",
-      "detail": "every page updates over WebSocket"
+      "detail": "every page updates over WebSocket",
+      "group": "Queue and playback",
+      "to": [
+        {
+          "id": "reply",
+          "label": "tell chat"
+        },
+        {
+          "id": "play",
+          "label": "wait its turn"
+        }
+      ]
     },
     {
       "id": "reply",
       "label": "Reply in chat",
       "kind": "end",
       "detail": "place and wait, or why not"
+    },
+    {
+      "id": "play",
+      "label": "Leader player plays it",
+      "detail": "other pages follow its clock",
+      "group": "Queue and playback"
+    },
+    {
+      "id": "next",
+      "label": "Anything left in the queue?",
+      "kind": "decision",
+      "group": "Queue and playback",
+      "to": [
+        {
+          "id": "play",
+          "label": "yes"
+        },
+        {
+          "id": "fav",
+          "label": "no"
+        },
+        {
+          "id": "quiet",
+          "label": "no, autoplay off"
+        }
+      ]
+    },
+    {
+      "id": "fav",
+      "label": "Play a random starred song",
+      "detail": "the one just played comes last",
+      "group": "Queue and playback",
+      "to": [
+        {
+          "id": "play"
+        }
+      ]
+    },
+    {
+      "id": "quiet",
+      "label": "Wait for the next request",
+      "kind": "end",
+      "detail": "dead air, by choice"
     }
   ],
   "lessons": [

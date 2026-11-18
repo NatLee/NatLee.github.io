@@ -7,7 +7,12 @@
   "longDescription": "The Flask player synchronises a request queue, default playlist and playback history over Socket.IO. Its final version resolves media with yt-dlp and includes Docker and regression tests. The Rust + React Streaming Player carries on the song-request workflow.",
   "language": "python",
   "images": [
-    "/images/projects/youtube-redirect-player/cover.webp"
+    "/images/projects/youtube-redirect-player/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/youtube-redirect-player/main/docs/images/screenshot-light.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Desktop and phone players paused on the same frame, with the same socket log"
   ],
   "githubUrl": "https://github.com/NatLee/youtube-redirect-player",
   "category": "Web Application",

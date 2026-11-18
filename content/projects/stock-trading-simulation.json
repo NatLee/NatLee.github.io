@@ -20,7 +20,21 @@
     "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/learn-center.png",
     "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/learn-sub-page.png",
     "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/k-chart-practice.png",
-    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/guess-practice.png"
+    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/guess-practice.png",
+    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/images/tick-loop-light.png",
+    "https://raw.githubusercontent.com/NatLee/stock-trading-simulation/main/docs/images/ladder-light.png"
+  ],
+  "imageCaptions": [
+    "",
+    "Trading screen: candlesticks with moving averages, the order book and market depth",
+    "Twelve scenarios, twenty seeded runs each; calm barely moves in any of them",
+    "Settings: pick a scenario, set the market intensity, the lot size and Taiwan fees",
+    "Learning Center: 19 courses and 185 units, from the basics to trading psychology",
+    "A lesson on the island reversal, with a drawn candle example and its OHLC values",
+    "Trading practice on a tweezer bottom: replay the candles, then buy or short",
+    "Pattern quiz: 20 seconds to pick the right pattern from four choices",
+    "One tick: bots send orders, the engine matches them, the last fill becomes the price",
+    "How the price moves one step: the market maker's quotes follow the last trade"
   ],
   "githubUrl": "https://github.com/NatLee/stock-trading-simulation",
   "technologies": [

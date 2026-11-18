@@ -10,7 +10,19 @@
     "/images/projects/dev-dock-manager/cover.webp",
     "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/create.gif",
     "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/console.gif",
-    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/novnc.gif"
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/novnc.gif",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/architecture-light.webp",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/lifecycle-light.webp",
+    "https://raw.githubusercontent.com/NatLee/dev-dock-manager/main/docs/images/family-light.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "Creating a desktop: name, SSH port and passwords go in, a running container comes out.",
+    "The web terminal: a root shell in the container, right in a browser tab.",
+    "NoVNC: type the VNC password, then Firefox and VS Code run on the remote desktop.",
+    "Traefik on port 8000 sends pages, the API and each noVNC desktop their own way.",
+    "What each click does, from login to terminal, desktop, start and stop.",
+    "The Dev Dock family: one desktop image, two managers. This one has more moving parts."
   ],
   "githubUrl": "https://github.com/NatLee/dev-dock-manager",
   "category": "DevOps",

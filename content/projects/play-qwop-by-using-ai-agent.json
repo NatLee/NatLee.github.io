@@ -7,7 +7,18 @@
   "longDescription": "Rebuilt in 2026 with Stable-Baselines3 PPO, PyTorch and a Gymnasium environment driving the official browser game through Playwright. Eight browser environments trained for 22 minutes. The recorded evaluation finished all six races; the best normal-speed game time was 193.8 seconds.",
   "language": "python",
   "images": [
-    "/images/projects/play-qwop-by-using-ai-agent/cover.webp"
+    "/images/projects/play-qwop-by-using-ai-agent/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/play-qwop-by-using-ai-agent/master/docs/images/best-run.gif",
+    "https://raw.githubusercontent.com/NatLee/play-qwop-by-using-ai-agent/master/docs/images/early-vs-trained.gif",
+    "https://raw.githubusercontent.com/NatLee/play-qwop-by-using-ai-agent/master/docs/images/learning-curve.png",
+    "https://raw.githubusercontent.com/NatLee/play-qwop-by-using-ai-agent/master/docs/goal.png"
+  ],
+  "imageCaptions": [
+    "",
+    "A 200.2-second race at 4x speed: the trained agent knee-scoots the whole 100 m",
+    "First 20 seconds: after 2 minutes of training it does the splits; after 22 it moves on",
+    "Learning curve: the best race reaches 100 m after 16 minutes; the average nears 60 m",
+    "The 2020 agent's finish screen: 592.1 on it, probably about 99 real minutes"
   ],
   "githubUrl": "https://github.com/NatLee/play-qwop-by-using-ai-agent",
   "category": "AI/ML",
@@ -51,48 +62,129 @@
       "id": "look",
       "label": "Look at the runner",
       "kind": "start",
-      "detail": "84x84 grayscale, last 4 stacked"
+      "detail": "84x84 grayscale, last 4 stacked",
+      "group": "Every step, 8 browsers"
     },
     {
       "id": "act",
       "label": "Hold one of nine key combos",
-      "detail": "Q/W thighs, O/P calves"
+      "detail": "Q/W thighs, O/P calves",
+      "group": "Every step, 8 browsers"
     },
     {
       "id": "clock",
       "label": "Advance exactly six frames",
-      "detail": "0.1 s on a virtual clock"
+      "detail": "0.1 s on a virtual clock",
+      "group": "Every step, 8 browsers"
     },
     {
       "id": "read",
       "label": "Read the distance with OCR",
-      "detail": "Jumps over 2 m ignored"
+      "detail": "Jumps over 2 m ignored",
+      "group": "Every step, 8 browsers"
     },
     {
-      "id": "reward",
-      "label": "Score progress, time, fall, finish",
-      "detail": "Falls cheap, or it freezes"
+      "id": "progress",
+      "label": "Reward metres gained, minus time",
+      "detail": "+1 a metre, -0.002 a step",
+      "group": "Every step, 8 browsers"
     },
     {
       "id": "over",
       "label": "Race over?",
       "kind": "decision",
-      "next": "yes",
-      "branch": {
-        "when": "no",
-        "to": "look"
-      }
+      "detail": "End panel, stall or 15 min",
+      "group": "Every step, 8 browsers",
+      "to": [
+        {
+          "id": "how",
+          "label": "yes"
+        },
+        {
+          "id": "batch",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "how",
+      "label": "How did it end?",
+      "kind": "decision",
+      "group": "When a race ends",
+      "to": [
+        {
+          "id": "bonus",
+          "label": "finished"
+        },
+        {
+          "id": "fall",
+          "label": "fell"
+        },
+        {
+          "id": "restart",
+          "label": "cut short"
+        }
+      ]
+    },
+    {
+      "id": "bonus",
+      "label": "Add 50 for the finish",
+      "group": "When a race ends"
     },
     {
       "id": "three",
-      "label": "Finished 100 m three times?",
+      "label": "Third finish?",
       "kind": "decision",
-      "detail": "Restart is the R key",
-      "next": "yes",
-      "branch": {
-        "when": "not yet",
-        "to": "look"
-      }
+      "group": "When a race ends",
+      "to": [
+        {
+          "id": "stop",
+          "label": "yes"
+        },
+        {
+          "id": "restart",
+          "label": "not yet"
+        }
+      ]
+    },
+    {
+      "id": "fall",
+      "label": "Subtract 2 for the fall",
+      "detail": "Small, or it freezes",
+      "group": "When a race ends"
+    },
+    {
+      "id": "restart",
+      "label": "Press R, race again",
+      "detail": "Same page, no reload",
+      "group": "When a race ends"
+    },
+    {
+      "id": "batch",
+      "label": "256 steps per browser yet?",
+      "kind": "decision",
+      "group": "PPO trainer (GPU)",
+      "to": [
+        {
+          "id": "update",
+          "label": "yes"
+        },
+        {
+          "id": "look",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "update",
+      "label": "PPO updates the policy",
+      "detail": "4 epochs, batches of 512",
+      "group": "PPO trainer (GPU)",
+      "to": [
+        {
+          "id": "look"
+        }
+      ]
     },
     {
       "id": "stop",

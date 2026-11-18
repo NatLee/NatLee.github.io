@@ -7,7 +7,14 @@
   "longDescription": "An efficient batch image processing tool that provides an intuitive interface for cropping multiple similar images simultaneously. This tool streamlines the workflow for processing large sets of images with consistent cropping requirements.",
   "language": "python",
   "images": [
-    "/images/projects/batch-crop-images/cover.webp"
+    "/images/projects/batch-crop-images/cover.webp",
+    "https://raw.githubusercontent.com/NatLee/batch-crop-images/main/docs/images/demo.gif",
+    "https://raw.githubusercontent.com/NatLee/batch-crop-images/main/docs/images/window.jpg"
+  ],
+  "imageCaptions": [
+    "",
+    "Draw a box, adjust it, lock 16:9, nudge it with the arrow keys, then crop the folder",
+    "The crop window: the box stays bright, the rest dims, the status bar shows exact pixels"
   ],
   "githubUrl": "https://github.com/NatLee/batch-crop-images",
   "category": "Image Processing",
@@ -45,51 +52,151 @@
   "gains": "Screenshots, scans, video frames, product photos, dataset images: any folder that shares a layout gets the same crop in one pass. Names, formats, EXIF and colour profiles are kept, the originals are left alone, and a saved preset repeats the job later without a window.",
   "flow": [
     {
-      "id": "ref",
-      "label": "Open the reference picture",
+      "id": "find",
+      "label": "List the pictures in the folder",
       "kind": "start",
-      "detail": "First file by name"
+      "detail": "Any letter case, name order"
     },
     {
       "id": "given",
       "label": "Box already given?",
       "kind": "decision",
       "detail": "Via --box or a preset",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "sizes"
-      }
+      "to": [
+        {
+          "id": "plan",
+          "label": "yes"
+        },
+        {
+          "id": "ref",
+          "label": "no"
+        }
+      ]
+    },
+    {
+      "id": "ref",
+      "label": "Open the reference picture",
+      "detail": "First file by name",
+      "group": "Crop window"
     },
     {
       "id": "draw",
       "label": "Draw and adjust the box",
-      "detail": "Esc quits, nothing written"
+      "detail": "Arrow keys nudge 1 px",
+      "group": "Crop window"
+    },
+    {
+      "id": "confirm",
+      "label": "Enter or Esc?",
+      "kind": "decision",
+      "group": "Crop window",
+      "to": [
+        {
+          "id": "hint",
+          "label": "Enter"
+        },
+        {
+          "id": "quit",
+          "label": "Esc"
+        }
+      ]
+    },
+    {
+      "id": "quit",
+      "label": "Quit, nothing written",
+      "kind": "end",
+      "group": "Crop window"
     },
     {
       "id": "hint",
-      "label": "Print it as a --box value",
-      "detail": "For reruns without the window"
+      "label": "Print the box as --box",
+      "detail": "For reruns without the window",
+      "group": "Crop window"
     },
     {
-      "id": "sizes",
-      "label": "Read every picture's size",
-      "detail": "Headers only, nothing written yet"
+      "id": "plan",
+      "label": "Read the next picture's size",
+      "detail": "Headers only, nothing written yet",
+      "group": "Planning first"
     },
     {
       "id": "same",
       "label": "Same size as the reference?",
       "kind": "decision",
-      "next": "no",
-      "branch": {
-        "when": "yes",
-        "to": "write"
-      }
+      "group": "Planning first",
+      "to": [
+        {
+          "id": "next",
+          "label": "yes"
+        },
+        {
+          "id": "rule",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "rule",
-      "label": "Apply the --mismatch rule",
-      "detail": "Ask, stretch, scale, anchor or skip"
+      "label": "Which --mismatch rule?",
+      "kind": "decision",
+      "group": "Planning first",
+      "to": [
+        {
+          "id": "stretch",
+          "label": "ask, stretch"
+        },
+        {
+          "id": "adapt",
+          "label": "scale, anchor"
+        },
+        {
+          "id": "skip",
+          "label": "skip"
+        }
+      ]
+    },
+    {
+      "id": "stretch",
+      "label": "Stretch to the reference size",
+      "detail": "With ask, 'no' stops everything",
+      "group": "Planning first",
+      "to": [
+        {
+          "id": "next"
+        }
+      ]
+    },
+    {
+      "id": "adapt",
+      "label": "Scale the box or anchor it",
+      "detail": "Scale resizes it; anchor keeps size",
+      "group": "Planning first",
+      "to": [
+        {
+          "id": "next"
+        }
+      ]
+    },
+    {
+      "id": "skip",
+      "label": "Leave the picture out",
+      "group": "Planning first"
+    },
+    {
+      "id": "next",
+      "label": "More pictures to plan?",
+      "kind": "decision",
+      "group": "Planning first",
+      "to": [
+        {
+          "id": "plan",
+          "label": "yes"
+        },
+        {
+          "id": "write",
+          "label": "no"
+        }
+      ]
     },
     {
       "id": "write",
