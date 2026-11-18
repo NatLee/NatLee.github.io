@@ -65,7 +65,7 @@ Rules (full brief: `themes/README.md`): themes contain **no personal content** �
 
 - Tapi: `lib/tapi/mascot.ts` + `lib/tapi/festivals.ts` are copied verbatim from NatLee/telepy (commit in the header) — re-copy to sync, don't edit. Rendered by `components/tapi/Tapi.tsx`.
 - `components/mascot/Mascot.tsx`: registry over `content/mascots.json` (`TalkingMascot`, `useMascotTalk`, `SpeechBubble`). Plain-HTML themes use `public/shared/mascot.js` (same data).
-- Tapi appears only in: home Telepy block, Telepy case study, footer, 404, Valhalla, and project pages (a `MascotRemark` beside the flow chart and the architecture diagram; lines in `remarks` of `content/mascots.json`, added 2026-11 at the owner's request). Sprite sizes are multiples of 26px.
+- Tapi appears only in: home Telepy block, Telepy case study, footer, 404, Valhalla, and project pages (a `MascotRemark` beside the flow chart and the architecture diagram, added 2026-11 at the owner's request). On project pages Tapi tells a dry joke from that project's own facts (`mascotLines` in the project JSON, Chinese in the overlay, 1–3 lines); projects without them fall back to the generic `remarks` in `content/mascots.json`. Outside Telepy's own pages Tapi never mentions tunnels (owner's rule; `npm test` checks it). Sprite sizes are multiples of 26px.
 
 ## Conventions
 

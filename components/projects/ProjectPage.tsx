@@ -238,7 +238,7 @@ export default function ProjectPage({ id }: { id: string }) {
           </div>
           {shots[0] && <Shot {...shots[0]} />}
           {(hasFlow || hasArchitecture) && (
-            <div className="reveal min-w-0 lg:hidden">{!wide && <DiagramCard flow={project.flow} architecture={project.architecture} seed={project.id} />}</div>
+            <div className="reveal min-w-0 lg:hidden">{!wide && <DiagramCard flow={project.flow} architecture={project.architecture} seed={project.id} lines={project.mascotLines} />}</div>
           )}
           {(project.challenges.length > 0 || project.solutions.length > 0) && (
             <div className="grid max-w-prose gap-12">
@@ -289,7 +289,7 @@ export default function ProjectPage({ id }: { id: string }) {
               ))}
             </ul>
           </div>
-          {hasFlow && <div className="hidden min-h-0 flex-1 flex-col lg:flex">{wide && <FlowSidePanel steps={project.flow!} seed={project.id} />}</div>}
+          {hasFlow && <div className="hidden min-h-0 flex-1 flex-col lg:flex">{wide && <FlowSidePanel steps={project.flow!} seed={project.id} lines={project.mascotLines} />}</div>}
         </aside>
       </div>
 
@@ -302,7 +302,7 @@ export default function ProjectPage({ id }: { id: string }) {
               </h2>
               <p className="mt-2 max-w-prose text-sm text-muted">{t('project.architectureNote')}</p>
             </div>
-            {wide && <MascotRemark section="architecture" seed={project.id} pose="wave" />}
+            {wide && <MascotRemark section="architecture" seed={project.id} own={project.mascotLines} pose="wave" />}
           </div>
           {wide && (
             <div className="reveal mt-6">

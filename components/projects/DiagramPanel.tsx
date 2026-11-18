@@ -67,7 +67,7 @@ function Fullscreen({ title, open, onClose, children }: { title: string; open: b
 }
 
 /** 寬螢幕：流程圖放在右欄，高度跟畫面一樣，圖比較高就在框裡捲。 */
-export function FlowSidePanel({ steps, seed }: { steps: FlowStep[]; seed: string }) {
+export function FlowSidePanel({ steps, seed, lines }: { steps: FlowStep[]; seed: string; lines?: string[] }) {
   const { t } = useLanguage()
   const [full, setFull] = useState(false)
   return (
@@ -87,7 +87,7 @@ export function FlowSidePanel({ steps, seed }: { steps: FlowStep[]; seed: string
         <FlowGraph steps={steps} />
       </div>
       <div className="flex justify-end border-t border-line px-4 py-2">
-        <MascotRemark section="flow" seed={seed} />
+        <MascotRemark section="flow" seed={seed} own={lines} />
       </div>
       <Fullscreen title={t('project.flow')} open={full} onClose={() => setFull(false)}>
         <FlowGraph steps={steps} />
@@ -99,7 +99,7 @@ export function FlowSidePanel({ steps, seed }: { steps: FlowStep[]; seed: string
 type Kind = 'flow' | 'architecture'
 
 /** 窄螢幕：流程圖和架構圖合成一張卡。只有一張圖時不出現切換鈕。 */
-export function DiagramCard({ flow, architecture, seed }: { flow?: FlowStep[]; architecture?: ArchitectureStep[]; seed: string }) {
+export function DiagramCard({ flow, architecture, seed, lines }: { flow?: FlowStep[]; architecture?: ArchitectureStep[]; seed: string; lines?: string[] }) {
   const { t } = useLanguage()
   const kinds = [flow?.length ? 'flow' : null, architecture?.length ? 'architecture' : null].filter(Boolean) as Kind[]
   const [kind, setKind] = useState<Kind>(kinds[0])
@@ -164,7 +164,7 @@ export function DiagramCard({ flow, architecture, seed }: { flow?: FlowStep[]; a
           )}
         </div>
         <p className="text-xs leading-snug text-muted">{kind === 'flow' ? t('project.flowNote') : t('project.architectureNote')}</p>
-        <MascotRemark key={kind} section={kind} seed={seed} pose={kind === 'architecture' ? 'wave' : 'idle'} />
+        <MascotRemark key={kind} section={kind} seed={seed} own={lines} pose={kind === 'architecture' ? 'wave' : 'idle'} />
       </div>
       <div ref={body} data-print-expand="" className="relative overflow-hidden" style={open ? undefined : { maxHeight: `${COLLAPSED_REM}rem` }}>
         <div ref={inner} className="p-3 sm:p-4">

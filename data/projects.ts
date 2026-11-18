@@ -177,12 +177,14 @@ export interface ProjectDetail {
   flow?: FlowStep[]
   /** 每張圖的說明，順序和 images 一樣；封面通常是空字串。 */
   imageCaptions?: string[]
+  /** 這個作品頁上 Tapi 講的話，從作品本身的事實取材；沒有就用通用台詞（content/mascots.json 的 remarks）。 */
+  mascotLines?: string[]
 }
 
 export type ProjectZhOverlay = Partial<
   Pick<
     ProjectDetail,
-    'title' | 'subtitle' | 'description' | 'longDescription' | 'role' | 'features' | 'challenges' | 'solutions' | 'results' | 'why' | 'gains' | 'lessons' | 'imageCaptions'
+    'title' | 'subtitle' | 'description' | 'longDescription' | 'role' | 'features' | 'challenges' | 'solutions' | 'results' | 'why' | 'gains' | 'lessons' | 'imageCaptions' | 'mascotLines'
   >
 > & { architecture?: ArchitectureStepZh[]; flow?: FlowStepZh[] }
 
@@ -210,6 +212,7 @@ function localizeProject(project: ProjectDetail, locale: Locale): ProjectDetail 
     lessons: project.lessons && localizedArray(locale, project.lessons, zh.lessons),
     flow: project.flow && localizeFlow(project.flow, zh.flow),
     imageCaptions: project.imageCaptions && localizedArray(locale, project.imageCaptions, zh.imageCaptions),
+    mascotLines: project.mascotLines && localizedArray(locale, project.mascotLines, zh.mascotLines),
   }
 }
 
