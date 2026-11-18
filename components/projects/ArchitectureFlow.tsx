@@ -22,6 +22,8 @@ const CORE_HALO = 4
 
 /** 直排時箭頭文字最寬多少（px），太寬就找不到不碰線的位置。 */
 const LABEL_MAX_VERTICAL = 160
+/** 直排時找箭頭文字的位置，沿著兩層之間的空隙每隔多少 px 試一格。 */
+const SLIDE_STEP = 8
 
 /** 箭頭文字的樣式：畫在圖上和量大小都用這一組。 */
 const LABEL_CLASS = 'rounded-md bg-paper px-1.5 py-0.5 font-mono text-[11px] leading-tight text-muted [overflow-wrap:anywhere]'
@@ -114,7 +116,8 @@ function NodeCard({ node, coreLabel, dim, point }: { node: FlowNode; coreLabel: 
         node.core ? 'border-accent-fill bg-accent-soft' : 'border-line bg-surface'
       }`}
     >
-      <div className="flex items-start gap-2.5">
+      {/* 格子窄（手機上一層三格）時，標題換到圖示下面一行，不和圖示搶寬度。 */}
+      <div className="flex flex-wrap items-start gap-x-2.5 gap-y-1.5">
         <span
           className={`grid h-7 w-7 shrink-0 place-items-center rounded-lg border ${
             node.core ? 'border-accent-fill bg-accent-fill text-paper' : 'border-line bg-paper text-muted'
@@ -122,7 +125,7 @@ function NodeCard({ node, coreLabel, dim, point }: { node: FlowNode; coreLabel: 
         >
           <Icon name={KIND_ICON[node.kind ?? 'app']} size={15} />
         </span>
-        <span className="min-w-0 pt-0.5">
+        <span className="min-w-0 grow basis-[4.5rem] pt-0.5">
           {node.core && <span className="block font-mono text-[10px] uppercase tracking-wider text-accent">{coreLabel}</span>}
           <span className="block font-display text-[0.95rem] font-bold leading-snug [overflow-wrap:anywhere]">{node.title}</span>
         </span>
@@ -208,9 +211,14 @@ export default function ArchitectureFlow({ steps }: { steps: ArchitectureStep[] 
         xs = [(a.right + b.left) / 2 - width / 2, a.right + 4, b.left - 4 - width]
         ys = [mid, mid - height - 6, mid + height + 6, Math.min(a.top, b.top) + 4 + height / 2, Math.max(a.bottom, b.bottom) - 4 - height / 2].map((cy) => cy - height / 2)
       } else {
+        // 直排：原本幾個常見位置（兩側、主幹兩旁），再加上沿著空隙每 SLIDE_STEP 一格滑過去，窄的時候才找得到線之間的空位。
         const center = trunk ? trunk.cx : base.width / 2
-        xs = [0, base.width - width, center + 10, center - 10 - width]
-        ys = [(a.bottom + b.top) / 2, a.bottom + 4 + height / 2, b.top - 4 - height / 2].map((cy) => cy - height / 2)
+        const slide = Array.from({ length: Math.max(0, Math.floor((base.width - width) / SLIDE_STEP)) + 1 }, (_, i) => i * SLIDE_STEP)
+        xs = [0, base.width - width, center + 10, center - 10 - width, ...slide]
+        const top = a.bottom + 4
+        const bottom = b.top - 4 - height
+        const rows = Array.from({ length: Math.max(0, Math.floor((bottom - top) / SLIDE_STEP)) + 1 }, (_, i) => top + i * SLIDE_STEP)
+        ys = [(a.bottom + b.top) / 2 - height / 2, top, bottom, ...rows]
       }
       const candidates: Rect[] = ys.flatMap((top) => xs.map((left) => ({ left, top, width, height })))
       const best = candidates.reduce((winner, candidate) => (score(candidate) < score(winner) ? candidate : winner))
