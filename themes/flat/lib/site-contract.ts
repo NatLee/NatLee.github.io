@@ -48,6 +48,16 @@ export interface FlowStep {
   next?: string
   /** 判斷往旁邊走的那條路：when 是條件，to 是要去的步驟 id。 */
   branch?: { when: string; to: string }
+  /** 分組框（子圖）的標題：同一個標題的步驟畫在同一個框裡。（2026-11 新增） */
+  group?: string
+  /** 往哪幾步走，可以帶文字；寫了就取代「接到下一步」。（2026-11 新增） */
+  to?: FlowLink[]
+}
+
+/** 流程圖的一條線：往哪一步（id），線上寫什麼。（2026-11 新增） */
+export interface FlowLink {
+  id: string
+  label?: string
 }
 
 /** 架構圖節點的種類，決定圖示。（2026-11 新增） */
@@ -147,6 +157,8 @@ export interface Project {
   /** 流程圖：由上到下的步驟，中英文步數相同。（2026-11 新增） */
   flow?: Localized<FlowStep[]>
   images: string[]
+  /** 每張圖的說明，順序和 images 一樣；封面通常是空字串。（2026-11 新增） */
+  imageCaptions?: Localized<string[]>
   /** 本地縮圖（/images/projects/<id>.webp），沒有就不給。 */
   thumbnail?: string
   links: { github?: string; demo?: string; pypi?: string; documentation?: string; article?: string }
@@ -195,6 +207,8 @@ export interface Mascot {
   images?: string[]
   /** 台詞；某個語言沒有就用另一個。 */
   lines: { en?: string[]; zh?: string[] }
+  /** 在作品頁評論圖表的台詞，依段落分（例如 flow、architecture）。（2026-11 新增） */
+  remarks?: Record<string, { en?: string[]; zh?: string[] }>
 }
 
 /** 主題用的小工具：依語言取值，zh 沒有就退回 en。 */

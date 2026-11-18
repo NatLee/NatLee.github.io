@@ -5,9 +5,10 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 import Icon from '@/components/Icon'
 import ArchitectureFlow from '@/components/projects/ArchitectureFlow'
-import FlowChart from '@/components/projects/FlowChart'
+import FlowGraph from '@/components/projects/FlowGraph'
 import ProjectCard, { StatusTag } from '@/components/projects/ProjectCard'
 import { StarCount, ThemeLabels } from '@/components/site/ui'
+import { MascotRemark } from '@/components/mascot/Mascot'
 import OriginBadge from '@/components/work/OriginBadge'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getProjectById, getProjectStars, getRelatedProjects, localizeCategory, type ProjectDetail } from '@/data/projects'
@@ -62,6 +63,24 @@ function Block({ title, children }: { title: string; children: ReactNode }) {
   )
 }
 
+/** 一張截圖加說明；點了開原圖。直式截圖限制高度、置中，不會把頁面撐得太長。 */
+function Shot({ src, caption, alt }: { src: string; caption: string; alt: string }) {
+  return (
+    <figure className="reveal grid gap-2">
+      <a href={src} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-xl border border-line bg-surface transition-colors hover:border-ink/30">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={caption || alt}
+          loading="lazy"
+          className="mx-auto block h-auto max-h-[36rem] w-auto max-w-full transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+        />
+      </a>
+      {caption && <figcaption className="text-sm leading-relaxed text-muted">{caption}</figcaption>}
+    </figure>
+  )
+}
+
 function Bullets({ items }: { items: string[] }) {
   return (
     <ul className="grid gap-3">
@@ -112,6 +131,12 @@ export default function ProjectPage({ id }: { id: string }) {
   const project = getProjectById(id, locale)
   if (!project) return null
   const [cover, ...gallery] = project.images
+  // 截圖（封面以外）和說明：前三張穿插在段落之間，其餘放最後的截圖區。
+  const shots = gallery.map((src, index) => ({
+    src,
+    caption: project.imageCaptions?.[index + 1] || '',
+    alt: t('project.imageAlt', { title: project.title, n: index + 2 }),
+  }))
 
   const origins = getProjectOrigins(project.id)
   const origin = origins.find((item) => item.kind === 'work')
@@ -188,51 +213,25 @@ export default function ProjectPage({ id }: { id: string }) {
         <p className="mt-12 rounded-2xl border border-dashed border-line p-6 text-sm text-muted">{t('project.noImage')}</p>
       )}
 
+      {/* 文字分成兩段，中間是流程圖；截圖穿插在段落之間，剩下的放最後。兩段文字都和右邊的技術欄同寬對齊。 */}
       <div className="mt-16 grid gap-14 lg:grid-cols-[minmax(0,1fr)_16rem]">
-        <div className="grid max-w-prose gap-12 text-[1.0625rem] leading-relaxed">
-          <Block title={t('project.overview')}>
-            <p>{project.longDescription}</p>
-          </Block>
-          {project.why && (
-            <Block title={t('project.why')}>
-              <p>{project.why}</p>
+        <div className="grid min-w-0 gap-12 text-[1.0625rem] leading-relaxed">
+          <div className="grid max-w-prose gap-12">
+            <Block title={t('project.overview')}>
+              <p>{project.longDescription}</p>
             </Block>
-          )}
-          {project.gains && (
-            <Block title={t('project.gains')}>
-              <p>{project.gains}</p>
-            </Block>
-          )}
-          {project.flow && project.flow.length > 0 && (
-            <Block title={t('project.flow')}>
-              <FlowChart steps={project.flow} />
-            </Block>
-          )}
-          {project.challenges.length > 0 && (
-            <Block title={t('project.problem')}>
-              <Bullets items={project.challenges} />
-            </Block>
-          )}
-          {project.solutions.length > 0 && (
-            <Block title={t('project.approach')}>
-              <Bullets items={project.solutions} />
-            </Block>
-          )}
-          {project.results.length > 0 && (
-            <Block title={t('project.results')}>
-              <Bullets items={project.results} />
-            </Block>
-          )}
-          {project.features.length > 0 && (
-            <Block title={t('project.features')}>
-              <Bullets items={project.features} />
-            </Block>
-          )}
-          {project.lessons && project.lessons.length > 0 && (
-            <Block title={t('project.lessons')}>
-              <Bullets items={project.lessons} />
-            </Block>
-          )}
+            {project.why && (
+              <Block title={t('project.why')}>
+                <p>{project.why}</p>
+              </Block>
+            )}
+            {project.gains && (
+              <Block title={t('project.gains')}>
+                <p>{project.gains}</p>
+              </Block>
+            )}
+          </div>
+          {shots[0] && <Shot {...shots[0]} />}
         </div>
         <aside className="h-fit lg:sticky lg:top-24">
           <h2 className="eyebrow">{t('project.stack')}</h2>
@@ -246,30 +245,92 @@ export default function ProjectPage({ id }: { id: string }) {
         </aside>
       </div>
 
-      {project.architecture && project.architecture.length > 0 && (
-        <section className="mt-20" aria-labelledby="architecture-title">
-          <h2 id="architecture-title" className="font-display text-2xl font-bold">
-            {t('project.architecture')}
-          </h2>
-          <p className="mt-2 max-w-prose text-sm text-muted">{t('project.architectureNote')}</p>
-          <div className="mt-6">
-            <ArchitectureFlow steps={project.architecture} />
+      {project.flow && project.flow.length > 0 && (
+        <section className="mt-20" aria-labelledby="flow-title">
+          <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
+            <div>
+              <h2 id="flow-title" className="font-display text-2xl font-bold">
+                {t('project.flow')}
+              </h2>
+              <p className="mt-2 max-w-prose text-sm text-muted">{t('project.flowNote')}</p>
+            </div>
+            <MascotRemark section="flow" seed={project.id} />
+          </div>
+          <div className="reveal mt-6 rounded-2xl border border-line bg-surface/50 p-4 sm:p-6">
+            <FlowGraph steps={project.flow} />
           </div>
         </section>
       )}
 
-      {gallery.length > 0 && (
+      <div className="mt-20 grid gap-14 lg:grid-cols-[minmax(0,1fr)_16rem]">
+        <div className="grid min-w-0 gap-12 text-[1.0625rem] leading-relaxed">
+          {(project.challenges.length > 0 || project.solutions.length > 0) && (
+            <div className="grid max-w-prose gap-12">
+              {project.challenges.length > 0 && (
+                <Block title={t('project.problem')}>
+                  <Bullets items={project.challenges} />
+                </Block>
+              )}
+              {project.solutions.length > 0 && (
+                <Block title={t('project.approach')}>
+                  <Bullets items={project.solutions} />
+                </Block>
+              )}
+            </div>
+          )}
+          {shots[1] && <Shot {...shots[1]} />}
+          {(project.results.length > 0 || project.features.length > 0) && (
+            <div className="grid max-w-prose gap-12">
+              {project.results.length > 0 && (
+                <Block title={t('project.results')}>
+                  <Bullets items={project.results} />
+                </Block>
+              )}
+              {project.features.length > 0 && (
+                <Block title={t('project.features')}>
+                  <Bullets items={project.features} />
+                </Block>
+              )}
+            </div>
+          )}
+          {shots[2] && <Shot {...shots[2]} />}
+          {project.lessons && project.lessons.length > 0 && (
+            <div className="grid max-w-prose gap-12">
+              <Block title={t('project.lessons')}>
+                <Bullets items={project.lessons} />
+              </Block>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {project.architecture && project.architecture.length > 0 && (
+        <section className="mt-20" aria-labelledby="architecture-title">
+          <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
+            <div>
+              <h2 id="architecture-title" className="font-display text-2xl font-bold">
+                {t('project.architecture')}
+              </h2>
+              <p className="mt-2 max-w-prose text-sm text-muted">{t('project.architectureNote')}</p>
+            </div>
+            <MascotRemark section="architecture" seed={project.id} pose="wave" />
+          </div>
+          <div className="reveal mt-6">
+            <ArchitectureFlow steps={project.architecture} />
+            <p className="mt-4 font-mono text-[11px] text-muted">{t('project.diagramHint')}</p>
+          </div>
+        </section>
+      )}
+
+      {shots.length > 3 && (
         <section className="mt-20" aria-labelledby="gallery-title">
           <h2 id="gallery-title" className="font-display text-2xl font-bold">
             {t('project.gallery')}
           </h2>
-          <ul className="mt-6 grid gap-5 md:grid-cols-2">
-            {gallery.map((src, index) => (
-              <li key={src}>
-                <a href={src} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl border border-line bg-surface transition-colors hover:border-ink/30">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={src} alt={t('project.imageAlt', { title: project.title, n: index + 2 })} loading="lazy" className="block w-full" />
-                </a>
+          <ul className="mt-6 grid gap-8 md:grid-cols-2">
+            {shots.slice(3).map((shot) => (
+              <li key={shot.src}>
+                <Shot {...shot} />
               </li>
             ))}
           </ul>

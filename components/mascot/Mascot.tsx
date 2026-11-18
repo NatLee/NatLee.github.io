@@ -106,3 +106,48 @@ export function TalkingMascot({ id, size = 78, align = 'right' }: { id: MascotId
     </span>
   )
 }
+
+/** 作品頁評論圖表的台詞（content/mascots.json 的 remarks），某個語言沒有就用另一個。 */
+export function mascotRemarks(id: MascotId, section: string, locale: Locale): string[] {
+  const set = mascots[id].remarks?.[section]
+  if (!set) return []
+  const preferred = locale === 'zh-TW' ? set.zh : set.en
+  return preferred?.length ? preferred : (set.en ?? set.zh ?? [])
+}
+
+/** 同一個作品、同一段永遠先說同一句（伺服器和瀏覽器算出來一樣）。 */
+function seedIndex(seed: string, length: number) {
+  let hash = 0
+  for (const char of seed) hash = (hash * 31 + char.charCodeAt(0)) >>> 0
+  return length ? hash % length : 0
+}
+
+/**
+ * Tapi 在作品頁的圖表旁邊講一句話：對話框加吉祥物，點吉祥物換下一句。
+ * seed 用作品 id，讓每個作品一開始講的不一樣。
+ */
+export function MascotRemark({ id = 'tapi', section, seed, pose = 'idle' }: { id?: MascotId; section: string; seed: string; pose?: MascotPose }) {
+  const { locale } = useLanguage()
+  const lines = mascotRemarks(id, section, locale)
+  const [offset, setOffset] = useState(0)
+  if (!lines.length) return null
+  const line = lines[(seedIndex(`${seed}:${section}`, lines.length) + offset) % lines.length]
+  const name = mascotName(id, locale)
+  return (
+    <div className="flex items-end gap-2">
+      <p className="relative max-w-[17rem] rounded-xl border border-line bg-surface px-3 py-2 text-sm leading-snug text-ink">
+        {line}
+        <span className="absolute -right-[7px] bottom-4 h-3 w-3 rotate-45 border-r border-t border-line bg-surface" aria-hidden="true" />
+      </p>
+      <button
+        type="button"
+        onClick={() => setOffset((current) => current + 1)}
+        aria-label={name}
+        title={name}
+        className="shrink-0 rounded-lg p-0.5 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      >
+        <MascotFigure id={id} size={52} pose={offset % 2 ? 'happy' : pose} />
+      </button>
+    </div>
+  )
+}

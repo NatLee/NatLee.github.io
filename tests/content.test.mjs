@@ -126,29 +126,65 @@ test('gains, lessons and flow charts are bilingual and well formed', () => {
       continue
     }
     const ids = steps.map(step => step.id)
-    // 流程圖放在內文欄：太短不像流程，太長要捲很久。分支走右邊的通道，最多兩條。
-    assert.ok(steps.length >= 3 && steps.length <= 8, `${project.id}: flow needs 3–8 steps`)
+    const where = index => `${project.id}: flow step ${index + 1}`
+    // 圖用 dagre 排，可以分岔、匯合、往回走；太長要捲很久，所以最多 16 步，每一步最多連出 3 條線。
+    assert.ok(steps.length >= 3 && steps.length <= 16, `${project.id}: flow needs 3–16 steps`)
     assert.equal(new Set(ids).size, ids.length, `${project.id}: flow step ids must be unique`)
-    assert.ok(steps.filter(step => step.branch).length <= 2, `${project.id}: at most two branches`)
     steps.forEach((step, index) => {
-      assert.ok(step.id && step.label, `${project.id}: flow step ${index + 1} needs an id and a label`)
-      if (step.kind) assert.ok(flowKinds.includes(step.kind), `${project.id}: flow step ${index + 1} kind must be one of ${flowKinds.join(', ')}`)
-      assert.equal(step.kind === 'decision', Boolean(step.branch), `${project.id}: flow step ${index + 1}: decisions and only decisions branch`)
-      if (step.branch) {
-        assert.ok(step.branch.when, `${project.id}: flow step ${index + 1} branch needs a condition`)
-        assert.ok(ids.includes(step.branch.to) && step.branch.to !== step.id, `${project.id}: flow step ${index + 1} branch must go to another step`)
+      assert.ok(step.id && step.label, `${where(index)} needs an id and a label`)
+      if (step.kind) assert.ok(flowKinds.includes(step.kind), `${where(index)}: kind must be one of ${flowKinds.join(', ')}`)
+      const out = [...(step.to ?? []), ...(step.branch ? [{ id: step.branch.to, label: step.branch.when }] : [])]
+      for (const link of out) assert.ok(ids.includes(link.id) && link.id !== step.id, `${where(index)}: goes to an unknown step or itself (${link.id})`)
+      assert.ok(out.length + (step.to ? 0 : 1) <= 3, `${where(index)}: at most three ways out`)
+      if (step.kind === 'decision') {
+        // 判斷至少兩條路，每條都要寫條件（新格式寫在 to，舊格式是「branch 加上接下一步」）。
+        const ways = step.to ? step.to : [{ label: step.next }, { label: step.branch?.when }]
+        assert.ok(ways.length >= 2 && ways.every(link => link.label), `${where(index)}: a decision needs two or more labelled ways out`)
+      } else {
+        assert.ok(!step.branch, `${where(index)}: only decisions branch`)
       }
-      assert.ok(!(index === steps.length - 1 && step.next), `${project.id}: the last flow step has no arrow`)
+      assert.ok(!(index === steps.length - 1 && step.next), `${where(index)}: the last flow step has no arrow`)
     })
     assert.ok(Array.isArray(zh.flow) && zh.flow.length === steps.length, `${project.id}: Chinese flow must have the same steps`)
+    const groupZh = new Map()
     zh.flow.forEach((step, index) => {
       const en = steps[index]
-      assert.ok(step.label, `${project.id}: Chinese flow step ${index + 1} needs a label`)
+      assert.ok(step.label, `${where(index)}: Chinese label missing`)
       for (const key of ['id', 'kind']) assert.ok(!(key in step), `${project.id}: write ${key} only in English`)
       assert.ok(!step.branch?.to, `${project.id}: write branch.to only in English`)
-      assert.equal(Boolean(step.next), Boolean(en.next), `${project.id}: flow step ${index + 1} arrow label must exist in both languages`)
-      assert.equal(Boolean(step.branch?.when), Boolean(en.branch), `${project.id}: flow step ${index + 1} branch condition must exist in both languages`)
+      assert.ok(!(step.to ?? []).some(link => 'id' in link), `${project.id}: write the ids in to only in English`)
+      assert.equal(Boolean(step.next), Boolean(en.next), `${where(index)}: arrow label must exist in both languages`)
+      assert.equal(Boolean(step.branch?.when), Boolean(en.branch), `${where(index)}: branch condition must exist in both languages`)
+      assert.equal(step.to?.length ?? 0, en.to?.length ?? 0, `${where(index)}: Chinese must have the same ways out`)
+      ;(en.to ?? []).forEach((link, i) => assert.equal(Boolean(step.to?.[i]?.label), Boolean(link.label), `${where(index)}: way ${i + 1} label must exist in both languages`))
+      assert.equal(Boolean(step.group), Boolean(en.group), `${where(index)}: group must exist in both languages`)
+      if (en.group) {
+        // 同一個英文分組在中文也要是同一個名字，不然會畫成兩個框。
+        if (!groupZh.has(en.group)) groupZh.set(en.group, step.group)
+        assert.equal(step.group, groupZh.get(en.group), `${where(index)}: group "${en.group}" has two Chinese names`)
+      }
     })
+  }
+})
+
+test('image captions line up with the images, and Tapi has remarks in both languages', () => {
+  const overlays = read('content/i18n/projects.zh.json')
+  for (const project of projects) {
+    const zh = overlays[project.id] ?? {}
+    if (!project.imageCaptions) {
+      assert.ok(!zh.imageCaptions, `${project.id}: Chinese captions without English ones`)
+      continue
+    }
+    assert.equal(project.imageCaptions.length, project.images.length, `${project.id}: one caption per image (the cover may be empty)`)
+    assert.equal(zh.imageCaptions?.length, project.images.length, `${project.id}: Chinese captions must line up with the images`)
+    project.imageCaptions.forEach((caption, i) => assert.equal(Boolean(caption), Boolean(zh.imageCaptions[i]), `${project.id}: caption ${i + 1} must exist in both languages`))
+  }
+  const mascots = read('content/mascots.json')
+  for (const [id, mascot] of Object.entries(mascots)) {
+    if (id === '$schema' || !mascot.remarks) continue
+    for (const [section, set] of Object.entries(mascot.remarks)) {
+      assert.ok(set.en?.length && set.en.length === set.zh?.length, `${id}.remarks.${section}: same number of lines in both languages`)
+    }
   }
 })
 

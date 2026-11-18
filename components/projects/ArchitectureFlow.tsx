@@ -4,7 +4,8 @@
 // 寬度夠每一層都有 MIN_NODE 寬時由左到右，不夠就由上到下（依實際寬度和層數決定，不看螢幕斷點）。
 // 節點用 CSS 排版，線是量完節點位置後用 SVG 畫的；箭頭上的字挑不會蓋到線和節點的位置。
 // 資料在作品 JSON 的 architecture（格式見 lib/content/contract.ts 的 ArchitectureStep）。
-import { useId, useState, type CSSProperties } from 'react'
+// 互動：指到（手機上點一下）某個節點，跟它相連的線變成流動的虛線，沒相連的節點和線變淡。
+import { useId, useState, type CSSProperties, type PointerEvent } from 'react'
 import Icon from '@/components/Icon'
 import { useLanguage } from '@/contexts/LanguageContext'
 import type { ArchitectureKind, ArchitectureStep } from '@/data/projects'
@@ -81,7 +82,8 @@ interface Rect {
 }
 
 interface Geometry {
-  edges: { d: string; core: boolean; points: [number, number][] }[]
+  /** from、to 是兩端節點的 key，指到節點時用來找相連的線。 */
+  edges: { d: string; core: boolean; points: [number, number][]; from: string; to: string }[]
   labels: (Rect & { text: string })[]
 }
 
@@ -99,12 +101,18 @@ function sample(p0: [number, number], p1: [number, number], p2: [number, number]
 
 const overlaps = (a: Rect, b: Box) => a.left < b.right && a.left + a.width > b.left && a.top < b.bottom && a.top + a.height > b.top
 
-function NodeCard({ node, coreLabel }: { node: FlowNode; coreLabel: string }) {
+/** 滑鼠：移進來亮、移出去恢復。觸控和筆：點一下亮，再點一下恢復。 */
+type PointHandlers = Record<'onPointerEnter' | 'onPointerLeave' | 'onPointerUp', (event: PointerEvent) => void>
+
+function NodeCard({ node, coreLabel, dim, point }: { node: FlowNode; coreLabel: string; dim: boolean; point: PointHandlers }) {
   return (
     <div
       data-box={`node:${node.key}`}
+      {...point}
       style={node.core ? { boxShadow: `0 0 0 ${CORE_HALO}px rgb(var(--accent-soft))` } : undefined}
-      className={`relative flex h-full min-w-0 flex-col gap-2 rounded-xl border p-3 ${node.core ? 'border-accent-fill bg-accent-soft' : 'border-line bg-surface'}`}
+      className={`relative flex h-full min-w-0 flex-col gap-2 rounded-xl border p-3 transition-opacity duration-200 ${dim ? 'opacity-30' : ''} ${
+        node.core ? 'border-accent-fill bg-accent-soft' : 'border-line bg-surface'
+      }`}
     >
       <div className="flex items-start gap-2.5">
         <span
@@ -139,6 +147,13 @@ export default function ArchitectureFlow({ steps }: { steps: ArchitectureStep[] 
   const layers = toLayers(steps)
   // 一開始（伺服器輸出時）用直排，量到寬度夠再換成橫排。
   const [horizontal, setHorizontal] = useState(false)
+  // 指到的節點（key）。
+  const [focus, setFocus] = useState<string | null>(null)
+  const pointAt = (key: string): PointHandlers => ({
+    onPointerEnter: (event) => event.pointerType === 'mouse' && setFocus(key),
+    onPointerLeave: (event) => event.pointerType === 'mouse' && setFocus((was) => (was === key ? null : was)),
+    onPointerUp: (event) => event.pointerType !== 'mouse' && setFocus((was) => (was === key ? null : key)),
+  })
 
   const [root, geometry] = useMeasuredBoxes<Geometry | null>((boxes, base, container) => {
     const fits = base.width >= layers.length * MIN_NODE + (layers.length - 1) * GAP_X
@@ -163,7 +178,7 @@ export default function ArchitectureFlow({ steps }: { steps: ArchitectureStep[] 
           const p: [number, number][] = horizontal
             ? [[s.right, s.cy], [(s.right + e.left - stop) / 2, s.cy], [(s.right + e.left - stop) / 2, e.cy], [e.left - stop, e.cy]]
             : [[s.cx, s.bottom], [s.cx, (s.bottom + e.top - stop) / 2], [e.cx, (s.bottom + e.top - stop) / 2], [e.cx, e.top - stop]]
-          edges.push({ d: `M${p[0]} C${p[1]} ${p[2]} ${p[3]}`, core, points: sample(p[0], p[1], p[2], p[3]) })
+          edges.push({ d: `M${p[0]} C${p[1]} ${p[2]} ${p[3]}`, core, points: sample(p[0], p[1], p[2], p[3]), from: source.key, to: target.key })
         }
       }
     })
@@ -212,6 +227,9 @@ export default function ArchitectureFlow({ steps }: { steps: ArchitectureStep[] 
   }, [steps, horizontal])
 
   const coreLabel = t('project.architectureCore')
+  // 指到某個節點時：亮著的是它、和它有線相連的節點，以及那些線。
+  const touching = (edge: Geometry['edges'][number]) => edge.from === focus || edge.to === focus
+  const near = focus && geometry ? new Set([focus, ...geometry.edges.filter(touching).flatMap((edge) => [edge.from, edge.to])]) : null
   const listStyle: CSSProperties = horizontal
     ? { gridTemplateColumns: `repeat(${layers.length}, minmax(0, 1fr))`, columnGap: GAP_X, alignItems: 'center' }
     : { rowGap: GAP_Y }
@@ -233,7 +251,7 @@ export default function ArchitectureFlow({ steps }: { steps: ArchitectureStep[] 
             d={edge.d}
             fill="none"
             strokeWidth={1.5}
-            className={edge.core ? 'stroke-accent-fill/70' : 'stroke-ink/30'}
+            className={`transition-opacity duration-200 ${edge.core ? 'stroke-accent-fill/70' : 'stroke-ink/30'} ${near ? (touching(edge) ? 'diagram-march' : 'opacity-20') : ''}`}
             markerEnd={`url(#${uid}-${edge.core ? 'c' : 'a'})`}
           />
         ))}
@@ -244,7 +262,7 @@ export default function ArchitectureFlow({ steps }: { steps: ArchitectureStep[] 
           const nodes = (
             <div className="grid gap-3" style={{ gridTemplateColumns: horizontal ? 'minmax(0, 1fr)' : `repeat(${layer.nodes.length}, minmax(0, 1fr))` }}>
               {layer.nodes.map((node) => (
-                <NodeCard key={node.key} node={node} coreLabel={coreLabel} />
+                <NodeCard key={node.key} node={node} coreLabel={coreLabel} dim={near !== null && !near.has(node.key)} point={pointAt(node.key)} />
               ))}
             </div>
           )

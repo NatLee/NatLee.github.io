@@ -24,10 +24,61 @@ export type ProjectCategory =
   | 'Web Automation'
   | 'Productivity Tools'
 
-export type { ArchitectureKind, ArchitectureNode, ArchitectureStep, FlowStep } from '@/lib/content/contract'
+export type { ArchitectureKind, ArchitectureNode, ArchitectureStep, FlowLink, FlowStep } from '@/lib/content/contract'
 
-/** 中文的流程圖：照英文的順序寫，只換字；id、kind、branch.to 只寫在英文。 */
-type FlowStepZh = { label?: string; detail?: string; next?: string; branch?: { when?: string } }
+/** 中文的流程圖：照英文的順序寫，只換字；id、kind、branch.to、to 的 id 只寫在英文。 */
+type FlowStepZh = { label?: string; detail?: string; next?: string; group?: string; branch?: { when?: string }; to?: { label?: string }[] }
+
+/** 流程圖的一條線。back 表示往回走（目標在前面），畫成虛線。 */
+export interface FlowEdge {
+  from: string
+  to: string
+  label?: string
+  back: boolean
+}
+
+/**
+ * 從步驟推出所有的線：有 to 就照 to；沒有就接到下一步（end 不接）；舊格式的 branch 再多一條。
+ * 作品頁畫圖和 npm test 檢查都用同一套規則。
+ */
+export function flowEdges(steps: FlowStep[]): FlowEdge[] {
+  const order = new Map(steps.map((step, index) => [step.id, index]))
+  const edges: FlowEdge[] = []
+  const add = (from: FlowStep, to: string, label?: string) => edges.push({ from: from.id, to, label, back: (order.get(to) ?? 0) <= (order.get(from.id) ?? 0) })
+  steps.forEach((step, index) => {
+    if (step.to) step.to.forEach((link) => add(step, link.id, link.label))
+    else if (step.kind !== 'end' && index < steps.length - 1) add(step, steps[index + 1].id, step.next)
+    if (step.branch) add(step, step.branch.to, step.branch.when)
+  })
+  return edges
+}
+
+/** 流程圖「跑一遍」走過的路：path 是依序經過的步驟，via[i] 是從 path[i] 走到 path[i + 1] 用的線（flowEdges 的索引）。 */
+export interface FlowWalk {
+  path: string[]
+  via: number[]
+}
+
+/**
+ * 從開始那一步（沒有就用第一步）沿著線走，走到沒有路為止。
+ * 有好幾條路時，第 play 次播放選第 play 條（除以路數取餘數），所以每按一次就換條路走。
+ * 同一條線一趟只走一次，迴圈最多繞一圈；再保險一點，最多走步數的兩倍。
+ */
+export function walkFlow(steps: FlowStep[], edges: FlowEdge[], play: number): FlowWalk {
+  const start = steps.find((step) => step.kind === 'start') ?? steps[0]
+  const taken = new Set<number>()
+  const walk: FlowWalk = { path: [start.id], via: [] }
+  while (walk.path.length <= steps.length * 2) {
+    const here = walk.path[walk.path.length - 1]
+    const outs = edges.flatMap((edge, index) => (edge.from === here && !taken.has(index) ? [index] : []))
+    if (!outs.length) break
+    const pick = outs[play % outs.length]
+    taken.add(pick)
+    walk.via.push(pick)
+    walk.path.push(edges[pick].to)
+  }
+  return walk
+}
 
 /** 把中文的流程圖疊到英文上：步數不一樣就用英文（npm test 會擋下這種情況）。作品頁和 site.json 共用。 */
 export function localizeFlow(en: FlowStep[], zh?: FlowStepZh[]): FlowStep[] {
@@ -40,6 +91,8 @@ export function localizeFlow(en: FlowStep[], zh?: FlowStepZh[]): FlowStep[] {
       ...(step.detail ? { detail: z.detail || step.detail } : {}),
       ...(step.next ? { next: z.next || step.next } : {}),
       ...(step.branch ? { branch: { ...step.branch, when: z.branch?.when || step.branch.when } } : {}),
+      ...(step.group ? { group: z.group || step.group } : {}),
+      ...(step.to ? { to: step.to.map((link, i) => ({ ...link, ...(link.label ? { label: z.to?.[i]?.label || link.label } : {}) })) } : {}),
     }
   })
 }
@@ -122,12 +175,14 @@ export interface ProjectDetail {
   lessons?: string[]
   /** 流程圖（作品頁「流程」）。 */
   flow?: FlowStep[]
+  /** 每張圖的說明，順序和 images 一樣；封面通常是空字串。 */
+  imageCaptions?: string[]
 }
 
 export type ProjectZhOverlay = Partial<
   Pick<
     ProjectDetail,
-    'title' | 'subtitle' | 'description' | 'longDescription' | 'role' | 'features' | 'challenges' | 'solutions' | 'results' | 'why' | 'gains' | 'lessons'
+    'title' | 'subtitle' | 'description' | 'longDescription' | 'role' | 'features' | 'challenges' | 'solutions' | 'results' | 'why' | 'gains' | 'lessons' | 'imageCaptions'
   >
 > & { architecture?: ArchitectureStepZh[]; flow?: FlowStepZh[] }
 
@@ -154,6 +209,7 @@ function localizeProject(project: ProjectDetail, locale: Locale): ProjectDetail 
     gains: project.gains && localizedField(locale, project.gains, zh.gains),
     lessons: project.lessons && localizedArray(locale, project.lessons, zh.lessons),
     flow: project.flow && localizeFlow(project.flow, zh.flow),
+    imageCaptions: project.imageCaptions && localizedArray(locale, project.imageCaptions, zh.imageCaptions),
   }
 }
 

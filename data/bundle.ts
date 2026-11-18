@@ -84,6 +84,7 @@ export function buildSiteBundle(): SiteBundle {
         lessons: p.lessons ? loc(p.lessons, zh.lessons) : undefined,
         flow: p.flow ? { en: p.flow, zh: localizeFlow(p.flow, (pz[p.id] as ProjectZhOverlay | undefined)?.flow) } : undefined,
         images: p.images,
+        imageCaptions: p.imageCaptions ? loc(p.imageCaptions, zh.imageCaptions) : undefined,
         thumbnail: p.thumbnail,
         links: p.links,
         stars: getProjectStars(p),
