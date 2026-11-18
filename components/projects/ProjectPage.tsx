@@ -1,12 +1,13 @@
 'use client'
 
-// 案例頁模板（Telepy 以外的所有作品）：標頭 → 主圖 → 概要 / 問題 / 做法 / 成果 / 功能 → 截圖 → 相關作品。
+// 案例頁模板（Telepy 以外的所有作品）：標頭（資料卡含技術）→ 主圖 → 交錯敘事的正文（見下方註解）→ 相關作品。
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import Icon from '@/components/Icon'
 import ArchitectureFlow from '@/components/projects/ArchitectureFlow'
 import { DiagramCard, FlowSidePanel, useWideLayout } from '@/components/projects/DiagramPanel'
 import ProjectCard, { StatusTag } from '@/components/projects/ProjectCard'
+import { Block, Bullets, Checklist, Gallery, Intro, LessonCards, ProblemApproach, PullQuote, Row, Shot } from '@/components/projects/ProjectSections'
 import { StarCount, ThemeLabels } from '@/components/site/ui'
 import { MascotRemark } from '@/components/mascot/Mascot'
 import OriginBadge from '@/components/work/OriginBadge'
@@ -52,46 +53,6 @@ export function formatPeriod(project: ProjectDetail, present: string) {
   const start = project.timeline.start?.replace('-', '.') ?? ''
   const end = !project.timeline.end || project.timeline.end === 'Present' ? present : project.timeline.end.replace('-', '.')
   return start === end ? start : `${start} – ${end}`
-}
-
-function Block({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <section className="grid gap-4">
-      <h2 className="font-display text-2xl font-bold">{title}</h2>
-      {children}
-    </section>
-  )
-}
-
-/** 一張截圖加說明；點了開原圖。直式截圖限制高度、置中，不會把頁面撐得太長。 */
-function Shot({ src, caption, alt }: { src: string; caption: string; alt: string }) {
-  return (
-    <figure className="reveal grid gap-2">
-      <a href={src} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-xl border border-line bg-surface transition-colors hover:border-ink/30">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={src}
-          alt={caption || alt}
-          loading="lazy"
-          className="mx-auto block h-auto max-h-[36rem] w-auto max-w-full transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-        />
-      </a>
-      {caption && <figcaption className="text-sm leading-relaxed text-muted">{caption}</figcaption>}
-    </figure>
-  )
-}
-
-function Bullets({ items }: { items: string[] }) {
-  return (
-    <ul className="grid gap-3">
-      {items.map((item) => (
-        <li key={item} className="grid grid-cols-[0.75rem_minmax(0,1fr)] gap-3">
-          <span className="mt-[0.7em] h-1.5 w-1.5 rounded-full bg-accent-fill" aria-hidden="true" />
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
-  )
 }
 
 export function RelatedProjects({ project }: { project: ProjectDetail }) {
@@ -140,6 +101,13 @@ export default function ProjectPage({ id }: { id: string }) {
     caption: project.imageCaptions?.[index + 1] || '',
     alt: t('project.imageAlt', { title: project.title, n: index + 2 }),
   }))
+  // 截圖依序發給各段：有流程圖時一張放在流程圖旁邊；沒有流程圖時功能配一張、成果配一張（有成果才配，不讓截圖單獨佔一列）。
+  // 沒發出去的都放最後的截圖區。
+  const pool = [...shots]
+  const chapterShot = hasFlow ? pool.shift() : undefined
+  const featureShot = !hasFlow && project.features.length ? pool.shift() : undefined
+  const resultShot = !hasFlow && project.results.length ? pool.shift() : undefined
+  const galleryShots = pool
 
   const origins = getProjectOrigins(project.id)
   const origin = origins.find((item) => item.kind === 'work')
@@ -169,6 +137,17 @@ export default function ProjectPage({ id }: { id: string }) {
       </span>,
     ])
   }
+  // 技術放在資料卡最後，正文就不必留一條窄欄給它。
+  facts.push([
+    t('project.stack'),
+    <ul key="stack" className="flex flex-wrap gap-1.5">
+      {project.technologies.map((tech) => (
+        <li key={tech} className="chip">
+          {tech}
+        </li>
+      ))}
+    </ul>,
+  ])
 
   return (
     <div className="shell pt-10">
@@ -216,117 +195,81 @@ export default function ProjectPage({ id }: { id: string }) {
         <p className="mt-12 rounded-2xl border border-dashed border-line p-6 text-sm text-muted">{t('project.noImage')}</p>
       )}
 
-      {/* 文字和截圖一欄到底，截圖穿插在段落之間，剩下的放最後。
-          寬螢幕：右欄是技術和流程圖，流程圖跟著捲動停在畫面裡；架構圖在下方全寬。
-          窄螢幕：流程圖和架構圖合成一張卡，放在第一段文字後面。擺法見 DiagramPanel.tsx。 */}
-      <div className={`mt-16 grid gap-14 ${hasFlow ? 'lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-12' : 'lg:grid-cols-[minmax(0,1fr)_16rem]'}`}>
-        <div className="grid min-w-0 gap-12 text-[1.0625rem] leading-relaxed">
-          <div className="grid max-w-prose gap-12">
-            <Block title={t('project.overview')}>
-              <p>{project.longDescription}</p>
-            </Block>
-            {project.why && (
-              <Block title={t('project.why')}>
-                <p>{project.why}</p>
-              </Block>
-            )}
-            {project.gains && (
-              <Block title={t('project.gains')}>
-                <p>{project.gains}</p>
-              </Block>
-            )}
-          </div>
-          {shots[0] && <Shot {...shots[0]} />}
-          {(hasFlow || hasArchitecture) && (
-            <div className="reveal min-w-0 lg:hidden">{!wide && <DiagramCard flow={project.flow} architecture={project.architecture} seed={project.id} lines={project.mascotLines} />}</div>
-          )}
-          {(project.challenges.length > 0 || project.solutions.length > 0) && (
-            <div className="grid max-w-prose gap-12">
-              {project.challenges.length > 0 && (
-                <Block title={t('project.problem')}>
-                  <Bullets items={project.challenges} />
-                </Block>
-              )}
-              {project.solutions.length > 0 && (
-                <Block title={t('project.approach')}>
-                  <Bullets items={project.solutions} />
-                </Block>
-              )}
+      {/* 交錯敘事：每一段依內容挑排法（ProjectSections.tsx），往下捲有起伏，整頁寬度都用上。
+          開場（大字概要＋「為什麼做」小卡）→ 引言（能帶來什麼）→ 中段 → 學到什麼 → 架構圖 → 其餘截圖。
+          中段，寬螢幕：有流程圖時是「怎麼運作」一章，流程圖跟著捲、旁邊是功能、問題與做法、成果和一張截圖；
+          沒有流程圖時截圖和文字左右交錯。窄螢幕都是一欄，流程圖和架構圖在同一張卡裡（DiagramPanel.tsx）。 */}
+      <div className="mt-16 grid gap-16 text-[1.0625rem] leading-relaxed lg:gap-20">
+        <Intro overviewTitle={t('project.overview')} overview={project.longDescription} whyTitle={t('project.why')} why={project.why} />
+        {project.gains && <PullQuote label={t('project.gains')} text={project.gains} />}
+
+        {(hasFlow || hasArchitecture) && (
+          <div className="reveal min-w-0 lg:hidden">{!wide && <DiagramCard flow={project.flow} architecture={project.architecture} seed={project.id} lines={project.mascotLines} />}</div>
+        )}
+
+        {hasFlow ? (
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+            {/* 左格撐滿這一章的高度，流程圖在裡面跟著捲（sticky 需要外層比自己高）。 */}
+            <div className="hidden min-w-0 lg:block">
+              <div className="sticky top-24 flex max-h-[calc(100vh-7rem)] flex-col">
+                {wide && <FlowSidePanel steps={project.flow!} seed={project.id} lines={project.mascotLines} />}
+              </div>
             </div>
-          )}
-          {shots[1] && <Shot {...shots[1]} />}
-          {(project.results.length > 0 || project.features.length > 0) && (
-            <div className="grid max-w-prose gap-12">
+            <div className="grid min-w-0 content-start gap-12">
+              {project.features.length > 0 && <Checklist title={t('project.features')} items={project.features} />}
+              <ProblemApproach stacked problemTitle={t('project.problem')} problems={project.challenges} approachTitle={t('project.approach')} approaches={project.solutions} />
               {project.results.length > 0 && (
                 <Block title={t('project.results')}>
                   <Bullets items={project.results} />
                 </Block>
               )}
-              {project.features.length > 0 && (
-                <Block title={t('project.features')}>
-                  <Bullets items={project.features} />
-                </Block>
-              )}
+              {chapterShot && <Shot {...chapterShot} />}
             </div>
-          )}
-          {shots[2] && <Shot {...shots[2]} />}
-          {project.lessons && project.lessons.length > 0 && (
-            <div className="grid max-w-prose gap-12">
-              <Block title={t('project.lessons')}>
-                <Bullets items={project.lessons} />
-              </Block>
-            </div>
-          )}
-        </div>
-        <aside className={`h-fit lg:sticky lg:top-24 ${hasFlow ? 'lg:flex lg:max-h-[calc(100vh-7rem)] lg:flex-col lg:gap-6' : ''}`}>
-          <div>
-            <h2 className="eyebrow">{t('project.stack')}</h2>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <li key={tech} className="chip">
-                  {tech}
-                </li>
-              ))}
-            </ul>
           </div>
-          {hasFlow && <div className="hidden min-h-0 flex-1 flex-col lg:flex">{wide && <FlowSidePanel steps={project.flow!} seed={project.id} lines={project.mascotLines} />}</div>}
-        </aside>
+        ) : (
+          <>
+            {project.features.length > 0 && (
+              <Row shot={featureShot}>
+                <Checklist title={t('project.features')} items={project.features} columns={featureShot ? 1 : 2} />
+              </Row>
+            )}
+            <ProblemApproach problemTitle={t('project.problem')} problems={project.challenges} approachTitle={t('project.approach')} approaches={project.solutions} />
+            {project.results.length > 0 && (
+              <Row shot={resultShot} flip>
+                <div className="max-w-prose">
+                  <Block title={t('project.results')}>
+                    <Bullets items={project.results} />
+                  </Block>
+                </div>
+              </Row>
+            )}
+          </>
+        )}
+
+        {project.lessons && project.lessons.length > 0 && <LessonCards title={t('project.lessons')} items={project.lessons} />}
+
+        {hasArchitecture && (
+          <section className="hidden rounded-3xl border border-line bg-surface/60 p-8 lg:block" aria-labelledby="architecture-title">
+            <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
+              <div>
+                <h2 id="architecture-title" className="font-display text-2xl font-bold">
+                  {t('project.architecture')}
+                </h2>
+                <p className="mt-2 max-w-prose text-sm text-muted">{t('project.architectureNote')}</p>
+              </div>
+              {wide && <MascotRemark section="architecture" seed={project.id} own={project.mascotLines} pose="wave" />}
+            </div>
+            {wide && (
+              <div className="reveal mt-6">
+                <ArchitectureFlow steps={project.architecture!} />
+                <p className="mt-4 font-mono text-[11px] text-muted">{t('project.diagramHint')}</p>
+              </div>
+            )}
+          </section>
+        )}
+
+        <Gallery title={t('project.gallery')} shots={galleryShots} />
       </div>
-
-      {hasArchitecture && (
-        <section className="mt-20 hidden lg:block" aria-labelledby="architecture-title">
-          <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-            <div>
-              <h2 id="architecture-title" className="font-display text-2xl font-bold">
-                {t('project.architecture')}
-              </h2>
-              <p className="mt-2 max-w-prose text-sm text-muted">{t('project.architectureNote')}</p>
-            </div>
-            {wide && <MascotRemark section="architecture" seed={project.id} own={project.mascotLines} pose="wave" />}
-          </div>
-          {wide && (
-            <div className="reveal mt-6">
-              <ArchitectureFlow steps={project.architecture!} />
-              <p className="mt-4 font-mono text-[11px] text-muted">{t('project.diagramHint')}</p>
-            </div>
-          )}
-        </section>
-      )}
-
-      {shots.length > 3 && (
-        <section className="mt-20" aria-labelledby="gallery-title">
-          <h2 id="gallery-title" className="font-display text-2xl font-bold">
-            {t('project.gallery')}
-          </h2>
-          <ul className="mt-6 grid gap-8 md:grid-cols-2">
-            {shots.slice(3).map((shot) => (
-              <li key={shot.src}>
-                <Shot {...shot} />
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
 
       <RelatedProjects project={project} />
     </div>
