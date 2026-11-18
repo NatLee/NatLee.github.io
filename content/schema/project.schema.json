@@ -81,19 +81,35 @@
     "flow": {
       "type": "array",
       "minItems": 3,
-      "maxItems": 8,
-      "description": "流程圖：步驟由上到下。判斷（kind: decision）一定有 branch，從旁邊走到另一步（往前是重來，往後是略過），最多兩條。中文照同樣順序寫在 projects.zh.json 的 flow，只寫 label、detail、next、branch.when。",
+      "maxItems": 16,
+      "description": "流程圖（像 Mermaid 的 flowchart），只寫步驟和連線，位置由網站自動排。每一步用 to 列出往哪幾步走，可以帶線上的字；沒寫 to 就接到下一步（end 不接）。判斷（kind: decision）要有 2–3 條帶字的 to。group 一樣的步驟會用分組框圈起來，同一組的步驟寫在一起。往前面的步驟走會畫成虛線。中文照同樣順序寫在 projects.zh.json 的 flow，只寫 label、detail、group 和 to 的 label（id、kind 只寫在這裡）。舊格式 next、branch 也還能用。npm test 會檢查連線和中英文是否對得上。",
       "items": {
         "type": "object",
         "required": ["id", "label"],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string" },
-          "label": { "type": "string" },
-          "kind": { "enum": ["start", "end", "decision"] },
-          "detail": { "type": "string" },
-          "next": { "type": "string", "description": "往下一步的箭頭上寫的字。" },
-          "branch": { "type": "object", "required": ["when", "to"], "additionalProperties": false, "properties": { "when": { "type": "string" }, "to": { "type": "string", "description": "要去的步驟 id。" } } }
+          "id": { "type": "string", "description": "這一步的代號，給 to 指用，同一張圖裡不能重複。" },
+          "label": { "type": "string", "description": "方塊上的主要文字，英文最多 6 個字。" },
+          "kind": { "enum": ["start", "end", "decision"], "description": "start／end 畫成圓角膠囊，decision 畫成六角形；一般步驟不用寫。" },
+          "detail": { "type": "string", "description": "方塊裡的小字說明，英文最多 6 個字。" },
+          "group": { "type": "string", "description": "分組框的標題。相同標題的步驟圈在同一個框裡。" },
+          "to": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "description": "往哪幾步走（最多 3 條）。沒寫就接到下一步。",
+            "items": {
+              "type": "object",
+              "required": ["id"],
+              "additionalProperties": false,
+              "properties": {
+                "id": { "type": "string", "description": "要去的步驟 id。" },
+                "label": { "type": "string", "description": "線上的字，例如 yes／no；判斷出去的線一定要寫。" }
+              }
+            }
+          },
+          "next": { "type": "string", "description": "（舊格式）往下一步的箭頭上寫的字。" },
+          "branch": { "type": "object", "required": ["when", "to"], "additionalProperties": false, "properties": { "when": { "type": "string" }, "to": { "type": "string", "description": "要去的步驟 id。" } }, "description": "（舊格式）判斷從旁邊走到另一步。新的圖請用 to。" }
         }
       }
     },

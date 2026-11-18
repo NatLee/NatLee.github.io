@@ -20,6 +20,8 @@ const SPACING = {
   narrow: { node: 14, rank: 48, edge: 10, nodeMax: 132 },
 }
 const NARROW_BELOW = 560
+/** 圖比框寬時最多縮到多少倍放進框裡：0.85 時步驟標題 14px 還有 12px，說明 11px 還有 9.4px。再小就讀不清楚，改成左右捲。 */
+const MIN_FIT = 0.85
 /** 分組框：框和裡面節點的距離；圖的上下邊界替一行標題預留的高度（px，標題換行時整張圖會再往下移）。 */
 const GROUP_PAD = 12
 const GROUP_CAPTION = 18
@@ -62,27 +64,56 @@ const CAPTION_GAP = 3
 const CAPTION_STEP = 8
 const CAPTION_MIN = 56
 
-/** 把折線切細，取樣成點，用來判斷標題會不會被線穿過。 */
-function densify(points: { x: number; y: number }[], step = 6) {
-  const out: { x: number; y: number }[] = []
-  for (let i = 0; i < points.length - 1; i++) {
-    const [a, b] = [points[i], points[i + 1]]
-    const n = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) / step))
-    for (let k = 0; k < n; k++) out.push({ x: a.x + ((b.x - a.x) * k) / n, y: a.y + ((b.y - a.y) * k) / n })
+interface Pt {
+  x: number
+  y: number
+}
+/** 一段三次貝茲曲線：起點、兩個控制點、終點。 */
+type Cubic = [Pt, Pt, Pt, Pt]
+
+/**
+ * 把 dagre 給的折線點變成平滑曲線（B-spline，和 d3 的 curveBasis 同一種），拆成一段段三次貝茲曲線。
+ * 畫線（pathOf）和找空位用的取樣（sampleCurve）都從這裡來，判斷「會不會碰到線」量的就是畫出來的那條。
+ */
+function curveOf(points: Pt[]): Cubic[] {
+  const mix = (a: Pt, b: Pt, wa: number, wb: number, total: number) => ({ x: (wa * a.x + wb * b.x) / total, y: (wa * a.y + wb * b.y) / total })
+  const line = (a: Pt, b: Pt): Cubic => [a, mix(a, b, 2, 1, 3), mix(a, b, 1, 2, 3), b]
+  if (points.length < 3) return points.slice(1).map((p, i) => line(points[i], p))
+  const first = mix(points[0], points[1], 5, 1, 6)
+  const out: Cubic[] = [line(points[0], first)]
+  let at = first
+  for (let i = 1; i < points.length - 1; i++) {
+    const [p0, p1, p2] = [points[i - 1], points[i], points[i + 1]]
+    const end = { x: (p0.x + 4 * p1.x + p2.x) / 6, y: (p0.y + 4 * p1.y + p2.y) / 6 }
+    out.push([at, mix(p0, p1, 2, 1, 3), mix(p0, p1, 1, 2, 3), end])
+    at = end
   }
+  const [a, b] = [points[points.length - 2], points[points.length - 1]]
+  out.push([at, mix(a, b, 2, 1, 3), mix(a, b, 1, 2, 3), b])
   return out
 }
 
-/** 把 dagre 給的折線點畫成平滑曲線（B-spline，和 d3 的 curveBasis 同一種）。 */
-function basis(points: { x: number; y: number }[]) {
-  if (points.length < 3) return `M${points.map((p) => `${p.x},${p.y}`).join(' L')}`
-  let d = `M${points[0].x},${points[0].y} L${(5 * points[0].x + points[1].x) / 6},${(5 * points[0].y + points[1].y) / 6}`
-  for (let i = 1; i < points.length - 1; i++) {
-    const [p0, p1, p2] = [points[i - 1], points[i], points[i + 1]]
-    d += ` C${(2 * p0.x + p1.x) / 3},${(2 * p0.y + p1.y) / 3} ${(p0.x + 2 * p1.x) / 3},${(p0.y + 2 * p1.y) / 3} ${(p0.x + 4 * p1.x + p2.x) / 6},${(p0.y + 4 * p1.y + p2.y) / 6}`
+const pathOf = (curve: Cubic[]) =>
+  curve.length ? `M${curve[0][0].x},${curve[0][0].y}${curve.map(([, c1, c2, end]) => ` C${c1.x},${c1.y} ${c2.x},${c2.y} ${end.x},${end.y}`).join('')}` : ''
+
+/** 沿著曲線大約每 step px 取一個點。 */
+function sampleCurve(curve: Cubic[], step = 4): Pt[] {
+  const out: Pt[] = []
+  for (const [p0, c1, c2, p3] of curve) {
+    const rough = Math.hypot(c1.x - p0.x, c1.y - p0.y) + Math.hypot(c2.x - c1.x, c2.y - c1.y) + Math.hypot(p3.x - c2.x, p3.y - c2.y)
+    const n = Math.max(1, Math.ceil(rough / step))
+    for (let k = 0; k < n; k++) {
+      const t = k / n
+      const u = 1 - t
+      out.push({
+        x: u * u * u * p0.x + 3 * u * u * t * c1.x + 3 * u * t * t * c2.x + t * t * t * p3.x,
+        y: u * u * u * p0.y + 3 * u * u * t * c1.y + 3 * u * t * t * c2.y + t * t * t * p3.y,
+      })
+    }
   }
-  const [a, b] = [points[points.length - 2], points[points.length - 1]]
-  return `${d} C${(2 * a.x + b.x) / 3},${(2 * a.y + b.y) / 3} ${(a.x + 2 * b.x) / 3},${(a.y + 2 * b.y) / 3} ${b.x},${b.y}`
+  const last = curve[curve.length - 1]?.[3]
+  if (last) out.push(last)
+  return out
 }
 
 function StepBox({ step, width, measure = false }: { step: FlowStep; width?: number; measure?: boolean }) {
@@ -139,7 +170,9 @@ export default function FlowGraph({ steps }: { steps: FlowStep[] }) {
   const space = narrow ? SPACING.narrow : SPACING.wide
   const maxWidth = space.nodeMax
   // 圖比框寬（手機上常見）時，在框下面提示可以左右滑。
-  const overflowing = layout !== null && boxWidth > 0 && layout.width > boxWidth + 1
+  // 圖只比框寬一點時，整張縮小放進框裡（最多縮到 MIN_FIT）；再寬就照原尺寸，在框裡左右捲。
+  const fit = layout && boxWidth > 0 && layout.width > boxWidth && layout.width * MIN_FIT <= boxWidth ? boxWidth / layout.width : 1
+  const overflowing = layout !== null && boxWidth > 0 && layout.width * fit > boxWidth + 1
 
   // 哪些步驟和線亮著：指到某一步時是它和相連的；跑一遍時是走過的。都沒有就全部照常。
   const mode = focus && !playing ? 'focus' : walk ? 'walk' : null
@@ -187,11 +220,17 @@ export default function FlowGraph({ steps }: { steps: FlowStep[] }) {
     return () => observer.disconnect()
   }, [])
 
-  // 量大小 → dagre 排版 → 存座標。字型載入後再排一次（字寬會變）。
+  // 量大小 → dagre 排版 → 存座標。
+  // 排版函式每次 render 都換成最新的（最新的步驟、間距和節點寬度），存在 layoutNow；什麼時候排：
+  // - 步驟內容或窄寬模式變了；
+  // - 量大小用的副本尺寸變了（字型載入、換語言、換節點寬度上限），由 ResizeObserver 通知。
+  // 這樣排出來的圖一定跟副本當下的尺寸一致，不會拿到舊的設定或舊的尺寸。
+  const layoutNow = useRef<() => void>(() => {})
+  const stepsKey = JSON.stringify(steps)
   useLayoutEffect(() => {
-    const host = measureRoot.current
-    if (!host) return
-    const run = () => {
+    layoutNow.current = () => {
+      const host = measureRoot.current
+      if (!host) return
       const sizes = new Map<string, { w: number; h: number }>()
       host.querySelectorAll<HTMLElement>('[data-measure]').forEach((el) => {
         const r = el.getBoundingClientRect()
@@ -225,15 +264,41 @@ export default function FlowGraph({ steps }: { steps: FlowStep[] }) {
       const routes = edges.map((edge, i) => {
         const e = g.edge({ v: edge.from, w: edge.to, name: `e${i}` })
         const size = labelSizes[i]
-        return { edge, points: e.points, label: edge.label && size ? { text: edge.label, x: e.x, y: e.y, w: size.width, h: size.height } : undefined }
+        return { edge, points: e.points as Pt[], label: edge.label && size ? { text: edge.label, x: e.x, y: e.y, w: size.width, h: size.height } : undefined }
       })
-      const linePoints = routes.flatMap((route) => densify(route.points))
+      const curves = routes.map((route) => curveOf(route.points))
+      const samples = curves.map((curve) => sampleCurve(curve))
       const rectOf = (p: Placed): Rect => ({ left: p.x - p.w / 2, top: p.y - p.h / 2, right: p.x + p.w / 2, bottom: p.y + p.h / 2 })
-      const obstacles = [...Object.values(nodes), ...routes.flatMap((route) => (route.label ? [route.label] : []))].map(rectOf)
+      const pointsIn = (points: Pt[], r: Rect) => points.filter((p) => p.x > r.left && p.x < r.right && p.y > r.top && p.y < r.bottom).length
+      const nodeRects = Object.values(nodes).map(rectOf)
 
-      // 分組框包住成員。標題放在框的上緣或下緣：從左到右每隔 CAPTION_STEP 試一個位置打分數
-      // （穿過的線越多越差，碰到步驟或線上文字就不考慮），選最好的；同分時上緣優先、靠左優先。
-      // 標題在上緣就在框的上方多留標題的高度，在下緣就留在下方。標題寬度有上限，會換行，高度照實量。
+      // 線上的文字：先用 dagre 給的位置；那裡會碰到別的線、步驟或已經放好的文字時，沿著自己的線（中間 60% 那段）找空位，
+      // 同樣乾淨時選離原位置最近的。
+      const labelRects: Rect[] = []
+      routes.forEach((route, i) => {
+        const label = route.label
+        if (!label) return
+        const others = samples.flatMap((points, j) => (j === i ? [] : points))
+        const own = samples[i]
+        const score = (p: Pt) => {
+          const r = rectOf({ x: p.x, y: p.y, w: label.w + 4, h: label.h + 4 })
+          const blocked = nodeRects.some((o) => overlaps(r, o)) || labelRects.some((o) => overlaps(r, o))
+          return pointsIn(others, r) + (blocked ? 1000 : 0) + Math.hypot(p.x - label.x, p.y - label.y) / 1000
+        }
+        const candidates = [{ x: label.x, y: label.y }, ...own.slice(Math.floor(own.length * 0.2), Math.ceil(own.length * 0.8))]
+        const best = candidates.reduce((winner, candidate) => (score(candidate) < score(winner) ? candidate : winner))
+        label.x = best.x
+        label.y = best.y
+        labelRects.push(rectOf(label))
+      })
+      const linePoints = samples.flat()
+      const obstacles = [...nodeRects, ...labelRects]
+
+      // 分組框包住成員。標題放在框的上緣或下緣，候選位置：
+      // - 一行的標題沿著框邊每隔 CAPTION_STEP 滑動；
+      // - 框太窄、線又從中間穿過時，縮成線之間空隙的寬度（會換行）；
+      // - 都會碰到線時，放到最外側那條線的外面，框往那一側延伸（延伸越多扣越多分，延伸的那塊不能蓋到步驟）。
+      // 每個候選打分數：穿過的線越多越差，碰到步驟或線上文字就不考慮；同分時上緣優先、靠左優先。標題在哪一側，框就在那一側多留標題的高度。
       const groups = groupNames.map((name) => {
         const members = steps.filter((step) => step.group === name).map((step) => nodes[step.id])
         const left = Math.min(...members.map((m) => m.x - m.w / 2)) - GROUP_PAD
@@ -245,18 +310,24 @@ export default function FlowGraph({ steps }: { steps: FlowStep[] }) {
           const band = size.height + 2 * CAPTION_GAP
           const y = atTop ? innerTop - band + CAPTION_GAP : innerBottom + CAPTION_GAP
           const r = { left: x - 2, top: y - 2, right: x + size.width + 2, bottom: y + size.height + 2 }
-          const crossings = linePoints.filter((p) => p.x > r.left && p.x < r.right && p.y > r.top && p.y < r.bottom).length
-          // 換行的標題比較高、比較擠，同樣沒有線穿過時，一行的優先。
+          // 框要延伸多少才包得住標題；延伸出來的那塊（整個框的高度）不能蓋到別的步驟。
+          const frame = { left: Math.min(left, x - CAPTION_INSET), right: Math.max(right, x + size.width + CAPTION_INSET) }
+          const extend = left - frame.left + (frame.right - right)
+          const strips = [
+            { left: frame.left, right: left, top: innerTop - band, bottom: innerBottom + band },
+            { left: right, right: frame.right, top: innerTop - band, bottom: innerBottom + band },
+          ].filter((s) => s.right > s.left)
+          const stripBlocked = strips.some((s) => nodeRects.some((o) => overlaps(s, o)))
+          // 換行的標題比較高、比較擠，同樣沒有線穿過時，一行的優先；延伸框每 40px 算一個點。
           const wrapped = size.height > oneLine.height ? 0.5 : 0
-          return { atTop, x, y, band, size, score: crossings + wrapped + (obstacles.some((o) => overlaps(r, o)) ? 1000 : 0) }
+          const blocked = obstacles.some((o) => overlaps(r, o)) || stripBlocked
+          return { atTop, x, y, band, size, frame, score: pointsIn(linePoints, r) + wrapped + extend / 40 + (blocked ? 1000 : 0) }
         }
         const candidates = [true, false].flatMap((atTop) => {
-          // 一行的標題沿著框邊滑動。
           const first = left + CAPTION_INSET
           const last = right - CAPTION_INSET - oneLine.width
           const xs = [...Array.from({ length: Math.max(1, Math.floor((last - first) / CAPTION_STEP) + 1) }, (_, i) => first + i * CAPTION_STEP), last]
           const slides = xs.map((x) => tryAt(atTop, x, oneLine))
-          // 框太窄、線又剛好從中間穿過時：找出穿過標題那一條的線之間的空隙，把標題縮成空隙的寬度（會換行）放進去。
           const bandTop = atTop ? innerTop - oneLine.height - 2 * CAPTION_GAP : innerBottom
           const cuts = linePoints
             .filter((p) => p.y >= bandTop && p.y <= bandTop + oneLine.height + 2 * CAPTION_GAP && p.x > left && p.x < right)
@@ -265,36 +336,48 @@ export default function FlowGraph({ steps }: { steps: FlowStep[] }) {
           const walls = [left + CAPTION_INSET - CAPTION_GAP, ...cuts, right - CAPTION_INSET + CAPTION_GAP]
           const gaps = walls.slice(1).map((x, i) => ({ from: walls[i] + CAPTION_GAP, to: x - CAPTION_GAP })).filter((gap) => gap.to - gap.from >= CAPTION_MIN)
           const fits = gaps.map((gap) => tryAt(atTop, gap.from, measureText(host, name, CAPTION_CLASS, gap.to - gap.from)))
-          return [...slides, ...fits]
+          const outside = cuts.length ? [tryAt(atTop, cuts[0] - 2 * CAPTION_GAP - oneLine.width, oneLine), tryAt(atTop, cuts[cuts.length - 1] + 2 * CAPTION_GAP, oneLine)] : []
+          return [...slides, ...fits, ...outside]
         })
         const best = candidates.reduce((winner, candidate) => (candidate.score < winner.score ? candidate : winner))
         const top = best.atTop ? innerTop - best.band : innerTop
         const bottom = best.atTop ? innerBottom : innerBottom + best.band
-        return { label: name, x: left, y: top, w: right - left, h: bottom - top, caption: { x: best.x, y: best.y, w: best.size.width } }
+        return { label: name, x: best.frame.left, y: top, w: best.frame.right - best.frame.left, h: bottom - top, caption: { x: best.x, y: best.y, w: best.size.width } }
       })
 
-      // 分組框可能超出 dagre 留的邊界（標題換行時），整張圖往下移、加高，讓框和標題都在圖裡面。
+      // 分組框可能超出 dagre 留的邊界（標題換行、框往旁邊延伸時），整張圖往右下移、放大，讓框和標題都在圖裡面。
       const graph = g.graph()
-      const shift = Math.max(0, ...groups.map((group) => 2 - group.y))
-      const height = Math.max(graph.height ?? 0, ...groups.map((group) => group.y + group.h + 2)) + shift
-      for (const node of Object.values(nodes)) node.y += shift
+      const shiftX = Math.max(0, ...groups.map((group) => 2 - group.x))
+      const shiftY = Math.max(0, ...groups.map((group) => 2 - group.y))
+      const width = Math.max(graph.width ?? 0, ...groups.map((group) => group.x + group.w + 2)) + shiftX
+      const height = Math.max(graph.height ?? 0, ...groups.map((group) => group.y + group.h + 2)) + shiftY
+      const move = (p: Pt) => ({ x: p.x + shiftX, y: p.y + shiftY })
+      for (const node of Object.values(nodes)) Object.assign(node, move(node))
       for (const group of groups) {
-        group.y += shift
-        group.caption.y += shift
+        Object.assign(group, move(group))
+        Object.assign(group.caption, move(group.caption))
       }
-      const laidEdges: Layout['edges'] = routes.map(({ edge, points, label }) => ({
-        d: basis(points.map((p: { x: number; y: number }) => ({ x: p.x, y: p.y + shift }))),
+      const laidEdges: Layout['edges'] = routes.map(({ edge, label }, i) => ({
+        d: pathOf(curves[i].map((cubic) => cubic.map(move) as Cubic)),
         decision: decisions.has(edge.from),
         back: edge.back,
-        label: label ? { ...label, y: label.y + shift } : undefined,
+        label: label ? { ...label, ...move(label) } : undefined,
       }))
-      setLayout({ width: Math.ceil(graph.width ?? 0), height: Math.ceil(height), nodes, edges: laidEdges, groups })
+      setLayout({ width: Math.ceil(width), height: Math.ceil(height), nodes, edges: laidEdges, groups })
     }
-    run()
-    document.fonts?.ready.then(run).catch(() => {})
-    // steps、narrow 變了才重排；edges、space、maxWidth 都由它們推出來。
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [steps, narrow])
+  })
+  // 步驟內容（不是陣列物件本身，每次 render 都是新的）或窄寬模式變了就重排。
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useLayoutEffect(() => layoutNow.current(), [stepsKey, narrow])
+  // 副本尺寸變了就重排；字型載入完也再排一次。
+  useLayoutEffect(() => {
+    const host = measureRoot.current
+    if (!host) return
+    const observer = new ResizeObserver(() => layoutNow.current())
+    host.querySelectorAll('[data-measure]').forEach((el) => observer.observe(el))
+    document.fonts?.ready.then(() => layoutNow.current()).catch(() => {})
+    return () => observer.disconnect()
+  }, [stepsKey])
 
   // 跑一遍：在目前這一步停一下，小點沿著下一條線走到下一步，再換下一步；走到底就停。
   useEffect(() => {
@@ -333,15 +416,39 @@ export default function FlowGraph({ steps }: { steps: FlowStep[] }) {
     }
   }, [walk, playing])
 
-  // 圖比框寬時，跑到框外的那一步要捲進來。
+  // 圖比框寬、要左右捲時，讓第一步置中（流程從那裡開始），不要停在最左邊。
+  // 每次重排都重新置中，直到使用者自己捲過；程式自己設的捲動不算（programmatic 記下這一次是程式捲的）。
+  const userScrolled = useRef(false)
+  const programmatic = useRef(false)
   useEffect(() => {
     const el = wrap.current
-    if (!walk || !layout || !el || el.scrollWidth <= el.clientWidth + 1) return
-    const node = layout.nodes[walk.path[walk.at]]
-    if (node.x - node.w / 2 >= el.scrollLeft && node.x + node.w / 2 <= el.scrollLeft + el.clientWidth) return
+    if (!el) return
+    const onScroll = () => {
+      if (programmatic.current) programmatic.current = false
+      else userScrolled.current = true
+    }
+    el.addEventListener('scroll', onScroll, { passive: true })
+    return () => el.removeEventListener('scroll', onScroll)
+  }, [])
+  useLayoutEffect(() => {
+    const el = wrap.current
+    if (!layout || !el || userScrolled.current || el.scrollWidth <= el.clientWidth + 1) return
+    const first = layout.nodes[(steps.find((step) => step.kind === 'start') ?? steps[0]).id]
+    if (!first) return
+    const target = Math.round(Math.max(0, Math.min(el.scrollWidth - el.clientWidth, first.x * fit - el.clientWidth / 2)))
+    if (Math.abs(el.scrollLeft - target) < 1) return
+    programmatic.current = true
+    el.scrollLeft = target
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [layout, fit, boxWidth])
+
+  // 跑一遍時，目前這一步要在看得到的地方：圖比框寬時左右捲，圖在側欄或收合的卡片裡時上下捲（外面哪一層需要就捲哪一層）。
+  useEffect(() => {
+    if (!walk || !playing) return
+    const box = wrap.current?.querySelector(`[data-box="step:${walk.path[walk.at]}"]`)
     const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    el.scrollTo({ left: node.x - el.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' })
-  }, [walk, layout])
+    box?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: smooth ? 'smooth' : 'auto' })
+  }, [walk, playing])
 
   const hasBranch = layout?.edges.some((edge) => edge.decision) ?? false
   const hasBack = layout?.edges.some((edge) => edge.back) ?? false
@@ -414,86 +521,92 @@ export default function FlowGraph({ steps }: { steps: FlowStep[] }) {
         </ol>
 
         {layout && (
-          <div aria-hidden="true" className="relative mx-auto" style={{ width: layout.width, height: layout.height }}>
-            {layout.groups.map((group) => (
-              <div key={group.label} className="absolute rounded-2xl border border-dashed border-ink/20" style={{ left: group.x, top: group.y, width: group.w, height: group.h }} />
-            ))}
-            {layout.groups.map((group) => (
-              <span
-                key={group.label}
-                data-diagram-label=""
-                className={`absolute z-[1] ${CAPTION_CLASS}`}
-                style={{ left: group.caption.x, top: group.caption.y, width: group.caption.w }}
-              >
-                {group.label}
-              </span>
-            ))}
-            <svg ref={svg} className="pointer-events-none absolute inset-0 h-full w-full overflow-visible">
-              <defs>
-                <marker id={`${uid}-m`} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L8,4 L0,8 z" className="fill-ink/45" />
-                </marker>
-                <marker id={`${uid}-d`} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L8,4 L0,8 z" className="fill-clip" />
-                </marker>
-                <marker id={`${uid}-w`} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L8,4 L0,8 z" className="fill-accent-fill" />
-                </marker>
-              </defs>
-              {/* data-edge：線和它的文字配對，版面檢查才分得出「文字在自己的線上」（本來就該這樣）和「蓋到別的線」。 */}
-              {layout.edges.map((edge, i) => {
-                const lit = litEdges.has(i)
-                // 跑一遍走過的線換成柿橘色；指到某一步時，相連的線變成流動的虛線；沒亮的線變淡。
-                const trail = mode === 'walk' && lit
-                const tone = trail ? 'stroke-accent-fill' : edge.decision ? 'stroke-clip/70' : 'stroke-ink/35'
-                const state = !mode ? '' : !lit ? 'opacity-20' : mode === 'focus' ? 'diagram-march' : ''
+          <div className="relative mx-auto" style={{ width: layout.width * fit, height: layout.height * fit }}>
+            <div
+              aria-hidden="true"
+              className="absolute left-0 top-0 origin-top-left"
+              style={{ width: layout.width, height: layout.height, transform: fit < 1 ? `scale(${fit})` : undefined }}
+            >
+              {layout.groups.map((group) => (
+                <div key={group.label} className="absolute rounded-2xl border border-dashed border-ink/20" style={{ left: group.x, top: group.y, width: group.w, height: group.h }} />
+              ))}
+              {layout.groups.map((group) => (
+                <span
+                  key={group.label}
+                  data-diagram-label=""
+                  className={`absolute z-[1] ${CAPTION_CLASS}`}
+                  style={{ left: group.caption.x, top: group.caption.y, width: group.caption.w }}
+                >
+                  {group.label}
+                </span>
+              ))}
+              <svg ref={svg} className="pointer-events-none absolute inset-0 h-full w-full overflow-visible">
+                <defs>
+                  <marker id={`${uid}-m`} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0,0 L8,4 L0,8 z" className="fill-ink/45" />
+                  </marker>
+                  <marker id={`${uid}-d`} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0,0 L8,4 L0,8 z" className="fill-clip" />
+                  </marker>
+                  <marker id={`${uid}-w`} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0,0 L8,4 L0,8 z" className="fill-accent-fill" />
+                  </marker>
+                </defs>
+                {/* data-edge：線和它的文字配對，版面檢查才分得出「文字在自己的線上」（本來就該這樣）和「蓋到別的線」。 */}
+                {layout.edges.map((edge, i) => {
+                  const lit = litEdges.has(i)
+                  // 跑一遍走過的線換成柿橘色；指到某一步時，相連的線變成流動的虛線；沒亮的線變淡。
+                  const trail = mode === 'walk' && lit
+                  const tone = trail ? 'stroke-accent-fill' : edge.decision ? 'stroke-clip/70' : 'stroke-ink/35'
+                  const state = !mode ? '' : !lit ? 'opacity-20' : mode === 'focus' ? 'diagram-march' : ''
+                  return (
+                    <path
+                      key={i}
+                      data-edge={i}
+                      d={edge.d}
+                      fill="none"
+                      strokeWidth={trail ? 2 : 1.5}
+                      strokeDasharray={edge.back ? '5 4' : undefined}
+                      className={`transition-opacity duration-200 ${tone} ${state}`}
+                      markerEnd={`url(#${uid}-${trail ? 'w' : edge.decision ? 'd' : 'm'})`}
+                    />
+                  )
+                })}
+                {/* 跑一遍的小點：位置由動畫直接改 transform，不經過 React。 */}
+                <g ref={dot} className="transition-opacity duration-200" style={{ opacity: 0 }}>
+                  <circle r={9} className="fill-accent-fill/25" />
+                  <circle r={4.5} className="fill-accent-fill" />
+                </g>
+              </svg>
+              {steps.map((step) => {
+                const n = layout.nodes[step.id]
+                const dim = litSteps !== null && !litSteps.has(step.id)
+                const here = current === step.id
                 return (
-                  <path
-                    key={i}
-                    data-edge={i}
-                    d={edge.d}
-                    fill="none"
-                    strokeWidth={trail ? 2 : 1.5}
-                    strokeDasharray={edge.back ? '5 4' : undefined}
-                    className={`transition-opacity duration-200 ${tone} ${state}`}
-                    markerEnd={`url(#${uid}-${trail ? 'w' : edge.decision ? 'd' : 'm'})`}
-                  />
+                  <div
+                    key={step.id}
+                    {...pointAt(step.id)}
+                    className={`absolute transition-[opacity,filter] duration-200 ${dim ? 'opacity-30' : ''} ${here ? 'drop-shadow-[0_0_7px_rgb(var(--accent-fill)/0.6)]' : ''}`}
+                    style={{ left: n.x - n.w / 2, top: n.y - n.h / 2 }}
+                  >
+                    <StepBox step={step} width={n.w} />
+                  </div>
                 )
               })}
-              {/* 跑一遍的小點：位置由動畫直接改 transform，不經過 React。 */}
-              <g ref={dot} className="transition-opacity duration-200" style={{ opacity: 0 }}>
-                <circle r={9} className="fill-accent-fill/25" />
-                <circle r={4.5} className="fill-accent-fill" />
-              </g>
-            </svg>
-            {steps.map((step) => {
-              const n = layout.nodes[step.id]
-              const dim = litSteps !== null && !litSteps.has(step.id)
-              const here = current === step.id
-              return (
-                <div
-                  key={step.id}
-                  {...pointAt(step.id)}
-                  className={`absolute transition-[opacity,filter] duration-200 ${dim ? 'opacity-30' : ''} ${here ? 'drop-shadow-[0_0_7px_rgb(var(--accent-fill)/0.6)]' : ''}`}
-                  style={{ left: n.x - n.w / 2, top: n.y - n.h / 2 }}
-                >
-                  <StepBox step={step} width={n.w} />
-                </div>
-              )
-            })}
-            {layout.edges.map((edge, i) =>
-              edge.label ? (
-                <span
-                  key={i}
-                  data-diagram-label=""
-                  data-edge={i}
-                  className={`pointer-events-none absolute text-center transition-opacity duration-200 ${LABEL_CLASS} ${edge.decision ? 'text-clip' : 'text-muted'} ${mode && !litEdges.has(i) ? 'opacity-30' : ''}`}
-                  style={{ left: edge.label.x - edge.label.w / 2, top: edge.label.y - edge.label.h / 2, width: edge.label.w }}
-                >
-                  {edge.label.text}
-                </span>
-              ) : null
-            )}
+              {layout.edges.map((edge, i) =>
+                edge.label ? (
+                  <span
+                    key={i}
+                    data-diagram-label=""
+                    data-edge={i}
+                    className={`pointer-events-none absolute text-center transition-opacity duration-200 ${LABEL_CLASS} ${edge.decision ? 'text-clip' : 'text-muted'} ${mode && !litEdges.has(i) ? 'opacity-30' : ''}`}
+                    style={{ left: edge.label.x - edge.label.w / 2, top: edge.label.y - edge.label.h / 2, width: edge.label.w }}
+                  >
+                    {edge.label.text}
+                  </span>
+                ) : null
+              )}
+            </div>
           </div>
         )}
       </div>

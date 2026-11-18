@@ -5,7 +5,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 import Icon from '@/components/Icon'
 import ArchitectureFlow from '@/components/projects/ArchitectureFlow'
-import FlowGraph from '@/components/projects/FlowGraph'
+import { DiagramCard, FlowSidePanel, useWideLayout } from '@/components/projects/DiagramPanel'
 import ProjectCard, { StatusTag } from '@/components/projects/ProjectCard'
 import { StarCount, ThemeLabels } from '@/components/site/ui'
 import { MascotRemark } from '@/components/mascot/Mascot'
@@ -128,9 +128,12 @@ export function BackLink() {
 
 export default function ProjectPage({ id }: { id: string }) {
   const { locale, t } = useLanguage()
+  const wide = useWideLayout()
   const project = getProjectById(id, locale)
   if (!project) return null
   const [cover, ...gallery] = project.images
+  const hasFlow = Boolean(project.flow?.length)
+  const hasArchitecture = Boolean(project.architecture?.length)
   // 截圖（封面以外）和說明：前三張穿插在段落之間，其餘放最後的截圖區。
   const shots = gallery.map((src, index) => ({
     src,
@@ -213,8 +216,10 @@ export default function ProjectPage({ id }: { id: string }) {
         <p className="mt-12 rounded-2xl border border-dashed border-line p-6 text-sm text-muted">{t('project.noImage')}</p>
       )}
 
-      {/* 文字分成兩段，中間是流程圖；截圖穿插在段落之間，剩下的放最後。兩段文字都和右邊的技術欄同寬對齊。 */}
-      <div className="mt-16 grid gap-14 lg:grid-cols-[minmax(0,1fr)_16rem]">
+      {/* 文字和截圖一欄到底，截圖穿插在段落之間，剩下的放最後。
+          寬螢幕：右欄是技術和流程圖，流程圖跟著捲動停在畫面裡；架構圖在下方全寬。
+          窄螢幕：流程圖和架構圖合成一張卡，放在第一段文字後面。擺法見 DiagramPanel.tsx。 */}
+      <div className={`mt-16 grid gap-14 ${hasFlow ? 'lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-12' : 'lg:grid-cols-[minmax(0,1fr)_16rem]'}`}>
         <div className="grid min-w-0 gap-12 text-[1.0625rem] leading-relaxed">
           <div className="grid max-w-prose gap-12">
             <Block title={t('project.overview')}>
@@ -232,38 +237,9 @@ export default function ProjectPage({ id }: { id: string }) {
             )}
           </div>
           {shots[0] && <Shot {...shots[0]} />}
-        </div>
-        <aside className="h-fit lg:sticky lg:top-24">
-          <h2 className="eyebrow">{t('project.stack')}</h2>
-          <ul className="mt-3 flex flex-wrap gap-2">
-            {project.technologies.map((tech) => (
-              <li key={tech} className="chip">
-                {tech}
-              </li>
-            ))}
-          </ul>
-        </aside>
-      </div>
-
-      {project.flow && project.flow.length > 0 && (
-        <section className="mt-20" aria-labelledby="flow-title">
-          <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-            <div>
-              <h2 id="flow-title" className="font-display text-2xl font-bold">
-                {t('project.flow')}
-              </h2>
-              <p className="mt-2 max-w-prose text-sm text-muted">{t('project.flowNote')}</p>
-            </div>
-            <MascotRemark section="flow" seed={project.id} />
-          </div>
-          <div className="reveal mt-6 rounded-2xl border border-line bg-surface/50 p-4 sm:p-6">
-            <FlowGraph steps={project.flow} />
-          </div>
-        </section>
-      )}
-
-      <div className="mt-20 grid gap-14 lg:grid-cols-[minmax(0,1fr)_16rem]">
-        <div className="grid min-w-0 gap-12 text-[1.0625rem] leading-relaxed">
+          {(hasFlow || hasArchitecture) && (
+            <div className="reveal min-w-0 lg:hidden">{!wide && <DiagramCard flow={project.flow} architecture={project.architecture} seed={project.id} />}</div>
+          )}
           {(project.challenges.length > 0 || project.solutions.length > 0) && (
             <div className="grid max-w-prose gap-12">
               {project.challenges.length > 0 && (
@@ -302,10 +278,23 @@ export default function ProjectPage({ id }: { id: string }) {
             </div>
           )}
         </div>
+        <aside className={`h-fit lg:sticky lg:top-24 ${hasFlow ? 'lg:flex lg:max-h-[calc(100vh-7rem)] lg:flex-col lg:gap-6' : ''}`}>
+          <div>
+            <h2 className="eyebrow">{t('project.stack')}</h2>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <li key={tech} className="chip">
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {hasFlow && <div className="hidden min-h-0 flex-1 flex-col lg:flex">{wide && <FlowSidePanel steps={project.flow!} seed={project.id} />}</div>}
+        </aside>
       </div>
 
-      {project.architecture && project.architecture.length > 0 && (
-        <section className="mt-20" aria-labelledby="architecture-title">
+      {hasArchitecture && (
+        <section className="mt-20 hidden lg:block" aria-labelledby="architecture-title">
           <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
             <div>
               <h2 id="architecture-title" className="font-display text-2xl font-bold">
@@ -313,12 +302,14 @@ export default function ProjectPage({ id }: { id: string }) {
               </h2>
               <p className="mt-2 max-w-prose text-sm text-muted">{t('project.architectureNote')}</p>
             </div>
-            <MascotRemark section="architecture" seed={project.id} pose="wave" />
+            {wide && <MascotRemark section="architecture" seed={project.id} pose="wave" />}
           </div>
-          <div className="reveal mt-6">
-            <ArchitectureFlow steps={project.architecture} />
-            <p className="mt-4 font-mono text-[11px] text-muted">{t('project.diagramHint')}</p>
-          </div>
+          {wide && (
+            <div className="reveal mt-6">
+              <ArchitectureFlow steps={project.architecture!} />
+              <p className="mt-4 font-mono text-[11px] text-muted">{t('project.diagramHint')}</p>
+            </div>
+          )}
         </section>
       )}
 

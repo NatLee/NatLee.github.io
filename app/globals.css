@@ -103,13 +103,16 @@
     html {
       scroll-behavior: auto;
     }
+    /* 轉場直接關掉（0 秒），不用常見的 0.01ms：transition-property 預設是 all，0.01ms 會讓每個元素的每個屬性都有一段極短的轉場，
+       尺寸改變時（例如流程圖換節點寬度上限）量到的是轉場起點的舊尺寸，圖就排錯了。站內沒有程式依賴 transitionend。 */
     *,
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
       animation-delay: 0s !important;
       animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
     }
   }
 }
@@ -432,5 +435,11 @@
   /* 捲動動畫在紙上沒有意義，印出來一律是完整的樣子。 */
   .reveal {
     animation: none !important;
+  }
+
+  /* 收合的圖解卡片、側欄裡要捲的流程圖：紙上沒辦法捲，整張印出來。 */
+  [data-print-expand] {
+    max-height: none !important;
+    overflow: visible !important;
   }
 }
